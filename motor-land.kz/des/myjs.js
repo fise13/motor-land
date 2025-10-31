@@ -84,12 +84,11 @@ $(document).ready(function() {
 	});
 	// Закрытие окна при клике на фон
 	$(document).on("click", ".plashesbgmodl", function () {
-  	$('.plashesbgmodl, #zakazaty').removeClass('show');
+    	$('.plashesbgmodl, #zakazaty').removeClass('show');
 	});
-	
 	// Закрытие модалки
-$	(document).on("click", ".closemodal", function () {
-  	$('.plashesbgmodl, #zakazaty').removeClass('show');
+	$(document).on("click", ".closemodal", function () {
+    	$('.plashesbgmodl, #zakazaty').removeClass('show');
 	});
 	
 	// Автоподбор марок/моделей/годов
@@ -184,4 +183,32 @@ $	(document).on("click", ".closemodal", function () {
 			}
 		});
 	});
+
+	// === Theme toggle logic with checkbox ===
+	function applyTheme(theme) {
+		$('html').attr('data-theme', theme);
+	}
+	function updateToggleUI(theme) {
+		var cb = $('#themeToggleInput');
+		if (cb.length) { cb.prop('checked', theme === 'dark'); }
+	}
+	(function initTheme() {
+		var saved = localStorage.getItem('ml_theme');
+		var theme = saved ? saved : 'light';
+		applyTheme(theme);
+		updateToggleUI(theme);
+	})();
+	$(document).on('change', '#themeToggleInput', function() {
+		var next = this.checked ? 'dark' : 'light';
+		applyTheme(next);
+		updateToggleUI(next);
+		localStorage.setItem('ml_theme', next);
+	});
+	// click on container toggles the checkbox for accessibility/mobile hit area
+	$(document).on('click', '#themeToggle', function(e) {
+		if (e.target.id === 'themeToggleInput' || $(e.target).hasClass('slider')) return;
+		var cb = $('#themeToggleInput');
+		cb.prop('checked', !cb.prop('checked')).trigger('change');
+	});
+
 });
