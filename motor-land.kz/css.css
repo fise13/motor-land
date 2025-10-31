@@ -290,7 +290,7 @@ border-radius: 15px;
 color: black;
 font-size: 18px;
 font-family: roboto;
-padding: 8px; 20px;
+padding: 8px, 20px;
 width: 650px;
 margin: 10px 20px 20px 5px;
 }
@@ -642,7 +642,7 @@ height: 900px;
 }
 
 .leftcolonka {
-flaot: left;
+float: left;
 padding: 220px 10px 10px 10px;
 width: 300px;
 display: inline-block;
@@ -850,9 +850,9 @@ border-radius: 15px;
 color: black;
 font-size: 18px;
 font-family: roboto;
-padding: 8px; 20px;
+padding: 8px, 20px;
 width: 600px;
-margin: 10px 20px 0px 0px;
+margin: 10px, 20px, 0px, 0px;
 }
 
 .filtersblock input[type="submit"]{
@@ -884,7 +884,7 @@ color: #ff0000;
 vertical-align: top;
 display: inline-block;
 width: 450px;
-pading: 20px;
+padding: 20px;
 height: 450px;
 text-align: left;
 margin: 10px;
@@ -1087,7 +1087,7 @@ margin: 10px;
 width: 340px;
 color: white;
 }
-/*Стиль Модалки 
+/*Стиль Модалки */
 /* Фон модального окна */
 .plashesbgmodl {
   position: fixed;
