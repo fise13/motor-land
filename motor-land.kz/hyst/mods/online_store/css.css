@@ -1,0 +1,36 @@
+.hyst_os_atributs_container {
+display: flex;
+flex-wrap: wrap;
+justify-content: start;
+align-items: start;
+}
+
+.OS_atribute_col {
+width: 200px;
+}
+
+.OS_atribute_col .admin_label_checkbox {
+width: 100%;
+box-sizing: border-box;
+}
+
+.OS_atribute_options_col {
+width: 180px;
+padding: 0px 0px 0px 20px;
+}
+
+.hyst_psevdodatalistsel > div {
+width: 100%;
+display: flex;
+justify-content: start;
+flex-wrap: wrap;
+}
+
+.os_sales_tover_pick {
+background-color: #1d1a26;
+padding: 5px;
+border-radius: 5px;
+display: inline-block;
+margin: 0px 0px 0px 10px;
+cursor: pointer;
+}

@@ -1,0 +1,107 @@
+@media screen and (max-width: 1100px) {
+
+	/* Общие контейнеры */
+	.shirina {
+		width: 90%;
+		max-width: 700px;
+		margin: 0 auto;
+	}
+
+	/* Слайдер */
+	.sliderbtns {
+		bottom: 20px;
+		left: 20px;
+	}
+
+	.sssskartins {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 9;
+		background-size: cover;
+		background-position: center;
+	}
+
+	.sliderform input[type="text"],
+	.filtersblock input[type="text"] {
+		width: 100%;
+		max-width: 400px;
+		margin: 15px auto;
+		display: block;
+	}
+
+	/* Меню */
+	.menu {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 10px;
+		padding: 10px 0;
+	}
+
+	.menu li {
+		padding: 15px 10px;
+		width: auto;
+		text-align: center;
+	}
+
+	.menu a:nth-child(3) li,
+	.menu a:nth-child(4) li {
+		margin: 0;
+	}
+
+	/* Главные блоки */
+	.maipttee {
+		width: 100%;
+		height: auto;
+	}
+
+	.logo {
+		width: 100px;
+		height: auto;
+		margin: 0 auto;
+		display: block;
+	}
+
+	.aboutblock,
+	.aboutblock1 {
+		width: 100%;
+		height: auto;
+		background-position: center top;
+		background-size: cover;
+		padding: 80px 0;
+	}
+
+	.abouttext,
+	.abouttext1 {
+		width: 90%;
+		max-width: 640px;
+		margin: 0 auto;
+		position: static;
+		transform: none;
+		text-align: center;
+	}
+
+	/* Мелкие правки */
+	.posilka {
+		display: none;
+	}
+
+	.leftcolonka,
+	.righcolonka {
+		width: 100%;
+		padding: 10px;
+		box-sizing: border-box;
+	}
+
+	.plashkasforig:before {
+		display: none;
+	}
+
+	.plashkasforig {
+		background-color: #f5f5f5;
+	}
+
+	.detalinlines {
+		height: auto;
+	}
+}

@@ -1,0 +1,16 @@
+Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
+
+
+RewriteEngine On
+RewriteBase /
+
+ErrorDocument 404 /404.php
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [L]
+
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+)\.php$ $1 [R=301,L]

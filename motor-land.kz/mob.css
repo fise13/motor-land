@@ -1,0 +1,156 @@
+@media screen and (max-width: 660px), only screen and (max-device-width : 660px) {
+
+	.logo {
+	width: 100px;
+	height: 100px;
+	margin-left: 0px;
+	left: 0px;
+	}
+	
+	.zgolovorleft {
+	padding-top: 20px;
+	}
+
+	
+	.sliderbtns {
+	bottom: 400px;
+	left: 50px;
+	}
+
+.maipttee {
+width: 280px;
+height: auto;
+}
+
+.sliderform input[type="text"] {
+width: 260px;
+}
+
+
+	.shirina {
+	width: 340px;
+	}
+	
+	.sssskartins {
+	width: 340px;
+	height: 300px;
+	}
+	
+	.detalinlines {
+	width: 320px;
+	}
+	
+	.modalwindow  {
+	width: 280px;
+	margin-left: -170px;
+	}
+	
+	.actionperekl  {
+	transform: translate(0%);
+	position: static;
+	left: auto;
+	top: auto;
+	}
+
+	.menu {
+	display: none;
+	position: fixed;
+	top: 63px;
+	right: 0px;
+	background: rgba(0,0,0,0.7);
+	background-color: rgba(0,0,0,0.7);
+	width: 200px;
+	transition: all 0.3s ease-out 0.3s;
+	}
+
+.filtersblock input[type="text"] {
+width: 260px;
+margin: 20px 10px;
+}
+
+	.menu li {
+	display: block;
+	padding: 20px 10px 20px 20px;
+	}
+
+	.relhead {
+	height: 60px;
+	}
+	
+	.modilebtn {
+	display: block;
+	}
+
+	.mobilefix {
+	background-color: black;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: 70;
+	}
+
+	.menu a:nth-child(3) li, .menu a:nth-child(4) li {
+	margin: 0px;
+	}
+
+	.slider {
+	height: 800px;
+	}
+
+	.titlephon {
+	width: 340px;
+	height: 300px;
+	}
+
+	.sliderform {
+	text-align: center;
+bottom: 10px;
+	}
+
+	.aboutblock {
+	background-position: center top;
+	background-size: 100% auto;
+	width: 340px;
+	height: 850px;
+	overflow: hidden;
+	}
+	
+	.abouttext {
+	transform: translate(0,0);
+	width: 300px;
+	margin-left: -160px;
+	left: 50%;
+	top: 460px;
+	}
+	
+	.aboutblock1 {
+	background-position: center top;
+	background-size: 100% auto;
+	width: 340px;
+	padding: 180px 0px 0px 0px;
+	}
+	
+	.abouttext1 {
+	transform: translate(0,0);
+	width: 300px;
+	/*margin-left: -160px;
+	left: 50%;*/
+	top: 200px;
+	margin: 0px auto;
+	}
+	
+	.leftcolonka {
+	padding: 10px;
+	width: 300px;
+	}
+	
+	.righcolonka{
+	width: 320px;
+	}
+	
+	.foterinline {
+	width: 320px;
+	padding: 10px;
+	}
+	
+}

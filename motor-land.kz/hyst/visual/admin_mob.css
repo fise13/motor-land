@@ -1,0 +1,61 @@
+@media screen and (max-width: 767px){
+
+sidebar {
+position: fixed;
+top: 40px;
+left: 0px;
+z-index: 100;
+}
+
+content {
+padding: 15px 10px 15px 75px;
+}
+
+sidebar .admin_sidebar_menu span {
+display: none;
+}
+
+#sidebarbutton:checked ~ adm_content sidebar .admin_sidebar_menu span {
+display: block;
+}
+
+sidebar {
+width: 60px;
+min-width: 60px;
+}
+
+#sidebarbutton:checked ~ adm_content sidebar {
+width: 300px;
+min-width: 300px;
+}
+
+label[for="sidebarbutton"] i:before{
+transform: rotate(45deg);
+right: -1px;
+left: auto;
+}
+
+label[for="sidebarbutton"] i:after{
+transform: rotate(-45deg);
+right: -1px;
+left: auto;
+}
+
+#sidebarbutton:checked ~ adm_header label[for="sidebarbutton"] i:before{
+transform: rotate(-45deg);
+left: -1px !important;
+right: auto !important;
+}
+
+#sidebarbutton:checked ~ adm_header label[for="sidebarbutton"] i:after{
+transform: rotate(45deg);
+left: -1px !important;
+right: auto !important;
+}
+
+.admin_back_header span {
+display: none;
+}
+
+
+}

@@ -1,0 +1,16 @@
+.sliders_mod_slide_prev {
+display: inline-block;
+width: 200px;
+height: 150px;
+border-radius: 10px;
+margin: 5px;
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center center;
+background-color: #1d1a26;
+cursor: pointer;
+}
+
+.slider_slide_redact_con {
+display: none;
+}

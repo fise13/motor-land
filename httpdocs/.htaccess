@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^(www\.)?xn--d1abrdhdaqq\.kz$ [NC]
+RewriteRule ^(.*)$ https://motor-land.kz/$1 [R=301,L]
