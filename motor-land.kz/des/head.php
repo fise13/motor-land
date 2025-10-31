@@ -1,12 +1,6 @@
 <div class="headercon mobilefix">
 	<div class="shirina relhead">
 		<div class="logo"></div>
-		<div id="themeToggle" aria-label="Переключить тему" title="Переключить тему" style="position:absolute; right:50px; top:14px; width:38px; height:38px; cursor:pointer; border-radius:20px; display:flex; align-items:center; justify-content:center;">
-			<label class="theme-switch">
-				<input type="checkbox" id="themeToggleInput">
-				<span class="slider"></span>
-			</label>
-		</div>
 		<ul class="menu">
 			<a href="/"><li>Главная</li></a>
 			<a href="/catalog"><li>Каталог</li></a>
@@ -20,6 +14,12 @@
 </div>
 <script>
 
+	/**
+	 * Функция: Переключение мобильного меню
+	 * Описание: Показывает/скрывает мобильное меню и меняет иконку кнопки (меню/крестик).
+	 * Параметры: нет
+	 * Возвращает: ничего
+	 */
 	function mobilemenu () {
 		if ($('.menu').css('display') == 'block') {
 			$('.menu').toggle(); 

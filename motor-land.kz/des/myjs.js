@@ -1,6 +1,12 @@
 $(document).ready(function() {
 
-    // Выпадающий список (клик по стрелке) — используем CSS-анимацию через класс .open
+	/**
+	 * Функция: Обработка клика по стрелке выпадающего списка
+	 * Описание: При клике на стрелку открывает/закрывает выпадающий список фильтров (Марка, Модель, Год).
+	 * 			Закрывает все остальные открытые списки и переключает состояние текущего.
+	 * Параметры: нет (использует элемент, на который кликнули)
+	 * Возвращает: ничего
+	 */
     $(document).on("click", ".btmmearrow", function () {
         var dd = $(this).parent('.meinputer').children('.ddwnblock');
         // закрыть все прочие открытые
@@ -9,20 +15,46 @@ $(document).ready(function() {
         dd.toggleClass('open');
     });
 	
-	// Плейсхолдер для контента editable div
+	/**
+	 * Функция: Очистка поля ввода при фокусе
+	 * Описание: При получении фокуса полем ввода удаляет значение-плейсхолдер (например, "Марка", "Модель"),
+	 * 			чтобы пользователь мог вводить текст.
+	 * Параметры: нет (использует элемент в фокусе)
+	 * Возвращает: ничего
+	 */
 	$(document).on("focus", ".madiv", function () {
 		if ($(this).html() == $(this).attr('data-val')) { $(this).html(''); }
 	});
 	
+	/**
+	 * Функция: Синхронизация видимого текста со скрытым полем
+	 * Описание: При вводе текста в видимый элемент (.madiv) копирует значение в скрытое input поле,
+	 * 			чтобы оно отправлялось вместе с формой.
+	 * Параметры: нет (использует элемент, в который вводят текст)
+	 * Возвращает: ничего
+	 */
 	$(document).on("input", ".madiv", function () {
 		$(this).parent('.meinputer').children('input').val($(this).html());
 	});
 	
+	/**
+	 * Функция: Восстановление плейсхолдера при потере фокуса
+	 * Описание: Если поле пустое при потере фокуса, восстанавливает значение-плейсхолдер из атрибута data-val.
+	 * Параметры: нет (использует элемент, потерявший фокус)
+	 * Возвращает: ничего
+	 */
 	$(document).on("blur", ".madiv", function () {
 		if ($(this).html() == '') { $(this).html($(this).attr('data-val')); }
 	});
 	
-	// Выбор из выпадающего списка
+	/**
+	 * Функция: Выбор значения из выпадающего списка
+	 * Описание: При клике на элемент выпадающего списка устанавливает выбранное значение в поле ввода,
+	 * 			закрывает список и, если выбрана марка или модель, загружает через AJAX соответствующие
+	 * 			варианты для связанных полей (модели для марки, годы для модели).
+	 * Параметры: нет (использует элемент, на который кликнули)
+	 * Возвращает: ничего
+	 */
 	$(document).on("click", ".ddwnblock div", function () {
         var parent = $(this).parent('.ddwnblock').parent('.meinputer');
         $(this).parent('.ddwnblock').removeClass('open');
@@ -60,7 +92,13 @@ $(document).ready(function() {
 		}
 	});
 	
-	// Переключение вкладок действий
+	/**
+	 * Функция: Переключение вкладок "Каталог" и "Акции"
+	 * Описание: При клике на кнопку вкладки переключает отображение между каталогом товаров и акционными товарами.
+	 * 			Меняет активное состояние кнопок и плавно показывает/скрывает соответствующие блоки.
+	 * Параметры: нет (использует элемент, на который кликнули)
+	 * Возвращает: ничего
+	 */
 	$(document).on("click", ".actionbtms li", function () {
 		if ($(this).attr('data-typ') == 'ac') {
 			$('.actionbtms li:first-child').addClass('liacactive');
@@ -75,35 +113,75 @@ $(document).ready(function() {
 		}
 	});
 	
-	// Модальное окно
+	/**
+	 * Функция: Открытие модального окна заказа
+	 * Описание: При клике на кнопку "Купить" у товара открывает модальное окно с формой заказа.
+	 * 			Заполняет скрытые поля названием товара и показывает модальное окно с затемнённым фоном.
+	 * Параметры: нет (использует элемент, на который кликнули)
+	 * Возвращает: ничего
+	 */
 	$(document).on("click", ".toverbuton", function () {
 		var name = $(this).attr('data-nam');
 		$('#playpayid').val(name);
 		$('#playpayidv').html(name);
 		$('.plashesbgmodl, #zakazaty').addClass('show');
 	});
-	// Закрытие окна при клике на фон
+	
+	/**
+	 * Функция: Закрытие модального окна при клике на фон
+	 * Описание: При клике на затемнённый фон закрывает модальное окно заказа.
+	 * Параметры: нет (использует элемент фона)
+	 * Возвращает: ничего
+	 */
 	$(document).on("click", ".plashesbgmodl", function () {
     	$('.plashesbgmodl, #zakazaty').removeClass('show');
 	});
-	// Закрытие модалки
+	
+	/**
+	 * Функция: Закрытие модального окна по кнопке
+	 * Описание: При клике на кнопку закрытия (крестик) закрывает модальное окно заказа.
+	 * Параметры: нет (использует элемент кнопки закрытия)
+	 * Возвращает: ничего
+	 */
 	$(document).on("click", ".closemodal", function () {
     	$('.plashesbgmodl, #zakazaty').removeClass('show');
 	});
 	
-	// Автоподбор марок/моделей/годов
+	/**
+	 * Функция: Автоподбор марок автомобилей
+	 * Описание: При вводе текста в поле поиска марки отправляет AJAX запрос для получения
+	 * 			подходящих вариантов марок и отображает их в выпадающем списке.
+	 * Параметры: нет (использует значение поля ввода)
+	 * Возвращает: ничего
+	 */
 	$(document).on("input", "#idmark", function () {
 		var tex = $(this).val();
 		$.post('getdtls.php', { tex: tex, typ: 1 }, function(html){
 			$("#makrlist").html(html.report);
 		}, 'json');
 	});
+	
+	/**
+	 * Функция: Автоподбор моделей автомобилей
+	 * Описание: При вводе текста в поле поиска модели отправляет AJAX запрос для получения
+	 * 			подходящих вариантов моделей и отображает их в выпадающем списке.
+	 * Параметры: нет (использует значение поля ввода)
+	 * Возвращает: ничего
+	 */
 	$(document).on("input", "#idmode", function () {
 		var tex = $(this).val();
 		$.post('getdtls.php', { tex: tex, typ: 2 }, function(html){
 			$("#modellist").html(html.report);
 		}, 'json');
 	});
+	
+	/**
+	 * Функция: Автоподбор годов автомобилей
+	 * Описание: При вводе текста в поле поиска года отправляет AJAX запрос для получения
+	 * 			подходящих вариантов годов и отображает их в выпадающем списке.
+	 * Параметры: нет (использует значение поля ввода)
+	 * Возвращает: ничего
+	 */
 	$(document).on("input", "#idyear", function () {
 		var tex = $(this).val();
 		$.post('getdtls.php', { tex: tex, typ: 3 }, function(html){
@@ -111,7 +189,14 @@ $(document).ready(function() {
 		}, 'json');
 	});
 
-	// Отправка форм
+	/**
+	 * Функция: Отправка формы обратного звонка
+	 * Описание: При клике на кнопку отправки формы обратного звонка валидирует поля (имя и телефон),
+	 * 			отправляет данные через AJAX на сервер, регистрирует событие в Google Analytics
+	 * 			и отображает сообщение об успешной отправке или ошибке.
+	 * Параметры: нет (использует данные формы)
+	 * Возвращает: ничего
+	 */
 	$(document).on('click', 'input[name="JF_send_casual"]', function () {
 		var parent_form = $(this).closest('.JF_parent_form'),
 			name = parent_form.find('input[name="name"]').val(),
@@ -150,6 +235,14 @@ $(document).ready(function() {
 		});
 	});
 	
+	/**
+	 * Функция: Отправка формы заказа товара
+	 * Описание: При клике на кнопку "Заказать" в модальном окне валидирует поля (имя и телефон),
+	 * 			отправляет данные заказа через AJAX на сервер, регистрирует событие в Google Analytics,
+	 * 			отображает сообщение об успешной отправке и скрывает форму.
+	 * Параметры: нет (использует данные формы и ID товара)
+	 * Возвращает: ничего
+	 */
 	$(document).on('click', 'input[name="JF_send_order"]', function () {
 		var parent_form = $(this).closest('.allrelativm'),
 			name = parent_form.find('input[name="name"]').val(),
@@ -182,33 +275,6 @@ $(document).ready(function() {
 				} else { alert(res.message); }
 			}
 		});
-	});
-
-	// === Theme toggle logic with checkbox ===
-	function applyTheme(theme) {
-		$('html').attr('data-theme', theme);
-	}
-	function updateToggleUI(theme) {
-		var cb = $('#themeToggleInput');
-		if (cb.length) { cb.prop('checked', theme === 'dark'); }
-	}
-	(function initTheme() {
-		var saved = localStorage.getItem('ml_theme');
-		var theme = saved ? saved : 'light';
-		applyTheme(theme);
-		updateToggleUI(theme);
-	})();
-	$(document).on('change', '#themeToggleInput', function() {
-		var next = this.checked ? 'dark' : 'light';
-		applyTheme(next);
-		updateToggleUI(next);
-		localStorage.setItem('ml_theme', next);
-	});
-	// click on container toggles the checkbox for accessibility/mobile hit area
-	$(document).on('click', '#themeToggle', function(e) {
-		if (e.target.id === 'themeToggleInput' || $(e.target).hasClass('slider')) return;
-		var cb = $('#themeToggleInput');
-		cb.prop('checked', !cb.prop('checked')).trigger('change');
 	});
 
 });

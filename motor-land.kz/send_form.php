@@ -1,6 +1,13 @@
 <?php
 include('hyst/php.php');
 
+/**
+ * Обработчик: Отправка формы обратного звонка
+ * Описание: Валидирует данные формы (имя и телефон), отправляет письмо на email,
+ * 			возвращает JSON с результатом операции (успех или ошибка).
+ * Параметры: $_POST['name'] - имя пользователя, $_POST['phon'] - телефон пользователя
+ * Возвращает: JSON с полями 'error' (bool), 'message' (string), 'conversion' (bool)
+ */
 if (isset($_POST['send_leed'])) { 
 	if (!empty($_POST['name']) && !empty($_POST['phon'])) {
 	$name = $_POST['name']; $phone = $_POST['phon'];
@@ -28,9 +35,13 @@ if (isset($_POST['send_leed'])) {
 	echo json_encode($res);
 }
 
-
-
-
+/**
+ * Обработчик: Отправка формы заказа товара
+ * Описание: Валидирует данные формы (имя, телефон, ID товара), отправляет письмо на email
+ * 			с информацией о заказе, возвращает JSON с результатом операции.
+ * Параметры: $_POST['name'] - имя пользователя, $_POST['phon'] - телефон, $_POST['id'] - название товара
+ * Возвращает: JSON с полями 'error' (bool), 'message' (string), 'conversion' (bool)
+ */
 if (isset($_POST['zakaz'])) {
 	if (!empty($_POST['name']) && !empty($_POST['phon']) && !empty($_POST['id'])) {
 	$name = $_POST['name']; $phone = $_POST['phon'];
