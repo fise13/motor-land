@@ -3,12 +3,20 @@
 	.logo {
 	width: 100px;
 	height: 100px;
-	margin-left: 0px;
-	left: 0px;
+	margin-left: -50px;
+	left: 50%;
+	position: absolute;
+	top: 0px;
+	z-index: 10;
 	}
 	
 	.zgolovorleft {
 	padding-top: 20px;
+	}
+	
+	.zgolovorright {
+	padding-top: 20px;
+	text-align: left;
 	}
 
 	
@@ -31,11 +39,6 @@ width: 260px;
 	width: 340px;
 	}
 	
-	.sssskartins {
-	width: 340px;
-	height: 300px;
-	}
-	
 	.detalinlines {
 	width: 320px;
 	}
@@ -50,6 +53,28 @@ width: 260px;
 	position: static;
 	left: auto;
 	top: auto;
+	}
+	
+	.actionbtms {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		margin: 20px auto;
+	}
+	
+	.actionbtms li {
+		width: 120px;
+		margin: 5px;
+	}
+	
+	.toverblock {
+		width: 280px;
+		margin: 15px auto;
+		display: block;
+	}
+	
+	.toverimg {
+		width: 278px;
 	}
 
 	.menu {
@@ -111,16 +136,31 @@ bottom: 10px;
 	background-position: center top;
 	background-size: 100% auto;
 	width: 340px;
-	height: 850px;
-	overflow: hidden;
+	height: auto;
+	min-height: 600px;
+	overflow: visible;
+	position: relative;
+	}
+	
+	.sssskartins {
+	width: 340px;
+	height: 300px;
+	position: relative;
+	left: auto;
+	top: auto;
+	display: block;
+	margin: 0 auto;
 	}
 	
 	.abouttext {
 	transform: translate(0,0);
 	width: 300px;
-	margin-left: -160px;
-	left: 50%;
-	top: 460px;
+	margin: 20px auto;
+	left: auto;
+	right: auto;
+	top: auto;
+	position: relative;
+	padding: 20px 15px;
 	}
 	
 	.aboutblock1 {

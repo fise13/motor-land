@@ -27,3 +27,18 @@ if (isset($_HYST_REPORT['message'])) {
 	}
 ?>
 </messagelog>
+
+<!-- Модальное окно заказа (восстановлено) -->
+<div class="plashesbgmodl"></div>
+<div class="modalwindow" id="zakazaty">
+	<div class="allrelativm">
+		<div class="formcraoss closemodal">X</div>
+		<div class="formza">Сделать заказ на: <span id="playpayidv"><?=(isset($print['name'])?$print['name']:'');?></span></div>
+		<form method="post">
+			<input type="hidden" name="id" id="playpayid" value="<?=(isset($print['name'])?$print['name']:'');?>">
+			<input type="text" name="name" placeholder="Имя">
+			<input type="text" name="phon" placeholder="Телефон">
+			<input type="button" name="JF_send_order" value="Заказать">
+		</form>
+	</div>
+</div>
