@@ -626,19 +626,13 @@ padding: 15px 10px;
   background-color: #2c2c2c;
   display: inline-block;
   cursor: pointer;
-
-  /* добавляем плавные визуальные улучшения */
-  border-radius: 8px; /* мягкое закругление углов */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* лёгкое затемнение под кнопкой */
-  transition: all 0.3s ease; /* плавные переходы */
+  border-radius: 8px;
+  box-shadow: none;
+  transition: none;
 }
 
 /* небольшой эффект при наведении */
-.toverbuton:hover {
-  background-color: #1e1e1e; /* чуть темнее при наведении */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* немного усиляем тень */
-  transform: translateY(-2px); /* лёгкое "поднятие" */
-}
+.toverbuton:hover { background-color: #2c2c2c; box-shadow: none; transform: none; }
 
 .okazatybolsh {
 padding: 10px 20px;
