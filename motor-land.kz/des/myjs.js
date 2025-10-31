@@ -82,10 +82,14 @@ $(document).ready(function() {
 		$('#playpayidv').html(name);
 		$('.plashesbgmodl, #zakazaty').addClass('show');
 	});
+	// Закрытие окна при клике на фон
+	$(document).on("click", ".plashesbgmodl", function () {
+  	$('.plashesbgmodl, #zakazaty').removeClass('show');
+	});
 	
 	// Закрытие модалки
-	$(document).on("click", ".plashesbgmodl", function() {
-		$('.plashesbgmodl, #zakazaty').removeClass('show');
+$	(document).on("click", ".closemodal", function () {
+  	$('.plashesbgmodl, #zakazaty').removeClass('show');
 	});
 	
 	// Автоподбор марок/моделей/годов
