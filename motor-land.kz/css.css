@@ -250,7 +250,7 @@ background: rgba(205,205,205,0.7);
 background-color: rgba(205,205,205,0.7);
 border-radius: 20px;
 display: inline-block;
-position: absolute;;
+position: absolute;
 bottom: 80px;
 left: 0px;
 font-size: 40px;
@@ -288,11 +288,7 @@ vertical-align: top;
 .ddwnblock {
 width: 190px;
 padding: 10px 10px 10px 10px;
-
-border-left: solid 1px white;
-border-right: solid 1px white;
-border-bottom: solid 1px white;
-background-color: white;
+/* unified border/background below */
 transform: translateY(-6px) scaleY(0.98);
 transform-origin: top;
 background: #fff;
@@ -300,7 +296,7 @@ border: 1px solid #e5e5e5;
 border-radius: 10px;
 box-shadow: 0 8px 24px rgba(0,0,0,0.08);
 transition: max-height 0.35s ease, opacity 0.25s ease, transform 0.35s ease, box-shadow 0.35s ease;
-border-radius: 15px;
+/* keep single border-radius definition */
 position: absolute;
 top: 38px;
 left: -1px;
@@ -333,7 +329,7 @@ border-radius: 15px;
 color: black;
 font-size: 18px;
 font-family: roboto;
-padding: 8px, 20px;
+padding: 8px 20px;
 width: 650px;
 margin: 10px 20px 20px 5px;
 }
@@ -341,7 +337,7 @@ margin: 10px 20px 20px 5px;
 .sliderform input[type="submit"]{
 background: transparent url(./img/sertch.png) no-repeat;
 background-size: contain;
-background-position: canter canter;
+background-position: center center;
 width: 60px;
 height: 60px;
 border: none;
@@ -351,7 +347,7 @@ cursor: pointer;
 .sliderform input[type="submit"]:active{
 background: transparent url(./img/sertchh.png) no-repeat;
 background-size: contain;
-background-position: canter canter;
+background-position: center center;
 }
 
 .generalw {
@@ -893,15 +889,15 @@ border-radius: 15px;
 color: black;
 font-size: 18px;
 font-family: roboto;
-padding: 8px, 20px;
+padding: 8px 20px;
 width: 600px;
-margin: 10px, 20px, 0px, 0px;
+margin: 10px 20px 0 0;
 }
 
 .filtersblock input[type="submit"]{
 background: transparent url(./img/sertch.png) no-repeat;
 background-size: contain;
-background-position: canter canter;
+background-position: center center;
 width: 60px;
 height: 60px;
 border: none;
@@ -911,7 +907,7 @@ cursor: pointer;
 .filtersblock input[type="submit"]:active{
 background: transparent url(./img/sertchh.png) no-repeat;
 background-size: contain;
-background-position: canter canter;
+background-position: center center;
 }
 
 .crumbsblock {
@@ -977,6 +973,8 @@ background: rgba(14, 14, 14, 0.75);
 z-index: 80;
 display: none;
 }
+
+/* duplicate .plashesbgmodl override removed to avoid conflicts; unified styles are defined at top of file */
 
 .modalwindow {
 padding: 30px;
@@ -1044,7 +1042,7 @@ margin: 20px 0px;
 text-align: center;
 padding: 0px;
 font-family: robotob;
-transform: translate(-50%);
+transform: translateX(-50%);
 position: absolute;
 left: 50%;
 top: 0px;
@@ -1106,7 +1104,7 @@ margin: 0px 0px;
 width: 100%;
 color: white;
 display: flex;
-flex-wrap: no-wrap;
+flex-wrap: nowrap;
 justify-content: center;
 }
 

@@ -17,13 +17,12 @@ $INTERFACE_VERSION = 0.91;
 <link rel="apple-touch-icon" href="favicon_apple.png?<?=$INTERFACE_VERSION;?>">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta property="og:image" content="">
-<meta name="description" content="">
 <link rel="stylesheet" href="/hyst/visual/admin.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
 <link rel="stylesheet" href="/hyst/visual/admin_mob.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
 
 <script src="/hyst/visual/jquery.js"></script>
 <script src="/hyst/visual/jquery-ui.js"></script>
-<script src="/hyst/visual/main.js?<?=$INTERFACE_VERSION;?>"></script>
+<script src="/hyst/visual/main.js?<?=$INTERFACE_VERSION?>"></script>
 
 
 	<link href="css.css?<?=$INTERFACE_VERSION;?>" rel="stylesheet" type="text/css" />
@@ -55,7 +54,7 @@ if (count($_HYST_METAINCUDES) != 0) {
 		$type = explode('.',$inc_type[count($inc_type)-1]);
 		if ($type[count($type)-1] == 'js') {
 		echo '<script src="'.$q.'"></script>';
-		} else if ($type[count($type-1)] == 'css') {
+		} else if ($type[count($type)-1] == 'css') {
 		echo '<link href="'.$q.'" rel="stylesheet" type="text/css" />';
 		}		
 	}
