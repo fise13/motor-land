@@ -14,10 +14,13 @@ $SITE_DESCRIPTION = 'Компания "Motor Land" - поставка контр
 <body>
 <?php include("hyst/sbody.php"); ?>
 <?php include("des/head.php"); ?>
-    <!-- Прелоадер -->
-    <div id="preloader">
-        <img src="logo.jpg" alt="Логотип" class="logo">
-    </div>
+<!-- Preloader -->
+
+<div id="preloader">
+  <div class="loader-wrapper">
+    <div class="loader-logo"></div>
+  </div>
+</div>
 
 <div class="slider">
 	<div id="slidess">
