@@ -758,7 +758,7 @@ background-position: center center;
 }
 
 /* ================================
-   CALLBACK FORM — минимализм, плавность, в футере
+   CALLBACK FORM — стеклянный минимализм с анимациями
 ================================ */
 .foterinline {
   display: inline-block;
@@ -771,17 +771,23 @@ background-position: center center;
   font-family: "Inter", sans-serif;
 }
 
-/* === Форма === */
+/* === Контейнер формы (плавающий эффект, без блока вокруг) === */
 .callback-form {
   display: inline-block;
-  background: transparent;
-  text-align: center;
+  padding: 45px 35px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border-radius: 24px;
   color: #fff;
+  text-align: center;
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.25);
   animation: fadeIn 0.8s ease forwards;
   opacity: 0;
   transform: translateY(10px);
   animation-delay: 0.1s;
   animation-fill-mode: forwards;
+  transition: transform 0.5s ease, box-shadow 0.6s ease;
 }
 
 @keyframes fadeIn {
@@ -791,19 +797,25 @@ background-position: center center;
   }
 }
 
+.callback-form:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 50px rgba(0, 0, 0, 0.35);
+}
+
 /* === Заголовок === */
 .callback-form h2 {
   margin-bottom: 25px;
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 1px;
-  color: #f1f1f1;
+  color: #f1f7ff;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.1);
 }
 
 /* === Поля ввода === */
 .form-control {
   position: relative;
-  margin: 24px 0;
+  margin: 28px 0;
   width: 100%;
   max-width: 320px;
   margin-left: auto;
@@ -811,27 +823,28 @@ background-position: center center;
 }
 
 .form-control input {
-  background: transparent;
+  background-color: transparent;
   border: none;
   border-bottom: 2px solid rgba(255, 255, 255, 0.35);
   width: 100%;
-  padding: 10px 0;
+  padding: 12px 0;
   font-size: 17px;
   color: #fff;
   transition: border-color 0.3s ease, transform 0.25s ease;
+  caret-color: #6ec9ff;
 }
 
 .form-control input:focus,
 .form-control input:valid {
   outline: none;
-  border-bottom-color: #fff;
+  border-bottom-color: #6ec9ff;
   transform: scale(1.02);
 }
 
 /* === Метка === */
 .form-control label {
   position: absolute;
-  top: 8px;
+  top: 6px;
   left: 0;
   pointer-events: none;
   transition: all 0.25s ease;
@@ -840,31 +853,30 @@ background-position: center center;
 
 .form-control input:focus + label,
 .form-control input:valid + label {
-  top: -16px;
+  top: -18px;
   font-size: 13px;
-  color: #ffffff;
-  opacity: 0.9;
+  color: #b7e4ff;
 }
 
-/* === Кнопка === */
+/* === Кнопка "Отправить" === */
 .callback-btn {
   margin-top: 25px;
-  padding: 12px 32px;
+  padding: 13px 36px;
   border: none;
   border-radius: 30px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, #2196f3, #64b5f6);
   color: #fff;
   font-size: 16px;
-  font-weight: 500;
-  letter-spacing: 0.6px;
+  font-weight: 600;
+  letter-spacing: 0.7px;
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(4px);
+  transition: background 0.35s ease, transform 0.25s ease, box-shadow 0.35s ease;
+  box-shadow: 0 6px 20px rgba(33, 150, 243, 0.3);
 }
 
-/* "Мягкий" блик при наведении */
+/* светлая волна при наведении */
 .callback-btn::before {
   content: "";
   position: absolute;
@@ -872,7 +884,7 @@ background-position: center center;
   top: 0;
   width: 200%;
   height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.25), transparent);
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.25), transparent);
   transform: translateX(-100%);
   transition: transform 0.8s ease;
 }
@@ -882,17 +894,17 @@ background-position: center center;
 }
 
 .callback-btn:hover {
-  background-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 28px rgba(33, 150, 243, 0.4);
+  background: linear-gradient(135deg, #1e88e5, #81d4fa);
 }
 
 .callback-btn:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 14px rgba(33, 150, 243, 0.25);
 }
 
-/* === Плавное появление полей === */
+/* === Анимация появления полей === */
 @keyframes inputFade {
   from {
     opacity: 0;
@@ -916,19 +928,27 @@ background-position: center center;
    📱 Адаптив
 ================================ */
 @media (max-width: 768px) {
+  .callback-form {
+    width: 90%;
+    padding: 35px 25px;
+    border-radius: 20px;
+  }
   .callback-form h2 { font-size: 20px; }
   .form-control input { font-size: 16px; }
-  .callback-btn { font-size: 15px; }
+  .callback-btn { font-size: 15px; padding: 12px 30px; }
 }
 
 @media (max-width: 420px) {
+  .callback-form {
+    padding: 28px 20px;
+    border-radius: 16px;
+  }
   .callback-form h2 { font-size: 18px; }
-  .form-control input { font-size: 15px; }
-  .callback-btn { font-size: 14px; padding: 10px 26px; }
+  .callback-btn { font-size: 14px; border-radius: 20px; padding: 10px 24px; }
 }
 
 /* ================================
-   ОСТАЛЬНЫЕ СТИЛИ (оставлены)
+   Остальные стили (оставлены)
 ================================ */
 .map {
   width: 100%;
