@@ -186,11 +186,12 @@ $year = false;
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const observer = new IntersectionObserver((entries, observer) => {
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add("show");
-        observer.unobserve(entry.target); // чтобы не повторять анимацию
+        entry.target.classList.add("show"); // элемент виден — показать
+      } else {
+        entry.target.classList.remove("show"); // элемент ушёл из зоны видимости — скрыть
       }
     });
   }, { threshold: 0.15 }); // элемент виден хотя бы на 15%
