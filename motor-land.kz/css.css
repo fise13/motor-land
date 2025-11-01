@@ -1232,67 +1232,73 @@ width: 340px;
 color: white;
 }
 
-/* Прелоадер */
+/* =================== PRELOADER =================== */
 #preloader {
   position: fixed;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #000;
   z-index: 9999;
-  backdrop-filter: blur(20px) saturate(160%);
-  background: rgba(255,255,255,0.05);
-  transition: opacity 600ms ease, visibility 600ms ease;
+  overflow: hidden;
+  transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 1.4s ease;
 }
 
-/* Скрытие прелоадера */
+/* Когда скрываем — фон “уезжает” вверх */
 #preloader.hide {
+  transform: translateY(-100%);
   opacity: 0;
-  visibility: hidden;
   pointer-events: none;
 }
 
-/* Копия логотипа в прелоадере (будет позиционироваться JS) */
+/* ЛОГОТИП */
 .loader-logo {
   width: 160px;
-  height: 160px;
+  height: 108px;
   background: url('./img/logo.jpg') center/contain no-repeat;
-  border-radius: 18px;
-  filter: drop-shadow(0 0 40px rgba(255,255,255,0.18));
-  will-change: transform, top, left, width, height, opacity;
-  /* переходы на случай, если потребуется */
-  transition: opacity 300ms ease;
-  transform-origin: center center;
+  border-radius: 12px;
+  filter: drop-shadow(0 0 40px rgba(255,255,255,0.25));
+  will-change: transform, opacity;
+  opacity: 0;
+  transition:
+    opacity 800ms ease-in-out,
+    transform 1s cubic-bezier(0.25, 1, 0.5, 1),
+    filter 1.2s ease;
 }
 
-/* Плавная "подтяжка" при движении задаётся JS (animation-timing заменяется) */
-.loader-logo.is-moving {
-  transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1),
-              width 900ms cubic-bezier(0.22, 1, 0.36, 1),
-              height 900ms cubic-bezier(0.22, 1, 0.36, 1),
-              border-radius 600ms ease,
-              filter 900ms ease;
-  border-radius: 6px; /* будет постепенно уменьшаться при движении */
+/* Появление логотипа */
+.loader-logo.show {
+  opacity: 1;
+  transform: scale(1.05);
 }
 
-/* header .logo — целевой элемент */
+/* Движение к позиции в header */
+.loader-logo.move-to-header {
+  transform: translate(var(--x, 0), var(--y, 0)) scale(1);
+  filter: drop-shadow(0 0 20px rgba(255,255,255,0.15));
+  border-radius: 6px;
+}
+
+/* Исходное лого в header */
 .header .logo {
   width: 160px;
   height: 108px;
-  margin-left: -80px; /* как у тебя */
+  margin-left: -80px;
   background-image: url(./img/logo.jpg);
   background-size: contain;
   background-position: center top;
   background-repeat: no-repeat;
   position: absolute;
-  top: 0px;
+  top: 0;
   left: 50%;
   z-index: 10;
-  opacity: 0; /* скрыт до "приземления" */
-  transition: opacity 400ms ease;
+  opacity: 0;
+  transition: opacity 600ms ease;
 }
 
-/* Когда готов показать реальную шапку-л�ого */
+/* Появляется после ухода прелоадера */
 .header .logo.visible {
   opacity: 1;
 }

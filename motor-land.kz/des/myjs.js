@@ -2,20 +2,34 @@ $(document).ready(function() {
 
 	window.addEventListener("load", () => {
 		const preloader = document.getElementById("preloader");
-		const logo = document.querySelector(".loader-logo");
-		const content = document.getElementById("content");
+		const loaderLogo = preloader.querySelector(".loader-logo");
+		const headerLogo = document.querySelector(".header .logo");
 	  
-		// Когда всё загружено — запускаем анимацию ухода логотипа
-		logo.classList.add("fade-out");
+		// Показ логотипа
+		loaderLogo.classList.add("show");
 	  
-		// Через время после анимации скрываем прелоадер полностью
+		// Получаем позицию шапочного логотипа
+		const headerRect = headerLogo.getBoundingClientRect();
+		const loaderRect = loaderLogo.getBoundingClientRect();
+	  
+		// Вычисляем разницу (куда двигаться)
+		const dx = headerRect.left + headerRect.width / 2 - (loaderRect.left + loaderRect.width / 2);
+		const dy = headerRect.top + headerRect.height / 2 - (loaderRect.top + loaderRect.height / 2);
+	  
+		// Применяем движение с помощью CSS-переменных
+		loaderLogo.style.setProperty("--x", `${dx}px`);
+		loaderLogo.style.setProperty("--y", `${dy}px`);
+	  
+		// Через короткую задержку — плавно перемещаем логотип
+		setTimeout(() => {
+		  loaderLogo.classList.add("move-to-header");
+		}, 600);
+	  
+		// Через ~1.8s — убираем прелоадер и показываем шапку
 		setTimeout(() => {
 		  preloader.classList.add("hide");
-	  
-		  // Показываем контент плавно
-		  content.style.transition = "opacity 1s ease";
-		  content.style.opacity = 1;
-		}, 600); // 1 секунда на уход логотипа
+		  headerLogo.classList.add("visible");
+		}, 1800);
 	  });
 
 	
