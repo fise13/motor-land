@@ -93,23 +93,9 @@ border-bottom: solid 1px #9a9a9a;
 background-color: #000000;
 }
 
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(25px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .shirina {
-  width: 1200px;
-  display: inline-block;
-  opacity: 0;
-  animation: fadeUp 0.8s ease forwards;
-  animation-delay: 0.3s; /* небольшая задержка для плавности */
+width: 1200px;
+display: inline-block;
 }
 
 .relhead {
@@ -426,66 +412,6 @@ margin: 20px 0px;
 position: relative;
 }
 
-/* Общая анимация появления снизу вверх */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(25px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Слева направо */
-@keyframes fadeFromLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Справа налево */
-@keyframes fadeFromRight {
-  from {
-    opacity: 0;
-    transform: translateX(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Применяем эффекты */
-.generalw {
-  animation: fadeUp 0.8s ease forwards;
-}
-
-.zgolovorleft {
-  animation: fadeFromLeft 0.8s ease forwards;
-}
-
-.zgolovorright {
-  animation: fadeFromRight 0.8s ease forwards;
-}
-
-/* Добавим лёгкую задержку, чтобы не появлялись одновременно */
-.generalw {
-  animation-delay: 0.2s;
-}
-.zgolovorleft {
-  animation-delay: 0.4s;
-}
-.zgolovorright {
-  animation-delay: 0.6s;
-}
-
 .sttitle {
 padding: 10px;
 display: inline-block;
@@ -610,8 +536,6 @@ background-color: #fe0000;
 }
 
 .toverblock {
-  opacity: 0;
-  animation: fadeUp .6s ease forwards;
   display: inline-block;
   margin: 15px;
   width: 250px;
@@ -619,10 +543,6 @@ background-color: #fe0000;
   background-color: #efefef;
   min-height: 540px;
   vertical-align: top;
-}
-
-animate-fadeUp {
-  animation: fadeUp .6s ease forwards;
 }
 
 .toverimg {
@@ -1441,4 +1361,27 @@ color: white;
     transform: scale(1.04);
     filter: drop-shadow(0 0 45px rgba(255,255,255,0.4));
   }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* начальное состояние */
+.toverblock {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* когда появляется */
+.toverblock.show {
+  animation: fadeUp 0.6s ease forwards;
 }

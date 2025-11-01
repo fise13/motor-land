@@ -183,5 +183,21 @@ $year = false;
 <br><br>
 <?php include("des/foter.php"); ?>
 <?php include("hyst/fbody.php"); ?>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+        observer.unobserve(entry.target); // чтобы не повторять анимацию
+      }
+    });
+  }, { threshold: 0.15 }); // элемент виден хотя бы на 15%
+
+  document.querySelectorAll(".toverblock").forEach(el => observer.observe(el));
+});
+</script>
+
 </body>
 </html>
