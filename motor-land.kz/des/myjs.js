@@ -5,31 +5,29 @@ $(document).ready(function() {
 		const loaderLogo = preloader.querySelector(".loader-logo");
 		const headerLogo = document.querySelector(".header .logo");
 	  
-		// Показ логотипа
+		// Шаг 1: показываем логотип
 		loaderLogo.classList.add("show");
 	  
-		// Получаем позицию шапочного логотипа
+		// Шаг 2: вычисляем смещение к .logo
 		const headerRect = headerLogo.getBoundingClientRect();
 		const loaderRect = loaderLogo.getBoundingClientRect();
-	  
-		// Вычисляем разницу (куда двигаться)
 		const dx = headerRect.left + headerRect.width / 2 - (loaderRect.left + loaderRect.width / 2);
 		const dy = headerRect.top + headerRect.height / 2 - (loaderRect.top + loaderRect.height / 2);
 	  
-		// Применяем движение с помощью CSS-переменных
+		// Устанавливаем CSS-переменные
 		loaderLogo.style.setProperty("--x", `${dx}px`);
 		loaderLogo.style.setProperty("--y", `${dy}px`);
 	  
-		// Через короткую задержку — плавно перемещаем логотип
+		// Шаг 3: плавное движение логотипа
 		setTimeout(() => {
 		  loaderLogo.classList.add("move-to-header");
 		}, 600);
 	  
-		// Через ~1.8s — убираем прелоадер и показываем шапку
+		// Шаг 4: убираем фон и показываем шапку
 		setTimeout(() => {
 		  preloader.classList.add("hide");
 		  headerLogo.classList.add("visible");
-		}, 1800);
+		}, 2000); // через 2 секунды — достаточно для плавного завершения
 	  });
 
 	

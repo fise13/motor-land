@@ -1232,7 +1232,7 @@ width: 340px;
 color: white;
 }
 
-/* =================== PRELOADER =================== */
+/* ===== PRELOADER ===== */
 #preloader {
   position: fixed;
   inset: 0;
@@ -1242,29 +1242,29 @@ color: white;
   background: #000;
   z-index: 9999;
   overflow: hidden;
-  transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1),
-              opacity 1.4s ease;
+  transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Когда скрываем — фон “уезжает” вверх */
+/* Исчезновение прелоадера */
 #preloader.hide {
-  transform: translateY(-100%);
   opacity: 0;
+  transform: translateY(-100%);
   pointer-events: none;
 }
 
-/* ЛОГОТИП */
+/* Логотип в центре */
 .loader-logo {
   width: 160px;
   height: 108px;
   background: url('./img/logo.jpg') center/contain no-repeat;
   border-radius: 12px;
-  filter: drop-shadow(0 0 40px rgba(255,255,255,0.25));
-  will-change: transform, opacity;
+  filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.3));
   opacity: 0;
+  transform: scale(0.95);
+  will-change: transform, opacity;
   transition:
     opacity 800ms ease-in-out,
-    transform 1s cubic-bezier(0.25, 1, 0.5, 1),
+    transform 1.2s cubic-bezier(0.25, 1, 0.5, 1),
     filter 1.2s ease;
 }
 
@@ -1274,14 +1274,13 @@ color: white;
   transform: scale(1.05);
 }
 
-/* Движение к позиции в header */
+/* Движение к логотипу в шапке */
 .loader-logo.move-to-header {
   transform: translate(var(--x, 0), var(--y, 0)) scale(1);
-  filter: drop-shadow(0 0 20px rgba(255,255,255,0.15));
-  border-radius: 6px;
+  filter: drop-shadow(0 0 15px rgba(255,255,255,0.15));
 }
 
-/* Исходное лого в header */
+/* ===== ЛОГОТИП В ШАПКЕ ===== */
 .header .logo {
   width: 160px;
   height: 108px;
@@ -1295,10 +1294,10 @@ color: white;
   left: 50%;
   z-index: 10;
   opacity: 0;
-  transition: opacity 600ms ease;
+  transition: opacity 800ms ease;
 }
 
-/* Появляется после ухода прелоадера */
+/* Когда показывается шапка */
 .header .logo.visible {
   opacity: 1;
 }
