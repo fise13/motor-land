@@ -8,13 +8,10 @@ $(document).ready(function() {
 	 * Возвращает: ничего
 	 */
     $(document).on("click", ".btmmearrow, .madiv", function () {
-
-		var meinputer = $(this).parent('.meinputer');
+		var meinputer = $(this).closest('.meinputer');
         var dd = meinputer.children('.ddwnblock');
         // закрыть все прочие открытые
         $('.ddwnblock').not(dd).removeClass('open');
-		// закрыть все остальные списки
-		$('.ddwnblock').removeClass('open');
 		// переключить текущий список
 		dd.toggleClass('open');
     });
