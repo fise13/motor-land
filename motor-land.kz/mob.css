@@ -51,9 +51,22 @@ width: 260px !important;
 }
 
 
-	.shirina {
-	width: 340px !important;
-	}
+.shirina {
+	position: relative; /* чтобы .modilebtn позиционировалась относительно этого блока */
+  }
+  
+  .modilebtn {
+	position: absolute;
+	top: 10px;      /* отступ сверху — подгони под дизайн */
+	right: 10px;    /* справа */
+	width: 40px;
+	height: 40px;
+	background-image: url('./img/mmenu.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	z-index: 1000;  /* над меню */
+  }
 	
 	.detalinlines {
 	width: 320px;
@@ -63,7 +76,7 @@ width: 260px !important;
 	width: 280px;
 	margin-left: -170px;
 	}
-	
+
 	.actionperekl  {
 		transform: translate(0%);
 		position: static;
