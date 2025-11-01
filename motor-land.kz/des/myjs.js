@@ -6,113 +6,68 @@ $(document).ready(function() {
 		const content = document.getElementById("content");
 		const headerLogo = document.querySelector(".header .logo");
 	  
-		// fallbacks: если нет контента или логотипа — просто скрываем
-		if (!preloader || !preLogo) return setTimeout(() => {
-		  preloader && preloader.classList.add("hide");
-		  content && (content.style.opacity = 1);
-		}, 500);
+		if (!preloader || !preLogo) return;
 	  
-		// Небольшая задержка чтобы прелоадер не мигал на очень быстрых загрузках
 		setTimeout(() => {
-		  // Получаем целевые координаты
 		  const target = headerLogo;
-		  const offsetX = -20; // "чуть левее" — подстрой при желании
-		  const duration = 900; // ms
-		  const easing = 'cubic-bezier(0.22, 1, 0.36, 1)';
+		  const offsetX = -20; // немного левее
+		  const duration = 1200; // чуть дольше для плавности
 	  
-		  // Если нет целевого .logo, делаем мягкое поднятие вверх по центру
 		  if (!target) {
-			// простая анимация вверх и исчезновение
-			preLogo.classList.add('is-moving');
-			preLogo.style.transform = 'translateY(-40px) scale(0.85)';
-			preLogo.style.opacity = '0';
-			setTimeout(() => {
-			  preloader.classList.add('hide');
-			  content && (content.style.opacity = 1);
-			}, duration);
+			preLogo.style.transition = "transform 1s ease, opacity 0.8s ease";
+			preLogo.style.transform = "translateY(-50px) scale(0.8)";
+			preLogo.style.opacity = "0";
+			setTimeout(() => preloader.classList.add("hide"), 1000);
 			return;
 		  }
 	  
-		  // Промежуточные прямые координаты
+		  // Берем координаты
 		  const logoRect = preLogo.getBoundingClientRect();
 		  const targetRect = target.getBoundingClientRect();
 	  
-		  // вычисляем центрные координаты
 		  const logoCenterX = logoRect.left + logoRect.width / 2;
 		  const logoCenterY = logoRect.top + logoRect.height / 2;
 		  const targetCenterX = targetRect.left + targetRect.width / 2 + offsetX;
 		  const targetCenterY = targetRect.top + targetRect.height / 2;
 	  
-		  // смещение, которое нужно применить
 		  const dx = targetCenterX - logoCenterX;
 		  const dy = targetCenterY - logoCenterY;
+		  const scale = Math.min(targetRect.width / logoRect.width, targetRect.height / logoRect.height);
 	  
-		  // масштаб, чтобы визуально совпало по размеру (.logo высота 108, ширина 160)
-		  const scale = Math.min((targetRect.width || 160) / logoRect.width, (targetRect.height || 108) / logoRect.height);
-	  
-		  // Переключаем в fixed чтобы перемещать по экрану (без влияния layout)
-		  const computedStyle = getComputedStyle(preLogo);
-		  const borderRadiusBefore = computedStyle.borderRadius;
-	  
-		  // Задаём начальную фиксированную позицию ровно там, где стоит прелоадерный элемент
-		  preLogo.style.position = 'fixed';
+		  // Делаем логотип фиксированным, чтобы он мог "лететь"
+		  preLogo.style.position = "fixed";
 		  preLogo.style.left = `${logoRect.left}px`;
 		  preLogo.style.top = `${logoRect.top}px`;
 		  preLogo.style.width = `${logoRect.width}px`;
 		  preLogo.style.height = `${logoRect.height}px`;
-		  preLogo.style.margin = '0';
-		  preLogo.style.zIndex = 10000;
-		  preLogo.style.pointerEvents = 'none';
+		  preLogo.style.margin = "0";
+		  preLogo.style.zIndex = "10000";
+		  preLogo.style.willChange = "transform, opacity";
+		  preLogo.style.transition = "transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.8s ease";
 	  
-		  // Включаем "is-moving" чтобы применились переходы
+		  // Очень важно: два requestAnimationFrame подряд, чтобы браузер успел зафиксировать начальное состояние
 		  requestAnimationFrame(() => {
-			preLogo.classList.add('is-moving');
-			// применяем трансформ — translate в px + scale
-			preLogo.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
-			preLogo.style.borderRadius = '6px';
-			preLogo.style.filter = 'drop-shadow(0 0 18px rgba(255,255,255,0.12))';
+			requestAnimationFrame(() => {
+			  preLogo.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
+			  preLogo.style.opacity = "0.95";
+			});
 		  });
 	  
-		  // После конца анимации — прячем копию и показываем реальный логотип
-		  const cleanup = () => {
-			// скрываем прелоадер
-			preloader.classList.add('hide');
-	  
-			// показываем реальный логотип в шапке
-			if (target) {
-			  target.classList.add('visible');
-			}
-	  
-			// сбрасываем копию (на случай, если нужно оставить DOM)
-			preLogo.style.opacity = '0';
-			// убираем слушатель
-			preLogo.removeEventListener('transitionend', onEnd);
-		  };
-	  
-		  const onEnd = (e) => {
-			// дождаться конца трансформации (иногда срабатывает по нескольким свойствам)
-			if (e.propertyName && (e.propertyName.includes('transform') || e.propertyName.includes('width') || e.propertyName.includes('height'))) {
-			  // немного задержим, чтобы эффект "встал" естественно
-			  setTimeout(cleanup, 80);
-			}
-		  };
-	  
-		  preLogo.addEventListener('transitionend', onEnd);
-	  
-		  // safety — если transitionend не сработает
+		  // Когда долетит — показать настоящий логотип и скрыть прелоадер
 		  setTimeout(() => {
-			if (!preloader.classList.contains('hide')) cleanup();
-		  }, duration + 500);
+			if (target) target.classList.add("visible");
+			preloader.classList.add("hide");
+			preLogo.style.opacity = "0";
+		  }, duration + 200);
 	  
-		  // показываем контент (фон) после маленькой паузы
+		  // Плавно показать контент
 		  setTimeout(() => {
 			if (content) {
-			  content.style.transition = "opacity 500ms ease";
+			  content.style.transition = "opacity 1s ease";
 			  content.style.opacity = 1;
 			}
-		  }, duration + 120);
-	  
-		}, 420); // небольшая задержка перед стартом анимации
+		  }, duration + 300);
+		}, 400); // лёгкая задержка перед полётом
 	  });
 
 	
