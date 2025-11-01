@@ -103,6 +103,10 @@ width: 260px !important;
 	width: 200px !important;
 	transition: all 0.3s ease-out 0.3s !important;
 	}
+	
+	.menu.open {
+		display: block !important; /* обязательно !important */
+	}
 
 .filtersblock input[type="text"] {
 width: 260px !important;
