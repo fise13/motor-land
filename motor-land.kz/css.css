@@ -755,87 +755,107 @@ text-align: center;
 color: white;
 }
 
-/* === MODERN FOOTER CALLBACK FORM === */
+/* === BEAUTIFUL MODERN FOOTER CALLBACK FORM === */
 .foterinline.JF_parent_form {
-  max-width: 700px;
+  max-width: 650px;
   margin: 60px auto;
-  padding: 40px 30px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.15);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  padding: 42px 32px 36px 32px;
+  border-radius: 22px;
+  background: linear-gradient(120deg, rgba(20,20,20,0.85), rgba(50,0,0,0.80), rgba(20,20,20,0.88) 80%);
+  backdrop-filter: blur(18px);
+  border: 1.5px solid rgba(254,0,0,0.18);
+  box-shadow: 0 12px 40px 0 rgba(30,0,0,0.36), 0 2px 10px rgba(254,0,0,0.12) inset;
   text-align: center;
-  color: white;
-  animation: scaleIn 0.6s ease forwards;
+  color: #fff;
+  animation: scaleIn 0.6s cubic-bezier(.62,.01,.42,1.01) forwards;
+  position: relative;
 }
 
 .foterinline.JF_parent_form .foterzago {
-  font-family: 'robotob';
-  font-size: 26px;
+  font-family: 'robotob', Arial, sans-serif;
+  font-size: 28px;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-bottom: 20px;
+  letter-spacing: 2px;
+  margin-bottom: 22px;
   color: #fff;
   position: relative;
+  text-shadow: 0 2px 12px rgba(254,0,0,0.18), 0px 1px 0px rgba(255,255,255,0.06);
 }
 
 .foterinline.JF_parent_form .foterzago::after {
   content: "";
   display: block;
-  width: 80px;
-  height: 2px;
-  margin: 10px auto;
-  background: #fe0000;
-  border-radius: 2px;
+  width: 96px;
+  height: 2.5px;
+  margin: 13px auto 0 auto;
+  background: linear-gradient(90deg, #fe0000 0%, #fff 50%, #fe0000 100%);
+  border-radius: 2.5px;
+  box-shadow: 0 0 5px #fe00007a;
 }
 
 .foterinline.JF_parent_form form {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 15px;
+  gap: 18px 22px;
+  margin-bottom: 3px;
 }
 
 .foterinline.JF_parent_form input[type="text"] {
-  width: 260px;
-  padding: 14px 18px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.08);
-  color: white;
-  font-size: 16px;
-  transition: all 0.3s ease;
+  width: 250px;
+  padding: 15px 20px;
+  border-radius: 13px;
+  border: 1.5px solid rgba(254,0,0,0.17);
+  background: rgba(255,255,255,0.11);
+  color: #fff;
+  font-size: 17px;
+  font-family: 'robotob', Arial, sans-serif;
+  box-shadow: 0 3px 18px rgba(0,0,0,0.07) inset;
+  margin-bottom: 3px;
+  transition: all 0.26s cubic-bezier(.44,.13,.49,.87);
 }
 
 .foterinline.JF_parent_form input[type="text"]:focus {
   outline: none;
   border-color: #fe0000;
-  box-shadow: 0 0 8px rgba(254, 0, 0, 0.4);
-  background: rgba(255,255,255,0.12);
+  box-shadow: 0 2px 18px 1px rgba(254,0,0,0.15), 0 0 0 2px #fe00008f;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
 }
 
 .foterinline.JF_parent_form input::placeholder {
-  color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.74);
+  font-size: 16px;
+  opacity: 1;
+  letter-spacing: 0.1em;
 }
 
 .foterinline.JF_parent_form input[type="button"] {
-  padding: 14px 26px;
-  font-size: 16px;
+  padding: 15px 38px;
+  font-size: 17px;
   border: none;
-  border-radius: 10px;
-  background: linear-gradient(90deg, #fe0000, #b30000);
+  border-radius: 13px;
+  background: linear-gradient(90deg, #ff3636, #fe0000 60%, #b30000 100%);
   color: white;
   cursor: pointer;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  letter-spacing: 1.3px;
+  font-family: 'robotob', Arial, sans-serif;
+  font-weight: bold;
+  box-shadow: 0 3px 18px rgba(254,0,0,0.13);
+  position: relative;
+  transition: 
+    transform 0.20s cubic-bezier(.36,1.55,.54,.95),
+    box-shadow 0.22s cubic-bezier(.36,1.55,.54,.95),
+    background 0.26s;
 }
 
-.foterinline.JF_parent_form input[type="button"]:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(254, 0, 0, 0.35);
-  background: linear-gradient(90deg, #ff1a1a, #e60000);
+.foterinline.JF_parent_form input[type="button"]:hover,
+.foterinline.JF_parent_form input[type="button"]:focus {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 13px 32px rgba(254,0,0,0.22), 0px 3px 6px #b3000059 inset;
+  background: linear-gradient(90deg, #ff5959, #e60000 90%);
+  outline: none;
 }
 
 .foterinline.JF_parent_form { animation: scaleIn .45s ease .05s both; }
