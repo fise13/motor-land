@@ -1,9 +1,10 @@
-<div class="authorization_block">
-	<div class="authorization_form">
-		<interfaceform target="hyst/core/admin_profile">
-			<label>Email<br><iw><input class="width100" type="text" name="email" mandatory></iw></label>
-			<label>Пароль<br><iw><input class="width100" type="password" name="password" savewrong mandatory></iw></label>
-			<input class="width100" type="button" role="submit" name="login" value="Войти">
-		</interfaceform>
-	</div>
+<div class="auth_container">
+  <div class="auth_form">
+    <div class="form_title">Вход в систему</div>
+    <interfaceform target="hyst/core/admin_profile">
+      <input class="input_field" type="text" name="email" placeholder="Email" mandatory>
+      <input class="input_field" type="password" name="password" placeholder="Пароль" mandatory>
+      <input class="btn_submit" type="button" role="submit" name="login" value="Войти">
+    </interfaceform>
+  </div>
 </div>
