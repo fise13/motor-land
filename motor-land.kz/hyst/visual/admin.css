@@ -233,7 +233,7 @@ width: 100%;
   .auth_form_logo {
     width: 100%;
     height: 100%;
-    background-image: url('/hyst/visual/images/logo.png');
+    background-image: url('img/logo.jpg');
     background-size: contain;
     background-position: center center;
   }
