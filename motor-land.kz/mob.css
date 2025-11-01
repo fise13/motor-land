@@ -51,22 +51,9 @@ width: 260px !important;
 }
 
 
-.shirina {
-	position: relative; /* чтобы .modilebtn позиционировалась относительно этого блока */
-  }
-  
-  .modilebtn {
-	position: absolute;
-	top: 10px;      /* отступ сверху — подгони под дизайн */
-	right: 10px;    /* справа */
-	width: 40px;
-	height: 40px;
-	background-image: url('./img/mmenu.png');
-	background-size: cover;
-	background-repeat: no-repeat;
-	cursor: pointer;
-	z-index: 1000;  /* над меню */
-  }
+	.shirina {
+	width: 340px !important;
+	}
 	
 	.detalinlines {
 	width: 320px;
@@ -76,42 +63,65 @@ width: 260px !important;
 	width: 280px;
 	margin-left: -170px;
 	}
-
-	.actionperekl  {
-		transform: translate(0%);
-		position: static;
-		left: auto;
-		top: auto;
-		}
-
-	.menu {
-		display: none;
-		position: fixed;
-		top: 63px;
-		right: 0px;
-		background: rgba(0,0,0,0.7);
-		background-color: rgba(0,0,0,0.7);
-		width: 200px;
-		transition: all 0.3s ease-out 0.3s;
-		}
 	
-	.filtersblock input[type="text"] {
-	width: 260px;
-	margin: 20px 10px;
+	.actionperekl  {
+	transform: translate(0%);
+	position: static;
+	left: auto;
+	top: auto;
 	}
 	
-		.menu li {
-		display: block;
-		padding: 20px 10px 20px 20px;
-		}
+	.actionbtms {
+		display: flex !important;
+		justify-content: center !important;
+		flex-wrap: wrap !important;
+		margin: 20px auto !important;
+	}
 	
-		.relhead {
-		height: 60px;
-		}
-		
-		.modilebtn {
-		display: block;
-		}
+	.actionbtms li {
+		width: 120px !important;
+		margin: 5px !important;
+	}
+	
+	.toverblock {
+		width: 280px !important;
+		margin: 15px auto !important;
+		display: block !important;
+	}
+	
+	.toverimg {
+		width: 278px !important;
+	}
+
+	.menu {
+	display: none !important;
+	position: fixed !important;
+	top: 63px !important;
+	right: 0px !important;
+	background: rgba(0,0,0,0.7) !important;
+	background-color: rgba(0,0,0,0.7) !important;
+	width: 200px !important;
+	transition: all 0.3s ease-out 0.3s !important;
+	}
+
+.filtersblock input[type="text"] {
+width: 260px !important;
+margin: 20px 10px !important;
+}
+
+	.menu li {
+	display: block !important;
+	padding: 20px 10px 20px 20px !important;
+	width: auto !important;
+	}
+
+	.relhead {
+	height: 60px !important;
+	}
+	
+	.modilebtn {
+	display: block !important;
+	}
 
 	.mobilefix {
 	background-color: black;
