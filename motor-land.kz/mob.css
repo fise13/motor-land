@@ -30,6 +30,26 @@ width: 280px !important;
 height: auto !important;
 }
 
+.tovercontainer {
+    display: flex;
+    flex-direction: column; /* все блоки в колонку */
+    align-items: center;    /* центрируем по ширине */
+    gap: 15px;              /* отступ между карточками */
+  }
+
+  .toverblock {
+    width: 90%;             /* почти вся ширина экрана */
+    max-width: 280px;       /* чтобы не растягивались сильно */
+    margin: 0;              /* внешние отступы через gap контейнера */
+    display: block;         /* по умолчанию flex не нужен */
+  }
+
+  .toverimg {
+    width: 100%;            /* изображение подстраивается под карточку */
+    height: auto;
+  }
+}
+
 .sliderform input[type="text"] {
 width: 260px !important;
 }
@@ -215,4 +235,3 @@ bottom: 10px;
 	padding: 10px;
 	}
 	
-}
