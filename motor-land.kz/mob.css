@@ -94,13 +94,15 @@ width: 260px !important;
 	}
 
 	.menu {
-		position: fixed;           /* фиксируем относительно экрана */
-		top: 63px;                 /* отступ сверху */
-		right: 0;                  /* прямо к правому краю */
-		width: 200px;              /* ширина меню */
+		display: none;
+		position: fixed;
+		top: 63px;
+		right: -220px;
 		background: rgba(0,0,0,0.7);
-		z-index: 1000;             /* чтобы было поверх других элементов */
-	  }
+		background-color: rgba(0,0,0,0.7);
+		width: 200px;
+		transition: all 0.3s ease-out 0.3s;
+		}
 
 .filtersblock input[type="text"] {
 width: 260px !important;
@@ -118,8 +120,17 @@ margin: 20px 10px !important;
 	}
 	
 	.modilebtn {
-	display: block !important;
-	}
+		position: absolute;      /* позиционируем внутри родителя */
+		top: 20px;               /* отступ сверху — подгони по дизайну */
+		right: 20px;             /* справа */
+		width: 40px;             /* размер кнопки */
+		height: 40px;
+		background-image: url('./img/mmenu.png');
+		background-size: cover;
+		background-repeat: no-repeat;
+		cursor: pointer;
+		z-index: 1001;           /* над меню */
+	  }
 
 	.mobilefix {
 	background-color: black;
