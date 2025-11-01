@@ -1,13 +1,20 @@
 <div class="generalw foterbag">
 	<div class="shirina">
-		<div class="foterinline JF_parent_form">
-			<div class="foterzago">закажите обратный звонок</div>
-			<form method="post">
-			<input type="text" name="name" placeholder="имя">
-			<input type="text" name="phon" placeholder="телефон">
-			<input type="hidden" name="send_one" value="send">
-			<input type="button" name="JF_send_casual" value="Отправить">
-			</form>
+	<div class="foterinline JF_parent_form">
+  <div class="foterzago">Закажите обратный звонок</div>
+  <form method="post">
+    <div class="form-control">
+      <input type="text" name="name" id="name" placeholder=" " required>
+      <label for="name">Имя</label>
+    </div>
+    <div class="form-control">
+      <input type="text" name="phon" id="phon" placeholder=" " required>
+      <label for="phon">Телефон</label>
+    </div>
+    <input type="hidden" name="send_one" value="send">
+    <input type="button" name="JF_send_casual" value="Отправить">
+  </form>
+</div>
 
 		</div>
 		<div class="footer_contacts">
