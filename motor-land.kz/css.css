@@ -1349,58 +1349,9 @@ width: 340px;
 color: white;
 }
 
-.consult-back {
-  min-height: 100%;
-  width: 100%;
-  position: relative;
-  background-color: #f8fafc;
-  overflow: hidden;
-}
-
-.grid-background {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 0;
-  background-image:
-    linear-gradient(to right, #e2e8f0 1px, transparent 1px),
-    linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
-  background-size: 20px 30px;
-  pointer-events: none;
-  -webkit-mask-image: radial-gradient(
-    ellipse 70% 60% at 50% 0%,
-    #000 60%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    ellipse 70% 60% at 50% 0%,
-    #000 60%,
-    transparent 100%
-  );
-  animation: grid-move 6s linear infinite;
-}
-
-.consult-container {
-  position: relative;
-  z-index: 1;
-  background-color: transparent;
-}
-
-@keyframes grid-move {
-  0% {
-    background-position: 0px 0px, 0px 0px;
-  }
-  100% {
-    background-position: 40px 60px, 40px 60px;
-  }
-}
-
-/* --- Стили для секции консультации, чтобы не затерять стили формы --- */
-
 .consult-section {
   position: relative;
+  z-index: 1;
   padding: 0;
   margin: 0;
   background: none;
