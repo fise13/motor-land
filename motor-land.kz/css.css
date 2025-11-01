@@ -745,58 +745,66 @@ background-size: cover;
 background-position: center center;
 }
 
+/* ================================
+   CALLBACK FORM — стеклянный стиль
+================================ */
 .foterinline {
-display: inline-block;
-vertical-align: top;
-padding: 20px;
-width: 100%;
-box-sizing: border-box;
-text-align: center;
-color: white;
+  display: inline-block;
+  vertical-align: top;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  color: white;
 }
 
+/* Контейнер формы */
 .callback-form {
-  width: 320px;
+  width: 340px;
   margin: 100px auto;
-  padding: 40px;
+  padding: 45px 35px;
   border-radius: 24px;
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  background-color: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.35);
   color: #fff;
   text-align: center;
-  transition: transform 0.6s ease, box-shadow 0.6s ease;
+  transition: transform 0.5s ease, box-shadow 0.6s ease;
 }
 
 .callback-form:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.35);
+  transform: translateY(-6px);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
 }
 
+/* Заголовок */
 .callback-form h2 {
-  margin-bottom: 25px;
+  margin-bottom: 28px;
   font-size: 22px;
-  letter-spacing: 1px;
-  color: #e2f0ff;
+  letter-spacing: 1.2px;
+  font-weight: 600;
+  color: #eaf6ff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
 }
 
-/* === поля === */
+/* === Поля ввода === */
 .form-control {
   position: relative;
-  margin: 25px 0;
+  margin: 28px 0;
   width: 100%;
 }
 
 .form-control input {
   background-color: transparent;
   border: none;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.35);
   width: 100%;
   padding: 12px 0;
-  font-size: 16px;
+  font-size: 17px;
   color: #fff;
   transition: all 0.3s ease;
+  caret-color: #7ccfff;
 }
 
 .form-control input:focus,
@@ -805,7 +813,7 @@ color: white;
   border-bottom-color: #7ccfff;
 }
 
-/* === анимированные буквы === */
+/* Анимированные метки */
 .form-control label {
   position: absolute;
   top: 6px;
@@ -823,89 +831,80 @@ color: white;
 .form-control input:focus + label span,
 .form-control input:valid + label span {
   color: #7ccfff;
-  transform: translateY(-20px);
+  transform: translateY(-22px);
 }
 
-/* === кнопка === */
+/* === Кнопка === */
 .callback-btn {
   width: 100%;
-  padding: 12px;
+  padding: 13px;
   border: none;
   border-radius: 12px;
   background: linear-gradient(135deg, #0f8cff, #6ed0ff);
   color: #fff;
-  font-size: 16px;
-  letter-spacing: 0.5px;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.6px;
   cursor: pointer;
-  transition: background 0.4s ease, transform 0.3s ease;
+  box-shadow: 0 6px 20px rgba(111, 200, 255, 0.3);
+  transition: background 0.4s ease, transform 0.25s ease, box-shadow 0.4s ease;
 }
 
 .callback-btn:hover {
   background: linear-gradient(135deg, #1fa3ff, #8de3ff);
   transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(111, 200, 255, 0.45);
 }
+
+.callback-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(111, 200, 255, 0.2);
+}
+
 /* ================================
-   📱 Мобильная адаптация
+   📱 Адаптив
 ================================ */
 @media (max-width: 768px) {
-  .foterinline.JF_parent_form {
-    max-width: 90%;
-    margin: 40px auto;
-    padding: 40px 25px;
-    border-radius: 16px;
+  .callback-form {
+    width: 90%;
+    margin: 60px auto;
+    padding: 35px 25px;
+    border-radius: 18px;
   }
 
-  .foterinline.JF_parent_form .foterzago {
-    font-size: 22px;
-    margin-bottom: 28px;
-  }
-
-  .form-control input {
-    font-size: 16px;
-    padding: 10px 0;
-  }
-
-  .form-control label {
-    font-size: 16px;
-  }
-
-  .foterinline.JF_parent_form input[type="button"] {
-    width: 100%;
-    max-width: 280px;
-    padding: 12px 0;
-    font-size: 15px;
-    border-radius: 8px;
-  }
-}
-
-/* 🔹 Очень маленькие экраны (до 420px) */
-@media (max-width: 420px) {
-  .foterinline.JF_parent_form {
-    padding: 30px 20px;
-    border-radius: 14px;
-    margin: 30px 10px;
-  }
-
-  .foterinline.JF_parent_form .foterzago {
-    font-size: 19px;
+  .callback-form h2 {
+    font-size: 20px;
     margin-bottom: 25px;
   }
 
-  .form-control {
-    max-width: 100%;
+  .form-control input {
+    font-size: 16px;
+  }
+
+  .callback-btn {
+    font-size: 15px;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  .callback-form {
+    padding: 30px 20px;
+    border-radius: 16px;
+    margin: 40px 10px;
+  }
+
+  .callback-form h2 {
+    font-size: 18px;
   }
 
   .form-control input {
     font-size: 15px;
   }
 
-  .form-control label {
-    font-size: 15px;
-  }
-
-  .foterinline.JF_parent_form input[type="button"] {
+  .callback-btn {
     font-size: 14px;
-    letter-spacing: 0.5px;
+    border-radius: 10px;
   }
 }
 
