@@ -1349,61 +1349,9 @@ width: 340px;
 color: white;
 }
 
-.consult-background {
-  width: 100%;
-  height: 100%;
-  /* control ize */
-  --u: 5px;
-  --c1: #ededee;
-  --c2: #000000;
-  --c3: #1e1e1e;
-  --gp: 50% / calc(var(--u) * 16.9) calc(var(--u) * 12.8);
-  background: conic-gradient(
-        from 122deg at 50% 85.15%,
-        var(--c2) 0 58deg,
-        var(--c3) 0 116deg,
-        #fff0 0 100%
-      )
-      var(--gp),
-    conic-gradient(from 122deg at 50% 72.5%, var(--c1) 0 116deg, #fff0 0 100%)
-      var(--gp),
-    conic-gradient(from 58deg at 82.85% 50%, var(--c3) 0 64deg, #fff0 0 100%)
-      var(--gp),
-    conic-gradient(
-        from 58deg at 66.87% 50%,
-        var(--c1) 0 64deg,
-        var(--c2) 0 130deg,
-        #fff0 0 100%
-      )
-      var(--gp),
-    conic-gradient(from 238deg at 17.15% 50%, var(--c2) 0 64deg, #fff0 0 100%)
-      var(--gp),
-    conic-gradient(
-        from 172deg at 33.13% 50%,
-        var(--c3) 0 66deg,
-        var(--c1) 0 130deg,
-        #fff0 0 100%
-      )
-      var(--gp),
-    linear-gradient(98deg, var(--c3) 0 15%, #fff0 calc(15% + 1px) 100%)
-      var(--gp),
-    linear-gradient(-98deg, var(--c2) 0 15%, #fff0 calc(15% + 1px) 100%)
-      var(--gp),
-    conic-gradient(
-        from -58deg at 50.25% 14.85%,
-        var(--c3) 0 58deg,
-        var(--c2) 0 116deg,
-        #fff0 0 100%
-      )
-      var(--gp),
-    conic-gradient(from -58deg at 50% 28.125%, var(--c1) 0 116deg, #fff0 0 100%)
-      var(--gp),
-    linear-gradient(90deg, var(--c2) 0 50%, var(--c3) 0 100%) var(--gp);
-}
-
-
 /* Минималистичный, прямоугольный, современный стиль для секции консультации */
 
+/* ---- CONSULT SECTION STYLES ---- */
 .consult-section {
   display: flex;
   justify-content: center;
@@ -1412,43 +1360,60 @@ color: white;
   background: #fafafa;
 }
 
+/* ---- CONSULT CONTAINER ---- */
 .consult-container {
   background: #fff;
   padding: 32px 42px 28px 42px;
-  border-radius: 10px;
-  box-shadow: 0 6px 36px rgba(34, 43, 86, 0.07);
+  border-radius: 14px;
+  box-shadow: 0 10px 36px rgba(34, 43, 86, 0.11);
   max-width: 640px;
   width: 100%;
   min-width: 320px;
   text-align: left;
-  border: 1px solid #e8e8e8;
-  transition: box-shadow .2s;
+  border: 1px solid #ededed;
+  transition: box-shadow .3s cubic-bezier(.4,0,.2,1);
   margin: 0 16px;
 }
 
 .consult-container:hover {
-  box-shadow: 0 12px 48px rgba(254,0,0,0.09);
+  box-shadow: 0 18px 44px rgba(254,0,0,0.13);
 }
 
+/* ---- CONSULT TITLE ---- */
 .consult-title {
-  font-family: robotob, Arial, sans-serif;
-  font-size: 22px;
-  font-weight: 600;
-  letter-spacing: .02em;
+  font-family: robotob, Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: .03em;
   color: #191919;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
   margin-top: 0;
+  text-shadow: 0 2px 8px #fff6, 0 1px 0 #fff3;
 }
 
+/* ---- CONSULT SUBTITLE ---- */
+/* Центрируем и украшаем */
 .consult-subtitle {
-  font-size: 15px;
-  color: #fe0000;
-  font-weight: 400;
-  margin-bottom: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: robotob, Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #fe4757;
+  margin-bottom: 24px;
   margin-top: 0;
-  letter-spacing: .01em;
+  letter-spacing: .04em;
+  background: linear-gradient(90deg, #ffb077 0%, #f1586a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; 
+  text-fill-color: transparent;
+  text-align: center;
+  text-shadow: 0 1px 2px #fff, 0 1px 8px #fff4;
 }
 
+/* ---- CONSULT FORM ROW ---- */
 .consult-form {
   display: flex;
   flex-direction: row;
@@ -1456,47 +1421,92 @@ color: white;
   gap: 18px;
 }
 
+/* ---- CONSULT INPUTS ---- */
 .consult-input {
+  font-family: robotob, Arial, Helvetica, sans-serif;
   flex: 1 1 0%;
-  min-width: 100px;
-  padding: 10px 14px;
-  font-size: 15px;
-  border: 1px solid #e5e6e9;
-  border-radius: 5px;
-  background: #fafafa;
-  color: #191919;
+  min-width: 110px;
+  padding: 12px 20px;
+  font-size: 17px;
+  border: 1.5px solid #e5e6e9;
+  border-radius: 8px;
+  background: #fbfbfb;
+  color: #222;
   outline: none;
-  transition: border-color 0.18s cubic-bezier(0.4,0,0.2,1), box-shadow 0.2s;
   margin-right: 0;
+  transition: 
+    border-color 0.33s cubic-bezier(.55,0,.1,1),
+    box-shadow 0.33s cubic-bezier(.55,0,.1,1),
+    background 0.23s cubic-bezier(.55,0,.1,1),
+    color 0.22s cubic-bezier(.55,0,.1,1),
+    transform .22s cubic-bezier(.55,0,.1,1);
+  box-shadow: 0 1.2px 12px 0 #f1586a17;
 }
 
+/* Анимация при фокусе на поле */
 .consult-input:focus {
   border-color: #fe0000;
   background: #fff;
-  box-shadow: 0 0 2px #fe0000;
+  color: #fe0000;
+  box-shadow: 0 0 0 3px #fe000043, 0 2px 18px 0 #f1586a17;
+  transform: scale(1.06);
+  z-index: 2;
 }
 
+.consult-input::placeholder {
+  color: #b6b6b6;
+  letter-spacing: .03em;
+  font-style: italic;
+  transition: color .19s;
+}
+
+/* Плавная анимация поля, если просто наведён курсор */
+.consult-input:hover:not(:focus) {
+  border-color: #ff7b00;
+  background: #fffaf7;
+  box-shadow: 0 2px 8px #ffa24115;
+}
+
+/* ---- CONSULT BUTTON ---- */
 .consult-btn {
+  font-family: robotob, Arial, Helvetica, sans-serif;
   background-color: #fe0000;
   color: #fff;
-  font-size: 15px;
-  font-weight: 500;
-  padding: 11px 26px;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 12px 34px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  min-width: 120px;
-  transition: background 0.23s, color 0.23s;
-  letter-spacing: .02em;
+  min-width: 132px;
+  transition: 
+    background 0.24s cubic-bezier(.55,0,.1,1), 
+    color 0.19s cubic-bezier(.55,0,.1,1),
+    box-shadow 0.24s cubic-bezier(.55,0,.1,1),
+    transform 0.17s cubic-bezier(.55,0,.1,1);
+  letter-spacing: .03em;
   align-self: stretch;
-  box-shadow: 0 2px 10px -4px #fe000035;
+  box-shadow: 0 2px 10px -4px #fe000035, 0 6px 18px #f1586a10;
+  position: relative;
+  overflow: hidden;
 }
 
-.consult-btn:hover {
-  background: #191919;
+/* Анимация градиента фона при ховере на кнопке */
+.consult-btn:hover, .consult-btn:focus-visible {
+  background: linear-gradient(92deg, #fe0000 0%, #ff9500 100%);
   color: #fff;
+  box-shadow: 0 6px 24px 0 #f1586a33, 0 3px 22px #ff950033;
+  transform: translateY(-2px) scale(1.05) rotate(-1.5deg);
 }
 
+/* Мягкая тень при активной кнопке */
+.consult-btn:active {
+  background: #c80000;
+  box-shadow: 0 2px 8px #fe000045;
+  transform: scale(0.99);
+}
+
+/* ---- АДАПТИВНОСТЬ ---- */
 @media (max-width: 700px) {
   .consult-container {
     max-width: 99%;
@@ -1510,6 +1520,16 @@ color: white;
   .consult-btn {
     min-width: 100px;
     width: 100%;
-    padding: 11px 0;
+    padding: 12px 0;
+  }
+  .consult-title {
+    font-size: 20px;
+  }
+  .consult-subtitle {
+    font-size: 15px;
+  }
+  .consult-input {
+    font-size: 15px;
+    padding: 11px 10px;
   }
 }
