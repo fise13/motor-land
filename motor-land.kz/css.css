@@ -103,39 +103,76 @@ position: relative;
 }
 
 .menu {
-list-style: none;
-margin: 0px;
-padding: 0px;
-text-align: center;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
 }
 
 .menu a {
-text-decoration: none;
+  text-decoration: none;
 }
 
 .menu li {
-display: inline-block;
-padding: 40px 5px 35px 5px;
-text-transform: uppercase;
-text-align: center;
-width: 100px;
-color: white;
-cursor: pointer;
+  display: inline-block;
+  padding: 40px 5px 35px 5px;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100px;
+  color: white;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.4s cubic-bezier(0.4,0,0.2,1), color 0.3s;
 }
 
+.menu li::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scaleX(0);
+  width: 120%;
+  height: 100%;
+  background: linear-gradient(90deg, #fe4757 0%, #ff9500 100%);
+  opacity: 0.13;
+  z-index: 0;
+  transition: transform 0.45s cubic-bezier(.55,0,.1,1);
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.menu li:hover::before {
+  transform: translate(-50%, -50%) scaleX(1);
+  opacity: 0.26;
+}
+
+.menu li span {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  transition: color 0.2s;
+}
+
+/* Поднимаем на пару пикселей текст при ховере */
+.menu li:hover span {
+  color: #fff;
+  transform: translateY(-3px) scale(1.06);
+  text-shadow: 0 2px 12px rgba(254, 0, 0, 0.11);
+  transition: transform 0.4s cubic-bezier(.55,0,.1,1), color 0.2s;
+}
 
 .menu li:hover {
-background-color: #fe0000;
-color: white;
+  background-color: #fe0000;
+  color: #fff;
 }
 
 .menu a:nth-child(3) li {
-margin-right: 80px;
+  margin-right: 80px;
 }
 
-
 .menu a:nth-child(4) li {
-margin-left: 80px;
+  margin-left: 80px;
 }
 
 .modilebtn {
