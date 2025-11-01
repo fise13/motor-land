@@ -1,15 +1,5 @@
 $(document).ready(function() {
 
-	window.addEventListener("load", () => {
-		const preloader = document.getElementById("preloader");
-		const logo = preloader.querySelector(".loader-logo");
-	  
-		logo.classList.add("show"); // сразу
-		setTimeout(() => {
-		  preloader.classList.add("hide");
-		}, 400); // лёгкое растворение
-	  });
-
 	
 	/**
 	 * Функция: Обработка клика по стрелке выпадающего списка
