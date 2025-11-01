@@ -1241,63 +1241,49 @@ color: white;
   justify-content: center;
   background: #000;
   z-index: 9999;
-  overflow: hidden;
-  transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1.5s ease, visibility 1.5s ease;
 }
 
-/* Исчезновение прелоадера */
+/* Исчезновение */
 #preloader.hide {
   opacity: 0;
-  transform: translateY(-100%);
+  visibility: hidden;
   pointer-events: none;
 }
 
-/* Логотип в центре */
+/* ===== ЛОГОТИП ===== */
 .loader-logo {
   width: 160px;
   height: 108px;
   background: url('./img/logo.jpg') center/contain no-repeat;
-  border-radius: 12px;
-  filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.3));
+  border-radius: 14px;
+  filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.2));
   opacity: 0;
-  transform: scale(0.95);
-  will-change: transform, opacity;
+  transform: scale(0.9);
   transition:
-    opacity 800ms ease-in-out,
-    transform 1.2s cubic-bezier(0.25, 1, 0.5, 1),
-    filter 1.2s ease;
+    opacity 1s ease,
+    transform 1.8s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 1.5s ease;
+  animation: pulse 3s ease-in-out infinite;
 }
 
-/* Появление логотипа */
+/* Плавное появление */
 .loader-logo.show {
   opacity: 1;
-  transform: scale(1.05);
+  transform: scale(1);
+  filter: drop-shadow(0 0 40px rgba(255,255,255,0.35));
 }
 
-/* Движение к логотипу в шапке */
-.loader-logo.move-to-header {
-  transform: translate(var(--x, 0), var(--y, 0)) scale(1);
-  filter: drop-shadow(0 0 15px rgba(255,255,255,0.15));
-}
-
-/* ===== ЛОГОТИП В ШАПКЕ ===== */
-.header .logo {
-  width: 160px;
-  height: 108px;
-  margin-left: -80px;
-  background-image: url(./img/logo.jpg);
-  background-size: contain;
-  background-position: center top;
-  background-repeat: no-repeat;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  z-index: 10;
-  opacity: 0;
-  transition: opacity 800ms ease;
-}
-
-/* Когда показывается шапка */
-.header .logo.visible {
-  opacity: 1;
+/* Эффект "дыхания" логотипа */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 25px rgba(255,255,255,0.25));
+  }
+  50% {
+    transform: scale(1.04);
+    filter: drop-shadow(0 0 45px rgba(255,255,255,0.4));
+  }
 }
