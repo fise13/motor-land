@@ -1169,6 +1169,7 @@ color: white;
   height: 160px;
   background-image: url('./img/logo.jpg'); /* путь к твоему логотипу */
   background-size: contain;
+  border-radius: 12px;
   background-repeat: no-repeat;
   background-position: center;
   filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.4)); /* мягкая подсветка */
