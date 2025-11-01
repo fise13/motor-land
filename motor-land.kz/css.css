@@ -1162,8 +1162,9 @@ margin: 10px;
 width: 340px;
 color: white;
 }
-
-/* === ELEGANT MODERN PRELOADER === */
+/*
+Preloader styles
+=== ELEGANT MODERN PRELOADER ===
 #preloader {
   position: fixed;
   inset: 0;
@@ -1178,13 +1179,11 @@ color: white;
   transition: opacity 1s ease, visibility 1s ease;
 }
 
-/* скрытие */
 #preloader.hide {
   opacity: 0;
   visibility: hidden;
 }
 
-/* центральный контейнер */
 .loader-wrapper {
   display: flex;
   flex-direction: column;
@@ -1193,7 +1192,6 @@ color: white;
   animation: fadeIn 1.5s ease forwards;
 }
 
-/* логотип */
 .loader-logo {
   width: 160px;
   height: 160px;
@@ -1203,7 +1201,6 @@ color: white;
   box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
 }
 
-/* стильная "полоса загрузки" снизу */
 .loader-progress {
   width: 180px;
   height: 4px;
@@ -1221,7 +1218,6 @@ color: white;
   animation: moveBar 1.4s infinite linear;
 }
 
-/* анимации */
 @keyframes pulseGlow {
   0%, 100% {
     transform: scale(1);
@@ -1242,5 +1238,6 @@ color: white;
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
+*/
 
 /* Удалены стили переключателя темы - функционал отключен */
