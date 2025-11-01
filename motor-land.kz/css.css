@@ -536,7 +536,7 @@ background-color: #fe0000;
 }
 
 .toverblock {
-  display: flex;
+  display: inline-block;
   margin: 15px;
   width: 250px;
   border-radius: 12px;
