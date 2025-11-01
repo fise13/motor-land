@@ -1381,79 +1381,6 @@ color: white;
   animation: fadein-consult 1s cubic-bezier(.57,.11,.39,.99);
 }
 
-/* --- TITLE STYLES --- */
-.consult-title,
-.consult-subtitle {
-  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-  color: #e4e4e4;
-  font-size: 16px;
-  margin: 0 0 8px 0;
-  font-weight: 400;
-  letter-spacing: 0;
-  text-transform: none;
-  text-align: center;
-  opacity: 0;
-  transform: translateY(12px);
-  animation: consult-title-fadein 0.8s 0.2s forwards;
-}
-
-.consult-title {
-  animation-delay: 0.15s;
-}
-.consult-subtitle {
-  font-size: 13px;
-  margin-bottom: 8px;
-  font-weight: 300;
-  animation-delay: 0.3s;
-}
-
-@keyframes fadein-consult {
-  0% { opacity: 0; transform: translateY(16px) scale(.98);}
-  100% { opacity: 1; transform: none;}
-}
-@keyframes consult-title-fadein {
-  to { opacity: 1; transform: none; }
-}
-
-/* --- INPUT Оформление как на картинке --- */
-.consult-input {
-  color: #fff;
-  font-size: 1.15rem;
-  background: transparent;
-  width: 280px;
-  max-width: 100vw;
-  border: none;
-  border-bottom: 2px solid #5891ff;
-  outline: none;
-  box-sizing: border-box;
-  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-  font-weight: 400;
-  padding: 0.32em 0;
-  margin-bottom: 12px;
-  transition: border-color 0.2s, background 0.23s;
-  background-color: transparent;
-  animation: consult-el-fadein 0.8s 0.45s forwards;
-  opacity: 0;
-  transform: translateY(8px);
-}
-
-.consult-input:focus {
-  border-bottom-color: #a370f0;
-}
-
-.consult-input::placeholder {
-  color: #b5c9e2;
-  opacity: 1;
-  font-weight: 300;
-  font-size: 1.07rem;
-}
-
-/* Fade in effect for fields */
-@keyframes consult-el-fadein {
-  to { opacity: 1; transform: none; }
-}
-
-/* --- SUBMIT BUTTON --- */
 .cssbuttons-io-button {
   background: #a370f0;
   color: white;
@@ -1473,11 +1400,6 @@ color: white;
   height: 2.8em;
   padding-right: 3.3em;
   cursor: pointer;
-  outline: none;
-  transition: background 0.2s, color 0.18s, box-shadow 0.22s, transform 0.15s;
-  animation: consult-el-fadein 0.8s 0.67s forwards;
-  opacity: 0;
-  transform: translateY(8px);
 }
 
 .cssbuttons-io-button .icon {
@@ -1511,21 +1433,4 @@ color: white;
 
 .cssbuttons-io-button:active .icon {
   transform: scale(0.95);
-}
-
-/* --- Responsive --- */
-@media (max-width: 600px) {
-  .consult-form {
-    width: 100%;
-    max-width: 100vw;
-    gap: 7px;
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .consult-input, .cssbuttons-io-button {
-    width: 100%;
-    min-width: 0;
-    font-size: 14px;
-    max-width: 100vw;
-  }
 }
