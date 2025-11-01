@@ -93,15 +93,35 @@ width: 260px !important;
 		width: 278px !important;
 	}
 
-	.menu {
-	position: fixed !important;
-	top: 63px !important;
-	right: 0px !important;
-	background: rgba(0,0,0,0.7) !important;
-	background-color: rgba(0,0,0,0.7) !important;
-	width: 200px !important;
-	transition: all 0.3s ease-out 0.3s !important;
-	}
+/* Исходное состояние меню */
+.menu {
+    position: fixed;
+    top: 0;
+    right: -250px; /* Скрыто за экраном справа */
+    width: 250px;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    transition: right 0.3s ease; /* Анимация */
+    z-index: 100;
+}
+
+/* Когда меню открыто */
+.menu.open {
+    right: 0; /* Сдвигаем меню на экран */
+}
+
+/* Стили для кнопки */
+.modilebtn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: url('./img/mmenu.png') no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+    z-index: 110;
+}
 
 .filtersblock input[type="text"] {
 width: 260px !important;

@@ -15,16 +15,17 @@
 <script>
 
 function mobilemenu() {
-  const menu = document.querySelector('.menu');
-  const btn = document.querySelector('.modilebtn');
+	const menu = document.querySelector('.menu');
+	const btn = document.querySelector('.modilebtn');
 
-  menu.classList.toggle('open');
+btn.addEventListener('click', () => {
+    menu.classList.toggle('open');
 
-  if (menu.classList.contains('open')) {
-    btn.style.backgroundImage = "url('./img/crossm.png')";
-  } else {
-    btn.style.backgroundImage = "url('./img/mmenu.png')";
-  }
-}
+    if (menu.classList.contains('open')) {
+        btn.style.backgroundImage = "url('./img/crossm.png')"; // крестик
+    } else {
+        btn.style.backgroundImage = "url('./img/mmenu.png')"; // гамбургер
+    }
+});
 	
 </script>
