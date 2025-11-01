@@ -117,14 +117,15 @@ $SITE_DESCRIPTION = 'Компания "Motor Land" - поставка контр
 	</div>
 </div>
 
-<div class="generalw forsbgf">
-	<div class="shirina forsliderform JF_parent_form">
-		Хотите получить бесплатную консультацию? <div>заполните форму</div>
-		<form method="post">
-		<input type="text" name="name" placeholder="имя">
-		<input type="text" name="phon" placeholder="телефон">
-		<input type="hidden" name="send_one" value="send">
-		<input type="button" name="JF_send_casual" value="Отправить">
+<div class="generalw forsbgf consult-section">
+	<div class="shirina forsliderform JF_parent_form consult-container">
+		<div class="consult-title">Хотите получить бесплатную консультацию?</div>
+		<div class="consult-subtitle">заполните форму</div>
+		<form method="post" class="consult-form">
+			<input type="text" name="name" placeholder="имя" class="consult-input consult-name">
+			<input type="text" name="phon" placeholder="телефон" class="consult-input consult-phone">
+			<input type="hidden" name="send_one" value="send">
+			<input type="button" name="JF_send_casual" value="Отправить" class="consult-btn">
 		</form>
 	</div>
 </div>

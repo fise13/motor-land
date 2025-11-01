@@ -361,7 +361,7 @@ border-radius: 15px;
 border: solid 1px white;
 padding: 8px 30px 8px 10px;
 font-size: 18px;
-color: #434343;
+color: #9f9f9f;
 font-weight: normal;
 width: 170px;
 margin: 5px;
@@ -1349,59 +1349,101 @@ width: 340px;
 color: white;
 }
 
-/* ===== PRELOADER ===== */
-#preloader {
-  position: fixed;
-  inset: 0;
+/* Основной контейнер секции */
+.consult-section {
   display: flex;
-  align-items: center;
   justify-content: center;
-  background: #000;
-  z-index: 9999;
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 1.5s ease, visibility 1.5s ease;
+  align-items: center;
+  padding: 60px 20px;
+  background: #f5f5f5; /* светлый фон */
 }
 
-/* Исчезновение */
-#preloader.hide {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+/* Внутренний блок формы */
+.consult-container {
+  background: #ffffff;
+  padding: 40px 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* ===== ЛОГОТИП ===== */
-.loader-logo {
-  width: 160px;
-  height: 108px;
-  border-radius: 12px;
-  background: url('./img/logo.jpg') center/contain no-repeat;
-  border-radius: 14px;
-  filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.2));
-  opacity: 0;
-  transform: scale(0.9);
-  transition:
-    opacity 1s ease,
-    transform 1.8s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 1.5s ease;
-  animation: pulse 3s ease-in-out infinite;
+.consult-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
 }
 
-/* Плавное появление */
-.loader-logo.show {
-  opacity: 1;
-  transform: scale(1);
-  filter: drop-shadow(0 0 40px rgba(255,255,255,0.35));
+/* Заголовок и подзаголовок */
+.consult-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333333;
 }
 
-/* Эффект "дыхания" логотипа */
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 25px rgba(255,255,255,0.25));
+.consult-subtitle {
+  font-size: 16px;
+  color: #666666;
+  margin-bottom: 25px;
+}
+
+/* Поля формы */
+.consult-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.consult-input {
+  padding: 12px 15px;
+  font-size: 14px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.consult-input:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 10px rgba(108, 99, 255, 0.2);
+}
+
+/* Кнопка */
+.consult-btn {
+  background-color: #6c63ff;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.consult-btn:hover {
+  background-color: #574fd6;
+  transform: scale(1.05);
+}
+
+/* Адаптивность */
+@media (max-width: 480px) {
+  .consult-container {
+      padding: 30px 20px;
   }
-  50% {
-    transform: scale(1.04);
-    filter: drop-shadow(0 0 45px rgba(255,255,255,0.4));
+  
+  .consult-title {
+      font-size: 20px;
+  }
+  
+  .consult-subtitle {
+      font-size: 14px;
+  }
+  
+  .consult-btn {
+      font-size: 14px;
+      padding: 10px;
   }
 }
