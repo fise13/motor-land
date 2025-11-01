@@ -536,6 +536,8 @@ background-color: #fe0000;
 }
 
 .toverblock {
+  opacity: 0;
+  animation: fadeUp .6s ease forwards;
   display: inline-block;
   margin: 15px;
   width: 250px;
@@ -543,6 +545,10 @@ background-color: #fe0000;
   background-color: #efefef;
   min-height: 540px;
   vertical-align: top;
+}
+
+animate-fadeUp {
+  animation: fadeUp .6s ease forwards;
 }
 
 .toverimg {

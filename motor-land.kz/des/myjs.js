@@ -27,6 +27,21 @@ $(document).ready(function() {
 		dd.toggleClass('open');
     });
 	
+    document.addEventListener("DOMContentLoaded", () => {
+		const observer = new IntersectionObserver((entries, obs) => {
+		  entries.forEach(entry => {
+			if (entry.isIntersecting) {
+			  entry.target.classList.add("animate-fadeUp");
+			  obs.unobserve(entry.target); // чтобы не повторять анимацию при прокрутке назад
+			}
+		  });
+		}, { threshold: 0.2 }); // 0.2 = элемент виден хотя бы на 20%
+	  
+		document.querySelectorAll(".toverblock").forEach(block => {
+		  observer.observe(block);
+		});
+	  });
+	
 	/**
 	 * Функция: Очистка поля ввода при фокусе
 	 * Описание: При получении фокуса полем ввода удаляет значение-плейсхолдер (например, "Марка", "Модель"),
