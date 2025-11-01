@@ -5,17 +5,17 @@ $(document).ready(function() {
 		const logo = document.querySelector(".loader-logo");
 		const content = document.getElementById("content");
 	  
-		// Когда всё загружено — запускаем анимацию ухода логотипа
-		logo.classList.add("fade-out");
+		// Этап 1 — логотип начинает перемещаться к шапке
+		setTimeout(() => {
+		  logo.classList.add("move-to-header");
+		}, 400);
 	  
-		// Через время после анимации скрываем прелоадер полностью
+		// Этап 2 — убираем прелоадер после движения
 		setTimeout(() => {
 		  preloader.classList.add("hide");
-	  
-		  // Показываем контент плавно
 		  content.style.transition = "opacity 1s ease";
 		  content.style.opacity = 1;
-		}, 1000); // 1 секунда на уход логотипа
+		}, 1600);
 	  });
 
 	
