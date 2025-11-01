@@ -231,10 +231,9 @@ width: 100%;
   }
   /* Логотип */
     .auth_form_logo {
-      width: 64px;
-      height: 64px;
-      border-radius: 16px;
-      margin-bottom: 10px;
+      width: 160px;
+      height: 108px;
+      border-radius: 12px;
       background: #fff;
       display: flex;
       align-items: center;
