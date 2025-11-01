@@ -94,17 +94,15 @@ width: 260px !important;
 	}
 
 	.menu {
+		display: none;
 		position: fixed;
 		top: 63px;
-		right: -220px;          /* полностью спрятано за экраном */
-		width: 200px;
+		right: -220px;
 		background: rgba(0,0,0,0.7);
-		transition: right 0.3s ease-out; /* анимация движения */
-		z-index: 1000;
-	  }
-	  .menu.open {
-		right: 0;               /* выезжает на экран */
-	  }
+		background-color: rgba(0,0,0,0.7);
+		width: 200px;
+		transition: all 0.3s ease-out 0.3s;
+		}
 
 .filtersblock input[type="text"] {
 width: 260px !important;
