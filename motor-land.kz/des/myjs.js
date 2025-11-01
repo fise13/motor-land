@@ -1,6 +1,5 @@
 $(document).ready(function() {
 
-	
 	/**
 	 * Функция: Обработка клика по стрелке выпадающего списка
 	 * Описание: При клике на стрелку открывает/закрывает выпадающий список фильтров (Марка, Модель, Год).
@@ -8,14 +7,14 @@ $(document).ready(function() {
 	 * Параметры: нет (использует элемент, на который кликнули)
 	 * Возвращает: ничего
 	 */
-    $(document).on("click", ".btmmearrow, .madiv", function () {
+	$(document).on("click", ".btmmearrow, .madiv", function () {
 		var meinputer = $(this).closest('.meinputer');
-        var dd = meinputer.children('.ddwnblock');
-        // закрыть все прочие открытые
-        $('.ddwnblock').not(dd).removeClass('open');
+		var dd = meinputer.children('.ddwnblock');
+		// закрыть все прочие открытые
+		$('.ddwnblock').not(dd).removeClass('open');
 		// переключить текущий список
 		dd.toggleClass('open');
-    });
+	});
 
 	
 	/**
