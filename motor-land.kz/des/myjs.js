@@ -10,12 +10,68 @@ $(document).ready(function() {
 	$(document).on("click", ".btmmearrow, .madiv", function () {
 		var meinputer = $(this).closest('.meinputer');
 		var dd = meinputer.children('.ddwnblock');
-	
-		// закрыть все прочие открытые
-		$('.ddwnblock').not(dd).slideUp(200).removeClass('open');
-	
-		// переключить текущий список с анимацией
-		dd.slideToggle(200).toggleClass('open');
+
+		// Закрыть другие открытые списки с плавным затемнением и уменьшением
+		$('.ddwnblock').not(dd).each(function() {
+			if ($(this).hasClass('open')) {
+				$(this).css({
+					'transform': 'translateY(0) scaleY(1)',
+					'opacity': 1,
+					'display': 'block'
+				}).animate({
+					opacity: 0,
+				}, {
+					step: function(now, fx) {
+						$(this).css('transform', 'translateY(-12px) scaleY(0.96)');
+					},
+					duration: 220,
+					complete: function() {
+						$(this).css({
+							'display': 'none',
+							'transform': 'translateY(-6px) scaleY(0.98)'
+						}).removeClass('open');
+					}
+				});
+			}
+		});
+
+		// Анимация открытия/закрытия текущего списка
+		if (dd.hasClass('open')) {
+			// Animate close
+			dd.animate({
+				opacity: 0
+			}, {
+				step: function(now, fx) {
+					$(this).css('transform', 'translateY(-12px) scaleY(0.96)');
+				},
+				duration: 220,
+				complete: function() {
+					$(this)
+						.css({
+							'display': 'none',
+							'transform': 'translateY(-6px) scaleY(0.98)'
+						})
+						.removeClass('open');
+				}
+			});
+		} else {
+			// Prepare and animate open
+			dd.css({
+				'display': 'block',
+				'opacity': 0,
+				'transform': 'translateY(28px) scaleY(1.08)'
+			}).animate({
+				opacity: 1
+			}, {
+				step: function(now, fx) {
+					$(this).css('transform', 'translateY(0) scaleY(1)');
+				},
+				duration: 240,
+				complete: function() {
+					$(this).addClass('open');
+				}
+			});
+		}
 	});
 
 	
