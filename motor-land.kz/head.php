@@ -17,11 +17,14 @@
 function mobilemenu() {
   const menu = document.querySelector('.menu');
   const btn = document.querySelector('.modilebtn');
-  
-  menu.classList.toggle('open'); // добавляем класс open
-  if (menu.classList.contains('open')) {
+
+  if (!menu.classList.contains('open')) {
+    menu.style.maxHeight = menu.scrollHeight + "px";
+    menu.classList.add('open');
     btn.style.backgroundImage = "url('./img/crossm.png')";
   } else {
+    menu.style.maxHeight = 0;
+    menu.classList.remove('open');
     btn.style.backgroundImage = "url('./img/mmenu.png')";
   }
 }

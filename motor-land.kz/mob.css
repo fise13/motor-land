@@ -94,15 +94,19 @@ width: 260px !important;
 	}
 
 	.menu {
-	display: none !important;
-	position: fixed !important;
-	top: 63px !important;
-	right: 0px !important;
-	background: rgba(0,0,0,0.7) !important;
-	background-color: rgba(0,0,0,0.7) !important;
-	width: 200px !important;
-	transition: all 0.3s ease-out 0.3s !important;
-	}
+		position: fixed !important;
+		top: 63px !important;
+		right: 0px !important;
+		background: rgba(0,0,0,0.7) !important;
+		width: 200px !important;
+		
+		max-height: 0;           /* изначально закрыто */
+		overflow: hidden;
+		transition: max-height 0.3s ease-out; /* плавное открытие */
+	  }
+	  .menu.open {
+		max-height: 500px;       /* достаточно для содержимого */
+	  }
 
 .filtersblock input[type="text"] {
 width: 260px !important;
