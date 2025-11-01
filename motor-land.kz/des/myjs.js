@@ -1,9 +1,19 @@
 $(document).ready(function() {
-
-	window.addEventListener("load", function () {
+ /**
+  * Функция: Закрытие прелоадера при загрузке страницы
+  * Описание: При загрузке страницы закрывает прелоадер и удаляет его из DOM.
+  * Параметры: нет
+  * Возвращает: ничего
+  */
+	window.addEventListener("load", function() {
 		const preloader = document.getElementById("preloader");
+		const body = document.body;
+	  
 		preloader.classList.add("hide");
-		setTimeout(() => preloader.remove(), 600); // удаляем из DOM после анимации
+		body.classList.add("loaded");
+	  
+		// удаляем элемент через 1 сек, чтобы не мешал
+		setTimeout(() => preloader.remove(), 1000);
 	  });
 
 	
