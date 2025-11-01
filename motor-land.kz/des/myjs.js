@@ -2,9 +2,20 @@ $(document).ready(function() {
 
 	window.addEventListener("load", () => {
 		const preloader = document.getElementById("preloader");
+		const logo = document.querySelector(".loader-logo");
+		const content = document.getElementById("content");
+	  
+		// Когда всё загружено — запускаем анимацию ухода логотипа
+		logo.classList.add("fade-out");
+	  
+		// Через время после анимации скрываем прелоадер полностью
 		setTimeout(() => {
 		  preloader.classList.add("hide");
-		}, 1200);
+	  
+		  // Показываем контент плавно
+		  content.style.transition = "opacity 1s ease";
+		  content.style.opacity = 1;
+		}, 1000); // 1 секунда на уход логотипа
 	  });
 
 	
