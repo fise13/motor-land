@@ -150,6 +150,36 @@ display: none;
 z-index: 90;
 }
 
+@media (max-width: 768px) {
+  .menu {
+    display: none; /* по умолчанию скрыто */
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: #1d1a26; /* тёмный фон под текст */
+    flex-direction: column;
+    text-align: center;
+    z-index: 999;
+  }
+
+  .menu li {
+    display: block;
+    padding: 15px 0;
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .menu a:nth-child(3) li,
+  .menu a:nth-child(4) li {
+    margin: 0; /* убираем отступы между пунктами */
+  }
+
+  .modilebtn {
+    display: block; /* показываем кнопку */
+  }
+}
+
 .logo {
 width: 160px;
 height: 108px;

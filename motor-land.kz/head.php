@@ -14,14 +14,17 @@
 </div>
 <script>
 
-	function mobilemenu () {
-		if ($('.menu').css('display') == 'block') {
-			$('.menu').toggle(); 
-			$('.modilebtn').css('background-image','url(./img/mmenu.png)');
-		} else {
-			$('.menu').toggle(); 
-			$('.modilebtn').css('background-image','url(./img/crossm.png)');
-		}
-	}
+function mobilemenu() {
+  const menu = document.querySelector('.menu');
+  const btn = document.querySelector('.modilebtn');
+  
+  if (menu.style.display === 'block') {
+    menu.style.display = 'none';
+    btn.style.backgroundImage = "url('./img/mmenu.png')";
+  } else {
+    menu.style.display = 'block';
+    btn.style.backgroundImage = "url('./img/crossm.png')";
+  }
+}
 	
-	</script>
+</script>
