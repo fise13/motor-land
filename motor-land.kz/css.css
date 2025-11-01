@@ -1198,7 +1198,7 @@ color: white;
 }
 
 /* =========================
-   PRELOADER CONTAINER
+   PRELOADER BASE
 ========================= */
 #preloader {
   position: fixed;
@@ -1206,9 +1206,10 @@ color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at center, rgba(10, 10, 10, 0.92), rgba(0, 0, 0, 1));
-  backdrop-filter: blur(12px);
   z-index: 9999;
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  background: rgba(255, 255, 255, 0.05); /* почти прозрачный */
   opacity: 1;
   visibility: visible;
   transition: opacity 1s ease, visibility 1s ease;
@@ -1221,77 +1222,56 @@ color: white;
 }
 
 /* =========================
-   WRAPPER (контейнер логотипа и прогресса)
-========================= */
-.loader-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-  animation: fadeIn 1.4s ease forwards;
-}
-
-/* =========================
-   LOGO ANIMATION
+   LOGO — без контейнера
 ========================= */
 .loader-logo {
-  width: 140px;
-  height: 140px;
+  width: 160px;
+  height: 160px;
   background: url('./img/logo.jpg') center/contain no-repeat;
-  border-radius: 18px;
-  animation: pulseGlow 3s infinite ease-in-out;
-  box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  animation: liquidPulse 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.2));
+  transition: transform 1s ease, filter 1s ease;
 }
 
 /* =========================
-   PROGRESS BAR
+   PROGRESS BAR (тонкая линия под логотипом)
 ========================= */
 .loader-progress {
-  width: 180px;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 4px;
+  position: absolute;
+  bottom: 15%;
+  width: 140px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
   overflow: hidden;
-  position: relative;
 }
 
 .loader-progress::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, transparent, #ff3b3b, #ff7b00, transparent);
-  animation: moveBar 1.8s infinite linear;
+  background: linear-gradient(90deg, transparent, #ff4e00, #ffb300, transparent);
+  animation: moveBar 1.6s infinite linear;
 }
 
 /* =========================
    ANIMATIONS
 ========================= */
 
-/* Плавное появление */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Мягкое "дыхание" логотипа */
-@keyframes pulseGlow {
+/* "Жидкое дыхание" логотипа */
+@keyframes liquidPulse {
   0%, 100% {
     transform: scale(1);
-    filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.35));
+    filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.25));
   }
   50% {
-    transform: scale(1.06);
-    filter: drop-shadow(0 0 50px rgba(255, 255, 255, 0.7));
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 50px rgba(255, 255, 255, 0.45));
   }
 }
 
-/* Движущаяся линия */
+/* Бегущая линия */
 @keyframes moveBar {
   0% {
     transform: translateX(-100%);
@@ -1300,5 +1280,3 @@ color: white;
     transform: translateX(100%);
   }
 }
-
-/* Удалены стили переключателя темы - функционал отключен */

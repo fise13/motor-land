@@ -1,9 +1,10 @@
 $(document).ready(function() {
 
-	window.addEventListener("load", function () {
+	window.addEventListener("load", () => {
 		const preloader = document.getElementById("preloader");
-		preloader.classList.add("hide");
-		setTimeout(() => preloader.remove(), 600); // удаляем из DOM после анимации
+		setTimeout(() => {
+		  preloader.classList.add("hide");
+		}, 1200);
 	  });
 
 	
