@@ -1,19 +1,28 @@
-<div class="generalw foterbag">
-	<div class="shirina">
-	<div class="foterinline JF_parent_form">
-  <div class="foterzago">Закажите обратный звонок</div>
-  <form method="post">
-    <div class="form-control">
-      <input type="text" name="name" id="name" placeholder=" " required>
-      <label for="name">Имя</label>
-    </div>
-    <div class="form-control">
-      <input type="text" name="phon" id="phon" placeholder=" " required>
-      <label for="phon">Телефон</label>
-    </div>
-    <input type="hidden" name="send_one" value="send">
-    <input type="button" name="JF_send_casual" value="Отправить">
-  </form>
+<div class="callback-form">
+  <h2>Связаться с нами</h2>
+
+  <div class="form-control">
+    <input type="text" required>
+    <label>
+      <span style="transition-delay:0ms">И</span><span style="transition-delay:50ms">м</span><span style="transition-delay:100ms">я</span>
+    </label>
+  </div>
+
+  <div class="form-control">
+    <input type="tel" required>
+    <label>
+      <span style="transition-delay:0ms">Т</span><span style="transition-delay:50ms">е</span><span style="transition-delay:100ms">л</span><span style="transition-delay:150ms">е</span><span style="transition-delay:200ms">ф</span><span style="transition-delay:250ms">о</span><span style="transition-delay:300ms">н</span>
+    </label>
+  </div>
+
+  <div class="form-control">
+    <input type="email" required>
+    <label>
+      <span style="transition-delay:0ms">E</span><span style="transition-delay:50ms">m</span><span style="transition-delay:100ms">a</span><span style="transition-delay:150ms">i</span><span style="transition-delay:200ms">l</span>
+    </label>
+  </div>
+
+  <button type="submit" class="callback-btn">Отправить</button>
 </div>
 
 		</div>

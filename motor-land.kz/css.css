@@ -755,124 +755,94 @@ text-align: center;
 color: white;
 }
 
-/* === MINIMAL MODERN CALLBACK FORM === */
-.foterinline.JF_parent_form {
-  max-width: 540px;
-  margin: 60px auto;
-  padding: 50px 35px;
-  border-radius: 20px;
-  background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.15);
+.callback-form {
+  width: 320px;
+  margin: 100px auto;
+  padding: 40px;
+  border-radius: 24px;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+  color: #fff;
   text-align: center;
-  color: #fff;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
-  animation: fadeInUp 0.7s ease both;
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
 }
 
-/* Заголовок */
-.foterinline.JF_parent_form .foterzago {
-  font-family: 'robotob', sans-serif;
-  font-size: 26px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-bottom: 35px;
-  color: #fff;
-  position: relative;
+.callback-form:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.35);
 }
 
-.foterinline.JF_parent_form .foterzago::after {
-  content: "";
-  display: block;
-  width: 60px;
-  height: 2px;
-  margin: 10px auto 0;
-  background: #fe0000;
-  opacity: 0.8;
-  border-radius: 1px;
+.callback-form h2 {
+  margin-bottom: 25px;
+  font-size: 22px;
+  letter-spacing: 1px;
+  color: #e2f0ff;
 }
 
-/* === Поля формы === */
-.foterinline.JF_parent_form form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 28px;
-}
-
-/* Контейнер для input */
+/* === поля === */
 .form-control {
   position: relative;
+  margin: 25px 0;
   width: 100%;
-  max-width: 340px;
 }
 
 .form-control input {
-  width: 100%;
-  background: transparent;
+  background-color: transparent;
   border: none;
-  border-bottom: 2px solid rgba(255,255,255,0.35);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+  width: 100%;
   padding: 12px 0;
-  font-size: 17px;
+  font-size: 16px;
   color: #fff;
+  transition: all 0.3s ease;
+}
+
+.form-control input:focus,
+.form-control input:valid {
   outline: none;
-  transition: border-color 0.3s ease;
+  border-bottom-color: #7ccfff;
 }
 
-.form-control input:focus {
-  border-bottom-color: #fe0000;
-}
-
-/* Плавающий label */
+/* === анимированные буквы === */
 .form-control label {
   position: absolute;
   top: 12px;
   left: 0;
-  font-size: 17px;
-  color: rgba(255,255,255,0.7);
   pointer-events: none;
-  transition: 0.3s ease;
 }
 
-.form-control input:focus + label,
-.form-control input:not(:placeholder-shown) + label {
-  top: -12px;
-  font-size: 14px;
-  color: #fe0000;
-}
-
-/* Кнопка */
-.foterinline.JF_parent_form input[type="button"] {
-  margin-top: 10px;
-  padding: 14px 40px;
+.form-control label span {
+  display: inline-block;
   font-size: 16px;
-  text-transform: uppercase;
-  font-family: 'robotob', sans-serif;
-  letter-spacing: 1px;
+  color: rgba(255,255,255,0.8);
+  transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.form-control input:focus + label span,
+.form-control input:valid + label span {
+  color: #7ccfff;
+  transform: translateY(-28px);
+}
+
+/* === кнопка === */
+.callback-btn {
+  width: 100%;
+  padding: 12px;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0f8cff, #6ed0ff);
   color: #fff;
-  background: linear-gradient(90deg, #fe0000, #cc0000);
+  font-size: 16px;
+  letter-spacing: 0.5px;
   cursor: pointer;
-  transition: transform 0.25s ease, background 0.3s ease, box-shadow 0.3s ease;
+  transition: background 0.4s ease, transform 0.3s ease;
 }
 
-.foterinline.JF_parent_form input[type="button"]:hover {
+.callback-btn:hover {
+  background: linear-gradient(135deg, #1fa3ff, #8de3ff);
   transform: translateY(-2px);
-  background: linear-gradient(90deg, #ff3030, #b30000);
-  box-shadow: 0 8px 24px rgba(254,0,0,0.25);
-}
-
-/* === Анимация появления === */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* ================================
