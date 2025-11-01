@@ -231,9 +231,9 @@ width: 100%;
   }
   .auth_form_logo {
     border-radius: 6px;
-    width: 48px;
-    height: 36px;
-    margin: -24px auto 12px auto;
+    width: 96px;
+    height: 64px;
+    margin: -48px auto 12px auto;
     overflow: hidden;
   }
   .auth_form_logo img {
