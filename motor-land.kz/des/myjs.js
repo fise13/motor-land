@@ -1,5 +1,12 @@
 $(document).ready(function() {
 
+	window.addEventListener("load", function () {
+		const preloader = document.getElementById("preloader");
+		preloader.classList.add("hide");
+		setTimeout(() => preloader.remove(), 600); // удаляем из DOM после анимации
+	  });
+
+	
 	/**
 	 * Функция: Обработка клика по стрелке выпадающего списка
 	 * Описание: При клике на стрелку открывает/закрывает выпадающий список фильтров (Марка, Модель, Год).
