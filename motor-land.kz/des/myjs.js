@@ -10,10 +10,12 @@ $(document).ready(function() {
 	$(document).on("click", ".btmmearrow, .madiv", function () {
 		var meinputer = $(this).closest('.meinputer');
 		var dd = meinputer.children('.ddwnblock');
+	
 		// закрыть все прочие открытые
-		$('.ddwnblock').not(dd).removeClass('open');
-		// переключить текущий список
-		dd.toggleClass('open');
+		$('.ddwnblock').not(dd).slideUp(200).removeClass('open');
+	
+		// переключить текущий список с анимацией
+		dd.slideToggle(200).toggleClass('open');
 	});
 
 	
