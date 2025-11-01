@@ -18,12 +18,11 @@ function mobilemenu() {
   const menu = document.querySelector('.menu');
   const btn = document.querySelector('.modilebtn');
   
-  if (menu.style.display === 'block') {
-    menu.style.display = 'none';
-    btn.style.backgroundImage = "url('./img/mmenu.png')";
-  } else {
-    menu.style.display = 'block';
+  menu.classList.toggle('open'); // добавляем класс open
+  if (menu.classList.contains('open')) {
     btn.style.backgroundImage = "url('./img/crossm.png')";
+  } else {
+    btn.style.backgroundImage = "url('./img/mmenu.png')";
   }
 }
 	
