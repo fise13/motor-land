@@ -770,6 +770,7 @@ color: white;
   animation: fadeInUp 0.7s ease both;
 }
 
+/* Заголовок */
 .foterinline.JF_parent_form .foterzago {
   font-family: 'robotob', sans-serif;
   font-size: 26px;
@@ -799,7 +800,7 @@ color: white;
   gap: 28px;
 }
 
-/* контейнер с "плавающим" label */
+/* Контейнер для input */
 .form-control {
   position: relative;
   width: 100%;
@@ -822,7 +823,7 @@ color: white;
   border-bottom-color: #fe0000;
 }
 
-/* плавающий label */
+/* Плавающий label */
 .form-control label {
   position: absolute;
   top: 12px;
@@ -840,7 +841,7 @@ color: white;
   color: #fe0000;
 }
 
-/* кнопка */
+/* Кнопка */
 .foterinline.JF_parent_form input[type="button"] {
   margin-top: 10px;
   padding: 14px 40px;
@@ -862,7 +863,7 @@ color: white;
   box-shadow: 0 8px 24px rgba(254,0,0,0.25);
 }
 
-/* Анимация появления */
+/* === Анимация появления === */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -871,6 +872,71 @@ color: white;
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* ================================
+   📱 Мобильная адаптация
+================================ */
+@media (max-width: 768px) {
+  .foterinline.JF_parent_form {
+    max-width: 90%;
+    margin: 40px auto;
+    padding: 40px 25px;
+    border-radius: 16px;
+  }
+
+  .foterinline.JF_parent_form .foterzago {
+    font-size: 22px;
+    margin-bottom: 28px;
+  }
+
+  .form-control input {
+    font-size: 16px;
+    padding: 10px 0;
+  }
+
+  .form-control label {
+    font-size: 16px;
+  }
+
+  .foterinline.JF_parent_form input[type="button"] {
+    width: 100%;
+    max-width: 280px;
+    padding: 12px 0;
+    font-size: 15px;
+    border-radius: 8px;
+  }
+}
+
+/* 🔹 Очень маленькие экраны (до 420px) */
+@media (max-width: 420px) {
+  .foterinline.JF_parent_form {
+    padding: 30px 20px;
+    border-radius: 14px;
+    margin: 30px 10px;
+  }
+
+  .foterinline.JF_parent_form .foterzago {
+    font-size: 19px;
+    margin-bottom: 25px;
+  }
+
+  .form-control {
+    max-width: 100%;
+  }
+
+  .form-control input {
+    font-size: 15px;
+  }
+
+  .form-control label {
+    font-size: 15px;
+  }
+
+  .foterinline.JF_parent_form input[type="button"] {
+    font-size: 14px;
+    letter-spacing: 0.5px;
   }
 }
 
