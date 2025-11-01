@@ -117,7 +117,7 @@ $SITE_DESCRIPTION = 'Компания "Motor Land" - поставка контр
 	</div>
 </div>
 
-<div class="generalw forsbgf consult-section">
+<div class="consult-background">
 	<div class="shirina forsliderform JF_parent_form consult-container">
 		<div class="consult-title">Хотите получить бесплатную консультацию?</div>
 		<div class="consult-subtitle">заполните форму</div>
