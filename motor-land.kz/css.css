@@ -1349,7 +1349,58 @@ width: 340px;
 color: white;
 }
 
+.consult-back {
+  min-height: 100%;
+  width: 100%;
+  position: relative;
+  background-color: #f8fafc;
+  overflow: hidden;
+}
+
+.grid-background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+    linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
+  background-size: 20px 30px;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(
+    ellipse 70% 60% at 50% 0%,
+    #000 60%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 70% 60% at 50% 0%,
+    #000 60%,
+    transparent 100%
+  );
+  animation: grid-move 6s linear infinite;
+}
+
+.consult-container {
+  position: relative;
+  z-index: 1;
+  background-color: transparent;
+}
+
+@keyframes grid-move {
+  0% {
+    background-position: 0px 0px, 0px 0px;
+  }
+  100% {
+    background-position: 40px 60px, 40px 60px;
+  }
+}
+
+/* --- Стили для секции консультации, чтобы не затерять стили формы --- */
+
 .consult-section {
+  position: relative;
   padding: 0;
   margin: 0;
   background: none;
@@ -1360,6 +1411,8 @@ color: white;
 }
 
 .consult-form {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1371,6 +1424,12 @@ color: white;
   box-shadow: none;
   min-width: 0;
   max-width: 100%;
+  animation: fadein-consult 1s cubic-bezier(.57,.11,.39,.99);
+}
+
+@keyframes fadein-consult {
+  0% { opacity: 0; transform: translateY(16px) scale(.98);}
+  100% { opacity: 1; transform: none;}
 }
 
 .consult-title,
@@ -1383,11 +1442,22 @@ color: white;
   letter-spacing: 0;
   text-transform: none;
   text-align: center;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: consult-title-fadein 0.8s 0.2s forwards;
 }
 
+@keyframes consult-title-fadein {
+  to { opacity: 1; transform: none; }
+}
+
+.consult-title {
+  animation-delay: 0.15s;
+}
 .consult-subtitle {
   font-size: 15px;
   margin-bottom: 10px;
+  animation-delay: 0.3s;
 }
 
 .consult-input {
@@ -1401,12 +1471,16 @@ color: white;
   width: 180px;
   outline: none;
   box-shadow: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.3s;
   font-family: inherit;
+  animation: consult-el-fadein 0.8s 0.45s forwards;
+  opacity: 0;
+  transform: translateY(8px);
 }
 
 .consult-input:focus {
   border-color: #222;
+  box-shadow: 0 0 5px #e2e8f0;
 }
 
 .consult-input::placeholder {
@@ -1426,13 +1500,21 @@ color: white;
   font-family: inherit;
   font-weight: normal;
   box-shadow: none;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s, color 0.2s, box-shadow 0.15s;
   outline: none;
+  animation: consult-el-fadein 0.8s 0.55s forwards;
+  opacity: 0;
+  transform: translateY(8px);
 }
 
 .consult-btn:hover, .consult-btn:focus {
   background: #444;
   color: #fff;
+  box-shadow: 0 2px 12px #e2e8f0cc;
+}
+
+@keyframes consult-el-fadein {
+  to { opacity: 1; transform: none; }
 }
 
 /* Minimal adaptive */
