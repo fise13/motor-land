@@ -209,7 +209,7 @@ width: 100%;
     background: radial-gradient(circle at center, #1b1b1b, #000);
     font-family: "Inter", sans-serif;
   }
-  
+  /* Форма авторизации */
   .auth_form {
     display: flex;
     flex-direction: column;
@@ -223,7 +223,7 @@ width: 100%;
                 inset -2px -2px 6px rgba(255, 255, 255, 0.3);
     transition: transform 0.5s ease, box-shadow 0.5s ease;
   }
-  
+  /* Hover */
   .auth_form:hover {
     transform: scale(1.02);
     box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.9),

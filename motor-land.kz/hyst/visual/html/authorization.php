@@ -3,7 +3,7 @@
     <div class="auth_form_logo"><img src="img/logo.jpg" alt="Моторленд"></div>
     <div class="form_title">Вход в систему</div>
     <interfaceform target="hyst/core/admin_profile">
-      <input class="input_field" type="text" name="email" placeholder="Email" mandatory>
+      <input class="input_field" type="email" name="email" placeholder="Email" mandatory>
       <input class="input_field" type="password" name="password" placeholder="Пароль" mandatory>
       <input class="btn_submit" type="button" role="submit" name="login" value="Войти">
     </interfaceform>
