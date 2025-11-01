@@ -94,7 +94,6 @@ width: 260px !important;
 	}
 
 	.menu {
-	display: none !important;
 	position: fixed !important;
 	top: 63px !important;
 	right: 0px !important;
@@ -102,10 +101,6 @@ width: 260px !important;
 	background-color: rgba(0,0,0,0.7) !important;
 	width: 200px !important;
 	transition: all 0.3s ease-out 0.3s !important;
-	}
-	
-	.menu.open {
-		display: block !important; /* обязательно !important */
 	}
 
 .filtersblock input[type="text"] {
