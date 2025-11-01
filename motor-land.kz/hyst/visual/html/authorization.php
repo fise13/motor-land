@@ -1,11 +1,11 @@
 <div class="auth_container">
-  <!-- From Uiverse.io by andrew-demchenk0 -->
-  <form class="form">
-    <ul class="wrapper">
-      <li style="--i:3;"><input class="input" type="text" placeholder="Name" required=""></li>
-      <li style="--i:2;"><input class="input" placeholder="Phone number" required="" name="phone"></li>
-      <li style="--i:1;"><input class="input" type="email" placeholder="E-mail" required="" name="email"></li>
-      <button style="--i:0;">Submit</button>
-    </ul>
-  </form>
+  <div class="auth_form">
+    <div class="auth_form_logo"><img src="img/logo.jpg" alt="Моторленд"></div>
+    <div class="form_title">Вход в систему</div>
+    <interfaceform target="hyst/core/admin_profile">
+      <input class="input_field" type="text" name="email" placeholder="Email" mandatory>
+      <input class="input_field" type="password" name="password" placeholder="Пароль" mandatory>
+      <input class="btn_submit" type="button" role="submit" name="login" value="Войти">
+    </interfaceform>
+  </div>
 </div>
