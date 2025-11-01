@@ -758,9 +758,8 @@ background-position: center center;
 }
 
 /* ================================
-   CALLBACK FORM — минимализм и плавность
+   CALLBACK FORM — минимализм, плавность, в футере
 ================================ */
-
 .foterinline {
   display: inline-block;
   vertical-align: top;
@@ -772,15 +771,15 @@ background-position: center center;
   font-family: "Inter", sans-serif;
 }
 
-/* Форма без контейнера — "плавает" в футере */
+/* === Форма === */
 .callback-form {
   display: inline-block;
   background: transparent;
   text-align: center;
   color: #fff;
-  animation: fadeIn 0.9s ease forwards;
-  transform: translateY(10px);
+  animation: fadeIn 0.8s ease forwards;
   opacity: 0;
+  transform: translateY(10px);
   animation-delay: 0.1s;
   animation-fill-mode: forwards;
 }
@@ -792,7 +791,7 @@ background-position: center center;
   }
 }
 
-/* Заголовок */
+/* === Заголовок === */
 .callback-form h2 {
   margin-bottom: 25px;
   font-size: 22px;
@@ -814,7 +813,7 @@ background-position: center center;
 .form-control input {
   background: transparent;
   border: none;
-  border-bottom: 1.8px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.35);
   width: 100%;
   padding: 10px 0;
   font-size: 17px;
@@ -825,11 +824,11 @@ background-position: center center;
 .form-control input:focus,
 .form-control input:valid {
   outline: none;
-  border-bottom-color: #ffffff;
+  border-bottom-color: #fff;
   transform: scale(1.02);
 }
 
-/* Метка */
+/* === Метка === */
 .form-control label {
   position: absolute;
   top: 8px;
@@ -849,24 +848,43 @@ background-position: center center;
 
 /* === Кнопка === */
 .callback-btn {
-  margin-top: 20px;
-  padding: 12px 28px;
+  margin-top: 25px;
+  padding: 12px 32px;
   border: none;
-  border-radius: 24px;
-  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 30px;
+  background-color: rgba(255, 255, 255, 0.1);
   color: #fff;
   font-size: 16px;
   font-weight: 500;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
   cursor: pointer;
-  backdrop-filter: blur(6px);
-  transition: background 0.35s ease, transform 0.25s ease, box-shadow 0.35s ease;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+/* "Мягкий" блик при наведении */
+.callback-btn::before {
+  content: "";
+  position: absolute;
+  left: -50%;
+  top: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.25), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.8s ease;
+}
+
+.callback-btn:hover::before {
+  transform: translateX(100%);
 }
 
 .callback-btn:hover {
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-3px);
-  box-shadow: 0 6px 18px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
 }
 
 .callback-btn:active {
@@ -874,7 +892,7 @@ background-position: center center;
   box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
 }
 
-/* === Анимации для полей === */
+/* === Плавное появление полей === */
 @keyframes inputFade {
   from {
     opacity: 0;
@@ -894,7 +912,9 @@ background-position: center center;
 .form-control:nth-child(2) { animation-delay: 0.35s; }
 .form-control:nth-child(3) { animation-delay: 0.5s; }
 
-/* === Адаптив === */
+/* ================================
+   📱 Адаптив
+================================ */
 @media (max-width: 768px) {
   .callback-form h2 { font-size: 20px; }
   .form-control input { font-size: 16px; }
@@ -904,7 +924,74 @@ background-position: center center;
 @media (max-width: 420px) {
   .callback-form h2 { font-size: 18px; }
   .form-control input { font-size: 15px; }
-  .callback-btn { font-size: 14px; padding: 10px 22px; }
+  .callback-btn { font-size: 14px; padding: 10px 26px; }
+}
+
+/* ================================
+   ОСТАЛЬНЫЕ СТИЛИ (оставлены)
+================================ */
+.map {
+  width: 100%;
+  height: 400px;
+  display: block;
+  background-image: url(./img/map.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.foterzago {
+  font-size: 20px;
+  text-transform: uppercase;
+  color: white;
+  font-family: robotob;
+  margin: 15px 0px;
+}
+
+.foterinline input[type="text"] {
+  background-color: transparent;
+  border: solid 1px white;
+  padding: 5px 20px;
+  border-radius: 15px;
+  font-size: 18px;
+  width: 140px;
+  margin: 10px;
+  color: white;
+}
+
+.foterinline input[type="submit"],
+.foterinline input[type="button"] {
+  padding: 5px 20px;
+  border-radius: 15px;
+  font-size: 18px;
+  width: 180px;
+  margin: 10px;
+  background-color: #fe0000;
+  color: white;
+  border: solid 1px #fe0000;
+  cursor: pointer;
+}
+
+.fonetininelis {
+  display: inline-block;
+  vertical-align: top;
+  width: 200px;
+  padding: 10px;
+  color: white;
+  text-align: left;
+}
+
+.foterconicon {
+  padding: 0px 0px 0px 30px;
+  margin: 20px;
+  background-size: 15px auto;
+  background-repeat: no-repeat;
+  background-position: left top;
+  text-align: left;
+}
+
+.foterconicon a {
+  text-decoration: none;
+  color: white;
 }
 
 .copyr {
