@@ -758,8 +758,9 @@ background-position: center center;
 }
 
 /* ================================
-   CALLBACK FORM — стеклянный стиль
+   CALLBACK FORM — минимализм и плавность
 ================================ */
+
 .foterinline {
   display: inline-block;
   vertical-align: top;
@@ -768,218 +769,142 @@ background-position: center center;
   box-sizing: border-box;
   text-align: center;
   color: white;
+  font-family: "Inter", sans-serif;
 }
 
-/* Контейнер формы */
+/* Форма без контейнера — "плавает" в футере */
 .callback-form {
-  width: 340px;
-  margin: 100px auto;
-  padding: 45px 35px;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
-  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.35);
-  color: #fff;
+  display: inline-block;
+  background: transparent;
   text-align: center;
-  transition: transform 0.5s ease, box-shadow 0.6s ease;
+  color: #fff;
+  animation: fadeIn 0.9s ease forwards;
+  transform: translateY(10px);
+  opacity: 0;
+  animation-delay: 0.1s;
+  animation-fill-mode: forwards;
 }
 
-.callback-form:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Заголовок */
 .callback-form h2 {
-  margin-bottom: 28px;
+  margin-bottom: 25px;
   font-size: 22px;
-  letter-spacing: 1.2px;
-  font-weight: 600;
-  color: #eaf6ff;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #f1f1f1;
 }
 
 /* === Поля ввода === */
 .form-control {
   position: relative;
-  margin: 28px 0;
+  margin: 24px 0;
   width: 100%;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .form-control input {
-  background-color: transparent;
+  background: transparent;
   border: none;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.35);
+  border-bottom: 1.8px solid rgba(255, 255, 255, 0.4);
   width: 100%;
-  padding: 12px 0;
+  padding: 10px 0;
   font-size: 17px;
   color: #fff;
-  transition: all 0.3s ease;
-  caret-color: #7ccfff;
+  transition: border-color 0.3s ease, transform 0.25s ease;
 }
 
 .form-control input:focus,
 .form-control input:valid {
   outline: none;
-  border-bottom-color: #7ccfff;
+  border-bottom-color: #ffffff;
+  transform: scale(1.02);
 }
 
-/* Анимированные метки */
+/* Метка */
 .form-control label {
   position: absolute;
-  top: 6px;
+  top: 8px;
   left: 0;
   pointer-events: none;
+  transition: all 0.25s ease;
+  color: rgba(255, 255, 255, 0.7);
 }
 
-.form-control label span {
-  display: inline-block;
-  font-size: 16px;
-  color: rgba(255,255,255,0.8);
-  transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.form-control input:focus + label span,
-.form-control input:valid + label span {
-  color: #7ccfff;
-  transform: translateY(-22px);
+.form-control input:focus + label,
+.form-control input:valid + label {
+  top: -16px;
+  font-size: 13px;
+  color: #ffffff;
+  opacity: 0.9;
 }
 
 /* === Кнопка === */
 .callback-btn {
-  width: 100%;
-  padding: 13px;
+  margin-top: 20px;
+  padding: 12px 28px;
   border: none;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #0f8cff, #6ed0ff);
+  border-radius: 24px;
+  background-color: rgba(255, 255, 255, 0.15);
   color: #fff;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 500;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.5px;
   cursor: pointer;
-  box-shadow: 0 6px 20px rgba(111, 200, 255, 0.3);
-  transition: background 0.4s ease, transform 0.25s ease, box-shadow 0.4s ease;
+  backdrop-filter: blur(6px);
+  transition: background 0.35s ease, transform 0.25s ease, box-shadow 0.35s ease;
 }
 
 .callback-btn:hover {
-  background: linear-gradient(135deg, #1fa3ff, #8de3ff);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(111, 200, 255, 0.45);
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(255, 255, 255, 0.15);
 }
 
 .callback-btn:active {
   transform: translateY(0);
-  box-shadow: 0 4px 15px rgba(111, 200, 255, 0.2);
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
 }
 
-/* ================================
-   📱 Адаптив
-================================ */
+/* === Анимации для полей === */
+@keyframes inputFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-control {
+  animation: inputFade 0.7s ease forwards;
+}
+
+.form-control:nth-child(1) { animation-delay: 0.2s; }
+.form-control:nth-child(2) { animation-delay: 0.35s; }
+.form-control:nth-child(3) { animation-delay: 0.5s; }
+
+/* === Адаптив === */
 @media (max-width: 768px) {
-  .callback-form {
-    width: 90%;
-    margin: 60px auto;
-    padding: 35px 25px;
-    border-radius: 18px;
-  }
-
-  .callback-form h2 {
-    font-size: 20px;
-    margin-bottom: 25px;
-  }
-
-  .form-control input {
-    font-size: 16px;
-  }
-
-  .callback-btn {
-    font-size: 15px;
-    padding: 12px;
-  }
+  .callback-form h2 { font-size: 20px; }
+  .form-control input { font-size: 16px; }
+  .callback-btn { font-size: 15px; }
 }
 
 @media (max-width: 420px) {
-  .callback-form {
-    padding: 30px 20px;
-    border-radius: 16px;
-    margin: 40px 10px;
-  }
-
-  .callback-form h2 {
-    font-size: 18px;
-  }
-
-  .form-control input {
-    font-size: 15px;
-  }
-
-  .callback-btn {
-    font-size: 14px;
-    border-radius: 10px;
-  }
-}
-
-.map {
-width: 100%;
-height: 400px;
-display: block;
-background-image: url(./img/map.jpg);
-}
-
-.foterzago {
-font-size: 20px;
-text-transform: uppercase;
-color: white;
-font-family: robotob;
-margin: 15px 0px;
-}
-
-
-.foterinline input[type="text"]{
-background-color: transparent;
-border: solid 1px white;
-padding: 5px 20px;
-border-radius: 15px;
-font-size: 18px;
-width: 140px;
-margin: 10px;
-color: white;
-}
-
-.foterinline input[type="submit"],.foterinline input[type="button"]{
-padding: 5px 20px;
-border-radius: 15px;
-font-size: 18px;
-width: 180px;
-margin: 10px;
-background-color: #fe0000;
-color: white;
-border: solid 1px #fe0000;
-cursor: pointer;
-}
-
-.fonetininelis {
-display: inline-block;
-vertical-align: top;
-width: 200px;
-padding: 10px;
-color: white;
-text-align: left;
-}
-
-.foterconicon {
-padding: 0px 0px 0px 30px;
-margin: 20px;
-background-size: 15px auto;
-background-repeat: no-repeat;
-background-position: left top;
-text-align: left;
-}
-
-.foterconicon  a {
-text-decoration: none;
-color: white;
+  .callback-form h2 { font-size: 18px; }
+  .form-control input { font-size: 15px; }
+  .callback-btn { font-size: 14px; padding: 10px 22px; }
 }
 
 .copyr {
