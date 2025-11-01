@@ -65,33 +65,11 @@ width: 260px !important;
 	}
 	
 	.actionperekl  {
-	transform: translate(0%);
-	position: static;
-	left: auto;
-	top: auto;
-	}
-	
-	.actionbtms {
-		display: flex !important;
-		justify-content: center !important;
-		flex-wrap: wrap !important;
-		margin: 20px auto !important;
-	}
-	
-	.actionbtms li {
-		width: 120px !important;
-		margin: 5px !important;
-	}
-	
-	.toverblock {
-		width: 280px !important;
-		margin: 15px auto !important;
-		display: block !important;
-	}
-	
-	.toverimg {
-		width: 278px !important;
-	}
+		transform: translate(0%);
+		position: static;
+		left: auto;
+		top: auto;
+		}
 
 	.menu {
 		display: none;
