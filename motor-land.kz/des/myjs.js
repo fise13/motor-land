@@ -4,15 +4,10 @@ $(document).ready(function() {
 		const preloader = document.getElementById("preloader");
 		const logo = preloader.querySelector(".loader-logo");
 	  
-		// Показываем логотип после короткой задержки
-		setTimeout(() => {
-		  logo.classList.add("show");
-		}, 150);
-	  
-		// Через пару секунд — плавное исчезновение всего прелоадера
+		logo.classList.add("show"); // сразу
 		setTimeout(() => {
 		  preloader.classList.add("hide");
-		}, 600); // можно увеличить для более медленного растворения
+		}, 400); // лёгкое растворение
 	  });
 
 	
@@ -138,9 +133,24 @@ $(document).ready(function() {
 	 * Параметры: нет (использует элемент фона)
 	 * Возвращает: ничего
 	 */
-	$(document).on("click", ".plashesbgmodl", function () {
-    	$('.plashesbgmodl, #zakazaty').removeClass('show');
-	});
+	const modal = document.getElementById('zakazaty');
+	const overlay = document.querySelector('.plashesbgmodl');
+	
+	function openModal() {
+	  overlay.classList.add('show');
+	  modal.classList.add('show');
+	}
+	
+	function closeModal() {
+	  modal.classList.remove('show');
+	  overlay.classList.remove('show');
+	  modal.classList.add('hide');
+	  overlay.classList.add('hide');
+	  setTimeout(() => {
+		modal.classList.remove('hide');
+		overlay.classList.remove('hide');
+	  }, 400); // ждать завершения анимации
+	}
 	
 	/**
 	 * Функция: Закрытие модального окна по кнопке
