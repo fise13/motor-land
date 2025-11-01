@@ -1349,276 +1349,151 @@ width: 340px;
 color: white;
 }
 
-/* Минималистичный, прямоугольный, современный стиль для секции консультации */
+/* Минималистичная прямоугольная форма консультации с анимациями */
 
-/* ---- CONSULT SECTION STYLES ---- */
+/* Основной фон секции */
 .consult-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 48px 0;
-  /* Новый фон с плавным градиентом */
-  background: linear-gradient(120deg, #f3f5fa 0%, #e6eaff 100%);
-}
-
-/* ---- CONSULT CONTAINER ---- */
-.consult-container {
-  background: rgba(255, 255, 255, 0.95);
-  padding: 36px 50px 32px 50px;
-  border-radius: 18px;
-  box-shadow: 0 14px 48px 0 rgba(34, 100, 255, 0.12), 0 2px 8px #fff3;
-  max-width: 670px;
   width: 100%;
-  min-width: 320px;
-  text-align: left;
-  border: 1.5px solid #e2e6fa;
-  transition: box-shadow .3s cubic-bezier(.4,0,.2,1);
-  margin: 0 16px;
-}
-
-.consult-container:hover {
-  box-shadow: 0 24px 56px rgba(61, 106, 255, 0.17), 0 4px 18px #f1faffc3;
-}
-
-/* ---- CONSULT TITLE ---- */
-.consult-title {
-  font-family: 'Montserrat', 'Segoe UI', Arial, Helvetica, sans-serif;
-  font-size: 30px;
-  font-weight: 800;
-  letter-spacing: .06em;
-  color: #2453d3;
-  margin-bottom: 14px;
-  margin-top: 0;
-  text-shadow: 0 3px 20px #b6caff65, 0 1px 0 #fff3;
-  background: linear-gradient(92deg, #3f58fc 0%, #40b3ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-fill-color: transparent;
-}
-
-/* ---- CONSULT SUBTITLE ---- */
-.consult-subtitle {
+  padding: 48px 0;
+  background: linear-gradient(110deg, #f5f7fa 0%, #e7eaf5 100%);
   display: flex;
   justify-content: center;
-  align-items: center;
-  font-family: 'Montserrat', 'Segoe UI', Arial, Helvetica, sans-serif;
-  font-size: 20px;
-  font-weight: 500;
-  color: #3d6aff;
-  margin-bottom: 28px;
-  margin-top: 0;
-  letter-spacing: .05em;
-  background: linear-gradient(90deg, #41b8ff 0%, #7986cb 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-fill-color: transparent;
-  text-align: center;
-  text-shadow: 0 2px 10px #b6caff33, 0 2px 12px #fff4;
 }
 
-/* ---- CONSULT FORM ROW ---- */
-.consult-form {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 22px;
+/* Минималистичный заголовок */
+.consult-title {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #234a92;
+  margin-bottom: 7px;
+  letter-spacing: .03em;
+  text-align: left;
 }
 
-/* --- FIELD STYLING: ВОЛНОВАЯ ГРУППА ИНПУТОВ --- */
-.wave-group {
-  position: relative;
-}
-
-.wave-group .input {
+/* Минималистичный подзаголовок */
+.consult-subtitle {
+  font-family: 'Montserrat', Arial, sans-serif;
   font-size: 16px;
-  padding: 10px 10px 10px 5px;
-  display: block;
-  width: 200px;
-  border: none;
-  border-bottom: 1px solid #515151;
-  background: transparent;
-  color: #25325f;
-  font-family: 'Montserrat', 'Segoe UI', Arial, Helvetica, sans-serif;
-  transition: background .15s;
+  color: #5074b7;
+  margin-bottom: 24px;
+  text-align: left;
 }
 
-.wave-group .input:focus {
-  outline: none;
-  background: #eef5ff;
-  color: #2241bf;
-}
-
-.wave-group .label {
-  color: #999;
-  font-size: 18px;
-  font-weight: normal;
-  position: absolute;
-  pointer-events: none;
-  left: 5px;
-  top: 10px;
-  display: flex;
-}
-
-.wave-group .label-char {
-  transition: 0.2s ease all;
-  transition-delay: calc(var(--index) * .05s);
-}
-
-/* Label animation on input focus/valid */
-.wave-group .input:focus ~ label .label-char,
-.wave-group .input:valid ~ label .label-char {
-  transform: translateY(-20px);
-  font-size: 14px;
-  color: #5264AE;
-}
-
-.wave-group .bar {
-  position: relative;
-  display: block;
-  width: 200px;
-}
-
-.wave-group .bar:before,
-.wave-group .bar:after {
-  content: '';
-  height: 2px;
-  width: 0;
-  bottom: 1px;
-  position: absolute;
-  background: #5264AE;
-  transition: 0.2s ease all;
-  -moz-transition: 0.2s ease all;
-  -webkit-transition: 0.2s ease all;
-}
-
-.wave-group .bar:before {
-  left: 50%;
-}
-
-.wave-group .bar:after {
-  right: 50%;
-}
-
-.wave-group .input:focus ~ .bar:before,
-.wave-group .input:focus ~ .bar:after {
-  width: 50%;
-}
-
-/* ---- CONSULT BUTTON ---- */
-button,
-.consult-btn {
-  position: relative;
-  padding: 10px 20px;
-  border-radius: 7px;
-  border: 1px solid rgb(61, 106, 255);
-  font-size: 14px;
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 2px;
-  background: transparent;
-  color: #fff;
-  overflow: hidden;
-  box-shadow: 0 0 0 0 transparent;
-  -webkit-transition: all 0.2s ease-in;
-  -moz-transition: all 0.2s ease-in;
-  transition: all 0.2s ease-in;
-  font-family: 'Montserrat', 'Segoe UI', Arial, Helvetica, sans-serif;
-  min-width: 132px;
-  align-self: stretch;
-}
-
-button:hover,
-.consult-btn:hover,
-button:focus-visible,
-.consult-btn:focus-visible {
-  background: rgb(61, 106, 255);
-  box-shadow: 0 0 30px 5px rgba(0, 142, 236, 0.815);
-  -webkit-transition: all 0.2s ease-out;
-  -moz-transition: all 0.2s ease-out;
-  transition: all 0.2s ease-out;
-  color: #fff;
-}
-
-button:hover::before,
-.consult-btn:hover::before {
-  -webkit-animation: sh02 0.5s 0s linear;
-  -moz-animation: sh02 0.5s 0s linear;
-  animation: sh02 0.5s 0s linear;
-}
-
-button::before,
-.consult-btn::before {
-  content: '';
-  display: block;
-  width: 0px;
-  height: 86%;
-  position: absolute;
-  top: 7%;
-  left: 0%;
-  opacity: 0;
+/* Форма - строчный флекс, прямоугольная и без контейнера */
+.consult-form {
   background: #fff;
-  box-shadow: 0 0 50px 30px #fff;
-  -webkit-transform: skewX(-20deg);
-  -moz-transform: skewX(-20deg);
-  -ms-transform: skewX(-20deg);
-  -o-transform: skewX(-20deg);
-  transform: skewX(-20deg);
+  border-radius: 12px;
+  box-shadow: 0 2px 26px 0 rgba(41,67,155,0.07), 0 1.5px 2.5px #e9e9fd70;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 26px;
+  min-width: 280px;
+  max-width: 480px;
+  margin: 0 auto;
+  border: 1px solid #e3e3ee;
 }
 
-@keyframes sh02 {
-  from {
-    opacity: 0;
-    left: 0%;
-  }
-  50% {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-    left: 100%;
-  }
+/* Инпуты - прямоугольные, с наследованием шрифта и плавной анимацией бордера */
+.consult-input {
+  font-family: inherit;
+  font-size: 17px;
+  border: 1.5px solid #dde1f4;
+  border-radius: 7px;
+  padding: 10px 14px;
+  background: transparent;
+  color: #233568;
+  outline: none;
+  min-width: 0;
+  width: 140px;
+  transition: border-color 0.25s, box-shadow 0.18s;
 }
 
-button:active,
-.consult-btn:active {
-  box-shadow: 0 0 0 0 transparent;
-  -webkit-transition: box-shadow 0.2s ease-in;
-  -moz-transition: box-shadow 0.2s ease-in;
-  transition: box-shadow 0.2s ease-in;
+.consult-input:focus {
+  border-color: #4578ea;
+  box-shadow: 0 2px 13px #b4ccff1a;
 }
 
-/* ---- ADAPTABILITY ---- */
-@media (max-width: 700px) {
-  .consult-container {
-    max-width: 99%;
-    padding: 20px 10px;
-    min-width: unset;
-  }
+/* Анимация placeholder-подпись вверх */
+.consult-input:focus::placeholder,
+.consult-input:not(:placeholder-shown)::placeholder {
+  opacity: 0.25;
+  transform: translateY(-8px) scale(0.92);
+  transition: all 0.21s;
+}
+
+/* Кнопка отправки - минимал, но с плавной анимацией */
+.consult-btn {
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(91deg, #4578ea 0%, #1749bf 100%);
+  border: none;
+  border-radius: 7px;
+  padding: 10px 26px;
+  cursor: pointer;
+  box-shadow: 0 2px 10px #2370e327;
+  transition: background 0.17s, box-shadow .22s, transform .14s;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+}
+
+/* Анимация волны кнопки */
+.consult-btn::after {
+  content: '';
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 0; height: 0;
+  background: #fff4;
+  border-radius: 100%;
+  transform: translate(-50%,-50%);
+  opacity: 0;
+  transition: all .47s cubic-bezier(.43,.21,.36,.93);
+}
+
+.consult-btn:active::after {
+  width: 160%;
+  height: 500%;
+  opacity: 1;
+  transition: 0s;
+}
+
+.consult-btn:hover, .consult-btn:focus {
+  background: linear-gradient(93deg, #1749bf 0%, #4578ea 100%);
+  transform: translateY(-2px) scale(1.032);
+  box-shadow: 0 6px 18px #4578ea44;
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
   .consult-form {
     flex-direction: column;
-    gap: 12px;
-  }
-  button,
-  .consult-btn {
-    min-width: 100px;
-    width: 100%;
-    padding: 12px 0;
-    font-size: 15px;
+    gap: 10px;
+    padding: 12px 7px;
+    max-width: 97vw;
   }
   .consult-title {
-    font-size: 20px;
+    font-size: 16px;
+    text-align: left;
   }
   .consult-subtitle {
-    font-size: 15px;
+    font-size: 13px;
+    text-align: left;
   }
-  .wave-group .input {
+  .consult-input {
+    width: 100%;
     font-size: 15px;
-    width: 100%;
-    padding: 10px 0 10px 5px;
+    padding: 10px 10px;
   }
-  .wave-group .bar {
+  .consult-btn {
     width: 100%;
+    font-size: 15px;
+    padding: 12px 0;
+    min-width: 0;
   }
 }
