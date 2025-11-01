@@ -95,6 +95,7 @@ width: 260px !important;
 
 /* Исходное состояние меню */
 .menu {
+	display: none;
     position: fixed;
     top: 0;
     right: -250px; /* Скрыто за экраном справа */
@@ -107,6 +108,7 @@ width: 260px !important;
 
 /* Когда меню открыто */
 .menu.open {
+	display: block;
     right: 0; /* Сдвигаем меню на экран */
 }
 
