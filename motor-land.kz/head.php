@@ -18,13 +18,11 @@ function mobilemenu() {
   const menu = document.querySelector('.menu');
   const btn = document.querySelector('.modilebtn');
 
-  if (!menu.classList.contains('open')) {
-    menu.style.maxHeight = menu.scrollHeight + "px";
-    menu.classList.add('open');
+  menu.classList.toggle('open');
+
+  if (menu.classList.contains('open')) {
     btn.style.backgroundImage = "url('./img/crossm.png')";
   } else {
-    menu.style.maxHeight = 0;
-    menu.classList.remove('open');
     btn.style.backgroundImage = "url('./img/mmenu.png')";
   }
 }
