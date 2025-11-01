@@ -230,7 +230,7 @@ width: 100%;
                 -2px -2px 8px rgba(255, 255, 255, 0.2);
   }
   .auth_form_logo {
-    border-radius: 6px;
+    border-radius: 12px;
     width: 96px;
     height: 64px;
     margin: -48px auto 12px auto;
