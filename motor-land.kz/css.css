@@ -93,9 +93,23 @@ border-bottom: solid 1px #9a9a9a;
 background-color: #000000;
 }
 
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .shirina {
-width: 1200px;
-display: inline-block;
+  width: 1200px;
+  display: inline-block;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards;
+  animation-delay: 0.3s; /* небольшая задержка для плавности */
 }
 
 .relhead {
@@ -410,6 +424,66 @@ position: relative;
 text-align: right;
 margin: 20px 0px;
 position: relative;
+}
+
+/* Общая анимация появления снизу вверх */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Слева направо */
+@keyframes fadeFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Справа налево */
+@keyframes fadeFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Применяем эффекты */
+.generalw {
+  animation: fadeUp 0.8s ease forwards;
+}
+
+.zgolovorleft {
+  animation: fadeFromLeft 0.8s ease forwards;
+}
+
+.zgolovorright {
+  animation: fadeFromRight 0.8s ease forwards;
+}
+
+/* Добавим лёгкую задержку, чтобы не появлялись одновременно */
+.generalw {
+  animation-delay: 0.2s;
+}
+.zgolovorleft {
+  animation-delay: 0.4s;
+}
+.zgolovorright {
+  animation-delay: 0.6s;
 }
 
 .sttitle {
