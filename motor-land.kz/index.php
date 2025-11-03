@@ -149,7 +149,6 @@ $SITE_DESCRIPTION = 'Компания "Motor Land" - поставка контр
 
 <div class="generalw">
 	<div class="shirina zgolovorright">
-		<div class="sttitle"><span>Акции</span></div>
 	</div>
 </div>
 
