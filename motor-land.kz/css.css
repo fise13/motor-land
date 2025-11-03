@@ -551,7 +551,8 @@ text-transform: uppercase;
 }
 
 .forsbgf {
-background-image: url(./img/forbg.png);
+background-color: #a29d9d;
+background-image: none;
 background-size: cover;
 background-position: center center;
 border-bottom: solid 1px #9a9a9a;
@@ -575,11 +576,14 @@ margin: 0;
   z-index: 1;
   margin: 0 auto;
   max-width: 650px;
-  /* Фон убран - контейнер прозрачный */
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
+  /* Полупрозрачный эффект как в "что ищем?" */
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(6px) saturate(180%);
+  -webkit-backdrop-filter: blur(6px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  background-clip: padding-box;
 }
 
 .consult-title {
