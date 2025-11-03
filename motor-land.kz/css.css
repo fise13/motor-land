@@ -904,16 +904,30 @@ opacity: 1;
 ================================ */
 .foterinline {
   display: block;
-  padding: 80px 20px 60px;
+  padding: 40px 20px 30px;
   width: 100%;
-  max-width: 480px;
-  margin: 0 auto 80px;
+  max-width: 400px;
+  margin: 0 auto 40px;
   box-sizing: border-box;
   text-align: left;
   color: white;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   position: relative;
   z-index: 1;
+  animation: fadeInUp 0.4s ease-out;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeInDown {
@@ -971,38 +985,56 @@ opacity: 1;
 /* === Поля ввода === */
 .form-control {
   position: relative;
-  margin: 0 0 32px 0;
+  margin: 0 0 20px 0;
   width: 100%;
   display: flex;
   flex-direction: column;
+  animation: fadeIn 0.4s ease-out both;
+}
+
+.form-control:nth-of-type(1) {
+  animation-delay: 0.3s;
+}
+
+.form-control:nth-of-type(2) {
+  animation-delay: 0.4s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .form-control label {
   position: relative;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   pointer-events: none;
 }
 
 .form-control label span {
   display: inline-block;
-  font-size: 14px;
+  font-size: 13px;
   min-width: 5px;
   color: rgba(255, 255, 255, 0.7);
-  transition: color 0.2s ease;
+  transition: color 0.15s ease;
   font-weight: 400;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.2px;
 }
 
 .form-control input {
   background-color: transparent;
   border: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
   display: block;
   width: 100%;
-  padding: 12px 0;
-  font-size: 16px;
+  padding: 8px 0;
+  font-size: 15px;
   color: #fff;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.15s ease;
   font-weight: 400;
 }
 
@@ -1086,48 +1118,56 @@ opacity: 1;
 ================================ */
 @media (max-width: 768px) {
   .foterinline {
-    padding: 60px 20px 40px;
-    margin-bottom: 60px;
+    padding: 30px 15px 25px;
+    margin-bottom: 30px;
+    max-width: 100%;
   }
   
   .foterzago {
-    font-size: 20px;
-    margin-bottom: 40px;
+    font-size: 16px;
+    margin-bottom: 22px;
+    padding-bottom: 10px;
   }
   
   .footer_contacts {
-    gap: 40px;
-    padding: 0 15px 60px;
+    gap: 30px;
+    padding: 0 15px 30px;
   }
   
   .footer_contact_block {
     width: 100%;
-    max-width: 320px;
+    max-width: 280px;
   }
 }
 
 @media (max-width: 420px) {
   .foterinline {
-    padding: 50px 15px 40px;
+    padding: 25px 12px 20px;
   }
   
   .foterzago {
-    font-size: 18px;
-    margin-bottom: 35px;
+    font-size: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
   }
   
   .form-control {
-    margin-bottom: 28px;
+    margin-bottom: 16px;
   }
   
   .form-control input {
-    font-size: 15px;
-    padding: 10px 0;
+    font-size: 14px;
+    padding: 6px 0;
   }
   
   .foterinline input[type="button"] {
-    font-size: 13px;
-    padding: 12px 24px;
+    font-size: 12px;
+    padding: 9px 20px;
+    margin-top: 16px;
+  }
+  
+  .footer_contact_block {
+    width: 100%;
   }
 }
 
@@ -1148,17 +1188,29 @@ opacity: 1;
 }
 
 .foterzago {
-  font-size: 24px;
+  font-size: 18px;
   text-transform: none;
   color: white;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  margin: 0 0 50px 0;
-  padding-bottom: 16px;
+  margin: 0 0 28px 0;
+  padding-bottom: 12px;
   position: relative;
   display: block;
   letter-spacing: 0;
   font-weight: 600;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  animation: slideInLeft 0.5s ease-out 0.2s both;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes slideInFromLeft {
@@ -1206,27 +1258,30 @@ opacity: 1;
 
 .foterinline input[type="submit"],
 .foterinline input[type="button"] {
-  padding: 14px 32px;
+  padding: 10px 24px;
   border-radius: 0;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   width: 100%;
-  margin: 32px 0 0 0;
+  margin: 20px 0 0 0;
   background: #fe0000;
   color: white;
   border: none;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.15s ease, transform 0.15s ease;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+  animation: fadeIn 0.4s ease-out 0.5s both;
 }
 
 .foterinline input[type="button"]:hover {
   background: #d50000;
+  transform: translateY(-1px);
 }
 
 .foterinline input[type="button"]:active {
   background: #b71c1c;
+  transform: translateY(0);
 }
 
 .fonetininelis {
@@ -1239,18 +1294,18 @@ opacity: 1;
 }
 
 .foterconicon {
-  padding: 0 0 0 32px;
-  margin: 0 0 24px 0;
+  padding: 0 0 0 28px;
+  margin: 0 0 16px 0;
   text-align: left;
   position: relative;
-  transition: opacity 0.2s ease;
-  font-size: 15px;
-  line-height: 1.6;
+  transition: transform 0.15s ease;
+  font-size: 14px;
+  line-height: 1.5;
   color: rgba(255, 255, 255, 0.9);
 }
 
 .foterconicon:hover {
-  opacity: 0.8;
+  transform: translateX(3px);
 }
 
 .foterconicon::before {
@@ -1267,10 +1322,10 @@ opacity: 1;
 .foterconicon a {
   text-decoration: none;
   color: white;
-  transition: color 0.2s ease;
+  transition: color 0.15s ease;
   display: inline-block;
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .foterconicon a:hover {
@@ -1612,19 +1667,39 @@ display: flex;
 justify-content: center;
 flex-wrap: wrap;
 align-items: start;
-gap: 60px;
-padding: 0 20px 80px;
+gap: 40px;
+padding: 0 20px 40px;
 position: relative;
 z-index: 1;
+animation: fadeInUp 0.4s ease-out 0.6s both;
 }
 
 .footer_contact_block {
 margin: 0;
-width: 320px;
+width: 280px;
 color: white;
-transition: opacity 0.2s ease;
+transition: transform 0.2s ease;
 padding: 0;
 position: relative;
+}
+
+.footer_contact_block:nth-child(1) {
+  animation: slideInLeft 0.4s ease-out 0.7s both;
+}
+
+.footer_contact_block:nth-child(2) {
+  animation: slideInRight 0.4s ease-out 0.8s both;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 
