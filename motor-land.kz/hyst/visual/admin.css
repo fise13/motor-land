@@ -31,7 +31,7 @@ padding: 0px 15px;
 
 .admin_header_exit {
   display: block;
-  margin: 0 0 0 10px;
+  margin: 0 10px 0 0; /* moved left, removed left margin */
   text-decoration: none;
   color: white;
   position: relative;
@@ -43,8 +43,8 @@ padding: 0px 15px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  width: 45px;
-  height: 45px;
+  width: 32px;    /* smaller width */
+  height: 32px;   /* smaller height */
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -65,7 +65,7 @@ padding: 0px 15px;
 }
 
 .sign svg {
-  width: 17px;
+  width: 13px;    /* smaller icon */
 }
 
 .sign svg path {
@@ -79,22 +79,22 @@ padding: 0px 15px;
   width: 0%;
   opacity: 0;
   color: white;
-  font-size: 1.2em;
+  font-size: 1em;         /* smaller font */
   font-weight: 600;
   transition-duration: .3s;
 }
 
 /* hover effect on button width */
 .Btn:hover {
-  width: 125px;
-  border-radius: 40px;
+  width: 90px;
+  border-radius: 32px;
   transition-duration: .3s;
 }
 
 .Btn:hover .sign {
   width: 30%;
   transition-duration: .3s;
-  padding-left: 20px;
+  padding-left: 14px;
 }
 
 /* hover effect button's text */
@@ -102,7 +102,7 @@ padding: 0px 15px;
   opacity: 1;
   width: 70%;
   transition-duration: .3s;
-  padding-right: 10px;
+  padding-right: 8px;
 }
 
 /* button click effect*/
