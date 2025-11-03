@@ -1,84 +1,84 @@
 /* ==========================================
-   СОВРЕМЕННАЯ CSS-АРХИТЕКТУРА ДЛЯ АДМИН-ПАНЕЛИ
-   Улучшенная версия с исправленным выравниванием
+   ПРЕМИУМ GLASSMORPHISM ДИЗАЙН АДМИН-ПАНЕЛИ
+   Современная архитектура с идеальным выравниванием
    ========================================== */
 
-/* === 1. CSS ПЕРЕМЕННЫЕ (Design Tokens) === */
+/* === 1. CSS ПЕРЕМЕННЫЕ === */
 :root {
-  /* Цветовая палитра - улучшенная тёмная тема */
-  --color-bg-primary: #0a0a12;
-  --color-bg-secondary: #16162a;
-  --color-bg-tertiary: #1f1f38;
-  --color-bg-elevated: #282846;
-  --color-bg-hover: #323254;
+  /* Градиентный фон */
+  --color-bg-primary: #0f0f23;
+  --color-bg-secondary: #1a1a2e;
+  --color-bg-tertiary: #16213e;
+  --color-bg-elevated: #0f3460;
+  --color-bg-glass: rgba(255, 255, 255, 0.05);
+  --color-bg-glass-hover: rgba(255, 255, 255, 0.08);
   
-  /* Акцентные цвета */
-  --color-accent: #6366f1;
-  --color-accent-hover: #818cf8;
-  --color-accent-light: rgba(99, 102, 241, 0.1);
-  --color-success: #10b981;
-  --color-success-light: rgba(16, 185, 129, 0.1);
-  --color-danger: #ef4444;
-  --color-danger-light: rgba(239, 68, 68, 0.1);
-  --color-warning: #f59e0b;
-  --color-warning-light: rgba(245, 158, 11, 0.1);
+  /* Акцентные цвета - яркие неоновые */
+  --color-accent: #00d4ff;
+  --color-accent-hover: #00f0ff;
+  --color-accent-light: rgba(0, 212, 255, 0.15);
+  --color-accent-glow: rgba(0, 212, 255, 0.4);
+  --color-success: #00ff88;
+  --color-success-light: rgba(0, 255, 136, 0.15);
+  --color-danger: #ff3366;
+  --color-danger-light: rgba(255, 51, 102, 0.15);
+  --color-warning: #ffaa00;
+  --color-warning-light: rgba(255, 170, 0, 0.15);
   
   /* Текстовые цвета */
-  --color-text-primary: #f8fafc;
-  --color-text-secondary: #cbd5e1;
-  --color-text-muted: #94a3b8;
-  --color-text-disabled: #64748b;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #b8c5d6;
+  --color-text-muted: #7a8a9e;
+  --color-text-disabled: #4a5a6e;
   
-  /* Границы */
-  --color-border: #334155;
-  --color-border-hover: #475569;
-  --color-border-focus: #6366f1;
+  /* Границы и линии */
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-hover: rgba(255, 255, 255, 0.2);
+  --color-border-focus: var(--color-accent);
   
-  /* Тени с улучшенной глубиной */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.7), 0 10px 10px -5px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.3);
+  /* Тени с неоновым свечением */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
+  --shadow-neon: 0 0 20px var(--color-accent-glow), 0 0 40px var(--color-accent-glow);
+  --shadow-neon-strong: 0 0 30px var(--color-accent-glow), 0 0 60px var(--color-accent-glow);
   
-  /* Радиусы скругления */
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
+  /* Радиусы */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
   --radius-2xl: 1.5rem;
   --radius-full: 9999px;
   
   /* Отступы */
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
+  --spacing-xs: 0.375rem;
+  --spacing-sm: 0.625rem;
   --spacing-md: 1rem;
   --spacing-lg: 1.5rem;
   --spacing-xl: 2rem;
   --spacing-2xl: 3rem;
   
   /* Типографика */
-  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
   --font-size-lg: 1.125rem;
   --font-size-xl: 1.25rem;
   --font-size-2xl: 1.5rem;
-  --font-size-3xl: 1.875rem;
+  --font-size-3xl: 2rem;
   
   /* Переходы */
-  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
   
   /* Размеры */
-  --header-height: 4rem;
+  --header-height: 4.5rem;
   --sidebar-width: 18rem;
-  --sidebar-width-collapsed: 4.5rem;
-  --icon-size-sm: 1rem;
-  --icon-size-md: 1.25rem;
-  --icon-size-lg: 1.5rem;
+  --sidebar-width-collapsed: 5rem;
 }
 
 /* === 2. БАЗОВЫЕ СТИЛИ === */
@@ -104,19 +104,35 @@ body {
   font-size: var(--font-size-base);
   line-height: 1.6;
   color: var(--color-text-primary);
-  background-color: var(--color-bg-primary);
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
-/* === 3. THEME === */
-.adm_theme {
-  color: var(--color-text-primary);
-  background-color: var(--color-bg-primary);
+/* Анимированный фоновый паттерн */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255, 51, 102, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* === 4. LAYOUT - ОРИГИНАЛЬНЫЕ ТЕГИ === */
+.adm_theme {
+  color: var(--color-text-primary);
+  position: relative;
+  z-index: 1;
+}
+
+/* === 3. HEADER === */
 adm_header,
 adm_content,
 adm_footer {
@@ -124,19 +140,18 @@ adm_footer {
   display: flex;
 }
 
-/* Header с улучшенным выравниванием */
 adm_header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(22, 22, 42, 0.95);
+  background: rgba(26, 26, 46, 0.7);
   height: var(--header-height);
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--color-border);
-  box-shadow: var(--shadow-md);
-  backdrop-filter: blur(12px);
-  padding: 0 var(--spacing-lg);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(20px) saturate(180%);
+  padding: 0 var(--spacing-xl);
 }
 
 .admin_header_profile {
@@ -144,73 +159,73 @@ adm_header {
   justify-content: flex-end;
   align-items: center;
   gap: var(--spacing-lg);
-  padding: 0;
   height: 100%;
 }
 
 .admin_header_exit {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--spacing-sm);
   text-decoration: none;
   color: var(--color-text-secondary);
   font-weight: 600;
   font-size: var(--font-size-sm);
-  transition: color var(--transition-fast);
+  transition: all var(--transition-fast);
   padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
+  height: 2.75rem;
 }
 
 .admin_header_exit:hover {
-  color: var(--color-accent-hover);
-  background: var(--color-accent-light);
+  color: var(--color-accent);
+  background: var(--color-bg-glass);
+  transform: translateY(-1px);
 }
 
-/* Улучшенная кнопка Logout с правильным выравниванием */
+/* Премиум кнопка Logout */
 .Btn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 3rem;
+  height: 3rem;
   border: none;
   border-radius: var(--radius-full);
   cursor: pointer;
   position: relative;
   overflow: hidden;
   transition: all var(--transition-base);
-  box-shadow: var(--shadow-md);
-  background: linear-gradient(135deg, #ef4444, #dc2626);
+  background: linear-gradient(135deg, var(--color-danger), #cc0044);
+  box-shadow: var(--shadow-md), 0 0 20px rgba(255, 51, 102, 0.3);
   flex-shrink: 0;
 }
 
 .Btn:hover {
-  width: 7rem;
-  border-radius: var(--radius-full);
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-1px);
-  background: linear-gradient(135deg, #f87171, #ef4444);
+  width: 8rem;
+  background: linear-gradient(135deg, #ff4477, var(--color-danger));
+  box-shadow: var(--shadow-lg), 0 0 30px rgba(255, 51, 102, 0.5);
+  transform: translateY(-2px);
 }
 
 .Btn:active {
   transform: translateY(0);
-  box-shadow: var(--shadow-sm);
 }
 
 .sign {
   width: 100%;
   height: 100%;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   transition: all var(--transition-base);
 }
 
 .sign svg {
-  width: var(--icon-size-md);
-  height: var(--icon-size-md);
-  transition: transform var(--transition-base);
+  width: 1.25rem;
+  height: 1.25rem;
   flex-shrink: 0;
+  transition: transform var(--transition-base);
 }
 
 .sign svg path {
@@ -219,11 +234,10 @@ adm_header {
 
 .Btn:hover .sign {
   width: 30%;
-  transform: translateX(-0.25rem);
 }
 
 .Btn:hover .sign svg {
-  transform: rotate(15deg);
+  transform: rotate(20deg) scale(1.1);
 }
 
 .text {
@@ -233,10 +247,10 @@ adm_header {
   opacity: 0;
   color: white;
   font-size: var(--font-size-sm);
-  font-weight: 600;
+  font-weight: 700;
   transition: all var(--transition-base);
   white-space: nowrap;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   height: 100%;
 }
@@ -247,25 +261,29 @@ adm_header {
 }
 
 .admin_header_name {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  padding: var(--spacing-sm) var(--spacing-md);
+  justify-content: center;
+  padding: var(--spacing-sm) var(--spacing-lg);
   color: var(--color-text-primary);
   font-weight: 600;
   font-size: var(--font-size-sm);
-  background: var(--color-bg-tertiary);
-  border-radius: var(--radius-md);
+  background: var(--color-bg-glass);
+  border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
+  backdrop-filter: blur(10px);
+  height: 2.75rem;
+  box-shadow: var(--shadow-sm);
 }
 
-/* Main Content Area */
+/* === 4. CONTENT AREA === */
 adm_content {
   justify-content: flex-start;
   overflow-x: hidden;
   height: calc(100% - var(--header-height));
 }
 
-/* === 5. SIDEBAR с улучшенным выравниванием === */
+/* === 5. SIDEBAR === */
 #sidebarbutton {
   display: none;
 }
@@ -273,21 +291,21 @@ adm_content {
 sidebar {
   width: var(--sidebar-width);
   min-width: var(--sidebar-width);
-  background: var(--color-bg-secondary);
+  background: rgba(26, 26, 46, 0.6);
   height: 100%;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
-  padding: var(--spacing-lg);
+  padding: var(--spacing-xl);
   transition: all var(--transition-base);
   border-right: 1px solid var(--color-border);
+  backdrop-filter: blur(20px) saturate(180%);
   overflow-y: auto;
   overflow-x: hidden;
+  box-shadow: var(--shadow-lg);
 }
 
-/* Кастомный скроллбар */
 sidebar::-webkit-scrollbar {
-  width: 0.5rem;
+  width: 0.375rem;
 }
 
 sidebar::-webkit-scrollbar-track {
@@ -297,56 +315,58 @@ sidebar::-webkit-scrollbar-track {
 sidebar::-webkit-scrollbar-thumb {
   background: var(--color-border);
   border-radius: var(--radius-full);
-  transition: background var(--transition-fast);
 }
 
 sidebar::-webkit-scrollbar-thumb:hover {
   background: var(--color-border-hover);
 }
 
-/* Sidebar Toggle Button с правильным центрированием */
+/* Toggle Button */
 label[for="sidebarbutton"] {
-  width: 3rem;
-  height: 3rem;
-  margin: 0 0 var(--spacing-lg) 0;
-  position: relative;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0 0 var(--spacing-xl) 0;
   cursor: pointer;
   transition: all var(--transition-base);
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-lg);
-  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-xl);
+  background: var(--color-bg-glass);
   border: 1px solid var(--color-border);
+  backdrop-filter: blur(10px);
   flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
 }
 
 label[for="sidebarbutton"]:hover {
-  background: var(--color-bg-elevated);
-  border-color: var(--color-border-hover);
+  background: var(--color-bg-glass-hover);
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-md), var(--shadow-neon);
   transform: scale(1.05);
-  box-shadow: var(--shadow-sm);
 }
 
 label[for="sidebarbutton"] i {
   position: relative;
-  background-color: var(--color-text-primary);
+  background-color: var(--color-accent);
   width: 1.5rem;
-  height: 2px;
+  height: 0.125rem;
   transition: all var(--transition-base);
   border-radius: var(--radius-full);
   display: block;
+  box-shadow: 0 0 10px var(--color-accent-glow);
 }
 
 label[for="sidebarbutton"] i:before,
 label[for="sidebarbutton"] i:after {
   content: '';
   width: 1rem;
-  height: 2px;
-  background-color: var(--color-text-primary);
+  height: 0.125rem;
+  background-color: var(--color-accent);
   position: absolute;
   transition: all var(--transition-base);
   border-radius: var(--radius-full);
+  box-shadow: 0 0 10px var(--color-accent-glow);
 }
 
 label[for="sidebarbutton"] i:before {
@@ -375,7 +395,6 @@ label[for="sidebarbutton"] i:after {
   left: auto;
 }
 
-/* Collapsed Sidebar */
 #sidebarbutton:checked ~ adm_content sidebar {
   width: var(--sidebar-width-collapsed);
   min-width: var(--sidebar-width-collapsed);
@@ -388,100 +407,83 @@ label[for="sidebarbutton"] i:after {
 }
 
 #sidebarbutton:checked ~ adm_content sidebar label[for="sidebarbutton"] {
-  margin: 0 auto var(--spacing-lg) auto;
+  margin: 0 auto var(--spacing-xl) auto;
 }
 
-/* Sidebar Menu Items с правильным выравниванием иконок */
-/* Sidebar Menu Items с правильным выравниванием иконок */
+/* Sidebar Menu Items */
 .admin_sidebar_menu {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: flex-start;
   gap: var(--spacing-md);
-  min-height: 3rem;
-  box-sizing: border-box;
-  padding: var(--spacing-sm) var(--spacing-md);
+  min-height: 3.25rem;
+  padding: var(--spacing-md) var(--spacing-lg);
   text-decoration: none;
-  text-align: left;
   color: var(--color-text-secondary);
-  margin: 0 0 var(--spacing-xs) 0;
-  overflow: hidden;
+  margin: 0 0 var(--spacing-sm) 0;
   transition: all var(--transition-fast);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   position: relative;
-  font-weight: 500;
+  font-weight: 600;
   font-size: var(--font-size-sm);
   background: transparent;
-  /* Убираем эти строки если они есть */
-  background-position: initial;
-  background-repeat: no-repeat;
-  background-size: initial;
+  border: 1px solid transparent;
+  overflow: hidden;
 }
 
-/* ВАЖНО: Удалите или закомментируйте этот блок */
 .admin_sidebar_menu::before {
-  /* Этот блок создаёт конфликт с вашими иконками */
-  display: none; /* Добавьте эту строку */
-}
-
-/* Индикатор активного пункта слева */
-.admin_sidebar_menu::after {
   content: '';
   position: absolute;
-  left: 0;
-  top: 0;
-  width: 0.25rem;
-  height: 100%;
-  background: var(--color-accent);
-  transform: scaleY(0);
-  transition: transform var(--transition-fast);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  inset: 0;
+  background: var(--color-bg-glass);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  border-radius: var(--radius-xl);
+  z-index: -1;
 }
 
-/* Стили для иконок - если они добавлены через background-image */
 .admin_sidebar_menu[style*="background-image"] {
-  padding-left: 3rem; /* Место для иконки слева */
-  background-position: var(--spacing-md) center !important;
+  padding-left: 3.5rem;
+  background-position: var(--spacing-lg) center !important;
   background-repeat: no-repeat !important;
-  background-size: 1.25rem 1.25rem !important;
+  background-size: 1.5rem 1.5rem !important;
 }
 
 .admin_sidebar_menu:hover {
-  background-color: var(--color-bg-tertiary);
-  color: var(--color-text-primary);
-  border: 1px solid var(--color-border);
-  padding-left: calc(var(--spacing-md) - 1px);
+  color: var(--color-accent);
+  border-color: var(--color-border);
+  transform: translateX(4px);
+  box-shadow: var(--shadow-sm);
 }
 
-/* Для пунктов с background-image при hover */
-.admin_sidebar_menu[style*="background-image"]:hover {
-  padding-left: calc(3rem - 1px);
+.admin_sidebar_menu:hover::before {
+  opacity: 1;
 }
 
-.admin_sidebar_menu:hover::after {
-  transform: scaleY(1);
+.admin_sidebar_menu span {
+  white-space: nowrap;
+  line-height: 1.4;
 }
 
-/* При свёрнутом sidebar */
 #sidebarbutton:checked ~ adm_content sidebar .admin_sidebar_menu {
   justify-content: center;
-  padding: var(--spacing-sm);
+  padding: var(--spacing-md);
 }
 
 #sidebarbutton:checked ~ adm_content sidebar .admin_sidebar_menu[style*="background-image"] {
   background-position: center !important;
-  padding-left: var(--spacing-sm);
+  padding-left: var(--spacing-md);
 }
 
-/* Content Area */
+/* === 6. CONTENT === */
 content {
   display: block;
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   flex-grow: 1;
-  box-sizing: border-box;
-  padding: var(--spacing-xl);
-  background: var(--color-bg-primary);
+  padding: var(--spacing-2xl);
+  background: transparent;
 }
 
 content::-webkit-scrollbar {
@@ -501,15 +503,14 @@ content::-webkit-scrollbar-thumb:hover {
   background: var(--color-border-hover);
 }
 
-/* === 6. ФОРМА АВТОРИЗАЦИИ с улучшенным выравниванием === */
+/* === 7. AUTH FORM === */
 .auth_container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: radial-gradient(circle at 50% 50%, var(--color-bg-secondary), var(--color-bg-primary));
-  font-family: var(--font-family);
   padding: var(--spacing-xl);
+  position: relative;
 }
 
 .auth_form {
@@ -518,19 +519,20 @@ content::-webkit-scrollbar-thumb:hover {
   align-items: stretch;
   gap: var(--spacing-lg);
   width: 100%;
-  max-width: 24rem;
-  padding: var(--spacing-2xl) var(--spacing-xl);
+  max-width: 28rem;
+  padding: var(--spacing-2xl);
   border-radius: var(--radius-2xl);
-  background: var(--color-bg-secondary);
-  box-shadow: var(--shadow-xl);
+  background: rgba(26, 26, 46, 0.8);
+  backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: var(--shadow-xl), var(--shadow-neon);
   border: 1px solid var(--color-border);
-  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes slideUp {
+@keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(2rem);
+    transform: translateY(3rem);
   }
   to {
     opacity: 1;
@@ -540,32 +542,33 @@ content::-webkit-scrollbar-thumb:hover {
 
 .auth_form_logo {
   border-radius: var(--radius-xl);
-  width: 6rem;
-  height: 4rem;
-  margin: -4rem auto var(--spacing-lg) auto;
+  width: 7rem;
+  height: 5rem;
+  margin: -4.5rem auto var(--spacing-xl) auto;
   overflow: hidden;
-  box-shadow: var(--shadow-xl);
-  background: var(--color-bg-elevated);
-  display: flex;
+  box-shadow: var(--shadow-xl), var(--shadow-neon-strong);
+  background: var(--color-bg-glass);
+  backdrop-filter: blur(10px);
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--color-border);
+  border: 2px solid var(--color-accent);
 }
 
 .auth_form_logo img {
   width: 100%;
   height: 100%;
-  display: block;
   object-fit: contain;
 }
 
 .form_title {
   color: var(--color-text-primary);
-  font-size: var(--font-size-2xl);
-  font-weight: 700;
-  margin-bottom: var(--spacing-xs);
+  font-size: var(--font-size-3xl);
+  font-weight: 800;
+  margin-bottom: var(--spacing-sm);
   text-align: center;
   line-height: 1.2;
+  text-shadow: 0 0 20px var(--color-accent-glow);
 }
 
 .input_field {
@@ -573,13 +576,15 @@ content::-webkit-scrollbar-thumb:hover {
   padding: var(--spacing-md) var(--spacing-lg);
   font-size: var(--font-size-base);
   color: var(--color-text-primary);
-  background: var(--color-bg-primary);
+  background: var(--color-bg-glass);
   border: 2px solid var(--color-border);
   border-radius: var(--radius-lg);
   outline: none;
   transition: all var(--transition-fast);
   font-family: inherit;
   line-height: 1.5;
+  backdrop-filter: blur(10px);
+  height: 3.5rem;
 }
 
 .input_field::placeholder {
@@ -588,58 +593,56 @@ content::-webkit-scrollbar-thumb:hover {
 
 .input_field:focus {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 4px var(--color-accent-light);
-  transform: translateY(-1px);
-  background: var(--color-bg-tertiary);
+  box-shadow: 0 0 0 4px var(--color-accent-light), var(--shadow-neon);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .btn_submit {
   width: 100%;
-  padding: var(--spacing-md) 0;
+  padding: 0;
+  height: 3.5rem;
   font-size: var(--font-size-base);
-  font-weight: 600;
+  font-weight: 700;
   color: white;
-  background: linear-gradient(135deg, var(--color-accent), #4f46e5);
+  background: linear-gradient(135deg, var(--color-accent), #0088cc);
   border: none;
   border-radius: var(--radius-lg);
   cursor: pointer;
   transition: all var(--transition-fast);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-md), var(--shadow-neon);
   font-family: inherit;
-  line-height: 1.5;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
 .btn_submit:hover {
   transform: translateY(-2px);
+  box-shadow: var(--shadow-lg), var(--shadow-neon-strong);
   background: linear-gradient(135deg, var(--color-accent-hover), var(--color-accent));
-  box-shadow: var(--shadow-lg), var(--shadow-glow);
 }
 
 .btn_submit:active {
   transform: translateY(0);
-  box-shadow: var(--shadow-sm);
 }
 
-/* === 7. ФОРМЫ (INTERFACEFORM) с улучшенным выравниванием === */
+/* === 8. INTERFACE FORMS === */
 interfaceform {
   display: block;
   width: 100%;
 }
 
 .form_title_sm {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-xl);
   font-weight: 700;
   padding: var(--spacing-md) 0;
   color: var(--color-text-primary);
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
   line-height: 1.3;
 }
 
 interfaceform label {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: var(--spacing-xs);
   margin-bottom: var(--spacing-sm);
@@ -647,6 +650,7 @@ interfaceform label {
   color: var(--color-text-secondary);
   font-size: var(--font-size-sm);
   line-height: 1.4;
+  height: 1.5rem;
 }
 
 label > i {
@@ -663,17 +667,18 @@ interfaceform input[type="number"],
 interfaceform input[type="date"],
 interfaceform input[type="datetime-local"] {
   width: 100%;
-  padding: var(--spacing-sm) var(--spacing-md);
-  margin: var(--spacing-xs) 0 var(--spacing-md) 0;
-  box-sizing: border-box;
-  background: var(--color-bg-tertiary);
+  padding: var(--spacing-md) var(--spacing-lg);
+  margin: var(--spacing-xs) 0 var(--spacing-lg) 0;
+  background: var(--color-bg-glass);
   border: 2px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   color: var(--color-text-primary);
   font-size: var(--font-size-base);
   transition: all var(--transition-fast);
   font-family: inherit;
   line-height: 1.5;
+  backdrop-filter: blur(10px);
+  height: 3.25rem;
 }
 
 interfaceform input[type="text"]:focus,
@@ -682,21 +687,20 @@ interfaceform input[type="number"]:focus,
 interfaceform input[type="date"]:focus,
 interfaceform input[type="datetime-local"]:focus {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px var(--color-accent-light);
+  box-shadow: 0 0 0 3px var(--color-accent-light), var(--shadow-neon);
   outline: none;
-  background: var(--color-bg-elevated);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 interfaceform input[type="button"] {
-  padding: var(--spacing-sm) var(--spacing-lg);
-  margin: var(--spacing-sm) var(--spacing-sm) var(--spacing-sm) 0;
-  box-sizing: border-box;
+  padding: var(--spacing-md) var(--spacing-xl);
+  margin: var(--spacing-md) var(--spacing-sm) var(--spacing-md) 0;
   cursor: pointer;
-  font-weight: 600;
-  background: var(--color-accent);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--color-accent), #0088cc);
   color: white;
   border: none;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   transition: all var(--transition-fast);
   font-family: inherit;
   font-size: var(--font-size-sm);
@@ -704,27 +708,27 @@ interfaceform input[type="button"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  box-shadow: var(--shadow-sm), 0 0 15px var(--color-accent-glow);
+  height: 2.75rem;
 }
 
 interfaceform input[type="button"]:hover {
-  background: var(--color-accent-hover);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
+  background: linear-gradient(135deg, var(--color-accent-hover), var(--color-accent));
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md), var(--shadow-neon);
 }
 
 interfaceform input[type="button"]:active {
   transform: translateY(0);
-  box-shadow: var(--shadow-sm);
 }
 
 interfaceform textarea {
   width: 100%;
-  box-sizing: border-box;
-  margin: var(--spacing-xs) 0 var(--spacing-md) 0;
-  padding: var(--spacing-md);
-  background: var(--color-bg-tertiary);
+  margin: var(--spacing-xs) 0 var(--spacing-lg) 0;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--color-bg-glass);
   border: 2px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   color: var(--color-text-primary);
   font-size: var(--font-size-base);
   resize: vertical;
@@ -732,77 +736,78 @@ interfaceform textarea {
   transition: all var(--transition-fast);
   font-family: inherit;
   line-height: 1.6;
+  backdrop-filter: blur(10px);
 }
 
 interfaceform textarea:focus {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px var(--color-accent-light);
+  box-shadow: 0 0 0 3px var(--color-accent-light), var(--shadow-neon);
   outline: none;
-  background: var(--color-bg-elevated);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 interfaceform select {
   width: 100%;
-  padding: var(--spacing-sm) var(--spacing-md);
-  margin: var(--spacing-xs) 0 var(--spacing-md) 0;
-  box-sizing: border-box;
-  background: var(--color-bg-tertiary);
+  padding: var(--spacing-md) var(--spacing-lg);
+  margin: var(--spacing-xs) 0 var(--spacing-lg) 0;
+  background: var(--color-bg-glass);
   border: 2px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   color: var(--color-text-primary);
   font-size: var(--font-size-base);
   cursor: pointer;
   transition: all var(--transition-fast);
   font-family: inherit;
   line-height: 1.5;
+  backdrop-filter: blur(10px);
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23cbd5e1' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%2300d4ff' d='M8 11L3 6h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right var(--spacing-md) center;
-  padding-right: 2.5rem;
+  background-position: right var(--spacing-lg) center;
+  padding-right: 3rem;
+  height: 3.25rem;
 }
 
 interfaceform select:focus {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px var(--color-accent-light);
+  box-shadow: 0 0 0 3px var(--color-accent-light), var(--shadow-neon);
   outline: none;
-  background-color: var(--color-bg-elevated);
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
-/* Input Wrapper с валидацией и правильным выравниванием */
+/* Input Wrapper */
 iw {
   position: relative;
   display: block;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
 }
 
 iv {
   position: absolute;
-  right: var(--spacing-md);
+  right: var(--spacing-lg);
   top: 50%;
   transform: translateY(-50%);
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   z-index: 10;
 }
 
 iv.left {
-  left: var(--spacing-md);
+  left: var(--spacing-lg);
   right: auto;
 }
 
-/* Error Icon с правильным центрированием */
 iv[error] {
   border-radius: var(--radius-full);
-  width: 1.5rem;
-  height: 1.5rem;
-  background-color: var(--color-danger);
-  display: flex;
+  width: 1.75rem;
+  height: 1.75rem;
+  background: linear-gradient(135deg, var(--color-danger), #cc0044);
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-sm), 0 0 15px rgba(255, 51, 102, 0.5);
 }
 
 @keyframes shake {
@@ -814,10 +819,10 @@ iv[error] {
 iv[error]:after {
   content: '!';
   color: white;
-  font-weight: 700;
+  font-weight: 800;
   font-size: var(--font-size-sm);
   line-height: 1;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 }
@@ -826,27 +831,27 @@ iv[error] message {
   display: none;
   position: absolute;
   right: 0;
-  bottom: calc(100% + var(--spacing-sm));
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--radius-md);
-  background-color: white;
+  bottom: calc(100% + var(--spacing-md));
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.95);
   border: 2px solid var(--color-danger);
   color: var(--color-danger);
   min-width: 16rem;
   max-width: 20rem;
-  box-sizing: border-box;
   box-shadow: var(--shadow-lg);
   font-size: var(--font-size-sm);
   z-index: 1000;
   animation: fadeIn 0.2s ease-out;
   line-height: 1.4;
-  font-weight: 500;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
 }
 
 @keyframes fadeIn {
   from { 
     opacity: 0; 
-    transform: translateY(0.25rem); 
+    transform: translateY(0.5rem); 
   }
   to { 
     opacity: 1; 
@@ -857,13 +862,13 @@ iv[error] message {
 iv[error] message::before {
   content: '';
   position: absolute;
-  bottom: -0.5rem;
-  right: var(--spacing-md);
+  bottom: -0.625rem;
+  right: var(--spacing-lg);
   width: 0;
   height: 0;
-  border-left: 0.5rem solid transparent;
-  border-right: 0.5rem solid transparent;
-  border-top: 0.5rem solid var(--color-danger);
+  border-left: 0.625rem solid transparent;
+  border-right: 0.625rem solid transparent;
+  border-top: 0.625rem solid var(--color-danger);
 }
 
 iv.left[error] message {
@@ -872,7 +877,7 @@ iv.left[error] message {
 }
 
 iv.left[error] message::before {
-  left: var(--spacing-md);
+  left: var(--spacing-lg);
   right: auto;
 }
 
@@ -880,11 +885,11 @@ iv[error]:hover message {
   display: block;
 }
 
-/* Success Icon с правильным центрированием */
+/* Success Icon */
 iv[right] {
-  width: 1.5rem;
-  height: 1.5rem;
-  display: flex;
+  width: 1.75rem;
+  height: 1.75rem;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -893,35 +898,37 @@ iv[right] {
 iv[right]:before {
   position: absolute;
   content: '';
-  width: 2px;
-  height: 0.5rem;
+  width: 0.125rem;
+  height: 0.625rem;
   background-color: var(--color-success);
   transform: rotate(-45deg);
-  left: 0.3rem;
-  bottom: 0.45rem;
+  left: 0.4rem;
+  bottom: 0.5rem;
   border-radius: var(--radius-full);
+  box-shadow: 0 0 8px var(--color-success);
 }
 
 iv[right]:after {
   position: absolute;
   content: '';
-  width: 2px;
-  height: 0.875rem;
+  width: 0.125rem;
+  height: 1rem;
   background-color: var(--color-success);
   transform: rotate(45deg);
-  left: 0.7rem;
-  bottom: 0.3rem;
+  left: 0.8rem;
+  bottom: 0.35rem;
   border-radius: var(--radius-full);
+  box-shadow: 0 0 8px var(--color-success);
 }
 
-/* === 8. LAYOUT HELPERS с улучшенным выравниванием === */
+/* === 9. LAYOUT HELPERS === */
 .admin_content_alignment {
   width: 100%;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
   align-items: flex-end;
-  gap: var(--spacing-md);
+  gap: var(--spacing-lg);
 }
 
 .admin_content_alignment_forimg {
@@ -930,13 +937,12 @@ iv[right]:after {
   justify-content: flex-start;
   flex-wrap: wrap;
   align-items: flex-start;
-  gap: var(--spacing-md);
+  gap: var(--spacing-lg);
 }
 
 .admin_content_widht300 {
   width: 18.75rem;
   padding: 0;
-  box-sizing: border-box;
 }
 
 .admin_content_alignment_remain {
@@ -945,15 +951,15 @@ iv[right]:after {
   flex-wrap: wrap;
   align-items: flex-end;
   flex: 1;
-  gap: var(--spacing-md);
+  gap: var(--spacing-lg);
   min-width: 0;
 }
 
-/* === 9. ROLLER MENU (ACCORDION) с улучшенным выравниванием === */
+/* === 10. ROLLER MENU (ACCORDION) === */
 .admin_roller_menu {
   width: 100%;
   text-align: left;
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
 }
 
 .admin_roller_menu > input[type="checkbox"],
@@ -965,12 +971,11 @@ iv[right]:after {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-sm) var(--spacing-lg);
-  background: var(--color-bg-tertiary);
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: var(--color-bg-glass);
   border: 2px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   cursor: pointer;
-  opacity: 0.7;
   transition: all var(--transition-fast);
   user-select: none;
   font-weight: 600;
@@ -979,52 +984,55 @@ iv[right]:after {
   margin-right: var(--spacing-sm);
   margin-bottom: var(--spacing-sm);
   line-height: 1.4;
-  min-height: 2.5rem;
+  min-height: 3rem;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-sm);
 }
 
 .admin_roller_menu > label:hover {
-  opacity: 1;
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
-  border-color: var(--color-border-hover);
-  background: var(--color-bg-elevated);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-bg-glass-hover);
 }
 
 .admin_roller_container {
   max-height: 0;
   overflow: hidden;
   width: 100%;
-  margin: var(--spacing-md) 0 0 0;
+  margin: var(--spacing-lg) 0 0 0;
   transition: all var(--transition-base);
   position: relative;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   opacity: 0;
 }
 
 .admin_roller_menu > input[type="checkbox"]:checked ~ label,
 .admin_roller_menu > input[type="radio"]:checked ~ label {
-  opacity: 1;
-  background: var(--color-accent);
+  background: linear-gradient(135deg, var(--color-accent), #0088cc);
   color: white;
   border-color: var(--color-accent);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-md), var(--shadow-neon);
   transform: translateY(0);
 }
 
 .admin_roller_menu > input[type="checkbox"]:checked ~ .admin_roller_container {
   max-height: none;
-  padding: var(--spacing-lg);
-  background: var(--color-bg-tertiary);
-  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  background: var(--color-bg-glass);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius-xl);
   border: 1px solid var(--color-border);
   opacity: 1;
-  animation: slideDown 0.3s ease-out;
+  animation: slideDown 0.4s ease-out;
+  box-shadow: var(--shadow-md);
 }
 
 @keyframes slideDown {
   from {
     opacity: 0;
-    transform: translateY(-0.5rem);
+    transform: translateY(-1rem);
   }
   to {
     opacity: 1;
@@ -1034,11 +1042,11 @@ iv[right]:after {
 
 .admin_roller_menu > input[type="checkbox"]:checked ~ .admin_roller_container.admin_roler_with_overflow {
   overflow-y: auto;
-  max-height: 30rem;
+  max-height: 32rem;
 }
 
 .admin_roller_container.admin_roler_with_overflow::-webkit-scrollbar {
-  width: 0.5rem;
+  width: 0.375rem;
 }
 
 .admin_roller_container.admin_roler_with_overflow::-webkit-scrollbar-track {
@@ -1051,22 +1059,20 @@ iv[right]:after {
 }
 
 .admin_roller_container.admin_roler_with_overflow::-webkit-scrollbar-thumb:hover {
-  background: var(--color-border-hover);
+  background: var(--color-accent);
 }
 
 .admin_roller_menu > input[type="radio"].one:checked ~ label.one,
 .admin_roller_menu > input[type="radio"].two:checked ~ label.two,
 .admin_roller_menu > input[type="radio"].three:checked ~ label.three {
-  opacity: 1;
-  background: var(--color-accent);
+  background: linear-gradient(135deg, var(--color-accent), #0088cc);
   color: white;
   border-color: var(--color-accent);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-md), var(--shadow-neon);
 }
 
 .admin_roller_menu > label.hide {
   display: inline-flex;
-  opacity: 1;
 }
 
 .admin_roller_menu > input[type="radio"].hide:checked ~ label.hide {
@@ -1077,35 +1083,35 @@ iv[right]:after {
 .admin_roller_menu > input[type="radio"].two:checked ~ .admin_roller_container.two,
 .admin_roller_menu > input[type="radio"].three:checked ~ .admin_roller_container.three {
   max-height: none;
-  padding: var(--spacing-lg);
-  background: var(--color-bg-tertiary);
-  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  background: var(--color-bg-glass);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius-xl);
   border: 1px solid var(--color-border);
   opacity: 1;
-  animation: slideDown 0.3s ease-out;
+  animation: slideDown 0.4s ease-out;
+  box-shadow: var(--shadow-md);
 }
 
 .admin_roller_menu > input[type="radio"].one:checked ~ .admin_roller_container.one.admin_roler_with_overflow,
 .admin_roller_menu > input[type="radio"].two:checked ~ .admin_roller_container.two.admin_roler_with_overflow,
 .admin_roller_menu > input[type="radio"].three:checked ~ .admin_roller_container.three.admin_roler_with_overflow {
   overflow-y: auto;
-  max-height: 30rem;
+  max-height: 32rem;
 }
 
 .admin_roller100 > label {
   width: 100%;
-  box-sizing: border-box;
   display: flex;
 }
 
-/* === 10. CHECKBOXES & GROUPS с улучшенным выравниванием === */
+/* === 11. CHECKBOXES === */
 .admin_group_checkboxes_title {
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-lg);
   font-weight: 700;
-  padding: 0 0 var(--spacing-md) 0;
-  position: relative;
+  padding: 0 0 var(--spacing-lg) 0;
   color: var(--color-text-primary);
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: var(--spacing-xs);
   line-height: 1.4;
@@ -1115,7 +1121,7 @@ iv[right]:after {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-md);
 }
 
 .admin_group_checkboxes_title i {
@@ -1123,33 +1129,35 @@ iv[right]:after {
   align-items: center;
   color: var(--color-danger);
   font-style: normal;
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-sm);
 }
 
 .admin_label_checkbox {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-sm) var(--spacing-md);
-  background: var(--color-bg-tertiary);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--color-bg-glass);
   border: 2px solid var(--color-border);
   cursor: pointer;
   user-select: none;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   transition: all var(--transition-fast);
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.4;
-  min-height: 2.25rem;
+  min-height: 2.75rem;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-sm);
 }
 
 .admin_label_checkbox:hover {
-  background: var(--color-bg-elevated);
-  border-color: var(--color-border-hover);
+  background: var(--color-bg-glass-hover);
+  border-color: var(--color-accent);
   color: var(--color-text-primary);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .admin_label_checkbox input[type="checkbox"] {
@@ -1158,39 +1166,44 @@ iv[right]:after {
 
 .admin_label_checkbox input[type="checkbox"]:checked ~ span,
 .admin_label_checkbox:has(input[type="checkbox"]:checked) {
-  background: var(--color-accent);
+  background: linear-gradient(135deg, var(--color-accent), #0088cc);
   color: white;
   border-color: var(--color-accent);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md), var(--shadow-neon);
 }
 
-/* === 11. ТАБЛИЦЫ === */
+/* === 12. TABLES === */
 table {
   width: 100%;
-  border-collapse: collapse;
-  background: var(--color-bg-secondary);
-  border-radius: var(--radius-lg);
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--color-bg-glass);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius-xl);
   overflow: hidden;
-  box-shadow: var(--shadow-md);
-  margin: var(--spacing-md) 0;
+  box-shadow: var(--shadow-lg);
+  margin: var(--spacing-lg) 0;
+  border: 1px solid var(--color-border);
 }
 
 thead {
-  background: var(--color-bg-tertiary);
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 136, 204, 0.1));
 }
 
 th {
-  padding: var(--spacing-md) var(--spacing-lg);
+  padding: var(--spacing-lg) var(--spacing-xl);
   text-align: left;
-  font-weight: 600;
-  color: var(--color-text-primary);
+  font-weight: 700;
+  color: var(--color-accent);
   font-size: var(--font-size-sm);
   border-bottom: 2px solid var(--color-border);
   line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 td {
-  padding: var(--spacing-md) var(--spacing-lg);
+  padding: var(--spacing-lg) var(--spacing-xl);
   color: var(--color-text-secondary);
   border-bottom: 1px solid var(--color-border);
   font-size: var(--font-size-sm);
@@ -1198,38 +1211,39 @@ td {
 }
 
 tbody tr {
-  transition: background var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 tbody tr:hover {
-  background: var(--color-bg-tertiary);
+  background: rgba(0, 212, 255, 0.05);
 }
 
 tbody tr:last-child td {
   border-bottom: none;
 }
 
-/* === 12. КАРТОЧКИ === */
+/* === 13. CARDS === */
 .card {
-  background: var(--color-bg-secondary);
+  background: var(--color-bg-glass);
+  backdrop-filter: blur(20px);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-lg);
-  box-shadow: var(--shadow-md);
-  transition: all var(--transition-fast);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-base);
 }
 
 .card:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-2px);
-  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-xl), var(--shadow-neon);
+  transform: translateY(-4px);
+  border-color: var(--color-accent);
 }
 
 .card-title {
-  font-size: var(--font-size-xl);
-  font-weight: 700;
+  font-size: var(--font-size-2xl);
+  font-weight: 800;
   color: var(--color-text-primary);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
   line-height: 1.3;
 }
 
@@ -1238,59 +1252,67 @@ tbody tr:last-child td {
   line-height: 1.6;
 }
 
-/* === 13. БЕЙДЖИ === */
+/* === 14. BADGES === */
 .badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-xs) var(--spacing-sm);
+  padding: var(--spacing-xs) var(--spacing-md);
   border-radius: var(--radius-full);
   font-size: var(--font-size-xs);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1;
   white-space: nowrap;
+  backdrop-filter: blur(10px);
+  height: 1.75rem;
 }
 
 .badge-success {
   background: var(--color-success-light);
   color: var(--color-success);
   border: 1px solid var(--color-success);
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
 }
 
 .badge-danger {
   background: var(--color-danger-light);
   color: var(--color-danger);
   border: 1px solid var(--color-danger);
+  box-shadow: 0 0 10px rgba(255, 51, 102, 0.3);
 }
 
 .badge-warning {
   background: var(--color-warning-light);
   color: var(--color-warning);
   border: 1px solid var(--color-warning);
+  box-shadow: 0 0 10px rgba(255, 170, 0, 0.3);
 }
 
 .badge-primary {
   background: var(--color-accent-light);
   color: var(--color-accent);
   border: 1px solid var(--color-accent);
+  box-shadow: 0 0 10px var(--color-accent-glow);
 }
 
-/* === 14. УВЕДОМЛЕНИЯ === */
+/* === 15. NOTIFICATIONS === */
 .notification {
   display: flex;
   align-items: flex-start;
-  gap: var(--spacing-md);
-  padding: var(--spacing-md) var(--spacing-lg);
-  border-radius: var(--radius-lg);
+  gap: var(--spacing-lg);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border-radius: var(--radius-xl);
   border-left: 4px solid;
-  margin-bottom: var(--spacing-md);
-  animation: slideInRight 0.3s ease-out;
+  margin-bottom: var(--spacing-lg);
+  animation: slideInRight 0.4s ease-out;
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-lg);
 }
 
 @keyframes slideInRight {
   from {
     opacity: 0;
-    transform: translateX(2rem);
+    transform: translateX(3rem);
   }
   to {
     opacity: 1;
@@ -1302,27 +1324,31 @@ tbody tr:last-child td {
   background: var(--color-success-light);
   border-color: var(--color-success);
   color: var(--color-success);
+  box-shadow: var(--shadow-lg), 0 0 20px rgba(0, 255, 136, 0.3);
 }
 
 .notification-danger {
   background: var(--color-danger-light);
   border-color: var(--color-danger);
   color: var(--color-danger);
+  box-shadow: var(--shadow-lg), 0 0 20px rgba(255, 51, 102, 0.3);
 }
 
 .notification-warning {
   background: var(--color-warning-light);
   border-color: var(--color-warning);
   color: var(--color-warning);
+  box-shadow: var(--shadow-lg), 0 0 20px rgba(255, 170, 0, 0.3);
 }
 
 .notification-info {
   background: var(--color-accent-light);
   border-color: var(--color-accent);
   color: var(--color-accent);
+  box-shadow: var(--shadow-lg), var(--shadow-neon);
 }
 
-/* === 15. УТИЛИТЫ === */
+/* === 16. UTILITIES === */
 .text-center {
   text-align: center;
 }
@@ -1359,12 +1385,21 @@ tbody tr:last-child td {
 .gap-md { gap: var(--spacing-md); }
 .gap-lg { gap: var(--spacing-lg); }
 
-/* === 16. АДАПТИВНОСТЬ === */
-@media (max-width: 768px) {
+/* === 17. RESPONSIVE === */
+@media (max-width: 1024px) {
   :root {
-    --header-height: 3.5rem;
     --sidebar-width: 16rem;
     --spacing-xl: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --header-height: 4rem;
+    --sidebar-width: 14rem;
+    --sidebar-width-collapsed: 4rem;
+    --spacing-xl: 1.25rem;
+    --spacing-2xl: 2rem;
   }
 
   adm_header {
@@ -1372,26 +1407,25 @@ tbody tr:last-child td {
   }
 
   sidebar {
-    padding: var(--spacing-md);
+    padding: var(--spacing-lg);
   }
 
   content {
-    padding: var(--spacing-md);
+    padding: var(--spacing-lg);
   }
 
   .admin_sidebar_menu {
     font-size: var(--font-size-xs);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    min-height: 2.5rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+    min-height: 2.75rem;
   }
 
   .auth_form {
-    padding: var(--spacing-xl) var(--spacing-lg);
+    padding: var(--spacing-xl);
   }
 
   .admin_content_widht300 {
     width: 100%;
-    padding: 0;
   }
 
   .admin_content_alignment,
@@ -1400,22 +1434,37 @@ tbody tr:last-child td {
     flex-direction: column;
     align-items: stretch;
   }
-}
-
-@media (max-width: 480px) {
-  .Btn:hover {
-    width: 2.75rem;
-  }
-
-  .Btn:hover .text {
-    display: none;
-  }
 
   table {
     font-size: var(--font-size-xs);
   }
 
   th, td {
-    padding: var(--spacing-sm);
+    padding: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --header-height: 3.5rem;
+    --spacing-lg: 1rem;
+    --spacing-xl: 1rem;
+  }
+
+  .Btn:hover {
+    width: 3rem;
+  }
+
+  .Btn:hover .text {
+    display: none;
+  }
+
+  .admin_roller_menu > label {
+    padding: var(--spacing-sm) var(--spacing-md);
+    min-height: 2.5rem;
+  }
+
+  .form_title {
+    font-size: var(--font-size-2xl);
   }
 }
