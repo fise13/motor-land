@@ -392,6 +392,7 @@ label[for="sidebarbutton"] i:after {
 }
 
 /* Sidebar Menu Items с правильным выравниванием иконок */
+/* Sidebar Menu Items с правильным выравниванием иконок */
 .admin_sidebar_menu {
   display: flex;
   align-items: center;
@@ -410,23 +411,19 @@ label[for="sidebarbutton"] i:after {
   font-weight: 500;
   font-size: var(--font-size-sm);
   background: transparent;
-}
-
-/* Иконка в начале меню */
-.admin_sidebar_menu::before {
-  content: '';
-  width: var(--icon-size-md);
-  height: var(--icon-size-md);
-  background-image: var(--menu-icon);
-  background-size: contain;
+  /* Убираем эти строки если они есть */
+  background-position: initial;
   background-repeat: no-repeat;
-  background-position: center;
-  flex-shrink: 0;
-  opacity: 0.7;
-  transition: opacity var(--transition-fast);
+  background-size: initial;
 }
 
-/* Индикатор активного пункта */
+/* ВАЖНО: Удалите или закомментируйте этот блок */
+.admin_sidebar_menu::before {
+  /* Этот блок создаёт конфликт с вашими иконками */
+  display: none; /* Добавьте эту строку */
+}
+
+/* Индикатор активного пункта слева */
 .admin_sidebar_menu::after {
   content: '';
   position: absolute;
@@ -440,6 +437,14 @@ label[for="sidebarbutton"] i:after {
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
+/* Стили для иконок - если они добавлены через background-image */
+.admin_sidebar_menu[style*="background-image"] {
+  padding-left: 3rem; /* Место для иконки слева */
+  background-position: var(--spacing-md) center !important;
+  background-repeat: no-repeat !important;
+  background-size: 1.25rem 1.25rem !important;
+}
+
 .admin_sidebar_menu:hover {
   background-color: var(--color-bg-tertiary);
   color: var(--color-text-primary);
@@ -447,29 +452,24 @@ label[for="sidebarbutton"] i:after {
   padding-left: calc(var(--spacing-md) - 1px);
 }
 
-.admin_sidebar_menu:hover::before {
-  opacity: 1;
+/* Для пунктов с background-image при hover */
+.admin_sidebar_menu[style*="background-image"]:hover {
+  padding-left: calc(3rem - 1px);
 }
 
 .admin_sidebar_menu:hover::after {
   transform: scaleY(1);
 }
 
-.admin_sidebar_menu.active {
-  background-color: var(--color-accent-light);
-  color: var(--color-accent);
-  border: 1px solid var(--color-accent);
+/* При свёрнутом sidebar */
+#sidebarbutton:checked ~ adm_content sidebar .admin_sidebar_menu {
+  justify-content: center;
+  padding: var(--spacing-sm);
 }
 
-.admin_sidebar_menu.active::after {
-  transform: scaleY(1);
-}
-
-.admin_sidebar_menu span {
-  transition: opacity var(--transition-base);
-  white-space: nowrap;
-  flex: 1;
-  line-height: 1.4;
+#sidebarbutton:checked ~ adm_content sidebar .admin_sidebar_menu[style*="background-image"] {
+  background-position: center !important;
+  padding-left: var(--spacing-sm);
 }
 
 /* Content Area */
