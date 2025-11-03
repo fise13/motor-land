@@ -9,6 +9,7 @@ include("./hyst/seocore.php");
 <!doctype html>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="css.css">
     <?php include("hyst/metacore.php"); ?>
 </head>
 <body>
