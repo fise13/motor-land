@@ -16,12 +16,18 @@ $SITE_DESCRIPTION = 'Предоставляемые гарантии на кон
 
 <div class="guarantees-page">
 	<div class="guarantees-container">
-		<div class="guarantees-header">
-			<div class="breadcrumbs">
-				<a href="/">Главная</a> / <span>Гарантии</span>
+		<div class="generalw">
+			<div class="shirina">
+				<div class="crumbsblock">
+				<a href="/">Главная</a> / Гарантии
+				</div>
 			</div>
-			<h1 class="guarantees-title">Гарантии</h1>
-			<p class="guarantees-subtitle">Условия гарантии на б/у запчасти</p>
+		</div>
+
+		<div class="generalw">
+			<div class="shirina zgolovorleft">
+				<div class="sttitle"><span>Гарантии</span></div>
+			</div>
 		</div>
 
 		<div class="guarantees-content">

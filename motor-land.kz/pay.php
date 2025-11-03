@@ -30,11 +30,104 @@ $SITE_DESCRIPTION = 'Доставка автозапчастей и двигат
 	</div>
 </div>
 
-<div class="generalw">
-	<div class="shirina">
-		<div class="aboutblock1" style="background-image: url(<?=get_simple_images('delivery_pay_image')[0];?>);">
-			<div class="abouttext1">
-			<?=get_customtexts('payment_page');?>
+<div class="pay-delivery-page">
+	<div class="pay-delivery-container">
+		<div class="pay-delivery-hero">
+			<?php 
+			$delivery_image = get_simple_images('delivery_pay_image');
+			if (!empty($delivery_image[0])): 
+			?>
+			<div class="pay-delivery-hero-image" style="background-image: url(<?=$delivery_image[0];?>);">
+			</div>
+			<?php endif; ?>
+			<div class="pay-delivery-hero-text">
+				<?=get_customtexts('payment_page');?>
+			</div>
+		</div>
+
+		<div class="pay-delivery-methods">
+			<h2 class="pay-section-title">Способы оплаты</h2>
+			<div class="pay-methods-grid">
+				<div class="pay-method-card">
+					<div class="pay-method-icon">💳</div>
+					<h3 class="pay-method-title">Наличный расчет</h3>
+					<p class="pay-method-text">Оплата наличными при получении товара в пункте выдачи или при доставке курьером</p>
+				</div>
+				<div class="pay-method-card">
+					<div class="pay-method-icon">🏦</div>
+					<h3 class="pay-method-title">Банковский перевод</h3>
+					<p class="pay-method-text">Перевод на расчетный счет компании. Реквизиты предоставляются после оформления заказа</p>
+				</div>
+				<div class="pay-method-card">
+					<div class="pay-method-icon">📱</div>
+					<h3 class="pay-method-title">Картой онлайн</h3>
+					<p class="pay-method-text">Безопасная оплата банковской картой через платежные системы</p>
+				</div>
+				<div class="pay-method-card">
+					<div class="pay-method-icon">💰</div>
+					<h3 class="pay-method-title">Kaspi.kz / Kaspi Gold</h3>
+					<p class="pay-method-text">Оплата через Kaspi.kz или рассрочка через Kaspi Gold</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="delivery-options">
+			<h2 class="pay-section-title">Варианты доставки</h2>
+			<div class="delivery-options-grid">
+				<div class="delivery-option-card">
+					<div class="delivery-option-icon">🚚</div>
+					<h3 class="delivery-option-title">Транспортные компании</h3>
+					<p class="delivery-option-text">Доставка по всей территории Казахстана и в страны СНГ через транспортные компании</p>
+					<ul class="delivery-option-list">
+						<li>Доставка до терминала ТК</li>
+						<li>Доставка до двери</li>
+						<li>Отслеживание груза</li>
+					</ul>
+				</div>
+				<div class="delivery-option-card">
+					<div class="delivery-option-icon">📍</div>
+					<h3 class="delivery-option-title">Самовывоз</h3>
+					<p class="delivery-option-text">Заберите товар самостоятельно из наших офисов в Алматы</p>
+					<ul class="delivery-option-list">
+						<li>Офис №1: РВ-90, 7-линия, 29</li>
+						<li>Офис №2: ул. Свердлова, 38</li>
+						<li>Предварительная договоренность</li>
+					</ul>
+				</div>
+				<div class="delivery-option-card">
+					<div class="delivery-option-icon">🚗</div>
+					<h3 class="delivery-option-title">Курьерская доставка</h3>
+					<p class="delivery-option-text">Доставка по городу Алматы курьерской службой</p>
+					<ul class="delivery-option-list">
+						<li>Доставка в день заказа</li>
+						<li>Доставка на следующий день</li>
+						<li>Стоимость от 2000 тенге</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="delivery-info">
+			<h2 class="pay-section-title">Условия доставки</h2>
+			<div class="delivery-info-grid">
+				<div class="info-card">
+					<h4 class="info-card-title">Сроки доставки</h4>
+					<p class="info-card-text">Доставка в Алматы: 1-2 рабочих дня<br>
+					По Казахстану: 3-7 рабочих дней<br>
+					В страны СНГ: 7-14 рабочих дней</p>
+				</div>
+				<div class="info-card">
+					<h4 class="info-card-title">Стоимость доставки</h4>
+					<p class="info-card-text">Расчет стоимости доставки производится индивидуально в зависимости от веса, габаритов и региона доставки. Точную стоимость уточняйте у менеджера.</p>
+				</div>
+				<div class="info-card">
+					<h4 class="info-card-title">Упаковка</h4>
+					<p class="info-card-text">Все товары тщательно упаковываются для безопасной транспортировки. Двигатели и КПП упаковываются в специальные защитные контейнеры.</p>
+				</div>
+				<div class="info-card">
+					<h4 class="info-card-title">Страхование</h4>
+					<p class="info-card-text">Рекомендуем застраховать груз при отправке через транспортные компании для защиты от повреждений в пути.</p>
+				</div>
 			</div>
 		</div>
 	</div>

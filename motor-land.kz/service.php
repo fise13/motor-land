@@ -16,12 +16,18 @@ $SITE_DESCRIPTION = 'Профессиональная замена и обслу
 
 <div class="service-page">
 	<div class="service-container">
-		<div class="service-header">
-			<div class="breadcrumbs">
-				<a href="/">Главная</a> / <span>Автосервис</span>
+		<div class="generalw">
+			<div class="shirina">
+				<div class="crumbsblock">
+				<a href="/">Главная</a> / Автосервис
+				</div>
 			</div>
-			<h1 class="service-title">Автосервис</h1>
-			<p class="service-subtitle">Профессиональная замена и обслуживание двигателей и КПП</p>
+		</div>
+
+		<div class="generalw">
+			<div class="shirina zgolovorleft">
+				<div class="sttitle"><span>Автосервис</span></div>
+			</div>
 		</div>
 
 		<div class="service-hero">
