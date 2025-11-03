@@ -312,6 +312,13 @@ object-fit: contain;
 border-radius: 12px;
 filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
 transition: filter 0.3s ease;
+/* Оптимизация: видео не загружается сразу */
+pointer-events: none;
+}
+
+.logo-video[poster] {
+	background-size: cover;
+	background-position: center;
 }
 
 .logo:hover .logo-video {
