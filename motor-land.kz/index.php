@@ -87,14 +87,19 @@ $SITE_DESCRIPTION = 'Компания "Motor Land" - поставка контр
 					<div class="btmmearrow">&#9660;</div>
 					<div class="ddwnblock">
 						<?php
-						$sql = $_DB_CONECT->query("SELECT * FROM internet_magazin_category WHERE idp='noting' ORDER BY name ASC");
+						$parent_id = 'noting';
+						$stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_category WHERE idp = ? ORDER BY name ASC");
+						$stmt->bind_param("s", $parent_id);
+						$stmt->execute();
+						$sql = $stmt->get_result();
 						if ($sql->num_rows != 0) {
-						while($get = $sql->fetch_array()):
-						?>
-						<div data-id="<?=$get['id'];?>"><?=$get['name'];?></div>
-						<?php
-						endwhile;
+							while($get = $sql->fetch_array()):
+							?>
+							<div data-id="<?=$get['id'];?>"><?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?></div>
+							<?php
+							endwhile;
 						}
+						$stmt->close();
 						?>
 					</div>
 				</div>
@@ -166,8 +171,12 @@ $SITE_DESCRIPTION = 'Компания "Motor Land" - поставка контр
 		<br>
 		<div id="actionb">
 			<?php
-			$tmp = $_DB_CONECT->query("SELECT * FROM internet_magazin_tovari ORDER BY prio ASC LIMIT 4");
-			while($get=$tmp->fetch_array()):
+			$limit = 4;
+			$stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_tovari ORDER BY prio ASC LIMIT ?");
+			$stmt->bind_param("i", $limit);
+			$stmt->execute();
+			$tmp = $stmt->get_result();
+			while($get = $tmp->fetch_array()):
 			?>
 			<div class="toverblock">
 			<a href="/detal?id=<?=$get['id'];?>"><div class="toverimg" style="background-image: url(<?=get_farrimg($get['images'])[0];?>);">
@@ -184,12 +193,20 @@ $SITE_DESCRIPTION = 'Компания "Motor Land" - поставка контр
 			</div>
 			<?php
 			endwhile;
+			if (isset($stmt)) {
+				$stmt->close();
+			}
 			?>
 		</div>
 		<div id="goodsb" style="display: none;">
 			<?php
-			$tmp = $_DB_CONECT->query("SELECT * FROM internet_magazin_tovari WHERE sale != 'noting' ORDER BY prio ASC LIMIT 4");
-			while($get=$tmp->fetch_array()):
+			$sale_value = 'noting';
+			$limit = 4;
+			$stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_tovari WHERE sale != ? ORDER BY prio ASC LIMIT ?");
+			$stmt->bind_param("si", $sale_value, $limit);
+			$stmt->execute();
+			$tmp = $stmt->get_result();
+			while($get = $tmp->fetch_array()):
 			?>
 			<div class="toverblock revealator-slideup">
 			<a href="/detal?id=<?=$get['id'];?>"><div class="toverimg" style="background-image: url(<?=get_farrimg($get['images'])[0];?>);">
@@ -206,6 +223,9 @@ $SITE_DESCRIPTION = 'Компания "Motor Land" - поставка контр
 			</div>
 			<?php
 			endwhile;
+			if (isset($stmt)) {
+				$stmt->close();
+			}
 			?>			
 		</div>
 		<br>

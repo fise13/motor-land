@@ -664,7 +664,7 @@ $(document).on('click', '.admin_file_cross',function() {
 $(document).on('click', '.admin_file_cross_multiple',function() { 
 	var val = $(this).closest('.admin_file_label_wraper').find('input').val(), new_val = '', data_delet = $(this).attr('data-delet'); 
 	val = val.split(','); 
-	val.forEach(function(e,i){ console.log(e+' != '+$(this).attr('data-delet'));
+	val.forEach(function(e,i){
 		if (e != data_delet) {
 		new_val += (new_val==''?e:','+e);
 		}

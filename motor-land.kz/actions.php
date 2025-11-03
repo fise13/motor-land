@@ -37,9 +37,13 @@ $SITE_TITLE = 'Моторленд | Акции на контрактные Мо�
 	<div class="shirina">	
 
 		<?php
-		$tmps = $_DB_CONECT->query("SELECT * FROM internet_magazin_tovari WHERE sale != 'noting' ORDER BY prio ASC");
-		if ($tmp->num_rows != 0) {
-		while($get=$tmp->fetch_array()):
+		$sale_value = 'noting';
+		$stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_tovari WHERE sale != ? ORDER BY prio ASC");
+		$stmt->bind_param("s", $sale_value);
+		$stmt->execute();
+		$tmps = $stmt->get_result();
+		if ($tmps->num_rows != 0) {
+			while($get = $tmps->fetch_array()):
 		?>
 		<div class="toverblock revealator-slideup">
 			<a href="/detal?id=<?=$get['id'];?>"><div class="toverimg" style="background-image: url(<?=get_farrimg($get['images'])[0];?>);">
@@ -55,7 +59,10 @@ $SITE_TITLE = 'Моторленд | Акции на контрактные Мо�
 			<div class="toverbuton" data-nam="<?=$get['name'];?>">Купить</div>
 		</div>
 		<?php
-		endwhile;
+			endwhile;
+		}
+		if (isset($stmt)) {
+			$stmt->close();
 		}
 		?>
 		

@@ -194,28 +194,38 @@ function hyst_img_resize($image, $folder, $width, $height) {
 }
 
 
-function hyst_coder($text,$key) {
-	$td = mcrypt_module_open ("tripledes", '', 'cfb', '');
-    $iv = mcrypt_create_iv (mcrypt_enc_get_iv_size ($td), MCRYPT_RAND);
-    if (mcrypt_generic_init ($td, $key, $iv) != -1) 
-		{
-        $enc_text=base64_encode(mcrypt_generic ($td,$iv.$text));
-        mcrypt_generic_deinit ($td);
-        mcrypt_module_close ($td);
-        return $enc_text;
-        }
+/**
+ * Кодирование текста с использованием AES-256-CBC
+ * Заменяет устаревшую функцию mcrypt
+ * 
+ * @param string $text Текст для кодирования
+ * @param string $key Ключ шифрования
+ * @return string Закодированный текст в base64
+ */
+function hyst_coder($text, $key) {
+	$iv_length = openssl_cipher_iv_length('aes-256-cbc');
+	$iv = openssl_random_pseudo_bytes($iv_length);
+	$encrypted = openssl_encrypt($text, 'aes-256-cbc', $key, 0, $iv);
+	return base64_encode($iv . $encrypted);
 }
 
-function hyst_decoder($text,$key) {
-	$td = mcrypt_module_open ("tripledes", '', 'cfb', '');
-	$iv_size = mcrypt_enc_get_iv_size ($td);
-	$iv = mcrypt_create_iv (mcrypt_enc_get_iv_size ($td), MCRYPT_RAND);     
-	if (mcrypt_generic_init ($td, $key, $iv) != -1) {
-			$decode_text = substr(mdecrypt_generic ($td, base64_decode($text)),$iv_size);
-			mcrypt_generic_deinit ($td);
-			mcrypt_module_close ($td);
-			return $decode_text;
+/**
+ * Декодирование текста, закодированного функцией hyst_coder
+ * Заменяет устаревшую функцию mcrypt
+ * 
+ * @param string $text Закодированный текст в base64
+ * @param string $key Ключ шифрования
+ * @return string|false Декодированный текст или false при ошибке
+ */
+function hyst_decoder($text, $key) {
+	$data = base64_decode($text);
+	if ($data === false) {
+		return false;
 	}
+	$iv_length = openssl_cipher_iv_length('aes-256-cbc');
+	$iv = substr($data, 0, $iv_length);
+	$encrypted = substr($data, $iv_length);
+	return openssl_decrypt($encrypted, 'aes-256-cbc', $key, 0, $iv);
 }
 
 function hyst_to_hash($str, $key) {

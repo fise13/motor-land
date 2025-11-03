@@ -5,15 +5,21 @@ include('hyst/php.php');
 
 //Фильтр гет
 if (hyst_test_id($_GET['id'])) {
-	$sql = $_DB_CONECT->query("SELECT * FROM internet_magazin_tovari WHERE id='".$_GET['id']."' ");
+	$id = (int)$_GET['id'];
+	$stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_tovari WHERE id = ?");
+	$stmt->bind_param("i", $id);
+	$stmt->execute();
+	$sql = $stmt->get_result();
 	if ($sql->num_rows != 0) {
-	$print = $sql->fetch_array();
-
+		$print = $sql->fetch_array();
+		$stmt->close();
 	} else {
-	echo "<script>location.href='catalog.php';</script>"; exit;
+		echo "<script>location.href='catalog.php';</script>"; 
+		exit;
 	}
 } else {
-echo "<script>location.href='catalog.php';</script>"; exit;
+	echo "<script>location.href='catalog.php';</script>"; 
+	exit;
 }
 
 

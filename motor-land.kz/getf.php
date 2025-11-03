@@ -28,40 +28,48 @@ if (!empty($_POST['tex']) && hystnempnumb ($_POST['typ'])) {
 	echo json_encode($res);
 }*/
 
-if (hyst_test_id($_POST['tex']) && hyst_test_id ($_POST['typ'])) {
+if (hyst_test_id($_POST['tex']) && hyst_test_id($_POST['typ'])) {
 	$res['report'] = '';
-	if ($_POST['typ'] == 1) { 
-	$tbnam = 'marks'; 
+	$tex_id = (int)$_POST['tex'];
+	$typ = (int)$_POST['typ'];
 	
-	
-	} else if ($_POST['typ'] == 2) { 
-	
-		$sql = $_DB_CONECT->query("SELECT * FROM internet_magazin_category WHERE idp='".$_POST['tex']."' ORDER BY name ASC");
+	if ($typ == 1) { 
+		// Marks - не используется в текущей реализации
+	} else if ($typ == 2) { 
+		$stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_category WHERE idp = ? ORDER BY name ASC");
+		$stmt->bind_param("i", $tex_id);
+		$stmt->execute();
+		$sql = $stmt->get_result();
 		if ($sql->num_rows != 0) {
-			while($get=$sql->fetch_array()):
-			$res['report'] .= "<div data-id='".$get['id']."'>".$get['name']."</div>";
+			while($get = $sql->fetch_array()):
+				$res['report'] .= "<div data-id='" . htmlspecialchars($get['id'], ENT_QUOTES, 'UTF-8') . "'>" . htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8') . "</div>";
 			endwhile;
 		}
-	} else if ($_POST['typ'] == 3) { 
-		$sql = $_DB_CONECT->query("SELECT internet_magazin_atributs_options.*
+		$stmt->close();
+	} else if ($typ == 3) { 
+		$mode_pattern = '[' . $tex_id . ']';
+		$stmt = $_DB_CONECT->prepare("SELECT internet_magazin_atributs_options.*
 		FROM internet_magazin_atributs_options 
 		INNER JOIN internet_magazin_tovari ON LOCATE(CONCAT('[', internet_magazin_atributs_options.id, ']'), internet_magazin_tovari.atributs_opt) > 0 
-		AND LOCATE('[".$_POST['tex']."]', internet_magazin_tovari.podegory) > 0
+		AND LOCATE(?, internet_magazin_tovari.podegory) > 0
 		WHERE internet_magazin_atributs_options.idp = 1 ORDER BY internet_magazin_atributs_options.name DESC");
+		$stmt->bind_param("s", $mode_pattern);
+		$stmt->execute();
+		$sql = $stmt->get_result();
 		
 		$exist = [];
 		
 		if ($sql->num_rows != 0) {
-			while($get=$sql->fetch_array()):
-				if (array_search($get['name'],$exist)===false) {
-			$res['report'] .= "<div data-id='".$get['id']."'>".$get['name']."</div>";
-				array_push($exist,$get['name']);
+			while($get = $sql->fetch_array()):
+				if (array_search($get['name'], $exist) === false) {
+					$res['report'] .= "<div data-id='" . htmlspecialchars($get['id'], ENT_QUOTES, 'UTF-8') . "'>" . htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8') . "</div>";
+					array_push($exist, $get['name']);
 				}
 			endwhile;
 		}
+		$stmt->close();
 	}
 
-	
 	echo json_encode($res);
 }
 ?>
