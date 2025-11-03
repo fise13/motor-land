@@ -137,8 +137,18 @@ $SITE_DESCRIPTION = 'Компания "Motor Land" - поставка контр
 		<div class="consult-title">Хотите получить бесплатную консультацию?</div>
 		<div class="consult-subtitle">заполните форму</div>
 		<form method="post" class="consult-form">
-			<input type="text" name="name" placeholder="имя" class="consult-input consult-name">
-			<input type="text" name="phon" placeholder="телефон" class="consult-input consult-phone">
+			<div class="form-control consult-form-control">
+				<label for="consult-name">
+					<span style="transition-delay:0ms">И</span><span style="transition-delay:50ms">м</span><span style="transition-delay:100ms">я</span>
+				</label>
+				<input type="text" name="name" id="consult-name" class="consult-input consult-name" required>
+			</div>
+			<div class="form-control consult-form-control">
+				<label for="consult-phone">
+					<span style="transition-delay:0ms">Т</span><span style="transition-delay:50ms">е</span><span style="transition-delay:100ms">л</span><span style="transition-delay:150ms">е</span><span style="transition-delay:200ms">ф</span><span style="transition-delay:250ms">о</span><span style="transition-delay:300ms">н</span>
+				</label>
+				<input type="text" name="phon" id="consult-phone" class="consult-input consult-phone" required>
+			</div>
 			<input type="hidden" name="send_one" value="send">
 			<input type="button" name="JF_send_casual" value="Отправить" class="consult-btn">
 		</form>
