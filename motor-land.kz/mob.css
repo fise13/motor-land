@@ -95,34 +95,123 @@ width: 260px !important;
 
 /* Исходное состояние меню */
 .menu {
-	display: none;
+	display: block;
     position: fixed;
-    top: 0;
-    right: -250px; /* Скрыто за экраном справа */
-    width: 250px;
-    height: 100%;
-    background: rgba(0,0,0,0.9);
-    transition: right 0.3s ease; /* Анимация */
+    top: 60px;
+    right: -280px; /* Скрыто за экраном справа */
+    width: 280px;
+    max-height: calc(100vh - 80px);
+    background: rgba(29, 26, 38, 0.98);
+    backdrop-filter: blur(10px);
+    transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), 
+                opacity 0.3s ease,
+                transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     z-index: 100;
+    opacity: 0;
+    transform: translateX(20px);
+    border-radius: 15px 0 0 15px;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 /* Когда меню открыто */
 .menu.open {
-	display: block;
     right: 0; /* Сдвигаем меню на экран */
+    opacity: 1;
+    transform: translateX(0);
 }
+
+/* Фоновое затемнение при открытом меню */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    display: none;
+}
+
+@media screen and (max-width: 660px), only screen and (max-device-width : 660px) {
+	.menu-overlay {
+		display: block;
+	}
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
 
 /* Стили для кнопки */
 .modilebtn {
     position: fixed;
     top: 20px;
     right: 20px;
-    width: 40px;
-    height: 40px;
-    background: url('./img/mmenu.png') no-repeat center center;
-    background-size: contain;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    background: transparent;
+    border: none;
     cursor: pointer;
     z-index: 110;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.modilebtn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.modilebtn span {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background-color: #fff;
+    border-radius: 3px;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transform-origin: center;
+}
+
+.modilebtn span:nth-child(1) {
+    transform: translateY(0);
+}
+
+.modilebtn span:nth-child(2) {
+    opacity: 1;
+}
+
+.modilebtn span:nth-child(3) {
+    transform: translateY(0);
+}
+
+/* Состояние активного меню (крестик) */
+.modilebtn.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+    background-color: #fff;
+}
+
+.modilebtn.active span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.modilebtn.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+    background-color: #fff;
 }
 
 .filtersblock input[type="text"] {
@@ -132,8 +221,21 @@ margin: 20px 10px !important;
 
 	.menu li {
 	display: block !important;
-	padding: 20px 10px 20px 20px !important;
+	padding: 18px 20px !important;
 	width: auto !important;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+	margin: 0 !important;
+	text-align: left !important;
+	transition: background-color 0.3s ease, padding-left 0.3s ease !important;
+	}
+	
+	.menu li:hover {
+		background-color: rgba(254, 0, 0, 0.15) !important;
+		padding-left: 30px !important;
+	}
+	
+	.menu li:last-child {
+		border-bottom: none !important;
 	}
 
 	.relhead {

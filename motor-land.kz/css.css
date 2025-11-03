@@ -178,13 +178,55 @@ position: relative;
 .modilebtn {
   width: 42px;
   height: 42px;
-  background-image: url(./img/mmenu.png);
-  background-size: contain;
   position: absolute;
   right: 0px;
   top: 10px;
   display: none;
   z-index: 90;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.modilebtn span {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background-color: #fff;
+  border-radius: 3px;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform-origin: center;
+}
+
+.modilebtn span:nth-child(1) {
+  transform: translateY(0);
+}
+
+.modilebtn span:nth-child(2) {
+  opacity: 1;
+}
+
+.modilebtn span:nth-child(3) {
+  transform: translateY(0);
+}
+
+/* Состояние активного меню (крестик) */
+.modilebtn.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.modilebtn.active span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.modilebtn.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 @media (max-width: 768px) {

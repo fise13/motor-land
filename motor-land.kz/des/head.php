@@ -9,25 +9,49 @@
 			<a href="/guarantees"><li>Гарантии</li></a>
 			<a href="/contacts.php"><li>Контакты</li></a>
 		</ul>
-		<div class="modilebtn" onclick="mobilemenu ();"></div>
+		<div class="modilebtn" onclick="mobilemenu();">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+		<div class="menu-overlay"></div>
 	</div>
 </div>
 <script>
 
 	/**
 	 * Функция: Переключение мобильного меню
-	 * Описание: Показывает/скрывает мобильное меню и меняет иконку кнопки (меню/крестик).
+	 * Описание: Показывает/скрывает мобильное меню с анимацией и переключает состояние кнопки.
 	 * Параметры: нет
 	 * Возвращает: ничего
 	 */
 	function mobilemenu () {
-		if ($('.menu').css('display') == 'block') {
-			$('.menu').toggle(); 
-			$('.modilebtn').css('background-image','url(./img/mmenu.png)');
+		var menu = $('.menu');
+		var btn = $('.modilebtn');
+		var overlay = $('.menu-overlay');
+		
+		if (menu.hasClass('open')) {
+			// Закрытие меню
+			menu.removeClass('open');
+			btn.removeClass('active');
+			overlay.removeClass('active');
 		} else {
-			$('.menu').toggle(); 
-			$('.modilebtn').css('background-image','url(./img/crossm.png)');
+			// Открытие меню
+			menu.addClass('open');
+			btn.addClass('active');
+			overlay.addClass('active');
 		}
 	}
+	
+	// Закрытие меню при клике на затемненный фон
+	$(document).on('click', '.menu-overlay', function() {
+		var menu = $('.menu');
+		var btn = $('.modilebtn');
+		var overlay = $('.menu-overlay');
+		
+		menu.removeClass('open');
+		btn.removeClass('active');
+		overlay.removeClass('active');
+	});
 	
 	</script>
