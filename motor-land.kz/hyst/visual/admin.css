@@ -1,43 +1,52 @@
 /* ==========================================
    СОВРЕМЕННАЯ CSS-АРХИТЕКТУРА ДЛЯ АДМИН-ПАНЕЛИ
-   Сохранены все оригинальные теги для обратной совместимости
+   Улучшенная версия с исправленным выравниванием
    ========================================== */
 
 /* === 1. CSS ПЕРЕМЕННЫЕ (Design Tokens) === */
 :root {
-  /* Цветовая палитра - мягкая тёмная тема */
-  --color-bg-primary: #0f0f1a;
-  --color-bg-secondary: #1a1a2e;
-  --color-bg-tertiary: #252541;
-  --color-bg-elevated: #2d2d4a;
+  /* Цветовая палитра - улучшенная тёмная тема */
+  --color-bg-primary: #0a0a12;
+  --color-bg-secondary: #16162a;
+  --color-bg-tertiary: #1f1f38;
+  --color-bg-elevated: #282846;
+  --color-bg-hover: #323254;
   
   /* Акцентные цвета */
   --color-accent: #6366f1;
   --color-accent-hover: #818cf8;
+  --color-accent-light: rgba(99, 102, 241, 0.1);
   --color-success: #10b981;
+  --color-success-light: rgba(16, 185, 129, 0.1);
   --color-danger: #ef4444;
+  --color-danger-light: rgba(239, 68, 68, 0.1);
   --color-warning: #f59e0b;
+  --color-warning-light: rgba(245, 158, 11, 0.1);
   
   /* Текстовые цвета */
-  --color-text-primary: #f1f5f9;
+  --color-text-primary: #f8fafc;
   --color-text-secondary: #cbd5e1;
   --color-text-muted: #94a3b8;
+  --color-text-disabled: #64748b;
   
   /* Границы */
   --color-border: #334155;
   --color-border-hover: #475569;
+  --color-border-focus: #6366f1;
   
-  /* Тени */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+  /* Тени с улучшенной глубиной */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.7), 0 10px 10px -5px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.3);
   
   /* Радиусы скругления */
   --radius-sm: 0.375rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
   --radius-full: 9999px;
   
   /* Отступы */
@@ -46,6 +55,7 @@
   --spacing-md: 1rem;
   --spacing-lg: 1.5rem;
   --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
   
   /* Типографика */
   --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
@@ -55,6 +65,7 @@
   --font-size-lg: 1.125rem;
   --font-size-xl: 1.25rem;
   --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
   
   /* Переходы */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -65,6 +76,9 @@
   --header-height: 4rem;
   --sidebar-width: 18rem;
   --sidebar-width-collapsed: 4.5rem;
+  --icon-size-sm: 1rem;
+  --icon-size-md: 1.25rem;
+  --icon-size-lg: 1.5rem;
 }
 
 /* === 2. БАЗОВЫЕ СТИЛИ === */
@@ -72,6 +86,8 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
@@ -80,8 +96,6 @@ html {
 }
 
 html, body {
-  margin: 0;
-  padding: 0;
   height: 100%;
   font-family: var(--font-family);
 }
@@ -93,6 +107,7 @@ body {
   background-color: var(--color-bg-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 /* === 3. THEME === */
@@ -109,65 +124,72 @@ adm_footer {
   display: flex;
 }
 
-/* Header */
+/* Header с улучшенным выравниванием */
 adm_header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--color-bg-secondary);
+  background: rgba(22, 22, 42, 0.95);
   height: var(--header-height);
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--color-border);
   box-shadow: var(--shadow-md);
-  backdrop-filter: blur(8px);
-  background: rgba(26, 26, 46, 0.95);
+  backdrop-filter: blur(12px);
+  padding: 0 var(--spacing-lg);
 }
 
 .admin_header_profile {
   display: flex;
-  justify-content: space-between;
-  box-sizing: border-box;
+  justify-content: flex-end;
   align-items: center;
-  padding: 0 var(--spacing-lg);
+  gap: var(--spacing-lg);
+  padding: 0;
+  height: 100%;
 }
 
 .admin_header_exit {
-  display: block;
-  margin: 0 var(--spacing-md) 0 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
   text-decoration: none;
-  color: white;
-  position: relative;
+  color: var(--color-text-secondary);
   font-weight: 600;
+  font-size: var(--font-size-sm);
   transition: color var(--transition-fast);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
 }
 
 .admin_header_exit:hover {
   color: var(--color-accent-hover);
+  background: var(--color-accent-light);
 }
 
-/* Улучшенная кнопка Logout */
+/* Улучшенная кнопка Logout с правильным выравниванием */
 .Btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
   border: none;
   border-radius: var(--radius-full);
   cursor: pointer;
   position: relative;
   overflow: hidden;
   transition: all var(--transition-base);
-  box-shadow: var(--shadow-sm);
-  background-color: var(--color-danger);
+  box-shadow: var(--shadow-md);
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  flex-shrink: 0;
 }
 
 .Btn:hover {
-  width: 6rem;
+  width: 7rem;
   border-radius: var(--radius-full);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
   transform: translateY(-1px);
+  background: linear-gradient(135deg, #f87171, #ef4444);
 }
 
 .Btn:active {
@@ -177,15 +199,18 @@ adm_header {
 
 .sign {
   width: 100%;
-  transition: all var(--transition-base);
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all var(--transition-base);
 }
 
 .sign svg {
-  width: 1rem;
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
   transition: transform var(--transition-base);
+  flex-shrink: 0;
 }
 
 .sign svg path {
@@ -194,13 +219,16 @@ adm_header {
 
 .Btn:hover .sign {
   width: 30%;
-  padding-left: var(--spacing-sm);
-  transform: translateX(-0.5rem);
+  transform: translateX(-0.25rem);
+}
+
+.Btn:hover .sign svg {
+  transform: rotate(15deg);
 }
 
 .text {
   position: absolute;
-  right: 0;
+  right: var(--spacing-md);
   width: 0;
   opacity: 0;
   color: white;
@@ -208,30 +236,36 @@ adm_header {
   font-weight: 600;
   transition: all var(--transition-base);
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 .Btn:hover .text {
   opacity: 1;
   width: 70%;
-  padding-right: var(--spacing-md);
 }
 
 .admin_header_name {
-  display: block;
-  padding: var(--spacing-sm);
-  margin: 0;
-  color: var(--color-text-secondary);
-  font-weight: 500;
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--color-text-primary);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
 }
 
 /* Main Content Area */
 adm_content {
-  justify-content: space-between;
+  justify-content: flex-start;
   overflow-x: hidden;
   height: calc(100% - var(--header-height));
 }
 
-/* === 5. SIDEBAR === */
+/* === 5. SIDEBAR с улучшенным выравниванием === */
 #sidebarbutton {
   display: none;
 }
@@ -241,7 +275,8 @@ sidebar {
   min-width: var(--sidebar-width);
   background: var(--color-bg-secondary);
   height: 100%;
-  display: block;
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
   padding: var(--spacing-lg);
   transition: all var(--transition-base);
@@ -252,7 +287,7 @@ sidebar {
 
 /* Кастомный скроллбар */
 sidebar::-webkit-scrollbar {
-  width: 0.375rem;
+  width: 0.5rem;
 }
 
 sidebar::-webkit-scrollbar-track {
@@ -262,68 +297,68 @@ sidebar::-webkit-scrollbar-track {
 sidebar::-webkit-scrollbar-thumb {
   background: var(--color-border);
   border-radius: var(--radius-full);
+  transition: background var(--transition-fast);
 }
 
 sidebar::-webkit-scrollbar-thumb:hover {
   background: var(--color-border-hover);
 }
 
-/* Sidebar Toggle Button */
+/* Sidebar Toggle Button с правильным центрированием */
 label[for="sidebarbutton"] {
   width: 3rem;
   height: 3rem;
-  margin: 0 0 var(--spacing-md) 0;
+  margin: 0 0 var(--spacing-lg) 0;
   position: relative;
   cursor: pointer;
   transition: all var(--transition-base);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  flex-shrink: 0;
 }
 
 label[for="sidebarbutton"]:hover {
   background: var(--color-bg-elevated);
+  border-color: var(--color-border-hover);
   transform: scale(1.05);
+  box-shadow: var(--shadow-sm);
 }
 
 label[for="sidebarbutton"] i {
-  transform: translate(-50%, -50%);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  background-color: white;
+  position: relative;
+  background-color: var(--color-text-primary);
   width: 1.5rem;
   height: 2px;
+  transition: all var(--transition-base);
+  border-radius: var(--radius-full);
+  display: block;
+}
+
+label[for="sidebarbutton"] i:before,
+label[for="sidebarbutton"] i:after {
+  content: '';
+  width: 1rem;
+  height: 2px;
+  background-color: var(--color-text-primary);
+  position: absolute;
   transition: all var(--transition-base);
   border-radius: var(--radius-full);
 }
 
 label[for="sidebarbutton"] i:before {
-  content: '';
-  width: 0.875rem;
-  height: 2px;
-  background-color: white;
-  position: absolute;
   transform: rotate(-45deg);
   bottom: 0.375rem;
   left: -1px;
-  transition: all var(--transition-base);
-  border-radius: var(--radius-full);
 }
 
 label[for="sidebarbutton"] i:after {
-  content: '';
-  width: 0.875rem;
-  height: 2px;
-  background-color: white;
-  position: absolute;
   transform: rotate(45deg);
   top: 0.375rem;
   left: -1px;
-  transition: all var(--transition-base);
-  border-radius: var(--radius-full);
 }
 
 #sidebarbutton:checked ~ adm_header label[for="sidebarbutton"] i:before {
@@ -352,29 +387,47 @@ label[for="sidebarbutton"] i:after {
   display: none;
 }
 
-/* Sidebar Menu Items */
+#sidebarbutton:checked ~ adm_content sidebar label[for="sidebarbutton"] {
+  margin: 0 auto var(--spacing-lg) auto;
+}
+
+/* Sidebar Menu Items с правильным выравниванием иконок */
 .admin_sidebar_menu {
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
-  min-height: 2.5rem;
+  min-height: 3rem;
   box-sizing: border-box;
   padding: var(--spacing-sm) var(--spacing-md);
   text-decoration: none;
   text-align: left;
-  background-position: var(--spacing-md) center;
-  background-repeat: no-repeat;
-  background-size: 1.25rem 1.25rem;
   color: var(--color-text-secondary);
   margin: 0 0 var(--spacing-xs) 0;
   overflow: hidden;
   transition: all var(--transition-fast);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   position: relative;
   font-weight: 500;
+  font-size: var(--font-size-sm);
+  background: transparent;
 }
 
+/* Иконка в начале меню */
 .admin_sidebar_menu::before {
+  content: '';
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  background-image: var(--menu-icon);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: opacity var(--transition-fast);
+}
+
+/* Индикатор активного пункта */
+.admin_sidebar_menu::after {
   content: '';
   position: absolute;
   left: 0;
@@ -390,17 +443,33 @@ label[for="sidebarbutton"] i:after {
 .admin_sidebar_menu:hover {
   background-color: var(--color-bg-tertiary);
   color: var(--color-text-primary);
-  transform: translateX(0.25rem);
-  padding-left: 2.5rem;
+  border: 1px solid var(--color-border);
+  padding-left: calc(var(--spacing-md) - 1px);
 }
 
 .admin_sidebar_menu:hover::before {
+  opacity: 1;
+}
+
+.admin_sidebar_menu:hover::after {
+  transform: scaleY(1);
+}
+
+.admin_sidebar_menu.active {
+  background-color: var(--color-accent-light);
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+}
+
+.admin_sidebar_menu.active::after {
   transform: scaleY(1);
 }
 
 .admin_sidebar_menu span {
   transition: opacity var(--transition-base);
   white-space: nowrap;
+  flex: 1;
+  line-height: 1.4;
 }
 
 /* Content Area */
@@ -408,42 +477,60 @@ content {
   display: block;
   height: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
   flex-grow: 1;
   box-sizing: border-box;
   padding: var(--spacing-xl);
   background: var(--color-bg-primary);
 }
 
-/* === 6. ФОРМА АВТОРИЗАЦИИ === */
+content::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+content::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+}
+
+content::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-hover);
+}
+
+/* === 6. ФОРМА АВТОРИЗАЦИИ с улучшенным выравниванием === */
 .auth_container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   background: radial-gradient(circle at 50% 50%, var(--color-bg-secondary), var(--color-bg-primary));
   font-family: var(--font-family);
-  padding: var(--spacing-lg);
+  padding: var(--spacing-xl);
 }
 
 .auth_form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: var(--spacing-lg);
   width: 100%;
-  max-width: 22rem;
-  padding: var(--spacing-xl) 2rem;
-  border-radius: var(--radius-xl);
+  max-width: 24rem;
+  padding: var(--spacing-2xl) var(--spacing-xl);
+  border-radius: var(--radius-2xl);
   background: var(--color-bg-secondary);
   box-shadow: var(--shadow-xl);
   border: 1px solid var(--color-border);
-  animation: slideUp 0.4s ease-out;
+  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(1rem);
+    transform: translateY(2rem);
   }
   to {
     opacity: 1;
@@ -452,13 +539,17 @@ content {
 }
 
 .auth_form_logo {
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   width: 6rem;
   height: 4rem;
-  margin: -3.5rem auto var(--spacing-md) auto;
+  margin: -4rem auto var(--spacing-lg) auto;
   overflow: hidden;
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-xl);
   background: var(--color-bg-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-border);
 }
 
 .auth_form_logo img {
@@ -472,21 +563,23 @@ content {
   color: var(--color-text-primary);
   font-size: var(--font-size-2xl);
   font-weight: 700;
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
   text-align: center;
+  line-height: 1.2;
 }
 
 .input_field {
   width: 100%;
-  padding: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
   font-size: var(--font-size-base);
   color: var(--color-text-primary);
   background: var(--color-bg-primary);
   border: 2px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   outline: none;
   transition: all var(--transition-fast);
   font-family: inherit;
+  line-height: 1.5;
 }
 
 .input_field::placeholder {
@@ -495,8 +588,9 @@ content {
 
 .input_field:focus {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  box-shadow: 0 0 0 4px var(--color-accent-light);
   transform: translateY(-1px);
+  background: var(--color-bg-tertiary);
 }
 
 .btn_submit {
@@ -505,19 +599,23 @@ content {
   font-size: var(--font-size-base);
   font-weight: 600;
   color: white;
-  background: var(--color-accent);
+  background: linear-gradient(135deg, var(--color-accent), #4f46e5);
   border: none;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   cursor: pointer;
   transition: all var(--transition-fast);
   box-shadow: var(--shadow-md);
   font-family: inherit;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn_submit:hover {
   transform: translateY(-2px);
-  background: var(--color-accent-hover);
-  box-shadow: var(--shadow-lg);
+  background: linear-gradient(135deg, var(--color-accent-hover), var(--color-accent));
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
 }
 
 .btn_submit:active {
@@ -525,9 +623,10 @@ content {
   box-shadow: var(--shadow-sm);
 }
 
-/* === 7. ФОРМЫ (INTERFACEFORM) === */
+/* === 7. ФОРМЫ (INTERFACEFORM) с улучшенным выравниванием === */
 interfaceform {
   display: block;
+  width: 100%;
 }
 
 .form_title_sm {
@@ -535,21 +634,27 @@ interfaceform {
   font-weight: 700;
   padding: var(--spacing-md) 0;
   color: var(--color-text-primary);
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.3;
 }
 
 interfaceform label {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
   margin-bottom: var(--spacing-sm);
   font-weight: 600;
   color: var(--color-text-secondary);
   font-size: var(--font-size-sm);
+  line-height: 1.4;
 }
 
 label > i {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   color: var(--color-danger);
   font-style: normal;
-  margin-left: var(--spacing-xs);
+  font-size: var(--font-size-xs);
 }
 
 interfaceform input[type="text"],
@@ -559,7 +664,7 @@ interfaceform input[type="date"],
 interfaceform input[type="datetime-local"] {
   width: 100%;
   padding: var(--spacing-sm) var(--spacing-md);
-  margin: var(--spacing-xs) 0;
+  margin: var(--spacing-xs) 0 var(--spacing-md) 0;
   box-sizing: border-box;
   background: var(--color-bg-tertiary);
   border: 2px solid var(--color-border);
@@ -568,6 +673,7 @@ interfaceform input[type="datetime-local"] {
   font-size: var(--font-size-base);
   transition: all var(--transition-fast);
   font-family: inherit;
+  line-height: 1.5;
 }
 
 interfaceform input[type="text"]:focus,
@@ -576,13 +682,14 @@ interfaceform input[type="number"]:focus,
 interfaceform input[type="date"]:focus,
 interfaceform input[type="datetime-local"]:focus {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  box-shadow: 0 0 0 3px var(--color-accent-light);
   outline: none;
+  background: var(--color-bg-elevated);
 }
 
 interfaceform input[type="button"] {
   padding: var(--spacing-sm) var(--spacing-lg);
-  margin: var(--spacing-xs) 0;
+  margin: var(--spacing-sm) var(--spacing-sm) var(--spacing-sm) 0;
   box-sizing: border-box;
   cursor: pointer;
   font-weight: 600;
@@ -592,6 +699,11 @@ interfaceform input[type="button"] {
   border-radius: var(--radius-md);
   transition: all var(--transition-fast);
   font-family: inherit;
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 interfaceform input[type="button"]:hover {
@@ -600,32 +712,39 @@ interfaceform input[type="button"]:hover {
   box-shadow: var(--shadow-md);
 }
 
+interfaceform input[type="button"]:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
 interfaceform textarea {
   width: 100%;
   box-sizing: border-box;
-  margin: var(--spacing-xs) 0;
-  padding: var(--spacing-sm) var(--spacing-md);
+  margin: var(--spacing-xs) 0 var(--spacing-md) 0;
+  padding: var(--spacing-md);
   background: var(--color-bg-tertiary);
   border: 2px solid var(--color-border);
   border-radius: var(--radius-md);
   color: var(--color-text-primary);
   font-size: var(--font-size-base);
   resize: vertical;
-  min-height: 6rem;
+  min-height: 8rem;
   transition: all var(--transition-fast);
   font-family: inherit;
+  line-height: 1.6;
 }
 
 interfaceform textarea:focus {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  box-shadow: 0 0 0 3px var(--color-accent-light);
   outline: none;
+  background: var(--color-bg-elevated);
 }
 
 interfaceform select {
   width: 100%;
   padding: var(--spacing-sm) var(--spacing-md);
-  margin: var(--spacing-xs) 0;
+  margin: var(--spacing-xs) 0 var(--spacing-md) 0;
   box-sizing: border-box;
   background: var(--color-bg-tertiary);
   border: 2px solid var(--color-border);
@@ -635,82 +754,125 @@ interfaceform select {
   cursor: pointer;
   transition: all var(--transition-fast);
   font-family: inherit;
+  line-height: 1.5;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23cbd5e1' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--spacing-md) center;
+  padding-right: 2.5rem;
 }
 
 interfaceform select:focus {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  box-shadow: 0 0 0 3px var(--color-accent-light);
   outline: none;
+  background-color: var(--color-bg-elevated);
 }
 
-/* Input Wrapper с валидацией */
+/* Input Wrapper с валидацией и правильным выравниванием */
 iw {
   position: relative;
   display: block;
+  margin-bottom: var(--spacing-md);
 }
 
 iv {
   position: absolute;
-  right: var(--spacing-sm);
+  right: var(--spacing-md);
   top: 50%;
-  transform: translate(0, -50%);
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
 }
 
 iv.left {
-  left: var(--spacing-sm);
+  left: var(--spacing-md);
   right: auto;
 }
 
-/* Error Icon */
+/* Error Icon с правильным центрированием */
 iv[error] {
   border-radius: var(--radius-full);
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
   background-color: var(--color-danger);
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: shake 0.3s;
+  animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  box-shadow: var(--shadow-sm);
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-4px); }
-  75% { transform: translateX(4px); }
+  0%, 100% { transform: translateY(-50%) translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateY(-50%) translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateY(-50%) translateX(4px); }
 }
 
 iv[error]:after {
   content: '!';
   color: white;
-  font-weight: bold;
+  font-weight: 700;
   font-size: var(--font-size-sm);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 iv[error] message {
   display: none;
   position: absolute;
-  right: -0.25rem;
-  bottom: 2rem;
+  right: 0;
+  bottom: calc(100% + var(--spacing-sm));
   padding: var(--spacing-sm) var(--spacing-md);
   border-radius: var(--radius-md);
   background-color: white;
   border: 2px solid var(--color-danger);
   color: var(--color-danger);
-  min-width: 18rem;
+  min-width: 16rem;
+  max-width: 20rem;
   box-sizing: border-box;
   box-shadow: var(--shadow-lg);
   font-size: var(--font-size-sm);
-  z-index: 10;
-  animation: fadeIn 0.2s;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+  line-height: 1.4;
+  font-weight: 500;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(0.5rem); }
-  to { opacity: 1; transform: translateY(0); }
+  from { 
+    opacity: 0; 
+    transform: translateY(0.25rem); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+iv[error] message::before {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  right: var(--spacing-md);
+  width: 0;
+  height: 0;
+  border-left: 0.5rem solid transparent;
+  border-right: 0.5rem solid transparent;
+  border-top: 0.5rem solid var(--color-danger);
 }
 
 iv.left[error] message {
-  left: -0.25rem;
+  left: 0;
+  right: auto;
+}
+
+iv.left[error] message::before {
+  left: var(--spacing-md);
   right: auto;
 }
 
@@ -718,21 +880,25 @@ iv[error]:hover message {
   display: block;
 }
 
-/* Success Icon */
+/* Success Icon с правильным центрированием */
 iv[right] {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 iv[right]:before {
   position: absolute;
   content: '';
   width: 2px;
-  height: 0.625rem;
+  height: 0.5rem;
   background-color: var(--color-success);
   transform: rotate(-45deg);
-  left: 0.125rem;
-  bottom: 0.125rem;
+  left: 0.3rem;
+  bottom: 0.45rem;
   border-radius: var(--radius-full);
 }
 
@@ -740,53 +906,54 @@ iv[right]:after {
   position: absolute;
   content: '';
   width: 2px;
-  height: 1rem;
+  height: 0.875rem;
   background-color: var(--color-success);
   transform: rotate(45deg);
-  left: 0.625rem;
-  bottom: 0.0625rem;
+  left: 0.7rem;
+  bottom: 0.3rem;
   border-radius: var(--radius-full);
 }
 
-/* === 8. LAYOUT HELPERS === */
+/* === 8. LAYOUT HELPERS с улучшенным выравниванием === */
 .admin_content_alignment {
   width: 100%;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  align-items: end;
+  align-items: flex-end;
   gap: var(--spacing-md);
 }
 
 .admin_content_alignment_forimg {
   width: 100%;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  align-items: start;
+  align-items: flex-start;
   gap: var(--spacing-md);
 }
 
 .admin_content_widht300 {
   width: 18.75rem;
-  padding: 0 var(--spacing-md) 0 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 .admin_content_alignment_remain {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  align-items: end;
+  align-items: flex-end;
   flex: 1;
   gap: var(--spacing-md);
+  min-width: 0;
 }
 
-/* === 9. ROLLER MENU (ACCORDION) === */
+/* === 9. ROLLER MENU (ACCORDION) с улучшенным выравниванием === */
 .admin_roller_menu {
   width: 100%;
   text-align: left;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
 }
 
 .admin_roller_menu > input[type="checkbox"],
@@ -795,25 +962,32 @@ iv[right]:after {
 }
 
 .admin_roller_menu > label {
-  display: inline-block;
-  padding: var(--spacing-sm) var(--spacing-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm) var(--spacing-lg);
   background: var(--color-bg-tertiary);
   border: 2px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   cursor: pointer;
   opacity: 0.7;
   transition: all var(--transition-fast);
   user-select: none;
   font-weight: 600;
+  font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
-  margin-right: var(--spacing-xs);
-  margin-bottom: var(--spacing-xs);
+  margin-right: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.4;
+  min-height: 2.5rem;
 }
 
 .admin_roller_menu > label:hover {
-  opacity: 0.9;
+  opacity: 1;
   transform: translateY(-1px);
   box-shadow: var(--shadow-sm);
+  border-color: var(--color-border-hover);
+  background: var(--color-bg-elevated);
 }
 
 .admin_roller_container {
@@ -823,17 +997,8 @@ iv[right]:after {
   margin: var(--spacing-md) 0 0 0;
   transition: all var(--transition-base);
   position: relative;
-  border-radius: var(--radius-md);
-}
-
-.admin_roller_container:after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: var(--color-border);
+  border-radius: var(--radius-lg);
+  opacity: 0;
 }
 
 .admin_roller_menu > input[type="checkbox"]:checked ~ label,
@@ -842,18 +1007,51 @@ iv[right]:after {
   background: var(--color-accent);
   color: white;
   border-color: var(--color-accent);
+  box-shadow: var(--shadow-md);
+  transform: translateY(0);
 }
 
 .admin_roller_menu > input[type="checkbox"]:checked ~ .admin_roller_container {
   max-height: none;
-  padding: var(--spacing-md);
+  padding: var(--spacing-lg);
   background: var(--color-bg-tertiary);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  opacity: 1;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .admin_roller_menu > input[type="checkbox"]:checked ~ .admin_roller_container.admin_roler_with_overflow {
   overflow-y: auto;
   max-height: 30rem;
+}
+
+.admin_roller_container.admin_roler_with_overflow::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.admin_roller_container.admin_roler_with_overflow::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.admin_roller_container.admin_roler_with_overflow::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+}
+
+.admin_roller_container.admin_roler_with_overflow::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-hover);
 }
 
 .admin_roller_menu > input[type="radio"].one:checked ~ label.one,
@@ -863,10 +1061,11 @@ iv[right]:after {
   background: var(--color-accent);
   color: white;
   border-color: var(--color-accent);
+  box-shadow: var(--shadow-md);
 }
 
 .admin_roller_menu > label.hide {
-  display: inline-block;
+  display: inline-flex;
   opacity: 1;
 }
 
@@ -878,9 +1077,12 @@ iv[right]:after {
 .admin_roller_menu > input[type="radio"].two:checked ~ .admin_roller_container.two,
 .admin_roller_menu > input[type="radio"].three:checked ~ .admin_roller_container.three {
   max-height: none;
-  padding: var(--spacing-md);
+  padding: var(--spacing-lg);
   background: var(--color-bg-tertiary);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  opacity: 1;
+  animation: slideDown 0.3s ease-out;
 }
 
 .admin_roller_menu > input[type="radio"].one:checked ~ .admin_roller_container.one.admin_roler_with_overflow,
@@ -893,37 +1095,327 @@ iv[right]:after {
 .admin_roller100 > label {
   width: 100%;
   box-sizing: border-box;
-  display: block;
+  display: flex;
 }
 
-/* === 10. CHECKBOXES & GROUPS === */
+/* === 10. CHECKBOXES & GROUPS с улучшенным выравниванием === */
 .admin_group_checkboxes_title {
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-base);
   font-weight: 700;
-  padding: 0 0 var(--spacing-md) 2.5rem;
+  padding: 0 0 var(--spacing-md) 0;
   position: relative;
   color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  line-height: 1.4;
 }
 
 .admin_group_checkboxes {
-  padding: 0 2.5rem 0 0;
+  padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-xs);
+  gap: var(--spacing-sm);
 }
 
 .admin_group_checkboxes_title i {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   color: var(--color-danger);
   font-style: normal;
+  font-size: var(--font-size-xs);
 }
 
 .admin_label_checkbox {
-  display: inline-block;
-  padding: var(--spacing-xs) var(--spacing-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm) var(--spacing-md);
   background: var(--color-bg-tertiary);
   border: 2px solid var(--color-border);
   cursor: pointer;
   user-select: none;
-  border-radius: var(--radius-m);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  line-height: 1.4;
+  min-height: 2.25rem;
+}
+
+.admin_label_checkbox:hover {
+  background: var(--color-bg-elevated);
+  border-color: var(--color-border-hover);
+  color: var(--color-text-primary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.admin_label_checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.admin_label_checkbox input[type="checkbox"]:checked ~ span,
+.admin_label_checkbox:has(input[type="checkbox"]:checked) {
+  background: var(--color-accent);
+  color: white;
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-sm);
+}
+
+/* === 11. ТАБЛИЦЫ === */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  margin: var(--spacing-md) 0;
+}
+
+thead {
+  background: var(--color-bg-tertiary);
+}
+
+th {
+  padding: var(--spacing-md) var(--spacing-lg);
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  border-bottom: 2px solid var(--color-border);
+  line-height: 1.4;
+}
+
+td {
+  padding: var(--spacing-md) var(--spacing-lg);
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+}
+
+tbody tr {
+  transition: background var(--transition-fast);
+}
+
+tbody tr:hover {
+  background: var(--color-bg-tertiary);
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* === 12. КАРТОЧКИ === */
+.card {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-fast);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+  border-color: var(--color-border-hover);
+}
+
+.card-title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.3;
+}
+
+.card-content {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* === 13. БЕЙДЖИ === */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.badge-success {
+  background: var(--color-success-light);
+  color: var(--color-success);
+  border: 1px solid var(--color-success);
+}
+
+.badge-danger {
+  background: var(--color-danger-light);
+  color: var(--color-danger);
+  border: 1px solid var(--color-danger);
+}
+
+.badge-warning {
+  background: var(--color-warning-light);
+  color: var(--color-warning);
+  border: 1px solid var(--color-warning);
+}
+
+.badge-primary {
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+}
+
+/* === 14. УВЕДОМЛЕНИЯ === */
+.notification {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  border-left: 4px solid;
+  margin-bottom: var(--spacing-md);
+  animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.notification-success {
+  background: var(--color-success-light);
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+.notification-danger {
+  background: var(--color-danger-light);
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
+
+.notification-warning {
+  background: var(--color-warning-light);
+  border-color: var(--color-warning);
+  color: var(--color-warning);
+}
+
+.notification-info {
+  background: var(--color-accent-light);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* === 15. УТИЛИТЫ === */
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mt-0 { margin-top: 0; }
+.mt-sm { margin-top: var(--spacing-sm); }
+.mt-md { margin-top: var(--spacing-md); }
+.mt-lg { margin-top: var(--spacing-lg); }
+.mt-xl { margin-top: var(--spacing-xl); }
+
+.mb-0 { margin-bottom: 0; }
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+.mb-xl { margin-bottom: var(--spacing-xl); }
+
+.gap-sm { gap: var(--spacing-sm); }
+.gap-md { gap: var(--spacing-md); }
+.gap-lg { gap: var(--spacing-lg); }
+
+/* === 16. АДАПТИВНОСТЬ === */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 3.5rem;
+    --sidebar-width: 16rem;
+    --spacing-xl: 1.5rem;
+  }
+
+  adm_header {
+    padding: 0 var(--spacing-md);
+  }
+
+  sidebar {
+    padding: var(--spacing-md);
+  }
+
+  content {
+    padding: var(--spacing-md);
+  }
+
+  .admin_sidebar_menu {
+    font-size: var(--font-size-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    min-height: 2.5rem;
+  }
+
+  .auth_form {
+    padding: var(--spacing-xl) var(--spacing-lg);
+  }
+
+  .admin_content_widht300 {
+    width: 100%;
+    padding: 0;
+  }
+
+  .admin_content_alignment,
+  .admin_content_alignment_forimg,
+  .admin_content_alignment_remain {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+  .Btn:hover {
+    width: 2.75rem;
+  }
+
+  .Btn:hover .text {
+    display: none;
+  }
+
+  table {
+    font-size: var(--font-size-xs);
+  }
+
+  th, td {
+    padding: var(--spacing-sm);
+  }
 }
