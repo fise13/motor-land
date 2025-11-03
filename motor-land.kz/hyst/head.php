@@ -17,21 +17,35 @@ $INTERFACE_VERSION = 0.91;
 <link rel="apple-touch-icon" href="favicon_apple.png?<?=$INTERFACE_VERSION;?>">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta property="og:image" content="">
-<link rel="stylesheet" href="/hyst/visual/admin.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
-<link rel="stylesheet" href="/hyst/visual/admin_mob.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
 
-<script src="/hyst/visual/jquery.js"></script>
-<script src="/hyst/visual/jquery-ui.js"></script>
-<script src="/hyst/visual/main.js?<?=$INTERFACE_VERSION?>"></script>
+<?php
+// Загружаем стили админ панели только если это админ панель
+$is_admin_page = (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/adm') !== false) || 
+                 (isset($_SERVER['PHP_SELF']) && basename($_SERVER['PHP_SELF']) == 'adm.php') ||
+                 (isset($_HYST_ADMIN_SETUP) || isset($_HYST_ADMIN));
 
+if ($is_admin_page) {
+    echo '<link rel="stylesheet" href="/hyst/visual/admin.css?'.$INTERFACE_VERSION.'" type="text/css"/>';
+    echo '<link rel="stylesheet" href="/hyst/visual/admin_mob.css?'.$INTERFACE_VERSION.'" type="text/css"/>';
+    echo '<script src="/hyst/visual/jquery.js"></script>';
+    echo '<script src="/hyst/visual/jquery-ui.js"></script>';
+    echo '<script src="/hyst/visual/main.js?'.$INTERFACE_VERSION.'"></script>';
+} else {
+    // Загружаем стили основного сайта только если это не админ панель
+    echo '<link href="css.css?'.$INTERFACE_VERSION.'" rel="stylesheet" type="text/css" />';
+    echo '<link href="tab.css?'.$INTERFACE_VERSION.'" rel="stylesheet" type="text/css" />';
+    echo '<link href="mob.css?'.$INTERFACE_VERSION.'" rel="stylesheet" type="text/css" />';
+}
+?>
 
-	<link href="css.css?<?=$INTERFACE_VERSION;?>" rel="stylesheet" type="text/css" />
-	<link href="tab.css?<?=$INTERFACE_VERSION;?>" rel="stylesheet" type="text/css" />
-	<link href="mob.css?<?=$INTERFACE_VERSION;?>" rel="stylesheet" type="text/css" />
-	
+<?php
+// Скрипты основного сайта загружаем только если не админ панель
+if (!$is_admin_page) {
+?>
 	<script src="des/myjs.js?<?=$INTERFACE_VERSION;?>"></script>
 	<script src="des/fm.revealator.jquery.js"></script>
 	<link rel="stylesheet" href="des/fm.revealator.jquery.min.css" type="text/css" />
+<?php } ?>
 
 <?php
 if ($_HYST_ADMIN) {
