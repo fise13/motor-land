@@ -49,7 +49,7 @@ $SITE_DESCRIPTION = 'Контакты компании Motor Land - контра
 				<div class="contact-card-content">
 					<div class="contact-item contact-icon-location">
 						<span class="contact-label">Адрес:</span>
-						<a target="_blank" href="https://2gis.kz/almaty/search/Motor%20Land%20РВ-90%2C%207-линия%2C%2029" class="contact-link">РВ-90, 7-линия, 29</a>
+						<a target="_blank" href="https://2gis.kz/almaty/geo/70000001083496996" class="contact-link">РВ-90, 7-линия, 29</a>
 					</div>
 					<div class="contact-item contact-icon-phone">
 						<span class="contact-label">Телефон:</span>
@@ -76,7 +76,7 @@ $SITE_DESCRIPTION = 'Контакты компании Motor Land - контра
 				<div class="contact-card-content">
 					<div class="contact-item contact-icon-location">
 						<span class="contact-label">Адрес:</span>
-						<a target="_blank" href="https://2gis.kz/almaty/search/Motor%20Land%20улица%20Свердлова%2C%2038" class="contact-link">улица Свердлова, 38</a>
+						<a target="_blank" href="https://2gis.kz/almaty/geo/70000001024156353" class="contact-link">улица Свердлова, 38</a>
 					</div>
 					<div class="contact-item contact-icon-phone">
 						<span class="contact-label">Телефоны:</span>
