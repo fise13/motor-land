@@ -138,9 +138,11 @@ $SITE_DESCRIPTION = 'Компания "Motor Land" - поставка контр
 		<div class="consult-subtitle">заполните форму</div>
 		<form method="post" class="consult-form">
 			<div class="form-control consult-form-control">
+				<label for="consult-name">Имя</label>
 				<input type="text" name="name" id="consult-name" class="consult-input consult-name" placeholder="Имя" required>
 			</div>
 			<div class="form-control consult-form-control">
+				<label for="consult-phone">Телефон</label>
 				<input type="text" name="phon" id="consult-phone" class="consult-input consult-phone" placeholder="Телефон" required>
 			</div>
 			<div class="consult-btn-wrapper">
