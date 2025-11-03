@@ -3,7 +3,7 @@
 		<a href="/" class="logo"><img src="img/logo.png" alt="Моторленд"></a>
 		<ul class="menu">
 			<a href="/"><li>Главная</li></a>
-			<a href="/catalog"><li>Каталог</li></a>
+			<a href="/catalog.php"><li>Каталог</li></a>
 			<a href="/service"><li>Сервис</li></a>
 			<a href="/pay"><li>Оплата / Доставка</li></a>
 			<a href="/guarantees"><li>Гарантии</li></a>

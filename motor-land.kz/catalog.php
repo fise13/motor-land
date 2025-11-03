@@ -69,17 +69,17 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		
 		<ul class="actionperekl">
 			<a href="/actions"><li>акции</li></a>
-			<a href="/catalog"><li class="actionpereklact" style="color: white;">каталог</li></a>
+			<a href="/catalog.php"><li class="actionpereklact catalog-active-tab">каталог</li></a>
 		</ul>
 	</div>
 </div>
 
 
-<div class="generalw">
+<div class="generalw catalog-main-section">
 	<div class="shirina">		
 
 		
-		<div class="filtersblock">
+		<div class="filtersblock filtersblock-animated">
 		<form method="get" action="catalog.php">
 			<!---<input type="text" name="setxt" class="searchbloinput" placeholder="Что вы хотели найти.."><br>--->
 			<div class="maipttee">
@@ -203,18 +203,18 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		if ($tmps->num_rows != 0) { 
 			while($get = $tmps->fetch_array()):
 		?>
-		<div class="toverblock">
-			<a href="/detal?id=<?=$get['id'];?>"><div class="toverimg" style="background-image: url(<?=get_farrimg($get['images'])[0];?>);">
+		<div class="toverblock catalog-item-animated">
+			<a href="/detal?id=<?=$get['id'];?>"><div class="toverimg catalog-item-image" style="background-image: url(<?=get_farrimg($get['images'])[0];?>);">
 			<?php if ($get['sale'] != 'noting') { ?>
-			<div class="cationsale"><?=$get['sale'];?></div>
+			<div class="cationsale catalog-sale-badge"><?=$get['sale'];?></div>
 			<?php } ?>
 			</div></a>
-			<div class="tovertitle"><?=$get['name'];?></div>
-			<div class="tovaropis">
+			<div class="tovertitle catalog-item-title"><?=$get['name'];?></div>
+			<div class="tovaropis catalog-item-description">
 				<?=$get['stext'];?>
 			</div>
-		<div class="tovercena"><?=($get['cash']!=0?$get['cash'].' KZT':'Цена по запросу');?></div>
-		<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="toverbuton" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">Купить</a>
+			<div class="tovercena catalog-item-price"><?=($get['cash']!=0?$get['cash'].' KZT':'Цена по запросу');?></div>
+			<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="toverbuton catalog-buy-button" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">Купить</a>
 		</div>
 		<?php
 			endwhile;

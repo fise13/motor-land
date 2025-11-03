@@ -19,52 +19,38 @@
 		</div>
 		<div class="footer_contacts">
 			<div class="footer_contact_center">
-				
 				<a class="footer_contact_social" style="background-image: url(./img/inst.png);" target="_blank" href="<?=get_simple_texts('footer_instagram');?>">Присоединяйтесь к нам в Instagram</a>
-				
 			</div>
 		
 			<div class="footer_contact_block">
-				
-				<div class="foterconicon" style="background-image: url(./img/loc.png);"><a target="_blank" href="<?=get_simple_texts('2gis_addres_1');?>"><?=get_simple_texts('footer_addr_1');?></a></div>
-				<?php
-				$phones = get_simple_texts('footer_phone_1');
-				$phones = explode(',',$phones);
-				$form  = '';
-				foreach($phones as $v) {
-					$clear = preg_replace('/[^\d+]/', '', $v);
-				$form .= '<a href="tel:'.$clear.'" onclick="gtag(\'event\', \'conversion\', {\'send_to\': \'AW-17661940869/8IrgCNzqw7QbEIWp7-VB\'});">'.preg_replace('/^\+(\d)(\d{3})(\d{3})(\d{4})$/', '+$1 $2 $3 $4', $clear).'</a><br>';
-				}
-				?>
-				<div class="foterconicon" style="background-image: url(./img/tel.png);"><?=$form;?></div>
-				
-				<div class="foterconicon" style="background-image: url(./img/wats.svg);"><a href="https://wa.me/<?=get_simple_texts('footer_whatsapp_1');?>">WhatsApp</a></div>
-				
-				<div class="foterconicon" style="background-image: url(./img/day.png);"><?=get_simple_texts('work_schedule_1');?></div>	
+				<div class="foterconicon" style="background-image: url(./img/loc.png);">РВ-90, 7-линия, 29</div>
+				<div class="foterconicon" style="background-image: url(./img/tel.png);">
+					<a href="tel:+77771445445" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">+7 777 144 5445</a>
+				</div>
+				<div class="foterconicon" style="background-image: url(./img/wats.svg);">
+					<a href="https://wa.me/77771445445">WhatsApp</a>
+				</div>
+				<div class="foterconicon" style="background-image: url(./img/day.png);">
+					пн-пт | 9:00-18:00<br>
+					суббота | 10:00-15:00<br>
+					воскресенье | выходной
+				</div>	
 			</div>
 			<div class="footer_contact_block">
-				
-				<div class="foterconicon" style="background-image: url(./img/loc.png);"><a target="_blank" href="<?=get_simple_texts('2gis_addres_2');?>"><?=get_simple_texts('footer_addr_2');?></a></div>
-				
-				<?php
-				$phones = get_simple_texts('footer_phone_2');
-				$phones = explode(',',$phones);
-				$form  = '';
-				foreach($phones as $v) {
-					$clear = preg_replace('/[^\d+]/', '', $v);
-				$form .= '<a href="tel:'.$clear.'" onclick="gtag(\'event\', \'conversion\', {\'send_to\': \'AW-17661940869/8IrgCNzqw7QbEIWp7-VB\'});">'.preg_replace('/^\+(\d)(\d{3})(\d{3})(\d{4})$/', '+$1 $2 $3 $4', $clear).'</a><br>';
-				}
-				?>
-				<div class="foterconicon" style="background-image: url(./img/tel.png);"><?=$form;?></div>
-				
-				<div class="foterconicon" style="background-image: url(./img/wats.svg);"><a href="https://wa.me/<?=get_simple_texts('footer_whatsapp_2');?>">WhatsApp</a></div>
-				
-				<div class="foterconicon" style="background-image: url(./img/day.png);"><?=get_simple_texts('work_schedule_2');?></div>
-				
-				<!--<div class="foterconicon" style="background-image: url(./img/pos.png);"></div>-->
+				<div class="foterconicon" style="background-image: url(./img/loc.png);">улица Свердлова, 38</div>
+				<div class="foterconicon" style="background-image: url(./img/tel.png);">
+					<a href="tel:+77011445445" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">+7 701 144 5445</a><br>
+					<a href="tel:+77071445445" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">+7 707 144 5445</a>
+				</div>
+				<div class="foterconicon" style="background-image: url(./img/wats.svg);">
+					<a href="https://wa.me/77011445445">WhatsApp</a>
+				</div>
+				<div class="foterconicon" style="background-image: url(./img/day.png);">
+					пн-пт | 9:00-18:00<br>
+					суббота | 10:00-15:00<br>
+					воскресенье | выходной
+				</div>
 			</div>
-		
-		
 		</div>
 		
 	</div>
@@ -72,6 +58,6 @@
 
 <div class="generalw frayalpfhon">
 	<div class="shirina copyr">
-		&copy; motorland <?=date('Y');?>
+		&copy; MOTORLAND 2025
 	</div>
 </div>
