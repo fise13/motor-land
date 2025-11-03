@@ -251,14 +251,21 @@ width: 160px;
 height: 108px;
 margin-left: -80px;
 border-radius: 12px;
-background-image: url(./img/logo.jpg);
-background-size: contain;
-background-position: center top;
-background-repeat: no-repeat;
 position: absolute;
 top: -2px;
 left: 50%;
 z-index: 10;
+display: flex;
+align-items: center;
+justify-content: center;
+overflow: hidden;
+}
+
+.logo-video {
+width: 100%;
+height: 100%;
+object-fit: contain;
+border-radius: 12px;
 }
 
 .slider {
@@ -397,6 +404,7 @@ margin: 5px;
 position: relative;
 height: 20px;
 vertical-align: top;
+z-index: 100;
 }
 
 .ddwnblock {
@@ -414,7 +422,7 @@ transition: max-height 0.35s ease;
 position: absolute;
 top: 38px;
 left: -1px;
-z-index: 99;
+z-index: 9999;
 display: none;
 max-height: 400px;
 overflow-y: scroll;
@@ -439,6 +447,7 @@ transform: translateX(3px);
     opacity: 1;
     transform: translateY(0) scaleY(1);
     display: block;
+    z-index: 9999;
 }
 
 /* Анимация тряски для недоступных полей */
@@ -462,6 +471,8 @@ transform: translateX(3px);
 display: inline-block;
 width: 700px;
 height: 40px;
+position: relative;
+z-index: 100;
 }
 
 .sliderform input[type="text"]{

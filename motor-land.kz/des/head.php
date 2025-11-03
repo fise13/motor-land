@@ -1,6 +1,10 @@
 <div class="headercon mobilefix">
 	<div class="shirina relhead">
-		<div class="logo"></div>
+		<div class="logo">
+			<video class="logo-video" autoplay muted playsinline loop>
+				<source src="img/loader.mp4" type="video/mp4">
+			</video>
+		</div>
 		<ul class="menu">
 			<a href="/"><li>Главная</li></a>
 			<a href="/catalog"><li>Каталог</li></a>
