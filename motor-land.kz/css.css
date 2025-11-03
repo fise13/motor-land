@@ -322,12 +322,12 @@ position: relative;
 }
 
 .logo {
-width: 200px;
-height: 140px;
-margin-left: -100px;
+width: 150px;
+height: 100px;
+margin-left: -75px;
 border-radius: 12px;
 position: absolute;
-top: 10px;
+top: 5px;
 left: 50%;
 z-index: 10;
 display: flex;
@@ -335,13 +335,15 @@ align-items: center;
 justify-content: center;
 overflow: hidden;
 /* Фоновое изображение убрано для десктопа - показываем только видео */
-animation: logoFadeIn 0.8s ease-out, logoFloat 3s ease-in-out 1s infinite;
+opacity: 0;
+transform: translateY(-20px) scale(0.8);
+animation: logoFadeIn 0.8s ease-out 0.3s forwards, logoFloat 3s ease-in-out 1.5s infinite;
 transition: transform 0.3s ease;
 }
 
 .logo:hover {
 	transform: scale(1.08) translateY(-5px);
-	animation: logoFadeIn 0.8s ease-out, logoPulse 1.5s ease-in-out infinite;
+	animation: logoFadeIn 0.8s ease-out forwards, logoPulse 1.5s ease-in-out infinite;
 }
 
 .logo-video {
@@ -364,9 +366,9 @@ transition: filter 0.3s ease;
 	}
 	
 	.logo {
-		width: 160px;
-		height: 110px;
-		margin-left: -80px;
+		width: 130px;
+		height: 90px;
+		margin-left: -65px;
 		background-image: url(./img/logo.jpg) !important;
 		background-size: contain !important;
 		background-position: center top !important;
