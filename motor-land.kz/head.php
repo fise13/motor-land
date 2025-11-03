@@ -9,24 +9,49 @@
 			<a href="/guarantees"><li>Гарантии</li></a>
 			<a href="/contacts.php"><li>Контакты</li></a>
 		</ul>
-		<div class="modilebtn" onclick="mobilemenu ();"></div>
+		<div class="modilebtn" onclick="mobilemenu();">
+			<span></span>
+			<span></span>
+			<span></span>
 		</div>
+		<div class="menu-overlay"></div>
 	</div>
 </div>
 <script>
-
-function mobilemenu() {
-	const menu = document.querySelector('.menu');
-	const btn = document.querySelector('.modilebtn');
-
-btn.addEventListener('click', () => {
-    menu.classList.toggle('open');
-
-    if (menu.classList.contains('open')) {
-        btn.style.backgroundImage = "url('./img/crossm.png')"; // крестик
-    } else {
-        btn.style.backgroundImage = "url('./img/mmenu.png')"; // гамбургер
-    }
-});
+	/**
+	 * Функция: Переключение мобильного меню
+	 * Описание: Показывает/скрывает мобильное меню с анимацией и переключает состояние кнопки.
+	 * Параметры: нет
+	 * Возвращает: ничего
+	 */
+	function mobilemenu() {
+		const menu = document.querySelector('.menu');
+		const btn = document.querySelector('.modilebtn');
+		const overlay = document.querySelector('.menu-overlay');
+		
+		if (menu.classList.contains('open')) {
+			// Закрытие меню
+			menu.classList.remove('open');
+			btn.classList.remove('active');
+			if (overlay) overlay.classList.remove('active');
+		} else {
+			// Открытие меню
+			menu.classList.add('open');
+			btn.classList.add('active');
+			if (overlay) overlay.classList.add('active');
+		}
+	}
 	
+	// Закрытие меню при клике на затемненный фон
+	document.addEventListener('click', function(e) {
+		if (e.target.classList.contains('menu-overlay')) {
+			const menu = document.querySelector('.menu');
+			const btn = document.querySelector('.modilebtn');
+			const overlay = document.querySelector('.menu-overlay');
+			
+			menu.classList.remove('open');
+			btn.classList.remove('active');
+			if (overlay) overlay.classList.remove('active');
+		}
+	});
 </script>

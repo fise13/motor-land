@@ -155,79 +155,89 @@ width: 260px !important;
 }
 
 
-/* Стили для кнопки */
+/* Стили для кнопки для head.php */
 .modilebtn {
     position: fixed !important;
-    top: 20px !important;
-    right: 20px !important;
+    top: 18px !important;
+    right: 18px !important;
     left: auto !important;
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     display: flex !important;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 0;
-    background: #000;
+    background: rgba(0, 0, 0, 0.9);
     border: none;
     cursor: pointer;
     z-index: 110;
-    padding: 12px 10px;
-    border-radius: 0;
-    box-shadow: none;
-    transition: background-color 0.2s ease;
+    padding: 0;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    transition: all 0.25s ease;
 }
 
 .modilebtn:hover {
-    background: #1a1a1a;
+    background: rgba(0, 0, 0, 1);
+    transform: scale(1.05);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
 }
 
 .modilebtn:active {
-    background: #333;
+    transform: scale(0.95);
 }
 
 .modilebtn span {
     display: block !important;
-    width: 24px;
-    height: 2px;
+    width: 22px;
+    height: 2.5px;
     background-color: #fff;
-    border-radius: 1px;
-    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    border-radius: 2px;
+    transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transform-origin: center center;
     position: relative;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .modilebtn span:nth-child(1) {
-    margin-bottom: 5px;
+    transform: translateY(0) rotate(0deg);
+    margin-bottom: 5.5px;
 }
 
 .modilebtn span:nth-child(2) {
-    margin-bottom: 5px;
+    transform: translateY(0) scaleX(1);
+    opacity: 1;
+    margin-bottom: 5.5px;
 }
 
 .modilebtn span:nth-child(3) {
+    transform: translateY(0) rotate(0deg);
     margin-bottom: 0;
 }
 
-/* Состояние активного меню (крестик) */
+/* Новая анимация - плавное превращение в крестик */
 .modilebtn.active {
-    background: #000;
+    background: rgba(0, 0, 0, 1);
 }
 
 .modilebtn.active span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg) !important;
+    transform: translateY(8px) rotate(135deg) !important;
     margin: 0;
+    width: 22px;
 }
 
 .modilebtn.active span:nth-child(2) {
     opacity: 0 !important;
-    transform: scaleX(0) !important;
+    transform: scaleX(0) translateY(0) !important;
     margin: 0;
+    width: 0;
 }
 
 .modilebtn.active span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg) !important;
+    transform: translateY(-8px) rotate(45deg) !important;
     margin: 0;
+    width: 22px;
 }
 
 .filtersblock input[type="text"] {
