@@ -89,8 +89,8 @@ $SITE_DESCRIPTION = 'Доставка автозапчастей и двигат
 					<h3 class="delivery-option-title">Самовывоз</h3>
 					<p class="delivery-option-text">Заберите товар самостоятельно из наших офисов в Алматы</p>
 					<ul class="delivery-option-list">
-						<li>Офис №1: РВ-90, 7-линия, 29</li>
-						<li>Офис №2: ул. Свердлова, 38</li>
+						<li>Феллиал №1: <a href="https://2gis.kz/almaty/geo/70000001083496996" target="_blank" class="delivery-link">РВ-90, 7-линия, 29</a></li>
+						<li>Феллиал №2: <a href="https://2gis.kz/almaty/geo/70000001024156353" target="_blank" class="delivery-link">ул. Свердлова, 38</a></li>
 						<li>Предварительная договоренность</li>
 					</ul>
 				</div>
@@ -122,7 +122,7 @@ $SITE_DESCRIPTION = 'Доставка автозапчастей и двигат
 				</div>
 				<div class="info-card">
 					<h4 class="info-card-title">Упаковка</h4>
-					<p class="info-card-text">Все товары тщательно упаковываются для безопасной транспортировки. Двигатели и КПП упаковываются в специальные защитные контейнеры.</p>
+					<p class="info-card-text">Все товары тщательно упаковываются для безопасной транспортировки. Двигатели и КПП упаковываются в защитные пленки.</p>
 				</div>
 				<div class="info-card">
 					<h4 class="info-card-title">Страхование</h4>
