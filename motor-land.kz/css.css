@@ -483,9 +483,9 @@ margin: 0;
 /* Стили для формы консультации (как в футере) */
 .consult-container {
   display: block;
-  padding: 40px 20px 30px;
+  padding: 30px 20px 25px;
   box-sizing: border-box;
-  text-align: left;
+  text-align: center;
   color: white;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   position: relative;
@@ -496,39 +496,40 @@ margin: 0;
 }
 
 .consult-title {
-  font-size: 18px;
+  font-size: 16px;
   text-transform: none;
   color: white;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  margin: 0 0 28px 0;
-  padding-bottom: 12px;
+  margin: 0 0 8px 0;
   position: relative;
   display: block;
   letter-spacing: 0;
   font-weight: 600;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   animation: slideInLeft 0.5s ease-out 0.2s both;
 }
 
 .consult-subtitle {
-  font-size: 14px;
+  font-size: 12px;
   color: rgba(255, 255, 255, 0.7);
-  margin: 0 0 28px 0;
+  margin: 0 0 20px 0;
   font-weight: 400;
   animation: slideInLeft 0.5s ease-out 0.3s both;
 }
 
 .consult-form {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .consult-form-control {
   position: relative;
-  margin: 0 0 20px 0;
-  width: 100%;
-  max-width: 300px;
+  margin: 0;
+  width: auto;
+  min-width: 180px;
   display: flex;
   flex-direction: column;
   animation: fadeIn 0.4s ease-out both;
@@ -544,13 +545,13 @@ margin: 0;
 
 .consult-form-control label {
   position: relative;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   pointer-events: none;
 }
 
 .consult-form-control label span {
   display: inline-block;
-  font-size: 13px;
+  font-size: 12px;
   min-width: 5px;
   color: rgba(255, 255, 255, 0.7);
   transition: color 0.15s ease;
@@ -559,16 +560,16 @@ margin: 0;
 }
 
 .consult-input {
-  background-color: transparent;
-  border: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  background-color: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   display: block;
   width: 100%;
-  padding: 8px 0;
-  font-size: 15px;
+  padding: 6px 12px;
+  font-size: 14px;
   color: #fff;
   transition: border-color 0.15s ease;
   font-weight: 400;
+  box-sizing: border-box;
 }
 
 .consult-input::placeholder {
@@ -578,8 +579,7 @@ margin: 0;
 .consult-input:focus,
 .consult-input:valid {
   outline: 0;
-  border-bottom-color: #fe0000;
-  border-bottom-width: 1px;
+  border-color: #fe0000;
 }
 
 .consult-form-control:has(.consult-input:focus) label span,
@@ -588,11 +588,11 @@ margin: 0;
 }
 
 .consult-btn {
-  padding: 10px 24px;
+  padding: 8px 20px;
   border-radius: 0;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
-  margin: 20px 0 0 0;
+  margin: 0;
   background: #fe0000;
   color: white;
   border: none;
@@ -601,6 +601,9 @@ margin: 0;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   animation: fadeIn 0.4s ease-out 0.5s both;
+  align-self: flex-end;
+  height: 32px;
+  box-sizing: border-box;
 }
 
 .consult-btn:hover {
