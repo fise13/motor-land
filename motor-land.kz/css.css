@@ -1031,6 +1031,10 @@ background-position: center center;
   background-image: url(./img/map.jpg);
   background-size: cover;
   background-position: center;
+  margin: 30px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .foterzago {
@@ -1191,373 +1195,10 @@ left: 0px;
 background-color: rgba(14, 14, 144, 0.75);
 }
 
-/* Стили для фильтров каталога */
-.meinputer .ddwnblock-filter {
-	border: 1px solid black;
-}
-
-.meinputer .ddwnblock-filter.overflow-scroll {
-	overflow-y: scroll;
-	border: 1px solid black;
-}
-
-.meinputer .ddwnblock-filter .filter-item {
-	color: black;
-}
-
-.meinputer-filter {
-	border: 1px solid black;
-}
-
 .btmmearrow {
 	font-size: 17px;
 }
 
-/* ============================================
-   СТИЛИ ДЛЯ КАТАЛОГА С АНИМАЦИЯМИ
-   ============================================ */
-
-/* Анимация появления секции каталога */
-@keyframes fadeInUp {
-	from {
-		opacity: 0;
-		transform: translateY(30px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
-}
-
-@keyframes slideInLeft {
-	from {
-		opacity: 0;
-		transform: translateX(-30px);
-	}
-	to {
-		opacity: 1;
-		transform: translateX(0);
-	}
-}
-
-@keyframes scaleIn {
-	from {
-		opacity: 0;
-		transform: scale(0.9);
-	}
-	to {
-		opacity: 1;
-		transform: scale(1);
-	}
-}
-
-@keyframes pulse {
-	0%, 100% {
-		transform: scale(1);
-	}
-	50% {
-		transform: scale(1.05);
-	}
-}
-
-/* Основная секция каталога */
-.catalog-main-section {
-	animation: fadeInUp 0.6s ease-out;
-}
-
-/* Фильтры с анимацией */
-.filtersblock-animated {
-	animation: slideInLeft 0.5s ease-out;
-	position: relative;
-}
-
-.filtersblock-animated::before {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: -100%;
-	width: 100%;
-	height: 100%;
-	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-	animation: shimmer 2s infinite;
-}
-
-@keyframes shimmer {
-	0% {
-		left: -100%;
-	}
-	100% {
-		left: 100%;
-	}
-}
-
-/* Карточки товаров с анимацией */
-.catalog-item-animated {
-	animation: fadeInUp 0.6s ease-out;
-	animation-fill-mode: both;
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-	cursor: pointer;
-	border-radius: 12px;
-	overflow: hidden;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.catalog-item-animated:nth-child(1) { animation-delay: 0.1s; }
-.catalog-item-animated:nth-child(2) { animation-delay: 0.2s; }
-.catalog-item-animated:nth-child(3) { animation-delay: 0.3s; }
-.catalog-item-animated:nth-child(4) { animation-delay: 0.4s; }
-.catalog-item-animated:nth-child(5) { animation-delay: 0.5s; }
-.catalog-item-animated:nth-child(6) { animation-delay: 0.6s; }
-.catalog-item-animated:nth-child(7) { animation-delay: 0.7s; }
-.catalog-item-animated:nth-child(8) { animation-delay: 0.8s; }
-
-.catalog-item-animated:hover {
-	transform: translateY(-8px) scale(1.02);
-	box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-	z-index: 10;
-}
-
-/* Изображение товара */
-.catalog-item-image {
-	position: relative;
-	overflow: hidden;
-	transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.catalog-item-animated:hover .catalog-item-image {
-	transform: scale(1.1);
-}
-
-.catalog-item-image::after {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
-	opacity: 0;
-	transition: opacity 0.3s ease;
-}
-
-.catalog-item-animated:hover .catalog-item-image::after {
-	opacity: 1;
-}
-
-/* Бейдж акции */
-.catalog-sale-badge {
-	animation: pulse 2s infinite;
-	z-index: 5;
-	font-weight: bold;
-	box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
-	transition: all 0.3s ease;
-}
-
-.catalog-item-animated:hover .catalog-sale-badge {
-	transform: scale(1.1);
-	box-shadow: 0 6px 16px rgba(255, 0, 0, 0.4);
-}
-
-/* Заголовок товара */
-.catalog-item-title {
-	transition: color 0.3s ease;
-	font-weight: 600;
-	line-height: 1.4;
-}
-
-.catalog-item-animated:hover .catalog-item-title {
-	color: #fe0000;
-}
-
-/* Описание товара */
-.catalog-item-description {
-	transition: opacity 0.3s ease;
-	color: #666;
-	font-size: 14px;
-	line-height: 1.6;
-}
-
-/* Цена */
-.catalog-item-price {
-	font-size: 20px;
-	font-weight: bold;
-	color: #fe0000;
-	transition: all 0.3s ease;
-	margin: 10px 0;
-}
-
-.catalog-item-animated:hover .catalog-item-price {
-	transform: scale(1.05);
-}
-
-/* Кнопка покупки */
-.catalog-buy-button {
-	position: relative;
-	overflow: hidden;
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-	border-radius: 8px;
-	font-weight: 600;
-	letter-spacing: 0.5px;
-	box-shadow: 0 4px 12px rgba(254, 0, 0, 0.2);
-}
-
-.catalog-buy-button::before {
-	content: '';
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 0;
-	height: 0;
-	border-radius: 50%;
-	background: rgba(255, 255, 255, 0.3);
-	transform: translate(-50%, -50%);
-	transition: width 0.6s, height 0.6s;
-}
-
-.catalog-buy-button:hover::before {
-	width: 300px;
-	height: 300px;
-}
-
-.catalog-buy-button:hover {
-	transform: translateY(-2px);
-	box-shadow: 0 6px 20px rgba(254, 0, 0, 0.35);
-	background: #ff1a1a;
-}
-
-.catalog-buy-button:active {
-	transform: translateY(0);
-	box-shadow: 0 2px 8px rgba(254, 0, 0, 0.25);
-}
-
-/* Заголовок страницы */
-.zgolovorleft {
-	animation: slideInLeft 0.6s ease-out;
-}
-
-.sttitle {
-	position: relative;
-	overflow: hidden;
-}
-
-.sttitle::after {
-	content: '';
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 0;
-	height: 3px;
-	background: linear-gradient(90deg, #fe0000, #ff4444);
-	animation: expandLine 1s ease-out 0.5s forwards;
-}
-
-@keyframes expandLine {
-	to {
-		width: 100%;
-	}
-}
-
-/* Переключатель акций/каталога */
-.actionperekl {
-	animation: fadeInUp 0.5s ease-out 0.3s both;
-}
-
-.actionperekl li {
-	transition: all 0.3s ease;
-	position: relative;
-	overflow: hidden;
-}
-
-.actionperekl li::before {
-	content: '';
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 0;
-	height: 2px;
-	background: #fff;
-	transition: width 0.3s ease;
-}
-
-.actionperekl li:hover::before {
-	width: 100%;
-}
-
-.actionperekl li:hover {
-	transform: translateY(-2px);
-}
-
-.catalog-active-tab {
-	color: white !important;
-	position: relative;
-}
-
-.catalog-active-tab::after {
-	content: '';
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: 2px;
-	background: #fff;
-	animation: expandLine 0.5s ease-out;
-}
-
-/* Фильтры - улучшенный дизайн */
-.maipttee {
-	display: flex;
-	gap: 15px;
-	justify-content: center;
-	flex-wrap: wrap;
-	animation: fadeInUp 0.6s ease-out 0.2s both;
-}
-
-.meinputer-filter {
-	transition: all 0.3s ease;
-	border-radius: 8px;
-	background: #fff;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.meinputer-filter:hover {
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-	transform: translateY(-2px);
-}
-
-.ddwnblock-filter {
-	border-radius: 8px;
-	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-	animation: scaleIn 0.2s ease-out;
-}
-
-.filter-item {
-	transition: all 0.2s ease;
-	padding: 8px 12px;
-	cursor: pointer;
-}
-
-.filter-item:hover {
-	background: #f0f0f0;
-	transform: translateX(5px);
-	color: #fe0000;
-	font-weight: 600;
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-	.catalog-item-animated {
-		animation-duration: 0.4s;
-	}
-	
-	.catalog-item-animated:hover {
-		transform: translateY(-4px) scale(1.01);
-	}
-	
-	.maipttee {
-		flex-direction: column;
-		gap: 10px;
-	}
-}
 
 /* duplicate .plashesbgmodl override removed to avoid conflicts; unified styles are defined at top of file */
 
@@ -1712,4 +1353,43 @@ text-align: left;
 margin: 10px;
 width: 340px;
 color: white;
+}
+
+/* Стили для страницы контактов */
+.contacts-page {
+	padding: 30px 0;
+	margin: 20px 0;
+}
+
+.contacts-page .footer_contact_block {
+	background-color: #f5f5f5;
+	padding: 25px;
+	border-radius: 8px;
+	margin: 15px;
+	color: #404554;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease;
+}
+
+.contacts-page .footer_contact_block:hover {
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+	transform: translateY(-2px);
+}
+
+.contacts-page .foterconicon {
+	color: #404554;
+	margin: 15px 0;
+	padding-left: 40px;
+	line-height: 1.6;
+}
+
+.contacts-page .foterconicon a {
+	color: #404554;
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+
+.contacts-page .foterconicon a:hover {
+	color: #fe0000;
+	text-decoration: underline;
 }

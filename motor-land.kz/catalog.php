@@ -69,24 +69,24 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		
 		<ul class="actionperekl">
 			<a href="/actions"><li>акции</li></a>
-			<a href="/catalog.php"><li class="actionpereklact catalog-active-tab">каталог</li></a>
+			<a href="/catalog"><li class="actionpereklact" style="color: white;">каталог</li></a>
 		</ul>
 	</div>
 </div>
 
 
-<div class="generalw catalog-main-section">
+<div class="generalw">
 	<div class="shirina">		
 
 		
-		<div class="filtersblock filtersblock-animated">
+		<div class="filtersblock">
 		<form method="get" action="catalog.php">
 			<!---<input type="text" name="setxt" class="searchbloinput" placeholder="Что вы хотели найти.."><br>--->
 			<div class="maipttee">
-				<div class="meinputer meinputer-filter"><div class="madiv" data-val="Марка"><?php if ($_GET['mk'] != '') { echo htmlspecialchars($_GET['mk'], ENT_QUOTES, 'UTF-8'); } else { echo "Марка"; } ?></div>
+				<div class="meinputer" style="border: solid 1px black;"><div class="madiv" data-val="Марка"><?php if ($_GET['mk'] != '') { echo htmlspecialchars($_GET['mk'], ENT_QUOTES, 'UTF-8'); } else { echo "Марка"; } ?></div>
 					<input type="hidden" name="mk" value="<?php if ($_GET['mk'] != '') { echo htmlspecialchars($_GET['mk'], ENT_QUOTES, 'UTF-8'); } else { echo ""; } ?>">
-					<div class="btmmearrow">&#9660;</div>
-					<div class="ddwnblock ddwnblock-filter">
+					<div class="btmmearrow" style="font-size: 17px;">&#9660;</div>
+					<div class="ddwnblock" style="border-top: solid 1px black; border-bottom: solid 1px black; border-right: solid 1px black; border-left: solid 1px black;">
 						<?php
 						$parent_id = 'noting';
 						$stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_category WHERE idp = ? ORDER BY id ASC");
@@ -96,7 +96,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 						if ($tmp->num_rows != 0) {
 							while($get = $tmp->fetch_array()):
 							?>
-							<div class="filter-item" data-id="<?=$get['id'];?>"><?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?></div>
+							<div style="color: black" data-id="<?=$get['id'];?>"><?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?></div>
 							<?php
 							endwhile;
 						}
@@ -105,10 +105,10 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 					</div>
 				</div>
 				
-				<div class="meinputer meinputer-filter"><div class="madiv" data-val="Модель"><?php if ($_GET['ml'] != '') { echo htmlspecialchars($_GET['ml'], ENT_QUOTES, 'UTF-8'); } else { echo "Модель"; } ?></div>
+				<div class="meinputer" style="border: solid 1px black;"><div class="madiv" data-val="Модель"><?php if ($_GET['ml'] != '') { echo htmlspecialchars($_GET['ml'], ENT_QUOTES, 'UTF-8'); } else { echo "Модель"; } ?></div>
 					<input type="hidden" name="ml" value="<?php if ($_GET['ml'] != '') { echo htmlspecialchars($_GET['ml'], ENT_QUOTES, 'UTF-8'); } else { echo ""; } ?>">
-					<div class="btmmearrow">&#9660;</div>
-					<div class="ddwnblock ddwnblock-filter" id="modellist">
+					<div class="btmmearrow" style="font-size: 17px;">&#9660;</div>
+					<div class="ddwnblock" id="modellist" style="border-top: solid 1px black; border-bottom: solid 1px black; border-right: solid 1px black; border-left: solid 1px black;">
 						<?php
 						if ($mark) {
 							$stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_category WHERE idp = ? ORDER BY id ASC");
@@ -118,7 +118,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 							if ($tmp->num_rows != 0) {
 								while($get = $tmp->fetch_array()):
 								?>
-								<div class="filter-item" data-id="<?=$get['id'];?>"><?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?></div>
+								<div style="color: black" data-id="<?=$get['id'];?>"><?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?></div>
 								<?php
 								endwhile;
 							}
@@ -128,10 +128,10 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 					</div>
 				</div>
 				
-				<div class="meinputer meinputer-filter"><div class="madiv"><?php if ($_GET['yr'] != '') { echo htmlspecialchars($_GET['yr'], ENT_QUOTES, 'UTF-8'); } else { echo "Год"; } ?></div>
+				<div class="meinputer" style="border-top: solid 1px black; border: solid 1px black;"><div class="madiv"><?php if ($_GET['yr'] != '') { echo htmlspecialchars($_GET['yr'], ENT_QUOTES, 'UTF-8'); } else { echo "Год"; } ?></div>
 					<input type="hidden" name="yr" value="<?php if ($_GET['yr'] != '') { echo htmlspecialchars($_GET['yr'], ENT_QUOTES, 'UTF-8'); } else { echo ""; } ?>">
-					<div class="btmmearrow">&#9660;</div>
-					<div class="ddwnblock ddwnblock-filter overflow-scroll" id="yearlist">
+					<div class="btmmearrow" style="font-size: 17px;">&#9660;</div>
+					<div class="ddwnblock" id="yearlist" style="overflow-y: scroll;border-top: solid 1px black; border-bottom: solid 1px black; border-right: solid 1px black; border-left: solid 1px black;">
 						<?php
 						if ($mode) {
 							$mode_pattern = '[' . $mode . ']';
@@ -146,7 +146,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 							if ($sql->num_rows != 0) {
 								while($get = $sql->fetch_array()):
 								?>
-								<div class="filter-item" data-id="<?=$get['id'];?>"><?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?></div>
+								<div style="color: black" data-id="<?=$get['id'];?>"><?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?></div>
 								<?php
 								endwhile;
 							}
@@ -203,18 +203,18 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		if ($tmps->num_rows != 0) { 
 			while($get = $tmps->fetch_array()):
 		?>
-		<div class="toverblock catalog-item-animated">
-			<a href="/detal?id=<?=$get['id'];?>"><div class="toverimg catalog-item-image" style="background-image: url(<?=get_farrimg($get['images'])[0];?>);">
+		<div class="toverblock">
+			<a href="/detal?id=<?=$get['id'];?>"><div class="toverimg" style="background-image: url(<?=get_farrimg($get['images'])[0];?>);">
 			<?php if ($get['sale'] != 'noting') { ?>
-			<div class="cationsale catalog-sale-badge"><?=$get['sale'];?></div>
+			<div class="cationsale"><?=$get['sale'];?></div>
 			<?php } ?>
 			</div></a>
-			<div class="tovertitle catalog-item-title"><?=$get['name'];?></div>
-			<div class="tovaropis catalog-item-description">
+			<div class="tovertitle"><?=$get['name'];?></div>
+			<div class="tovaropis">
 				<?=$get['stext'];?>
 			</div>
-			<div class="tovercena catalog-item-price"><?=($get['cash']!=0?$get['cash'].' KZT':'Цена по запросу');?></div>
-			<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="toverbuton catalog-buy-button" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">Купить</a>
+		<div class="tovercena"><?=($get['cash']!=0?$get['cash'].' KZT':'Цена по запросу');?></div>
+		<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="toverbuton" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">Купить</a>
 		</div>
 		<?php
 			endwhile;

@@ -7,7 +7,7 @@
 			<a href="/service"><li>Сервис</li></a>
 			<a href="/pay"><li>Оплата / Доставка</li></a>
 			<a href="/guarantees"><li>Гарантии</li></a>
-			<li onclick="$('html,body').stop().animate({ scrollTop: 9000 }, 500);">Контакты</li>
+			<a href="/contacts.php"><li>Контакты</li></a>
 		</ul>
 		<div class="modilebtn" onclick="mobilemenu ();"></div>
 		</div>
