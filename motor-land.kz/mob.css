@@ -8,6 +8,14 @@
 	position: absolute !important;
 	top: -15px !important;
 	z-index: 10 !important;
+	background-image: url(./img/logo.jpg) !important;
+	background-size: contain !important;
+	background-position: center top !important;
+	background-repeat: no-repeat !important;
+	}
+	
+	.logo-video {
+		display: none !important;
 	}
 	
 	.zgolovorleft {

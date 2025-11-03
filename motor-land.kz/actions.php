@@ -9,16 +9,6 @@ $SITE_TITLE = 'Моторленд | Акции на контрактные Мо�
 <?php include("hyst/head.php"); ?>
 </head>
 <body>
-<!-- Экран загрузки -->
-<div id="loader-screen" class="loader-screen">
-	<div class="loader-video-container">
-		<video id="loader-video" class="loader-video" autoplay muted playsinline>
-			<source src="img/loader.mp4" type="video/mp4">
-			<div class="loader-fallback">Моторленд</div>
-		</video>
-	</div>
-</div>
-
 <?php include("hyst/sbody.php"); ?>
 <?php include("des/head.php"); ?>
 <br><br>
@@ -82,33 +72,5 @@ $SITE_TITLE = 'Моторленд | Акции на контрактные Мо�
 <?php include("des/foter.php"); ?>
 <?php include("hyst/fbody.php"); ?>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-	var loader = document.getElementById('loader-screen');
-	var video = document.getElementById('loader-video');
-	
-	function hideLoader() {
-		if (loader && !loader.classList.contains('hidden')) {
-			loader.classList.add('hidden');
-			setTimeout(function() {
-				if (loader) loader.style.display = 'none';
-			}, 500);
-		}
-	}
-	
-	if (video) {
-		video.addEventListener('ended', hideLoader);
-		video.addEventListener('loadeddata', function() {
-			setTimeout(hideLoader, 800);
-		});
-		video.play().catch(function() {});
-	}
-	
-	setTimeout(hideLoader, 1500);
-	window.addEventListener('load', function() {
-		setTimeout(hideLoader, 300);
-	});
-});
-</script>
 </body>
 </html>
