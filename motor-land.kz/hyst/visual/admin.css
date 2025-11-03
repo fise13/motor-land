@@ -412,7 +412,7 @@ label[for="sidebarbutton"] i:after {
 
 /* Sidebar Menu Items */
 .admin_sidebar_menu {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: var(--spacing-md);
@@ -428,7 +428,9 @@ label[for="sidebarbutton"] i:after {
   font-size: var(--font-size-sm);
   background: transparent;
   border: 1px solid transparent;
-  overflow: hidden;
+  overflow: visible;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .admin_sidebar_menu::before {
@@ -439,9 +441,31 @@ label[for="sidebarbutton"] i:after {
   opacity: 0;
   transition: opacity var(--transition-fast);
   border-radius: var(--radius-xl);
-  z-index: -1;
+  z-index: 0;
 }
 
+/* Контейнер для иконки */
+.admin_sidebar_menu > *:first-child {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Текст в меню */
+.admin_sidebar_menu span {
+  white-space: nowrap;
+  line-height: 1.4;
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+
+/* Для элементов с background-image */
 .admin_sidebar_menu[style*="background-image"] {
   padding-left: 3.5rem;
   background-position: var(--spacing-lg) center !important;
@@ -460,11 +484,7 @@ label[for="sidebarbutton"] i:after {
   opacity: 1;
 }
 
-.admin_sidebar_menu span {
-  white-space: nowrap;
-  line-height: 1.4;
-}
-
+/* Collapsed sidebar */
 #sidebarbutton:checked ~ adm_content sidebar .admin_sidebar_menu {
   justify-content: center;
   padding: var(--spacing-md);
@@ -472,7 +492,7 @@ label[for="sidebarbutton"] i:after {
 
 #sidebarbutton:checked ~ adm_content sidebar .admin_sidebar_menu[style*="background-image"] {
   background-position: center !important;
-  padding-left: var(--spacing-md);
+  padding: var(--spacing-md);
 }
 
 /* === 6. CONTENT === */
