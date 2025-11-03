@@ -925,4 +925,5 @@ iv[right]:after {
   border: 2px solid var(--color-border);
   cursor: pointer;
   user-select: none;
-  border-radius: var(--radius-m
+  border-radius: var(--radius-m);
+}
