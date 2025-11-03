@@ -120,7 +120,7 @@ $SITE_DESCRIPTION = 'Компания "Motor Land" - поставка контр
 					<div class="ddwnblock" id="modellist"></div>
 				</div>
 				
-				<div class="meinputer"><div class="madiv">Год</div>
+				<div class="meinputer"><div class="madiv" data-val="Год">Год</div>
 					<input type="hidden" name="yr">
 					<div class="btmmearrow">&#9660;</div>
 					<div class="ddwnblock" id="yearlist" style="overflow-y: scroll;"></div>

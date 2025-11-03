@@ -1,76 +1,152 @@
 $(document).ready(function() {
 
 	/**
+	 * Функция: Проверка возможности открытия выпадающего списка
+	 * Описание: Проверяет, можно ли открыть список (для Модель и Год требуется выбор предыдущих полей)
+	 * Параметры: meinputer - jQuery объект контейнера поля
+	 * Возвращает: true если можно открыть, false если нельзя
+	 */
+	function canOpenDropdown(meinputer) {
+		var fieldName = meinputer.find('input[type="hidden"]').attr('name');
+		
+		// Марка всегда доступна
+		if (fieldName === 'mk') {
+			return true;
+		}
+		
+		// Для Модели требуется выбор Марки
+		if (fieldName === 'ml') {
+			var markValue = $('.meinputer').find('input[name="mk"]').val();
+			if (!markValue || markValue === '') {
+				return false;
+			}
+			return true;
+		}
+		
+		// Для Года требуется выбор Модели
+		if (fieldName === 'yr') {
+			var modelValue = $('.meinputer').find('input[name="ml"]').val();
+			if (!modelValue || modelValue === '') {
+				return false;
+			}
+			return true;
+		}
+		
+		return true;
+	}
+
+	/**
+	 * Функция: Закрытие выпадающего списка с анимацией
+	 * Описание: Плавно закрывает выпадающий список
+	 * Параметры: dd - jQuery объект выпадающего списка
+	 * Возвращает: ничего
+	 */
+	function closeDropdown(dd) {
+		if (dd.hasClass('open')) {
+			dd.css({
+				'transform': 'translateY(0) scaleY(1)',
+				'opacity': 1
+			}).animate({
+				opacity: 0
+			}, {
+				step: function(now, fx) {
+					var progress = 1 - now;
+					$(this).css('transform', 'translateY(' + (-8 * progress) + 'px) scaleY(' + (1 - 0.04 * progress) + ')');
+				},
+				duration: 250,
+				easing: 'swing',
+				complete: function() {
+					$(this).css({
+						'display': 'none',
+						'transform': 'translateY(-6px) scaleY(0.98)',
+						'opacity': 0
+					}).removeClass('open');
+				}
+			});
+		}
+	}
+
+	/**
+	 * Функция: Открытие выпадающего списка с анимацией
+	 * Описание: Плавно открывает выпадающий список
+	 * Параметры: dd - jQuery объект выпадающего списка
+	 * Возвращает: ничего
+	 */
+	function openDropdown(dd) {
+		dd.css({
+			'display': 'block',
+			'opacity': 0,
+			'transform': 'translateY(-10px) scaleY(0.95)'
+		});
+		
+		// Небольшая задержка для инициализации
+		setTimeout(function() {
+			dd.animate({
+				opacity: 1
+			}, {
+				step: function(now, fx) {
+					var progress = now;
+					var translateY = -10 + (10 * progress);
+					var scaleY = 0.95 + (0.05 * progress);
+					$(this).css('transform', 'translateY(' + translateY + 'px) scaleY(' + scaleY + ')');
+				},
+				duration: 300,
+				easing: 'swing',
+				complete: function() {
+					$(this).css({
+						'transform': 'translateY(0) scaleY(1)',
+						'opacity': 1
+					}).addClass('open');
+				}
+			});
+		}, 10);
+	}
+
+	/**
 	 * Функция: Обработка клика по стрелке выпадающего списка
 	 * Описание: При клике на стрелку открывает/закрывает выпадающий список фильтров (Марка, Модель, Год).
 	 * 			Закрывает все остальные открытые списки и переключает состояние текущего.
+	 * 			Проверяет валидацию - нельзя открыть следующее поле без выбора предыдущего.
 	 * Параметры: нет (использует элемент, на который кликнули)
 	 * Возвращает: ничего
 	 */
 	$(document).on("click", ".btmmearrow, .madiv", function () {
 		var meinputer = $(this).closest('.meinputer');
 		var dd = meinputer.children('.ddwnblock');
-
-		// Закрыть другие открытые списки с плавным затемнением и уменьшением
-		$('.ddwnblock').not(dd).each(function() {
-			if ($(this).hasClass('open')) {
-				$(this).css({
-					'transform': 'translateY(0) scaleY(1)',
-					'opacity': 1,
-					'display': 'block'
-				}).animate({
-					opacity: 0,
-				}, {
-					step: function(now, fx) {
-						$(this).css('transform', 'translateY(-12px) scaleY(0.96)');
-					},
-					duration: 220,
-					complete: function() {
-						$(this).css({
-							'display': 'none',
-							'transform': 'translateY(-6px) scaleY(0.98)'
-						}).removeClass('open');
-					}
-				});
+		
+		// Проверка валидации перед открытием
+		if (!dd.hasClass('open')) {
+			if (!canOpenDropdown(meinputer)) {
+				var fieldName = meinputer.find('input[type="hidden"]').attr('name');
+				var fieldLabel = '';
+				if (fieldName === 'ml') {
+					fieldLabel = 'Сначала выберите Марку';
+				} else if (fieldName === 'yr') {
+					fieldLabel = 'Сначала выберите Модель';
+				}
+				if (fieldLabel) {
+					// Визуальная индикация недоступности
+					meinputer.css({
+						'animation': 'shake 0.5s ease'
+					});
+					setTimeout(function() {
+						meinputer.css('animation', '');
+					}, 500);
+					return false;
+				}
 			}
+		}
+
+		// Закрыть другие открытые списки с плавной анимацией
+		$('.ddwnblock').not(dd).each(function() {
+			closeDropdown($(this));
 		});
 
-		// Анимация открытия/закрытия текущего списка
+		// Переключение текущего списка
 		if (dd.hasClass('open')) {
-			// Animate close
-			dd.animate({
-				opacity: 0
-			}, {
-				step: function(now, fx) {
-					$(this).css('transform', 'translateY(-12px) scaleY(0.96)');
-				},
-				duration: 220,
-				complete: function() {
-					$(this)
-						.css({
-							'display': 'none',
-							'transform': 'translateY(-6px) scaleY(0.98)'
-						})
-						.removeClass('open');
-				}
-			});
+			closeDropdown(dd);
 		} else {
-			// Prepare and animate open
-			dd.css({
-				'display': 'block',
-				'opacity': 0,
-				'transform': 'translateY(28px) scaleY(1.08)'
-			}).animate({
-				opacity: 1
-			}, {
-				step: function(now, fx) {
-					$(this).css('transform', 'translateY(0) scaleY(1)');
-				},
-				duration: 240,
-				complete: function() {
-					$(this).addClass('open');
-				}
-			});
+			openDropdown(dd);
 		}
 	});
 
@@ -106,47 +182,106 @@ $(document).ready(function() {
 	$(document).on("blur", ".madiv", function () {
 		if ($(this).html() == '') { $(this).html($(this).attr('data-val')); }
 	});
+
+	/**
+	 * Функция: Обновление состояния доступности полей
+	 * Описание: Обновляет визуальное состояние полей в зависимости от заполненности предыдущих полей
+	 * Параметры: нет
+	 * Возвращает: ничего
+	 */
+	function updateFieldsState() {
+		var markValue = $('.meinputer').find('input[name="mk"]').val();
+		var modelValue = $('.meinputer').find('input[name="ml"]').val();
+		
+		// Управление полем Модель
+		var modelInputer = $('.meinputer').has('input[name="ml"]');
+		if (!markValue || markValue === '') {
+			modelInputer.addClass('disabled');
+		} else {
+			modelInputer.removeClass('disabled');
+		}
+		
+		// Управление полем Год
+		var yearInputer = $('.meinputer').has('input[name="yr"]');
+		if (!modelValue || modelValue === '') {
+			yearInputer.addClass('disabled');
+		} else {
+			yearInputer.removeClass('disabled');
+		}
+	}
+
+	// Обновление состояния полей при загрузке страницы
+	updateFieldsState();
 	
 	/**
 	 * Функция: Выбор значения из выпадающего списка
 	 * Описание: При клике на элемент выпадающего списка устанавливает выбранное значение в поле ввода,
-	 * 			закрывает список и, если выбрана марка или модель, загружает через AJAX соответствующие
-	 * 			варианты для связанных полей (модели для марки, годы для модели).
+	 * 			автоматически закрывает список с плавной анимацией и, если выбрана марка или модель, 
+	 * 			загружает через AJAX соответствующие варианты для связанных полей (модели для марки, годы для модели).
 	 * Параметры: нет (использует элемент, на который кликнули)
 	 * Возвращает: ничего
 	 */
 	$(document).on("click", ".ddwnblock div", function () {
         var parent = $(this).parent('.ddwnblock').parent('.meinputer');
-        $(this).parent('.ddwnblock').removeClass('open');
-		parent.children('.madiv').html($(this).html());
-		parent.children('input').val($(this).html());
+		var dd = $(this).parent('.ddwnblock');
+		var selectedValue = $(this).html();
+		var selectedId = $(this).attr('data-id');
+		
+		// Установка выбранного значения
+		parent.children('.madiv').html(selectedValue);
+		parent.children('input').val(selectedValue);
+
+		// Автоматическое закрытие выпадающего списка с анимацией
+		closeDropdown(dd);
+
+		// Обновление состояния полей после выбора
+		updateFieldsState();
 
 		// Дальнейшие ajax запросы
 		if (parent.children('input').attr('name') == 'mk') {
+			// Очистка зависимых полей
 			$("#modellist, #yearlist").html('');
 			$('#modellist').parent('.meinputer').children('.madiv').html('Модель');
+			$('#modellist').parent('.meinputer').children('.madiv').attr('data-val', 'Модель');
 			$('#yearlist').parent('.meinputer').children('.madiv').html('Год');
+			$('#yearlist').parent('.meinputer').children('.madiv').attr('data-val', 'Год');
+			
+			// Обновление состояния полей после очистки зависимых
+			updateFieldsState();
+			
+			// Загрузка моделей для выбранной марки
 			$.ajax({
 				type: "POST",
 				url: 'getf.php',
-				data: { tex: $(this).attr('data-id'), typ: 2 },
+				data: { tex: selectedId, typ: 2 },
 				dataType: "json",
 				success: function(html){
 					$('.meinputer').find('input[name="ml"], input[name="yr"]').val('');
 					$("#modellist").html(html.report);
+					// Повторное обновление состояния после загрузки
+					updateFieldsState();
 				}
 			});
 		} else if (parent.children('input').attr('name') == 'ml') {
+			// Очистка поля Года
 			$("#yearlist").html('');
 			$('#yearlist').parent('.meinputer').children('.madiv').html('Год');
+			$('#yearlist').parent('.meinputer').children('.madiv').attr('data-val', 'Год');
+			
+			// Обновление состояния полей после очистки зависимых
+			updateFieldsState();
+			
+			// Загрузка годов для выбранной модели
 			$.ajax({
 				type: "POST",
 				url: 'getf.php',
-				data: { tex: $(this).attr('data-id'), typ: 3 },
+				data: { tex: selectedId, typ: 3 },
 				dataType: "json",
 				success: function(html){
 					$('.meinputer').find('input[name="yr"]').val('');
 					$("#yearlist").html(html.report);
+					// Повторное обновление состояния после загрузки
+					updateFieldsState();
 				}
 			});
 		}
