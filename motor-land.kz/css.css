@@ -522,16 +522,15 @@ margin: 0;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
 }
 
 .consult-form-control {
   position: relative;
   margin: 0;
   width: auto;
-  min-width: 180px;
-  display: flex;
-  flex-direction: column;
+  display: inline-block;
+  vertical-align: top;
   animation: fadeIn 0.4s ease-out both;
 }
 
@@ -544,53 +543,38 @@ margin: 0;
 }
 
 .consult-form-control label {
-  position: relative;
-  margin-bottom: 4px;
-  pointer-events: none;
-}
-
-.consult-form-control label span {
-  display: inline-block;
-  font-size: 12px;
-  min-width: 5px;
-  color: rgba(255, 255, 255, 0.7);
-  transition: color 0.15s ease;
-  font-weight: 400;
-  letter-spacing: 0.2px;
+  display: none;
 }
 
 .consult-input {
-  background-color: #000000;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: transparent;
+  border: 1px solid #000000;
   display: block;
-  width: 100%;
-  padding: 6px 12px;
-  font-size: 14px;
-  color: #fff;
+  width: 140px;
+  padding: 5px 15px;
+  font-size: 15px;
+  color: #000000;
   transition: border-color 0.15s ease;
   font-weight: 400;
   box-sizing: border-box;
+  border-radius: 0;
 }
 
 .consult-input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .consult-input:focus,
 .consult-input:valid {
   outline: 0;
   border-color: #fe0000;
-}
-
-.consult-form-control:has(.consult-input:focus) label span,
-.consult-form-control:has(.consult-input:valid) label span {
-  color: #fe0000;
+  color: #000000;
 }
 
 .consult-btn {
-  padding: 8px 20px;
+  padding: 5px 20px;
   border-radius: 0;
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 500;
   margin: 0;
   background: #fe0000;
@@ -601,9 +585,9 @@ margin: 0;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   animation: fadeIn 0.4s ease-out 0.5s both;
-  align-self: flex-end;
-  height: 32px;
+  height: auto;
   box-sizing: border-box;
+  width: 180px;
 }
 
 .consult-btn:hover {
