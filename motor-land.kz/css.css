@@ -517,12 +517,12 @@ margin: 0;
 }
 
 .consult-form {
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   flex-wrap: nowrap;
-  gap: 6px;
+  gap: 4px;
 }
 
 .consult-form-control {
@@ -530,7 +530,7 @@ margin: 0;
   margin: 0;
   width: auto;
   display: inline-block;
-  vertical-align: top;
+  vertical-align: middle;
   animation: fadeIn 0.4s ease-out both;
   flex-shrink: 0;
 }
@@ -551,19 +551,21 @@ margin: 0;
   background-color: transparent;
   border: solid 1px #333333;
   display: inline-block;
-  width: 140px;
-  padding: 5px 20px;
-  font-size: 15px;
+  width: 110px;
+  padding: 3px 10px;
+  font-size: 13px;
   color: #333333;
   transition: border-color 0.15s ease;
   font-weight: 400;
   box-sizing: border-box;
   border-radius: 0;
   vertical-align: middle;
+  height: 28px;
 }
 
 .consult-input::placeholder {
   color: rgba(0, 0, 0, 0.5);
+  font-size: 13px;
 }
 
 .consult-input:focus,
@@ -574,9 +576,9 @@ margin: 0;
 }
 
 .consult-btn {
-  padding: 5px 20px;
+  padding: 3px 12px;
   border-radius: 0;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 500;
   margin: 0;
   background: #fe0000;
@@ -584,11 +586,12 @@ margin: 0;
   border: none;
   cursor: pointer;
   transition: background-color 0.15s ease;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   text-transform: uppercase;
   animation: fadeIn 0.4s ease-out 0.5s both;
   box-sizing: border-box;
-  width: 180px;
+  width: 130px;
+  height: 28px;
   vertical-align: middle;
   display: inline-block;
 }
@@ -599,7 +602,6 @@ margin: 0;
 
 .consult-btn:active {
   background: #b71c1c;
-  transform: translateY(0);
 }
 
 /* Старые стили для обратной совместимости */
