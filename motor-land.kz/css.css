@@ -259,10 +259,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 overflow: hidden;
-background-image: url(./img/logo.jpg);
-background-size: contain;
-background-position: center center;
-background-repeat: no-repeat;
+/* Фоновое изображение убрано для десктопа - показываем только видео */
 }
 
 .logo-video {
@@ -275,14 +272,14 @@ border-radius: 12px;
 /* В мобильной версии скрываем видео и показываем фоновое изображение */
 @media screen and (max-width: 660px), only screen and (max-device-width : 660px) {
 	.logo-video {
-		display: none;
+		display: none !important;
 	}
 	
 	.logo {
-		background-image: url(./img/logo.jpg);
-		background-size: contain;
-		background-position: center top;
-		background-repeat: no-repeat;
+		background-image: url(./img/logo.jpg) !important;
+		background-size: contain !important;
+		background-position: center top !important;
+		background-repeat: no-repeat !important;
 	}
 }
 
