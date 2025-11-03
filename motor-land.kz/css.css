@@ -1279,30 +1279,94 @@ opacity: 1;
 
 /* Иконка локации */
 .footer-icon-location::before {
-  content: '📍';
-  font-size: 16px;
-  opacity: 0.7;
+  content: '';
+  width: 10px;
+  height: 10px;
+  border: 2px solid #fe0000;
+  border-radius: 50% 50% 50% 0;
+  transform: translateY(-50%) rotate(-45deg);
+  left: 2px;
+  top: 50%;
+  opacity: 1;
+  background: transparent;
 }
 
 /* Иконка телефона */
 .footer-icon-phone::before {
-  content: '📞';
-  font-size: 16px;
-  opacity: 0.7;
+  content: '';
+  width: 12px;
+  height: 12px;
+  border: 2px solid #fe0000;
+  border-radius: 2px;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 1;
+  background: transparent;
+}
+
+.footer-icon-phone::after {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 3px;
+  border: 1px solid #fe0000;
+  border-left: none;
+  border-radius: 0 2px 2px 0;
 }
 
 /* Иконка WhatsApp */
 .footer-icon-whatsapp::before {
-  content: '💬';
-  font-size: 16px;
-  opacity: 0.7;
+  content: '';
+  width: 12px;
+  height: 12px;
+  border: 2px solid #fe0000;
+  border-radius: 2px;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 1;
+  background: transparent;
+}
+
+.footer-icon-whatsapp::after {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 4px;
+  height: 4px;
+  border-right: 2px solid #fe0000;
+  border-bottom: 2px solid #fe0000;
 }
 
 /* Иконка расписания */
 .footer-icon-schedule::before {
-  content: '🕐';
-  font-size: 16px;
-  opacity: 0.7;
+  content: '';
+  width: 12px;
+  height: 12px;
+  border: 2px solid #fe0000;
+  border-radius: 50%;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 1;
+  background: transparent;
+}
+
+.footer-icon-schedule::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 1px;
+  height: 4px;
+  background: #fe0000;
 }
 
 .copyr {
