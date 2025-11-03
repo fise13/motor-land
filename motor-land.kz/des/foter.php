@@ -4,12 +4,16 @@
   <div class="foterzago">Закажите обратный звонок</div>
   <form method="post">
     <div class="form-control">
-      <input type="text" name="name" id="name" placeholder=" " required>
-      <label for="name">Имя</label>
+      <input type="text" name="name" id="name" required>
+      <label for="name">
+        <span style="transition-delay:0ms">И</span><span style="transition-delay:50ms">м</span><span style="transition-delay:100ms">я</span>
+      </label>
     </div>
     <div class="form-control">
-      <input type="text" name="phon" id="phon" placeholder=" " required>
-      <label for="phon">Телефон</label>
+      <input type="text" name="phon" id="phon" required>
+      <label for="phon">
+        <span style="transition-delay:0ms">Т</span><span style="transition-delay:50ms">е</span><span style="transition-delay:100ms">л</span><span style="transition-delay:150ms">е</span><span style="transition-delay:200ms">ф</span><span style="transition-delay:250ms">о</span><span style="transition-delay:300ms">н</span>
+      </label>
     </div>
     <input type="hidden" name="send_one" value="send">
     <input type="button" name="JF_send_casual" value="Отправить">
