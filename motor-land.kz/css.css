@@ -905,14 +905,24 @@ opacity: 1;
 .foterinline {
   display: inline-block;
   vertical-align: top;
-  padding: 20px;
+  padding: 50px 30px;
   width: 100%;
+  max-width: 500px;
+  margin: 0 auto 60px;
   box-sizing: border-box;
   text-align: center;
   color: white;
   font-family: "Inter", sans-serif;
   animation: fadeInDown 0.8s ease-out;
   position: relative;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  z-index: 1;
 }
 
 @keyframes fadeInDown {
@@ -970,8 +980,8 @@ opacity: 1;
 /* === Поля ввода === */
 .form-control {
   position: relative;
-  margin: 20px 0 40px;
-  width: 190px;
+  margin: 25px 0 35px;
+  width: 250px;
   display: flex;
   flex-direction: column;
   animation: inputFadeIn 0.6s ease-out forwards;
@@ -1005,36 +1015,47 @@ opacity: 1;
 
 .form-control label span {
   display: inline-block;
-  font-size: 18px;
+  font-size: 19px;
   min-width: 5px;
   color: #fff;
   transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  font-weight: 500;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .form-control input {
   background-color: transparent;
   border: 0;
-  border-bottom: 2px #fff solid;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.6);
   display: block;
   width: 100%;
-  padding: 15px 0;
+  padding: 18px 0;
   font-size: 18px;
   color: #fff;
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  font-weight: 400;
+}
+
+.form-control input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .form-control input:focus,
 .form-control input:valid {
   outline: 0;
-  border-bottom-color: lightblue;
+  border-bottom-color: #ffeb3b;
   border-bottom-width: 3px;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(173, 216, 230, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(255, 235, 59, 0.4);
+  background: rgba(255, 255, 255, 0.03);
+  padding-left: 10px;
+  border-radius: 5px 5px 0 0;
 }
 
 .form-control:has(input:focus) label span,
 .form-control:has(input:valid) label span {
-  color: lightblue;
+  color: #ffeb3b;
+  text-shadow: 0 0 10px rgba(255, 235, 59, 0.6);
 }
 
 /* === Кнопка "Отправить" === */
@@ -1136,16 +1157,33 @@ opacity: 1;
 }
 
 .foterzago {
-  font-size: 24px;
+  font-size: 28px;
   text-transform: uppercase;
   color: white;
   font-family: robotob;
-  margin: 15px 0px 30px 0px;
+  margin: 0 0 40px 0;
+  padding-bottom: 20px;
   position: relative;
   display: inline-block;
   animation: titleGlow 3s ease-in-out infinite, slideInFromLeft 0.8s ease-out 0.2s both;
-  letter-spacing: 2px;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  letter-spacing: 3px;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.4),
+               0 2px 10px rgba(0, 0, 0, 0.3);
+  font-weight: 700;
+}
+
+.foterzago::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #ffeb3b, transparent);
+  border-radius: 2px;
+  animation: expandLine 1s ease-out 0.8s forwards;
+  max-width: 0;
 }
 
 @keyframes slideInFromLeft {
@@ -1288,13 +1326,16 @@ opacity: 1;
 }
 
 .foterconicon {
-  padding: 0px 0px 0px 30px;
-  margin: 20px;
+  padding: 15px 0px 15px 45px;
+  margin: 12px 0;
   text-align: left;
   position: relative;
   animation: fadeInUp 0.6s ease-out forwards;
   opacity: 0;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 3px solid transparent;
 }
 
 .foterconicon:nth-child(1) { animation-delay: 0.1s; }
@@ -1303,22 +1344,30 @@ opacity: 1;
 .foterconicon:nth-child(4) { animation-delay: 0.4s; }
 
 .foterconicon:hover {
-  transform: translateX(10px);
-  padding-left: 35px;
+  transform: translateX(8px);
+  padding-left: 50px;
+  background: rgba(255, 255, 255, 0.08);
+  border-left-color: #ffeb3b;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
 .foterconicon:hover::before {
-  transform: scale(1.3) rotate(5deg);
+  transform: scale(1.4) rotate(8deg);
+  filter: drop-shadow(0 0 8px rgba(255, 235, 59, 0.6));
 }
 
 .foterconicon::before {
   content: '';
   position: absolute;
-  left: 0;
-  top: 0;
-  width: 20px;
-  height: 20px;
-  transition: all 0.3s ease;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .foterconicon a {
@@ -1353,29 +1402,33 @@ opacity: 1;
 /* Иконка локации */
 .footer-icon-location::before {
   content: '📍';
-  font-size: 18px;
+  font-size: 22px;
   animation: iconPulse 2s ease-in-out infinite;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 /* Иконка телефона */
 .footer-icon-phone::before {
   content: '📞';
-  font-size: 18px;
+  font-size: 22px;
   animation: iconPulse 2s ease-in-out infinite 0.3s;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 /* Иконка WhatsApp */
 .footer-icon-whatsapp::before {
   content: '💬';
-  font-size: 18px;
+  font-size: 22px;
   animation: iconPulse 2s ease-in-out infinite 0.6s;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 /* Иконка расписания */
 .footer-icon-schedule::before {
   content: '🕐';
-  font-size: 18px;
+  font-size: 22px;
   animation: iconPulse 2s ease-in-out infinite 0.9s;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 @keyframes iconPulse {
@@ -1630,11 +1683,12 @@ display: flex;
 justify-content: center;
 flex-wrap: wrap;
 align-items: start;
-gap: 40px;
-padding: 40px 0;
+gap: 50px;
+padding: 50px 20px;
 animation: fadeInUp 0.8s ease-out 0.2s forwards;
 opacity: 0;
 position: relative;
+z-index: 1;
 }
 
 .footer_contacts::before {
@@ -1658,15 +1712,46 @@ position: relative;
 
 .footer_contact_block {
 margin: 0;
-width: 340px;
+width: 380px;
 color: white;
 animation: slideInUp 0.6s ease-out forwards;
 opacity: 0;
-transition: transform 0.3s ease, box-shadow 0.3s ease;
+transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+background: rgba(0, 0, 0, 0.15);
+backdrop-filter: blur(15px) saturate(150%);
+-webkit-backdrop-filter: blur(15px) saturate(150%);
+border-radius: 20px;
+padding: 35px 25px;
+border: 1px solid rgba(255, 255, 255, 0.1);
+box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+position: relative;
+overflow: hidden;
+}
+
+.footer_contact_block::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ffeb3b, #ff9800);
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+  transform-origin: left;
+}
+
+.footer_contact_block:hover::before {
+  transform: scaleX(1);
 }
 
 .footer_contact_block:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3),
+              0 0 30px rgba(255, 235, 59, 0.2),
+              inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 235, 59, 0.3);
 }
 
 .footer_office_block:nth-child(1) {
