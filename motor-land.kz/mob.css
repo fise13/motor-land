@@ -158,67 +158,76 @@ width: 260px !important;
 /* Стили для кнопки */
 .modilebtn {
     position: fixed !important;
-    top: 15px !important;
-    right: 15px !important;
+    top: 20px !important;
+    right: 20px !important;
     left: auto !important;
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     display: flex !important;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 5px;
-    background: transparent;
+    gap: 0;
+    background: #000;
     border: none;
     cursor: pointer;
     z-index: 110;
-    padding: 8px;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
+    padding: 12px 10px;
+    border-radius: 0;
+    box-shadow: none;
+    transition: background-color 0.2s ease;
 }
 
 .modilebtn:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background: #1a1a1a;
+}
+
+.modilebtn:active {
+    background: #333;
 }
 
 .modilebtn span {
     display: block !important;
-    width: 28px;
-    height: 3px;
+    width: 24px;
+    height: 2px;
     background-color: #fff;
-    border-radius: 3px;
+    border-radius: 1px;
     transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    transform-origin: center;
+    transform-origin: center center;
     position: relative;
 }
 
 .modilebtn span:nth-child(1) {
-    transform: translateY(0) rotate(0deg);
+    margin-bottom: 5px;
 }
 
 .modilebtn span:nth-child(2) {
-    opacity: 1;
-    transform: scaleX(1);
+    margin-bottom: 5px;
 }
 
 .modilebtn span:nth-child(3) {
-    transform: translateY(0) rotate(0deg);
+    margin-bottom: 0;
 }
 
 /* Состояние активного меню (крестик) */
+.modilebtn.active {
+    background: #000;
+}
+
 .modilebtn.active span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg) !important;
-    background-color: #fff;
+    transform: translateY(7px) rotate(45deg) !important;
+    margin: 0;
 }
 
 .modilebtn.active span:nth-child(2) {
     opacity: 0 !important;
     transform: scaleX(0) !important;
+    margin: 0;
 }
 
 .modilebtn.active span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg) !important;
-    background-color: #fff;
+    transform: translateY(-7px) rotate(-45deg) !important;
+    margin: 0;
 }
 
 .filtersblock input[type="text"] {
