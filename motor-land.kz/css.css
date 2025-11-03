@@ -522,7 +522,7 @@ margin: 0;
   align-items: center;
   justify-content: center;
   flex-wrap: nowrap;
-  gap: 8px;
+  gap: 6px;
 }
 
 .consult-form-control {
@@ -548,22 +548,23 @@ margin: 0;
 }
 
 .consult-input {
-  background-color: #000000;
-  border: 1px solid #333333;
+  background-color: #000000 !important;
+  border: 2px solid #000000 !important;
   display: inline-block;
-  width: 120px;
-  padding: 4px 10px;
-  font-size: 14px;
-  color: #ffffff;
+  width: 90px;
+  padding: 2px 6px;
+  font-size: 12px;
+  color: #ffffff !important;
   transition: border-color 0.15s ease;
   font-weight: 400;
   box-sizing: border-box;
   border-radius: 0;
   vertical-align: middle;
+  height: 26px;
 }
 
 .consult-input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .consult-input:focus,
@@ -574,9 +575,9 @@ margin: 0;
 }
 
 .consult-btn {
-  padding: 4px 16px;
+  padding: 2px 10px;
   border-radius: 0;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   margin: 0;
   background: #fe0000;
@@ -587,9 +588,9 @@ margin: 0;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   animation: fadeIn 0.4s ease-out 0.5s both;
-  height: auto;
+  height: 26px;
   box-sizing: border-box;
-  width: 150px;
+  width: 100px;
   vertical-align: middle;
   display: inline-block;
 }
