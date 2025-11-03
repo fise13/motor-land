@@ -2839,3 +2839,361 @@ to {
 	font-weight: bold;
 	text-align: center;
 }
+
+/* Современный дизайн страницы автосервиса */
+.service-page {
+	min-height: calc(100vh - 200px);
+	padding: 60px 0 80px;
+	background: #fafafa;
+}
+
+.service-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+.service-header {
+	margin-bottom: 50px;
+	text-align: center;
+}
+
+.service-header .breadcrumbs {
+	font-size: 14px;
+	color: #888;
+	margin-bottom: 20px;
+}
+
+.service-header .breadcrumbs a {
+	color: #fe0000;
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.service-header .breadcrumbs a:hover {
+	color: #d00000;
+}
+
+.service-header .breadcrumbs span {
+	color: #333;
+}
+
+.service-title {
+	font-size: 48px;
+	font-weight: 700;
+	color: #1a1a1a;
+	margin: 0 0 15px 0;
+	letter-spacing: -1px;
+}
+
+.service-subtitle {
+	font-size: 18px;
+	color: #666;
+	margin: 0;
+	font-weight: 400;
+}
+
+/* Hero секция */
+.service-hero {
+	margin-bottom: 60px;
+}
+
+.service-hero-content {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 40px;
+	align-items: center;
+	background: #ffffff;
+	border-radius: 16px;
+	padding: 50px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.service-hero-text {
+	font-size: 16px;
+	line-height: 1.8;
+	color: #444;
+}
+
+.service-hero-text p {
+	margin: 0 0 16px 0;
+}
+
+.service-hero-text p:last-child {
+	margin-bottom: 0;
+}
+
+.service-hero-image {
+	width: 100%;
+	height: 400px;
+	background-size: cover;
+	background-position: center;
+	border-radius: 12px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Секция услуг */
+.service-services {
+	margin-bottom: 80px;
+}
+
+.service-section-title {
+	font-size: 36px;
+	font-weight: 700;
+	color: #1a1a1a;
+	margin: 0 0 40px 0;
+	text-align: center;
+	letter-spacing: -0.5px;
+}
+
+.service-cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	gap: 30px;
+}
+
+.service-card {
+	background: #ffffff;
+	border-radius: 16px;
+	padding: 35px 30px;
+	text-align: center;
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+	transition: all 0.3s ease;
+	border: 1px solid #f0f0f0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.service-card:hover {
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+	transform: translateY(-5px);
+	border-color: #fe0000;
+}
+
+.service-card-icon {
+	font-size: 48px;
+	margin-bottom: 20px;
+	display: block;
+	height: 60px;
+	line-height: 60px;
+}
+
+.service-card-title {
+	font-size: 20px;
+	font-weight: 600;
+	color: #1a1a1a;
+	margin: 0 0 15px 0;
+}
+
+.service-card-text {
+	font-size: 15px;
+	line-height: 1.6;
+	color: #666;
+	margin: 0;
+	flex-grow: 1;
+}
+
+/* Секция преимуществ */
+.service-advantages {
+	margin-bottom: 80px;
+}
+
+.advantages-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 25px;
+}
+
+.advantage-item {
+	background: #ffffff;
+	border-radius: 12px;
+	padding: 25px;
+	display: flex;
+	align-items: flex-start;
+	gap: 20px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+	transition: all 0.3s ease;
+	border: 1px solid #f0f0f0;
+}
+
+.advantage-item:hover {
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+	transform: translateY(-2px);
+}
+
+.advantage-icon {
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	background: linear-gradient(135deg, #fe0000 0%, #d00000 100%);
+	color: #ffffff;
+	font-size: 20px;
+	font-weight: bold;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+.advantage-content {
+	flex: 1;
+}
+
+.advantage-title {
+	font-size: 18px;
+	font-weight: 600;
+	color: #1a1a1a;
+	margin: 0 0 8px 0;
+}
+
+.advantage-text {
+	font-size: 14px;
+	line-height: 1.6;
+	color: #666;
+	margin: 0;
+}
+
+/* CTA секция */
+.service-cta {
+	background: linear-gradient(135deg, #fe0000 0%, #d00000 100%);
+	border-radius: 16px;
+	padding: 60px 40px;
+	text-align: center;
+	color: #ffffff;
+	box-shadow: 0 8px 32px rgba(254, 0, 0, 0.2);
+}
+
+.service-cta-content {
+	max-width: 600px;
+	margin: 0 auto;
+}
+
+.service-cta-title {
+	font-size: 36px;
+	font-weight: 700;
+	margin: 0 0 15px 0;
+	color: #ffffff;
+}
+
+.service-cta-text {
+	font-size: 18px;
+	margin: 0 0 30px 0;
+	color: rgba(255, 255, 255, 0.9);
+	line-height: 1.6;
+}
+
+.service-cta-btn {
+	display: inline-block;
+	background: #ffffff;
+	color: #fe0000;
+	padding: 16px 40px;
+	border-radius: 50px;
+	text-decoration: none;
+	font-size: 18px;
+	font-weight: 600;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.service-cta-btn:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+	background: #f5f5f5;
+}
+
+.service-cta-btn:active {
+	transform: translateY(0);
+}
+
+/* Адаптивность для планшетов */
+@media (max-width: 1024px) {
+	.service-hero-content {
+		grid-template-columns: 1fr;
+		gap: 30px;
+		padding: 40px;
+	}
+
+	.service-hero-image {
+		order: -1;
+		height: 300px;
+	}
+
+	.service-cards {
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: 25px;
+	}
+
+	.advantages-grid {
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	}
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+	.service-page {
+		padding: 40px 0 60px;
+	}
+
+	.service-title {
+		font-size: 36px;
+	}
+
+	.service-subtitle {
+		font-size: 16px;
+	}
+
+	.service-hero-content {
+		padding: 30px 20px;
+	}
+
+	.service-hero-image {
+		height: 250px;
+	}
+
+	.service-section-title {
+		font-size: 28px;
+		margin-bottom: 30px;
+	}
+
+	.service-cards {
+		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+
+	.service-card {
+		padding: 30px 25px;
+	}
+
+	.service-card-icon {
+		font-size: 40px;
+		height: 50px;
+		line-height: 50px;
+	}
+
+	.advantages-grid {
+		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+
+	.advantage-item {
+		padding: 20px;
+	}
+
+	.service-cta {
+		padding: 40px 25px;
+	}
+
+	.service-cta-title {
+		font-size: 28px;
+	}
+
+	.service-cta-text {
+		font-size: 16px;
+	}
+
+	.service-cta-btn {
+		padding: 14px 35px;
+		font-size: 16px;
+	}
+}
