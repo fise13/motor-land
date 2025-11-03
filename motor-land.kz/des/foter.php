@@ -24,7 +24,7 @@
 		
 			<div class="footer_contact_block">
 				<div class="foterconicon" style="background-image: url(./img/loc.png);">
-					<a target="_blank" href="https://2gis.kz/almaty/search/РВ-90%2C%207-линия%2C%2029">РВ-90, 7-линия, 29</a>
+					<a target="_blank" href="https://2gis.kz/almaty/search/Motor%20Land%20РВ-90%2C%207-линия%2C%2029">РВ-90, 7-линия, 29</a>
 				</div>
 				<div class="foterconicon" style="background-image: url(./img/tel.png);">
 					<a href="tel:+77771445445" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">+7 777 144 5445</a>
@@ -40,7 +40,7 @@
 			</div>
 			<div class="footer_contact_block">
 				<div class="foterconicon" style="background-image: url(./img/loc.png);">
-					<a target="_blank" href="https://2gis.kz/almaty/search/улица%20Свердлова%2C%2038">улица Свердлова, 38</a>
+					<a target="_blank" href="https://2gis.kz/almaty/search/Motor%20Land%20улица%20Свердлова%2C%2038">улица Свердлова, 38</a>
 				</div>
 				<div class="foterconicon" style="background-image: url(./img/tel.png);">
 					<a href="tel:+77011445445" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">+7 701 144 5445</a><br>
