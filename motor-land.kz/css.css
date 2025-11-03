@@ -529,7 +529,8 @@ margin: 0;
   position: relative;
   margin: 0;
   width: auto;
-  display: inline-block;
+  display: inline-flex;
+  flex-direction: column;
   vertical-align: middle;
   animation: fadeIn 0.4s ease-out both;
   flex-shrink: 0;
@@ -544,22 +545,34 @@ margin: 0;
 }
 
 .consult-form-control label {
-  display: none;
+  display: block;
+  margin-bottom: 4px;
+  pointer-events: none;
+}
+
+.consult-form-control label span {
+  display: inline-block;
+  font-size: 12px;
+  min-width: 5px;
+  color: #000000;
+  transition: color 0.15s ease;
+  font-weight: 400;
+  letter-spacing: 0.2px;
 }
 
 .consult-input {
   background-color: transparent;
-  border: solid 1px #333333;
-  display: inline-block;
+  border: 0;
+  border-bottom: 1px solid #000000;
+  display: block;
   width: 110px;
-  padding: 3px 10px;
+  padding: 3px 0;
   font-size: 13px;
   color: #333333;
   transition: border-color 0.15s ease;
   font-weight: 400;
   box-sizing: border-box;
   border-radius: 0;
-  vertical-align: middle;
   height: 28px;
 }
 
@@ -571,8 +584,13 @@ margin: 0;
 .consult-input:focus,
 .consult-input:valid {
   outline: 0;
-  border-color: #fe0000;
+  border-bottom-color: #fe0000;
   color: #333333;
+}
+
+.consult-form-control:has(.consult-input:focus) label span,
+.consult-form-control:has(.consult-input:valid) label span {
+  color: #fe0000;
 }
 
 .consult-btn {
