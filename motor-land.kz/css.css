@@ -551,8 +551,9 @@ text-transform: uppercase;
 }
 
 .forsbgf {
-/* Убран клетчатый фон - теперь используется полупрозрачный эффект */
-background: transparent;
+background-image: url(./img/forbg.png);
+background-size: cover;
+background-position: center center;
 border-bottom: solid 1px #9a9a9a;
 }
 
