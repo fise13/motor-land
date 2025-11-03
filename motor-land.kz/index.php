@@ -15,7 +15,7 @@ $SITE_DESCRIPTION = 'Компания "Motor Land" - поставка контр
 <!-- Экран загрузки -->
 <div id="loader-screen" class="loader-screen">
 	<div class="loader-video-container">
-		<video id="loader-video" class="loader-video" autoplay muted playsinline>
+		<video id="loader-video" class="loader-video" muted playsinline>
 			<source src="img/loader.mp4" type="video/mp4">
 			<div class="loader-fallback">Моторленд</div>
 		</video>
@@ -264,15 +264,19 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 	
 	if (video) {
+		setTimeout(function() {
+			video.play();
+		}, 1000);
+		
 		video.addEventListener('ended', hideLoader);
 		video.addEventListener('loadeddata', function() {
 			setTimeout(hideLoader, 800);
 		});
 	}
 	
-	setTimeout(hideLoader, 1500);
+	setTimeout(hideLoader, 2000);
 	window.addEventListener('load', function() {
-		setTimeout(hideLoader, 300);
+		setTimeout(hideLoader, 1300);
 	});
 });
 </script>
