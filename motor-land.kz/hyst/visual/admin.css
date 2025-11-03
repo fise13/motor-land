@@ -185,7 +185,7 @@ adm_header {
 
 /* Премиум кнопка Logout */
 .Btn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 3rem;
@@ -213,17 +213,21 @@ adm_header {
 }
 
 .sign {
-  width: 100%;
-  height: 100%;
-  display: inline-flex;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
   align-items: center;
   justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
   transition: all var(--transition-base);
 }
 
 .sign svg {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 100%;
+  height: 100%;
   flex-shrink: 0;
   transition: transform var(--transition-base);
 }
@@ -233,7 +237,8 @@ adm_header {
 }
 
 .Btn:hover .sign {
-  width: 30%;
+  left: 1rem;
+  transform: translate(0, -50%);
 }
 
 .Btn:hover .sign svg {
@@ -243,21 +248,21 @@ adm_header {
 .text {
   position: absolute;
   right: var(--spacing-md);
-  width: 0;
   opacity: 0;
   color: white;
   font-size: var(--font-size-sm);
   font-weight: 700;
   transition: all var(--transition-base);
   white-space: nowrap;
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: center;
   height: 100%;
+  pointer-events: none;
 }
 
 .Btn:hover .text {
   opacity: 1;
-  width: 70%;
 }
 
 .admin_header_name {
@@ -592,58 +597,85 @@ content::-webkit-scrollbar-thumb:hover {
 }
 
 .input_field {
+  color: #fff;
+  font-size: 0.9rem;
+  background-color: transparent;
   width: 100%;
-  padding: var(--spacing-md) var(--spacing-lg);
-  font-size: var(--font-size-base);
-  color: var(--color-text-primary);
-  background: var(--color-bg-glass);
-  border: 2px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  box-sizing: border-box;
+  padding-inline: 1em;
+  padding-block: 0.8em;
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   outline: none;
   transition: all var(--transition-fast);
   font-family: inherit;
   line-height: 1.5;
-  backdrop-filter: blur(10px);
-  height: 3.5rem;
+  position: relative;
+  height: auto;
+  min-height: 3.5rem;
 }
 
 .input_field::placeholder {
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .input_field:focus {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0 4px var(--color-accent-light), var(--shadow-neon);
-  background: rgba(255, 255, 255, 0.08);
+  border-bottom-color: transparent;
+  background-color: rgba(255, 255, 255, 0.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Контейнер для input с анимированной границей */
+.auth_form > div {
+  position: relative;
+  width: 100%;
+}
+
+.auth_form > div::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #FF6464 0%, #FFBF59 50%, #47C9FF 100%);
+  transition: width 0.4s cubic-bezier(0.42, 0, 0.58, 1.00);
+}
+
+.auth_form > div:focus-within::after {
+  width: 100%;
 }
 
 .btn_submit {
+  position: relative;
   width: 100%;
-  padding: 0;
-  height: 3.5rem;
+  padding: var(--spacing-md) var(--spacing-xl);
+  height: auto;
+  min-height: 3.5rem;
   font-size: var(--font-size-base);
   font-weight: 700;
-  color: white;
-  background: linear-gradient(135deg, var(--color-accent), #0088cc);
-  border: none;
+  letter-spacing: 0.05em;
+  color: #725AC1;
+  background: transparent;
+  border: 2px solid #725AC1;
   border-radius: var(--radius-lg);
   cursor: pointer;
-  transition: all var(--transition-fast);
-  box-shadow: var(--shadow-md), var(--shadow-neon);
+  transition: ease-out 0.5s;
+  box-shadow: inset 0 0 0 0 #725AC1;
   font-family: inherit;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .btn_submit:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg), var(--shadow-neon-strong);
-  background: linear-gradient(135deg, var(--color-accent-hover), var(--color-accent));
+  color: white;
+  box-shadow: inset 0 -100px 0 0 #725AC1;
 }
 
 .btn_submit:active {
-  transform: translateY(0);
+  transform: scale(0.95);
 }
 
 /* === 8. INTERFACE FORMS === */
@@ -681,24 +713,27 @@ label > i {
   font-size: var(--font-size-xs);
 }
 
+/* Стили для input полей с анимированной границей */
 interfaceform input[type="text"],
 interfaceform input[type="password"],
 interfaceform input[type="number"],
 interfaceform input[type="date"],
 interfaceform input[type="datetime-local"] {
+  color: #fff;
+  font-size: 0.9rem;
+  background-color: transparent;
   width: 100%;
-  padding: var(--spacing-md) var(--spacing-lg);
-  margin: var(--spacing-xs) 0 var(--spacing-lg) 0;
-  background: var(--color-bg-glass);
-  border: 2px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  color: var(--color-text-primary);
-  font-size: var(--font-size-base);
+  box-sizing: border-box;
+  padding-inline: 0.5em;
+  padding-block: 0.7em;
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: all var(--transition-fast);
   font-family: inherit;
   line-height: 1.5;
-  backdrop-filter: blur(10px);
-  height: 3.25rem;
+  margin: var(--spacing-xs) 0 var(--spacing-lg) 0;
+  position: relative;
 }
 
 interfaceform input[type="text"]:focus,
@@ -706,100 +741,119 @@ interfaceform input[type="password"]:focus,
 interfaceform input[type="number"]:focus,
 interfaceform input[type="date"]:focus,
 interfaceform input[type="datetime-local"]:focus {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px var(--color-accent-light), var(--shadow-neon);
   outline: none;
-  background: rgba(255, 255, 255, 0.08);
+  border-bottom-color: transparent;
+  background-color: rgba(255, 255, 255, 0.02);
 }
 
+/* Анимированная граница для input (создается через wrapper) */
+iw {
+  position: relative;
+  display: block;
+  margin-bottom: var(--spacing-lg);
+}
+
+iw::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #FF6464 0%, #FFBF59 50%, #47C9FF 100%);
+  transition: width 0.4s cubic-bezier(0.42, 0, 0.58, 1.00);
+}
+
+iw:focus-within::after {
+  width: 100%;
+}
+
+/* Стили для кнопок сохранения */
 interfaceform input[type="button"] {
-  padding: var(--spacing-md) var(--spacing-xl);
+  position: relative;
+  display: inline-block;
   margin: var(--spacing-md) var(--spacing-sm) var(--spacing-md) 0;
+  padding: var(--spacing-md) var(--spacing-xl);
+  text-align: center;
+  font-size: var(--font-size-base);
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  color: #725AC1;
+  background: transparent;
   cursor: pointer;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--color-accent), #0088cc);
-  color: white;
-  border: none;
+  transition: ease-out 0.5s;
+  border: 2px solid #725AC1;
   border-radius: var(--radius-lg);
-  transition: all var(--transition-fast);
+  box-shadow: inset 0 0 0 0 #725AC1;
   font-family: inherit;
-  font-size: var(--font-size-sm);
+  font-weight: 600;
   line-height: 1.5;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--shadow-sm), 0 0 15px var(--color-accent-glow);
-  height: 2.75rem;
+  height: auto;
+  min-height: 2.75rem;
 }
 
 interfaceform input[type="button"]:hover {
-  background: linear-gradient(135deg, var(--color-accent-hover), var(--color-accent));
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md), var(--shadow-neon);
+  color: white;
+  box-shadow: inset 0 -100px 0 0 #725AC1;
 }
 
 interfaceform input[type="button"]:active {
-  transform: translateY(0);
+  transform: scale(0.95);
 }
 
 interfaceform textarea {
+  color: #fff;
+  font-size: 0.9rem;
+  background-color: transparent;
   width: 100%;
-  margin: var(--spacing-xs) 0 var(--spacing-lg) 0;
-  padding: var(--spacing-md) var(--spacing-lg);
-  background: var(--color-bg-glass);
-  border: 2px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  box-sizing: border-box;
+  padding: var(--spacing-md);
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   color: var(--color-text-primary);
-  font-size: var(--font-size-base);
   resize: vertical;
   min-height: 8rem;
   transition: all var(--transition-fast);
   font-family: inherit;
   line-height: 1.6;
-  backdrop-filter: blur(10px);
+  margin: var(--spacing-xs) 0 var(--spacing-lg) 0;
 }
 
 interfaceform textarea:focus {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px var(--color-accent-light), var(--shadow-neon);
   outline: none;
-  background: rgba(255, 255, 255, 0.08);
+  border-bottom-color: transparent;
+  background-color: rgba(255, 255, 255, 0.02);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 interfaceform select {
+  color: #fff;
+  font-size: 0.9rem;
+  background-color: transparent;
   width: 100%;
-  padding: var(--spacing-md) var(--spacing-lg);
-  margin: var(--spacing-xs) 0 var(--spacing-lg) 0;
-  background: var(--color-bg-glass);
-  border: 2px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  color: var(--color-text-primary);
-  font-size: var(--font-size-base);
+  box-sizing: border-box;
+  padding-inline: 0.5em;
+  padding-block: 0.7em;
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: all var(--transition-fast);
   font-family: inherit;
   line-height: 1.5;
-  backdrop-filter: blur(10px);
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%2300d4ff' d='M8 11L3 6h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right var(--spacing-lg) center;
-  padding-right: 3rem;
-  height: 3.25rem;
+  background-position: right 0.5em center;
+  padding-right: 2.5rem;
+  margin: var(--spacing-xs) 0 var(--spacing-lg) 0;
 }
 
 interfaceform select:focus {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px var(--color-accent-light), var(--shadow-neon);
   outline: none;
-  background-color: rgba(255, 255, 255, 0.08);
-}
-
-/* Input Wrapper */
-iw {
-  position: relative;
-  display: block;
-  margin-bottom: var(--spacing-lg);
+  border-bottom-color: transparent;
+  background-color: rgba(255, 255, 255, 0.02);
 }
 
 iv {
