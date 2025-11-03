@@ -531,7 +531,6 @@ top: 0px;
 .abouttext {
   padding: 20px 10px;
   background-color: #efefef;
-  border-radius: 12px;
   position: absolute;
   right: 50px;
   top: 50%;
@@ -542,13 +541,6 @@ top: 0px;
   line-height: 2.0;
   opacity: 0;
   transform: translateY(30px);
-  transition: 
-    opacity 0.6s cubic-bezier(.25, .8, .25, 1),
-    transform 0.6s cubic-bezier(.25, .8, .25, 1);
-}
-.abouttext.anim-in {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .frayalpfhon {
