@@ -575,14 +575,11 @@ margin: 0;
   z-index: 1;
   margin: 0 auto;
   max-width: 650px;
-  /* Полупрозрачный фон как в "что ищем?" и футере */
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(8px) saturate(180%);
-  -webkit-backdrop-filter: blur(8px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 20px;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-  background-clip: padding-box;
+  /* Фон убран - контейнер прозрачный */
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .consult-title {
