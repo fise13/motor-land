@@ -820,8 +820,7 @@ if ($_HYST_ADMIN && ($_HYST_ADMIN[AUC_PREFIX.'_role']=='general' || $_HYST_ADMIN
 				}
 			} else { $images = 'noting'; }
 			
-			$harakteristic = json_decode($_POST['harakteristik'],1); print_r($harakter);
-			if (count($harakteristic) != 0) {
+			$harakteristic = json_decode($_POST['harakteristik'],1); 			if (count($harakteristic) != 0) {
 				$harakter = '';
 				foreach($harakteristic as $v) {
 					$harakter .= ($harakter==''?'':'|').$v['parametr_name'].'^'.$v['parametr_val'];
@@ -897,8 +896,7 @@ if ($_HYST_ADMIN && ($_HYST_ADMIN[AUC_PREFIX.'_role']=='general' || $_HYST_ADMIN
 				}
 			} else { $images = 'noting'; }
 			
-			$harakteristic = json_decode($_POST['harakteristik'],1); print_r($harakter);
-			if (count($harakteristic) != 0) {
+			$harakteristic = json_decode($_POST['harakteristik'],1); 			if (count($harakteristic) != 0) {
 				$harakter = '';
 				foreach($harakteristic as $v) {
 					$harakter .= ($harakter==''?'':'|').$v['parametr_name'].'^'.$v['parametr_val'];
