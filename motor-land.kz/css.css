@@ -1085,15 +1085,74 @@ background-position: center center;
 .foterconicon {
   padding: 0px 0px 0px 30px;
   margin: 20px;
-  background-size: 15px auto;
-  background-repeat: no-repeat;
-  background-position: left top;
   text-align: left;
+  position: relative;
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.foterconicon:nth-child(1) { animation-delay: 0.1s; }
+.foterconicon:nth-child(2) { animation-delay: 0.2s; }
+.foterconicon:nth-child(3) { animation-delay: 0.3s; }
+.foterconicon:nth-child(4) { animation-delay: 0.4s; }
+
+.foterconicon::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  transition: all 0.3s ease;
 }
 
 .foterconicon a {
   text-decoration: none;
   color: white;
+  transition: color 0.3s ease, transform 0.3s ease;
+  display: inline-block;
+}
+
+.foterconicon a:hover {
+  color: #ffeb3b;
+  transform: translateX(5px);
+}
+
+/* Иконка локации */
+.footer-icon-location::before {
+  content: '📍';
+  font-size: 18px;
+  animation: iconPulse 2s ease-in-out infinite;
+}
+
+/* Иконка телефона */
+.footer-icon-phone::before {
+  content: '📞';
+  font-size: 18px;
+  animation: iconPulse 2s ease-in-out infinite 0.3s;
+}
+
+/* Иконка WhatsApp */
+.footer-icon-whatsapp::before {
+  content: '💬';
+  font-size: 18px;
+  animation: iconPulse 2s ease-in-out infinite 0.6s;
+}
+
+/* Иконка расписания */
+.footer-icon-schedule::before {
+  content: '🕐';
+  font-size: 18px;
+  animation: iconPulse 2s ease-in-out infinite 0.9s;
+}
+
+@keyframes iconPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
 }
 
 .copyr {
@@ -1327,36 +1386,37 @@ display: flex;
 justify-content: center;
 flex-wrap: wrap;
 align-items: start;
-}
-
-.footer_contact_center {
-margin: 0px 0px;
-width: 100%;
-color: white;
-display: flex;
-flex-wrap: nowrap;
-justify-content: center;
-}
-
-.footer_contact_social {
-display: inline-block;
-margin: 5px;
-padding: 10px 5px 0px 50px;
-width: 40px;
-height: 40px;
-background-position: left center;
-background-size: 40px auto;
-background-repeat: no-repeat;
-color: white;
-text-decoration: none;
-width: 130px;
-text-align: left;
+gap: 40px;
+padding: 40px 0;
+animation: fadeInUp 0.8s ease-out 0.2s forwards;
+opacity: 0;
 }
 
 .footer_contact_block {
-margin: 10px;
+margin: 0;
 width: 340px;
 color: white;
+animation: slideInUp 0.6s ease-out forwards;
+opacity: 0;
+}
+
+.footer_office_block:nth-child(1) {
+animation-delay: 0.3s;
+}
+
+.footer_office_block:nth-child(2) {
+animation-delay: 0.5s;
+}
+
+@keyframes slideInUp {
+from {
+  opacity: 0;
+  transform: translateY(30px);
+}
+to {
+  opacity: 1;
+  transform: translateY(0);
+}
 }
 
 /* ============================================
@@ -1679,112 +1739,31 @@ color: white;
 .contact-icon-schedule::before {
 	content: '';
 	position: absolute;
-	left: 18px;
-	top: 50%;
-	transform: translateY(-50%);
-	width: 48px;
-	height: 48px;
-	border-radius: 12px;
-	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-	z-index: 1;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.contact-icon-location::after,
-.contact-icon-phone::after,
-.contact-icon-whatsapp::after,
-.contact-icon-schedule::after {
-	content: '';
-	position: absolute;
-	left: 18px;
-	top: 50%;
-	transform: translateY(-50%);
-	width: 48px;
-	height: 48px;
-	border-radius: 12px;
-	z-index: 2;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 24px;
+	left: 0;
+	top: 0;
+	font-size: 22px;
 	line-height: 1;
-	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	transition: all 0.3s ease;
 }
 
-.contact-card:nth-child(1) .contact-icon-location::before {
-	background: #d32f2f;
-}
-
-.contact-card:nth-child(1) .contact-icon-location::after {
+.contact-icon-location::before {
 	content: '📍';
-	filter: grayscale(0);
 	animation: iconPulse 2s ease-in-out infinite;
 }
 
-.contact-card:nth-child(1) .contact-icon-phone::before {
-	background: #d32f2f;
-}
-
-.contact-card:nth-child(1) .contact-icon-phone::after {
+.contact-icon-phone::before {
 	content: '📞';
-	animation: iconShake 3s ease-in-out infinite;
+	animation: iconPulse 2s ease-in-out infinite 0.3s;
 }
 
-.contact-card:nth-child(1) .contact-icon-whatsapp::before {
-	background: #d32f2f;
-}
-
-.contact-card:nth-child(1) .contact-icon-whatsapp::after {
+.contact-icon-whatsapp::before {
 	content: '💬';
-	animation: iconBounce 2.5s ease-in-out infinite;
+	animation: iconPulse 2s ease-in-out infinite 0.6s;
 }
 
-.contact-card:nth-child(1) .contact-icon-schedule::before {
-	background: #d32f2f;
-}
-
-.contact-card:nth-child(1) .contact-icon-schedule::after {
+.contact-icon-schedule::before {
 	content: '🕐';
-	animation: iconRotate 4s ease-in-out infinite;
-}
-
-.contact-card:nth-child(2) .contact-icon-location::before {
-	background: #6c757d;
-}
-
-.contact-card:nth-child(2) .contact-icon-location::after {
-	content: '📍';
-	animation: iconPulse 2s ease-in-out infinite 0.5s;
-}
-
-.contact-card:nth-child(2) .contact-icon-phone::before {
-	background: #6c757d;
-}
-
-.contact-card:nth-child(2) .contact-icon-phone::after {
-	content: '📞';
-	animation: iconShake 3s ease-in-out infinite 0.3s;
-}
-
-.contact-card:nth-child(2) .contact-icon-whatsapp::before {
-	background: #6c757d;
-}
-
-.contact-card:nth-child(2) .contact-icon-whatsapp::after {
-	content: '💬';
-	animation: iconBounce 2.5s ease-in-out infinite 0.7s;
-}
-
-.contact-card:nth-child(2) .contact-icon-schedule::before {
-	background: #6c757d;
-}
-
-.contact-card:nth-child(2) .contact-icon-schedule::after {
-	content: '🕐';
-	animation: iconRotate 4s ease-in-out infinite 0.2s;
+	animation: iconPulse 2s ease-in-out infinite 0.9s;
 }
 
 .contact-item:hover {

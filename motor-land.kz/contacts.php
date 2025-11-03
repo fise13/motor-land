@@ -57,7 +57,7 @@ $SITE_DESCRIPTION = 'Контакты компании Motor Land - контра
 					</div>
 					<div class="contact-item contact-icon-whatsapp">
 						<span class="contact-label">WhatsApp:</span>
-						<a href="https://wa.me/77771445445" class="contact-link">Написать в WhatsApp</a>
+						<a href="https://wa.me/77771445445" class="contact-link">WhatsApp</a>
 					</div>
 					<div class="contact-item contact-icon-schedule">
 						<span class="contact-label">Режим работы:</span>
@@ -87,7 +87,7 @@ $SITE_DESCRIPTION = 'Контакты компании Motor Land - контра
 					</div>
 					<div class="contact-item contact-icon-whatsapp">
 						<span class="contact-label">WhatsApp:</span>
-						<a href="https://wa.me/77011445445" class="contact-link">Написать в WhatsApp</a>
+						<a href="https://wa.me/77011445445" class="contact-link">WhatsApp</a>
 					</div>
 					<div class="contact-item contact-icon-schedule">
 						<span class="contact-label">Режим работы:</span>
