@@ -480,211 +480,182 @@ font-size: 18px;
 margin: 0;
 }
 
-/* Стили для формы консультации (как в футере) */
+/* Новый дизайн формы консультации */
 .consult-container {
   display: block;
-  padding: 12px 16px 12px;
+  padding: 0;
   box-sizing: border-box;
-  text-align: center;
+  text-align: left;
   color: #000000;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   position: relative;
   z-index: 1;
-  animation: fadeInUp 0.4s ease-out;
-  opacity: 0;
-  animation-fill-mode: forwards;
   margin: 0 auto;
-  max-width: 500px;
-  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  max-width: 100%;
+  background: transparent;
 }
 
 .consult-title {
-  font-size: 14px;
+  font-size: 16px;
   text-transform: none;
-  color: #000000;
+  color: #1a1a1a;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  margin: 0 0 4px 0;
+  margin: 0 0 3px 0;
   position: relative;
   display: block;
-  letter-spacing: 0.2px;
-  font-weight: 700;
-  line-height: 1.4;
-  animation: fadeIn 0.4s ease-out 0.1s both;
+  letter-spacing: -0.2px;
+  font-weight: 800;
+  line-height: 1.3;
 }
 
 .consult-subtitle {
-  font-size: 9px;
-  color: rgba(0, 0, 0, 0.7);
-  margin: 0 0 12px 0;
+  font-size: 11px;
+  color: #666666;
+  margin: 0 0 14px 0;
   font-weight: 400;
-  letter-spacing: 0.1px;
-  animation: fadeIn 0.4s ease-out 0.2s both;
+  letter-spacing: 0;
 }
 
 .consult-form {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
   width: 100%;
   flex-wrap: wrap;
-  align-content: flex-start;
 }
 
 .consult-form-control {
   position: relative;
   margin: 0;
-  width: 100%;
   flex: 1;
-  min-width: 140px;
-  max-width: 200px;
-  display: flex;
-  flex-direction: column;
-  animation: fadeIn 0.4s ease-out both;
-  flex-shrink: 0;
-  align-items: flex-start;
-  order: 1;
-}
-
-.consult-form-control:nth-of-type(1) {
-  animation-delay: 0.25s;
-}
-
-.consult-form-control:nth-of-type(2) {
-  animation-delay: 0.35s;
+  min-width: 150px;
+  max-width: 220px;
+  display: inline-block;
 }
 
 .consult-form-control label {
-  display: block;
-  margin-bottom: 4px;
-  pointer-events: none;
-}
-
-.consult-form-control label span {
-  display: inline-block;
-  font-size: 8px;
-  min-width: 3px;
-  color: #555555;
-  transition: color 0.2s ease, transform 0.2s ease;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-  text-transform: uppercase;
+  display: none;
 }
 
 .consult-input {
   background-color: #ffffff;
-  border: 1.5px solid rgba(0, 0, 0, 0.15) !important;
-  border-bottom: 1.5px solid rgba(0, 0, 0, 0.15) !important;
+  border: 2px solid #e0e0e0 !important;
   display: block;
   width: 100%;
-  padding: 6px 10px;
-  font-size: 9px;
-  color: #000000;
-  transition: all 0.3s ease;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #1a1a1a;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   font-weight: 400;
   box-sizing: border-box;
-  border-radius: 6px;
-  height: 24px;
+  border-radius: 8px;
+  height: auto;
   margin: 0;
   text-align: left;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 .consult-input::placeholder {
-  color: rgba(0, 0, 0, 0.4);
-  font-size: 9px;
+  color: #999999;
+  font-size: 13px;
 }
 
-.consult-input:focus,
-.consult-input:valid {
+.consult-input:focus {
   outline: 0 !important;
-  border: 1.5px solid #fe0000 !important;
-  border-bottom: 1.5px solid #fe0000 !important;
-  color: #000000;
-  box-shadow: 0 2px 8px rgba(254, 0, 0, 0.15);
-  background-color: #fffafa;
+  border: 2px solid #fe0000 !important;
+  color: #1a1a1a;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(254, 0, 0, 0.1);
 }
 
-.consult-form-control:has(.consult-input:focus) label span,
-.consult-form-control:has(.consult-input:valid) label span {
-  color: #fe0000;
-  transform: translateY(-1px);
+.consult-input:hover {
+  border-color: #c0c0c0;
 }
 
 .consult-btn-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 8px;
-  flex-basis: 100%;
-  order: 3;
+  flex: 0 0 auto;
+  margin-top: 0;
 }
 
 .consult-btn {
-  padding: 8px 20px;
-  border-radius: 6px;
-  font-size: 9px;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 13px;
   font-weight: 600;
-  margin: 8px auto 0 auto;
-  background: linear-gradient(135deg, #fe0000 0%, #d50000 100%);
+  margin: 0;
+  background: #fe0000;
   color: white;
-  border: none;
+  border: 2px solid #fe0000;
   cursor: pointer;
-  transition: all 0.3s ease;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  animation: fadeIn 0.4s ease-out 0.45s both;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.3px;
+  text-transform: none;
   box-sizing: border-box;
-  min-width: 120px;
-  height: 28px;
-  display: flex;
+  height: auto;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 3px 8px rgba(254, 0, 0, 0.25);
-  flex: 1;
-  max-width: 250px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  white-space: nowrap;
 }
 
 .consult-btn:hover {
-  background: linear-gradient(135deg, #d50000 0%, #c40000 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 12px rgba(254, 0, 0, 0.35);
+  background: #d50000;
+  border-color: #d50000;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(254, 0, 0, 0.3);
 }
 
 .consult-btn:active {
-  background: linear-gradient(135deg, #b71c1c 0%, #a01010 100%);
+  background: #b71c1c;
+  border-color: #b71c1c;
   transform: translateY(0);
   box-shadow: 0 2px 6px rgba(254, 0, 0, 0.2);
 }
 
 /* Адаптивность для формы консультации */
-@media (max-width: 600px) {
-  .consult-container {
-    max-width: 100%;
-    padding: 10px 12px;
-    border-radius: 10px;
-  }
-  
+@media (max-width: 768px) {
   .consult-form {
     flex-direction: column;
     gap: 12px;
+    align-items: stretch;
   }
   
   .consult-form-control {
     max-width: 100%;
     width: 100%;
+    min-width: 100%;
   }
   
   .consult-btn-wrapper {
-    margin-top: 8px;
+    width: 100%;
   }
   
   .consult-btn {
     width: 100%;
-    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .consult-title {
+    font-size: 14px;
+  }
+  
+  .consult-subtitle {
+    font-size: 10px;
+    margin-bottom: 12px;
+  }
+  
+  .consult-input {
+    font-size: 12px;
+    padding: 9px 12px;
+  }
+  
+  .consult-btn {
+    font-size: 12px;
+    padding: 9px 20px;
   }
 }
 
