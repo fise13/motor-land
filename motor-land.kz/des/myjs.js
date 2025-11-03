@@ -260,7 +260,7 @@ $(document).ready(function() {
 	 * Параметры: нет (использует данные формы)
 	 * Возвращает: ничего
 	 */
-	$(document).on('click', 'input[name="JF_send_casual"]', function () {
+	$(document).on('click', 'input[name="JF_send_casual"], button[name="JF_send_casual"]', function () {
 		var parent_form = $(this).closest('.JF_parent_form'),
 			name = parent_form.find('input[name="name"]').val(),
 			phon = parent_form.find('input[name="phon"]').val();

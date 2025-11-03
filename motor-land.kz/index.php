@@ -147,7 +147,7 @@ $SITE_DESCRIPTION = 'Компания "Motor Land" - поставка контр
 			</div>
 			<div class="consult-btn-wrapper">
 				<input type="hidden" name="send_one" value="send">
-				<input type="button" name="JF_send_casual" value="Отправить" class="consult-btn">
+				<button type="button" name="JF_send_casual" class="consult-btn"><span>Отправить</span></button>
 			</div>
 		</form>
 	</div>
