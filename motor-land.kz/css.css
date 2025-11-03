@@ -247,12 +247,12 @@ position: relative;
 }
 
 .logo {
-width: 160px;
-height: 108px;
-margin-left: -80px;
-border-radius: 12px;
+width: 120px;
+height: 80px;
+margin-left: -60px;
+border-radius: 10px;
 position: absolute;
-top: -2px;
+top: 5px;
 left: 50%;
 z-index: 10;
 display: flex;
@@ -261,7 +261,7 @@ justify-content: center;
 overflow: hidden;
 background-image: url(./img/logo.jpg);
 background-size: contain;
-background-position: center top;
+background-position: center center;
 background-repeat: no-repeat;
 }
 
