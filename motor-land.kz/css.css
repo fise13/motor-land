@@ -543,6 +543,41 @@ top: 0px;
 
 .frayalpfhon {
 background-color: #2c2c2c;
+position: relative;
+overflow: hidden;
+animation: slideInFromBottom 0.8s ease-out 1.2s both;
+opacity: 0;
+}
+
+.frayalpfhon::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 2px;
+background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+animation: expandLineHorizontal 1s ease-out 1.5s forwards;
+max-width: 0;
+margin: 0 auto;
+width: 80%;
+}
+
+@keyframes slideInFromBottom {
+from {
+opacity: 0;
+transform: translateY(30px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+@keyframes expandLineHorizontal {
+to {
+max-width: 80%;
+}
 }
 
 .actionbtms {
@@ -829,6 +864,39 @@ z-index: 9;
 background-image: url(./img/footer.jpg);
 background-size: cover;
 background-position: center center;
+position: relative;
+animation: fadeIn 1s ease-out;
+overflow: hidden;
+}
+
+.foterbag::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+animation: shimmerFooter 4s ease-in-out infinite;
+z-index: 0;
+}
+
+@keyframes shimmerFooter {
+0% {
+left: -100%;
+}
+50%, 100% {
+left: 100%;
+}
+}
+
+@keyframes fadeIn {
+from {
+opacity: 0;
+}
+to {
+opacity: 1;
+}
 }
 
 /* ================================
@@ -843,6 +911,19 @@ background-position: center center;
   text-align: center;
   color: white;
   font-family: "Inter", sans-serif;
+  animation: fadeInDown 0.8s ease-out;
+  position: relative;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* === Контейнер формы (плавающий эффект, без блока вокруг) === */
@@ -893,6 +974,27 @@ background-position: center center;
   width: 190px;
   display: flex;
   flex-direction: column;
+  animation: inputFadeIn 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.form-control:nth-of-type(1) {
+  animation-delay: 0.3s;
+}
+
+.form-control:nth-of-type(2) {
+  animation-delay: 0.5s;
+}
+
+@keyframes inputFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .form-control label {
@@ -918,12 +1020,16 @@ background-position: center center;
   padding: 15px 0;
   font-size: 18px;
   color: #fff;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .form-control input:focus,
 .form-control input:valid {
   outline: 0;
   border-bottom-color: lightblue;
+  border-bottom-width: 3px;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(173, 216, 230, 0.3);
 }
 
 .form-control:has(input:focus) label span,
@@ -1030,11 +1136,36 @@ background-position: center center;
 }
 
 .foterzago {
-  font-size: 20px;
+  font-size: 24px;
   text-transform: uppercase;
   color: white;
   font-family: robotob;
-  margin: 15px 0px;
+  margin: 15px 0px 30px 0px;
+  position: relative;
+  display: inline-block;
+  animation: titleGlow 3s ease-in-out infinite, slideInFromLeft 0.8s ease-out 0.2s both;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes titleGlow {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
+  }
 }
 
 .foterinline form input[type="text"] {
@@ -1062,15 +1193,89 @@ background-position: center center;
 
 .foterinline input[type="submit"],
 .foterinline input[type="button"] {
-  padding: 5px 20px;
-  border-radius: 15px;
+  padding: 15px 40px;
+  border-radius: 50px;
   font-size: 18px;
-  width: 180px;
+  font-weight: 600;
+  width: 200px;
   margin: 10px;
-  background-color: #fe0000;
+  background: linear-gradient(135deg, #fe0000 0%, #ff4444 50%, #fe0000 100%);
+  background-size: 200% 200%;
   color: white;
-  border: solid 1px #fe0000;
+  border: none;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 0 8px 25px rgba(254, 0, 0, 0.4);
+  animation: buttonPulse 2.5s ease-in-out infinite, buttonShimmer 3s linear infinite;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.foterinline input[type="button"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.6s ease;
+}
+
+.foterinline input[type="button"]:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 35px rgba(254, 0, 0, 0.6);
+  background-position: 100% 0;
+}
+
+.foterinline input[type="button"]:hover::before {
+  left: 100%;
+}
+
+.foterinline input[type="button"]:active {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 6px 20px rgba(254, 0, 0, 0.5);
+}
+
+.foterinline input[type="button"]::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.foterinline input[type="button"]:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+@keyframes buttonPulse {
+  0%, 100% {
+    box-shadow: 0 8px 25px rgba(254, 0, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 8px 35px rgba(254, 0, 0, 0.7);
+  }
+}
+
+@keyframes buttonShimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .fonetininelis {
@@ -1089,12 +1294,22 @@ background-position: center center;
   position: relative;
   animation: fadeInUp 0.6s ease-out forwards;
   opacity: 0;
+  transition: all 0.3s ease;
 }
 
 .foterconicon:nth-child(1) { animation-delay: 0.1s; }
 .foterconicon:nth-child(2) { animation-delay: 0.2s; }
 .foterconicon:nth-child(3) { animation-delay: 0.3s; }
 .foterconicon:nth-child(4) { animation-delay: 0.4s; }
+
+.foterconicon:hover {
+  transform: translateX(10px);
+  padding-left: 35px;
+}
+
+.foterconicon:hover::before {
+  transform: scale(1.3) rotate(5deg);
+}
 
 .foterconicon::before {
   content: '';
@@ -1109,13 +1324,30 @@ background-position: center center;
 .foterconicon a {
   text-decoration: none;
   color: white;
-  transition: color 0.3s ease, transform 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   display: inline-block;
+  position: relative;
+}
+
+.foterconicon a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #ffeb3b;
+  transition: width 0.3s ease;
 }
 
 .foterconicon a:hover {
   color: #ffeb3b;
   transform: translateX(5px);
+  text-shadow: 0 0 8px rgba(255, 235, 59, 0.5);
+}
+
+.foterconicon a:hover::after {
+  width: 100%;
 }
 
 /* Иконка локации */
@@ -1158,8 +1390,20 @@ background-position: center center;
 .copyr {
 text-transform: uppercase;
 font-size: 16px;
-padding: 10px;
+padding: 15px;
 color: white;
+text-align: center;
+animation: fadeInUp 0.8s ease-out 1s both;
+opacity: 0;
+position: relative;
+letter-spacing: 1px;
+transition: all 0.3s ease;
+}
+
+.copyr:hover {
+color: #ffeb3b;
+text-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
+transform: scale(1.05);
 }
 
 .filtersblock {
@@ -1390,6 +1634,26 @@ gap: 40px;
 padding: 40px 0;
 animation: fadeInUp 0.8s ease-out 0.2s forwards;
 opacity: 0;
+position: relative;
+}
+
+.footer_contacts::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: expandLine 1s ease-out 0.5s forwards;
+  max-width: 0;
+}
+
+@keyframes expandLine {
+  to {
+    max-width: 80%;
+  }
 }
 
 .footer_contact_block {
@@ -1398,14 +1662,19 @@ width: 340px;
 color: white;
 animation: slideInUp 0.6s ease-out forwards;
 opacity: 0;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.footer_contact_block:hover {
+  transform: translateY(-5px);
 }
 
 .footer_office_block:nth-child(1) {
-animation-delay: 0.3s;
+animation-delay: 0.7s;
 }
 
 .footer_office_block:nth-child(2) {
-animation-delay: 0.5s;
+animation-delay: 0.9s;
 }
 
 @keyframes slideInUp {
