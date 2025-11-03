@@ -37,19 +37,19 @@ $SITE_DESCRIPTION = 'Контакты компании Motor Land - контра
 					<h3 class="contact-office-title">Офис №1</h3>
 				</div>
 				<div class="contact-card-content">
-					<div class="foterconicon contact-item" style="background-image: url(./img/loc.png);">
+					<div class="contact-item contact-icon-location">
 						<span class="contact-label">Адрес:</span>
 						<a target="_blank" href="https://2gis.kz/almaty/search/РВ-90%2C%207-линия%2C%2029" class="contact-link">РВ-90, 7-линия, 29</a>
 					</div>
-					<div class="foterconicon contact-item" style="background-image: url(./img/tel.png);">
+					<div class="contact-item contact-icon-phone">
 						<span class="contact-label">Телефон:</span>
 						<a href="tel:+77771445445" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});" class="contact-link">+7 777 144 5445</a>
 					</div>
-					<div class="foterconicon contact-item" style="background-image: url(./img/wats.svg);">
+					<div class="contact-item contact-icon-whatsapp">
 						<span class="contact-label">WhatsApp:</span>
 						<a href="https://wa.me/77771445445" class="contact-link">Написать в WhatsApp</a>
 					</div>
-					<div class="foterconicon contact-item" style="background-image: url(./img/day.png);">
+					<div class="contact-item contact-icon-schedule">
 						<span class="contact-label">Режим работы:</span>
 						<div class="contact-schedule">
 							пн-пт | 9:00-18:00<br>
@@ -64,22 +64,22 @@ $SITE_DESCRIPTION = 'Контакты компании Motor Land - контра
 					<h3 class="contact-office-title">Офис №2</h3>
 				</div>
 				<div class="contact-card-content">
-					<div class="foterconicon contact-item" style="background-image: url(./img/loc.png);">
+					<div class="contact-item contact-icon-location">
 						<span class="contact-label">Адрес:</span>
 						<a target="_blank" href="https://2gis.kz/almaty/search/улица%20Свердлова%2C%2038" class="contact-link">улица Свердлова, 38</a>
 					</div>
-					<div class="foterconicon contact-item" style="background-image: url(./img/tel.png);">
+					<div class="contact-item contact-icon-phone">
 						<span class="contact-label">Телефоны:</span>
 						<div class="contact-phones">
 							<a href="tel:+77011445445" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});" class="contact-link">+7 701 144 5445</a><br>
 							<a href="tel:+77071445445" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});" class="contact-link">+7 707 144 5445</a>
 						</div>
 					</div>
-					<div class="foterconicon contact-item" style="background-image: url(./img/wats.svg);">
+					<div class="contact-item contact-icon-whatsapp">
 						<span class="contact-label">WhatsApp:</span>
 						<a href="https://wa.me/77011445445" class="contact-link">Написать в WhatsApp</a>
 					</div>
-					<div class="foterconicon contact-item" style="background-image: url(./img/day.png);">
+					<div class="contact-item contact-icon-schedule">
 						<span class="contact-label">Режим работы:</span>
 						<div class="contact-schedule">
 							пн-пт | 9:00-18:00<br>
