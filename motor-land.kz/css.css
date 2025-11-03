@@ -551,8 +551,8 @@ text-transform: uppercase;
 }
 
 .forsbgf {
-background-image: url(./img/forbg.png);
-background-size: cover;
+/* Убран клетчатый фон - теперь используется полупрозрачный эффект */
+background: transparent;
 border-bottom: solid 1px #9a9a9a;
 }
 
@@ -565,16 +565,23 @@ margin: 0;
 /* Минималистичный дизайн формы консультации */
 .consult-container {
   display: block;
-  padding: 15px 0;
+  padding: 35px 30px;
   box-sizing: border-box;
   text-align: center;
-  color: #000000;
+  color: white;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   position: relative;
   z-index: 1;
   margin: 0 auto;
   max-width: 650px;
-  background: transparent;
+  /* Полупрозрачный фон как в "что ищем?" и футере */
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(6px) saturate(180%);
+  -webkit-backdrop-filter: blur(6px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  background-clip: padding-box;
 }
 
 .consult-title {
@@ -593,7 +600,7 @@ margin: 0;
 
 .consult-subtitle {
   font-size: 12px;
-  color: #888888;
+  color: rgba(255, 255, 255, 0.9);
   margin: 0 0 20px 0;
   font-weight: 400;
   letter-spacing: 0;
@@ -623,7 +630,7 @@ margin: 0;
 .consult-form-control label {
   display: block;
   font-size: 11px;
-  color: #666666;
+  color: rgba(255, 255, 255, 0.8);
   margin-bottom: 6px;
   font-weight: 500;
   text-align: left;
@@ -636,14 +643,14 @@ margin: 0;
 }
 
 .consult-input {
-  background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
   display: block;
   width: 100%;
   padding: 12px 14px;
   font-size: 14px;
-  color: #1a1a1a;
-  transition: border-color 0.2s ease;
+  color: white;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
   font-weight: 400;
   box-sizing: border-box;
   border-radius: 8px;
@@ -655,19 +662,20 @@ margin: 0;
 }
 
 .consult-input::placeholder {
-  color: #aaaaaa;
+  color: rgba(255, 255, 255, 0.6);
   font-size: 14px;
 }
 
 .consult-input:focus {
   outline: 0 !important;
   border: 1px solid #fe0000 !important;
-  color: #1a1a1a;
-  background: transparent;
+  color: white;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .consult-input:hover:not(:focus) {
-  border-color: rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.18);
 }
 
 .consult-btn-wrapper {
@@ -1380,7 +1388,7 @@ opacity: 1;
 ================================ */
 .foterinline {
   display: block;
-  padding: 40px 20px 30px;
+  padding: 40px 30px 30px;
   width: 100%;
   max-width: 400px;
   margin: 0 auto 40px;
@@ -1393,6 +1401,14 @@ opacity: 1;
   animation: fadeInUp 0.4s ease-out;
   opacity: 0;
   animation-fill-mode: forwards;
+  /* Полупрозрачный фон как в "что ищем?" */
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(6px) saturate(180%);
+  -webkit-backdrop-filter: blur(6px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  background-clip: padding-box;
 }
 
 @keyframes fadeInUp {
@@ -1594,7 +1610,7 @@ opacity: 1;
 ================================ */
 @media (max-width: 768px) {
   .foterinline {
-    padding: 30px 15px 25px;
+    padding: 30px 20px 25px;
     margin-bottom: 30px;
     max-width: 100%;
   }
@@ -1618,7 +1634,7 @@ opacity: 1;
 
 @media (max-width: 420px) {
   .foterinline {
-    padding: 25px 12px 20px;
+    padding: 25px 18px 20px;
   }
   
   .foterzago {
