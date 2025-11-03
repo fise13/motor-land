@@ -475,4 +475,55 @@ $(document).ready(function() {
 		});
 	});
 
+	/**
+	 * Плавные переходы между страницами
+	 * Перехватывает клики по внутренним ссылкам и делает плавный fade-out перед переходом
+	 */
+	$(document).on('click', 'a[href]', function(e) {
+		var $link = $(this);
+		var href = $link.attr('href');
+		
+		// Пропускаем ссылки, которые не должны иметь анимацию
+		if (!$link.length || !href || 
+			$link.hasClass('no-transition') ||
+			$link.attr('target') === '_blank' ||
+			$link.attr('download')) {
+			return;
+		}
+		
+		// Пропускаем внешние ссылки, якоря, javascript, mailto, tel
+		if (href.match(/^(https?:\/\/|mailto:|tel:|#|javascript:)/)) {
+			return;
+		}
+		
+		// Нормализуем пути для сравнения
+		var currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+		var targetPath = href.split('?')[0].split('#')[0].replace(/\/$/, '') || '/';
+		
+		// Если это та же страница (или якорь на той же странице), пропускаем
+		if (targetPath === currentPath || (href.indexOf('#') === 0)) {
+			return;
+		}
+		
+		// Если ссылка начинается с /, это абсолютный путь
+		if (href.indexOf('/') === 0) {
+			targetPath = href.split('?')[0].split('#')[0];
+		}
+		
+		// Предотвращаем стандартный переход
+		e.preventDefault();
+		
+		// Добавляем класс для анимации fade-out
+		$('body').addClass('page-transitioning');
+		
+		// После окончания анимации переходим на новую страницу
+		setTimeout(function() {
+			if (href.indexOf('/') === 0) {
+				window.location.href = href;
+			} else {
+				window.location.href = href;
+			}
+		}, 400); // Время должно совпадать с длительностью pageFadeOut
+	});
+
 });
