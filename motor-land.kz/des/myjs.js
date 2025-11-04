@@ -46,8 +46,6 @@ $(document).ready(function() {
 	/**
 	 * Функция: Закрытие выпадающего списка с анимацией
 	 * Описание: Плавно закрывает выпадающий список
-	 * 			Если dropdown находится внутри .sliderform (главная страница), возвращает absolute позиционирование
-	 * Accessibility: Обновляет ARIA атрибуты при закрытии
 	 * Параметры: dd - jQuery объект выпадающего списка
 	 * Возвращает: ничего
 	 */
@@ -55,7 +53,6 @@ $(document).ready(function() {
 		if (dd.hasClass('open')) {
 			var meinputer = dd.closest('.meinputer');
 			var btn = meinputer.find('.btmmearrow');
-			var isInSliderForm = dd.closest('.sliderform').length > 0;
 			
 			dd.css({
 				'transform': 'translateY(0) scaleY(1)',
@@ -70,32 +67,17 @@ $(document).ready(function() {
 				duration: 250,
 				easing: 'swing',
 				complete: function() {
-					var resetStyles = {
+					$(this).css({
 						'display': 'none',
 						'transform': 'translateY(-6px) scaleY(0.98)',
 						'opacity': 0
-					};
-					
-					// Если dropdown был в fixed позиции, возвращаем absolute
-					if (isInSliderForm) {
-						resetStyles['position'] = 'absolute';
-						resetStyles['left'] = '';
-						resetStyles['top'] = '';
-						resetStyles['width'] = '';
-						resetStyles['z-index'] = '';
-					}
-					
-					$(this).css(resetStyles).removeClass('open');
+					}).removeClass('open');
 					// Разблокируем все поля при закрытии
 					$('.meinputer').css({
 						'pointer-events': '',
 						'opacity': ''
 					});
 					$('.maipttee').removeClass('dropdown-open');
-					// Accessibility: Обновляем ARIA атрибуты
-					meinputer.attr('aria-expanded', 'false');
-					btn.attr('aria-expanded', 'false');
-					dd.attr('aria-hidden', 'true');
 				}
 			});
 		}
@@ -104,50 +86,18 @@ $(document).ready(function() {
 	/**
 	 * Функция: Открытие выпадающего списка с анимацией
 	 * Описание: Плавно открывает выпадающий список
-	 * 			Если dropdown находится внутри .sliderform (главная страница), использует fixed позиционирование
-	 * Accessibility: Обновляет ARIA атрибуты при открытии
 	 * Параметры: dd - jQuery объект выпадающего списка
 	 * Возвращает: ничего
 	 */
 	function openDropdown(dd) {
-		if (!dd || dd.length === 0) return;
-		
 		var meinputer = dd.closest('.meinputer');
-		if (!meinputer || meinputer.length === 0) return;
-		
 		var btn = meinputer.find('.btmmearrow');
-		var isInSliderForm = dd.closest('.sliderform').length > 0;
 		
-		// Если dropdown находится внутри .sliderform (главная страница), используем fixed позиционирование
-		if (isInSliderForm) {
-			var meinputerOffset = meinputer.offset();
-			if (!meinputerOffset) return;
-			
-			var meinputerHeight = meinputer.outerHeight();
-			var ddWidth = meinputer.outerWidth();
-			var scrollTop = $(window).scrollTop();
-			var scrollLeft = $(window).scrollLeft();
-			
-			dd.css({
-				'display': 'block',
-				'opacity': 0,
-				'transform': 'translateY(-10px) scaleY(0.95)',
-				'position': 'fixed',
-				'left': (meinputerOffset.left - scrollLeft) + 'px',
-				'top': (meinputerOffset.top + meinputerHeight - scrollTop) + 'px',
-				'width': ddWidth + 'px',
-				'z-index': '999999',
-				'pointer-events': 'auto'
-			});
-		} else {
-			dd.css({
-				'display': 'block',
-				'opacity': 0,
-				'transform': 'translateY(-10px) scaleY(0.95)',
-				'position': 'absolute',
-				'pointer-events': 'auto'
-			});
-		}
+		dd.css({
+			'display': 'block',
+			'opacity': 0,
+			'transform': 'translateY(-10px) scaleY(0.95)'
+		});
 		
 		// Небольшая задержка для инициализации
 		setTimeout(function() {
@@ -167,10 +117,6 @@ $(document).ready(function() {
 						'transform': 'translateY(0) scaleY(1)',
 						'opacity': 1
 					}).addClass('open');
-					// Accessibility: Обновляем ARIA атрибуты
-					meinputer.attr('aria-expanded', 'true');
-					btn.attr('aria-expanded', 'true');
-					dd.attr('aria-hidden', 'false');
 				}
 			});
 		}, 10);
@@ -265,54 +211,16 @@ $(document).ready(function() {
 	 * Функция: Очистка поля ввода при фокусе
 	 * Описание: При получении фокуса полем ввода удаляет значение-плейсхолдер (например, "Марка", "Модель"),
 	 * 			только если список уже открыт (пользователь собирается вводить текст).
-	 * 			Если список закрыт, клик откроет список вместо очистки (через обработчик click).
 	 * Параметры: нет (использует элемент в фокусе)
 	 * Возвращает: ничего
 	 */
-	$(document).on("focus", ".madiv", function (e) {
+	$(document).on("focus", ".madiv", function () {
 		var $this = $(this);
 		var dd = $this.closest('.meinputer').children('.ddwnblock');
-		// Если список закрыт, не очищаем поле - клик откроет список
-		// Добавляем небольшую задержку, чтобы обработчик click успел сработать первым
-		setTimeout(function() {
-			if (!dd.hasClass('open')) {
-				// Список все еще закрыт - значит клик не сработал или был блокирован
-				// Не очищаем поле
-				return;
-			}
-			// Очищаем плейсхолдер только если список уже открыт (пользователь собирается вводить текст)
-			if (dd.hasClass('open') && $this.html() == $this.attr('data-val')) {
-				$this.html('');
-			}
-		}, 50); // Небольшая задержка для обработки клика
-	});
-	
-	/**
-	 * Функция: Обновление позиции fixed dropdown при скролле
-	 * Описание: Если открыт dropdown с fixed позиционированием, обновляет его позицию при скролле
-	 * Параметры: нет
-	 * Возвращает: ничего
-	 */
-	$(window).on('scroll resize', function() {
-		$('.ddwnblock.open').each(function() {
-			var dd = $(this);
-			var isInSliderForm = dd.closest('.sliderform').length > 0;
-			
-			if (isInSliderForm && dd.css('position') === 'fixed') {
-				var meinputer = dd.closest('.meinputer');
-				var meinputerOffset = meinputer.offset();
-				var meinputerHeight = meinputer.outerHeight();
-				var ddWidth = meinputer.outerWidth();
-				var scrollTop = $(window).scrollTop();
-				var scrollLeft = $(window).scrollLeft();
-				
-				dd.css({
-					'left': (meinputerOffset.left - scrollLeft) + 'px',
-					'top': (meinputerOffset.top + meinputerHeight - scrollTop) + 'px',
-					'width': ddWidth + 'px'
-				});
-			}
-		});
+		// Очищаем плейсхолдер только если список уже открыт (пользователь собирается вводить текст)
+		if (dd.hasClass('open') && $this.html() == $this.attr('data-val')) {
+			$this.html('');
+		}
 	});
 	
 	/**
