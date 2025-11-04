@@ -214,8 +214,7 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 			<!--<input type="text" name="setxt" class="searchbloinput" placeholder="Что вы хотели найти.."><br>--->
 		
 			<div class="maipttee">
-				<div class="meinputer" style="border: solid 1px white;">
-					<div class="madiv" data-val="Марка">Марка</div>
+				<div class="meinputer" style="border: solid 1px white;"><div class="madiv" data-val="Марка">Марка</div>
 					<input type="hidden" name="mk" value="">
 					<div class="btmmearrow" style="font-size: 17px;">&#9660;</div>
 					<div class="ddwnblock" style="border-top: solid 1px white; border-bottom: solid 1px white; border-right: solid 1px white; border-left: solid 1px white;">
@@ -237,16 +236,14 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 					</div>
 				</div>
 				
-				<div class="meinputer" style="border: solid 1px white;">
-					<div class="madiv" data-val="Модель">Модель</div>
+				<div class="meinputer" style="border: solid 1px white;"><div class="madiv" data-val="Модель">Модель</div>
 					<input type="hidden" name="ml" value="">
 					<div class="btmmearrow" style="font-size: 17px;">&#9660;</div>
 					<div class="ddwnblock" id="modellist" style="border-top: solid 1px white; border-bottom: solid 1px white; border-right: solid 1px white; border-left: solid 1px white;">
 					</div>
 				</div>
 				
-				<div class="meinputer" style="border: solid 1px white;">
-					<div class="madiv" data-val="Год">Год</div>
+				<div class="meinputer" style="border: solid 1px white;"><div class="madiv" data-val="Год">Год</div>
 					<input type="hidden" name="yr" value="">
 					<div class="btmmearrow" style="font-size: 17px;">&#9660;</div>
 					<div class="ddwnblock" id="yearlist" style="overflow-y: scroll; border-top: solid 1px white; border-bottom: solid 1px white; border-right: solid 1px white; border-left: solid 1px white;">
