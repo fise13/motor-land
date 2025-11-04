@@ -180,8 +180,6 @@ $(document).ready(function() {
 	$(document).on("click", ".btmmearrow, .madiv", function (e) {
 		// Предотвращаем всплытие события, чтобы не срабатывали другие обработчики
 		e.stopPropagation();
-		e.preventDefault();
-		e.stopImmediatePropagation();
 		
 		var meinputer = $(this).closest('.meinputer');
 		var dd = meinputer.children('.ddwnblock');
@@ -206,10 +204,14 @@ $(document).ready(function() {
 					setTimeout(function() {
 						meinputer.css('animation', '');
 					}, 500);
+					e.preventDefault();
 					return false;
 				}
 			}
 		}
+
+		// Предотвращаем стандартное поведение только если это не форма
+		e.preventDefault();
 
 		// Закрыть другие открытые списки с плавной анимацией
 		$('.ddwnblock').not(dd).each(function() {
@@ -246,7 +248,6 @@ $(document).ready(function() {
 			dd.attr('aria-hidden', 'false');
 		}
 		
-		// Возвращаем false для предотвращения дальнейшей обработки
 		return false;
 	});
 
