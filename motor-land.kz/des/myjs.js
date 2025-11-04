@@ -129,45 +129,17 @@
 		var meinputer = dd.closest('.meinputer');
 		var btn = meinputer.find('.btmmearrow');
 		
-		// Решение 1: Для dropdown внутри .sliderform используем fixed позиционирование
+		// Для dropdown внутри .sliderform используем absolute позиционирование (CSS уже настроен)
+		// Не устанавливаем position: fixed, чтобы dropdown был в stacking context формы поиска
 		if (dd.closest('.sliderform').length) {
-			// Получаем позицию родительского элемента относительно viewport
-			var meinputerOffset = meinputer.offset();
-			var meinputerWidth = meinputer.outerWidth();
-			var scrollTop = $(window).scrollTop();
-			var scrollLeft = $(window).scrollLeft();
-			
-			// Устанавливаем fixed позиционирование с правильными координатами
+			// Устанавливаем только необходимые стили, position: absolute уже в CSS
 			dd.css({
-				'position': 'fixed',
-				'top': (meinputerOffset.top + meinputer.outerHeight() - scrollTop) + 'px',
-				'left': (meinputerOffset.left - scrollLeft) + 'px',
-				'width': meinputerWidth + 'px',
-				'z-index': '2147483647', // Максимальный z-index
 				'display': 'block',
 				'opacity': 0,
 				'transform': 'translateY(-10px) scaleY(0.95)',
-				'isolation': 'isolate',
-				'transform-style': 'preserve-3d'
+				'z-index': '1010', // Правильный z-index: выше формы (1000), но не перекрывает секции ниже
+				'isolation': 'auto' // Не создаем новый stacking context
 			});
-			
-			// Обновляем позицию при скролле (если нужно)
-			var updatePosition = function() {
-				var newOffset = meinputer.offset();
-				var newScrollTop = $(window).scrollTop();
-				var newScrollLeft = $(window).scrollLeft();
-				if (dd.hasClass('open')) {
-					dd.css({
-						'top': (newOffset.top + meinputer.outerHeight() - newScrollTop) + 'px',
-						'left': (newOffset.left - newScrollLeft) + 'px'
-					});
-				}
-			};
-			
-			// Сохраняем обработчик для последующего удаления
-			dd.data('scroll-handler', updatePosition);
-			$(window).on('scroll', updatePosition);
-			$(window).on('resize', updatePosition);
 		} else {
 			// Для других dropdown используем обычное позиционирование
 			dd.css({

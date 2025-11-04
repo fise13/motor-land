@@ -77,7 +77,8 @@ border-collapse:collapse;
 	color: #fff;
 	padding: 8px;
 	text-decoration: none;
-	z-index: 1000;
+	/* Skip-link должен быть доступен поверх всего для доступности */
+	z-index: 10002;
 }
 
 .skip-link:focus {
@@ -104,7 +105,8 @@ font-style: normal;
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.4s ease, visibility 0.4s ease;
-  z-index: 999;
+  /* z-index выше формы поиска и выпадающих списков, но ниже модальных окон */
+  z-index: 10000;
 }
 
 .plashesbgmodl.show {
@@ -129,7 +131,8 @@ font-style: normal;
   width: 90%;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
   transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s ease;
-  z-index: 1000;
+  /* z-index выше фона модального окна */
+  z-index: 10001;
 }
 
 #zakazaty.show {
@@ -160,7 +163,8 @@ font-style: normal;
 
 .sliderbtns {
 position: absolute;
-z-index: 55;
+/* z-index для кнопок слайдера - ниже формы поиска */
+z-index: 50;
 left: 860px;
 bottom: 100px;
 }
@@ -580,39 +584,36 @@ transition: max-height 0.35s ease;
 position: absolute;
 top: 38px;
 left: -1px;
-/* Performance: Максимальный z-index чтобы выпадающие списки были поверх всего контента */
-z-index: 999999;
+/* Правильный z-index: выше формы поиска (1000), но не перекрывает секции ниже */
+z-index: 1010;
 display: none;
 max-height: 400px;
 overflow-y: auto;
 opacity: 0;
 pointer-events: none;
-/* Решение 1: Изоляция stacking context */
-isolation: isolate;
-/* Решение 2: Гарантия что элемент будет поверх всего */
-transform-style: preserve-3d;
+/* Не создаем новый stacking context, чтобы элемент был в том же контексте что и форма */
+isolation: auto;
 }
 
-/* Performance: Для dropdown внутри .sliderform используем fixed позиционирование через JS */
+/* Dropdown внутри .sliderform - используем absolute позиционирование */
 .sliderform .ddwnblock {
-/* Будет установлено через JS на fixed, но оставляем absolute как fallback */
 position: absolute;
-z-index: 2147483647 !important; /* Максимальный z-index (максимальное значение для 32-битного int) */
-/* Решение 3: Изоляция stacking context */
-isolation: isolate !important;
-/* Решение 4: Гарантия что элемент будет поверх всего */
-transform-style: preserve-3d !important;
-/* Решение 5: Убеждаемся что элемент не обрезается */
+/* z-index выше формы поиска (1000), но ниже секций ниже */
+z-index: 1010;
+/* Не создаем новый stacking context */
+isolation: auto;
+/* Убеждаемся что элемент не обрезается родителями */
 contain: none !important;
-/* Решение 11: Убираем любые ограничения по родителям */
 clip: auto !important;
 clip-path: none !important;
 }
 
 .sliderform .ddwnblock.open {
-z-index: 2147483647 !important; /* Максимальный z-index для открытого dropdown */
-position: fixed !important; /* Гарантируем fixed позиционирование */
-/* Решение 12: Гарантируем что элемент видим и не обрезан */
+/* z-index выше формы поиска, но не перекрывает секции ниже */
+z-index: 1010;
+/* Используем absolute, а не fixed, чтобы элемент был в контексте формы */
+position: absolute !important;
+/* Гарантируем что элемент видим и не обрезан */
 display: block !important;
 visibility: visible !important;
 opacity: 1 !important;
@@ -637,14 +638,12 @@ transform: translateX(3px);
     opacity: 1;
     transform: translateY(0) scaleY(1);
     display: block !important;
-    /* Performance: Максимальный z-index для открытого dropdown чтобы он был поверх всего контента */
-    z-index: 2147483647 !important; /* Максимальное значение z-index */
+    /* z-index выше формы поиска, но не перекрывает секции ниже */
+    z-index: 1010;
     pointer-events: auto !important;
-    /* Решение 6: Гарантия что открытый dropdown поверх всего */
-    /* Для dropdown внутри .sliderform будет установлено position: fixed через JS */
-    isolation: isolate !important;
-    transform-style: preserve-3d !important;
-    /* Решение 13: Гарантируем видимость */
+    /* Не создаем новый stacking context */
+    isolation: auto;
+    /* Гарантируем видимость */
     visibility: visible !important;
 }
 
@@ -729,6 +728,9 @@ background-position: center center;
 width: 100%;
 display: block;
 text-align: center;
+/* Правильный stacking context для секций: они должны быть под выпадающим списком */
+position: relative;
+z-index: 1;
 }
 
 .zgolovorleft {
@@ -762,6 +764,9 @@ background-image: url(./img/forbg.png);
 background-size: cover;
 background-position: center center;
 border-bottom: solid 1px #9a9a9a;
+/* Правильный stacking context: секция должна быть поверх формы поиска при скролле */
+position: relative;
+z-index: 100; /* Достаточно высокий, чтобы быть поверх формы поиска, но ниже dropdown (1010) */
 }
 
 .forsliderform {
@@ -2536,41 +2541,8 @@ object-fit: cover;
 	}
 }
 
-/* Стили для модального окна заказа (улучшенные) */
-.plashesbgmodl {
-	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.7);
-	z-index: 9998;
-	opacity: 0;
-	transition: opacity 0.3s ease;
-}
-
-.plashesbgmodl.show {
-	display: block;
-	opacity: 1;
-}
-
-.modalwindow {
-	display: none;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%) scale(0.9);
-	z-index: 9999;
-	opacity: 0;
-	transition: all 0.3s ease;
-}
-
-.modalwindow.show {
-	display: block;
-	opacity: 1;
-	transform: translate(-50%, -50%) scale(1);
-}
+/* Стили для модального окна заказа (улучшенные) - дублирующие стили удалены, используем стили из начала файла */
+/* .plashesbgmodl и .modalwindow стили определены выше в файле */
 
 .charactr {
 text-align: left;
@@ -2615,8 +2587,9 @@ margin-left: -230px;
 border: solid 1px white;
 border-radius: 15px;
 text-align: center;
-display: none;
-z-index: 81;
+	display: none;
+	/* z-index выше фона модального окна */
+	z-index: 10001;
 }
 
 .allrelativm {
@@ -3389,7 +3362,8 @@ to {
 	width: 100%;
 	height: 100%;
 	background: #000000;
-	z-index: 99999;
+	/* Экран загрузки должен быть поверх всего, включая модальные окна */
+	z-index: 100000;
 	display: flex;
 	align-items: center;
 	justify-content: center;
