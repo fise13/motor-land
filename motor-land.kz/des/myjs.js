@@ -278,6 +278,34 @@ $(document).ready(function() {
 	});
 	
 	/**
+	 * Функция: Обновление позиции fixed dropdown при скролле
+	 * Описание: Если открыт dropdown с fixed позиционированием, обновляет его позицию при скролле
+	 * Параметры: нет
+	 * Возвращает: ничего
+	 */
+	$(window).on('scroll resize', function() {
+		$('.ddwnblock.open').each(function() {
+			var dd = $(this);
+			var isInSliderForm = dd.closest('.sliderform').length > 0;
+			
+			if (isInSliderForm && dd.css('position') === 'fixed') {
+				var meinputer = dd.closest('.meinputer');
+				var meinputerOffset = meinputer.offset();
+				var meinputerHeight = meinputer.outerHeight();
+				var ddWidth = meinputer.outerWidth();
+				var scrollTop = $(window).scrollTop();
+				var scrollLeft = $(window).scrollLeft();
+				
+				dd.css({
+					'left': (meinputerOffset.left - scrollLeft) + 'px',
+					'top': (meinputerOffset.top + meinputerHeight - scrollTop) + 'px',
+					'width': ddWidth + 'px'
+				});
+			}
+		});
+	});
+	
+	/**
 	 * Функция: Синхронизация видимого текста со скрытым полем
 	 * Описание: При вводе текста в видимый элемент (.madiv) копирует значение в скрытое input поле,
 	 * 			чтобы оно отправлялось вместе с формой.
