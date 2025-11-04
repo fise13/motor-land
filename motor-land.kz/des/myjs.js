@@ -54,6 +54,13 @@ $(document).ready(function() {
 			var meinputer = dd.closest('.meinputer');
 			var btn = meinputer.find('.btmmearrow');
 			
+			// Performance: Удаляем обработчики прокрутки при закрытии
+			if (dd.data('scroll-handler-added')) {
+				var handlerId = dd.data('handler-id') || 'default';
+				$(window).off('scroll.dropdown-' + handlerId + ' resize.dropdown-' + handlerId);
+				dd.data('scroll-handler-added', false);
+			}
+			
 			dd.css({
 				'transform': 'translateY(0) scaleY(1)',
 				'opacity': 1
@@ -67,6 +74,15 @@ $(document).ready(function() {
 				duration: 250,
 				easing: 'swing',
 				complete: function() {
+					// Performance: Восстанавливаем absolute позиционирование при закрытии
+					if ($(this).closest('.sliderform').length) {
+						$(this).css({
+							'position': 'absolute',
+							'width': '',
+							'top': '',
+							'left': ''
+						});
+					}
 					$(this).css({
 						'display': 'none',
 						'transform': 'translateY(-6px) scaleY(0.98)',
@@ -93,11 +109,53 @@ $(document).ready(function() {
 		var meinputer = dd.closest('.meinputer');
 		var btn = meinputer.find('.btmmearrow');
 		
-		dd.css({
-			'display': 'block',
-			'opacity': 0,
-			'transform': 'translateY(-10px) scaleY(0.95)'
-		});
+		// Performance: Переключаем на fixed позиционирование для гарантированного отображения поверх всего
+		if (dd.closest('.sliderform').length) {
+			// Получаем позицию родительского элемента относительно viewport
+			var meinputerOffset = meinputer.offset();
+			var meinputerWidth = meinputer.outerWidth();
+			
+			// Генерируем уникальный ID для обработчиков, если его нет
+			if (!dd[0].id) {
+				dd[0].id = 'dropdown-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+			}
+			
+			// Устанавливаем fixed позиционирование с правильными координатами
+			dd.css({
+				'position': 'fixed',
+				'top': (meinputerOffset.top + meinputer.outerHeight()) + 'px',
+				'left': meinputerOffset.left + 'px',
+				'width': meinputerWidth + 'px',
+				'z-index': '999999',
+				'display': 'block',
+				'opacity': 0,
+				'transform': 'translateY(-10px) scaleY(0.95)'
+			});
+			
+			// Performance: Обработчик для обновления позиции при прокрутке/изменении размера окна
+			if (!dd.data('scroll-handler-added')) {
+				var handlerId = dd[0].id;
+				var updatePosition = function() {
+					if (dd.hasClass('open') && dd.is(':visible')) {
+						var meinputerOffset = meinputer.offset();
+						dd.css({
+							'top': (meinputerOffset.top + meinputer.outerHeight()) + 'px',
+							'left': meinputerOffset.left + 'px'
+						});
+					}
+				};
+				
+				$(window).on('scroll.dropdown-' + handlerId + ' resize.dropdown-' + handlerId, updatePosition);
+				dd.data('scroll-handler-added', true);
+				dd.data('handler-id', handlerId);
+			}
+		} else {
+			dd.css({
+				'display': 'block',
+				'opacity': 0,
+				'transform': 'translateY(-10px) scaleY(0.95)'
+			});
+		}
 		
 		// Небольшая задержка для инициализации
 		setTimeout(function() {
