@@ -1,35 +1,126 @@
 <?php
 include('hyst/php.php');
 
-$SITE_TITLE = 'Моторленд | Контакты';
-$SITE_DESCRIPTION = 'Контакты компании Motor Land - контрактные двигатели и КПП в Алматы';
+// SEO: Оптимизированные мета-теги для страницы контактов
+$SITE_TITLE = 'Контакты | Моторленд - Контрактные Двигатели и КПП в Алматы';
+$SITE_DESCRIPTION = 'Контакты компании Motor Land в Алматы. Адреса офисов, телефоны, режим работы. Контрактные двигатели и КПП. Доставка по Казахстану.';
+$SITE_KEYWORDS = 'контакты моторленд, адрес автосервиса алматы, телефон контрактных двигателей, где купить двигатель б/у алматы';
 ?>
 <!doctype html>
-<html>
+<html lang="ru">
 <head>
 <?php include("hyst/head.php"); ?>
+<!-- SEO: Canonical URL -->
 <link rel="canonical" href="https://motor-land.kz/contacts.php"/>
+<!-- SEO: Meta keywords -->
+<meta name="keywords" content="<?=$SITE_KEYWORDS;?>">
+<!-- SEO: Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://motor-land.kz/contacts.php">
+<meta property="og:title" content="<?=$SITE_TITLE;?>">
+<meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
+<meta property="og:image" content="https://motor-land.kz/img/logo.jpg">
+<!-- SEO: Twitter Cards -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="<?=$SITE_TITLE;?>">
+<meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
+<!-- SEO: Schema.org LocalBusiness для страницы контактов -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Motor Land",
+  "alternateName": "Моторленд",
+  "image": "https://motor-land.kz/img/logo.jpg",
+  "description": "<?=$SITE_DESCRIPTION;?>",
+  "address": [{
+    "@type": "PostalAddress",
+    "streetAddress": "РВ-90, 7-линия, 29",
+    "addressLocality": "Алматы",
+    "addressRegion": "Алматы",
+    "addressCountry": "KZ"
+  }, {
+    "@type": "PostalAddress",
+    "streetAddress": "улица Свердлова, 38",
+    "addressLocality": "Алматы",
+    "addressRegion": "Алматы",
+    "addressCountry": "KZ"
+  }],
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "43.238949",
+    "longitude": "76.889709"
+  },
+  "telephone": ["+7-777-144-5445", "+7-701-144-5445", "+7-707-144-5445"],
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "opens": "09:00",
+    "closes": "18:00"
+  }, {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": "Saturday",
+    "opens": "10:00",
+    "closes": "15:00"
+  }],
+  "priceRange": "$$",
+  "areaServed": {
+    "@type": "Country",
+    "name": "Kazakhstan"
+  }
+}
+</script>
+<!-- SEO: BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Главная",
+    "item": "https://motor-land.kz/"
+  }, {
+    "@type": "ListItem",
+    "position": 2,
+    "name": "Контакты",
+    "item": "https://motor-land.kz/contacts.php"
+  }]
+}
+</script>
 </head>
 <body>
 <?php include("hyst/sbody.php"); ?>
 <?php include("des/head.php"); ?>
+<!-- SEO: Семантический тег <main> -->
+<main>
 <br><br>
-<div class="generalw">
+<!-- SEO: Семантический тег <nav> для хлебных крошек -->
+<nav class="generalw" aria-label="Навигационная цепочка">
 	<div class="shirina">
-		<div class="crumbsblock">
-		<a href="/">Главная</a> / Контакты
+		<div class="crumbsblock" itemscope itemtype="https://schema.org/BreadcrumbList">
+		<span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+			<a href="/" itemprop="item"><span itemprop="name">Главная</span></a>
+			<meta itemprop="position" content="1" />
+		</span> / 
+		<span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+			<span itemprop="name">Контакты</span>
+			<meta itemprop="position" content="2" />
+		</span>
 		</div>
 		
 	</div>
-</div>	
+</nav>	
 
-<div class="generalw">
+<!-- SEO: Семантический тег <section> для заголовка -->
+<section class="generalw" aria-labelledby="contacts-title">
 	<div class="shirina zgolovorleft">
-		<div class="sttitle"><span>Контакты</span></div>
+		<h1 id="contacts-title" class="sttitle"><span>Контакты</span></h1>
 	</div>
-</div>
+</section>
 
-<div class="generalw contacts-main">
+<!-- SEO: Семантический тег <section> для контактной информации -->
+<section class="generalw contacts-main" aria-label="Контактная информация">
 	<div class="shirina">
 		<div class="footer_contacts contacts-page">
 			<div class="footer_contact_block contact-card">
@@ -95,7 +186,8 @@ $SITE_DESCRIPTION = 'Контакты компании Motor Land - контра
 			<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A7f3534207526eaa3fc4288c55720ef5bf87c1fae35fecbd8953f8b3dab48de0e&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
 		</div>
 	</div>
-</div>
+</section>
+</main>
 
 <br><br>
 <?php include("des/foter.php"); ?>

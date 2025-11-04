@@ -32,6 +32,32 @@ function hyst_translit_url($v)
 	return $v;
 }
 
+// SEO: Функция для генерации ЧПУ URL для товаров
+function seo_get_product_url($product_id, $product_name) {
+	// Создаем slug из названия товара
+	$slug = hyst_translit_url(mb_strtolower($product_name));
+	// Убираем лишние символы
+	$slug = preg_replace('/[^a-z0-9-]/', '', $slug);
+	// Убираем множественные дефисы
+	$slug = preg_replace('/-+/', '-', $slug);
+	// Убираем дефисы в начале и конце
+	$slug = trim($slug, '-');
+	// Если slug пустой, используем ID
+	if (empty($slug)) {
+		$slug = 'product-' . $product_id;
+	}
+	return '/katalog/' . $slug . '-' . $product_id;
+}
+
+// SEO: Функция для получения ID товара из ЧПУ URL
+function seo_get_product_id_from_slug($slug) {
+	// Извлекаем ID из конца URL (после последнего дефиса)
+	if (preg_match('/-(\d+)$/', $slug, $matches)) {
+		return (int)$matches[1];
+	}
+	return 0;
+}
+
 
 
 

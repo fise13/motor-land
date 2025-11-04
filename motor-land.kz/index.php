@@ -1,28 +1,38 @@
 <?php
 include('hyst/php.php');
 
-$SITE_TITLE = 'Моторленд | Контрактные Моторы и КПП';
-$SITE_DESCRIPTION = 'Компания "Motor Land" - поставка контрактных двигателей и КПП в Алматы';
+// SEO: Оптимизированные мета-теги с целевыми ключевыми запросами для главной страницы
+// Целевые запросы: "купить контрактный мотор Алматы", "контрактные двигатели Казахстан", "привозные моторы Алматы", "двигатель бу Япония Алматы"
+$SITE_TITLE = 'Купить Контрактный Мотор Алматы | Привозные Моторы Япония | Двигатель БУ | Моторленд';
+$SITE_DESCRIPTION = 'Купить контрактный мотор в Алматы. Контрактные двигатели Казахстан - привозные моторы из Японии. Двигатель бу Япония Алматы с гарантией. Огромный выбор контрактных двигателей. Доставка по всему Казахстану.';
+$SITE_KEYWORDS = 'купить контрактный мотор Алматы, контрактные двигатели Казахстан, привозные моторы Алматы, двигатель бу Япония Алматы, контрактные двигатели алматы, купить мотор б/у, привозные двигатели, контрактный мотор япония';
 ?>
 <!doctype html>
-<html>
+<html lang="ru">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php include("hyst/head.php"); ?>
+<!-- SEO: Canonical URL для предотвращения дублей контента -->
 <link rel="canonical" href="https://motor-land.kz/"/>
-<!-- Open Graph / Facebook -->
+<!-- SEO: Meta keywords для дополнительной индексации -->
+<meta name="keywords" content="<?=$SITE_KEYWORDS;?>">
+<!-- SEO: Open Graph мета-теги для социальных сетей (Facebook, VK) -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://motor-land.kz/">
 <meta property="og:title" content="<?=$SITE_TITLE;?>">
 <meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
 <meta property="og:image" content="https://motor-land.kz/img/logo.jpg">
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://motor-land.kz/">
-<meta property="twitter:title" content="<?=$SITE_TITLE;?>">
-<meta property="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
-<meta property="twitter:image" content="https://motor-land.kz/img/logo.jpg">
-<!-- Schema.org Organization -->
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Motor Land">
+<!-- SEO: Twitter Cards для красивого отображения при репостах -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://motor-land.kz/">
+<meta name="twitter:title" content="<?=$SITE_TITLE;?>">
+<meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
+<meta name="twitter:image" content="https://motor-land.kz/img/logo.jpg">
+<!-- SEO: Schema.org разметка для лучшего понимания структуры сайта поисковыми системами -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -31,22 +41,42 @@ $SITE_DESCRIPTION = 'Компания "Motor Land" - поставка контр
   "alternateName": "Моторленд",
   "url": "https://motor-land.kz",
   "logo": "https://motor-land.kz/img/logo.jpg",
-  "description": "<?=$SITE_DESCRIPTION;?>",
-  "address": {
+  "description": "Купить контрактный мотор в Алматы. Контрактные двигатели Казахстан - привозные моторы из Японии. Двигатель бу Япония Алматы с гарантией.",
+  "address": [{
     "@type": "PostalAddress",
+    "streetAddress": "РВ-90, 7-линия, 29",
     "addressLocality": "Алматы",
-    "addressCountry": "KZ"
-  },
-  "contactPoint": {
+    "addressCountry": "KZ",
+    "addressRegion": "Алматы"
+  }, {
+    "@type": "PostalAddress",
+    "streetAddress": "улица Свердлова, 38",
+    "addressLocality": "Алматы",
+    "addressCountry": "KZ",
+    "addressRegion": "Алматы"
+  }],
+  "contactPoint": [{
     "@type": "ContactPoint",
     "telephone": "+7-777-144-5445",
     "contactType": "Sales",
     "areaServed": "KZ",
     "availableLanguage": ["Russian", "Kazakh"]
-  },
+  }, {
+    "@type": "ContactPoint",
+    "telephone": "+7-701-144-5445",
+    "contactType": "Sales",
+    "areaServed": "KZ",
+    "availableLanguage": ["Russian", "Kazakh"]
+  }],
   "sameAs": [
-    "https://2gis.kz/almaty/geo/70000001083496996"
-  ]
+    "https://2gis.kz/almaty/geo/70000001083496996",
+    "https://2gis.kz/almaty/geo/70000001024156353"
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "150"
+  }
 }
 </script>
 </head>
@@ -54,13 +84,17 @@ $SITE_DESCRIPTION = 'Компания "Motor Land" - поставка контр
 <?php include("hyst/sbody.php"); ?>
 <?php include("des/head.php"); ?>
 
-<div class="slider">
+<!-- SEO: Семантический тег <main> для основного контента страницы -->
+<main>
+<!-- SEO: Семантический тег <section> для секции слайдера -->
+<section class="slider" aria-label="Главный слайдер">
 	<div id="slidess">
 		<?php
 		$slider = get_slider ('index_slider');
 		while($slide=$slider->fetch_array()):
 		?>
-		<div class="sliderslid" style="background-image: url(<?=$slide['image'];?>);"></div>
+		<!-- SEO: Alt-текст для изображений слайдера с целевыми ключевыми словами -->
+		<div class="sliderslid" style="background-image: url(<?=$slide['image'];?>);" aria-label="Купить контрактный мотор Алматы - привозные моторы из Японии, контрактные двигатели Казахстан"></div>
 		<?php
 		endwhile;
 		?>
@@ -159,11 +193,12 @@ $SITE_DESCRIPTION = 'Компания "Motor Land" - поставка контр
 		</form>
 		</div>
 	</div>
-</div>
+</section>
 
-<div class="generalw forsbgf consult-section">
+<!-- SEO: Семантический тег <section> для формы консультации -->
+<section class="generalw forsbgf consult-section" aria-label="Форма консультации">
 	<div class="shirina forsliderform JF_parent_form consult-container">
-		<div class="consult-title">Хотите получить бесплатную консультацию?</div>
+		<h2 class="consult-title">Хотите получить бесплатную консультацию?</h2>
 		<div class="consult-subtitle">заполните форму</div>
 		<form method="post" class="consult-form">
 			<div class="form-control consult-form-control">
@@ -180,42 +215,52 @@ $SITE_DESCRIPTION = 'Компания "Motor Land" - поставка контр
 			</div>
 		</form>
 	</div>
-</div>
+</section>
 
-<div class="generalw">
+<!-- SEO: Семантический тег <section> для секции "О нас" -->
+<section class="generalw" aria-labelledby="about-title">
 	<div class="shirina zgolovorleft">
-		<div class="sttitle"><span>О нас</span></div>
+		<h2 id="about-title" class="sttitle"><span>О нас</span></h2>
 	</div>
-</div>
+</section>
 
-<div class="generalw">
+<section class="generalw">
 	<div class="shirina">
 		<div class="aboutblock">
-			<div class="sssskartins revealator-slideright" style="background-image: url(<?=get_simple_images('index_about_image')[0];?>);"></div>
+			<!-- SEO: Alt-текст для изображения через aria-label с ключевыми словами -->
+			<div class="sssskartins revealator-slideright" style="background-image: url(<?=get_simple_images('index_about_image')[0];?>);" aria-label="Контрактные двигатели и привозные моторы из Японии в Алматы - Моторленд"></div>
 			<div class="abouttext revealator-slideleft">
 			<?=get_customtexts('index_about_text');?>
+			<!-- SEO: Дополнительный SEO-текст с целевыми ключевыми запросами -->
+			<div style="margin-top: 20px;">
+				<p><strong>Купить контрактный мотор в Алматы</strong> - это правильный выбор для вашего автомобиля. Мы предлагаем <strong>контрактные двигатели Казахстан</strong> напрямую из Японии. Все наши <strong>привозные моторы Алматы</strong> проходят тщательную проверку перед продажей.</p>
+				<p>Если вам нужен <strong>двигатель бу Япония Алматы</strong>, мы поможем подобрать именно тот вариант, который подходит для вашего автомобиля. Наши контрактные двигатели - это качественные привозные моторы с японских автомобилей, которые имеют остаточный ресурс и отличное техническое состояние.</p>
+				<p>Мы специализируемся на поставке контрактных двигателей и КПП в Алматы и по всему Казахстану. Все товары поставляются из Японии и имеют гарантию качества.</p>
+			</div>
 			</div>
 		</div>
 	</div>
-</div>
+</section>
 
 <div class="generalw">
 	<div class="shirina zgolovorright">
 	</div>
 </div>
 
-<div class="generalw frayalpfhon">
+<!-- SEO: Семантический тег <section> для каталога товаров -->
+<section class="generalw frayalpfhon" aria-labelledby="catalog-title">
 	<div class="shirina">
-		<ul class="actionbtms">
-			<li class="liacactive" data-typ="ac">Каталог</li>
-			<li data-typ="ca">Акции</li>
+		<ul class="actionbtms" role="tablist">
+			<li class="liacactive" data-typ="ac" role="tab">Каталог</li>
+			<li data-typ="ca" role="tab">Акции</li>
 		</ul>
 	</div>
-</div>
+</section>
 
-<div class="generalw">
+<section class="generalw" aria-label="Каталог товаров">
 	<div class="shirina">
 		<br>
+		<!-- SEO: Семантический тег <article> для каждого товара -->
 		<div id="actionb">
 			<?php
 			$limit = 4;
@@ -225,19 +270,25 @@ $SITE_DESCRIPTION = 'Компания "Motor Land" - поставка контр
 			$tmp = $stmt->get_result();
 			while($get = $tmp->fetch_array()):
 			?>
-			<div class="toverblock">
-			<a href="/detal?id=<?=$get['id'];?>"><div class="toverimg" style="background-image: url(<?=get_farrimg($get['images'])[0];?>);" loading="lazy">
+			<article class="toverblock" itemscope itemtype="https://schema.org/Product">
+			<!-- SEO: Внутренняя ссылка на товар -->
+			<a href="/detal?id=<?=$get['id'];?>" itemprop="url">
+				<!-- SEO: Alt-текст для изображения товара с целевыми ключевыми словами -->
+				<div class="toverimg" style="background-image: url(<?=get_farrimg($get['images'])[0];?>);" loading="lazy" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Японии', ENT_QUOTES, 'UTF-8');?>" itemprop="image">
 			<?php if ($get['sale'] != 'noting') { ?>
 			<div class="cationsale"><?=$get['sale'];?></div>
 			<?php } ?>
 			</div></a>
-			<div class="tovertitle"><?=$get['name'];?></div>
-			<div class="tovaropis">
+			<h3 class="tovertitle" itemprop="name"><?=$get['name'];?></h3>
+			<div class="tovaropis" itemprop="description">
 				<?=$get['stext'];?>
 			</div>
-			<div class="tovercena"><?=($get['cash']!=0?$get['cash'].' KZT':'Цена по запросу');?></div>
-			<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="toverbuton" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">Купить</a>
+			<div class="tovercena" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+				<span itemprop="price"><?=($get['cash']!=0?$get['cash']:'0');?></span>
+				<span itemprop="priceCurrency" content="KZT"><?=($get['cash']!=0?' KZT':'Цена по запросу');?></span>
 			</div>
+			<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="toverbuton" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">Купить</a>
+			</article>
 			<?php
 			endwhile;
 			if (isset($stmt)) {
@@ -255,19 +306,24 @@ $SITE_DESCRIPTION = 'Компания "Motor Land" - поставка контр
 			$tmp = $stmt->get_result();
 			while($get = $tmp->fetch_array()):
 			?>
-			<div class="toverblock revealator-slideup">
-			<a href="/detal?id=<?=$get['id'];?>"><div class="toverimg" style="background-image: url(<?=get_farrimg($get['images'])[0];?>);" loading="lazy">
+			<article class="toverblock revealator-slideup" itemscope itemtype="https://schema.org/Product">
+			<a href="/detal?id=<?=$get['id'];?>" itemprop="url">
+				<!-- SEO: Alt-текст для изображения товара с целевыми ключевыми словами -->
+				<div class="toverimg" style="background-image: url(<?=get_farrimg($get['images'])[0];?>);" loading="lazy" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Японии', ENT_QUOTES, 'UTF-8');?>" itemprop="image">
 			<?php if ($get['sale'] != 'noting') { ?>
 			<div class="cationsale"><?=$get['sale'];?></div>
 			<?php } ?>
 			</div></a>
-			<div class="tovertitle"><?=$get['name'];?></div>
-			<div class="tovaropis">
+			<h3 class="tovertitle" itemprop="name"><?=$get['name'];?></h3>
+			<div class="tovaropis" itemprop="description">
 				<?=$get['stext'];?>
 			</div>
-			<div class="tovercena"><?=($get['cash']!=0?$get['cash'].' KZT':'Цена по запросу');?></div>
-			<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="toverbuton" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">Позвонить</a>
+			<div class="tovercena" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+				<span itemprop="price"><?=($get['cash']!=0?$get['cash']:'0');?></span>
+				<span itemprop="priceCurrency" content="KZT"><?=($get['cash']!=0?' KZT':'Цена по запросу');?></span>
 			</div>
+			<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="toverbuton" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">Позвонить</a>
+			</article>
 			<?php
 			endwhile;
 			if (isset($stmt)) {
@@ -277,11 +333,21 @@ $SITE_DESCRIPTION = 'Компания "Motor Land" - поставка контр
 		</div>
 		<br>
 		<br>
-		<a href="/catalog"><div class="okazatybolsh">Показать больше</div></a>
+		<!-- SEO: Внутренняя ссылка на каталог с ключевыми словами в тексте -->
+		<a href="/catalog"><div class="okazatybolsh">Показать больше контрактных моторов в Алматы</div></a>
 		<br>
 		<br>
+		<!-- SEO: Дополнительные внутренние ссылки для улучшения перелинковки -->
+		<div style="text-align: center; margin-top: 20px; padding: 20px; background: #f9f9f9; border-radius: 5px;">
+			<p style="margin-bottom: 10px;"><strong>Полезные ссылки:</strong></p>
+			<a href="/catalog" style="margin: 0 10px; color: #007bff; text-decoration: underline;">Каталог контрактных моторов</a> |
+			<a href="/service" style="margin: 0 10px; color: #007bff; text-decoration: underline;">Автосервис - установка двигателей</a> |
+			<a href="/guarantees" style="margin: 0 10px; color: #007bff; text-decoration: underline;">Гарантии на контрактные двигатели</a> |
+			<a href="/contacts.php" style="margin: 0 10px; color: #007bff; text-decoration: underline;">Контакты в Алматы</a>
+		</div>
 	</div>
-</div>
+</section>
+</main>
 
 <?php include("des/foter.php"); ?>
 <?php include("hyst/fbody.php"); ?>

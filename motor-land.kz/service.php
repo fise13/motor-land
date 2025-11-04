@@ -1,34 +1,99 @@
 <?php
 include('hyst/php.php');
 
-$SITE_TITLE = 'Моторленд | Автосервис';
-$SITE_DESCRIPTION = 'Профессиональная замена и обслуживание двигателей, а также замена КПП для автомобилей различных марок и моделей.';
+// SEO: Оптимизированные мета-теги для страницы автосервиса
+$SITE_TITLE = 'Автосервис - Замена Двигателей и КПП в Алматы | Моторленд';
+$SITE_DESCRIPTION = 'Профессиональная замена и обслуживание контрактных двигателей и КПП в Алматы. Опытные мастера, гарантия на работы. Все марки автомобилей.';
+$SITE_KEYWORDS = 'замена двигателя алматы, автосервис замена КПП, установка контрактного двигателя, автосервис алматы, замена моторов';
 ?>
 <!doctype html>
-<html>
+<html lang="ru">
 <head>
 <?php include("hyst/head.php"); ?>
-<link rel="canonical" href="https://motor-land.kz/service"/> 
+<!-- SEO: Canonical URL -->
+<link rel="canonical" href="https://motor-land.kz/service"/>
+<!-- SEO: Meta keywords -->
+<meta name="keywords" content="<?=$SITE_KEYWORDS;?>">
+<!-- SEO: Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://motor-land.kz/service">
+<meta property="og:title" content="<?=$SITE_TITLE;?>">
+<meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
+<meta property="og:image" content="https://motor-land.kz/img/logo.jpg">
+<!-- SEO: Twitter Cards -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="<?=$SITE_TITLE;?>">
+<meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
+<!-- SEO: Schema.org Service для страницы автосервиса -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Автосервис - замена двигателей и КПП",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Motor Land",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Алматы",
+      "addressCountry": "KZ"
+    }
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Алматы"
+  },
+  "description": "<?=$SITE_DESCRIPTION;?>"
+}
+</script>
+<!-- SEO: BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Главная",
+    "item": "https://motor-land.kz/"
+  }, {
+    "@type": "ListItem",
+    "position": 2,
+    "name": "Автосервис",
+    "item": "https://motor-land.kz/service"
+  }]
+}
+</script>
 </head>
 <body>
 <?php include("hyst/sbody.php"); ?>
 <?php include("des/head.php"); ?>
-
+<!-- SEO: Семантический тег <main> -->
+<main>
 <div class="service-page">
 	<div class="service-container">
-		<div class="generalw">
+		<!-- SEO: Семантический тег <nav> для хлебных крошек -->
+		<nav class="generalw" aria-label="Навигационная цепочка">
 			<div class="shirina">
-				<div class="crumbsblock">
-				<a href="/">Главная</a> / Автосервис
+				<div class="crumbsblock" itemscope itemtype="https://schema.org/BreadcrumbList">
+				<span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+					<a href="/" itemprop="item"><span itemprop="name">Главная</span></a>
+					<meta itemprop="position" content="1" />
+				</span> / 
+				<span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+					<span itemprop="name">Автосервис</span>
+					<meta itemprop="position" content="2" />
+				</span>
 				</div>
 			</div>
-		</div>
+		</nav>
 
-		<div class="generalw">
+		<!-- SEO: Семантический тег <section> для заголовка -->
+		<section class="generalw" aria-labelledby="service-title">
 			<div class="shirina zgolovorleft">
-				<div class="sttitle"><span>Автосервис</span></div>
+				<h1 id="service-title" class="sttitle"><span>Автосервис</span></h1>
 			</div>
-		</div>
+		</section>
 
 		<div class="service-hero">
 			<div class="service-hero-content">
@@ -130,6 +195,7 @@ $SITE_DESCRIPTION = 'Профессиональная замена и обслу
 		</div>
 	</div>
 </div>
+</main>
 
 <?php include("des/foter.php"); ?>
 <?php include("hyst/fbody.php"); ?>

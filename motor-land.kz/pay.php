@@ -1,34 +1,78 @@
 <?php
 include('hyst/php.php');
 
-$SITE_TITLE = 'Моторленд | Оплата';
-$SITE_DESCRIPTION = 'Доставка автозапчастей и двигателей по всей территории Казахстана и в страны СНГ через транспортные компании.';
+// SEO: Оптимизированные мета-теги для страницы оплаты и доставки
+$SITE_TITLE = 'Доставка и Оплата | Контрактные Двигатели и КПП | Моторленд';
+$SITE_DESCRIPTION = 'Доставка контрактных двигателей и КПП по Казахстану и СНГ. Способы оплаты: наличные, карта, Kaspi.kz. Быстрая доставка транспортными компаниями.';
+$SITE_KEYWORDS = 'доставка двигателей алматы, оплата контрактных моторов, доставка КПП по казахстану, способы оплаты двигателей';
 ?>
 <!doctype html>
-<html>
+<html lang="ru">
 <head>
 	<?php include("hyst/head.php"); ?>
-	<link rel="canonical" href="https://motor-land.kz/pay"/> 
+	<!-- SEO: Canonical URL -->
+	<link rel="canonical" href="https://motor-land.kz/pay"/>
+	<!-- SEO: Meta keywords -->
+	<meta name="keywords" content="<?=$SITE_KEYWORDS;?>">
+	<!-- SEO: Open Graph -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://motor-land.kz/pay">
+	<meta property="og:title" content="<?=$SITE_TITLE;?>">
+	<meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
+	<meta property="og:image" content="https://motor-land.kz/img/logo.jpg">
+	<!-- SEO: Twitter Cards -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="<?=$SITE_TITLE;?>">
+	<meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
+	<!-- SEO: BreadcrumbList -->
+	<script type="application/ld+json">
+	{
+	  "@context": "https://schema.org",
+	  "@type": "BreadcrumbList",
+	  "itemListElement": [{
+	    "@type": "ListItem",
+	    "position": 1,
+	    "name": "Главная",
+	    "item": "https://motor-land.kz/"
+	  }, {
+	    "@type": "ListItem",
+	    "position": 2,
+	    "name": "Доставка и Оплата",
+	    "item": "https://motor-land.kz/pay"
+	  }]
+	}
+	</script>
 </head>
 <body>
 <?php include("hyst/sbody.php"); ?>
 <?php include("des/head.php"); ?>
+<!-- SEO: Семантический тег <main> -->
+<main>
 <br><br>
-<div class="generalw">
+<!-- SEO: Семантический тег <nav> для хлебных крошек -->
+<nav class="generalw" aria-label="Навигационная цепочка">
 	<div class="shirina">
-		<div class="crumbsblock">
-		<a href="/">Главная</a> / Доставка и Оплата
+		<div class="crumbsblock" itemscope itemtype="https://schema.org/BreadcrumbList">
+		<span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+			<a href="/" itemprop="item"><span itemprop="name">Главная</span></a>
+			<meta itemprop="position" content="1" />
+		</span> / 
+		<span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+			<span itemprop="name">Доставка и Оплата</span>
+			<meta itemprop="position" content="2" />
+		</span>
 		</div>
 		
 	</div>
-</div>
+</nav>
 
 
-<div class="generalw">
+<!-- SEO: Семантический тег <section> для заголовка -->
+<section class="generalw" aria-labelledby="pay-title">
 	<div class="shirina zgolovorleft">
-		<div class="sttitle"><span>Доставка и Оплата</span></div>
+		<h1 id="pay-title" class="sttitle"><span>Доставка и Оплата</span></h1>
 	</div>
-</div>
+</section>
 
 <div class="pay-delivery-page">
 	<div class="pay-delivery-container">
@@ -132,6 +176,7 @@ $SITE_DESCRIPTION = 'Доставка автозапчастей и двигат
 		</div>
 	</div>
 </div>
+</main>
 
 <br><br>
 <?php include("des/foter.php"); ?>

@@ -151,6 +151,12 @@ $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : '
 				
 				<div itemprop="description">
 					<?=$print['text'];?>
+					<!-- SEO: Дополнительный SEO-текст с целевыми ключевыми запросами -->
+					<div style="margin-top: 20px; padding: 15px; background: #f5f5f5; border-radius: 5px;">
+						<p><strong>Купить контрактный мотор <?=$product_name;?> в Алматы</strong> - это отличное решение для вашего автомобиля. Мы предлагаем <strong>привозные моторы из Японии</strong>, которые проходят тщательную проверку перед продажей.</p>
+						<p>Все наши <strong>контрактные двигатели Казахстан</strong> поставляются напрямую из Японии и имеют гарантию качества. Если вам нужен <strong>двигатель бу Япония Алматы</strong>, мы поможем подобрать оптимальный вариант.</p>
+						<p>Посмотрите также наш <a href="/catalog" style="color: #007bff; text-decoration: underline;">полный каталог контрактных моторов</a> или <a href="/service" style="color: #007bff; text-decoration: underline;">запишитесь на установку в наш автосервис</a>.</p>
+					</div>
 				</div>
 				<br><br>
 				<div class="tovercenaca" itemprop="offers" itemscope itemtype="https://schema.org/Offer">

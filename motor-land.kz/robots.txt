@@ -1,10 +1,28 @@
+# SEO: robots.txt для поисковых роботов
+# Разрешаем индексацию всех основных страниц
 User-agent: *
 Allow: /
+Allow: /catalog
+Allow: /detal
+Allow: /service
+Allow: /pay
+Allow: /guarantees
+Allow: /contacts.php
+
+# Запрещаем индексацию админ-панели и служебных директорий
 Disallow: /hyst/
 Disallow: /adm.php
 Disallow: /cms_img/
 Disallow: /logs/
+Disallow: /actions.php
+Disallow: /getdtls.php
+Disallow: /getdtlsaa.php
+Disallow: /getf.php
+Disallow: /send_form.php
 
-# Sitemap
+# SEO: Указываем расположение sitemap
 Sitemap: https://motor-land.kz/sitemap.php
+
+# SEO: Указываем задержку для вежливых роботов (опционально)
+# Crawl-delay: 1
 

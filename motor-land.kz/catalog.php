@@ -1,8 +1,11 @@
 <?php
 include('hyst/php.php');
 
-$SITE_TITLE = 'Моторленд | Каталог контрактных Моторов и КПП';
-$SITE_DESCRIPTION = 'Контрактные моторы и КПП в Алматы, подбор мо марке и модели';
+// SEO: Оптимизированные мета-теги для страницы каталога с целевыми ключевыми запросами
+// Целевые запросы: "купить контрактный мотор Алматы", "контрактные двигатели Казахстан", "привозные моторы Алматы"
+$SITE_TITLE = 'Каталог Контрактных Моторов Алматы | Привозные Моторы Япония | Контрактные Двигатели Казахстан';
+$SITE_DESCRIPTION = 'Каталог контрактных моторов в Алматы. Привозные моторы из Японии. Контрактные двигатели Казахстан - большой выбор двигателей бу. Подбор по марке, модели и году. Гарантия качества.';
+$SITE_KEYWORDS = 'купить контрактный мотор Алматы, контрактные двигатели Казахстан, привозные моторы Алматы, каталог контрактных моторов, двигатель бу Япония, контрактные двигатели каталог';
 
 $mark = false;
 $mode = false;
@@ -45,37 +48,81 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 }
 ?>
 <!doctype html>
-<html>
+<html lang="ru">
 <head>
 <?php include("hyst/head.php"); ?>
+<!-- SEO: Canonical URL для страницы каталога -->
+<link rel="canonical" href="https://motor-land.kz/catalog"/>
+<!-- SEO: Meta keywords -->
+<meta name="keywords" content="<?=$SITE_KEYWORDS;?>">
+<!-- SEO: Open Graph для социальных сетей -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://motor-land.kz/catalog">
+<meta property="og:title" content="<?=$SITE_TITLE;?>">
+<meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
+<meta property="og:image" content="https://motor-land.kz/img/logo.jpg">
+<meta property="og:locale" content="ru_RU">
+<!-- SEO: Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<?=$SITE_TITLE;?>">
+<meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
+<!-- SEO: Schema.org BreadcrumbList для навигации -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Главная",
+    "item": "https://motor-land.kz/"
+  }, {
+    "@type": "ListItem",
+    "position": 2,
+    "name": "Каталог",
+    "item": "https://motor-land.kz/catalog"
+  }]
+}
+</script>
 </head>
 <body>
 <?php include("hyst/sbody.php"); ?>
 <?php include("des/head.php"); ?>
+<!-- SEO: Семантический тег <main> для основного контента -->
+<main>
 <br><br>
-<div class="generalw">
+<!-- SEO: Семантический тег <nav> для хлебных крошек -->
+<nav class="generalw" aria-label="Навигационная цепочка">
 	<div class="shirina">
-		<div class="crumbsblock">
-		<a href="/">Главная</a> / Каталог
+		<div class="crumbsblock" itemscope itemtype="https://schema.org/BreadcrumbList">
+		<span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+			<a href="/" itemprop="item"><span itemprop="name">Главная</span></a>
+			<meta itemprop="position" content="1" />
+		</span> / 
+		<span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+			<span itemprop="name">Каталог</span>
+			<meta itemprop="position" content="2" />
+		</span>
 		</div>
 		
 	</div>
-</div>	
+</nav>	
 
 
-<div class="generalw">
+<!-- SEO: Семантический тег <section> для заголовка каталога -->
+<section class="generalw" aria-labelledby="catalog-title">
 	<div class="shirina zgolovorleft">
-		<div class="sttitle"><span>Каталог</span></div>
+		<h1 id="catalog-title" class="sttitle"><span>Каталог</span></h1>
 		
 		<ul class="actionperekl">
 			<a href="/actions"><li>акции</li></a>
 			<a href="/catalog"><li class="actionpereklact" style="color: white;">каталог</li></a>
 		</ul>
 	</div>
-</div>
+</section>
 
-
-<div class="generalw">
+<!-- SEO: Семантический тег <section> для фильтров и товаров -->
+<section class="generalw" aria-label="Фильтры и товары каталога">
 	<div class="shirina">		
 
 		
@@ -203,19 +250,25 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		if ($tmps->num_rows != 0) { 
 			while($get = $tmps->fetch_array()):
 		?>
-		<div class="toverblock">
-			<a href="/detal?id=<?=$get['id'];?>"><div class="toverimg" style="background-image: url(<?=get_farrimg($get['images'])[0];?>);">
+		<!-- SEO: Семантический тег <article> для каждого товара в каталоге -->
+		<article class="toverblock" itemscope itemtype="https://schema.org/Product">
+			<a href="/detal?id=<?=$get['id'];?>" itemprop="url">
+				<!-- SEO: Alt-текст для изображения товара с целевыми ключевыми словами -->
+				<div class="toverimg" style="background-image: url(<?=get_farrimg($get['images'])[0];?>);" loading="lazy" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Японии', ENT_QUOTES, 'UTF-8');?>" itemprop="image">
 			<?php if ($get['sale'] != 'noting') { ?>
 			<div class="cationsale"><?=$get['sale'];?></div>
 			<?php } ?>
 			</div></a>
-			<div class="tovertitle"><?=$get['name'];?></div>
-			<div class="tovaropis">
+			<h2 class="tovertitle" itemprop="name"><?=$get['name'];?></h2>
+			<div class="tovaropis" itemprop="description">
 				<?=$get['stext'];?>
 			</div>
-		<div class="tovercena"><?=($get['cash']!=0?$get['cash'].' KZT':'Цена по запросу');?></div>
-		<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="toverbuton" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">Купить</a>
-		</div>
+			<div class="tovercena" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+				<span itemprop="price"><?=($get['cash']!=0?$get['cash']:'0');?></span>
+				<span itemprop="priceCurrency" content="KZT"><?=($get['cash']!=0?' KZT':'Цена по запросу');?></span>
+			</div>
+			<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="toverbuton" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">Купить</a>
+		</article>
 		<?php
 			endwhile;
 		}
@@ -225,7 +278,8 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		?>
 		
 	</div>
-</div>
+</section>
+</main>
 <br><br>
 <?php include("des/foter.php"); ?>
 <?php include("hyst/fbody.php"); ?>

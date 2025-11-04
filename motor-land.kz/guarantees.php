@@ -1,34 +1,77 @@
 <?php
 include('hyst/php.php');
 
-$SITE_TITLE = 'Моторленд | Гарантии';
-$SITE_DESCRIPTION = 'Предоставляемые гарантии на контрактные моторы и КПП, Алматы покупка автозапчастей';
+// SEO: Оптимизированные мета-теги для страницы гарантий
+$SITE_TITLE = 'Гарантии на Контрактные Двигатели и КПП | Моторленд';
+$SITE_DESCRIPTION = 'Гарантии на контрактные двигатели и КПП в Алматы. Условия гарантии, сроки проверки, возврат товара. Прозрачные условия гарантийного обслуживания.';
+$SITE_KEYWORDS = 'гарантия на контрактные двигатели, гарантия на КПП, возврат двигателя, гарантия моторов алматы';
 ?>
 <!doctype html>
-<html>
+<html lang="ru">
 <head>
 <?php include("hyst/head.php"); ?>
-<link rel="canonical" href="https://motor-land.kz/guarantees"/> 
+<!-- SEO: Canonical URL -->
+<link rel="canonical" href="https://motor-land.kz/guarantees"/>
+<!-- SEO: Meta keywords -->
+<meta name="keywords" content="<?=$SITE_KEYWORDS;?>">
+<!-- SEO: Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://motor-land.kz/guarantees">
+<meta property="og:title" content="<?=$SITE_TITLE;?>">
+<meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
+<meta property="og:image" content="https://motor-land.kz/img/logo.jpg">
+<!-- SEO: Twitter Cards -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="<?=$SITE_TITLE;?>">
+<meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
+<!-- SEO: BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Главная",
+    "item": "https://motor-land.kz/"
+  }, {
+    "@type": "ListItem",
+    "position": 2,
+    "name": "Гарантии",
+    "item": "https://motor-land.kz/guarantees"
+  }]
+}
+</script>
 </head>
 <body>
 <?php include("hyst/sbody.php"); ?>
 <?php include("des/head.php"); ?>
-
+<!-- SEO: Семантический тег <main> -->
+<main>
 <div class="guarantees-page">
 	<div class="guarantees-container">
-		<div class="generalw">
+		<!-- SEO: Семантический тег <nav> для хлебных крошек -->
+		<nav class="generalw" aria-label="Навигационная цепочка">
 			<div class="shirina">
-				<div class="crumbsblock">
-				<a href="/">Главная</a> / Гарантии
+				<div class="crumbsblock" itemscope itemtype="https://schema.org/BreadcrumbList">
+				<span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+					<a href="/" itemprop="item"><span itemprop="name">Главная</span></a>
+					<meta itemprop="position" content="1" />
+				</span> / 
+				<span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+					<span itemprop="name">Гарантии</span>
+					<meta itemprop="position" content="2" />
+				</span>
 				</div>
 			</div>
-		</div>
+		</nav>
 
-		<div class="generalw">
+		<!-- SEO: Семантический тег <section> для заголовка -->
+		<section class="generalw" aria-labelledby="guarantees-title">
 			<div class="shirina zgolovorleft">
-				<div class="sttitle"><span>Гарантии</span></div>
+				<h1 id="guarantees-title" class="sttitle"><span>Гарантии</span></h1>
 			</div>
-		</div>
+		</section>
 
 		<div class="guarantees-content">
 			<div class="guarantees-sidebar">
@@ -112,6 +155,7 @@ $SITE_DESCRIPTION = 'Предоставляемые гарантии на кон
 		</div>
 	</div>
 </div>
+</main>
 
 <?php include("des/foter.php"); ?>
 <?php include("hyst/fbody.php"); ?>
