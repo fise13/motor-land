@@ -1,11 +1,28 @@
-$(document).ready(function() {
+// Performance: Ожидание загрузки jQuery перед использованием
+(function() {
+	function waitForJQuery(callback) {
+		if (typeof window.jQuery !== 'undefined' && typeof window.$ !== 'undefined') {
+			callback();
+		} else {
+			setTimeout(function() { waitForJQuery(callback); }, 50);
+		}
+	}
 	
-	// Плавное появление страницы при загрузке
-	// Используем небольшую задержку для более плавного эффекта
-	setTimeout(function() {
-		$('body').addClass('page-loaded');
-		$('html').css('opacity', '1');
-	}, 50);
+	function initMainScript() {
+		var $ = window.jQuery || window.$;
+		if (!$) {
+			waitForJQuery(initMainScript);
+			return;
+		}
+		
+		$(document).ready(function() {
+			
+			// Плавное появление страницы при загрузке
+			// Используем небольшую задержку для более плавного эффекта
+			setTimeout(function() {
+				$('body').addClass('page-loaded');
+				$('html').css('opacity', '1');
+			}, 50);
 
 
 	/**
@@ -648,4 +665,14 @@ $(document).ready(function() {
 		}
 	});
 
-});
+		});
+	}
+	
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', function() {
+			waitForJQuery(initMainScript);
+		});
+	} else {
+		waitForJQuery(initMainScript);
+	}
+})();

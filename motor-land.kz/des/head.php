@@ -25,53 +25,80 @@
 </header>
 	<!-- Performance: Скрипт мобильного меню загружается с defer -->
 	<script defer>
-	/**
-	 * Функция: Переключение мобильного меню
-	 * Описание: Показывает/скрывает мобильное меню с анимацией и переключает состояние кнопки.
-	 * Accessibility: Обновляет ARIA атрибуты для screen readers
-	 * Параметры: нет
-	 * Возвращает: ничего
-	 */
-	function mobilemenu () {
-		var menu = $('.menu');
-		var btn = $('.modilebtn');
-		var overlay = $('.menu-overlay');
-		var isOpen = menu.hasClass('open');
+	// Performance: Ожидание загрузки jQuery перед использованием
+	(function() {
+		function waitForJQuery(callback) {
+			if (typeof window.jQuery !== 'undefined' && typeof window.$ !== 'undefined') {
+				callback();
+			} else {
+				setTimeout(function() { waitForJQuery(callback); }, 50);
+			}
+		}
 		
-		if (isOpen) {
-			// Закрытие меню
-			menu.removeClass('open');
-			btn.removeClass('active');
-			overlay.removeClass('active');
-			btn.attr('aria-expanded', 'false');
-			overlay.attr('aria-hidden', 'true');
+		function initMobileMenu() {
+			var $ = window.jQuery || window.$;
+			if (!$) {
+				waitForJQuery(initMobileMenu);
+				return;
+			}
+			
+			/**
+			 * Функция: Переключение мобильного меню
+			 * Описание: Показывает/скрывает мобильное меню с анимацией и переключает состояние кнопки.
+			 * Accessibility: Обновляет ARIA атрибуты для screen readers
+			 * Параметры: нет
+			 * Возвращает: ничего
+			 */
+			window.mobilemenu = function() {
+				var menu = $('.menu');
+				var btn = $('.modilebtn');
+				var overlay = $('.menu-overlay');
+				var isOpen = menu.hasClass('open');
+				
+				if (isOpen) {
+					// Закрытие меню
+					menu.removeClass('open');
+					btn.removeClass('active');
+					overlay.removeClass('active');
+					btn.attr('aria-expanded', 'false');
+					overlay.attr('aria-hidden', 'true');
+				} else {
+					// Открытие меню
+					menu.addClass('open').attr('id', 'mobile-menu');
+					btn.addClass('active');
+					overlay.addClass('active');
+					btn.attr('aria-expanded', 'true');
+					overlay.attr('aria-hidden', 'false');
+				}
+			};
+			
+			// Закрытие меню при клике на затемненный фон
+			$(document).on('click', '.menu-overlay', function() {
+				var menu = $('.menu');
+				var btn = $('.modilebtn');
+				var overlay = $('.menu-overlay');
+				
+				menu.removeClass('open');
+				btn.removeClass('active');
+				overlay.removeClass('active');
+				btn.attr('aria-expanded', 'false');
+				overlay.attr('aria-hidden', 'true');
+			});
+			
+			// Accessibility: Закрытие меню по ESC
+			$(document).on('keydown', function(e) {
+				if (e.key === 'Escape' && $('.menu').hasClass('open')) {
+					window.mobilemenu();
+				}
+			});
+		}
+		
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', function() {
+				waitForJQuery(initMobileMenu);
+			});
 		} else {
-			// Открытие меню
-			menu.addClass('open').attr('id', 'mobile-menu');
-			btn.addClass('active');
-			overlay.addClass('active');
-			btn.attr('aria-expanded', 'true');
-			overlay.attr('aria-hidden', 'false');
+			waitForJQuery(initMobileMenu);
 		}
-	}
-	
-	// Закрытие меню при клике на затемненный фон
-	$(document).on('click', '.menu-overlay', function() {
-		var menu = $('.menu');
-		var btn = $('.modilebtn');
-		var overlay = $('.menu-overlay');
-		
-		menu.removeClass('open');
-		btn.removeClass('active');
-		overlay.removeClass('active');
-		btn.attr('aria-expanded', 'false');
-		overlay.attr('aria-hidden', 'true');
-	});
-	
-	// Accessibility: Закрытие меню по ESC
-	$(document).on('keydown', function(e) {
-		if (e.key === 'Escape' && $('.menu').hasClass('open')) {
-			mobilemenu();
-		}
-	});
+	})();
 	</script>
