@@ -149,27 +149,27 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 				
 				function slider() {
 					var cil = $("#slidess").children('div, img').length - 1;
-					var cur = 0;
+			var cur = 0;
 					$("#slidess").children('div, img').each(function(index, element){	
 						if ($(element).css('display') == 'block' || $(element).is(':visible')) {
-							cur = index;
-						}	
-					});
-					
-					if (cur >= cil) { cur = 0; } else { cur++; }
-					
+				cur = index;
+				}	
+			});
+			
+			if (cur >= cil) { cur = 0; } else { cur++; }
+			
 					$("#slidess").children('div, img').each(function(index, element){	
 						if ($(element).css('display') == 'block' || $(element).is(':visible')) { 
 							$(element).fadeOut(500); 
 						}
-						if (cur == index) {
-							$(element).fadeIn(500);
-						}	
-					});
-					
+				if (cur == index) {
+				$(element).fadeIn(500);
+				}	
+			});
+			
 					setTimeout(function() { slider(); }, 3000);
-				}
-				
+		}
+		
 				setTimeout(function() { slider(); }, 3000);
 			}
 			

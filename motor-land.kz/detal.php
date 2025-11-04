@@ -139,7 +139,7 @@ $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : '
 			<meta itemprop="position" content="3" />
 		</span>
 		</div>
-	</div>
+		</div>
 </nav>
 
 <!-- SEO: Семантический тег <article> для товара -->
@@ -154,7 +154,7 @@ $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : '
 					$product_img = get_optimized_image(get_farrimg($print['images'])[0]);
 					?>
 					<link rel="preload" as="image" href="<?=$product_img['webp'] ?: $product_img['original'];?>">
-					<div class="tovarimage">
+			<div class="tovarimage">
 						<!-- Performance: WebP изображение с fallback для оптимизации размера -->
 						<picture>
 							<?php if ($product_img['webp']): ?>
@@ -164,16 +164,16 @@ $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : '
 							<!-- Performance: width и height для предотвращения CLS (Cumulative Layout Shift) -->
 							<img src="<?=$product_img['original'];?>" alt="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы из Малайзии';?>" title="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы';?>" itemprop="image" loading="eager" fetchpriority="high" width="600" height="450" decoding="async">
 						</picture>
-						<?php if ($print['sale'] != 'noting') { ?>
-						<div class="cationsale"><?=$print['sale'];?></div>
-						<?php } ?>
-					</div>
-				</div>
+				<?php if ($print['sale'] != 'noting') { ?>
+				<div class="cationsale"><?=$print['sale'];?></div>
+				<?php } ?>
+			</div>
+		</div>
 				
 				<!-- Информация о товаре -->
 				<div class="product-info-wrapper">
 					<h1 class="product-title" itemprop="name"><?=$print['name'];?></h1>
-					
+			
 					<!-- Цена -->
 					<div class="product-price-section" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
 						<?php if ($print['cash'] != 0 && $print['cash'] != '0') { ?>
@@ -204,10 +204,10 @@ $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : '
 						?>
 					</div>
 				</div>
-			</div>
-			<!--<div class="charactr">
-			<?=$print['text1'];?>
-			</div>-->
+		</div>
+		<!--<div class="charactr">
+		<?=$print['text1'];?>
+		</div>-->
 		</article>
 	</div>
 </section>

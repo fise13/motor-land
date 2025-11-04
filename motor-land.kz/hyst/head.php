@@ -42,9 +42,6 @@ if (mb_strlen($SITE_DESCRIPTION) < 50) {
 }
 ?>
 <!-- Performance: Resource hints для ускорения загрузки внешних ресурсов -->
-<!-- Performance: Preconnect для собственного домена - критично для быстрой загрузки CSS -->
-<link rel="preconnect" href="https://motor-land.kz" crossorigin>
-<link rel="dns-prefetch" href="https://motor-land.kz">
 <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
 <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
@@ -83,10 +80,6 @@ if (mb_strlen($SITE_DESCRIPTION) < 50) {
 .sliderbtns{position:absolute;bottom:100px;left:0}
 .phone{text-decoration:none;padding:10px 30px;border:solid 2px #fff;border-radius:30px;font-size:22px;color:#fff;display:inline-block}
 .atalogb{padding:10px 30px;border:solid 2px #fff;border-radius:30px;font-size:20px;color:#fff;text-decoration:none;display:inline-block;margin-top:15px}
-/* Performance: Критические стили для формы поиска */
-.sliderform{padding:25px;background:rgba(255,255,255,0.18);border-radius:20px;display:inline-block;position:absolute;bottom:80px;left:0;font-size:40px;color:#fff;font-family:robotob;text-align:left;backdrop-filter:blur(6px) saturate(180%);-webkit-backdrop-filter:blur(6px) saturate(180%);border:1px solid rgba(255,255,255,0.26);box-shadow:0 8px 32px 0 rgba(31,38,135,0.18);z-index:999999}
-.maipttee{display:flex;flex-wrap:wrap;justify-content:center;z-index:999998}
-.meinputer{display:inline-block;border-radius:15px;border:solid 1px #fff;padding:8px 30px 8px 10px;font-size:18px;color:#5b5b5b;width:170px;margin:5px;position:relative;height:20px;z-index:999998}
 /* Улучшение FCP - базовые стили для body */
 body{margin:0;padding:0;width:100%;height:100%;font-family:roboto,sans-serif;font-size:14px;color:#404554}
 /* Performance: Предотвращение layout shift для header */
@@ -94,38 +87,21 @@ body{margin:0;padding:0;width:100%;height:100%;font-family:roboto,sans-serif;fon
 .shirina{max-width:1200px;margin:0 auto;position:relative}
 </style>
 
-<!-- Performance: Оптимизация критического пути - загружаем CSS параллельно, не блокируя рендеринг -->
-<!-- Performance: Критические стили загружаем с preload для параллельной загрузки -->
-<link rel="preload" href="/hyst/visual/admin.css?<?=$INTERFACE_VERSION;?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="/hyst/visual/admin.css?<?=$INTERFACE_VERSION;?>" type="text/css"/></noscript>
-<link rel="preload" href="/hyst/visual/admin_mob.css?<?=$INTERFACE_VERSION;?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="/hyst/visual/admin_mob.css?<?=$INTERFACE_VERSION;?>" type="text/css"/></noscript>
+<!-- Performance: Критические стили загружаем первыми -->
+<link rel="stylesheet" href="/hyst/visual/admin.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
+<link rel="stylesheet" href="/hyst/visual/admin_mob.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
 
 <!-- Performance: Основные стили загружаем асинхронно для улучшения SI (Speed Index) -->
 <!-- Non-critical CSS загружаем после рендеринга критического контента -->
 <link rel="preload" href="css.css?<?=$INTERFACE_VERSION;?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="css.css?<?=$INTERFACE_VERSION;?>" type="text/css" /></noscript>
-<link rel="preload" href="tab.css?<?=$INTERFACE_VERSION;?>" as="style" onload="this.onload=null;this.rel='stylesheet'" media="(min-width: 768px)">
-<noscript><link rel="stylesheet" href="tab.css?<?=$INTERFACE_VERSION;?>" type="text/css" media="(min-width: 768px)" /></noscript>
-<link rel="preload" href="mob.css?<?=$INTERFACE_VERSION;?>" as="style" onload="this.onload=null;this.rel='stylesheet'" media="(max-width: 767px)">
-<noscript><link rel="stylesheet" href="mob.css?<?=$INTERFACE_VERSION;?>" type="text/css" media="(max-width: 767px)" /></noscript>
+<link href="tab.css?<?=$INTERFACE_VERSION;?>" rel="stylesheet" type="text/css" media="(min-width: 768px)" />
+<link href="mob.css?<?=$INTERFACE_VERSION;?>" rel="stylesheet" type="text/css" media="(max-width: 767px)" />
 <!-- Performance: Revealator CSS загружаем асинхронно -->
 <link rel="preload" href="des/fm.revealator.jquery.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="des/fm.revealator.jquery.min.css"></noscript>
 
 <!-- Performance: JavaScript загружаем с defer для неблокирующей загрузки -->
-<!-- Performance: Добавляем скрипт для загрузки CSS через preload (polyfill для старых браузеров) -->
-<script>
-/*! loadCSS rel=preload polyfill. [c]2017 @zachleat, Filament Group, Inc. Licensed MIT */
-(function(w){"use strict";if(!w.loadCSS){w.loadCSS=function(){}}
-var loadCSS=function(href,before,media){var doc=w.document;var ss=doc.createElement("link");var ref;if(before){ref=before}else{var refs=(doc.body||doc.getElementsByTagName("head")[0]).childNodes;ref=refs[refs.length-1]}
-var sheets=doc.styleSheets;ss.rel="stylesheet";ss.href=href;ss.media="only x";function ready(cb){if(doc.body){return cb()}
-setTimeout(function(){ready(cb)},1)}
-ready(function(){ref.parentNode.insertBefore(ss,before?ref:ref.nextSibling)});var onloadcssdefined=function(cb){var resolvedHref=ss.href;var i=sheets.length;while(i--){if(sheets[i].href===resolvedHref){return cb()}}
-setTimeout(function(){onloadcssdefined(cb)})};function loadCB(){if(ss.addEventListener){ss.removeEventListener("load",loadCB)}ss.media=media||"all"}
-if(ss.addEventListener){ss.addEventListener("load",loadCB)}
-ss.onloadcssdefined=onloadcssdefined;onloadcssdefined(loadCB);return ss};w.loadCSS=loadCSS})(typeof global!=="undefined"?global:this);
-</script>
 <!-- Важно: jQuery должен загрузиться первым, но используем defer для неблокирующей загрузки -->
 <script src="/hyst/visual/jquery.js" defer></script>
 <script src="/hyst/visual/jquery-ui.js" defer></script>

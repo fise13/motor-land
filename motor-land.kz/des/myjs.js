@@ -441,7 +441,7 @@ $(document).ready(function() {
 	 * Возвращает: ничего
 	 */
 	$(document).on("click", ".closemodal", function () {
-		$('.plashesbgmodl, #zakazaty').removeClass('show');
+    	$('.plashesbgmodl, #zakazaty').removeClass('show');
 		$('.plashesbgmodl').attr('aria-hidden', 'true');
 		$('#zakazaty').attr('aria-hidden', 'true');
 	});
@@ -610,7 +610,7 @@ $(document).ready(function() {
 		
 		// После окончания анимации переходим на новую страницу
 		setTimeout(function() {
-			window.location.href = href;
+				window.location.href = href;
 		}, 400); // Время должно совпадать с длительностью pageFadeOut
 	});
 
