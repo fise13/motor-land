@@ -110,13 +110,19 @@ $(document).ready(function() {
 	 * Возвращает: ничего
 	 */
 	function openDropdown(dd) {
+		if (!dd || dd.length === 0) return;
+		
 		var meinputer = dd.closest('.meinputer');
+		if (!meinputer || meinputer.length === 0) return;
+		
 		var btn = meinputer.find('.btmmearrow');
 		var isInSliderForm = dd.closest('.sliderform').length > 0;
 		
 		// Если dropdown находится внутри .sliderform (главная страница), используем fixed позиционирование
 		if (isInSliderForm) {
 			var meinputerOffset = meinputer.offset();
+			if (!meinputerOffset) return;
+			
 			var meinputerHeight = meinputer.outerHeight();
 			var ddWidth = meinputer.outerWidth();
 			var scrollTop = $(window).scrollTop();
@@ -130,14 +136,16 @@ $(document).ready(function() {
 				'left': (meinputerOffset.left - scrollLeft) + 'px',
 				'top': (meinputerOffset.top + meinputerHeight - scrollTop) + 'px',
 				'width': ddWidth + 'px',
-				'z-index': '999999'
+				'z-index': '999999',
+				'pointer-events': 'auto'
 			});
 		} else {
 			dd.css({
 				'display': 'block',
 				'opacity': 0,
 				'transform': 'translateY(-10px) scaleY(0.95)',
-				'position': 'absolute'
+				'position': 'absolute',
+				'pointer-events': 'auto'
 			});
 		}
 		
