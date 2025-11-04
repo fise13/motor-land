@@ -392,8 +392,6 @@ min-height: 600px;
 position: relative;
 height: 100%;
 display: inline-block;
-width: 100%;
-text-align: center;
 /* Performance: Создаем stacking context для корректного отображения формы поиска поверх всего */
 z-index: 1;
 /* Performance: Разрешаем overflow для выпадающих списков */
@@ -477,8 +475,7 @@ color: white;
   display: inline-block;
   position: absolute;
   bottom: 80px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0px;
   font-size: 40px;
   color: white;
   font-family: robotob;
@@ -541,6 +538,8 @@ vertical-align: top;
 z-index: 1002;
 /* Performance: Разрешаем overflow для выпадающих списков */
 overflow: visible;
+/* Гарантируем что элементы внутри кликабельны */
+pointer-events: auto !important;
 }
 
 /* Performance: Стили для поля ввода .madiv - кликабельное поле */
@@ -600,6 +599,7 @@ clip-path: none !important;
 z-index: 2147483647 !important; /* Максимальный z-index для открытого dropdown */
 position: fixed !important; /* Гарантируем fixed позиционирование */
 /* Решение 12: Гарантируем что элемент видим и не обрезан */
+display: block !important;
 visibility: visible !important;
 opacity: 1 !important;
 pointer-events: auto !important;
@@ -622,10 +622,10 @@ transform: translateX(3px);
     max-height: 300px;
     opacity: 1;
     transform: translateY(0) scaleY(1);
-    display: block;
+    display: block !important;
     /* Performance: Максимальный z-index для открытого dropdown чтобы он был поверх всего контента */
     z-index: 2147483647 !important; /* Максимальное значение z-index */
-    pointer-events: auto;
+    pointer-events: auto !important;
     /* Решение 6: Гарантия что открытый dropdown поверх всего */
     /* Для dropdown внутри .sliderform будет установлено position: fixed через JS */
     isolation: isolate !important;
