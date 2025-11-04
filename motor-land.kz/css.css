@@ -391,7 +391,7 @@ min-height: 600px;
 .slidercoun {
 position: relative;
 height: 100%;
-display: inline-block;
+display: block;
 width: 100%;
 max-width: 1200px;
 margin: 0 auto;
@@ -481,7 +481,7 @@ color: white;
   display: inline-block;
   position: absolute;
   bottom: 80px;
-  left: 0;
+  left: 0px;
   font-size: 40px;
   color: white;
   font-family: robotob;
@@ -503,10 +503,6 @@ color: white;
   clip-path: none !important;
   /* Гарантируем что форма и все её элементы кликабельны */
   pointer-events: auto !important;
-  /* Форма фиксирована относительно контейнера слайдера */
-  margin-left: 0;
-  /* Убираем transform который может влиять на позиционирование */
-  transform: none;
 }
 
 /* Гарантируем кликабельность всех элементов внутри формы */
