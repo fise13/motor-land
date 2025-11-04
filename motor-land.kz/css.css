@@ -501,6 +501,15 @@ vertical-align: top;
 z-index: 10000;
 }
 
+/* Performance: Стили для поля ввода .madiv - кликабельное поле */
+.madiv {
+cursor: pointer;
+user-select: none;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+}
+
 .ddwnblock {
 width: 190px;
 padding: 10px 10px 10px 10px;
@@ -1156,6 +1165,25 @@ transition: all 0.5s;
 .okazatybolsh:hover {
 background-position: -300px 0px;
 color: white;
+}
+
+/* Performance: Убираем синий цвет ссылки для кнопки "Подробнее" */
+.okazatybolsh-link {
+	text-decoration: none !important;
+	color: inherit !important;
+	display: inline-block;
+}
+
+.okazatybolsh-link:visited,
+.okazatybolsh-link:link,
+.okazatybolsh-link:active {
+	color: inherit !important;
+	text-decoration: none !important;
+}
+
+.okazatybolsh-link:hover {
+	color: inherit !important;
+	text-decoration: none !important;
 }
 
 .aboutblock1 {

@@ -150,11 +150,20 @@ $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : '
 				<!-- Изображение товара -->
 				<div class="product-image-wrapper">
 					<!-- Performance: Preload изображения товара для ускорения LCP на странице товара -->
-					<link rel="preload" as="image" href="<?=get_farrimg($print['images'])[0];?>">
+					<?php 
+					$product_img = get_optimized_image(get_farrimg($print['images'])[0]);
+					?>
+					<link rel="preload" as="image" href="<?=$product_img['webp'] ?: $product_img['original'];?>">
 					<div class="tovarimage">
-						<!-- SEO: Улучшенный alt-текст для изображения товара с целевыми ключевыми словами -->
-						<!-- Performance: width и height для предотвращения CLS (Cumulative Layout Shift) -->
-						<img src="<?=get_farrimg($print['images'])[0];?>" alt="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы из Малайзии';?>" title="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы';?>" itemprop="image" loading="eager" fetchpriority="high" width="600" height="450" decoding="async">
+						<!-- Performance: WebP изображение с fallback для оптимизации размера -->
+						<picture>
+							<?php if ($product_img['webp']): ?>
+							<source srcset="<?=$product_img['webp'];?>" type="image/webp">
+							<?php endif; ?>
+							<!-- SEO: Улучшенный alt-текст для изображения товара с целевыми ключевыми словами -->
+							<!-- Performance: width и height для предотвращения CLS (Cumulative Layout Shift) -->
+							<img src="<?=$product_img['original'];?>" alt="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы из Малайзии';?>" title="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы';?>" itemprop="image" loading="eager" fetchpriority="high" width="600" height="450" decoding="async">
+						</picture>
 						<?php if ($print['sale'] != 'noting') { ?>
 						<div class="cationsale"><?=$print['sale'];?></div>
 						<?php } ?>

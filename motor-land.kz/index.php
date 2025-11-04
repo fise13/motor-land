@@ -98,14 +98,23 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 		while($slide=$slider->fetch_array()):
 		?>
 		<!-- Performance: Оптимизация LCP - первый слайд использует <img> вместо background-image -->
-		<?php if ($slide_index == 0): ?>
+		<?php if ($slide_index == 0): 
+			$slide_img = get_optimized_image($slide['image']);
+		?>
 		<!-- Performance: Preload первого изображения с высоким приоритетом для улучшения LCP -->
-		<link rel="preload" as="image" href="<?=$slide['image'];?>" fetchpriority="high">
-		<!-- Performance: Используем <img> для LCP элемента вместо background-image -->
-		<img src="<?=$slide['image'];?>" alt="Купить контрактный мотор Алматы - привозные моторы из Малайзии, контрактные двигатели Казахстан" class="sliderslid" loading="eager" fetchpriority="high" width="1920" height="600" decoding="async" style="object-fit:cover;width:100%;height:100%;position:absolute;top:0;left:0;display:block;">
-		<?php else: ?>
-		<!-- SEO: Alt-текст для остальных изображений слайдера -->
-		<div class="sliderslid" style="background-image: url(<?=$slide['image'];?>);" aria-label="Купить контрактный мотор Алматы - привозные моторы из Малайзии, контрактные двигатели Казахстан" loading="lazy"></div>
+		<link rel="preload" as="image" href="<?=$slide_img['webp'] ?: $slide_img['original'];?>" fetchpriority="high">
+		<!-- Performance: Используем <img> для LCP элемента вместо background-image с WebP поддержкой -->
+		<picture>
+			<?php if ($slide_img['webp']): ?>
+			<source srcset="<?=$slide_img['webp'];?>" type="image/webp">
+			<?php endif; ?>
+			<img src="<?=$slide_img['original'];?>" alt="Купить контрактный мотор Алматы - привозные моторы из Малайзии, контрактные двигатели Казахстан" class="sliderslid" loading="eager" fetchpriority="high" width="1920" height="600" decoding="async" style="object-fit:cover;width:100%;height:100%;position:absolute;top:0;left:0;display:block;">
+		</picture>
+		<?php else: 
+			$slide_img = get_optimized_image($slide['image']);
+		?>
+		<!-- Performance: Оптимизированные изображения слайдера с WebP -->
+		<div class="sliderslid" style="background-image: url(<?=$slide_img['webp'] ?: $slide_img['original'];?>);" aria-label="Купить контрактный мотор Алматы - привозные моторы из Малайзии, контрактные двигатели Казахстан" loading="lazy"></div>
 		<?php endif; ?>
 		<?php
 		$slide_index++;
@@ -208,7 +217,7 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 				<!-- Accessibility: Поле выбора марки -->
 				<div class="meinputer" role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-controls="mark-listbox">
 					<label for="mark-input" class="sr-only">Выберите марку автомобиля</label>
-					<div class="madiv" id="mark-input" data-val="Марка" role="textbox" aria-label="Марка автомобиля" tabindex="0" aria-readonly="true">Марка</div>
+					<div class="madiv" id="mark-input" data-val="Марка" role="textbox" aria-label="Марка автомобиля" tabindex="0" aria-readonly="true" style="cursor: pointer;">Марка</div>
 					<input type="hidden" name="mk" id="mark-hidden" aria-hidden="true">
 					<button type="button" class="btmmearrow" aria-label="Открыть список марок" aria-expanded="false" tabindex="0">&#9660;</button>
 					<div class="ddwnblock" id="mark-listbox" role="listbox" aria-label="Список марок автомобилей" aria-hidden="true">
@@ -233,7 +242,7 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 				<!-- Accessibility: Поле выбора модели -->
 				<div class="meinputer" role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-controls="model-listbox" aria-disabled="true">
 					<label for="model-input" class="sr-only">Выберите модель автомобиля</label>
-					<div class="madiv" id="model-input" data-val="Модель" role="textbox" aria-label="Модель автомобиля" tabindex="0" aria-readonly="true">Модель</div>
+					<div class="madiv" id="model-input" data-val="Модель" role="textbox" aria-label="Модель автомобиля" tabindex="0" aria-readonly="true" style="cursor: pointer;">Модель</div>
 					<input type="hidden" name="ml" id="model-hidden" aria-hidden="true">
 					<button type="button" class="btmmearrow" aria-label="Открыть список моделей" aria-expanded="false" tabindex="0">&#9660;</button>
 					<div class="ddwnblock" id="modellist" role="listbox" aria-label="Список моделей автомобилей" aria-hidden="true"></div>
@@ -242,7 +251,7 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 				<!-- Accessibility: Поле выбора года -->
 				<div class="meinputer" role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-controls="year-listbox" aria-disabled="true">
 					<label for="year-input" class="sr-only">Выберите год выпуска автомобиля</label>
-					<div class="madiv" id="year-input" data-val="Год" role="textbox" aria-label="Год выпуска автомобиля" tabindex="0" aria-readonly="true">Год</div>
+					<div class="madiv" id="year-input" data-val="Год" role="textbox" aria-label="Год выпуска автомобиля" tabindex="0" aria-readonly="true" style="cursor: pointer;">Год</div>
 					<input type="hidden" name="yr" id="year-hidden" aria-hidden="true">
 					<button type="button" class="btmmearrow" aria-label="Открыть список годов" aria-expanded="false" tabindex="0">&#9660;</button>
 					<div class="ddwnblock" id="yearlist" role="listbox" aria-label="Список годов выпуска" aria-hidden="true" style="overflow-y: scroll;"></div>
@@ -288,7 +297,10 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 	<div class="shirina">
 		<div class="aboutblock">
 			<!-- SEO: Alt-текст для изображения через aria-label с ключевыми словами -->
-			<div class="sssskartins revealator-slideright" style="background-image: url(<?=get_simple_images('index_about_image')[0];?>);" aria-label="Контрактные двигатели и привозные моторы из Малайзии в Алматы - Моторленд"></div>
+			<?php 
+			$about_img = get_optimized_image(get_simple_images('index_about_image')[0]);
+			?>
+			<div class="sssskartins revealator-slideright" style="background-image: url(<?=$about_img['webp'] ?: $about_img['original'];?>);" aria-label="Контрактные двигатели и привозные моторы из Малайзии в Алматы - Моторленд" loading="lazy"></div>
 			<div class="abouttext revealator-slideleft">
 			<?=get_customtexts('index_about_text');?>
 			</div>
@@ -330,8 +342,11 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 			<article class="toverblock" itemscope itemtype="https://schema.org/Product" role="article" aria-labelledby="home-product-title-<?=$get['id'];?>">
 			<!-- SEO: Внутренняя ссылка на товар -->
 			<a href="/detal?id=<?=$get['id'];?>" itemprop="url" aria-label="Подробнее о товаре <?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>">
-				<!-- SEO: Alt-текст для изображения товара с целевыми ключевыми словами -->
-				<div class="toverimg" style="background-image: url(<?=get_farrimg($get['images'])[0];?>);" loading="lazy" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии', ENT_QUOTES, 'UTF-8');?>" itemprop="image" role="img"></div>
+				<!-- Performance: Оптимизированное изображение товара с WebP и lazy loading -->
+				<?php 
+				$product_img = get_optimized_image(get_farrimg($get['images'])[0]);
+				?>
+				<div class="toverimg" style="background-image: url(<?=$product_img['webp'] ?: $product_img['original'];?>);" loading="lazy" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии', ENT_QUOTES, 'UTF-8');?>" itemprop="image" role="img"></div>
 			<?php if ($get['sale'] != 'noting') { ?>
 			<div class="cationsale" aria-label="Скидка: <?=htmlspecialchars($get['sale'], ENT_QUOTES, 'UTF-8');?>"><?=$get['sale'];?></div>
 			<?php } ?>
@@ -370,7 +385,10 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 			<article class="toverblock revealator-slideup" itemscope itemtype="https://schema.org/Product">
 			<a href="/detal?id=<?=$get['id'];?>" itemprop="url">
 				<!-- SEO: Alt-текст для изображения товара с целевыми ключевыми словами -->
-				<div class="toverimg" style="background-image: url(<?=get_farrimg($get['images'])[0];?>);" loading="lazy" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии', ENT_QUOTES, 'UTF-8');?>" itemprop="image">
+				<?php 
+				$product_img = get_optimized_image(get_farrimg($get['images'])[0]);
+				?>
+				<div class="toverimg" style="background-image: url(<?=$product_img['webp'] ?: $product_img['original'];?>);" loading="lazy" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии', ENT_QUOTES, 'UTF-8');?>" itemprop="image">
 			<?php if ($get['sale'] != 'noting') { ?>
 			<div class="cationsale"><?=$get['sale'];?></div>
 			<?php } ?>
@@ -399,7 +417,7 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 		<br>
 		<br>
 		<!-- SEO: Внутренняя ссылка на каталог с ключевыми словами в тексте -->
-		<a href="/catalog"><div class="okazatybolsh">Подробнее</div></a>
+		<a href="/catalog" class="okazatybolsh-link" style="text-decoration: none; color: inherit; display: inline-block;"><div class="okazatybolsh">Подробнее</div></a>
 		<br>
 		<br>
 	</div>

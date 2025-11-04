@@ -75,16 +75,18 @@ RewriteRule ^(.+)\.php$ $1 [R=301,L]
 
 # Performance: Cache-Control заголовки для дополнительной оптимизации
 <IfModule mod_headers.c>
-    # Кеширование изображений
+    # Кеширование изображений - 1 год с immutable для стабильных версий
     <FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|ico)$">
         Header set Cache-Control "max-age=31536000, public, immutable"
+        # Performance: Добавляем Vary для правильного кеширования WebP
+        Header append Vary "Accept"
     </FilesMatch>
     # Кеширование шрифтов
     <FilesMatch "\.(ttf|otf|woff|woff2|eot)$">
         Header set Cache-Control "max-age=31536000, public, immutable"
         Header set Access-Control-Allow-Origin "*"
     </FilesMatch>
-    # Кеширование CSS и JS
+    # Кеширование CSS и JS - 1 месяц с версионированием
     <FilesMatch "\.(css|js)$">
         Header set Cache-Control "max-age=2592000, public"
     </FilesMatch>
@@ -92,5 +94,9 @@ RewriteRule ^(.+)\.php$ $1 [R=301,L]
     <FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|ico|css|js|ttf|otf|woff|woff2)$">
         Header unset ETag
         FileETag None
+    </FilesMatch>
+    # Performance: Поддержка WebP формата через Accept заголовок
+    <FilesMatch "\.(jpg|jpeg|png)$">
+        Header append Vary "Accept"
     </FilesMatch>
 </IfModule>

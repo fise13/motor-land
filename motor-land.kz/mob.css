@@ -561,6 +561,16 @@ bottom: 10px;
 		display: block !important;
 	}
 	
+	/* Performance: Убираем синий цвет ссылки для кнопки "Подробнее" на мобильных */
+	.okazatybolsh-link,
+	.okazatybolsh-link:visited,
+	.okazatybolsh-link:link,
+	.okazatybolsh-link:active,
+	.okazatybolsh-link:hover {
+		color: inherit !important;
+		text-decoration: none !important;
+	}
+	
 	/* Оптимизация модального окна */
 	.modalwindow {
 		width: 90% !important;

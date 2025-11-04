@@ -62,6 +62,35 @@ function seo_get_product_id_from_slug($slug) {
 
 
 
+/**
+ * Performance: Функция для оптимизации изображений - возвращает WebP с fallback
+ * @param string $image_path - путь к изображению
+ * @return array - массив с webp и оригинальным форматом
+ */
+function get_optimized_image($image_path) {
+	if (empty($image_path)) {
+		return ['original' => '', 'webp' => ''];
+	}
+	
+	// Проверяем поддержку WebP через Accept заголовок
+	$webp_path = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $image_path);
+	
+	// Если WebP существует, возвращаем его
+	if (file_exists($_SERVER['DOCUMENT_ROOT'] . $webp_path)) {
+		return [
+			'original' => $image_path,
+			'webp' => $webp_path,
+			'has_webp' => true
+		];
+	}
+	
+	return [
+		'original' => $image_path,
+		'webp' => '',
+		'has_webp' => false
+	];
+}
+
 function get_farrimg ($i) {
 	$e = explode('][',$i);
 	$r = array();

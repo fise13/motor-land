@@ -33,7 +33,8 @@ if (!isset($SITE_TITLE) || empty($SITE_TITLE)) {
 <!-- SEO: Meta description всегда должен быть в head (обязательно для SEO) -->
 <meta name="description" content="<?=htmlspecialchars($SITE_DESCRIPTION ?? 'Купить контрактный мотор в Алматы. Контрактные двигатели Казахстан - привозные моторы из Малайзии.', ENT_QUOTES, 'UTF-8');?>">
 <title><?=htmlspecialchars($SITE_TITLE ?? 'Купить Контрактный Мотор Алматы | Моторленд', ENT_QUOTES, 'UTF-8');?></title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!-- Accessibility: Убираем maximum-scale для разрешения масштабирования (требование PageSpeed) -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <link rel="shortcut icon" href="favicon.ico?<?=$INTERFACE_VERSION;?>" />
 <link rel="apple-touch-icon" href="favicon_apple.png?<?=$INTERFACE_VERSION;?>">
