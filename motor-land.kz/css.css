@@ -178,6 +178,14 @@ width: 1200px;
 display: inline-block;
 }
 
+/* Переопределение для контейнера слайдера */
+.slidercoun.shirina {
+display: block !important;
+width: 100%;
+max-width: 1200px;
+margin: 0 auto;
+}
+
 .relhead {
 position: relative;
 }
