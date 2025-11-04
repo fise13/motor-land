@@ -6,6 +6,46 @@ include('hyst/php.php');
 $SITE_TITLE = 'Купить Контрактный Мотор Алматы | Привозные Моторы Малайзия | Двигатель БУ | Моторленд';
 $SITE_DESCRIPTION = 'Купить контрактный мотор в Алматы. Контрактные двигатели Казахстан - привозные моторы из Малайзии. Контрактный двигатель Toyota, Honda, Nissan, Mazda, Mitsubishi. Двигатель бу Малайзия Алматы с гарантией. Двигатель 1NZ, 2AZ, 3S, K24A, QR25DE. Контрактный двигатель Camry, CRV. Огромный выбор контрактных двигателей. Доставка по всему Казахстану.';
 $SITE_KEYWORDS = 'купить контрактный мотор Алматы, контрактные двигатели Казахстан, привозные моторы Алматы, двигатель бу Малайзия Алматы, контрактные двигатели алматы, купить мотор б/у, привозные двигатели, контрактный мотор малайзия, контрактный двигатель Toyota, контрактный двигатель Honda, контрактный двигатель Nissan, контрактный двигатель Mazda, контрактный двигатель Mitsubishi, двигатель бу, контрактные двигатели, двигатели бу, двигатель 1NZ, двигатель 2AZ, двигатель 3S, двигатель K24A, двигатель QR25DE, контрактный двигатель Camry, контрактный двигатель CRV, контрактный двигатель Corolla, контрактный двигатель Almera, контрактный двигатель Accord';
+
+$mark = false;
+$mode = false;
+$year = false;
+
+if (isset($_GET['mk']) && $_GET['mk'] != '') {
+	$name = trim($_GET['mk']);
+	$stmt = $_DB_CONECT->prepare("SELECT id FROM internet_magazin_category WHERE name = ?");
+	$stmt->bind_param("s", $name);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	if ($result->num_rows != 0) {
+		$mark = $result->fetch_array()['id'];
+	}
+	$stmt->close();
+}
+
+if (isset($_GET['ml']) && $_GET['ml'] != '') {
+	$name = trim($_GET['ml']);
+	$stmt = $_DB_CONECT->prepare("SELECT id FROM internet_magazin_category WHERE name = ?");
+	$stmt->bind_param("s", $name);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	if ($result->num_rows != 0) {
+		$mode = $result->fetch_array()['id'];
+	}
+	$stmt->close();
+}
+
+if (isset($_GET['yr']) && $_GET['yr'] != '') {
+	$name = trim($_GET['yr']);
+	$stmt = $_DB_CONECT->prepare("SELECT id FROM internet_magazin_atributs_options WHERE name = ?");
+	$stmt->bind_param("s", $name);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	if ($result->num_rows != 0) {
+		$year = $result->fetch_array()['id'];
+	}
+	$stmt->close();
+}
 ?>
 <!doctype html>
 <html lang="ru">
@@ -223,13 +263,50 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 					<input type="hidden" name="ml" value="<?php if (isset($_GET['ml']) && $_GET['ml'] != '') { echo htmlspecialchars($_GET['ml'], ENT_QUOTES, 'UTF-8'); } else { echo ""; } ?>">
 					<div class="btmmearrow" style="font-size: 17px;">&#9660;</div>
 					<div class="ddwnblock" id="modellist" style="border-top: solid 1px white; border-bottom: solid 1px white; border-right: solid 1px white; border-left: solid 1px white;">
+						<?php
+						if ($mark) {
+							$stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_category WHERE idp = ? ORDER BY id ASC");
+							$stmt->bind_param("i", $mark);
+							$stmt->execute();
+							$tmp = $stmt->get_result();
+							if ($tmp->num_rows != 0) {
+								while($get = $tmp->fetch_array()):
+								?>
+								<div style="color: black" data-id="<?=$get['id'];?>"><?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?></div>
+								<?php
+								endwhile;
+							}
+							$stmt->close();
+						}
+						?>
 					</div>
 				</div>
 				
-				<div class="meinputer" style="border-top: solid 1px white; border: solid 1px white;"><div class="madiv" data-val="Год"><?php if (isset($_GET['yr']) && $_GET['yr'] != '') { echo htmlspecialchars($_GET['yr'], ENT_QUOTES, 'UTF-8'); } else { echo "Год"; } ?></div>
+				<div class="meinputer" style="border-top: solid 1px white; border: solid 1px white;"><div class="madiv"><?php if (isset($_GET['yr']) && $_GET['yr'] != '') { echo htmlspecialchars($_GET['yr'], ENT_QUOTES, 'UTF-8'); } else { echo "Год"; } ?></div>
 					<input type="hidden" name="yr" value="<?php if (isset($_GET['yr']) && $_GET['yr'] != '') { echo htmlspecialchars($_GET['yr'], ENT_QUOTES, 'UTF-8'); } else { echo ""; } ?>">
 					<div class="btmmearrow" style="font-size: 17px;">&#9660;</div>
 					<div class="ddwnblock" id="yearlist" style="overflow-y: scroll; border-top: solid 1px white; border-bottom: solid 1px white; border-right: solid 1px white; border-left: solid 1px white;">
+						<?php
+						if ($mode) {
+							$mode_pattern = '[' . $mode . ']';
+							$stmt = $_DB_CONECT->prepare("SELECT internet_magazin_atributs_options.*
+							FROM internet_magazin_atributs_options 
+							INNER JOIN internet_magazin_tovari ON LOCATE(CONCAT('[', internet_magazin_atributs_options.id, ']'), internet_magazin_tovari.atributs_opt) > 0 
+							AND LOCATE(?, internet_magazin_tovari.podegory) > 0
+							WHERE internet_magazin_atributs_options.idp = 1");
+							$stmt->bind_param("s", $mode_pattern);
+							$stmt->execute();
+							$sql = $stmt->get_result();
+							if ($sql->num_rows != 0) {
+								while($get = $sql->fetch_array()):
+								?>
+								<div style="color: black" data-id="<?=$get['id'];?>"><?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?></div>
+								<?php
+								endwhile;
+							}
+							$stmt->close();
+						}
+						?>	
 					</div>
 				</div>
 			</div>
