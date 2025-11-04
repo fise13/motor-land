@@ -392,6 +392,12 @@ min-height: 600px;
 position: relative;
 height: 100%;
 display: inline-block;
+width: 100%;
+max-width: 1200px;
+margin: 0 auto;
+padding-left: 0;
+padding-right: 0;
+box-sizing: border-box;
 /* Performance: Создаем stacking context для корректного отображения формы поиска поверх всего */
 z-index: 1;
 /* Performance: Разрешаем overflow для выпадающих списков */
@@ -475,7 +481,7 @@ color: white;
   display: inline-block;
   position: absolute;
   bottom: 80px;
-  left: 0px;
+  left: 0;
   font-size: 40px;
   color: white;
   font-family: robotob;
@@ -497,6 +503,10 @@ color: white;
   clip-path: none !important;
   /* Гарантируем что форма и все её элементы кликабельны */
   pointer-events: auto !important;
+  /* Форма фиксирована относительно контейнера слайдера */
+  margin-left: 0;
+  /* Убираем transform который может влиять на позиционирование */
+  transform: none;
 }
 
 /* Гарантируем кликабельность всех элементов внутри формы */
