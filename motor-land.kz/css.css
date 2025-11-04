@@ -534,15 +534,16 @@ border-radius: 10px;
 box-shadow: 0 8px 24px rgba(0,0,0,0.08);
 transition: max-height 0.35s ease;
 /* keep single border-radius definition */
-position: fixed;
-/* Performance: Используем fixed positioning чтобы выпадающий список был поверх всего */
-z-index: 999999;
+position: absolute;
+top: 38px;
+left: -1px;
+/* Performance: Увеличен z-index чтобы выпадающие списки были поверх всего контента */
+z-index: 10000;
 display: none;
 max-height: 400px;
 overflow-y: auto;
 opacity: 0;
 pointer-events: none;
-/* Performance: Убираем left: -1px так как используем fixed positioning */
 }
 
 .ddwnblock div {
@@ -564,9 +565,8 @@ transform: translateX(3px);
     transform: translateY(0) scaleY(1);
     display: block;
     /* Performance: Увеличен z-index для открытого dropdown чтобы он был поверх всего */
-    z-index: 999999;
+    z-index: 10000;
     pointer-events: auto;
-    /* Performance: Fixed positioning устанавливается через JavaScript */
 }
 
 /* Анимация тряски для недоступных полей */
