@@ -132,13 +132,10 @@ $(document).ready(function() {
 	 * Возвращает: ничего
 	 */
 	$(document).on("click", ".btmmearrow, .madiv", function (e) {
-		// Предотвращаем всплытие события, чтобы не срабатывали другие обработчики
 		e.stopPropagation();
 		
 		var meinputer = $(this).closest('.meinputer');
 		var dd = meinputer.children('.ddwnblock');
-		var btn = meinputer.find('.btmmearrow');
-		var madiv = meinputer.find('.madiv');
 		
 		// Проверка валидации перед открытием
 		if (!dd.hasClass('open')) {
@@ -158,14 +155,10 @@ $(document).ready(function() {
 					setTimeout(function() {
 						meinputer.css('animation', '');
 					}, 500);
-					e.preventDefault();
 					return false;
 				}
 			}
 		}
-
-		// Предотвращаем стандартное поведение только если это не форма
-		e.preventDefault();
 
 		// Закрыть другие открытые списки с плавной анимацией
 		$('.ddwnblock').not(dd).each(function() {
@@ -178,17 +171,7 @@ $(document).ready(function() {
 			// Разблокируем все поля при закрытии
 			$('.meinputer').css('pointer-events', '');
 			$('.meinputer').css('opacity', '1');
-			// Accessibility: Обновляем ARIA атрибуты
-			meinputer.attr('aria-expanded', 'false');
-			btn.attr('aria-expanded', 'false');
-			dd.attr('aria-hidden', 'true');
 		} else {
-			// Если кликнули на поле ввода, не очищаем его сразу
-			if ($(this).hasClass('madiv')) {
-				// Если поле содержит плейсхолдер, оставляем его для отображения
-				// Очистка произойдет только при реальном вводе текста
-			}
-			// Открываем dropdown немедленно
 			openDropdown(dd);
 			// Блокируем другие поля ввода когда открыт список
 			$('.meinputer').not(meinputer).css({
@@ -197,10 +180,6 @@ $(document).ready(function() {
 			});
 			// Добавляем класс для дополнительной блокировки через CSS
 			$('.maipttee').addClass('dropdown-open');
-			// Accessibility: Обновляем ARIA атрибуты
-			meinputer.attr('aria-expanded', 'true');
-			btn.attr('aria-expanded', 'true');
-			dd.attr('aria-hidden', 'false');
 		}
 		
 		return false;
