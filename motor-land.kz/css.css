@@ -398,6 +398,8 @@ height: 100%;
 /* Performance: Оптимизация для LCP - предотвращение layout shift */
 object-fit: cover;
 min-height: 600px;
+/* z-index ниже формы поиска, чтобы выпадающий список был поверх фона */
+z-index: 0;
 }
 
 .slidercoun {
@@ -410,8 +412,8 @@ margin: 0 auto;
 padding-left: 0;
 padding-right: 0;
 box-sizing: border-box;
-/* Performance: Создаем stacking context для корректного отображения формы поиска поверх всего */
-z-index: 1;
+/* Создаем stacking context выше фоновых изображений слайдера */
+z-index: 10;
 /* Performance: Разрешаем overflow для выпадающих списков */
 overflow: visible;
 /* Решение 8: Убеждаемся что не создаем новый stacking context который может мешать */
@@ -598,10 +600,10 @@ isolation: auto;
 /* Dropdown внутри .sliderform - используем absolute позиционирование */
 .sliderform .ddwnblock {
 position: absolute;
-/* z-index выше формы поиска (1000), но ниже секций ниже */
+/* z-index выше формы поиска (1000) и фона слайдера, но ниже секций ниже */
 z-index: 1010;
-/* Не создаем новый stacking context */
-isolation: auto;
+/* Создаем новый stacking context чтобы гарантировать что dropdown поверх фона слайдера */
+isolation: isolate;
 /* Убеждаемся что элемент не обрезается родителями */
 contain: none !important;
 clip: auto !important;
@@ -609,10 +611,12 @@ clip-path: none !important;
 }
 
 .sliderform .ddwnblock.open {
-/* z-index выше формы поиска, но не перекрывает секции ниже */
+/* z-index выше формы поиска (1000) и фона слайдера, но ниже секций ниже */
 z-index: 1010;
 /* Используем absolute, а не fixed, чтобы элемент был в контексте формы */
 position: absolute !important;
+/* Создаем новый stacking context чтобы гарантировать что dropdown поверх фона слайдера */
+isolation: isolate !important;
 /* Гарантируем что элемент видим и не обрезан */
 display: block !important;
 visibility: visible !important;
@@ -638,11 +642,11 @@ transform: translateX(3px);
     opacity: 1;
     transform: translateY(0) scaleY(1);
     display: block !important;
-    /* z-index выше формы поиска, но не перекрывает секции ниже */
+    /* z-index выше формы поиска (1000) и фона слайдера, но ниже секций ниже */
     z-index: 1010;
     pointer-events: auto !important;
-    /* Не создаем новый stacking context */
-    isolation: auto;
+    /* Создаем новый stacking context для dropdown внутри .sliderform */
+    isolation: isolate;
     /* Гарантируем видимость */
     visibility: visible !important;
 }
