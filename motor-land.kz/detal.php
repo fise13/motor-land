@@ -164,7 +164,7 @@ $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : '
 				<div class="product-info-wrapper">
 					<h1 class="product-title" itemprop="name"><?=$print['name'];?></h1>
 					
-					<!-- Цена и кнопка -->
+					<!-- Цена -->
 					<div class="product-price-section" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
 						<?php if ($print['cash'] != 0 && $print['cash'] != '0') { ?>
 						<div class="product-price">
@@ -177,8 +177,10 @@ $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : '
 						</div>
 						<?php } ?>
 						<link itemprop="availability" href="https://schema.org/InStock" />
-						<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="product-buy-button" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">Купить</a>
 					</div>
+					
+					<!-- Кнопка покупки -->
+					<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="product-buy-button" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">Купить</a>
 					
 					<!-- Описание товара -->
 					<div class="product-description" itemprop="description">
@@ -190,13 +192,6 @@ $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : '
 						$text = preg_replace('/на выбор более\s*\d+шт\.?/iu', '', $text);
 						echo $text;
 						?>
-					</div>
-					
-					<!-- SEO: Дополнительный SEO-текст с целевыми ключевыми запросами -->
-					<div class="product-seo-info">
-						<p><strong>Купить контрактный мотор <?=$product_name;?> в Алматы</strong> - это отличное решение для вашего автомобиля. Мы предлагаем <strong>привозные моторы из Малайзии</strong>, которые проходят тщательную проверку перед продажей. У нас вы можете купить <strong>контрактный двигатель Toyota</strong>, <strong>контрактный двигатель Honda</strong>, <strong>контрактный двигатель Nissan</strong>, <strong>контрактный двигатель Mazda</strong>, <strong>контрактный двигатель Mitsubishi</strong>.</p>
-						<p>Все наши <strong>контрактные двигатели Казахстан</strong> поставляются напрямую из Малайзии и имеют гарантию качества. Если вам нужен <strong>двигатель бу Малайзия Алматы</strong>, мы поможем подобрать оптимальный вариант. В каталоге представлены <strong>контрактный двигатель Toyota Camry</strong>, <strong>контрактный двигатель Honda CRV</strong>, <strong>контрактный двигатель Toyota Corolla</strong>, <strong>контрактный двигатель Nissan Almera</strong>, <strong>контрактный двигатель Honda Accord</strong> и другие модели.</p>
-						<p>В наличии <strong>двигатели бу</strong> различных типов: <strong>двигатель 1NZ</strong>, <strong>двигатель 2AZ</strong>, <strong>двигатель 3S</strong>, <strong>двигатель K24A</strong>, <strong>двигатель QR25DE</strong> и многие другие. Посмотрите также наш <a href="/catalog" class="product-link">полный каталог контрактных моторов</a> или <a href="/service" class="product-link">запишитесь на установку в наш автосервис</a>.</p>
 					</div>
 				</div>
 			</div>
