@@ -534,7 +534,15 @@ z-index: 10000;
 
 .maipttee:has(.ddwnblock.open) .meinputer:not(:has(.ddwnblock.open)) {
 	z-index: 99997;
-	pointer-events: none;
+	pointer-events: none !important;
+	opacity: 0.3 !important;
+}
+
+/* Дополнительная блокировка через JavaScript класс */
+.maipttee.dropdown-open .meinputer:not(:has(.ddwnblock.open)) {
+	pointer-events: none !important;
+	opacity: 0.3 !important;
+	z-index: 99997 !important;
 }
 
 .sliderform input[type="text"]{

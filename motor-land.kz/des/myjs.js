@@ -69,6 +69,12 @@ $(document).ready(function() {
 						'transform': 'translateY(-6px) scaleY(0.98)',
 						'opacity': 0
 					}).removeClass('open');
+					// Разблокируем все поля при закрытии
+					$('.meinputer').css({
+						'pointer-events': '',
+						'opacity': ''
+					});
+					$('.maipttee').removeClass('dropdown-open');
 				}
 			});
 		}
@@ -153,8 +159,18 @@ $(document).ready(function() {
 		// Переключение текущего списка
 		if (dd.hasClass('open')) {
 			closeDropdown(dd);
+			// Разблокируем все поля при закрытии
+			$('.meinputer').css('pointer-events', '');
+			$('.meinputer').css('opacity', '1');
 		} else {
 			openDropdown(dd);
+			// Блокируем другие поля ввода когда открыт список
+			$('.meinputer').not(meinputer).css({
+				'pointer-events': 'none',
+				'opacity': '0.3'
+			});
+			// Добавляем класс для дополнительной блокировки через CSS
+			$('.maipttee').addClass('dropdown-open');
 		}
 	});
 
@@ -532,6 +548,15 @@ $(document).ready(function() {
 				window.location.href = href;
 			}
 		}, 400); // Время должно совпадать с длительностью pageFadeOut
+	});
+
+	// Закрытие выпадающего списка при клике вне его
+	$(document).on('click', function(e) {
+		if (!$(e.target).closest('.meinputer').length && !$(e.target).closest('.ddwnblock').length) {
+			$('.ddwnblock.open').each(function() {
+				closeDropdown($(this));
+			});
+		}
 	});
 
 });
