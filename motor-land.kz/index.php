@@ -195,27 +195,10 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 			<label for="search-form" class="sr-only">Поиск товаров</label>
 			<span id="search-form-label">что ищем?</span>
 		
-		
-		<!---
-		<form method="get" action="catalog.php">
-		<input type="text" name="mk" placeholder="Марка" list="makrlist" id="idmark">
-			<datalist id="makrlist">
-			</datalist>
-		<input type="text" name="nl" placeholder="Модель" list="modellist" id="idmode">
-			<datalist id="modellist">
-			</datalist>
-		<input type="text" name="yr" placeholder="Год" list="yearlist" id="idyear">
-			<datalist id="yearlist">
-			</datalist>
-		<input type="submit" name="sear" value=" ">
-		</form>--->
-			
 		<form method="get" action="catalog.php" aria-labelledby="search-form-label">
-			<!--<input type="text" name="setxt" class="searchbloinput" placeholder="Что вы хотели найти.."><br>--->
-		
 			<div class="maipttee">
-				<div class="meinputer" style="border: solid 1px white;"><div class="madiv" data-val="Марка">Марка</div>
-					<input type="hidden" name="mk" value="">
+				<div class="meinputer" style="border: solid 1px white;"><div class="madiv" data-val="Марка"><?php if (isset($_GET['mk']) && $_GET['mk'] != '') { echo htmlspecialchars($_GET['mk'], ENT_QUOTES, 'UTF-8'); } else { echo "Марка"; } ?></div>
+					<input type="hidden" name="mk" value="<?php if (isset($_GET['mk']) && $_GET['mk'] != '') { echo htmlspecialchars($_GET['mk'], ENT_QUOTES, 'UTF-8'); } else { echo ""; } ?>">
 					<div class="btmmearrow" style="font-size: 17px;">&#9660;</div>
 					<div class="ddwnblock" style="border-top: solid 1px white; border-bottom: solid 1px white; border-right: solid 1px white; border-left: solid 1px white;">
 						<?php
@@ -236,15 +219,15 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 					</div>
 				</div>
 				
-				<div class="meinputer" style="border: solid 1px white;"><div class="madiv" data-val="Модель">Модель</div>
-					<input type="hidden" name="ml" value="">
+				<div class="meinputer" style="border: solid 1px white;"><div class="madiv" data-val="Модель"><?php if (isset($_GET['ml']) && $_GET['ml'] != '') { echo htmlspecialchars($_GET['ml'], ENT_QUOTES, 'UTF-8'); } else { echo "Модель"; } ?></div>
+					<input type="hidden" name="ml" value="<?php if (isset($_GET['ml']) && $_GET['ml'] != '') { echo htmlspecialchars($_GET['ml'], ENT_QUOTES, 'UTF-8'); } else { echo ""; } ?>">
 					<div class="btmmearrow" style="font-size: 17px;">&#9660;</div>
 					<div class="ddwnblock" id="modellist" style="border-top: solid 1px white; border-bottom: solid 1px white; border-right: solid 1px white; border-left: solid 1px white;">
 					</div>
 				</div>
 				
-				<div class="meinputer" style="border: solid 1px white;"><div class="madiv" data-val="Год">Год</div>
-					<input type="hidden" name="yr" value="">
+				<div class="meinputer" style="border-top: solid 1px white; border: solid 1px white;"><div class="madiv" data-val="Год"><?php if (isset($_GET['yr']) && $_GET['yr'] != '') { echo htmlspecialchars($_GET['yr'], ENT_QUOTES, 'UTF-8'); } else { echo "Год"; } ?></div>
+					<input type="hidden" name="yr" value="<?php if (isset($_GET['yr']) && $_GET['yr'] != '') { echo htmlspecialchars($_GET['yr'], ENT_QUOTES, 'UTF-8'); } else { echo ""; } ?>">
 					<div class="btmmearrow" style="font-size: 17px;">&#9660;</div>
 					<div class="ddwnblock" id="yearlist" style="overflow-y: scroll; border-top: solid 1px white; border-bottom: solid 1px white; border-right: solid 1px white; border-left: solid 1px white;">
 					</div>
