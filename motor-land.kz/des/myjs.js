@@ -70,7 +70,11 @@ $(document).ready(function() {
 					$(this).css({
 						'display': 'none',
 						'transform': 'translateY(-6px) scaleY(0.98)',
-						'opacity': 0
+						'opacity': 0,
+						'position': 'absolute',
+						'left': '',
+						'top': '',
+						'width': ''
 					}).removeClass('open');
 					// Разблокируем все поля при закрытии
 					$('.meinputer').css({
@@ -97,10 +101,23 @@ $(document).ready(function() {
 	function openDropdown(dd) {
 		var meinputer = dd.closest('.meinputer');
 		var btn = meinputer.find('.btmmearrow');
+		
+		// Performance: Вычисляем позицию для fixed positioning
+		var meinputerOffset = meinputer.offset();
+		var meinputerHeight = meinputer.outerHeight();
+		var ddWidth = dd.outerWidth();
+		var ddLeft = meinputerOffset.left;
+		var ddTop = meinputerOffset.top + meinputerHeight;
+		
+		// Устанавливаем позицию для fixed positioning
 		dd.css({
 			'display': 'block',
 			'opacity': 0,
-			'transform': 'translateY(-10px) scaleY(0.95)'
+			'transform': 'translateY(-10px) scaleY(0.95)',
+			'position': 'fixed',
+			'left': ddLeft + 'px',
+			'top': ddTop + 'px',
+			'width': ddWidth + 'px'
 		});
 		
 		// Небольшая задержка для инициализации
