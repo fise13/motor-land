@@ -213,24 +213,22 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 		<form method="get" action="catalog.php" aria-labelledby="search-form-label">
 			<!--<input type="text" name="setxt" class="searchbloinput" placeholder="Что вы хотели найти.."><br>--->
 		
-			<div class="maipttee" role="group" aria-label="Фильтры поиска">
-				<!-- Accessibility: Поле выбора марки -->
-				<div class="meinputer" role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-controls="mark-listbox">
-					<label for="mark-input" class="sr-only">Выберите марку автомобиля</label>
-					<div class="madiv" id="mark-input" data-val="Марка" role="textbox" aria-label="Марка автомобиля" tabindex="0" aria-readonly="true" style="cursor: pointer;">Марка</div>
-					<input type="hidden" name="mk" id="mark-hidden" aria-hidden="true">
-					<button type="button" class="btmmearrow" aria-label="Открыть список марок" aria-expanded="false" tabindex="0">&#9660;</button>
-					<div class="ddwnblock" id="mark-listbox" role="listbox" aria-label="Список марок автомобилей" aria-hidden="true">
+			<div class="maipttee">
+				<div class="meinputer" style="border: solid 1px white;">
+					<div class="madiv" data-val="Марка">Марка</div>
+					<input type="hidden" name="mk" value="">
+					<div class="btmmearrow" style="font-size: 17px;">&#9660;</div>
+					<div class="ddwnblock" style="border-top: solid 1px white; border-bottom: solid 1px white; border-right: solid 1px white; border-left: solid 1px white;">
 						<?php
 						$parent_id = 'noting';
-						$stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_category WHERE idp = ? ORDER BY name ASC");
+						$stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_category WHERE idp = ? ORDER BY id ASC");
 						$stmt->bind_param("s", $parent_id);
 						$stmt->execute();
-						$sql = $stmt->get_result();
-						if ($sql->num_rows != 0) {
-							while($get = $sql->fetch_array()):
+						$tmp = $stmt->get_result();
+						if ($tmp->num_rows != 0) {
+							while($get = $tmp->fetch_array()):
 							?>
-							<div data-id="<?=$get['id'];?>" role="option" tabindex="0" aria-label="Марка <?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>"><?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?></div>
+							<div style="color: black" data-id="<?=$get['id'];?>"><?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?></div>
 							<?php
 							endwhile;
 						}
@@ -239,25 +237,23 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 					</div>
 				</div>
 				
-				<!-- Accessibility: Поле выбора модели -->
-				<div class="meinputer" role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-controls="model-listbox" aria-disabled="true">
-					<label for="model-input" class="sr-only">Выберите модель автомобиля</label>
-					<div class="madiv" id="model-input" data-val="Модель" role="textbox" aria-label="Модель автомобиля" tabindex="0" aria-readonly="true" style="cursor: pointer;">Модель</div>
-					<input type="hidden" name="ml" id="model-hidden" aria-hidden="true">
-					<button type="button" class="btmmearrow" aria-label="Открыть список моделей" aria-expanded="false" tabindex="0">&#9660;</button>
-					<div class="ddwnblock" id="modellist" role="listbox" aria-label="Список моделей автомобилей" aria-hidden="true"></div>
+				<div class="meinputer" style="border: solid 1px white;">
+					<div class="madiv" data-val="Модель">Модель</div>
+					<input type="hidden" name="ml" value="">
+					<div class="btmmearrow" style="font-size: 17px;">&#9660;</div>
+					<div class="ddwnblock" id="modellist" style="border-top: solid 1px white; border-bottom: solid 1px white; border-right: solid 1px white; border-left: solid 1px white;">
+					</div>
 				</div>
 				
-				<!-- Accessibility: Поле выбора года -->
-				<div class="meinputer" role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-controls="year-listbox" aria-disabled="true">
-					<label for="year-input" class="sr-only">Выберите год выпуска автомобиля</label>
-					<div class="madiv" id="year-input" data-val="Год" role="textbox" aria-label="Год выпуска автомобиля" tabindex="0" aria-readonly="true" style="cursor: pointer;">Год</div>
-					<input type="hidden" name="yr" id="year-hidden" aria-hidden="true">
-					<button type="button" class="btmmearrow" aria-label="Открыть список годов" aria-expanded="false" tabindex="0">&#9660;</button>
-					<div class="ddwnblock" id="yearlist" role="listbox" aria-label="Список годов выпуска" aria-hidden="true" style="overflow-y: scroll;"></div>
+				<div class="meinputer" style="border: solid 1px white;">
+					<div class="madiv" data-val="Год">Год</div>
+					<input type="hidden" name="yr" value="">
+					<div class="btmmearrow" style="font-size: 17px;">&#9660;</div>
+					<div class="ddwnblock" id="yearlist" style="overflow-y: scroll; border-top: solid 1px white; border-bottom: solid 1px white; border-right: solid 1px white; border-left: solid 1px white;">
+					</div>
 				</div>
 			</div>
-			<button type="submit" name="sear" aria-label="Найти товары по выбранным параметрам" class="sr-only">Найти</button>
+			<input type="submit" name="sear" value=" ">
 		</form>
 		</div>
 	</div>
