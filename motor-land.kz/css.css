@@ -363,6 +363,8 @@ text-align: center;
 position: relative;
 /* Performance: Оптимизация для LCP */
 contain: layout style paint;
+/* Performance: Разрешаем overflow для выпадающих списков формы поиска */
+overflow: visible;
 }
 
 .sliderslid {
@@ -385,6 +387,8 @@ height: 100%;
 display: inline-block;
 /* Performance: Создаем stacking context для корректного отображения формы поиска поверх всего */
 z-index: 1;
+/* Performance: Разрешаем overflow для выпадающих списков */
+overflow: visible;
 }
 
 .titlephon {
@@ -474,9 +478,9 @@ color: white;
   box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
   background-clip: padding-box;
   /* Performance: Увеличен z-index чтобы форма поиска была поверх всего контента */
-  z-index: 999999 !important;
-  /* Performance: Создаем новый stacking context для гарантии отображения поверх всех элементов */
-  isolation: isolate;
+  z-index: 1000;
+  /* Performance: Разрешаем overflow для выпадающих списков */
+  overflow: visible;
 }
 
 .btmmearrow {
@@ -504,7 +508,9 @@ position: relative;
 height: 20px;
 vertical-align: top;
 /* Performance: Увеличен z-index чтобы поля формы были поверх всего контента */
-z-index: 999998 !important;
+z-index: 1002;
+/* Performance: Разрешаем overflow для выпадающих списков */
+overflow: visible;
 }
 
 /* Performance: Стили для поля ввода .madiv - кликабельное поле */
@@ -532,10 +538,10 @@ position: absolute;
 top: 38px;
 left: -1px;
 /* Performance: Увеличен z-index чтобы выпадающие списки были поверх всего контента */
-z-index: 9999999 !important;
+z-index: 10000;
 display: none;
 max-height: 400px;
-overflow-y: scroll;
+overflow-y: auto;
 opacity: 0;
 pointer-events: none;
 }
@@ -559,7 +565,7 @@ transform: translateX(3px);
     transform: translateY(0) scaleY(1);
     display: block;
     /* Performance: Увеличен z-index для открытого dropdown чтобы он был поверх всего */
-    z-index: 9999999 !important;
+    z-index: 10000;
     pointer-events: auto;
 }
 
@@ -586,20 +592,20 @@ width: 700px;
 height: 40px;
 position: relative;
 /* Performance: Увеличен z-index чтобы форма поиска была поверх всего контента */
-z-index: 999998 !important;
-/* Performance: Создаем новый stacking context */
-isolation: isolate;
+z-index: 1001;
+/* Performance: Разрешаем overflow для выпадающих списков */
+overflow: visible;
 }
 
 /* Когда открыт выпадающий список, другие поля должны быть под ним */
 .maipttee:has(.ddwnblock.open) {
 	/* Performance: Увеличен z-index когда открыт dropdown */
-	z-index: 999999 !important;
+	z-index: 1001;
 }
 
 .maipttee:has(.ddwnblock.open) .meinputer:not(:has(.ddwnblock.open)) {
 	/* Performance: Увеличен z-index для неактивных полей когда открыт dropdown */
-	z-index: 999998 !important;
+	z-index: 1000;
 	pointer-events: none !important;
 	opacity: 0.3 !important;
 }
@@ -609,7 +615,7 @@ isolation: isolate;
 	pointer-events: none !important;
 	opacity: 0.3 !important;
 	/* Performance: Увеличен z-index для неактивных полей */
-	z-index: 999998 !important;
+	z-index: 1000 !important;
 }
 
 .sliderform input[type="text"]{
