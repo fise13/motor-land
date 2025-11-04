@@ -597,12 +597,12 @@ pointer-events: none;
 isolation: auto;
 }
 
-/* Dropdown внутри .sliderform - используем absolute позиционирование */
+/* Dropdown внутри .sliderform - будет использовать fixed позиционирование через JS */
 .sliderform .ddwnblock {
 position: absolute;
-/* z-index выше формы поиска (1000) и фона слайдера, но ниже секций ниже */
-z-index: 1010;
-/* Создаем новый stacking context чтобы гарантировать что dropdown поверх фона слайдера */
+/* z-index будет установлен через JS, но базовое значение для fallback */
+z-index: 5000;
+/* Создаем новый stacking context чтобы гарантировать что dropdown поверх всех элементов страницы */
 isolation: isolate;
 /* Убеждаемся что элемент не обрезается родителями */
 contain: none !important;
@@ -611,11 +611,11 @@ clip-path: none !important;
 }
 
 .sliderform .ddwnblock.open {
-/* z-index выше формы поиска (1000) и фона слайдера, но ниже секций ниже */
-z-index: 1010;
-/* Используем absolute, а не fixed, чтобы элемент был в контексте формы */
-position: absolute !important;
-/* Создаем новый stacking context чтобы гарантировать что dropdown поверх фона слайдера */
+/* z-index выше всех элементов страницы, включая секции, но ниже модальных окон */
+z-index: 5000 !important;
+/* Используем fixed позиционирование чтобы выйти из всех stacking contexts */
+position: fixed !important;
+/* Создаем новый stacking context чтобы гарантировать что dropdown поверх всех элементов */
 isolation: isolate !important;
 /* Гарантируем что элемент видим и не обрезан */
 display: block !important;
@@ -642,8 +642,8 @@ transform: translateX(3px);
     opacity: 1;
     transform: translateY(0) scaleY(1);
     display: block !important;
-    /* z-index выше формы поиска (1000) и фона слайдера, но ниже секций ниже */
-    z-index: 1010;
+    /* z-index будет установлен через JS для .sliderform .ddwnblock, базовое значение */
+    z-index: 5000;
     pointer-events: auto !important;
     /* Создаем новый stacking context для dropdown внутри .sliderform */
     isolation: isolate;
@@ -768,9 +768,9 @@ background-image: url(./img/forbg.png);
 background-size: cover;
 background-position: center center;
 border-bottom: solid 1px #9a9a9a;
-/* Правильный stacking context: секция должна быть поверх формы поиска при скролле */
+/* Правильный stacking context: секция должна быть поверх формы поиска при скролле, но ниже dropdown (5000) */
 position: relative;
-z-index: 100; /* Достаточно высокий, чтобы быть поверх формы поиска, но ниже dropdown (1010) */
+z-index: 100; /* Достаточно высокий, чтобы быть поверх формы поиска, но ниже dropdown (5000) */
 }
 
 .forsliderform {

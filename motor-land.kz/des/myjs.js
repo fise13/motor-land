@@ -94,6 +94,12 @@
 				complete: function() {
 					// Восстанавливаем исходное позиционирование если это был fixed
 					if (dd.closest('.sliderform').length) {
+						// Удаляем обработчики событий
+						var scrollHandler = dd.data('scroll-handler');
+						if (scrollHandler) {
+							$(window).off('scroll.dropdown resize.dropdown', scrollHandler);
+							dd.removeData('scroll-handler');
+						}
 						$(this).css({
 							'position': '',
 							'top': '',
@@ -129,17 +135,46 @@
 		var meinputer = dd.closest('.meinputer');
 		var btn = meinputer.find('.btmmearrow');
 		
-		// Для dropdown внутри .sliderform используем absolute позиционирование (CSS уже настроен)
-		// Не устанавливаем position: fixed, чтобы dropdown был в stacking context формы поиска
+		// Для dropdown внутри .sliderform используем fixed позиционирование чтобы выйти из всех stacking contexts
 		if (dd.closest('.sliderform').length) {
-			// Устанавливаем только необходимые стили, position: absolute уже в CSS
+			// Получаем позицию родительского элемента относительно viewport
+			var meinputerOffset = meinputer.offset();
+			var meinputerWidth = meinputer.outerWidth();
+			var scrollTop = $(window).scrollTop();
+			var scrollLeft = $(window).scrollLeft();
+			
+			// Сохраняем исходную ширину для восстановления
+			var originalWidth = dd.outerWidth() || meinputerWidth;
+			
+			// Устанавливаем fixed позиционирование с правильными координатами
 			dd.css({
+				'position': 'fixed',
+				'top': (meinputerOffset.top + meinputer.outerHeight() - scrollTop) + 'px',
+				'left': (meinputerOffset.left - scrollLeft) + 'px',
+				'width': originalWidth + 'px',
+				'z-index': '5000', // Очень высокий z-index чтобы быть поверх всех элементов
 				'display': 'block',
 				'opacity': 0,
 				'transform': 'translateY(-10px) scaleY(0.95)',
-				'z-index': '1010', // Правильный z-index: выше формы (1000), но не перекрывает секции ниже
-				'isolation': 'auto' // Не создаем новый stacking context
+				'isolation': 'isolate'
 			});
+			
+			// Обновляем позицию при скролле и ресайзе
+			var updatePosition = function() {
+				if (dd.hasClass('open')) {
+					var newOffset = meinputer.offset();
+					var newScrollTop = $(window).scrollTop();
+					var newScrollLeft = $(window).scrollLeft();
+					dd.css({
+						'top': (newOffset.top + meinputer.outerHeight() - newScrollTop) + 'px',
+						'left': (newOffset.left - newScrollLeft) + 'px'
+					});
+				}
+			};
+			
+			// Сохраняем обработчик для последующего удаления
+			dd.data('scroll-handler', updatePosition);
+			$(window).on('scroll.dropdown resize.dropdown', updatePosition);
 		} else {
 			// Для других dropdown используем обычное позиционирование
 			dd.css({
