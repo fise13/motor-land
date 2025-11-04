@@ -472,11 +472,12 @@ transition: max-height 0.35s ease;
 position: absolute;
 top: 38px;
 left: -1px;
-z-index: 10001;
+z-index: 99999;
 display: none;
 max-height: 400px;
 overflow-y: scroll;
 opacity: 0;
+pointer-events: none;
 }
 
 .ddwnblock div {
@@ -497,7 +498,8 @@ transform: translateX(3px);
     opacity: 1;
     transform: translateY(0) scaleY(1);
     display: block;
-    z-index: 10001;
+    z-index: 99999;
+    pointer-events: auto;
 }
 
 /* Анимация тряски для недоступных полей */
@@ -523,6 +525,16 @@ width: 700px;
 height: 40px;
 position: relative;
 z-index: 10000;
+}
+
+/* Когда открыт выпадающий список, другие поля должны быть под ним */
+.maipttee:has(.ddwnblock.open) {
+	z-index: 99998;
+}
+
+.maipttee:has(.ddwnblock.open) .meinputer:not(:has(.ddwnblock.open)) {
+	z-index: 99997;
+	pointer-events: none;
 }
 
 .sliderform input[type="text"]{
