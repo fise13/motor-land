@@ -46,6 +46,7 @@ $(document).ready(function() {
 	/**
 	 * Функция: Закрытие выпадающего списка с анимацией
 	 * Описание: Плавно закрывает выпадающий список
+	 * 			Если dropdown находится внутри .sliderform (главная страница), возвращает absolute позиционирование
 	 * Accessibility: Обновляет ARIA атрибуты при закрытии
 	 * Параметры: dd - jQuery объект выпадающего списка
 	 * Возвращает: ничего
@@ -54,6 +55,8 @@ $(document).ready(function() {
 		if (dd.hasClass('open')) {
 			var meinputer = dd.closest('.meinputer');
 			var btn = meinputer.find('.btmmearrow');
+			var isInSliderForm = dd.closest('.sliderform').length > 0;
+			
 			dd.css({
 				'transform': 'translateY(0) scaleY(1)',
 				'opacity': 1
@@ -67,11 +70,22 @@ $(document).ready(function() {
 				duration: 250,
 				easing: 'swing',
 				complete: function() {
-					$(this).css({
+					var resetStyles = {
 						'display': 'none',
 						'transform': 'translateY(-6px) scaleY(0.98)',
 						'opacity': 0
-					}).removeClass('open');
+					};
+					
+					// Если dropdown был в fixed позиции, возвращаем absolute
+					if (isInSliderForm) {
+						resetStyles['position'] = 'absolute';
+						resetStyles['left'] = '';
+						resetStyles['top'] = '';
+						resetStyles['width'] = '';
+						resetStyles['z-index'] = '';
+					}
+					
+					$(this).css(resetStyles).removeClass('open');
 					// Разблокируем все поля при закрытии
 					$('.meinputer').css({
 						'pointer-events': '',
@@ -90,6 +104,7 @@ $(document).ready(function() {
 	/**
 	 * Функция: Открытие выпадающего списка с анимацией
 	 * Описание: Плавно открывает выпадающий список
+	 * 			Если dropdown находится внутри .sliderform (главная страница), использует fixed позиционирование
 	 * Accessibility: Обновляет ARIA атрибуты при открытии
 	 * Параметры: dd - jQuery объект выпадающего списка
 	 * Возвращает: ничего
@@ -97,11 +112,34 @@ $(document).ready(function() {
 	function openDropdown(dd) {
 		var meinputer = dd.closest('.meinputer');
 		var btn = meinputer.find('.btmmearrow');
-		dd.css({
-			'display': 'block',
-			'opacity': 0,
-			'transform': 'translateY(-10px) scaleY(0.95)'
-		});
+		var isInSliderForm = dd.closest('.sliderform').length > 0;
+		
+		// Если dropdown находится внутри .sliderform (главная страница), используем fixed позиционирование
+		if (isInSliderForm) {
+			var meinputerOffset = meinputer.offset();
+			var meinputerHeight = meinputer.outerHeight();
+			var ddWidth = meinputer.outerWidth();
+			var scrollTop = $(window).scrollTop();
+			var scrollLeft = $(window).scrollLeft();
+			
+			dd.css({
+				'display': 'block',
+				'opacity': 0,
+				'transform': 'translateY(-10px) scaleY(0.95)',
+				'position': 'fixed',
+				'left': (meinputerOffset.left - scrollLeft) + 'px',
+				'top': (meinputerOffset.top + meinputerHeight - scrollTop) + 'px',
+				'width': ddWidth + 'px',
+				'z-index': '999999'
+			});
+		} else {
+			dd.css({
+				'display': 'block',
+				'opacity': 0,
+				'transform': 'translateY(-10px) scaleY(0.95)',
+				'position': 'absolute'
+			});
+		}
 		
 		// Небольшая задержка для инициализации
 		setTimeout(function() {
@@ -140,9 +178,15 @@ $(document).ready(function() {
 	 * Возвращает: ничего
 	 */
 	$(document).on("click", ".btmmearrow, .madiv", function (e) {
+		// Предотвращаем всплытие события, чтобы не срабатывали другие обработчики
+		e.stopPropagation();
+		e.preventDefault();
+		e.stopImmediatePropagation();
+		
 		var meinputer = $(this).closest('.meinputer');
 		var dd = meinputer.children('.ddwnblock');
 		var btn = meinputer.find('.btmmearrow');
+		var madiv = meinputer.find('.madiv');
 		
 		// Проверка валидации перед открытием
 		if (!dd.hasClass('open')) {
@@ -178,7 +222,16 @@ $(document).ready(function() {
 			// Разблокируем все поля при закрытии
 			$('.meinputer').css('pointer-events', '');
 			$('.meinputer').css('opacity', '1');
+			// Accessibility: Обновляем ARIA атрибуты
+			meinputer.attr('aria-expanded', 'false');
+			btn.attr('aria-expanded', 'false');
+			dd.attr('aria-hidden', 'true');
 		} else {
+			// Если кликнули на поле ввода, не очищаем его сразу
+			if ($(this).hasClass('madiv')) {
+				// Если поле содержит плейсхолдер, оставляем его для отображения
+				// Очистка произойдет только при реальном вводе текста
+			}
 			openDropdown(dd);
 			// Блокируем другие поля ввода когда открыт список
 			$('.meinputer').not(meinputer).css({
@@ -187,7 +240,14 @@ $(document).ready(function() {
 			});
 			// Добавляем класс для дополнительной блокировки через CSS
 			$('.maipttee').addClass('dropdown-open');
+			// Accessibility: Обновляем ARIA атрибуты
+			meinputer.attr('aria-expanded', 'true');
+			btn.attr('aria-expanded', 'true');
+			dd.attr('aria-hidden', 'false');
 		}
+		
+		// Возвращаем false для предотвращения дальнейшей обработки
+		return false;
 	});
 
 	
@@ -199,13 +259,22 @@ $(document).ready(function() {
 	 * Параметры: нет (использует элемент в фокусе)
 	 * Возвращает: ничего
 	 */
-	$(document).on("focus", ".madiv", function () {
+	$(document).on("focus", ".madiv", function (e) {
 		var $this = $(this);
 		var dd = $this.closest('.meinputer').children('.ddwnblock');
-		// Очищаем плейсхолдер только если список уже открыт (пользователь собирается вводить текст)
-		if (dd.hasClass('open') && $this.html() == $this.attr('data-val')) {
-			$this.html('');
-		}
+		// Если список закрыт, не очищаем поле - клик откроет список
+		// Добавляем небольшую задержку, чтобы обработчик click успел сработать первым
+		setTimeout(function() {
+			if (!dd.hasClass('open')) {
+				// Список все еще закрыт - значит клик не сработал или был блокирован
+				// Не очищаем поле
+				return;
+			}
+			// Очищаем плейсхолдер только если список уже открыт (пользователь собирается вводить текст)
+			if (dd.hasClass('open') && $this.html() == $this.attr('data-val')) {
+				$this.html('');
+			}
+		}, 50); // Небольшая задержка для обработки клика
 	});
 	
 	/**

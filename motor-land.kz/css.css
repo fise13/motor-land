@@ -546,6 +546,11 @@ opacity: 0;
 pointer-events: none;
 }
 
+/* Performance: Для dropdown внутри .sliderform используем fixed позиционирование через JS */
+.sliderform .ddwnblock {
+position: absolute; /* Будет переопределено через JS на fixed при открытии */
+}
+
 .ddwnblock div {
 cursor: pointer;
 color: #434343;
