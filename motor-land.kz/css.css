@@ -379,8 +379,8 @@ position: relative;
 contain: none !important;
 /* Performance: Разрешаем overflow для выпадающих списков формы поиска */
 overflow: visible !important;
-/* Решение 7: Убеждаемся что родительский элемент не создает новый stacking context */
-z-index: auto;
+/* Создаем stacking context выше секции консультации (100), чтобы форма поиска и dropdown были поверх */
+z-index: 200;
 /* Решение 16: Гарантируем что дочерние элементы не обрезаются */
 clip: auto !important;
 clip-path: none !important;
@@ -412,8 +412,8 @@ margin: 0 auto;
 padding-left: 0;
 padding-right: 0;
 box-sizing: border-box;
-/* Создаем stacking context выше фоновых изображений слайдера */
-z-index: 10;
+/* Наследуем stacking context от .slider (z-index: 200) */
+z-index: auto;
 /* Performance: Разрешаем overflow для выпадающих списков */
 overflow: visible;
 /* Решение 8: Убеждаемся что не создаем новый stacking context который может мешать */
@@ -597,13 +597,13 @@ pointer-events: none;
 isolation: auto;
 }
 
-/* Dropdown внутри .sliderform - будет использовать fixed позиционирование через JS */
+/* Dropdown внутри .sliderform - используем absolute позиционирование */
 .sliderform .ddwnblock {
 position: absolute;
-/* z-index будет установлен через JS, но базовое значение для fallback */
-z-index: 5000;
-/* Создаем новый stacking context чтобы гарантировать что dropdown поверх всех элементов страницы */
-isolation: isolate;
+/* z-index выше формы поиска (1000), но в том же stacking context что и слайдер (200) */
+z-index: 1001;
+/* Не создаем новый stacking context, остаемся в контексте слайдера */
+isolation: auto;
 /* Убеждаемся что элемент не обрезается родителями */
 contain: none !important;
 clip: auto !important;
@@ -611,12 +611,12 @@ clip-path: none !important;
 }
 
 .sliderform .ddwnblock.open {
-/* z-index выше всех элементов страницы, включая секции, но ниже модальных окон */
-z-index: 5000 !important;
-/* Используем fixed позиционирование чтобы выйти из всех stacking contexts */
-position: fixed !important;
-/* Создаем новый stacking context чтобы гарантировать что dropdown поверх всех элементов */
-isolation: isolate !important;
+/* z-index выше формы поиска (1000), в stacking context слайдера (200) который выше секции (100) */
+z-index: 1001 !important;
+/* Используем absolute позиционирование в контексте формы */
+position: absolute !important;
+/* Не создаем новый stacking context */
+isolation: auto !important;
 /* Гарантируем что элемент видим и не обрезан */
 display: block !important;
 visibility: visible !important;
@@ -642,11 +642,11 @@ transform: translateX(3px);
     opacity: 1;
     transform: translateY(0) scaleY(1);
     display: block !important;
-    /* z-index будет установлен через JS для .sliderform .ddwnblock, базовое значение */
-    z-index: 5000;
+    /* z-index выше формы поиска, но специфичный для .sliderform .ddwnblock */
+    z-index: 1001;
     pointer-events: auto !important;
-    /* Создаем новый stacking context для dropdown внутри .sliderform */
-    isolation: isolate;
+    /* Не создаем новый stacking context, остаемся в контексте слайдера */
+    isolation: auto;
     /* Гарантируем видимость */
     visibility: visible !important;
 }
