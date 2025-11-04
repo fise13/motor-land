@@ -1,9 +1,6 @@
 <div class="headercon mobilefix">
 	<div class="shirina relhead">
 		<div class="logo">
-			<video class="logo-video" autoplay muted playsinline loop preload="none" poster="img/logo.jpg">
-				<source src="img/loader.mp4" type="video/mp4">
-			</video>
 		</div>
 		<ul class="menu">
 			<a href="/"><li>Главная</li></a>

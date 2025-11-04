@@ -7,22 +7,6 @@ $(document).ready(function() {
 		$('html').css('opacity', '1');
 	}, 50);
 
-	// Оптимизация загрузки видео-логотипа: загружаем только после полной загрузки страницы
-	$(window).on('load', function() {
-		setTimeout(function() {
-			var $logoVideo = $('.logo-video');
-			if ($logoVideo.length && $logoVideo[0].readyState === 0) {
-				// Загружаем видео только если оно еще не загружено
-				$logoVideo[0].load();
-				// Запускаем воспроизведение после загрузки
-				$logoVideo[0].addEventListener('loadeddata', function() {
-					this.play().catch(function() {
-						// Игнорируем ошибки автовоспроизведения
-					});
-				});
-			}
-		}, 500); // Задержка для загрузки остального контента
-	});
 
 	/**
 	 * Функция: Проверка возможности открытия выпадающего списка
