@@ -9,7 +9,46 @@ $SITE_DESCRIPTION = 'Компания "Motor Land" - поставка контр
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php include("hyst/head.php"); ?>
-<link rel="canonical" href="https://motor-land.kz/"/> 
+<link rel="canonical" href="https://motor-land.kz/"/>
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://motor-land.kz/">
+<meta property="og:title" content="<?=$SITE_TITLE;?>">
+<meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
+<meta property="og:image" content="https://motor-land.kz/img/logo.jpg">
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://motor-land.kz/">
+<meta property="twitter:title" content="<?=$SITE_TITLE;?>">
+<meta property="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
+<meta property="twitter:image" content="https://motor-land.kz/img/logo.jpg">
+<!-- Schema.org Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Motor Land",
+  "alternateName": "Моторленд",
+  "url": "https://motor-land.kz",
+  "logo": "https://motor-land.kz/img/logo.jpg",
+  "description": "<?=$SITE_DESCRIPTION;?>",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Алматы",
+    "addressCountry": "KZ"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+7-777-144-5445",
+    "contactType": "Sales",
+    "areaServed": "KZ",
+    "availableLanguage": ["Russian", "Kazakh"]
+  },
+  "sameAs": [
+    "https://2gis.kz/almaty/geo/70000001083496996"
+  ]
+}
+</script>
 </head>
 <body>
 <?php include("hyst/sbody.php"); ?>
@@ -187,7 +226,7 @@ $SITE_DESCRIPTION = 'Компания "Motor Land" - поставка контр
 			while($get = $tmp->fetch_array()):
 			?>
 			<div class="toverblock">
-			<a href="/detal?id=<?=$get['id'];?>"><div class="toverimg" style="background-image: url(<?=get_farrimg($get['images'])[0];?>);">
+			<a href="/detal?id=<?=$get['id'];?>"><div class="toverimg" style="background-image: url(<?=get_farrimg($get['images'])[0];?>);" loading="lazy">
 			<?php if ($get['sale'] != 'noting') { ?>
 			<div class="cationsale"><?=$get['sale'];?></div>
 			<?php } ?>
@@ -217,7 +256,7 @@ $SITE_DESCRIPTION = 'Компания "Motor Land" - поставка контр
 			while($get = $tmp->fetch_array()):
 			?>
 			<div class="toverblock revealator-slideup">
-			<a href="/detal?id=<?=$get['id'];?>"><div class="toverimg" style="background-image: url(<?=get_farrimg($get['images'])[0];?>);">
+			<a href="/detal?id=<?=$get['id'];?>"><div class="toverimg" style="background-image: url(<?=get_farrimg($get['images'])[0];?>);" loading="lazy">
 			<?php if ($get['sale'] != 'noting') { ?>
 			<div class="cationsale"><?=$get['sale'];?></div>
 			<?php } ?>

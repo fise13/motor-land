@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /hyst/
+Disallow: /adm.php
+Disallow: /cms_img/
+Disallow: /logs/
+
+# Sitemap
+Sitemap: https://motor-land.kz/sitemap.php
+

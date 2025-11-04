@@ -16,7 +16,9 @@ $INTERFACE_VERSION = 0.91;
 <link rel="shortcut icon" href="favicon.ico?<?=$INTERFACE_VERSION;?>" />
 <link rel="apple-touch-icon" href="favicon_apple.png?<?=$INTERFACE_VERSION;?>">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-<meta property="og:image" content="">
+<meta property="og:image" content="https://motor-land.kz/img/logo.jpg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Motor Land">
 <link rel="stylesheet" href="/hyst/visual/admin.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
 <link rel="stylesheet" href="/hyst/visual/admin_mob.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
 
