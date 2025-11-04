@@ -101,6 +101,42 @@
 		background-color: #f5f5f5;
 	}
 
+	/* Улучшенные стили для страницы товара на планшетах */
+	.product-detail-wrapper {
+		padding: 15px 10px;
+	}
+	
+	.product-detail-container {
+		flex-direction: column;
+		padding: 20px;
+		gap: 25px;
+	}
+	
+	.product-image-wrapper {
+		max-width: 100%;
+	}
+	
+	.tovarimage {
+		min-height: 350px;
+	}
+	
+	.tovarimage img {
+		min-height: 350px;
+	}
+	
+	.product-title {
+		font-size: 24px;
+	}
+	
+	.price-value {
+		font-size: 28px;
+	}
+	
+	.product-buy-button {
+		padding: 15px 28px;
+		font-size: 17px;
+	}
+
 	.detalinlines {
 		height: auto;
 	}

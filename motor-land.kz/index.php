@@ -91,14 +91,21 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 	<div id="slidess">
 		<?php
 		$slider = get_slider ('index_slider');
+		$slide_index = 0;
 		while($slide=$slider->fetch_array()):
 		?>
+		<!-- Performance: Preload первого изображения слайдера для ускорения LCP -->
+		<?php if ($slide_index == 0): ?>
+		<link rel="preload" as="image" href="<?=$slide['image'];?>">
+		<?php endif; ?>
 		<!-- SEO: Alt-текст для изображений слайдера с целевыми ключевыми словами -->
 		<div class="sliderslid" style="background-image: url(<?=$slide['image'];?>);" aria-label="Купить контрактный мотор Алматы - привозные моторы из Японии, контрактные двигатели Казахстан"></div>
 		<?php
+		$slide_index++;
 		endwhile;
 		?>
 	</div>
+	<!-- Performance: Скрипт слайдера выполняется после загрузки DOM и jQuery -->
 	<script>
 		/**
 		 * Функция: Автоматическая смена слайдов
@@ -107,28 +114,41 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 		 * Параметры: нет
 		 * Возвращает: ничего
 		 */
-		function slider () {
-			var cil = $("#slidess").children('div').length - 1;
-			var cur = 0;
-			$("#slidess").children('div').each(function(index, element){	
-				if ($(element).css('display') == 'block') {
-				cur = index;
-				}	
-			});
+		function initSlider() {
+			if (typeof jQuery === 'undefined') {
+				setTimeout(initSlider, 100);
+				return;
+			}
 			
-			if (cur >= cil) { cur = 0; } else { cur++; }
-			
-			$("#slidess").children('div').each(function(index, element){	
-				if ($(element).css('display') == 'block') { $(element).fadeOut(500); }
-				if (cur == index) {
-				$(element).fadeIn(500);
-				}	
-			});
+			function slider () {
+				var cil = $("#slidess").children('div').length - 1;
+				var cur = 0;
+				$("#slidess").children('div').each(function(index, element){	
+					if ($(element).css('display') == 'block') {
+					cur = index;
+					}	
+				});
+				
+				if (cur >= cil) { cur = 0; } else { cur++; }
+				
+				$("#slidess").children('div').each(function(index, element){	
+					if ($(element).css('display') == 'block') { $(element).fadeOut(500); }
+					if (cur == index) {
+					$(element).fadeIn(500);
+					}	
+				});
+				
+				setTimeout(function() { slider () }, 3000);
+			}
 			
 			setTimeout(function() { slider () }, 3000);
 		}
 		
-		setTimeout(function() { slider () }, 3000);
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', initSlider);
+		} else {
+			initSlider();
+		}
 		</script>
 	<div class="slidercoun shirina">
 					

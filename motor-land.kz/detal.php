@@ -52,8 +52,10 @@ $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : '
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ru_RU">
-<meta property="product:price:amount" content="<?=$print['cash']!=0?$print['cash']:'0';?>">
+<?php if ($print['cash'] != 0 && $print['cash'] != '0') { ?>
+<meta property="product:price:amount" content="<?=$print['cash'];?>">
 <meta property="product:price:currency" content="KZT">
+<?php } ?>
 <!-- SEO: Twitter Cards для товара -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="<?=$SITE_TITLE;?>">
@@ -76,7 +78,7 @@ $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : '
     "@type": "Offer",
     "url": "https://motor-land.kz/detal?id=<?=$print['id'];?>",
     "priceCurrency": "KZT",
-    "price": "<?=$print['cash']!=0?$print['cash']:'0';?>",
+    "price": "<?=($print['cash'] != 0 && $print['cash'] != '0') ? $print['cash'] : '0';?>",
     "availability": "https://schema.org/InStock",
     "seller": {
       "@type": "Organization",
@@ -137,47 +139,99 @@ $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : '
 			<meta itemprop="position" content="3" />
 		</span>
 		</div>
-		<!-- SEO: Семантический тег <article> для товара -->
-		<article class="detalinlines" itemscope itemtype="https://schema.org/Product">
-			<div class="tovarimage">
-				<!-- SEO: Улучшенный alt-текст для изображения товара с целевыми ключевыми словами -->
-				<img src="<?=get_farrimg($print['images'])[0];?>" alt="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы из Японии';?>" title="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы';?>" itemprop="image" loading="lazy">
-				<?php if ($print['sale'] != 'noting') { ?>
-				<div class="cationsale"><?=$print['sale'];?></div>
-				<?php } ?>
-			</div>
-			<div class="detalinlines">
-				<h1 class="tovertitle" itemprop="name"><?=$print['name'];?></h1>
-				
-				<div itemprop="description">
-					<?=$print['text'];?>
-					<!-- SEO: Дополнительный SEO-текст с целевыми ключевыми запросами -->
-					<div style="margin-top: 20px; padding: 15px; background: #f5f5f5; border-radius: 5px;">
-						<p><strong>Купить контрактный мотор <?=$product_name;?> в Алматы</strong> - это отличное решение для вашего автомобиля. Мы предлагаем <strong>привозные моторы из Японии</strong>, которые проходят тщательную проверку перед продажей.</p>
-						<p>Все наши <strong>контрактные двигатели Казахстан</strong> поставляются напрямую из Японии и имеют гарантию качества. Если вам нужен <strong>двигатель бу Япония Алматы</strong>, мы поможем подобрать оптимальный вариант.</p>
-						<p>Посмотрите также наш <a href="/catalog" style="color: #007bff; text-decoration: underline;">полный каталог контрактных моторов</a> или <a href="/service" style="color: #007bff; text-decoration: underline;">запишитесь на установку в наш автосервис</a>.</p>
+	</div>
+</nav>
+
+<!-- SEO: Семантический тег <article> для товара -->
+<section class="generalw">
+	<div class="shirina">
+		<article class="product-detail-wrapper" itemscope itemtype="https://schema.org/Product">
+			<div class="product-detail-container">
+				<!-- Изображение товара -->
+				<div class="product-image-wrapper">
+					<!-- Performance: Preload изображения товара для ускорения LCP на странице товара -->
+					<link rel="preload" as="image" href="<?=get_farrimg($print['images'])[0];?>">
+					<div class="tovarimage">
+						<!-- SEO: Улучшенный alt-текст для изображения товара с целевыми ключевыми словами -->
+						<img src="<?=get_farrimg($print['images'])[0];?>" alt="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы из Японии';?>" title="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы';?>" itemprop="image" loading="eager" fetchpriority="high">
+						<?php if ($print['sale'] != 'noting') { ?>
+						<div class="cationsale"><?=$print['sale'];?></div>
+						<?php } ?>
 					</div>
 				</div>
-				<br><br>
-				<div class="tovercenaca" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-					<span itemprop="price"><?=($print['cash']!=0?$print['cash']:'0');?></span>
-					<span itemprop="priceCurrency" content="KZT"><?=($print['cash']!=0?' KZT':'Цена по запросу');?></span>
-					<link itemprop="availability" href="https://schema.org/InStock" />
+				
+				<!-- Информация о товаре -->
+				<div class="product-info-wrapper">
+					<h1 class="product-title" itemprop="name"><?=$print['name'];?></h1>
+					
+					<!-- Цена и кнопка -->
+					<div class="product-price-section" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+						<?php if ($print['cash'] != 0 && $print['cash'] != '0') { ?>
+						<div class="product-price">
+							<span class="price-value" itemprop="price"><?=number_format($print['cash'], 0, '.', ' ');?></span>
+							<span class="price-currency" itemprop="priceCurrency" content="KZT"> KZT</span>
+						</div>
+						<?php } else { ?>
+						<div class="product-price-request">
+							<span>Цена по запросу</span>
+						</div>
+						<?php } ?>
+						<link itemprop="availability" href="https://schema.org/InStock" />
+						<button class="product-buy-button" data-nam="<?=$print['name'];?>">Купить</button>
+					</div>
+					
+					<!-- Описание товара -->
+					<div class="product-description" itemprop="description">
+						<?=$print['text'];?>
+					</div>
+					
+					<!-- SEO: Дополнительный SEO-текст с целевыми ключевыми запросами -->
+					<div class="product-seo-info">
+						<p><strong>Купить контрактный мотор <?=$product_name;?> в Алматы</strong> - это отличное решение для вашего автомобиля. Мы предлагаем <strong>привозные моторы из Японии</strong>, которые проходят тщательную проверку перед продажей.</p>
+						<p>Все наши <strong>контрактные двигатели Казахстан</strong> поставляются напрямую из Японии и имеют гарантию качества. Если вам нужен <strong>двигатель бу Япония Алматы</strong>, мы поможем подобрать оптимальный вариант.</p>
+						<p>Посмотрите также наш <a href="/catalog" class="product-link">полный каталог контрактных моторов</a> или <a href="/service" class="product-link">запишитесь на установку в наш автосервис</a>.</p>
+					</div>
 				</div>
-				<div class="toverbuton" data-nam="<?=$print['name'];?>">Купить</div>
 			</div>
 			<!--<div class="charactr">
 			<?=$print['text1'];?>
 			</div>-->
 		</article>
 	</div>
-</nav>
+</section>
 </main>
 <br><br>
 
 	
 <?php include("des/foter.php"); ?>
 <?php include("hyst/fbody.php"); ?>
+
+<!-- JavaScript для обработки кнопки покупки -->
+<script>
+$(document).ready(function() {
+	// Обработчик клика на кнопку покупки (новая кнопка product-buy-button)
+	$(document).on('click', '.product-buy-button', function() {
+		var productName = $(this).attr('data-nam');
+		if (productName) {
+			$('#playpayid').val(productName);
+			$('#playpayidv').text(productName);
+			$('.plashesbgmodl').addClass('show').show();
+			$('#zakazaty').addClass('show').show();
+		}
+	});
+	
+	// Обработчик клика на старую кнопку toverbuton (для обратной совместимости)
+	$(document).on('click', '.toverbuton', function() {
+		var productName = $(this).attr('data-nam');
+		if (productName) {
+			$('#playpayid').val(productName);
+			$('#playpayidv').text(productName);
+			$('.plashesbgmodl').addClass('show').show();
+			$('#zakazaty').addClass('show').show();
+		}
+	});
+});
+</script>
 
 </body>
 </html>
