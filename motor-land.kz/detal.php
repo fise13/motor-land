@@ -182,7 +182,14 @@ $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : '
 					
 					<!-- Описание товара -->
 					<div class="product-description" itemprop="description">
-						<?=$print['text'];?>
+						<?php
+						// Убираем текст "В наличии - на выбор более 100шт." из описания
+						$text = $print['text'];
+						$text = preg_replace('/В наличии\s*[-–—]\s*на выбор более\s*\d+шт\.?/iu', '', $text);
+						$text = preg_replace('/В наличии\s*на выбор более\s*\d+шт\.?/iu', '', $text);
+						$text = preg_replace('/на выбор более\s*\d+шт\.?/iu', '', $text);
+						echo $text;
+						?>
 					</div>
 					
 					<!-- SEO: Дополнительный SEO-текст с целевыми ключевыми запросами -->

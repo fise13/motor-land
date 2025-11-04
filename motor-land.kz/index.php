@@ -120,28 +120,28 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 				return;
 			}
 			
-			function slider () {
-				var cil = $("#slidess").children('div').length - 1;
-				var cur = 0;
-				$("#slidess").children('div').each(function(index, element){	
-					if ($(element).css('display') == 'block') {
-					cur = index;
-					}	
-				});
-				
-				if (cur >= cil) { cur = 0; } else { cur++; }
-				
-				$("#slidess").children('div').each(function(index, element){	
-					if ($(element).css('display') == 'block') { $(element).fadeOut(500); }
-					if (cur == index) {
-					$(element).fadeIn(500);
-					}	
-				});
-				
-				setTimeout(function() { slider () }, 3000);
-			}
+		function slider () {
+			var cil = $("#slidess").children('div').length - 1;
+			var cur = 0;
+			$("#slidess").children('div').each(function(index, element){	
+				if ($(element).css('display') == 'block') {
+				cur = index;
+				}	
+			});
+			
+			if (cur >= cil) { cur = 0; } else { cur++; }
+			
+			$("#slidess").children('div').each(function(index, element){	
+				if ($(element).css('display') == 'block') { $(element).fadeOut(500); }
+				if (cur == index) {
+				$(element).fadeIn(500);
+				}	
+			});
 			
 			setTimeout(function() { slider () }, 3000);
+		}
+		
+		setTimeout(function() { slider () }, 3000);
 		}
 		
 		if (document.readyState === 'loading') {
