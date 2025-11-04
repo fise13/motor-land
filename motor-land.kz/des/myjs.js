@@ -140,14 +140,9 @@ $(document).ready(function() {
 	 * Возвращает: ничего
 	 */
 	$(document).on("click", ".btmmearrow, .madiv", function (e) {
-		// Предотвращаем всплытие события, чтобы не срабатывали другие обработчики
-		e.stopPropagation();
-		e.preventDefault();
-		
 		var meinputer = $(this).closest('.meinputer');
 		var dd = meinputer.children('.ddwnblock');
 		var btn = meinputer.find('.btmmearrow');
-		var madiv = meinputer.find('.madiv');
 		
 		// Проверка валидации перед открытием
 		if (!dd.hasClass('open')) {
@@ -183,16 +178,7 @@ $(document).ready(function() {
 			// Разблокируем все поля при закрытии
 			$('.meinputer').css('pointer-events', '');
 			$('.meinputer').css('opacity', '1');
-			// Accessibility: Обновляем ARIA атрибуты
-			meinputer.attr('aria-expanded', 'false');
-			btn.attr('aria-expanded', 'false');
-			dd.attr('aria-hidden', 'true');
 		} else {
-			// Если кликнули на поле ввода, не очищаем его сразу
-			if ($(this).hasClass('madiv')) {
-				// Если поле содержит плейсхолдер, оставляем его для отображения
-				// Очистка произойдет только при реальном вводе текста
-			}
 			openDropdown(dd);
 			// Блокируем другие поля ввода когда открыт список
 			$('.meinputer').not(meinputer).css({
@@ -201,14 +187,7 @@ $(document).ready(function() {
 			});
 			// Добавляем класс для дополнительной блокировки через CSS
 			$('.maipttee').addClass('dropdown-open');
-			// Accessibility: Обновляем ARIA атрибуты
-			meinputer.attr('aria-expanded', 'true');
-			btn.attr('aria-expanded', 'true');
-			dd.attr('aria-hidden', 'false');
 		}
-		
-		// Возвращаем false для предотвращения дальнейшей обработки
-		return false;
 	});
 
 	
@@ -220,22 +199,13 @@ $(document).ready(function() {
 	 * Параметры: нет (использует элемент в фокусе)
 	 * Возвращает: ничего
 	 */
-	$(document).on("focus", ".madiv", function (e) {
+	$(document).on("focus", ".madiv", function () {
 		var $this = $(this);
 		var dd = $this.closest('.meinputer').children('.ddwnblock');
-		// Если список закрыт, не очищаем поле - клик откроет список
-		// Добавляем небольшую задержку, чтобы обработчик click успел сработать первым
-		setTimeout(function() {
-			if (!dd.hasClass('open')) {
-				// Список все еще закрыт - значит клик не сработал или был блокирован
-				// Не очищаем поле
-				return;
-			}
-			// Очищаем плейсхолдер только если список уже открыт (пользователь собирается вводить текст)
-			if (dd.hasClass('open') && $this.html() == $this.attr('data-val')) {
-				$this.html('');
-			}
-		}, 50); // Небольшая задержка для обработки клика
+		// Очищаем плейсхолдер только если список уже открыт (пользователь собирается вводить текст)
+		if (dd.hasClass('open') && $this.html() == $this.attr('data-val')) {
+			$this.html('');
+		}
 	});
 	
 	/**
