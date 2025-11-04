@@ -29,17 +29,36 @@
 
 	
 	.sliderbtns {
-	bottom: 400px !important;
-	left: 50px !important;
+	position: relative !important;
+	bottom: auto !important;
+	left: auto !important;
+	text-align: center !important;
+	width: 100% !important;
+	margin: 20px auto !important;
+	display: flex !important;
+	flex-direction: column !important;
+	align-items: center !important;
+	justify-content: center !important;
+	gap: 15px !important;
 	}
 
 .maipttee {
-width: 280px !important;
+width: 100% !important;
+max-width: 280px !important;
 height: auto !important;
+margin: 0 auto !important;
+display: flex !important;
+flex-direction: column !important;
+align-items: center !important;
+justify-content: center !important;
+gap: 10px !important;
 }
 
 .sliderform input[type="text"] {
-width: 260px !important;
+width: 100% !important;
+max-width: 260px !important;
+margin: 5px auto !important;
+display: block !important;
 }
 
 /* Выпадающие списки на мобильных */
@@ -405,13 +424,34 @@ margin: 20px 10px !important;
 	}
 
 	.titlephon {
-	width: 340px;
-	height: 300px;
+	width: 100% !important;
+	max-width: 340px !important;
+	height: auto !important;
+	min-height: 200px !important;
+	margin: 0 auto !important;
+	text-align: center !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	padding: 20px 15px !important;
+	box-sizing: border-box !important;
+	position: relative !important;
+	left: auto !important;
+	top: auto !important;
 	}
 
 	.sliderform {
-	text-align: center;
-bottom: 10px;
+	text-align: center !important;
+	bottom: 10px !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	margin: 0 auto !important;
+	padding: 15px 10px !important;
+	box-sizing: border-box !important;
+	display: flex !important;
+	flex-direction: column !important;
+	align-items: center !important;
+	justify-content: center !important;
 	}
 
 	.aboutblock {
@@ -551,7 +591,15 @@ bottom: 10px;
 	
 	.slidercoun {
 		width: 100% !important;
+		max-width: 100% !important;
 		padding: 20px 10px !important;
+		box-sizing: border-box !important;
+		display: flex !important;
+		flex-direction: column !important;
+		align-items: center !important;
+		justify-content: center !important;
+		text-align: center !important;
+		margin: 0 auto !important;
 	}
 	
 	.titlephon {
@@ -559,6 +607,13 @@ bottom: 10px;
 		line-height: 1.3 !important;
 		padding: 15px !important;
 		text-align: center !important;
+		width: 100% !important;
+		max-width: 340px !important;
+		margin: 0 auto !important;
+		display: flex !important;
+		align-items: center !important;
+		justify-content: center !important;
+		box-sizing: border-box !important;
 	}
 	
 	.sliderbtns {
@@ -566,30 +621,47 @@ bottom: 10px;
 		left: auto !important;
 		bottom: auto !important;
 		text-align: center !important;
-		margin: 15px 0 !important;
+		margin: 15px auto !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		display: flex !important;
+		flex-direction: column !important;
+		align-items: center !important;
+		justify-content: center !important;
+		gap: 15px !important;
 	}
 	
 	.phone {
 		display: inline-block !important;
 		padding: 12px 24px !important;
 		font-size: 18px !important;
-		margin: 10px 0 !important;
+		margin: 0 auto !important;
 		width: auto !important;
 		max-width: 90% !important;
+		text-align: center !important;
 	}
 	
 	.atalogb {
 		display: inline-block !important;
 		padding: 12px 24px !important;
 		font-size: 16px !important;
-		margin: 10px 0 !important;
+		margin: 0 auto !important;
 		width: auto !important;
 		max-width: 90% !important;
+		text-align: center !important;
 	}
 	
 	.sliderform {
 		width: 100% !important;
+		max-width: 100% !important;
 		padding: 15px 10px !important;
+		text-align: center !important;
+		margin: 0 auto !important;
+		display: flex !important;
+		flex-direction: column !important;
+		align-items: center !important;
+		justify-content: center !important;
+		box-sizing: border-box !important;
 	}
 	
 	.sliderform input[type="text"] {
@@ -599,6 +671,13 @@ bottom: 10px;
 		display: block !important;
 		font-size: 16px !important;
 		padding: 12px 15px !important;
+		text-align: center !important;
+	}
+	
+	.sliderform input[type="submit"] {
+		margin: 15px auto !important;
+		display: block !important;
+		text-align: center !important;
 	}
 	
 	/* Кнопка "Подробнее" */
@@ -870,6 +949,11 @@ bottom: 10px;
 	.generalw {
 		padding: 10px 5px !important;
 		max-width: 100% !important;
+		text-align: center !important;
+		display: flex !important;
+		flex-direction: column !important;
+		align-items: center !important;
+		justify-content: center !important;
 	}
 	
 	.shirina {
@@ -877,6 +961,12 @@ bottom: 10px;
 		max-width: 100% !important;
 		padding: 0 10px !important;
 		box-sizing: border-box !important;
+		text-align: center !important;
+		margin: 0 auto !important;
+		display: flex !important;
+		flex-direction: column !important;
+		align-items: center !important;
+		justify-content: center !important;
 	}
 	
 	/* Оптимизация хедера */
@@ -1051,6 +1141,11 @@ bottom: 10px;
 	section {
 		padding: 20px 10px !important;
 		box-sizing: border-box !important;
+		text-align: center !important;
+		display: flex !important;
+		flex-direction: column !important;
+		align-items: center !important;
+		justify-content: center !important;
 	}
 	
 	/* Оптимизация отступов */
@@ -1096,8 +1191,13 @@ bottom: 10px;
 	
 	/* Оптимизация секции "О нас" */
 	.aboutblock {
-		margin: 20px 0 !important;
+		margin: 20px auto !important;
 		padding: 20px 10px !important;
+		text-align: center !important;
+		display: flex !important;
+		flex-direction: column !important;
+		align-items: center !important;
+		justify-content: center !important;
 	}
 	
 	.abouttext {
@@ -1105,9 +1205,10 @@ bottom: 10px;
 		transform: none !important;
 		width: 100% !important;
 		max-width: 100% !important;
-		margin: 20px 0 !important;
+		margin: 20px auto !important;
 		padding: 20px 15px !important;
 		box-sizing: border-box !important;
+		text-align: center !important;
 	}
 	
 	/* Оптимизация изображений в секциях */
@@ -1139,5 +1240,113 @@ bottom: 10px;
 		margin: 20px 0 !important;
 		padding: 15px !important;
 		box-sizing: border-box !important;
+		text-align: center !important;
+	}
+	
+	/* Централизация формы консультации */
+	.consult-container {
+		text-align: center !important;
+		display: flex !important;
+		flex-direction: column !important;
+		align-items: center !important;
+		justify-content: center !important;
+		margin: 0 auto !important;
+	}
+	
+	.consult-form {
+		width: 100% !important;
+		max-width: 100% !important;
+		display: flex !important;
+		flex-direction: column !important;
+		align-items: center !important;
+		justify-content: center !important;
+		gap: 15px !important;
+	}
+	
+	.consult-form-control {
+		width: 100% !important;
+		max-width: 300px !important;
+		margin: 0 auto !important;
+		text-align: center !important;
+	}
+	
+	.consult-btn-wrapper {
+		width: 100% !important;
+		max-width: 300px !important;
+		margin: 0 auto !important;
+		text-align: center !important;
+	}
+	
+	.consult-btn {
+		width: 100% !important;
+		margin: 0 auto !important;
+		text-align: center !important;
+	}
+	
+	/* Централизация основных контейнеров (не все div) */
+	.main-container, .content-wrapper, .page-content {
+		text-align: center !important;
+	}
+	
+	/* Исключения для текста внутри контента - оставляем по левому краю */
+	.product-description, .tovaropis, .abouttext p, p {
+		text-align: left !important;
+	}
+	
+	/* Централизация заголовков (кроме заголовков внутри контента) */
+	h1, h2, h3, h4, h5, h6 {
+		text-align: center !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+	}
+	
+	/* Исключения для заголовков внутри описаний */
+	.product-description h1, .product-description h2, .product-description h3,
+	.tovaropis h1, .tovaropis h2, .tovaropis h3,
+	.abouttext h1, .abouttext h2, .abouttext h3 {
+		text-align: left !important;
+	}
+	
+	/* Централизация основных кнопок */
+	button:not(.menu-button):not(.closemodal),
+	input[type="button"]:not([class*="menu"]),
+	input[type="submit"]:not([class*="menu"]),
+	.toverbuton, .product-buy-button, .phone, .atalogb, .consult-btn {
+		margin-left: auto !important;
+		margin-right: auto !important;
+		display: block !important;
+	}
+	
+	/* Централизация футера */
+	footer, .foterinline {
+		text-align: center !important;
+	}
+	
+	footer h3, .foterinline h3 {
+		text-align: center !important;
+		margin: 0 auto !important;
+	}
+	
+	/* Централизация breadcrumbs */
+	.crumbsblock {
+		text-align: center !important;
+	}
+	
+	/* Централизация таблиц */
+	table {
+		margin: 0 auto !important;
+	}
+	
+	/* Централизация изображений */
+	img {
+		margin: 0 auto !important;
+		display: block !important;
+	}
+	
+	/* Централизация списков */
+	ul, ol {
+		margin: 0 auto !important;
+		text-align: left !important;
+		display: inline-block !important;
 	}
 }	
