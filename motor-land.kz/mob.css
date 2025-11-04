@@ -29,36 +29,17 @@
 
 	
 	.sliderbtns {
-	position: relative !important;
-	bottom: auto !important;
-	left: auto !important;
-	text-align: center !important;
-	width: 100% !important;
-	margin: 20px auto !important;
-	display: flex !important;
-	flex-direction: column !important;
-	align-items: center !important;
-	justify-content: center !important;
-	gap: 15px !important;
+	bottom: 400px !important;
+	left: 50px !important;
 	}
 
 .maipttee {
-width: 100% !important;
-max-width: 280px !important;
+width: 280px !important;
 height: auto !important;
-margin: 0 auto !important;
-display: flex !important;
-flex-direction: column !important;
-align-items: center !important;
-justify-content: center !important;
-gap: 10px !important;
 }
 
 .sliderform input[type="text"] {
-width: 100% !important;
-max-width: 260px !important;
-margin: 5px auto !important;
-display: block !important;
+width: 260px !important;
 }
 
 /* Выпадающие списки на мобильных */
@@ -424,34 +405,13 @@ margin: 20px 10px !important;
 	}
 
 	.titlephon {
-	width: 100% !important;
-	max-width: 340px !important;
-	height: auto !important;
-	min-height: 200px !important;
-	margin: 0 auto !important;
-	text-align: center !important;
-	display: flex !important;
-	align-items: center !important;
-	justify-content: center !important;
-	padding: 20px 15px !important;
-	box-sizing: border-box !important;
-	position: relative !important;
-	left: auto !important;
-	top: auto !important;
+	width: 340px;
+	height: 300px;
 	}
 
 	.sliderform {
-	text-align: center !important;
-	bottom: 10px !important;
-	width: 100% !important;
-	max-width: 100% !important;
-	margin: 0 auto !important;
-	padding: 15px 10px !important;
-	box-sizing: border-box !important;
-	display: flex !important;
-	flex-direction: column !important;
-	align-items: center !important;
-	justify-content: center !important;
+	text-align: center;
+bottom: 10px;
 	}
 
 	.aboutblock {
@@ -591,15 +551,7 @@ margin: 20px 10px !important;
 	
 	.slidercoun {
 		width: 100% !important;
-		max-width: 100% !important;
 		padding: 20px 10px !important;
-		box-sizing: border-box !important;
-		display: flex !important;
-		flex-direction: column !important;
-		align-items: center !important;
-		justify-content: center !important;
-		text-align: center !important;
-		margin: 0 auto !important;
 	}
 	
 	.titlephon {
@@ -607,13 +559,6 @@ margin: 20px 10px !important;
 		line-height: 1.3 !important;
 		padding: 15px !important;
 		text-align: center !important;
-		width: 100% !important;
-		max-width: 340px !important;
-		margin: 0 auto !important;
-		display: flex !important;
-		align-items: center !important;
-		justify-content: center !important;
-		box-sizing: border-box !important;
 	}
 	
 	.sliderbtns {
@@ -621,47 +566,30 @@ margin: 20px 10px !important;
 		left: auto !important;
 		bottom: auto !important;
 		text-align: center !important;
-		margin: 15px auto !important;
-		width: 100% !important;
-		max-width: 100% !important;
-		display: flex !important;
-		flex-direction: column !important;
-		align-items: center !important;
-		justify-content: center !important;
-		gap: 15px !important;
+		margin: 15px 0 !important;
 	}
 	
 	.phone {
 		display: inline-block !important;
 		padding: 12px 24px !important;
 		font-size: 18px !important;
-		margin: 0 auto !important;
+		margin: 10px 0 !important;
 		width: auto !important;
 		max-width: 90% !important;
-		text-align: center !important;
 	}
 	
 	.atalogb {
 		display: inline-block !important;
 		padding: 12px 24px !important;
 		font-size: 16px !important;
-		margin: 0 auto !important;
+		margin: 10px 0 !important;
 		width: auto !important;
 		max-width: 90% !important;
-		text-align: center !important;
 	}
 	
 	.sliderform {
 		width: 100% !important;
-		max-width: 100% !important;
 		padding: 15px 10px !important;
-		text-align: center !important;
-		margin: 0 auto !important;
-		display: flex !important;
-		flex-direction: column !important;
-		align-items: center !important;
-		justify-content: center !important;
-		box-sizing: border-box !important;
 	}
 	
 	.sliderform input[type="text"] {
@@ -671,13 +599,6 @@ margin: 20px 10px !important;
 		display: block !important;
 		font-size: 16px !important;
 		padding: 12px 15px !important;
-		text-align: center !important;
-	}
-	
-	.sliderform input[type="submit"] {
-		margin: 15px auto !important;
-		display: block !important;
-		text-align: center !important;
 	}
 	
 	/* Кнопка "Подробнее" */
@@ -899,454 +820,5 @@ margin: 20px 10px !important;
 	/* Улучшение скролла */
 	* {
 		-webkit-tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
-	}
-	
-	/* Оптимизация производительности на мобильных */
-	* {
-		-webkit-font-smoothing: antialiased !important;
-		-moz-osx-font-smoothing: grayscale !important;
-	}
-	
-	/* Улучшение контрастности для лучшей читаемости */
-	body {
-		-webkit-text-size-adjust: 100% !important;
-		text-size-adjust: 100% !important;
-	}
-	
-	/* Оптимизация заголовков */
-	h1, h2, h3, h4, h5, h6 {
-		word-wrap: break-word !important;
-		line-height: 1.3 !important;
-	}
-	
-	h1 {
-		font-size: 28px !important;
-		margin: 20px 0 15px !important;
-	}
-	
-	h2 {
-		font-size: 24px !important;
-		margin: 18px 0 12px !important;
-	}
-	
-	h3 {
-		font-size: 20px !important;
-		margin: 15px 0 10px !important;
-	}
-	
-	/* Оптимизация списков */
-	ul, ol {
-		padding-left: 20px !important;
-		margin: 15px 0 !important;
-	}
-	
-	li {
-		margin: 8px 0 !important;
-		line-height: 1.6 !important;
-	}
-	
-	/* Оптимизация контейнеров */
-	.generalw {
-		padding: 10px 5px !important;
-		max-width: 100% !important;
-		text-align: center !important;
-		display: flex !important;
-		flex-direction: column !important;
-		align-items: center !important;
-		justify-content: center !important;
-	}
-	
-	.shirina {
-		width: 100% !important;
-		max-width: 100% !important;
-		padding: 0 10px !important;
-		box-sizing: border-box !important;
-		text-align: center !important;
-		margin: 0 auto !important;
-		display: flex !important;
-		flex-direction: column !important;
-		align-items: center !important;
-		justify-content: center !important;
-	}
-	
-	/* Оптимизация хедера */
-	.relhead {
-		position: fixed !important;
-		top: 0 !important;
-		left: 0 !important;
-		right: 0 !important;
-		width: 100% !important;
-		z-index: 100 !important;
-		background: rgba(0, 0, 0, 0.95) !important;
-		backdrop-filter: blur(10px) !important;
-	}
-	
-	/* Оптимизация слайдера на главной */
-	.slider {
-		height: auto !important;
-		min-height: 500px !important;
-		max-height: 600px !important;
-	}
-	
-	.sliderslid {
-		height: 500px !important;
-		background-size: cover !important;
-		background-position: center center !important;
-	}
-	
-	/* Оптимизация каталога товаров */
-	.generalw {
-		display: flex !important;
-		flex-wrap: wrap !important;
-		justify-content: center !important;
-		gap: 15px !important;
-		padding: 15px 10px !important;
-	}
-	
-	.toverblock {
-		flex: 0 0 calc(100% - 20px) !important;
-		max-width: calc(100% - 20px) !important;
-		margin: 0 !important;
-	}
-	
-	/* Оптимизация страницы детали товара */
-	.detalinlines {
-		width: 100% !important;
-		max-width: 100% !important;
-		padding: 10px 5px !important;
-		box-sizing: border-box !important;
-	}
-	
-	/* Оптимизация футера */
-	.foterinline {
-		display: block !important;
-		width: 100% !important;
-		max-width: 100% !important;
-		margin: 15px 0 !important;
-		padding: 15px 10px !important;
-		box-sizing: border-box !important;
-	}
-	
-	/* Оптимизация контактной информации */
-	.contact-item {
-		width: 100% !important;
-		margin: 10px 0 !important;
-		padding: 15px !important;
-		box-sizing: border-box !important;
-	}
-	
-	.contact-item h3 {
-		font-size: 18px !important;
-		margin-bottom: 10px !important;
-	}
-	
-	.contact-item p {
-		font-size: 14px !important;
-		line-height: 1.6 !important;
-	}
-	
-	/* Оптимизация карт и iframe */
-	iframe, embed, object {
-		width: 100% !important;
-		max-width: 100% !important;
-		height: auto !important;
-		min-height: 250px !important;
-	}
-	
-	/* Оптимизация breadcrumbs */
-	.crumbsblock {
-		width: 100% !important;
-		padding: 10px 15px !important;
-		box-sizing: border-box !important;
-		overflow-x: auto !important;
-		-webkit-overflow-scrolling: touch !important;
-	}
-	
-	/* Улучшение доступности для touch-устройств */
-	a, button, input[type="button"], input[type="submit"] {
-		min-height: 44px !important;
-		min-width: 44px !important;
-		touch-action: manipulation !important;
-		-webkit-touch-callout: none !important;
-	}
-	
-	/* Оптимизация полей ввода для мобильных клавиатур */
-	input[type="tel"] {
-		-webkit-appearance: none !important;
-		appearance: none !important;
-	}
-	
-	input[type="email"] {
-		-webkit-appearance: none !important;
-		appearance: none !important;
-	}
-	
-	/* Улучшение видимости активных элементов */
-	a:active, button:active {
-		opacity: 0.8 !important;
-	}
-	
-	/* Оптимизация скролла для iOS */
-	body {
-		-webkit-overflow-scrolling: touch !important;
-	}
-	
-	/* Скрытие горизонтального скролла */
-	html, body {
-		overflow-x: hidden !important;
-		max-width: 100% !important;
-	}
-	
-	/* Оптимизация выпадающих списков */
-	select {
-		font-size: 16px !important;
-		padding: 12px 15px !important;
-		width: 100% !important;
-		max-width: 100% !important;
-		box-sizing: border-box !important;
-		-webkit-appearance: none !important;
-		appearance: none !important;
-		background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
-		background-repeat: no-repeat !important;
-		background-position: right 10px center !important;
-		background-size: 20px !important;
-		padding-right: 40px !important;
-	}
-	
-	/* Оптимизация модальных окон */
-	.plashesbgmodl {
-		position: fixed !important;
-		top: 0 !important;
-		left: 0 !important;
-		right: 0 !important;
-		bottom: 0 !important;
-		width: 100vw !important;
-		height: 100vh !important;
-		z-index: 9998 !important;
-	}
-	
-	.modalwindow {
-		position: fixed !important;
-		top: 50% !important;
-		left: 50% !important;
-		transform: translate(-50%, -50%) !important;
-		margin: 0 !important;
-		z-index: 9999 !important;
-		max-height: 90vh !important;
-		overflow-y: auto !important;
-		-webkit-overflow-scrolling: touch !important;
-	}
-	
-	/* Оптимизация секций */
-	section {
-		padding: 20px 10px !important;
-		box-sizing: border-box !important;
-		text-align: center !important;
-		display: flex !important;
-		flex-direction: column !important;
-		align-items: center !important;
-		justify-content: center !important;
-	}
-	
-	/* Оптимизация отступов */
-	main {
-		padding-top: 70px !important;
-	}
-	
-	/* Улучшение читаемости текста в описаниях */
-	.tovaropis, .product-description {
-		text-align: justify !important;
-		hyphens: auto !important;
-		-webkit-hyphens: auto !important;
-		-moz-hyphens: auto !important;
-	}
-	
-	/* Оптимизация ссылок */
-	a {
-		word-break: break-word !important;
-		color: #fe0000 !important;
-		text-decoration: none !important;
-	}
-	
-	a:active {
-		color: #cc0000 !important;
-	}
-	
-	/* Оптимизация кнопок для лучшей видимости */
-	.toverbuton, .product-buy-button, .phone, .atalogb {
-		box-shadow: 0 4px 12px rgba(254, 0, 0, 0.3) !important;
-		border: none !important;
-	}
-	
-	/* Оптимизация фильтров */
-	.filtersblock {
-		position: sticky !important;
-		top: 70px !important;
-		z-index: 50 !important;
-		background: #fff !important;
-		padding: 15px 10px !important;
-		margin-bottom: 15px !important;
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
-	}
-	
-	/* Оптимизация секции "О нас" */
-	.aboutblock {
-		margin: 20px auto !important;
-		padding: 20px 10px !important;
-		text-align: center !important;
-		display: flex !important;
-		flex-direction: column !important;
-		align-items: center !important;
-		justify-content: center !important;
-	}
-	
-	.abouttext {
-		position: static !important;
-		transform: none !important;
-		width: 100% !important;
-		max-width: 100% !important;
-		margin: 20px auto !important;
-		padding: 20px 15px !important;
-		box-sizing: border-box !important;
-		text-align: center !important;
-	}
-	
-	/* Оптимизация изображений в секциях */
-	.aboutblock img, .sssskartins {
-		width: 100% !important;
-		height: auto !important;
-		max-width: 100% !important;
-		object-fit: cover !important;
-	}
-	
-	/* Улучшение видимости разделителей */
-	hr {
-		margin: 20px 0 !important;
-		border: none !important;
-		border-top: 1px solid #e0e0e0 !important;
-	}
-	
-	/* Оптимизация мета-информации */
-	.meta-info, .product-meta {
-		font-size: 13px !important;
-		color: #666 !important;
-		line-height: 1.5 !important;
-	}
-	
-	/* Улучшение виджетов */
-	.widget, .sidebar {
-		width: 100% !important;
-		max-width: 100% !important;
-		margin: 20px 0 !important;
-		padding: 15px !important;
-		box-sizing: border-box !important;
-		text-align: center !important;
-	}
-	
-	/* Централизация формы консультации */
-	.consult-container {
-		text-align: center !important;
-		display: flex !important;
-		flex-direction: column !important;
-		align-items: center !important;
-		justify-content: center !important;
-		margin: 0 auto !important;
-	}
-	
-	.consult-form {
-		width: 100% !important;
-		max-width: 100% !important;
-		display: flex !important;
-		flex-direction: column !important;
-		align-items: center !important;
-		justify-content: center !important;
-		gap: 15px !important;
-	}
-	
-	.consult-form-control {
-		width: 100% !important;
-		max-width: 300px !important;
-		margin: 0 auto !important;
-		text-align: center !important;
-	}
-	
-	.consult-btn-wrapper {
-		width: 100% !important;
-		max-width: 300px !important;
-		margin: 0 auto !important;
-		text-align: center !important;
-	}
-	
-	.consult-btn {
-		width: 100% !important;
-		margin: 0 auto !important;
-		text-align: center !important;
-	}
-	
-	/* Централизация основных контейнеров (не все div) */
-	.main-container, .content-wrapper, .page-content {
-		text-align: center !important;
-	}
-	
-	/* Исключения для текста внутри контента - оставляем по левому краю */
-	.product-description, .tovaropis, .abouttext p, p {
-		text-align: left !important;
-	}
-	
-	/* Централизация заголовков (кроме заголовков внутри контента) */
-	h1, h2, h3, h4, h5, h6 {
-		text-align: center !important;
-		margin-left: auto !important;
-		margin-right: auto !important;
-	}
-	
-	/* Исключения для заголовков внутри описаний */
-	.product-description h1, .product-description h2, .product-description h3,
-	.tovaropis h1, .tovaropis h2, .tovaropis h3,
-	.abouttext h1, .abouttext h2, .abouttext h3 {
-		text-align: left !important;
-	}
-	
-	/* Централизация основных кнопок */
-	button:not(.menu-button):not(.closemodal),
-	input[type="button"]:not([class*="menu"]),
-	input[type="submit"]:not([class*="menu"]),
-	.toverbuton, .product-buy-button, .phone, .atalogb, .consult-btn {
-		margin-left: auto !important;
-		margin-right: auto !important;
-		display: block !important;
-	}
-	
-	/* Централизация футера */
-	footer, .foterinline {
-		text-align: center !important;
-	}
-	
-	footer h3, .foterinline h3 {
-		text-align: center !important;
-		margin: 0 auto !important;
-	}
-	
-	/* Централизация breadcrumbs */
-	.crumbsblock {
-		text-align: center !important;
-	}
-	
-	/* Централизация таблиц */
-	table {
-		margin: 0 auto !important;
-	}
-	
-	/* Централизация изображений */
-	img {
-		margin: 0 auto !important;
-		display: block !important;
-	}
-	
-	/* Централизация списков */
-	ul, ol {
-		margin: 0 auto !important;
-		text-align: left !important;
-		display: inline-block !important;
 	}
 }	
