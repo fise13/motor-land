@@ -24,12 +24,12 @@ if (hyst_test_id($_GET['id'])) {
 
 
 // SEO: Оптимизированные мета-теги для страницы товара с целевыми ключевыми запросами
-// Целевые запросы: "купить контрактный мотор Алматы", "привозные моторы Алматы", "двигатель бу Япония Алматы"
+// Целевые запросы: "купить контрактный мотор Алматы", "привозные моторы Алматы", "двигатель бу Малайзия Алматы"
 $product_name = htmlspecialchars($print['name'], ENT_QUOTES, 'UTF-8');
 $product_meta = htmlspecialchars($print['tmeta'], ENT_QUOTES, 'UTF-8');
-$SITE_TITLE = 'Купить Контрактный Мотор '.$product_name.' Алматы | Привозные Моторы Япония | Моторленд';
-$SITE_DESCRIPTION = 'Купить контрактный мотор '.$product_name.' в Алматы. Привозные моторы из Японии. '.$product_meta.'. Двигатель бу Япония Алматы с гарантией. Контрактные двигатели Казахстан. Быстрая доставка. Цена: '.($print['cash']!=0?$print['cash'].' KZT':'уточняйте').'.';
-$SITE_KEYWORDS = 'купить контрактный мотор '.mb_strtolower($product_name).' алматы, привозные моторы '.mb_strtolower($product_name).', двигатель бу япония алматы, контрактные двигатели казахстан, '.mb_strtolower($product_meta);
+$SITE_TITLE = 'Купить Контрактный Мотор '.$product_name.' Алматы | Привозные Моторы Малайзия | Моторленд';
+$SITE_DESCRIPTION = 'Купить контрактный мотор '.$product_name.' в Алматы. Привозные моторы из Малайзии. '.$product_meta.'. Двигатель бу Малайзия Алматы с гарантией. Контрактные двигатели Казахстан. Быстрая доставка. Цена: '.($print['cash']!=0?$print['cash'].' KZT':'уточняйте').'.';
+$SITE_KEYWORDS = 'купить контрактный мотор '.mb_strtolower($product_name).' алматы, привозные моторы '.mb_strtolower($product_name).', двигатель бу малайзия алматы, контрактные двигатели казахстан, '.mb_strtolower($product_meta);
 
 // SEO: Формируем URL для Open Graph изображения
 $product_image = get_farrimg($print['images'])[0];
@@ -67,13 +67,13 @@ $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : '
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "<?=$product_name;?>",
-  "description": "Купить контрактный мотор <?=$product_name;?> в Алматы. Привозные моторы из Японии. <?=htmlspecialchars(strip_tags($print['text'] ? $print['text'] : $print['stext']), ENT_QUOTES, 'UTF-8');?>",
+  "description": "Купить контрактный мотор <?=$product_name;?> в Алматы. Привозные моторы из Малайзии. <?=htmlspecialchars(strip_tags($print['text'] ? $print['text'] : $print['stext']), ENT_QUOTES, 'UTF-8');?>",
   "image": "<?=$product_image_url;?>",
   "brand": {
     "@type": "Brand",
     "name": "Motor Land"
   },
-  "category": "Контрактные двигатели и привозные моторы из Японии",
+  "category": "Контрактные двигатели и привозные моторы из Малайзии",
   "offers": {
     "@type": "Offer",
     "url": "https://motor-land.kz/detal?id=<?=$print['id'];?>",
@@ -153,7 +153,7 @@ $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : '
 					<link rel="preload" as="image" href="<?=get_farrimg($print['images'])[0];?>">
 					<div class="tovarimage">
 						<!-- SEO: Улучшенный alt-текст для изображения товара с целевыми ключевыми словами -->
-						<img src="<?=get_farrimg($print['images'])[0];?>" alt="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы из Японии';?>" title="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы';?>" itemprop="image" loading="eager" fetchpriority="high">
+						<img src="<?=get_farrimg($print['images'])[0];?>" alt="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы из Малайзии';?>" title="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы';?>" itemprop="image" loading="eager" fetchpriority="high">
 						<?php if ($print['sale'] != 'noting') { ?>
 						<div class="cationsale"><?=$print['sale'];?></div>
 						<?php } ?>
@@ -177,7 +177,7 @@ $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : '
 						</div>
 						<?php } ?>
 						<link itemprop="availability" href="https://schema.org/InStock" />
-						<button class="product-buy-button" data-nam="<?=$print['name'];?>">Купить</button>
+						<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="product-buy-button" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});"><?=get_simple_texts('index_slider_phone');?></a>
 					</div>
 					
 					<!-- Описание товара -->
@@ -187,9 +187,55 @@ $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : '
 					
 					<!-- SEO: Дополнительный SEO-текст с целевыми ключевыми запросами -->
 					<div class="product-seo-info">
-						<p><strong>Купить контрактный мотор <?=$product_name;?> в Алматы</strong> - это отличное решение для вашего автомобиля. Мы предлагаем <strong>привозные моторы из Японии</strong>, которые проходят тщательную проверку перед продажей.</p>
-						<p>Все наши <strong>контрактные двигатели Казахстан</strong> поставляются напрямую из Японии и имеют гарантию качества. Если вам нужен <strong>двигатель бу Япония Алматы</strong>, мы поможем подобрать оптимальный вариант.</p>
-						<p>Посмотрите также наш <a href="/catalog" class="product-link">полный каталог контрактных моторов</a> или <a href="/service" class="product-link">запишитесь на установку в наш автосервис</a>.</p>
+						<p><strong>Купить контрактный мотор <?=$product_name;?> в Алматы</strong> - это отличное решение для вашего автомобиля. Мы предлагаем <strong>привозные моторы из Малайзии</strong>, которые проходят тщательную проверку перед продажей.</p>
+						<p>Все наши <strong>контрактные двигатели Казахстан</strong> поставляются напрямую из Малайзии и имеют гарантию качества. Если вам нужен <strong>двигатель бу Малайзия Алматы</strong>, мы поможем подобрать оптимальный вариант.</p>
+						<?php
+						// SEO: Извлекаем марку и модель из названия товара для улучшения SEO
+						$product_lower = mb_strtolower($product_name);
+						$brands = ['toyota', 'honda', 'nissan', 'mazda', 'mitsubishi', 'subaru', 'suzuki'];
+						$models = ['camry', 'corolla', 'crv', 'accord', 'almera', 'forester', 'outback', 'impreza', 'legacy'];
+						$engines = ['1nz', '2az', '3s', 'k24a', 'qr25de', 'ej251'];
+						$found_brand = '';
+						$found_model = '';
+						$found_engine = '';
+						
+						foreach ($brands as $brand) {
+							if (strpos($product_lower, $brand) !== false) {
+								$found_brand = ucfirst($brand);
+								break;
+							}
+						}
+						
+						foreach ($models as $model) {
+							if (strpos($product_lower, $model) !== false) {
+								$found_model = ucfirst($model);
+								break;
+							}
+						}
+						
+						foreach ($engines as $engine) {
+							if (strpos($product_lower, $engine) !== false || strpos($product_lower, strtoupper($engine)) !== false) {
+								$found_engine = strtoupper($engine);
+								break;
+							}
+						}
+						
+						if ($found_brand || $found_model || $found_engine) {
+							echo '<p>';
+							if ($found_brand) {
+								echo 'Мы специализируемся на поставке <strong>контрактных двигателей ' . $found_brand . '</strong>';
+								if ($found_model) {
+									echo ' для модели <strong>' . $found_model . '</strong>';
+								}
+								echo '. ';
+							}
+							if ($found_engine) {
+								echo 'Если вам нужен <strong>двигатель ' . $found_engine . '</strong>, мы поможем подобрать оптимальный вариант. ';
+							}
+							echo 'Все <strong>контрактные двигатели</strong> проходят проверку и готовы к установке.</p>';
+						}
+						?>
+						<p>Посмотрите также наш <a href="/catalog" class="product-link">полный каталог контрактных моторов</a>, где представлены <strong>контрактные двигатели Toyota, Honda, Nissan</strong> и других марок, или <a href="/service" class="product-link">запишитесь на установку в наш автосервис</a>.</p>
 					</div>
 				</div>
 			</div>
