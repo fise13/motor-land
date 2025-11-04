@@ -363,8 +363,15 @@ text-align: center;
 position: relative;
 /* Performance: Оптимизация для LCP - убираем contain чтобы не обрезать выпадающие списки */
 /* contain: layout style paint; */
+/* Решение 15: Переопределяем contain из критического CSS */
+contain: none !important;
 /* Performance: Разрешаем overflow для выпадающих списков формы поиска */
-overflow: visible;
+overflow: visible !important;
+/* Решение 7: Убеждаемся что родительский элемент не создает новый stacking context */
+z-index: auto;
+/* Решение 16: Гарантируем что дочерние элементы не обрезаются */
+clip: auto !important;
+clip-path: none !important;
 }
 
 .sliderslid {
@@ -389,6 +396,8 @@ display: inline-block;
 z-index: 1;
 /* Performance: Разрешаем overflow для выпадающих списков */
 overflow: visible;
+/* Решение 8: Убеждаемся что не создаем новый stacking context который может мешать */
+isolation: auto;
 }
 
 .titlephon {
@@ -480,7 +489,14 @@ color: white;
   /* Performance: Увеличен z-index чтобы форма поиска была поверх всего контента */
   z-index: 1000;
   /* Performance: Разрешаем overflow для выпадающих списков */
-  overflow: visible;
+  overflow: visible !important;
+  /* Решение 9: Убеждаемся что форма не создает новый stacking context */
+  isolation: auto;
+  /* Решение 10: Убираем transform который может создавать новый stacking context */
+  transform: none;
+  /* Решение 14: Гарантируем что дочерние элементы могут выходить за границы */
+  clip: auto !important;
+  clip-path: none !important;
 }
 
 .btmmearrow {
@@ -550,16 +566,35 @@ max-height: 400px;
 overflow-y: auto;
 opacity: 0;
 pointer-events: none;
+/* Решение 1: Изоляция stacking context */
+isolation: isolate;
+/* Решение 2: Гарантия что элемент будет поверх всего */
+transform-style: preserve-3d;
 }
 
 /* Performance: Для dropdown внутри .sliderform используем fixed позиционирование через JS */
 .sliderform .ddwnblock {
-position: absolute; /* Будет переопределено через JS на fixed при открытии */
-z-index: 999999 !important; /* Максимальный z-index для dropdown в форме поиска */
+/* Будет установлено через JS на fixed, но оставляем absolute как fallback */
+position: absolute;
+z-index: 2147483647 !important; /* Максимальный z-index (максимальное значение для 32-битного int) */
+/* Решение 3: Изоляция stacking context */
+isolation: isolate !important;
+/* Решение 4: Гарантия что элемент будет поверх всего */
+transform-style: preserve-3d !important;
+/* Решение 5: Убеждаемся что элемент не обрезается */
+contain: none !important;
+/* Решение 11: Убираем любые ограничения по родителям */
+clip: auto !important;
+clip-path: none !important;
 }
 
 .sliderform .ddwnblock.open {
-z-index: 999999 !important; /* Гарантируем что открытый dropdown поверх всего */
+z-index: 2147483647 !important; /* Максимальный z-index для открытого dropdown */
+position: fixed !important; /* Гарантируем fixed позиционирование */
+/* Решение 12: Гарантируем что элемент видим и не обрезан */
+visibility: visible !important;
+opacity: 1 !important;
+pointer-events: auto !important;
 }
 
 .ddwnblock div {
@@ -581,8 +616,14 @@ transform: translateX(3px);
     transform: translateY(0) scaleY(1);
     display: block;
     /* Performance: Максимальный z-index для открытого dropdown чтобы он был поверх всего контента */
-    z-index: 999999 !important;
+    z-index: 2147483647 !important; /* Максимальное значение z-index */
     pointer-events: auto;
+    /* Решение 6: Гарантия что открытый dropdown поверх всего */
+    /* Для dropdown внутри .sliderform будет установлено position: fixed через JS */
+    isolation: isolate !important;
+    transform-style: preserve-3d !important;
+    /* Решение 13: Гарантируем видимость */
+    visibility: visible !important;
 }
 
 /* Анимация тряски для недоступных полей */

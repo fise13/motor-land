@@ -45,7 +45,7 @@ $(document).ready(function() {
 
 	/**
 	 * Функция: Закрытие выпадающего списка с анимацией
-	 * Описание: Плавно закрывает выпадающий список
+	 * Описание: Плавно закрывает выпадающий список и очищает обработчики
 	 * Параметры: dd - jQuery объект выпадающего списка
 	 * Возвращает: ничего
 	 */
@@ -54,11 +54,12 @@ $(document).ready(function() {
 			var meinputer = dd.closest('.meinputer');
 			var btn = meinputer.find('.btmmearrow');
 			
-			// Performance: Удаляем обработчики прокрутки при закрытии
-			if (dd.data('scroll-handler-added')) {
-				var handlerId = dd.data('handler-id') || 'default';
-				$(window).off('scroll.dropdown-' + handlerId + ' resize.dropdown-' + handlerId);
-				dd.data('scroll-handler-added', false);
+			// Удаляем обработчики скролла и ресайза если они были установлены
+			var scrollHandler = dd.data('scroll-handler');
+			if (scrollHandler) {
+				$(window).off('scroll', scrollHandler);
+				$(window).off('resize', scrollHandler);
+				dd.removeData('scroll-handler');
 			}
 			
 			dd.css({
@@ -74,13 +75,15 @@ $(document).ready(function() {
 				duration: 250,
 				easing: 'swing',
 				complete: function() {
-					// Performance: Восстанавливаем absolute позиционирование при закрытии
-					if ($(this).closest('.sliderform').length) {
+					// Восстанавливаем исходное позиционирование если это был fixed
+					if (dd.closest('.sliderform').length) {
 						$(this).css({
-							'position': 'absolute',
-							'width': '',
+							'position': '',
 							'top': '',
-							'left': ''
+							'left': '',
+							'width': '',
+							'isolation': '',
+							'transform-style': ''
 						});
 					}
 					$(this).css({
@@ -101,7 +104,7 @@ $(document).ready(function() {
 
 	/**
 	 * Функция: Открытие выпадающего списка с анимацией
-	 * Описание: Плавно открывает выпадающий список
+	 * Описание: Плавно открывает выпадающий список с гарантированным отображением поверх всего контента
 	 * Параметры: dd - jQuery объект выпадающего списка
 	 * Возвращает: ничего
 	 */
@@ -109,47 +112,47 @@ $(document).ready(function() {
 		var meinputer = dd.closest('.meinputer');
 		var btn = meinputer.find('.btmmearrow');
 		
-		// Performance: Переключаем на fixed позиционирование для гарантированного отображения поверх всего
+		// Решение 1: Для dropdown внутри .sliderform используем fixed позиционирование
 		if (dd.closest('.sliderform').length) {
 			// Получаем позицию родительского элемента относительно viewport
 			var meinputerOffset = meinputer.offset();
 			var meinputerWidth = meinputer.outerWidth();
-			
-			// Генерируем уникальный ID для обработчиков, если его нет
-			if (!dd[0].id) {
-				dd[0].id = 'dropdown-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-			}
+			var scrollTop = $(window).scrollTop();
+			var scrollLeft = $(window).scrollLeft();
 			
 			// Устанавливаем fixed позиционирование с правильными координатами
 			dd.css({
 				'position': 'fixed',
-				'top': (meinputerOffset.top + meinputer.outerHeight()) + 'px',
-				'left': meinputerOffset.left + 'px',
+				'top': (meinputerOffset.top + meinputer.outerHeight() - scrollTop) + 'px',
+				'left': (meinputerOffset.left - scrollLeft) + 'px',
 				'width': meinputerWidth + 'px',
-				'z-index': '999999',
+				'z-index': '2147483647', // Максимальный z-index
 				'display': 'block',
 				'opacity': 0,
-				'transform': 'translateY(-10px) scaleY(0.95)'
+				'transform': 'translateY(-10px) scaleY(0.95)',
+				'isolation': 'isolate',
+				'transform-style': 'preserve-3d'
 			});
 			
-			// Performance: Обработчик для обновления позиции при прокрутке/изменении размера окна
-			if (!dd.data('scroll-handler-added')) {
-				var handlerId = dd[0].id;
-				var updatePosition = function() {
-					if (dd.hasClass('open') && dd.is(':visible')) {
-						var meinputerOffset = meinputer.offset();
-						dd.css({
-							'top': (meinputerOffset.top + meinputer.outerHeight()) + 'px',
-							'left': meinputerOffset.left + 'px'
-						});
-					}
-				};
-				
-				$(window).on('scroll.dropdown-' + handlerId + ' resize.dropdown-' + handlerId, updatePosition);
-				dd.data('scroll-handler-added', true);
-				dd.data('handler-id', handlerId);
-			}
+			// Обновляем позицию при скролле (если нужно)
+			var updatePosition = function() {
+				var newOffset = meinputer.offset();
+				var newScrollTop = $(window).scrollTop();
+				var newScrollLeft = $(window).scrollLeft();
+				if (dd.hasClass('open')) {
+					dd.css({
+						'top': (newOffset.top + meinputer.outerHeight() - newScrollTop) + 'px',
+						'left': (newOffset.left - newScrollLeft) + 'px'
+					});
+				}
+			};
+			
+			// Сохраняем обработчик для последующего удаления
+			dd.data('scroll-handler', updatePosition);
+			$(window).on('scroll', updatePosition);
+			$(window).on('resize', updatePosition);
 		} else {
+			// Для других dropdown используем обычное позиционирование
 			dd.css({
 				'display': 'block',
 				'opacity': 0,
