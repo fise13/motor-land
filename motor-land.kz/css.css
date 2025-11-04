@@ -543,8 +543,8 @@ transition: max-height 0.35s ease;
 position: absolute;
 top: 38px;
 left: -1px;
-/* Performance: Увеличен z-index чтобы выпадающие списки были поверх всего контента */
-z-index: 10000;
+/* Performance: Максимальный z-index чтобы выпадающие списки были поверх всего контента */
+z-index: 999999;
 display: none;
 max-height: 400px;
 overflow-y: auto;
@@ -555,6 +555,11 @@ pointer-events: none;
 /* Performance: Для dropdown внутри .sliderform используем fixed позиционирование через JS */
 .sliderform .ddwnblock {
 position: absolute; /* Будет переопределено через JS на fixed при открытии */
+z-index: 999999 !important; /* Максимальный z-index для dropdown в форме поиска */
+}
+
+.sliderform .ddwnblock.open {
+z-index: 999999 !important; /* Гарантируем что открытый dropdown поверх всего */
 }
 
 .ddwnblock div {
@@ -575,8 +580,8 @@ transform: translateX(3px);
     opacity: 1;
     transform: translateY(0) scaleY(1);
     display: block;
-    /* Performance: Увеличен z-index для открытого dropdown чтобы он был поверх всего */
-    z-index: 10000;
+    /* Performance: Максимальный z-index для открытого dropdown чтобы он был поверх всего контента */
+    z-index: 999999 !important;
     pointer-events: auto;
 }
 
