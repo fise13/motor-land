@@ -471,7 +471,8 @@ color: white;
   border: 1px solid rgba(255,255,255,0.26);
   box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
   background-clip: padding-box;
-  z-index: 9999;
+  /* Performance: Увеличен z-index чтобы форма поиска была поверх всего контента */
+  z-index: 999999;
 }
 
 .btmmearrow {
@@ -498,7 +499,8 @@ margin: 5px;
 position: relative;
 height: 20px;
 vertical-align: top;
-z-index: 10000;
+/* Performance: Увеличен z-index чтобы поля формы были поверх всего контента */
+z-index: 999998;
 }
 
 /* Performance: Стили для поля ввода .madiv - кликабельное поле */
@@ -525,7 +527,8 @@ transition: max-height 0.35s ease;
 position: absolute;
 top: 38px;
 left: -1px;
-z-index: 99999;
+/* Performance: Увеличен z-index чтобы выпадающие списки были поверх всего контента */
+z-index: 9999999;
 display: none;
 max-height: 400px;
 overflow-y: scroll;
@@ -551,7 +554,8 @@ transform: translateX(3px);
     opacity: 1;
     transform: translateY(0) scaleY(1);
     display: block;
-    z-index: 99999;
+    /* Performance: Увеличен z-index для открытого dropdown чтобы он был поверх всего */
+    z-index: 9999999;
     pointer-events: auto;
 }
 
@@ -577,16 +581,19 @@ display: inline-block;
 width: 700px;
 height: 40px;
 position: relative;
-z-index: 10000;
+/* Performance: Увеличен z-index чтобы форма поиска была поверх всего контента */
+z-index: 999998;
 }
 
 /* Когда открыт выпадающий список, другие поля должны быть под ним */
 .maipttee:has(.ddwnblock.open) {
-	z-index: 99998;
+	/* Performance: Увеличен z-index когда открыт dropdown */
+	z-index: 999999;
 }
 
 .maipttee:has(.ddwnblock.open) .meinputer:not(:has(.ddwnblock.open)) {
-	z-index: 99997;
+	/* Performance: Увеличен z-index для неактивных полей когда открыт dropdown */
+	z-index: 999998;
 	pointer-events: none !important;
 	opacity: 0.3 !important;
 }
@@ -595,7 +602,8 @@ z-index: 10000;
 .maipttee.dropdown-open .meinputer:not(:has(.ddwnblock.open)) {
 	pointer-events: none !important;
 	opacity: 0.3 !important;
-	z-index: 99997 !important;
+	/* Performance: Увеличен z-index для неактивных полей */
+	z-index: 999998 !important;
 }
 
 .sliderform input[type="text"]{
