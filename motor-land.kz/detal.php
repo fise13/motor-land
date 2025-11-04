@@ -181,7 +181,7 @@ $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : '
 					</div>
 					
 					<!-- Accessibility: Кнопка покупки с ARIA атрибутами -->
-					<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="product-buy-button" role="button" aria-label="Купить товар <?=htmlspecialchars($product_name, ENT_QUOTES, 'UTF-8');?>" tabindex="0" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">Купить</a>
+					<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="product-buy-button" role="button" aria-label="Купить товар <?=htmlspecialchars($product_name, ENT_QUOTES, 'UTF-8');?>" tabindex="0" onclick="if(typeof gtag==='function'){gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});}">Купить</a>
 					
 					<!-- Описание товара -->
 					<div class="product-description" itemprop="description">
@@ -210,53 +210,78 @@ $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : '
 <?php include("hyst/fbody.php"); ?>
 
 <!-- JavaScript для обработки кнопки покупки -->
-<script>
-$(document).ready(function() {
-	// Performance: Унифицированный обработчик для кнопок покупки
-	// Обработчик клика на кнопку покупки (новая кнопка product-buy-button)
-	$(document).on('click', '.product-buy-button', function(e) {
-		// Если ссылка tel:, не открываем модал
-		if ($(this).attr('href') && $(this).attr('href').indexOf('tel:') === 0) {
-			return; // Позволяем стандартному поведению ссылки
+<!-- Performance: Ожидание загрузки jQuery для предотвращения ошибки "$ is not defined" -->
+<script defer>
+(function() {
+	function waitForJQuery(callback) {
+		if (typeof window.jQuery !== 'undefined' && typeof window.$ !== 'undefined') {
+			callback();
+		} else {
+			setTimeout(function() { waitForJQuery(callback); }, 50);
 		}
-		e.preventDefault();
-		var productName = $(this).closest('.product-info-wrapper').find('.product-title').text() || 
-		                  $(this).attr('data-nam') || 
-		                  $('#playpayidv').text();
-		if (productName) {
-			$('#playpayid').val(productName);
-			$('#playpayidv').text(productName);
-			if (typeof openModal === 'function') {
-				openModal();
-			} else {
-				$('.plashesbgmodl').addClass('show').show().attr('aria-hidden', 'false');
-				$('#zakazaty').addClass('show').show().attr('aria-hidden', 'false');
-			}
-		}
-	});
+	}
 	
-	// Обработчик клика на старую кнопку toverbuton (для обратной совместимости)
-	$(document).on('click', '.toverbuton', function(e) {
-		// Если ссылка tel:, не открываем модал
-		if ($(this).attr('href') && $(this).attr('href').indexOf('tel:') === 0) {
-			return; // Позволяем стандартному поведению ссылки
+	function initBuyButtons() {
+		var $ = window.jQuery || window.$;
+		if (!$) {
+			waitForJQuery(initBuyButtons);
+			return;
 		}
-		e.preventDefault();
-		var productName = $(this).closest('article').find('.tovertitle').text() || 
-		                  $(this).attr('data-nam') || 
-		                  $('#playpayidv').text();
-		if (productName) {
-			$('#playpayid').val(productName);
-			$('#playpayidv').text(productName);
-			if (typeof openModal === 'function') {
-				openModal();
-			} else {
-				$('.plashesbgmodl').addClass('show').show().attr('aria-hidden', 'false');
-				$('#zakazaty').addClass('show').show().attr('aria-hidden', 'false');
+		
+		// Performance: Унифицированный обработчик для кнопок покупки
+		// Обработчик клика на кнопку покупки (новая кнопка product-buy-button)
+		$(document).on('click', '.product-buy-button', function(e) {
+			// Если ссылка tel:, не открываем модал
+			if ($(this).attr('href') && $(this).attr('href').indexOf('tel:') === 0) {
+				return; // Позволяем стандартному поведению ссылки
 			}
-		}
-	});
-});
+			e.preventDefault();
+			var productName = $(this).closest('.product-info-wrapper').find('.product-title').text() || 
+			                  $(this).attr('data-nam') || 
+			                  $('#playpayidv').text();
+			if (productName) {
+				$('#playpayid').val(productName);
+				$('#playpayidv').text(productName);
+				if (typeof openModal === 'function') {
+					openModal();
+				} else {
+					$('.plashesbgmodl').addClass('show').show().attr('aria-hidden', 'false');
+					$('#zakazaty').addClass('show').show().attr('aria-hidden', 'false');
+				}
+			}
+		});
+		
+		// Обработчик клика на старую кнопку toverbuton (для обратной совместимости)
+		$(document).on('click', '.toverbuton', function(e) {
+			// Если ссылка tel:, не открываем модал
+			if ($(this).attr('href') && $(this).attr('href').indexOf('tel:') === 0) {
+				return; // Позволяем стандартному поведению ссылки
+			}
+			e.preventDefault();
+			var productName = $(this).closest('article').find('.tovertitle').text() || 
+			                  $(this).attr('data-nam') || 
+			                  $('#playpayidv').text();
+			if (productName) {
+				$('#playpayid').val(productName);
+				$('#playpayidv').text(productName);
+				if (typeof openModal === 'function') {
+					openModal();
+				} else {
+					$('.plashesbgmodl').addClass('show').show().attr('aria-hidden', 'false');
+					$('#zakazaty').addClass('show').show().attr('aria-hidden', 'false');
+				}
+			}
+		});
+	}
+	
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', function() {
+			waitForJQuery(initBuyButtons);
+		});
+	} else {
+		waitForJQuery(initBuyButtons);
+	}
+})();
 </script>
 
 </body>

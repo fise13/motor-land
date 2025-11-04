@@ -97,68 +97,88 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 		$slide_index = 0;
 		while($slide=$slider->fetch_array()):
 		?>
-		<!-- Performance: Preload первого изображения слайдера для ускорения LCP -->
+		<!-- Performance: Оптимизация LCP - первый слайд использует <img> вместо background-image -->
 		<?php if ($slide_index == 0): ?>
+		<!-- Performance: Preload первого изображения с высоким приоритетом для улучшения LCP -->
 		<link rel="preload" as="image" href="<?=$slide['image'];?>" fetchpriority="high">
+		<!-- Performance: Используем <img> для LCP элемента вместо background-image -->
+		<img src="<?=$slide['image'];?>" alt="Купить контрактный мотор Алматы - привозные моторы из Малайзии, контрактные двигатели Казахстан" class="sliderslid" loading="eager" fetchpriority="high" width="1920" height="600" decoding="async" style="object-fit:cover;width:100%;height:100%;position:absolute;top:0;left:0;display:block;">
+		<?php else: ?>
+		<!-- SEO: Alt-текст для остальных изображений слайдера -->
+		<div class="sliderslid" style="background-image: url(<?=$slide['image'];?>);" aria-label="Купить контрактный мотор Алматы - привозные моторы из Малайзии, контрактные двигатели Казахстан" loading="lazy"></div>
 		<?php endif; ?>
-		<!-- SEO: Alt-текст для изображений слайдера с целевыми ключевыми словами -->
-		<div class="sliderslid" style="background-image: url(<?=$slide['image'];?>);" aria-label="Купить контрактный мотор Алматы - привозные моторы из Малайзии, контрактные двигатели Казахстан"></div>
 		<?php
 		$slide_index++;
 		endwhile;
 		?>
 	</div>
-	<!-- Performance: Скрипт слайдера выполняется после загрузки DOM и jQuery (defer) -->
-	<script defer>
+	<!-- Performance: Скрипт слайдера выполняется после загрузки DOM и jQuery -->
+	<script>
 		/**
 		 * Функция: Автоматическая смена слайдов
 		 * Описание: Переключает слайды в главном слайдере каждые 3 секунды.
 		 * 			Находит текущий отображаемый слайд и плавно показывает следующий.
+		 * Performance: Ожидает загрузки jQuery перед использованием
 		 * Параметры: нет
 		 * Возвращает: ничего
 		 */
-		function initSlider() {
-			if (typeof jQuery === 'undefined') {
-				setTimeout(initSlider, 100);
-				return;
+		(function() {
+			function waitForJQuery(callback) {
+				if (typeof window.jQuery !== 'undefined' && typeof window.$ !== 'undefined') {
+					callback();
+				} else {
+					setTimeout(function() { waitForJQuery(callback); }, 50);
+				}
 			}
 			
-		function slider () {
-			var cil = $("#slidess").children('div').length - 1;
-			var cur = 0;
-			$("#slidess").children('div').each(function(index, element){	
-				if ($(element).css('display') == 'block') {
-				cur = index;
-				}	
-			});
+			function initSlider() {
+				var $ = window.jQuery || window.$;
+				if (!$) {
+					waitForJQuery(initSlider);
+					return;
+				}
+				
+				function slider() {
+					var cil = $("#slidess").children('div, img').length - 1;
+					var cur = 0;
+					$("#slidess").children('div, img').each(function(index, element){	
+						if ($(element).css('display') == 'block' || $(element).is(':visible')) {
+							cur = index;
+						}	
+					});
+					
+					if (cur >= cil) { cur = 0; } else { cur++; }
+					
+					$("#slidess").children('div, img').each(function(index, element){	
+						if ($(element).css('display') == 'block' || $(element).is(':visible')) { 
+							$(element).fadeOut(500); 
+						}
+						if (cur == index) {
+							$(element).fadeIn(500);
+						}	
+					});
+					
+					setTimeout(function() { slider(); }, 3000);
+				}
+				
+				setTimeout(function() { slider(); }, 3000);
+			}
 			
-			if (cur >= cil) { cur = 0; } else { cur++; }
-			
-			$("#slidess").children('div').each(function(index, element){	
-				if ($(element).css('display') == 'block') { $(element).fadeOut(500); }
-				if (cur == index) {
-				$(element).fadeIn(500);
-				}	
-			});
-			
-			setTimeout(function() { slider () }, 3000);
-		}
-		
-		setTimeout(function() { slider () }, 3000);
-		}
-		
-		if (document.readyState === 'loading') {
-			document.addEventListener('DOMContentLoaded', initSlider);
-		} else {
-			initSlider();
-		}
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', function() {
+					waitForJQuery(initSlider);
+				});
+			} else {
+				waitForJQuery(initSlider);
+			}
+		})();
 		</script>
 	<div class="slidercoun shirina">
 		<!-- Accessibility: Заголовок слайдера -->
 		<h2 class="titlephon" role="heading" aria-level="2"><?=get_simple_texts ('index_slider_title');?></h2>
 		<!-- Accessibility: Кнопки действий с ARIA атрибутами -->
 		<div class="sliderbtns" role="group" aria-label="Действия на главной странице">
-			<a href="tel:<?=get_simple_texts ('index_slider_phone');?>" class="phone" aria-label="Позвонить по телефону <?=get_simple_texts ('index_slider_phone');?>" role="button" tabindex="0" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});"><?=get_simple_texts ('index_slider_phone');?></a><br>
+			<a href="tel:<?=get_simple_texts ('index_slider_phone');?>" class="phone" aria-label="Позвонить по телефону <?=get_simple_texts ('index_slider_phone');?>" role="button" tabindex="0" onclick="if(typeof gtag==='function'){gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});}"><?=get_simple_texts ('index_slider_phone');?></a><br>
 			<a href="catalog.php" aria-label="Перейти в каталог товаров"><div class="atalogb" role="button" tabindex="0">Каталог</div></a>
 		</div>
 		<!-- Accessibility: Форма поиска с правильными labels -->
@@ -328,7 +348,7 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 				<span aria-label="Цена по запросу">Цена по запросу</span>
 				<?php } ?>
 			</div>
-			<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="toverbuton" role="button" aria-label="Купить товар <?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>" tabindex="0" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">Купить</a>
+			<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="toverbuton" role="button" aria-label="Купить товар <?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>" tabindex="0" onclick="if(typeof gtag==='function'){gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});}">Купить</a>
 			</article>
 			<?php
 			endwhile;
@@ -367,7 +387,7 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 				<span>Цена по запросу</span>
 				<?php } ?>
 			</div>
-			<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="toverbuton" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">Купить</a>
+			<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="toverbuton" role="button" aria-label="Купить товар <?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>" tabindex="0" onclick="if(typeof gtag==='function'){gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});}">Купить</a>
 			</article>
 			<?php
 			endwhile;
