@@ -494,6 +494,12 @@ border-radius: 0px 15px 15px 0px;
 cursor: pointer;
 }
 
+/* Performance: Унифицированные стили для всех кнопок dropdown в форме поиска */
+.sliderform .btmmearrow {
+background-color: white;
+border: 1px solid white;
+}
+
 .meinputer {
 display: inline-block;
 border-radius: 15px;
