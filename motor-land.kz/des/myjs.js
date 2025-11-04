@@ -46,11 +46,14 @@ $(document).ready(function() {
 	/**
 	 * Функция: Закрытие выпадающего списка с анимацией
 	 * Описание: Плавно закрывает выпадающий список
+	 * Accessibility: Обновляет ARIA атрибуты при закрытии
 	 * Параметры: dd - jQuery объект выпадающего списка
 	 * Возвращает: ничего
 	 */
 	function closeDropdown(dd) {
 		if (dd.hasClass('open')) {
+			var meinputer = dd.closest('.meinputer');
+			var btn = meinputer.find('.btmmearrow');
 			dd.css({
 				'transform': 'translateY(0) scaleY(1)',
 				'opacity': 1
@@ -75,6 +78,10 @@ $(document).ready(function() {
 						'opacity': ''
 					});
 					$('.maipttee').removeClass('dropdown-open');
+					// Accessibility: Обновляем ARIA атрибуты
+					meinputer.attr('aria-expanded', 'false');
+					btn.attr('aria-expanded', 'false');
+					dd.attr('aria-hidden', 'true');
 				}
 			});
 		}
@@ -83,10 +90,13 @@ $(document).ready(function() {
 	/**
 	 * Функция: Открытие выпадающего списка с анимацией
 	 * Описание: Плавно открывает выпадающий список
+	 * Accessibility: Обновляет ARIA атрибуты при открытии
 	 * Параметры: dd - jQuery объект выпадающего списка
 	 * Возвращает: ничего
 	 */
 	function openDropdown(dd) {
+		var meinputer = dd.closest('.meinputer');
+		var btn = meinputer.find('.btmmearrow');
 		dd.css({
 			'display': 'block',
 			'opacity': 0,
@@ -111,6 +121,10 @@ $(document).ready(function() {
 						'transform': 'translateY(0) scaleY(1)',
 						'opacity': 1
 					}).addClass('open');
+					// Accessibility: Обновляем ARIA атрибуты
+					meinputer.attr('aria-expanded', 'true');
+					btn.attr('aria-expanded', 'true');
+					dd.attr('aria-hidden', 'false');
 				}
 			});
 		}, 10);
@@ -121,12 +135,14 @@ $(document).ready(function() {
 	 * Описание: При клике на стрелку открывает/закрывает выпадающий список фильтров (Марка, Модель, Год).
 	 * 			Закрывает все остальные открытые списки и переключает состояние текущего.
 	 * 			Проверяет валидацию - нельзя открыть следующее поле без выбора предыдущего.
+	 * Accessibility: Обновляет ARIA атрибуты для screen readers
 	 * Параметры: нет (использует элемент, на который кликнули)
 	 * Возвращает: ничего
 	 */
 	$(document).on("click", ".btmmearrow, .madiv", function () {
 		var meinputer = $(this).closest('.meinputer');
 		var dd = meinputer.children('.ddwnblock');
+		var btn = meinputer.find('.btmmearrow');
 		
 		// Проверка валидации перед открытием
 		if (!dd.hasClass('open')) {
@@ -162,6 +178,10 @@ $(document).ready(function() {
 			// Разблокируем все поля при закрытии
 			$('.meinputer').css('pointer-events', '');
 			$('.meinputer').css('opacity', '1');
+			// Accessibility: Обновляем ARIA атрибуты
+			meinputer.attr('aria-expanded', 'false');
+			btn.attr('aria-expanded', 'false');
+			dd.attr('aria-hidden', 'true');
 		} else {
 			openDropdown(dd);
 			// Блокируем другие поля ввода когда открыт список
@@ -171,6 +191,10 @@ $(document).ready(function() {
 			});
 			// Добавляем класс для дополнительной блокировки через CSS
 			$('.maipttee').addClass('dropdown-open');
+			// Accessibility: Обновляем ARIA атрибуты
+			meinputer.attr('aria-expanded', 'true');
+			btn.attr('aria-expanded', 'true');
+			dd.attr('aria-hidden', 'false');
 		}
 	});
 
@@ -315,20 +339,24 @@ $(document).ready(function() {
 	 * Функция: Переключение вкладок "Каталог" и "Акции"
 	 * Описание: При клике на кнопку вкладки переключает отображение между каталогом товаров и акционными товарами.
 	 * 			Меняет активное состояние кнопок и плавно показывает/скрывает соответствующие блоки.
+	 * Accessibility: Обновляет ARIA атрибуты для screen readers
 	 * Параметры: нет (использует элемент, на который кликнули)
 	 * Возвращает: ничего
 	 */
 	$(document).on("click", ".actionbtms li", function () {
-		if ($(this).attr('data-typ') == 'ac') {
-			$('.actionbtms li:first-child').addClass('liacactive');
-			$('.actionbtms li:last-child').removeClass('liacactive');
-			$('#actionb').stop(true,true).fadeIn(200);
-			$('#goodsb').stop(true,true).fadeOut(200);
+		var $clicked = $(this);
+		var isCatalog = $clicked.attr('data-typ') == 'ac';
+		
+		if (isCatalog) {
+			$('.actionbtms li:first-child').addClass('liacactive').attr('aria-selected', 'true');
+			$('.actionbtms li:last-child').removeClass('liacactive').attr('aria-selected', 'false');
+			$('#actionb').stop(true,true).fadeIn(200).attr('aria-hidden', 'false');
+			$('#goodsb').stop(true,true).fadeOut(200).attr('aria-hidden', 'true');
 		} else {
-			$('.actionbtms li:first-child').removeClass('liacactive');
-			$('.actionbtms li:last-child').addClass('liacactive');
-			$('#goodsb').stop(true,true).fadeIn(200);
-			$('#actionb').stop(true,true).fadeOut(200);
+			$('.actionbtms li:first-child').removeClass('liacactive').attr('aria-selected', 'false');
+			$('.actionbtms li:last-child').addClass('liacactive').attr('aria-selected', 'true');
+			$('#goodsb').stop(true,true).fadeIn(200).attr('aria-hidden', 'false');
+			$('#actionb').stop(true,true).fadeOut(200).attr('aria-hidden', 'true');
 		}
 	});
 	
@@ -343,30 +371,51 @@ $(document).ready(function() {
 	const modal = document.getElementById('zakazaty');
 	const overlay = document.querySelector('.plashesbgmodl');
 	
+	// Accessibility: Функция открытия модального окна с обновлением ARIA
 	function openModal() {
 	  overlay.classList.add('show');
 	  modal.classList.add('show');
+	  overlay.setAttribute('aria-hidden', 'false');
+	  modal.setAttribute('aria-hidden', 'false');
+	  // Фокус на первом поле ввода
+	  const firstInput = modal.querySelector('input[type="text"], input[type="tel"]');
+	  if (firstInput) {
+		setTimeout(() => firstInput.focus(), 100);
+	  }
 	}
 	
+	// Accessibility: Функция закрытия модального окна с обновлением ARIA
 	function closeModal() {
 	  modal.classList.remove('show');
 	  overlay.classList.remove('show');
 	  modal.classList.add('hide');
 	  overlay.classList.add('hide');
+	  overlay.setAttribute('aria-hidden', 'true');
+	  modal.setAttribute('aria-hidden', 'true');
 	  setTimeout(() => {
 		modal.classList.remove('hide');
 		overlay.classList.remove('hide');
 	  }, 400); // ждать завершения анимации
 	}
 	
+	// Accessibility: Закрытие модального окна по ESC
+	document.addEventListener('keydown', function(e) {
+		if (e.key === 'Escape' && modal && modal.classList.contains('show')) {
+			closeModal();
+		}
+	});
+	
 	/**
 	 * Функция: Закрытие модального окна по кнопке
 	 * Описание: При клике на кнопку закрытия (крестик) закрывает модальное окно заказа.
+	 * Accessibility: Обновляет ARIA атрибуты для screen readers
 	 * Параметры: нет (использует элемент кнопки закрытия)
 	 * Возвращает: ничего
 	 */
 	$(document).on("click", ".closemodal", function () {
-    	$('.plashesbgmodl, #zakazaty').removeClass('show');
+		$('.plashesbgmodl, #zakazaty').removeClass('show');
+		$('.plashesbgmodl').attr('aria-hidden', 'true');
+		$('#zakazaty').attr('aria-hidden', 'true');
 	});
 	
 	/**
@@ -500,23 +549,19 @@ $(document).ready(function() {
 	});
 
 	/**
-	 * Плавные переходы между страницами
+	 * Performance: Плавные переходы между страницами (оптимизировано)
 	 * Перехватывает клики по внутренним ссылкам и делает плавный fade-out перед переходом
+	 * Оптимизировано: проверка выполняется быстрее, меньше DOM операций
 	 */
-	$(document).on('click', 'a[href]', function(e) {
+	$(document).on('click', 'a[href]:not(.no-transition)', function(e) {
 		var $link = $(this);
 		var href = $link.attr('href');
 		
-		// Пропускаем ссылки, которые не должны иметь анимацию
-		if (!$link.length || !href || 
-			$link.hasClass('no-transition') ||
+		// Быстрая проверка пропускаемых ссылок
+		if (!href || 
 			$link.attr('target') === '_blank' ||
-			$link.attr('download')) {
-			return;
-		}
-		
-		// Пропускаем внешние ссылки, якоря, javascript, mailto, tel
-		if (href.match(/^(https?:\/\/|mailto:|tel:|#|javascript:)/)) {
+			$link.attr('download') ||
+			href.match(/^(https?:\/\/|mailto:|tel:|#|javascript:)/)) {
 			return;
 		}
 		
@@ -524,14 +569,9 @@ $(document).ready(function() {
 		var currentPath = window.location.pathname.replace(/\/$/, '') || '/';
 		var targetPath = href.split('?')[0].split('#')[0].replace(/\/$/, '') || '/';
 		
-		// Если это та же страница (или якорь на той же странице), пропускаем
-		if (targetPath === currentPath || (href.indexOf('#') === 0)) {
+		// Если это та же страница, пропускаем
+		if (targetPath === currentPath) {
 			return;
-		}
-		
-		// Если ссылка начинается с /, это абсолютный путь
-		if (href.indexOf('/') === 0) {
-			targetPath = href.split('?')[0].split('#')[0];
 		}
 		
 		// Предотвращаем стандартный переход
@@ -542,11 +582,7 @@ $(document).ready(function() {
 		
 		// После окончания анимации переходим на новую страницу
 		setTimeout(function() {
-			if (href.indexOf('/') === 0) {
-				window.location.href = href;
-			} else {
-				window.location.href = href;
-			}
+			window.location.href = href;
 		}, 400); // Время должно совпадать с длительностью pageFadeOut
 	});
 

@@ -1,19 +1,27 @@
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-TV26F96Q');</script>
+<!-- Google Tag Manager - отложенная загрузка для улучшения FCP -->
+<script>
+  // Отложенная загрузка GTM после загрузки страницы
+  window.addEventListener('load', function() {
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TV26F96Q');
+  });
+</script>
 <!-- End Google Tag Manager -->
 
 <?php
 $INTERFACE_VERSION = 0.91;
 ?>
 <!-- Performance: Resource hints для ускорения загрузки внешних ресурсов -->
-<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
 <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
 <link rel="dns-prefetch" href="https://www.google-analytics.com">
+<!-- Performance: Preconnect для критических доменов -->
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
 
 <title><?=$SITE_TITLE;?></title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -34,7 +42,7 @@ $INTERFACE_VERSION = 0.91;
 <link rel="stylesheet" href="/hyst/visual/admin.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
 <link rel="stylesheet" href="/hyst/visual/admin_mob.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
 
-<!-- Performance: Основные стили -->
+<!-- Performance: Основные стили загружаем синхронно (критично для отображения) -->
 <link href="css.css?<?=$INTERFACE_VERSION;?>" rel="stylesheet" type="text/css" />
 <link href="tab.css?<?=$INTERFACE_VERSION;?>" rel="stylesheet" type="text/css" media="(min-width: 768px)" />
 <link href="mob.css?<?=$INTERFACE_VERSION;?>" rel="stylesheet" type="text/css" media="(max-width: 767px)" />
@@ -43,8 +51,8 @@ $INTERFACE_VERSION = 0.91;
 <noscript><link rel="stylesheet" href="des/fm.revealator.jquery.min.css"></noscript>
 
 <!-- Performance: JavaScript загружаем с defer для неблокирующей загрузки -->
-<!-- Важно: jQuery должен загрузиться первым, поэтому используем defer в правильном порядке -->
-<script src="/hyst/visual/jquery.js"></script>
+<!-- Важно: jQuery должен загрузиться первым, но используем defer для неблокирующей загрузки -->
+<script src="/hyst/visual/jquery.js" defer></script>
 <script src="/hyst/visual/jquery-ui.js" defer></script>
 <script src="/hyst/visual/main.js?<?=$INTERFACE_VERSION?>" defer></script>
 <script src="des/myjs.js?<?=$INTERFACE_VERSION;?>" defer></script>
@@ -83,11 +91,18 @@ if (count($_HYST_METAINCUDES) != 0) {
 }
 ?>
 
-<!-- Performance: Google Analytics загружаем асинхронно с низким приоритетом -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17661940869"></script>
+<!-- Performance: Google Analytics загружаем асинхронно с низким приоритетом (отложенная загрузка) -->
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'AW-17661940869');
+  // Отложенная загрузка Google Analytics для улучшения FCP
+  window.addEventListener('load', function() {
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17661940869';
+    document.head.appendChild(script);
+    
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-17661940869');
+  });
 </script>

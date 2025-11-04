@@ -55,6 +55,35 @@ table {
 border-collapse:collapse;
 }
 
+/* Accessibility: Скрытие элементов только для визуального отображения, но доступных для screen readers */
+.sr-only {
+	position: absolute !important;
+	width: 1px !important;
+	height: 1px !important;
+	padding: 0 !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	clip: rect(0, 0, 0, 0) !important;
+	white-space: nowrap !important;
+	border-width: 0 !important;
+}
+
+/* Accessibility: Skip link для быстрой навигации с клавиатуры */
+.skip-link {
+	position: absolute;
+	top: -40px;
+	left: 0;
+	background: #000;
+	color: #fff;
+	padding: 8px;
+	text-decoration: none;
+	z-index: 1000;
+}
+
+.skip-link:focus {
+	top: 0;
+}
+
 /* Performance: Оптимизация загрузки шрифтов - font-display: swap для предотвращения FOIT */
 @font-face {
 font-family: roboto;

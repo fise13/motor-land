@@ -153,7 +153,8 @@ $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : '
 					<link rel="preload" as="image" href="<?=get_farrimg($print['images'])[0];?>">
 					<div class="tovarimage">
 						<!-- SEO: Улучшенный alt-текст для изображения товара с целевыми ключевыми словами -->
-						<img src="<?=get_farrimg($print['images'])[0];?>" alt="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы из Малайзии';?>" title="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы';?>" itemprop="image" loading="eager" fetchpriority="high">
+						<!-- Performance: width и height для предотвращения CLS (Cumulative Layout Shift) -->
+						<img src="<?=get_farrimg($print['images'])[0];?>" alt="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы из Малайзии';?>" title="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы';?>" itemprop="image" loading="eager" fetchpriority="high" width="600" height="450" decoding="async">
 						<?php if ($print['sale'] != 'noting') { ?>
 						<div class="cationsale"><?=$print['sale'];?></div>
 						<?php } ?>
@@ -179,8 +180,8 @@ $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : '
 						<link itemprop="availability" href="https://schema.org/InStock" />
 					</div>
 					
-					<!-- Кнопка покупки -->
-					<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="product-buy-button" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">Купить</a>
+					<!-- Accessibility: Кнопка покупки с ARIA атрибутами -->
+					<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="product-buy-button" role="button" aria-label="Купить товар <?=htmlspecialchars($product_name, ENT_QUOTES, 'UTF-8');?>" tabindex="0" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">Купить</a>
 					
 					<!-- Описание товара -->
 					<div class="product-description" itemprop="description">
@@ -211,25 +212,48 @@ $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : '
 <!-- JavaScript для обработки кнопки покупки -->
 <script>
 $(document).ready(function() {
+	// Performance: Унифицированный обработчик для кнопок покупки
 	// Обработчик клика на кнопку покупки (новая кнопка product-buy-button)
-	$(document).on('click', '.product-buy-button', function() {
-		var productName = $(this).attr('data-nam');
+	$(document).on('click', '.product-buy-button', function(e) {
+		// Если ссылка tel:, не открываем модал
+		if ($(this).attr('href') && $(this).attr('href').indexOf('tel:') === 0) {
+			return; // Позволяем стандартному поведению ссылки
+		}
+		e.preventDefault();
+		var productName = $(this).closest('.product-info-wrapper').find('.product-title').text() || 
+		                  $(this).attr('data-nam') || 
+		                  $('#playpayidv').text();
 		if (productName) {
 			$('#playpayid').val(productName);
 			$('#playpayidv').text(productName);
-			$('.plashesbgmodl').addClass('show').show();
-			$('#zakazaty').addClass('show').show();
+			if (typeof openModal === 'function') {
+				openModal();
+			} else {
+				$('.plashesbgmodl').addClass('show').show().attr('aria-hidden', 'false');
+				$('#zakazaty').addClass('show').show().attr('aria-hidden', 'false');
+			}
 		}
 	});
 	
 	// Обработчик клика на старую кнопку toverbuton (для обратной совместимости)
-	$(document).on('click', '.toverbuton', function() {
-		var productName = $(this).attr('data-nam');
+	$(document).on('click', '.toverbuton', function(e) {
+		// Если ссылка tel:, не открываем модал
+		if ($(this).attr('href') && $(this).attr('href').indexOf('tel:') === 0) {
+			return; // Позволяем стандартному поведению ссылки
+		}
+		e.preventDefault();
+		var productName = $(this).closest('article').find('.tovertitle').text() || 
+		                  $(this).attr('data-nam') || 
+		                  $('#playpayidv').text();
 		if (productName) {
 			$('#playpayid').val(productName);
 			$('#playpayidv').text(productName);
-			$('.plashesbgmodl').addClass('show').show();
-			$('#zakazaty').addClass('show').show();
+			if (typeof openModal === 'function') {
+				openModal();
+			} else {
+				$('.plashesbgmodl').addClass('show').show().attr('aria-hidden', 'false');
+				$('#zakazaty').addClass('show').show().attr('aria-hidden', 'false');
+			}
 		}
 	});
 });

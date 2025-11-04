@@ -251,27 +251,28 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 			while($get = $tmps->fetch_array()):
 		?>
 		<!-- SEO: Семантический тег <article> для каждого товара в каталоге -->
-		<article class="toverblock" itemscope itemtype="https://schema.org/Product">
-			<a href="/detal?id=<?=$get['id'];?>" itemprop="url">
+		<!-- Accessibility: Карточка товара с полной поддержкой screen readers -->
+		<article class="toverblock" itemscope itemtype="https://schema.org/Product" role="article" aria-labelledby="product-title-<?=$get['id'];?>">
+			<a href="/detal?id=<?=$get['id'];?>" itemprop="url" aria-label="Подробнее о товаре <?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>">
 				<!-- SEO: Alt-текст для изображения товара с целевыми ключевыми словами -->
-				<div class="toverimg" style="background-image: url(<?=get_farrimg($get['images'])[0];?>);" loading="lazy" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии', ENT_QUOTES, 'UTF-8');?>" itemprop="image">
+				<div class="toverimg" style="background-image: url(<?=get_farrimg($get['images'])[0];?>);" loading="lazy" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии', ENT_QUOTES, 'UTF-8');?>" itemprop="image" role="img">
 			<?php if ($get['sale'] != 'noting') { ?>
-			<div class="cationsale"><?=$get['sale'];?></div>
+			<div class="cationsale" aria-label="Скидка: <?=htmlspecialchars($get['sale'], ENT_QUOTES, 'UTF-8');?>"><?=$get['sale'];?></div>
 			<?php } ?>
 			</div></a>
-			<h2 class="tovertitle" itemprop="name"><?=$get['name'];?></h2>
-			<div class="tovaropis" itemprop="description">
+			<h2 id="product-title-<?=$get['id'];?>" class="tovertitle" itemprop="name"><?=$get['name'];?></h2>
+			<div class="tovaropis" itemprop="description" aria-label="Описание товара">
 				<?=$get['stext'];?>
 			</div>
-			<div class="tovercena" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+			<div class="tovercena" itemprop="offers" itemscope itemtype="https://schema.org/Offer" aria-label="Цена товара">
 				<?php if ($get['cash'] != 0 && $get['cash'] != '0') { ?>
-				<span itemprop="price"><?=$get['cash'];?></span>
-				<span itemprop="priceCurrency" content="KZT"> KZT</span>
+				<span itemprop="price" aria-label="Цена"><?=$get['cash'];?></span>
+				<span itemprop="priceCurrency" content="KZT" aria-label="валюта"> KZT</span>
 				<?php } else { ?>
-				<span>Цена по запросу</span>
+				<span aria-label="Цена по запросу">Цена по запросу</span>
 				<?php } ?>
 			</div>
-			<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="toverbuton" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">Купить</a>
+			<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="toverbuton" role="button" aria-label="Купить товар <?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>" tabindex="0" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">Купить</a>
 		</article>
 		<?php
 			endwhile;

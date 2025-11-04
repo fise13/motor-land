@@ -11,6 +11,8 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 <html lang="ru">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Accessibility: Skip link для быстрой навигации с клавиатуры -->
+<a href="#main-content" class="skip-link">Перейти к основному содержимому</a>
 <?php include("hyst/head.php"); ?>
 <!-- SEO: Canonical URL для предотвращения дублей контента -->
 <link rel="canonical" href="https://motor-land.kz/"/>
@@ -85,7 +87,8 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 <?php include("des/head.php"); ?>
 
 <!-- SEO: Семантический тег <main> для основного контента страницы -->
-<main>
+<!-- Accessibility: Основной контент страницы с идентификатором для skip link -->
+<main id="main-content" role="main">
 <!-- SEO: Семантический тег <section> для секции слайдера -->
 <section class="slider" aria-label="Главный слайдер">
 	<div id="slidess">
@@ -96,7 +99,7 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 		?>
 		<!-- Performance: Preload первого изображения слайдера для ускорения LCP -->
 		<?php if ($slide_index == 0): ?>
-		<link rel="preload" as="image" href="<?=$slide['image'];?>">
+		<link rel="preload" as="image" href="<?=$slide['image'];?>" fetchpriority="high">
 		<?php endif; ?>
 		<!-- SEO: Alt-текст для изображений слайдера с целевыми ключевыми словами -->
 		<div class="sliderslid" style="background-image: url(<?=$slide['image'];?>);" aria-label="Купить контрактный мотор Алматы - привозные моторы из Малайзии, контрактные двигатели Казахстан"></div>
@@ -105,8 +108,8 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 		endwhile;
 		?>
 	</div>
-	<!-- Performance: Скрипт слайдера выполняется после загрузки DOM и jQuery -->
-	<script>
+	<!-- Performance: Скрипт слайдера выполняется после загрузки DOM и jQuery (defer) -->
+	<script defer>
 		/**
 		 * Функция: Автоматическая смена слайдов
 		 * Описание: Переключает слайды в главном слайдере каждые 3 секунды.
@@ -151,10 +154,17 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 		}
 		</script>
 	<div class="slidercoun shirina">
-					
-		<div class="titlephon"><?=get_simple_texts ('index_slider_title');?></div>
-		<div class="sliderbtns"><a href="tel:<?=get_simple_texts ('index_slider_phone');?>" class="phone" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});"><?=get_simple_texts ('index_slider_phone');?></a><br><a href="catalog.php"><div class="atalogb">Каталог</div></a></div>
-		<div class="sliderform">что ищем?
+		<!-- Accessibility: Заголовок слайдера -->
+		<h2 class="titlephon" role="heading" aria-level="2"><?=get_simple_texts ('index_slider_title');?></h2>
+		<!-- Accessibility: Кнопки действий с ARIA атрибутами -->
+		<div class="sliderbtns" role="group" aria-label="Действия на главной странице">
+			<a href="tel:<?=get_simple_texts ('index_slider_phone');?>" class="phone" aria-label="Позвонить по телефону <?=get_simple_texts ('index_slider_phone');?>" role="button" tabindex="0" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});"><?=get_simple_texts ('index_slider_phone');?></a><br>
+			<a href="catalog.php" aria-label="Перейти в каталог товаров"><div class="atalogb" role="button" tabindex="0">Каталог</div></a>
+		</div>
+		<!-- Accessibility: Форма поиска с правильными labels -->
+		<div class="sliderform" role="search" aria-label="Поиск товаров по параметрам">
+			<label for="search-form" class="sr-only">Поиск товаров</label>
+			<span id="search-form-label">что ищем?</span>
 		
 		
 		<!---
@@ -171,14 +181,17 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 		<input type="submit" name="sear" value=" ">
 		</form>--->
 			
-		<form method="get" action="catalog.php">
+		<form method="get" action="catalog.php" aria-labelledby="search-form-label">
 			<!--<input type="text" name="setxt" class="searchbloinput" placeholder="Что вы хотели найти.."><br>--->
 		
-			<div class="maipttee">
-				<div class="meinputer"><div class="madiv" data-val="Марка">Марка</div>
-					<input type="hidden" name="mk">
-					<div class="btmmearrow">&#9660;</div>
-					<div class="ddwnblock">
+			<div class="maipttee" role="group" aria-label="Фильтры поиска">
+				<!-- Accessibility: Поле выбора марки -->
+				<div class="meinputer" role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-controls="mark-listbox">
+					<label for="mark-input" class="sr-only">Выберите марку автомобиля</label>
+					<div class="madiv" id="mark-input" data-val="Марка" role="textbox" aria-label="Марка автомобиля" tabindex="0" aria-readonly="true">Марка</div>
+					<input type="hidden" name="mk" id="mark-hidden" aria-hidden="true">
+					<button type="button" class="btmmearrow" aria-label="Открыть список марок" aria-expanded="false" tabindex="0">&#9660;</button>
+					<div class="ddwnblock" id="mark-listbox" role="listbox" aria-label="Список марок автомобилей" aria-hidden="true">
 						<?php
 						$parent_id = 'noting';
 						$stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_category WHERE idp = ? ORDER BY name ASC");
@@ -188,7 +201,7 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 						if ($sql->num_rows != 0) {
 							while($get = $sql->fetch_array()):
 							?>
-							<div data-id="<?=$get['id'];?>"><?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?></div>
+							<div data-id="<?=$get['id'];?>" role="option" tabindex="0" aria-label="Марка <?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>"><?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?></div>
 							<?php
 							endwhile;
 						}
@@ -197,41 +210,48 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 					</div>
 				</div>
 				
-				<div class="meinputer"><div class="madiv" data-val="Модель">Модель</div>
-					<input type="hidden" name="ml">
-					<div class="btmmearrow">&#9660;</div>
-					<div class="ddwnblock" id="modellist"></div>
+				<!-- Accessibility: Поле выбора модели -->
+				<div class="meinputer" role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-controls="model-listbox" aria-disabled="true">
+					<label for="model-input" class="sr-only">Выберите модель автомобиля</label>
+					<div class="madiv" id="model-input" data-val="Модель" role="textbox" aria-label="Модель автомобиля" tabindex="0" aria-readonly="true">Модель</div>
+					<input type="hidden" name="ml" id="model-hidden" aria-hidden="true">
+					<button type="button" class="btmmearrow" aria-label="Открыть список моделей" aria-expanded="false" tabindex="0">&#9660;</button>
+					<div class="ddwnblock" id="modellist" role="listbox" aria-label="Список моделей автомобилей" aria-hidden="true"></div>
 				</div>
 				
-				<div class="meinputer"><div class="madiv" data-val="Год">Год</div>
-					<input type="hidden" name="yr">
-					<div class="btmmearrow">&#9660;</div>
-					<div class="ddwnblock" id="yearlist" style="overflow-y: scroll;"></div>
+				<!-- Accessibility: Поле выбора года -->
+				<div class="meinputer" role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-controls="year-listbox" aria-disabled="true">
+					<label for="year-input" class="sr-only">Выберите год выпуска автомобиля</label>
+					<div class="madiv" id="year-input" data-val="Год" role="textbox" aria-label="Год выпуска автомобиля" tabindex="0" aria-readonly="true">Год</div>
+					<input type="hidden" name="yr" id="year-hidden" aria-hidden="true">
+					<button type="button" class="btmmearrow" aria-label="Открыть список годов" aria-expanded="false" tabindex="0">&#9660;</button>
+					<div class="ddwnblock" id="yearlist" role="listbox" aria-label="Список годов выпуска" aria-hidden="true" style="overflow-y: scroll;"></div>
 				</div>
 			</div>
-			<input type="submit" name="sear" value=" ">
+			<button type="submit" name="sear" aria-label="Найти товары по выбранным параметрам" class="sr-only">Найти</button>
 		</form>
 		</div>
 	</div>
 </section>
 
 <!-- SEO: Семантический тег <section> для формы консультации -->
-<section class="generalw forsbgf consult-section" aria-label="Форма консультации">
+<!-- Accessibility: Форма консультации с полной поддержкой screen readers -->
+<section class="generalw forsbgf consult-section" aria-labelledby="consult-title" role="region">
 	<div class="shirina forsliderform JF_parent_form consult-container">
-		<h2 class="consult-title">Хотите получить бесплатную консультацию?</h2>
-		<div class="consult-subtitle">заполните форму</div>
-		<form method="post" class="consult-form">
+		<h2 id="consult-title" class="consult-title">Хотите получить бесплатную консультацию?</h2>
+		<div class="consult-subtitle" id="consult-subtitle">заполните форму</div>
+		<form method="post" class="consult-form" aria-labelledby="consult-title" aria-describedby="consult-subtitle" novalidate>
 			<div class="form-control consult-form-control">
-				<label for="consult-name">Имя</label>
-				<input type="text" name="name" id="consult-name" class="consult-input consult-name" placeholder="Имя" required>
+				<label for="consult-name">Имя <span aria-label="обязательное поле">*</span></label>
+				<input type="text" name="name" id="consult-name" class="consult-input consult-name" placeholder="Имя" required aria-required="true" autocomplete="name">
 			</div>
 			<div class="form-control consult-form-control">
-				<label for="consult-phone">Телефон</label>
-				<input type="text" name="phon" id="consult-phone" class="consult-input consult-phone" placeholder="Телефон" required>
+				<label for="consult-phone">Телефон <span aria-label="обязательное поле">*</span></label>
+				<input type="tel" name="phon" id="consult-phone" class="consult-input consult-phone" placeholder="Телефон" required aria-required="true" autocomplete="tel">
 			</div>
 			<div class="consult-btn-wrapper">
-				<input type="hidden" name="send_one" value="send">
-				<button type="button" name="JF_send_casual" class="consult-btn"><span>Отправить</span></button>
+				<input type="hidden" name="send_one" value="send" aria-hidden="true">
+				<button type="button" name="JF_send_casual" class="consult-btn" aria-label="Отправить форму обратной связи"><span>Отправить</span></button>
 			</div>
 		</form>
 	</div>
@@ -264,9 +284,10 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 <!-- SEO: Семантический тег <section> для каталога товаров -->
 <section class="generalw frayalpfhon" aria-labelledby="catalog-title">
 	<div class="shirina">
-		<ul class="actionbtms" role="tablist">
-			<li class="liacactive" data-typ="ac" role="tab">Каталог</li>
-			<li data-typ="ca" role="tab">Акции</li>
+		<!-- Accessibility: Вкладки с ARIA атрибутами -->
+		<ul class="actionbtms" role="tablist" aria-label="Переключение между каталогом и акциями">
+			<li class="liacactive" data-typ="ac" role="tab" aria-selected="true" aria-controls="actionb" id="tab-catalog" tabindex="0">Каталог</li>
+			<li data-typ="ca" role="tab" aria-selected="false" aria-controls="goodsb" id="tab-sales" tabindex="-1">Акции</li>
 		</ul>
 	</div>
 </section>
@@ -275,7 +296,8 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 	<div class="shirina">
 		<br>
 		<!-- SEO: Семантический тег <article> для каждого товара -->
-		<div id="actionb">
+		<!-- Accessibility: Контейнер каталога с ARIA атрибутами -->
+		<div id="actionb" role="tabpanel" aria-labelledby="tab-catalog">
 			<?php
 			$limit = 4;
 			$stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_tovari ORDER BY prio ASC LIMIT ?");
@@ -284,28 +306,29 @@ $SITE_KEYWORDS = 'купить контрактный мотор Алматы, �
 			$tmp = $stmt->get_result();
 			while($get = $tmp->fetch_array()):
 			?>
-			<article class="toverblock" itemscope itemtype="https://schema.org/Product">
+			<!-- Accessibility: Карточка товара с полной поддержкой screen readers -->
+			<article class="toverblock" itemscope itemtype="https://schema.org/Product" role="article" aria-labelledby="home-product-title-<?=$get['id'];?>">
 			<!-- SEO: Внутренняя ссылка на товар -->
-			<a href="/detal?id=<?=$get['id'];?>" itemprop="url">
+			<a href="/detal?id=<?=$get['id'];?>" itemprop="url" aria-label="Подробнее о товаре <?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>">
 				<!-- SEO: Alt-текст для изображения товара с целевыми ключевыми словами -->
-				<div class="toverimg" style="background-image: url(<?=get_farrimg($get['images'])[0];?>);" loading="lazy" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии', ENT_QUOTES, 'UTF-8');?>" itemprop="image">
+				<div class="toverimg" style="background-image: url(<?=get_farrimg($get['images'])[0];?>);" loading="lazy" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии', ENT_QUOTES, 'UTF-8');?>" itemprop="image" role="img"></div>
 			<?php if ($get['sale'] != 'noting') { ?>
-			<div class="cationsale"><?=$get['sale'];?></div>
+			<div class="cationsale" aria-label="Скидка: <?=htmlspecialchars($get['sale'], ENT_QUOTES, 'UTF-8');?>"><?=$get['sale'];?></div>
 			<?php } ?>
-			</div></a>
-			<h3 class="tovertitle" itemprop="name"><?=$get['name'];?></h3>
-			<div class="tovaropis" itemprop="description">
+			</a>
+			<h3 id="home-product-title-<?=$get['id'];?>" class="tovertitle" itemprop="name"><?=$get['name'];?></h3>
+			<div class="tovaropis" itemprop="description" aria-label="Описание товара">
 				<?=$get['stext'];?>
 			</div>
-			<div class="tovercena" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+			<div class="tovercena" itemprop="offers" itemscope itemtype="https://schema.org/Offer" aria-label="Цена товара">
 				<?php if ($get['cash'] != 0 && $get['cash'] != '0') { ?>
-				<span itemprop="price"><?=$get['cash'];?></span>
-				<span itemprop="priceCurrency" content="KZT"> KZT</span>
+				<span itemprop="price" aria-label="Цена"><?=$get['cash'];?></span>
+				<span itemprop="priceCurrency" content="KZT" aria-label="валюта"> KZT</span>
 				<?php } else { ?>
-				<span>Цена по запросу</span>
+				<span aria-label="Цена по запросу">Цена по запросу</span>
 				<?php } ?>
 			</div>
-			<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="toverbuton" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">Купить</a>
+			<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="toverbuton" role="button" aria-label="Купить товар <?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>" tabindex="0" onclick="gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});">Купить</a>
 			</article>
 			<?php
 			endwhile;

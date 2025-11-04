@@ -1,5 +1,17 @@
 Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
 
+# Performance: Оптимизация TTFB через кэширование заголовков
+<IfModule mod_headers.c>
+    # Кэширование HTML для уменьшения TTFB
+    <FilesMatch "\.(html|htm|php)$">
+        Header set Cache-Control "max-age=3600, public, must-revalidate"
+        Header set Vary "Accept-Encoding"
+    </FilesMatch>
+    # Улучшение производительности через раннее установление соединения
+    Header always set Connection "keep-alive"
+    Header always set Keep-Alive "timeout=5, max=1000"
+</IfModule>
+
 # SEO: Включаем модуль перезаписи URL
 RewriteEngine On
 RewriteBase /
@@ -30,6 +42,10 @@ RewriteRule ^(.+)\.php$ $1 [R=301,L]
     AddOutputFilterByType DEFLATE image/svg+xml
     # Включаем сжатие для шрифтов
     AddOutputFilterByType DEFLATE application/x-font-ttf application/x-font-opentype font/opentype font/ttf font/eot font/otf
+    # Включаем сжатие для PHP
+    AddOutputFilterByType DEFLATE application/x-httpd-php
+    # Включаем сжатие для всех текстовых типов
+    AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css application/xml application/xhtml+xml application/rss+xml application/javascript application/x-javascript
 </IfModule>
 
 # Performance: Улучшенное кэширование статических ресурсов
