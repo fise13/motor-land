@@ -379,11 +379,13 @@ position: relative;
 contain: none !important;
 /* Performance: Разрешаем overflow для выпадающих списков формы поиска */
 overflow: visible !important;
-/* Создаем stacking context выше секции консультации (100), чтобы форма поиска и dropdown были поверх */
+/* z-index слайдера должен быть ниже формы поиска (10001), чтобы форма могла быть поверх секции консультации */
 z-index: 200;
 /* Решение 16: Гарантируем что дочерние элементы не обрезаются */
 clip: auto !important;
 clip-path: none !important;
+/* Не создаем новый stacking context, чтобы форма поиска могла выйти за пределы слайдера */
+isolation: auto;
 }
 
 .sliderslid {
@@ -506,12 +508,12 @@ color: white;
   border: 1px solid rgba(255,255,255,0.26);
   box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
   background-clip: padding-box;
-  /* Performance: Увеличен z-index чтобы форма поиска была поверх всего контента, включая меню */
-  z-index: 10001;
+  /* Performance: Увеличен z-index чтобы форма поиска была поверх всего контента, включая меню и секцию консультации */
+  z-index: 10001 !important;
+  /* Создаем новый stacking context для формы, чтобы она была поверх секции консультации */
+  isolation: isolate;
   /* Performance: Разрешаем overflow для выпадающих списков */
   overflow: visible !important;
-  /* Решение 9: Убеждаемся что форма не создает новый stacking context */
-  isolation: auto;
   /* Решение 14: Гарантируем что дочерние элементы могут выходить за границы */
   clip: auto !important;
   clip-path: none !important;
@@ -768,9 +770,9 @@ background-image: url(./img/forbg.png);
 background-size: cover;
 background-position: center center;
 border-bottom: solid 1px #9a9a9a;
-/* Правильный stacking context: секция должна быть поверх формы поиска при скролле, но ниже dropdown (5000) */
+/* Правильный stacking context: секция должна быть ниже формы поиска и её выпадающих списков */
 position: relative;
-z-index: 100; /* Достаточно высокий, чтобы быть поверх формы поиска, но ниже dropdown (5000) */
+z-index: 100; /* Ниже формы поиска (10001) и выпадающих списков (10003) */
 }
 
 .forsliderform {
