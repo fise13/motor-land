@@ -5,12 +5,12 @@
 	}
 
 	.logo {
-		width: 90px !important;
-		height: 90px !important;
-		margin-left: -45px !important;
+		width: 120px !important;
+		height: 80px !important;
+		margin-left: -60px !important;
 		left: 50% !important;
 		position: absolute !important;
-		top: -10px !important;
+		top: -5px !important;
 		z-index: 201 !important;
 		background-image: url(./img/logo.jpg) !important;
 		background-size: contain !important;
@@ -19,9 +19,9 @@
 		display: block !important;
 		visibility: visible !important;
 		opacity: 1 !important;
-		border-radius: 50% !important;
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
-		transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+		border-radius: 0 !important;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+		transition: transform 0.3s ease !important;
 	}
 	
 	.logo:active {
@@ -277,95 +277,84 @@ width: 260px !important;
 }
 
 
-/* Стили для кнопки для head.php */
+/* Стили для кнопки меню в стиле uiverse.io */
 .modilebtn {
     position: fixed !important;
-    top: 20px !important;
+    top: 15px !important;
     right: 15px !important;
     left: auto !important;
-    width: 44px !important;
-    height: 44px !important;
+    width: 50px !important;
+    height: 50px !important;
     display: flex !important;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 0;
-    background: rgba(255, 255, 255, 0.15) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    gap: 6px;
+    background: transparent !important;
+    border: none !important;
     cursor: pointer;
-    /* z-index мобильного меню выше формы поиска, но ниже модальных окон */
     z-index: 201 !important;
     padding: 0;
-    border-radius: 12px !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition: all 0.3s ease !important;
 }
 
 .modilebtn:hover {
-    background: rgba(255, 255, 255, 0.25) !important;
-    transform: scale(1.08) !important;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
-    border-color: rgba(255, 255, 255, 0.3) !important;
+    transform: scale(1.05) !important;
 }
 
 .modilebtn:active {
     transform: scale(0.95) !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
 }
 
 .modilebtn span {
     display: block !important;
-    width: 24px !important;
+    width: 28px !important;
     height: 3px !important;
-    background-color: #ffffff !important;
-    border-radius: 2px !important;
-    transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-    transform-origin: center center;
+    background: linear-gradient(90deg, #fff 0%, #fff 100%) !important;
+    border-radius: 3px !important;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+    transform-origin: center;
     position: relative;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3) !important;
 }
 
 .modilebtn span:nth-child(1) {
     transform: translateY(0) rotate(0deg);
-    margin-bottom: 5.5px;
 }
 
 .modilebtn span:nth-child(2) {
     transform: translateY(0) scaleX(1);
     opacity: 1;
-    margin-bottom: 5.5px;
 }
 
 .modilebtn span:nth-child(3) {
     transform: translateY(0) rotate(0deg);
-    margin-bottom: 0;
 }
 
-/* Новая анимация - плавное превращение в крестик */
-.modilebtn.active {
-    background: rgba(255, 255, 255, 0.25) !important;
-    border-color: rgba(255, 255, 255, 0.4) !important;
-}
-
+/* Анимация превращения в крестик */
 .modilebtn.active span:nth-child(1) {
-    transform: translateY(9px) rotate(135deg) !important;
-    margin: 0;
-    width: 24px !important;
+    transform: translateY(9px) rotate(45deg) !important;
+    background: linear-gradient(90deg, #ff0000 0%, #ff4444 100%) !important;
 }
 
 .modilebtn.active span:nth-child(2) {
     opacity: 0 !important;
-    transform: scaleX(0) translateY(0) !important;
-    margin: 0;
-    width: 0;
+    transform: scaleX(0) !important;
+    width: 0 !important;
 }
 
 .modilebtn.active span:nth-child(3) {
-    transform: translateY(-9px) rotate(45deg) !important;
-    margin: 0;
-    width: 24px !important;
+    transform: translateY(-9px) rotate(-45deg) !important;
+    background: linear-gradient(90deg, #ff0000 0%, #ff4444 100%) !important;
+}
+
+/* Дополнительный эффект для активной кнопки */
+.modilebtn.active {
+    transform: rotate(180deg) !important;
+}
+
+.modilebtn.active:hover {
+    transform: rotate(180deg) scale(1.05) !important;
 }
 
 .filtersblock input[type="text"] {
@@ -449,9 +438,13 @@ margin: 20px 10px !important;
 		visibility: visible !important;
 		opacity: 1 !important;
 		position: fixed !important;
-		top: 20px !important;
+		top: 15px !important;
 		right: 15px !important;
+		width: 50px !important;
+		height: 50px !important;
 		z-index: 201 !important;
+		background: transparent !important;
+		border: none !important;
 	}
 
 	.menu a:nth-child(3) li, .menu a:nth-child(4) li {
