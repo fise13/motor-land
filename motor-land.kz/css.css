@@ -506,8 +506,8 @@ color: white;
   border: 1px solid rgba(255,255,255,0.26);
   box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
   background-clip: padding-box;
-  /* Performance: Увеличен z-index чтобы форма поиска была поверх всего контента */
-  z-index: 1000;
+  /* Performance: Увеличен z-index чтобы форма поиска была поверх всего контента, включая меню */
+  z-index: 10001;
   /* Performance: Разрешаем overflow для выпадающих списков */
   overflow: visible !important;
   /* Решение 9: Убеждаемся что форма не создает новый stacking context */
@@ -554,8 +554,8 @@ margin: 5px;
 position: relative;
 height: 20px;
 vertical-align: top;
-/* Performance: Увеличен z-index чтобы поля формы были поверх всего контента */
-z-index: 1002;
+  /* Performance: Увеличен z-index чтобы поля формы были поверх всего контента, включая меню */
+  z-index: 10002;
 /* Performance: Разрешаем overflow для выпадающих списков */
 overflow: visible;
 /* Гарантируем что элементы внутри кликабельны */
@@ -586,8 +586,8 @@ transition: max-height 0.35s ease;
 position: absolute;
 top: 38px;
 left: -1px;
-/* Правильный z-index: выше формы поиска (1000), но не перекрывает секции ниже */
-z-index: 1010;
+  /* z-index выше всего, чтобы выпадающие списки были поверх всех элементов */
+  z-index: 10003;
 display: none;
 max-height: 400px;
 overflow-y: auto;
@@ -600,8 +600,8 @@ isolation: auto;
 /* Dropdown внутри .sliderform - используем absolute позиционирование */
 .sliderform .ddwnblock {
 position: absolute;
-/* z-index выше формы поиска (1000), но в том же stacking context что и слайдер (200) */
-z-index: 1001;
+/* z-index выше всего, чтобы выпадающие списки были поверх всех элементов */
+z-index: 10003;
 /* Не создаем новый stacking context, остаемся в контексте слайдера */
 isolation: auto;
 /* Убеждаемся что элемент не обрезается родителями */
@@ -611,8 +611,8 @@ clip-path: none !important;
 }
 
 .sliderform .ddwnblock.open {
-/* z-index выше формы поиска (1000), в stacking context слайдера (200) который выше секции (100) */
-z-index: 1001 !important;
+/* z-index выше всего, чтобы открытые выпадающие списки были поверх всех элементов */
+z-index: 10003 !important;
 /* Используем absolute позиционирование в контексте формы */
 position: absolute !important;
 /* Не создаем новый stacking context */
@@ -642,8 +642,8 @@ transform: translateX(3px);
     opacity: 1;
     transform: translateY(0) scaleY(1);
     display: block !important;
-    /* z-index выше формы поиска, но специфичный для .sliderform .ddwnblock */
-    z-index: 1001;
+    /* z-index выше всего, чтобы открытые выпадающие списки были поверх всех элементов */
+    z-index: 10003;
     pointer-events: auto !important;
     /* Не создаем новый stacking context, остаемся в контексте слайдера */
     isolation: auto;

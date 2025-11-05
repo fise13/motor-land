@@ -85,6 +85,22 @@
 				overlay.attr('aria-hidden', 'true');
 			});
 			
+			// Закрытие меню при клике на ссылку в меню
+			$(document).on('click', '.menu a', function() {
+				var menu = $('.menu');
+				var btn = $('.modilebtn');
+				var overlay = $('.menu-overlay');
+				
+				// Небольшая задержка для плавного закрытия
+				setTimeout(function() {
+					menu.removeClass('open');
+					btn.removeClass('active');
+					overlay.removeClass('active');
+					btn.attr('aria-expanded', 'false');
+					overlay.attr('aria-hidden', 'true');
+				}, 100);
+			});
+			
 			// Accessibility: Закрытие меню по ESC
 			$(document).on('keydown', function(e) {
 				if (e.key === 'Escape' && $('.menu').hasClass('open')) {

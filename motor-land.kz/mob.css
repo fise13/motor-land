@@ -238,12 +238,14 @@ width: 260px !important;
     flex-direction: column !important;
     text-align: left !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    pointer-events: none !important;
 }
 
 /* Когда меню открыто - выпадает из кнопки */
 .menu.open {
     transform: scale(1) translateY(0) !important;
     opacity: 1;
+    pointer-events: auto !important;
 }
 
 /* Фоновое затемнение при открытом меню */
@@ -375,9 +377,15 @@ margin: 20px 10px !important;
 		transition: background-color 0.2s ease !important;
 		color: #ffffff !important;
 		font-size: 15px !important;
+		pointer-events: auto !important;
+		cursor: pointer !important;
 	}
 	
 	.menu li:hover {
+		background-color: rgba(255, 255, 255, 0.08) !important;
+	}
+	
+	.menu a:hover li {
 		background-color: rgba(255, 255, 255, 0.08) !important;
 	}
 	
@@ -388,6 +396,9 @@ margin: 20px 10px !important;
 	.menu a {
 		width: 100% !important;
 		display: block !important;
+		pointer-events: auto !important;
+		cursor: pointer !important;
+		text-decoration: none !important;
 	}
 	
 	.menu a:nth-child(3) li,
@@ -479,8 +490,24 @@ margin: 20px 10px !important;
 	}
 
 	.sliderform {
-	text-align: center;
-bottom: 10px;
+		text-align: center !important;
+		bottom: 10px !important;
+		z-index: 10001 !important;
+		position: relative !important;
+	}
+	
+	.sliderform .meinputer {
+		z-index: 10002 !important;
+		position: relative !important;
+	}
+	
+	.sliderform .ddwnblock {
+		z-index: 10003 !important;
+		position: absolute !important;
+	}
+	
+	.sliderform .ddwnblock.open {
+		z-index: 10003 !important;
 	}
 
 	.aboutblock {
