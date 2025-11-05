@@ -493,17 +493,14 @@ margin: 20px 10px !important;
 		text-align: center !important;
 		bottom: 10px !important;
 		z-index: 10001 !important;
-		position: relative !important;
 	}
 	
 	.sliderform .meinputer {
 		z-index: 10002 !important;
-		position: relative !important;
 	}
 	
 	.sliderform .ddwnblock {
 		z-index: 10003 !important;
-		position: absolute !important;
 	}
 	
 	.sliderform .ddwnblock.open {
