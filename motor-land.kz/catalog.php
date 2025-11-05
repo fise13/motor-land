@@ -248,10 +248,6 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		$tmps = $stmt->get_result();
 		
 		if ($tmps->num_rows != 0) { 
-		?>
-		<!-- Контейнер для товаров с улучшенной сеткой -->
-		<div class="catalog-products-grid">
-		<?php
 			while($get = $tmps->fetch_array()):
 		?>
 		<!-- SEO: Семантический тег <article> для каждого товара в каталоге -->
@@ -283,17 +279,6 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		</article>
 		<?php
 			endwhile;
-		?>
-		</div>
-		<!-- Конец контейнера товаров -->
-		<?php
-		} else {
-		?>
-		<!-- Сообщение, если товары не найдены -->
-		<div class="catalog-empty">
-			<p class="catalog-empty-text">Товары не найдены. Попробуйте изменить параметры поиска.</p>
-		</div>
-		<?php
 		}
 		if (isset($stmt)) {
 			$stmt->close();

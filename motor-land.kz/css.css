@@ -1135,65 +1135,28 @@ border-radius: 0px 15px 15px 0px;
 background-color: #fe0000;
 }
 
-/* Контейнер для товаров с улучшенной сеткой */
-.catalog-products-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-	gap: 30px;
-	padding: 20px 0;
-	margin: 0 auto;
-	max-width: 1200px;
-}
-
-@media (max-width: 768px) {
-	.catalog-products-grid {
-		grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-		gap: 20px;
-		padding: 15px 10px;
-	}
-}
-
 .toverblock {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  width: 100%;
-  max-width: 100%;
-  border-radius: 16px;
-  background-color: #ffffff;
+  display: inline-block;
+  margin: 15px;
+  width: 250px;
+  border-radius: 12px;
+  background-color: #efefef;
   min-height: 540px;
   vertical-align: top;
-  gap: 0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid #e9ecef;
-  overflow: hidden;
-  position: relative;
-}
-
-.toverblock:hover {
-	transform: translateY(-8px);
-	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-	border-color: #fe0000;
+  gap: 15px;
 }
 
 .toverimg {
-	width: 100%;
-	height: 280px;
-	border-radius: 0;
-	border: none;
-	background-size: cover;
-	border-top-left-radius: 16px;
-	border-top-right-radius: 16px;
-	background-position: center center;
-	display: block;
-	position: relative;
-	overflow: hidden;
-	transition: transform 0.4s ease;
-}
-
-.toverblock:hover .toverimg {
-	transform: scale(1.05);
+width: 248px;
+height: 248px;
+border-radius: 12px;
+border: solid 1px black;
+background-size: cover;
+border-top-left-radius: 12px;
+border-top-right-radius: 12px;
+background-position: center center;
+display: block;
+position: relative;
 }
 
 /* Animations: keyframes and helpers (no visual restyle) */
@@ -1234,54 +1197,33 @@ background-color: #fe0000;
 
 
 .cationsale {
-	background: linear-gradient(135deg, #fe0000 0%, #cc0000 100%);
-	color: white;
-	position: absolute;
-	top: 15px;
-	right: 15px;
-	padding: 8px 16px;
-	font-size: 14px;
-	font-weight: 700;
-	border-radius: 20px;
-	box-shadow: 0 4px 12px rgba(254, 0, 0, 0.4);
-	z-index: 10;
-	text-transform: uppercase;
-	letter-spacing: 0.5px;
+background-color: #fe0000;
+color: white;
+position: absolute;
+bottom: 10px;
+right: 0px;
+padding: 10px 20px;
+font-size: 16px;
 }
 
 .tovertitle {
-	font-size: 20px;
-	font-weight: 600;
-	color: #2c2c2c;
-	text-align: left;
-	padding: 20px 20px 10px;
-	margin: 0px;
-	line-height: 1.4;
-	transition: color 0.3s ease;
-}
-
-.toverblock:hover .tovertitle {
-	color: #fe0000;
+font-size: 18px;
+color: #fe0000;
+text-align: left;
+padding: 15px 10px;
+margin: 0px;
 }
 
 .tovaropis {
-	padding: 0 20px 15px;
-	text-align: left;
-	min-height: 80px;
-	color: #666;
-	font-size: 14px;
-	line-height: 1.6;
-	flex: 1;
+padding: 10px;
+text-align: left;
+min-height: 80px;
 }
 
 .tovercena {
-	font-size: 24px;
-	font-weight: 700;
-	color: #fe0000;
-	padding: 15px 20px;
-	text-align: left;
-	border-top: 1px solid #f0f0f0;
-	margin-top: auto;
+font-size: 18px;
+color: #fe0000;
+padding: 15px 10px;
 }
 
 .tovercenaca {
@@ -1291,37 +1233,23 @@ padding: 15px 10px;
 }
 
 .toverbuton {
-	text-transform: uppercase;
-	color: white;
-	font-size: 16px;
-	font-weight: 600;
-	padding: 14px 24px;
-	background: linear-gradient(135deg, #fe0000 0%, #cc0000 100%);
-	display: block;
-	cursor: pointer;
-	border-radius: 0 0 16px 16px;
-	box-shadow: 0 2px 8px rgba(254, 0, 0, 0.3);
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-	text-decoration: none;
-	-webkit-tap-highlight-color: transparent;
-	outline: none;
-	text-align: center;
-	margin: 0;
-	width: 100%;
+  text-transform: uppercase;
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  background-color: #2c2c2c;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: none;
+  transition: none;
+  text-decoration: none; /* убрать подчёркивание у ссылки */
+  -webkit-tap-highlight-color: transparent; /* убрать подсветку на iOS/Android */
+  outline: none;
 }
 
-/* улучшенный эффект при наведении */
-.toverbuton:hover {
-	background: linear-gradient(135deg, #ff0000 0%, #dd0000 100%);
-	box-shadow: 0 4px 16px rgba(254, 0, 0, 0.4);
-	transform: translateY(-2px);
-	text-decoration: none;
-}
-
-.toverbuton:active {
-	transform: translateY(0);
-	box-shadow: 0 2px 8px rgba(254, 0, 0, 0.3);
-}
+/* небольшой эффект при наведении */
+.toverbuton:hover { background-color: #2c2c2c; box-shadow: none; transform: none; text-decoration: none; }
 
 /* Гарантируем отсутствие подчёркивания и одинаковый цвет для всех состояний ссылки */
 a.toverbuton:link { color: white; text-decoration: none; }
@@ -2241,20 +2169,11 @@ text-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
 transform: scale(1.05);
 }
 
-/* Улучшенные стили для каталога */
 .filtersblock {
-	text-align: center;
-	padding: 30px 20px;
-	background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-	border-radius: 16px;
-	border: 1px solid #e9ecef;
-	margin: 20px 10px 40px;
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-	transition: box-shadow 0.3s ease;
-}
-
-.filtersblock:hover {
-	box-shadow: 0 6px 30px rgba(0, 0, 0, 0.12);
+text-align: center;
+padding: 15px;
+border-bottom: solid 1px #404554;
+margin: 10px;
 }
 
 .filtersblock input[type="text"]{
@@ -2270,55 +2189,28 @@ margin: 10px 20px 0 0;
 }
 
 .filtersblock input[type="submit"]{
-	background: linear-gradient(135deg, #fe0000 0%, #cc0000 100%) url(./img/sertch.png) no-repeat;
-	background-size: 24px 24px, cover;
-	background-position: center center;
-	width: 60px;
-	height: 60px;
-	border: none;
-	cursor: pointer;
-	border-radius: 12px;
-	transition: all 0.3s ease;
-	box-shadow: 0 2px 8px rgba(254, 0, 0, 0.3);
+background: transparent url(./img/sertch.png) no-repeat;
+background-size: contain;
+background-position: center center;
+width: 60px;
+height: 60px;
+border: none;
+cursor: pointer;
 }
 
-.filtersblock input[type="submit"]:hover {
-	background: linear-gradient(135deg, #ff0000 0%, #dd0000 100%) url(./img/sertch.png) no-repeat;
-	background-size: 24px 24px, cover;
-	background-position: center center;
-	box-shadow: 0 4px 12px rgba(254, 0, 0, 0.4);
-	transform: translateY(-2px);
-}
-
-.filtersblock input[type="submit"]:active {
-	background: linear-gradient(135deg, #cc0000 0%, #aa0000 100%) url(./img/sertchh.png) no-repeat;
-	background-size: 24px 24px, cover;
-	background-position: center center;
-	transform: translateY(0);
-	box-shadow: 0 2px 8px rgba(254, 0, 0, 0.3);
+.filtersblock input[type="submit"]:active{
+background: transparent url(./img/sertchh.png) no-repeat;
+background-size: contain;
+background-position: center center;
 }
 
 .crumbsblock {
-	text-align: left;
-	color: #666;
-	font-size: 14px;
-	padding: 15px 0;
+text-align: left;
+color: #ff0000;
 }
 
 .crumbsblock a {
-	color: #fe0000;
-	text-decoration: none;
-	transition: color 0.3s ease;
-	font-weight: 500;
-}
-
-.crumbsblock a:hover {
-	color: #cc0000;
-	text-decoration: underline;
-}
-
-.crumbsblock span:not(:has(a)) {
-	color: #666;
+color: #ff0000;
 }
 
 /* Старые стили для обратной совместимости */
@@ -2785,39 +2677,7 @@ border-radius: 0px 15px 15px 0px;
 }
 
 .actionpereklact {
-	background: linear-gradient(135deg, #fe0000 0%, #cc0000 100%);
-	color: white !important;
-	box-shadow: 0 2px 8px rgba(254, 0, 0, 0.3);
-}
-
-.actionperekl li {
-	transition: all 0.3s ease;
-}
-
-.actionperekl li:hover {
-	background-color: #f0f0f0;
-}
-
-.actionpereklact:hover {
-	background: linear-gradient(135deg, #ff0000 0%, #dd0000 100%);
-	box-shadow: 0 4px 12px rgba(254, 0, 0, 0.4);
-}
-
-/* Сообщение о пустом каталоге */
-.catalog-empty {
-	text-align: center;
-	padding: 60px 20px;
-	margin: 40px 0;
-	background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-	border-radius: 16px;
-	border: 1px solid #e9ecef;
-}
-
-.catalog-empty-text {
-	font-size: 18px;
-	color: #666;
-	margin: 0;
-	line-height: 1.6;
+background-color: #505050;
 }
 
 .new_buttons {
