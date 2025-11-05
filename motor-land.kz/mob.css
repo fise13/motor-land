@@ -1,24 +1,31 @@
 @media screen and (max-width: 660px), only screen and (max-device-width : 660px) {
 	/* Отступ для body, чтобы контент не перекрывал фиксированный header */
 	body {
-		padding-top: 60px !important;
+		padding-top: 70px !important;
 	}
 
 	.logo {
-	width: 100px !important;
-	height: 100px !important;
-	margin-left: -50px !important;
-	left: 50% !important;
-	position: absolute !important;
-	top: -15px !important;
+		width: 90px !important;
+		height: 90px !important;
+		margin-left: -45px !important;
+		left: 50% !important;
+		position: absolute !important;
+		top: -10px !important;
 		z-index: 201 !important;
-	background-image: url(./img/logo.jpg) !important;
-	background-size: contain !important;
-	background-position: center top !important;
-	background-repeat: no-repeat !important;
+		background-image: url(./img/logo.jpg) !important;
+		background-size: contain !important;
+		background-position: center center !important;
+		background-repeat: no-repeat !important;
 		display: block !important;
 		visibility: visible !important;
 		opacity: 1 !important;
+		border-radius: 50% !important;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+		transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+	}
+	
+	.logo:active {
+		transform: scale(0.95) !important;
 	}
 	
 	.logo-video {
@@ -273,47 +280,51 @@ width: 260px !important;
 /* Стили для кнопки для head.php */
 .modilebtn {
     position: fixed !important;
-    top: 18px !important;
-    right: 18px !important;
+    top: 20px !important;
+    right: 15px !important;
     left: auto !important;
-    width: 40px;
-    height: 40px;
+    width: 44px !important;
+    height: 44px !important;
     display: flex !important;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 0;
-    background: rgba(0, 0, 0, 0.9);
-    border: none;
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
     cursor: pointer;
     /* z-index мобильного меню выше формы поиска, но ниже модальных окон */
-    z-index: 200;
+    z-index: 201 !important;
     padding: 0;
-    border-radius: 6px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    transition: all 0.25s ease;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .modilebtn:hover {
-    background: rgba(0, 0, 0, 1);
-    transform: scale(1.05);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.25) !important;
+    transform: scale(1.08) !important;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
 }
 
 .modilebtn:active {
-    transform: scale(0.95);
+    transform: scale(0.95) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
 }
 
 .modilebtn span {
     display: block !important;
-    width: 22px;
-    height: 2.5px;
-    background-color: #fff;
-    border-radius: 2px;
-    transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 24px !important;
+    height: 3px !important;
+    background-color: #ffffff !important;
+    border-radius: 2px !important;
+    transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
     transform-origin: center center;
     position: relative;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
 }
 
 .modilebtn span:nth-child(1) {
@@ -334,13 +345,14 @@ width: 260px !important;
 
 /* Новая анимация - плавное превращение в крестик */
 .modilebtn.active {
-    background: rgba(0, 0, 0, 1);
+    background: rgba(255, 255, 255, 0.25) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
 }
 
 .modilebtn.active span:nth-child(1) {
-    transform: translateY(8px) rotate(135deg) !important;
+    transform: translateY(9px) rotate(135deg) !important;
     margin: 0;
-    width: 22px;
+    width: 24px !important;
 }
 
 .modilebtn.active span:nth-child(2) {
@@ -351,9 +363,9 @@ width: 260px !important;
 }
 
 .modilebtn.active span:nth-child(3) {
-    transform: translateY(-8px) rotate(45deg) !important;
+    transform: translateY(-9px) rotate(45deg) !important;
     margin: 0;
-    width: 22px;
+    width: 24px !important;
 }
 
 .filtersblock input[type="text"] {
@@ -394,10 +406,11 @@ margin: 20px 10px !important;
 		display: block !important;
 		width: 100% !important;
 		position: relative !important;
-		background-color: #000000 !important;
-		border-bottom: solid 1px #9a9a9a !important;
+		background: linear-gradient(180deg, #1a1a1a 0%, #000000 100%) !important;
+		border-bottom: solid 2px rgba(255, 255, 255, 0.1) !important;
 		z-index: 100 !important;
-		min-height: 60px !important;
+		min-height: 70px !important;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
 	}
 	
 	.headercon.mobilefix {
@@ -410,23 +423,35 @@ margin: 20px 10px !important;
 		display: block !important;
 		visibility: visible !important;
 		opacity: 1 !important;
-		background-color: #000000 !important;
-		min-height: 60px !important;
+		background: linear-gradient(180deg, #1a1a1a 0%, #000000 100%) !important;
+		min-height: 70px !important;
 		height: auto !important;
+		backdrop-filter: blur(10px) !important;
+		-webkit-backdrop-filter: blur(10px) !important;
+		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3) !important;
 	}
 
 	.relhead {
-	height: 60px !important;
-		min-height: 60px !important;
+		height: 70px !important;
+		min-height: 70px !important;
 		width: 100% !important;
-		display: block !important;
+		max-width: 100% !important;
+		display: flex !important;
+		align-items: center !important;
+		justify-content: center !important;
 		position: relative !important;
+		padding: 0 15px !important;
+		box-sizing: border-box !important;
 	}
 	
 	.modilebtn {
-	display: block !important;
+		display: flex !important;
 		visibility: visible !important;
 		opacity: 1 !important;
+		position: fixed !important;
+		top: 20px !important;
+		right: 15px !important;
+		z-index: 201 !important;
 	}
 
 	.menu a:nth-child(3) li, .menu a:nth-child(4) li {
