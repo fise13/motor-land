@@ -290,22 +290,23 @@ width: 260px !important;
     justify-content: center;
     align-items: center;
     gap: 6px;
-    background: rgba(0, 0, 0, 0.6) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    border-radius: 8px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 10px !important;
     cursor: pointer;
     z-index: 201 !important;
     padding: 0;
     transition: all 0.3s ease !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
 }
 
 .modilebtn:hover {
     transform: scale(1.05) !important;
-    background: rgba(0, 0, 0, 0.8) !important;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5) !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
 }
 
 .modilebtn:active {
@@ -315,13 +316,14 @@ width: 260px !important;
 .modilebtn span {
     display: block !important;
     width: 28px !important;
-    height: 3.5px !important;
+    height: 4px !important;
     background: #ffffff !important;
-    border-radius: 3px !important;
+    border-radius: 4px !important;
     transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
     transform-origin: center;
     position: relative;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 2px rgba(255, 255, 255, 0.8) !important;
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.6)) !important;
 }
 
 .modilebtn span:nth-child(1) {
@@ -340,7 +342,9 @@ width: 260px !important;
 /* Анимация превращения в крестик */
 .modilebtn.active span:nth-child(1) {
     transform: translateY(9px) rotate(45deg) !important;
-    background: linear-gradient(90deg, #ff0000 0%, #ff4444 100%) !important;
+    background: #ff0000 !important;
+    box-shadow: 0 2px 8px rgba(255, 0, 0, 0.6), 0 0 4px rgba(255, 0, 0, 0.8) !important;
+    filter: drop-shadow(0 0 3px rgba(255, 0, 0, 0.9)) !important;
 }
 
 .modilebtn.active span:nth-child(2) {
@@ -351,16 +355,22 @@ width: 260px !important;
 
 .modilebtn.active span:nth-child(3) {
     transform: translateY(-9px) rotate(-45deg) !important;
-    background: linear-gradient(90deg, #ff0000 0%, #ff4444 100%) !important;
+    background: #ff0000 !important;
+    box-shadow: 0 2px 8px rgba(255, 0, 0, 0.6), 0 0 4px rgba(255, 0, 0, 0.8) !important;
+    filter: drop-shadow(0 0 3px rgba(255, 0, 0, 0.9)) !important;
 }
 
 /* Дополнительный эффект для активной кнопки */
 .modilebtn.active {
     transform: rotate(180deg) !important;
+    background: rgba(255, 0, 0, 0.1) !important;
+    border-color: rgba(255, 0, 0, 0.4) !important;
 }
 
 .modilebtn.active:hover {
     transform: rotate(180deg) scale(1.05) !important;
+    background: rgba(255, 0, 0, 0.15) !important;
+    border-color: rgba(255, 0, 0, 0.5) !important;
 }
 
 .filtersblock input[type="text"] {
@@ -449,12 +459,12 @@ margin: 20px 10px !important;
 		width: 50px !important;
 		height: 50px !important;
 		z-index: 201 !important;
-		background: rgba(0, 0, 0, 0.6) !important;
-		backdrop-filter: blur(8px) !important;
-		-webkit-backdrop-filter: blur(8px) !important;
-		border: 1px solid rgba(255, 255, 255, 0.2) !important;
-		border-radius: 8px !important;
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+		background: rgba(255, 255, 255, 0.1) !important;
+		backdrop-filter: blur(10px) !important;
+		-webkit-backdrop-filter: blur(10px) !important;
+		border: 2px solid rgba(255, 255, 255, 0.3) !important;
+		border-radius: 10px !important;
+		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
 	}
 
 	.menu a:nth-child(3) li, .menu a:nth-child(4) li {
