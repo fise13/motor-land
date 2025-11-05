@@ -492,19 +492,58 @@ margin: 20px 10px !important;
 	.sliderform {
 		text-align: center !important;
 		bottom: 10px !important;
+		/* Performance: Увеличен z-index чтобы форма поиска была поверх всего контента, включая меню и секцию консультации */
 		z-index: 10001 !important;
+		/* Создаем новый stacking context для формы, чтобы она была поверх секции консультации */
+		isolation: isolate !important;
+		/* Performance: Разрешаем overflow для выпадающих списков */
+		overflow: visible !important;
+		/* Гарантируем что дочерние элементы могут выходить за границы */
+		clip: auto !important;
+		clip-path: none !important;
+		/* Гарантируем что форма и все её элементы кликабельны */
+		pointer-events: auto !important;
+	}
+	
+	/* Гарантируем кликабельность всех элементов внутри формы */
+	.sliderform * {
+		pointer-events: auto !important;
 	}
 	
 	.sliderform .meinputer {
+		/* Performance: Увеличен z-index чтобы поля формы были поверх всего контента, включая меню */
 		z-index: 10002 !important;
+		/* Performance: Разрешаем overflow для выпадающих списков */
+		overflow: visible !important;
+		/* Гарантируем что элементы внутри кликабельны */
+		pointer-events: auto !important;
 	}
 	
+	/* Dropdown внутри .sliderform - используем absolute позиционирование */
 	.sliderform .ddwnblock {
+		position: absolute !important;
+		/* z-index выше всего, чтобы выпадающие списки были поверх всех элементов */
 		z-index: 10003 !important;
+		/* Не создаем новый stacking context, остаемся в контексте формы */
+		isolation: auto !important;
+		/* Убеждаемся что элемент не обрезается родителями */
+		contain: none !important;
+		clip: auto !important;
+		clip-path: none !important;
 	}
 	
 	.sliderform .ddwnblock.open {
+		/* z-index выше всего, чтобы открытые выпадающие списки были поверх всех элементов */
 		z-index: 10003 !important;
+		/* Используем absolute позиционирование в контексте формы */
+		position: absolute !important;
+		/* Не создаем новый stacking context */
+		isolation: auto !important;
+		/* Гарантируем что элемент видим и не обрезан */
+		display: block !important;
+		visibility: visible !important;
+		opacity: 1 !important;
+		pointer-events: auto !important;
 	}
 
 	.aboutblock {
