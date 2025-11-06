@@ -522,23 +522,25 @@ margin: 20px 10px !important;
 	/* Dropdown внутри .sliderform - используем absolute позиционирование */
 	.sliderform .ddwnblock {
 		position: absolute !important;
-		/* z-index выше всего, чтобы выпадающие списки были поверх всех элементов */
-		z-index: 10003 !important;
-		/* Не создаем новый stacking context, остаемся в контексте формы */
-		isolation: auto !important;
+		/* z-index выше всего, чтобы выпадающие списки были поверх всех элементов, включая секцию консультации */
+		z-index: 10004 !important;
+		/* Создаем новый stacking context для выпадающих списков, чтобы они вышли за пределы секции консультации */
+		isolation: isolate !important;
 		/* Убеждаемся что элемент не обрезается родителями */
 		contain: none !important;
 		clip: auto !important;
 		clip-path: none !important;
+		/* Гарантируем что элемент видим */
+		visibility: visible !important;
 	}
 	
 	.sliderform .ddwnblock.open {
 		/* z-index выше всего, чтобы открытые выпадающие списки были поверх всех элементов */
-		z-index: 10003 !important;
+		z-index: 10004 !important;
 		/* Используем absolute позиционирование в контексте формы */
 		position: absolute !important;
-		/* Не создаем новый stacking context */
-		isolation: auto !important;
+		/* Создаем новый stacking context для выхода за пределы секции консультации */
+		isolation: isolate !important;
 		/* Гарантируем что элемент видим и не обрезан */
 		display: block !important;
 		visibility: visible !important;
@@ -818,6 +820,34 @@ margin: 20px 10px !important;
 		max-width: 320px !important;
 		padding: 15px 10px !important;
 		text-align: center !important;
+		z-index: 50 !important;
+		position: relative !important;
+	}
+	
+	.foterbag {
+		z-index: 50 !important;
+		position: relative !important;
+	}
+	
+	/* Секция общего вида тоже должна быть ниже выпадающих списков */
+	.generalw {
+		z-index: 50 !important;
+	}
+	
+	/* Форма консультации "Хотите получить бесплатную консультацию?" должна быть ниже выпадающих списков */
+	.consult-section,
+	.forsbgf,
+	.generalw.forsbgf {
+		z-index: 50 !important;
+		position: relative !important;
+		/* Не создаем новый stacking context, чтобы выпадающие списки могли выйти за пределы */
+		isolation: auto !important;
+	}
+	
+	.consult-container,
+	.consult-container * {
+		z-index: auto !important;
+		position: relative !important;
 	}
 	
 	.foterinline h3 {
