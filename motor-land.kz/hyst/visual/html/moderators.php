@@ -31,15 +31,18 @@
 					<?php
 					$mods_folders = scandir($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/');
 					array_splice($mods_folders, 0, 2);
+					$hidden_modules = array('seo_queries', 'page_content');
 					for ($q = 0; $q < count($mods_folders); $q++) {
-						if (file_exists($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/'.$mods_folders[$q].'/info.ini') && $module_info = parse_ini_file($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/'.$mods_folders[$q].'/info.ini')) {
-						$module_name = $module_info['name'];
-						} else {
-						$module_name = $mods_folders[$q];
+						if (!in_array($mods_folders[$q], $hidden_modules)) {
+							if (file_exists($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/'.$mods_folders[$q].'/info.ini') && $module_info = parse_ini_file($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/'.$mods_folders[$q].'/info.ini')) {
+							$module_name = $module_info['name'];
+							} else {
+							$module_name = $mods_folders[$q];
+							}
+						?>
+						<label class="admin_label_checkbox"><?=$module_name;?> <input type="checkbox" data-rms="secondary" value="<?=$mods_folders[$q];?>"></label>
+						<?php
 						}
-					?>
-					<label class="admin_label_checkbox"><?=$module_name;?> <input type="checkbox" data-rms="secondary" value="<?=$mods_folders[$q];?>"></label>
-					<?php
 					}
 					?>
 				</div>
@@ -126,15 +129,18 @@ if ($sql->num_rows != 0) {
 						<?php
 						$mods_folders = scandir($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/');
 						array_splice($mods_folders, 0, 2);
+						$hidden_modules = array('seo_queries', 'page_content');
 						for ($q = 0; $q < count($mods_folders); $q++) {
-							if (file_exists($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/'.$mods_folders[$q].'/info.ini') && $module_info = parse_ini_file($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/'.$mods_folders[$q].'/info.ini')) {
-							$module_name = $module_info['name'];
-							} else {
-							$module_name = $mods_folders[$q];
+							if (!in_array($mods_folders[$q], $hidden_modules)) {
+								if (file_exists($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/'.$mods_folders[$q].'/info.ini') && $module_info = parse_ini_file($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/'.$mods_folders[$q].'/info.ini')) {
+								$module_name = $module_info['name'];
+								} else {
+								$module_name = $mods_folders[$q];
+								}
+							?>
+							<label class="admin_label_checkbox"><?=$module_name;?> <input type="checkbox" data-rms="secondary" value="<?=$mods_folders[$q];?>"<?=(array_search($mods_folders[$q],explode(',',$record[AUC_PREFIX.'_role']))!==false?' checked':'');?>></label>
+							<?php
 							}
-						?>
-						<label class="admin_label_checkbox"><?=$module_name;?> <input type="checkbox" data-rms="secondary" value="<?=$mods_folders[$q];?>"<?=(array_search($mods_folders[$q],explode(',',$record[AUC_PREFIX.'_role']))!==false?' checked':'');?>></label>
-						<?php
 						}
 						?>
 					</div>
