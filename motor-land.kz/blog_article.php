@@ -3,13 +3,19 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 0); // Не показываем ошибки пользователям, но логируем
 ini_set('log_errors', 1);
-ini_set('error_log', $_SERVER['DOCUMENT_ROOT'] . '/logs/php_errors.log');
 
 // Начинаем буферизацию вывода для перехвата ошибок
-ob_start();
+if (ob_get_level() == 0) {
+	ob_start();
+}
 
 try {
 	include('hyst/php.php');
+	
+	// Убеждаемся, что переменная версии определена
+	if (!isset($INTERFACE_VERSION)) {
+		$INTERFACE_VERSION = 0.91;
+	}
 	
 	// Загружаем функции блога
 	if (!function_exists('get_blog_article')) {
@@ -22,7 +28,16 @@ try {
 	}
 } catch (Exception $e) {
 	error_log('Blog article initialization error: ' . $e->getMessage());
-	ob_end_clean();
+	if (ob_get_level()) {
+		ob_end_clean();
+	}
+	header('HTTP/1.0 500 Internal Server Error');
+	die('Ошибка инициализации. Пожалуйста, попробуйте позже.');
+} catch (Error $e) {
+	error_log('Blog article fatal error: ' . $e->getMessage());
+	if (ob_get_level()) {
+		ob_end_clean();
+	}
 	header('HTTP/1.0 500 Internal Server Error');
 	die('Ошибка инициализации. Пожалуйста, попробуйте позже.');
 }
@@ -31,7 +46,9 @@ try {
 $article_slug = isset($_GET['slug']) ? trim($_GET['slug']) : '';
 
 if (empty($article_slug)) {
-	ob_end_clean();
+	if (ob_get_level()) {
+		ob_end_clean();
+	}
 	header('HTTP/1.0 404 Not Found');
 	include('404.php');
 	exit;
@@ -46,20 +63,26 @@ try {
 	$article = get_blog_article($article_slug);
 	
 	if (!$article || !is_array($article)) {
-		ob_end_clean();
+		if (ob_get_level()) {
+			ob_end_clean();
+		}
 		header('HTTP/1.0 404 Not Found');
 		include('404.php');
 		exit;
 	}
 } catch (Exception $e) {
 	error_log('Blog article error: ' . $e->getMessage() . ' | Slug: ' . $article_slug . ' | Trace: ' . $e->getTraceAsString());
-	ob_end_clean();
+	if (ob_get_level()) {
+		ob_end_clean();
+	}
 	header('HTTP/1.0 500 Internal Server Error');
 	include('404.php');
 	exit;
 } catch (Error $e) {
 	error_log('Blog article fatal error: ' . $e->getMessage() . ' | Slug: ' . $article_slug . ' | Trace: ' . $e->getTraceAsString());
-	ob_end_clean();
+	if (ob_get_level()) {
+		ob_end_clean();
+	}
 	header('HTTP/1.0 500 Internal Server Error');
 	include('404.php');
 	exit;
@@ -81,7 +104,7 @@ if (!isset($INTERFACE_VERSION)) {
 }
 include("hyst/head.php"); 
 ?>
-<!-- Блог: Стили для страницы статьи загружаем синхронно для гарантированной загрузки -->
+<!-- Блог: Стили для страницы статьи загружаем синхронно с абсолютными путями -->
 <link rel="stylesheet" href="/css.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
 <link rel="stylesheet" href="/tab.css?<?=$INTERFACE_VERSION;?>" type="text/css" media="(min-width: 768px)" />
 <link rel="stylesheet" href="/mob.css?<?=$INTERFACE_VERSION;?>" type="text/css" media="(max-width: 767px)" />
@@ -170,7 +193,9 @@ echo json_encode($article_data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES 
 <body>
 <?php 
 // Очищаем буфер перед выводом контента
-ob_end_flush();
+while (ob_get_level() > 0) {
+	ob_end_flush();
+}
 try {
 	include("hyst/sbody.php"); 
 	include("des/head.php");
