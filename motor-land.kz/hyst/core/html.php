@@ -80,7 +80,7 @@ function hyst_show_adm () {
 			}
 		$mods_folders = scandir($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/');
 		array_splice($mods_folders, 0, 2);
-		$hidden_modules = array('seo_queries');
+		$hidden_modules = array('seo_queries', 'page_content');
 		for ($q = 0; $q < count($mods_folders); $q++) {
 			if (!in_array($mods_folders[$q], $hidden_modules)) {
 				if (array_search('general',explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false || array_search('all',explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false || array_search($mods_folders[$q],explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false) {
@@ -102,7 +102,7 @@ function hyst_show_adm () {
 		include($_SERVER['DOCUMENT_ROOT'].'/hyst/visual/html/moderators.php');
 			} else if (isset($_GET['mediafiles']) && (array_search('general',explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false || array_search('all',explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false || array_search('mediafiles',explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false)) {
 		include($_SERVER['DOCUMENT_ROOT'].'/hyst/visual/html/mediafiles.php');		
-			} else if (isset($_GET['displayed']) && !in_array($_GET['displayed'], array('seo_queries')) && (array_search('general',explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false || array_search('all',explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false || array_search($_GET['displayed'],explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false)) {
+			} else if (isset($_GET['displayed']) && !in_array($_GET['displayed'], array('seo_queries', 'page_content')) && (array_search('general',explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false || array_search('all',explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false || array_search($_GET['displayed'],explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false)) {
 				if (file_exists($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/'.$_GET['displayed'].'/index.php')) {
 		include($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/'.$_GET['displayed'].'/index.php');			
 				} else {

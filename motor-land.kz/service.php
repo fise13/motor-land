@@ -90,7 +90,14 @@ $SITE_KEYWORDS = 'замена двигателя алматы, автосерв
 				<div class="service-hero">
 					<div class="service-hero-content">
 						<div class="service-hero-text">
-							<p>Наш автосервис предлагает профессиональную замену и обслуживание двигателей, а также замену КПП для автомобилей различных марок и моделей.</p>
+							<?php
+							$service_hero_text = get_customtexts('service_page_hero_text');
+							if ($service_hero_text) {
+								echo $service_hero_text;
+							} else {
+								echo '<p>Наш автосервис предлагает профессиональную замену и обслуживание двигателей, а также замену КПП для автомобилей различных марок и моделей.</p>';
+							}
+							?>
 						</div>
 						<div class="service-hero-image" style="background-image: url(/cms_img/2025-02/1740464745_67bd626973430.png);"></div>
 					</div>

@@ -47,6 +47,16 @@ if ($_HYST_ADMIN && ($_HYST_ADMIN[AUC_PREFIX.'_role']=='general' || $_HYST_ADMIN
 		
 		$about_text_escaped = $_DB_CONECT->real_escape_string($about_text);
 		$_DB_CONECT->query("INSERT INTO customtexts (name, key_id, text) VALUES ('О нас', 'index_about_text', '".$about_text_escaped."')");
+		
+		// Инициализация текста для страницы "Автосервис"
+		$service_text = '<p>Наш автосервис предлагает профессиональную замену и обслуживание двигателей, а также замену КПП для автомобилей различных марок и моделей.</p>';
+		$service_text_escaped = $_DB_CONECT->real_escape_string($service_text);
+		$_DB_CONECT->query("INSERT INTO customtexts (name, key_id, text) VALUES ('Текст Автосервис (рядом с фото)', 'service_page_hero_text', '".$service_text_escaped."')");
+		
+		// Инициализация текста для страницы "Оплата и Доставка"
+		$pay_text = '<p>Мы обеспечиваем доставку автозапчастей и двигателей по всей территории Казахстана и в страны СНГ через транспортные компании. Если доставка официальной транспортной компанией невозможна, мы поможем организовать перевозку частными перевозчиками.</p>';
+		$pay_text_escaped = $_DB_CONECT->real_escape_string($pay_text);
+		$_DB_CONECT->query("INSERT INTO customtexts (name, key_id, text) VALUES ('Текст Доставка и Оплата (рядом с фото)', 'pay_page_hero_text', '".$pay_text_escaped."')");
 	} else {
 		// Проверяем, существует ли текст "О нас", если нет - добавляем
 		$check_about = $_DB_CONECT->query("SELECT id FROM customtexts WHERE key_id='index_about_text'");
@@ -72,6 +82,22 @@ if ($_HYST_ADMIN && ($_HYST_ADMIN[AUC_PREFIX.'_role']=='general' || $_HYST_ADMIN
 <p><strong>Обращайтесь к нам, и мы поможем вам вернуть ваш автомобиль в строй!</strong></p>';
 			$about_text_escaped = $_DB_CONECT->real_escape_string($about_text);
 			$_DB_CONECT->query("INSERT INTO customtexts (name, key_id, text) VALUES ('О нас', 'index_about_text', '".$about_text_escaped."')");
+		}
+		
+		// Проверяем и инициализируем текст для страницы "Автосервис"
+		$check_service = $_DB_CONECT->query("SELECT id FROM customtexts WHERE key_id='service_page_hero_text'");
+		if ($check_service->num_rows == 0) {
+			$service_text = '<p>Наш автосервис предлагает профессиональную замену и обслуживание двигателей, а также замену КПП для автомобилей различных марок и моделей.</p>';
+			$service_text_escaped = $_DB_CONECT->real_escape_string($service_text);
+			$_DB_CONECT->query("INSERT INTO customtexts (name, key_id, text) VALUES ('Текст Автосервис (рядом с фото)', 'service_page_hero_text', '".$service_text_escaped."')");
+		}
+		
+		// Проверяем и инициализируем текст для страницы "Оплата и Доставка"
+		$check_pay = $_DB_CONECT->query("SELECT id FROM customtexts WHERE key_id='pay_page_hero_text'");
+		if ($check_pay->num_rows == 0) {
+			$pay_text = '<p>Мы обеспечиваем доставку автозапчастей и двигателей по всей территории Казахстана и в страны СНГ через транспортные компании. Если доставка официальной транспортной компанией невозможна, мы поможем организовать перевозку частными перевозчиками.</p>';
+			$pay_text_escaped = $_DB_CONECT->real_escape_string($pay_text);
+			$_DB_CONECT->query("INSERT INTO customtexts (name, key_id, text) VALUES ('Текст Доставка и Оплата (рядом с фото)', 'pay_page_hero_text', '".$pay_text_escaped."')");
 		}
 	}
 	

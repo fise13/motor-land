@@ -115,7 +115,7 @@ body{margin:0;padding:0;width:100%;height:100%;font-family:roboto,sans-serif;fon
 if ($_HYST_ADMIN) {
 	$mods_folders = scandir($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/');
 	array_splice($mods_folders, 0, 2);
-	$hidden_modules = array('seo_queries');
+	$hidden_modules = array('seo_queries', 'page_content');
 	for ($q = 0; $q < count($mods_folders); $q++) {
 		if (!in_array($mods_folders[$q], $hidden_modules)) {
 			if (file_exists($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/'.$mods_folders[$q].'/css.css')) {
