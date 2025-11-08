@@ -25,9 +25,9 @@
 .adm_theme,
 .adm_theme html,
 .adm_theme body {
-	margin: 0px;
-	padding: 0px;
-	height: 100%;
+margin: 0px;
+padding: 0px;
+height: 100%;
 	font-family: roboto, sans-serif;
 	font-size: 14px;
 	color: #e0e0e0;
@@ -44,14 +44,14 @@
 .adm_theme adm_header,
 .adm_theme adm_content,
 .adm_theme adm_footer {
-	width: 100%;
-	display: flex;
+width: 100%;
+display: flex;
 }
 
 .adm_theme adm_header {
 	background: linear-gradient(135deg, #1a1a1a 0%, #2b2b2b 100%);
 	height: 70px;
-	justify-content: space-between;
+justify-content: space-between;
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 1px rgba(254, 0, 0, 0.3);
 	border-bottom: 2px solid #fe0000;
 	position: relative;
@@ -59,10 +59,10 @@
 }
 
 .admin_header_profile {
-	display: flex;
-	justify-content: space-between;
-	box-sizing: border-box;
-	align-items: center;
+display: flex;
+justify-content: space-between;
+box-sizing: border-box;
+align-items: center;
 	padding: 0px 20px;
 	width: 100%;
 }
@@ -77,11 +77,11 @@
 }
 
 .admin_header_exit {
-	display: block;
+  display: block;
 	margin: 0 10px 0 0;
-	text-decoration: none;
+  text-decoration: none;
 	color: #e0e0e0;
-	position: relative;
+  position: relative;
 	font-weight: 600;
 	transition: all 0.2s ease;
 }
@@ -93,27 +93,27 @@
 
 /* Button style for logout */
 .Btn {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 	width: 40px;
 	height: 40px;
-	border: none;
+  border: none;
 	border-radius: 8px;
-	cursor: pointer;
-	position: relative;
-	overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
 	transition: all 0.3s ease;
 	box-shadow: 0 2px 6px rgba(254, 0, 0, 0.2);
 	background-color: #fe0000;
 }
 
 .sign {
-	width: 100%;
-	transition-duration: .3s;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  width: 100%;
+  transition-duration: .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sign svg {
@@ -121,39 +121,39 @@
 }
 
 .sign svg path {
-	fill: white;
+  fill: white;
 }
 
 .text {
-	position: absolute;
-	right: 0%;
-	width: 0%;
-	opacity: 0;
-	color: white;
+  position: absolute;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  color: white;
 	font-size: 14px;
-	font-weight: 600;
-	transition-duration: .3s;
+  font-weight: 600;
+  transition-duration: .3s;
 }
 
 .Btn:hover {
 	width: 100px;
 	border-radius: 8px;
-	transition-duration: .3s;
+  transition-duration: .3s;
 	background-color: #d00000;
 	box-shadow: 0 4px 12px rgba(254, 0, 0, 0.3);
 }
 
 .Btn:hover .sign {
-	width: 30%;
-	transition-duration: .3s;
+  width: 30%;
+  transition-duration: .3s;
 	padding-left: 12px;
 }
 
 .Btn:hover .text {
-	opacity: 1;
-	width: 70%;
-	transition-duration: .3s;
-	padding-right: 8px;
+  opacity: 1;
+  width: 70%;
+  transition-duration: .3s;
+  padding-right: 8px;
 }
 
 .Btn:active {
@@ -161,22 +161,22 @@
 }
 
 .adm_theme adm_content {
-	justify-content: space-between;
-	overflow-x: hidden;
+justify-content: space-between;
+overflow-x: hidden;
 	height: calc(100% - 60px);
 }
 
 #sidebarbutton {
-	display: none;
+display: none;
 }
 
 .adm_theme sidebar {
 	width: 280px;
 	min-width: 280px;
 	background: linear-gradient(180deg, #1a1a1a 0%, #151515 100%);
-	height: 100%;
-	display: block;
-	box-sizing: border-box;
+height: 100%;
+display: block;
+box-sizing: border-box;
 	padding: 20px 15px;
 	transition: all 0.3s ease;
 	box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
@@ -203,71 +203,71 @@
 }
 
 label[for="sidebarbutton"] {
-	width: 50px;
-	margin: 0px 0px 10px 0px;
-	height: 100%;
-	position: relative;
-	cursor: pointer;
+width: 50px;
+margin: 0px 0px 10px 0px;
+height: 100%;
+position: relative;
+cursor: pointer;
 	transition: all 0.3s ease;
 }
 
 label[for="sidebarbutton"] i{
-	transform: translate(-50%,-50%);
-	position: absolute;
-	top: 50%;
-	left: 50%;
+transform: translate(-50%,-50%);
+position: absolute;
+top: 50%;
+left: 50%;
 	background-color: #404554;
 	width: 24px;
-	height: 2px;
+height: 2px;
 	transition: all 0.3s ease;
 	border-radius: 2px;
 }
 
 label[for="sidebarbutton"] i:before{
-	content: '';
+content: '';
 	width: 18px;
-	height: 2px;
+height: 2px;
 	background-color: #404554;
-	position: absolute;
-	transform: rotate(-45deg);
-	bottom: 6px;
-	left: -1px;
+position: absolute;
+transform: rotate(-45deg);
+bottom: 6px;
+left: -1px;
 	transition: all 0.3s ease;
 	border-radius: 2px;
 }
 
 label[for="sidebarbutton"] i:after{
-	content: '';
+content: '';
 	width: 18px;
-	height: 2px;
+height: 2px;
 	background-color: #404554;
-	position: absolute;
-	transform: rotate(45deg);
-	top: 6px;
-	left: -1px;
+position: absolute;
+transform: rotate(45deg);
+top: 6px;
+left: -1px;
 	transition: all 0.3s ease;
 	border-radius: 2px;
 }
 
 #sidebarbutton:checked ~ adm_header label[for="sidebarbutton"] i:before{
-	transform: rotate(45deg);
-	bottom: 6px;
-	right: -1px;
-	left: auto;
+transform: rotate(45deg);
+bottom: 6px;
+right: -1px;
+left: auto;
 }
 
 #sidebarbutton:checked ~ adm_header label[for="sidebarbutton"] i:after{
-	transform: rotate(-45deg);
-	top: 6px;
-	right: -1px;
-	left: auto;
+transform: rotate(-45deg);
+top: 6px;
+right: -1px;
+left: auto;
 }
 
 .admin_sidebar_menu {
 	display: flex;
 	align-items: center;
 	padding: 14px 16px;
-	text-decoration: none;
+text-decoration: none;
 	color: #b0b0b0;
 	font-size: 15px;
 	font-weight: 500;
@@ -281,7 +281,7 @@ label[for="sidebarbutton"] i:after{
 	background-size: auto !important;
 	border: 1px solid transparent;
 	position: relative;
-	overflow: hidden;
+overflow: hidden;
 }
 
 /* Эмодзи иконка перед текстом */
@@ -403,7 +403,7 @@ label[for="sidebarbutton"] i:after{
 }
 
 #sidebarbutton:checked ~ adm_content sidebar .admin_sidebar_menu span {
-	display: none;
+display: none;
 }
 
 #sidebarbutton:checked ~ adm_content sidebar .admin_sidebar_menu {
@@ -422,11 +422,11 @@ label[for="sidebarbutton"] i:after{
 }
 
 .adm_theme content {
-	display: block;
-	height: 100%;
-	overflow-y: auto;
-	flex-grow: 1;
-	box-sizing: border-box;
+display: block;
+height: 100%;
+overflow-y: auto;
+flex-grow: 1;
+box-sizing: border-box;
 	padding: 30px;
 	background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #151515 100%);
 	background-attachment: fixed;
@@ -452,20 +452,20 @@ label[for="sidebarbutton"] i:after{
 }
 
 .text-center {
-	text-align: center;
+text-align: center;
 }
 
 .width100 {
-	width: 100%;
+width: 100%;
 	box-sizing: border-box;
 }
 
 /* Форма авторизации */
 .auth_container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 	background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #151515 100%);
 	font-family: roboto, sans-serif;
 	position: relative;
@@ -481,18 +481,18 @@ label[for="sidebarbutton"] i:after{
 	height: 200%;
 	background: radial-gradient(circle, rgba(254, 0, 0, 0.1) 0%, transparent 70%);
 	animation: pulse 4s ease-in-out infinite;
-}
+  }
 
 @keyframes pulse {
 	0%, 100% { transform: scale(1); opacity: 0.5; }
 	50% { transform: scale(1.1); opacity: 0.8; }
 }
 
-.auth_form {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 22px;
+  .auth_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
 	width: 380px;
 	padding: 50px 40px;
 	border-radius: 16px;
@@ -503,84 +503,84 @@ label[for="sidebarbutton"] i:after{
 	z-index: 1;
 }
 
-.auth_form:hover {
+  .auth_form:hover {
 	transform: translateY(-4px);
 	box-shadow: 0 12px 50px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(254, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
+  }
 
-.auth_form_logo {
+  .auth_form_logo {
 	border-radius: 8px;
 	width: 120px;
 	height: 80px;
 	margin: -48px auto 20px auto;
-	overflow: hidden;
-}
+    overflow: hidden;
+  }
 
-.auth_form_logo img {
-	width: 100%;
-	height: 100%;
-	display: block;
-	object-fit: contain;
-}
+  .auth_form_logo img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+  }
 
-.form_title {
+  .form_title {
 	color: #ffffff;
 	font-size: 24px;
 	font-weight: 700;
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 	font-family: robotob, sans-serif;
 	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.input_field {
-	width: 100%;
+  }
+  
+  .input_field {
+    width: 100%;
 	padding: 12px 16px;
-	font-size: 14px;
+    font-size: 14px;
 	color: #e0e0e0;
 	background: rgba(255, 255, 255, 0.05);
 	border: 2px solid rgba(255, 255, 255, 0.1);
-	border-radius: 8px;
-	outline: none;
+    border-radius: 8px;
+    outline: none;
 	transition: all 0.3s ease;
 	font-family: roboto, sans-serif;
-}
-
-.input_field::placeholder {
+  }
+  
+  .input_field::placeholder {
 	color: #666;
-}
-
-.input_field:focus {
+  }
+  
+  .input_field:focus {
 	border-color: #fe0000;
 	background: rgba(255, 255, 255, 0.08);
 	box-shadow: 0 0 0 3px rgba(254, 0, 0, 0.2), 0 0 15px rgba(254, 0, 0, 0.1);
-}
-
-.btn_submit {
-	width: 100%;
+  }
+  
+    .btn_submit {
+    width: 100%;
 	padding: 14px 0;
-	font-size: 15px;
-	font-weight: 600;
+    font-size: 15px;
+    font-weight: 600;
 	color: #ffffff;
 	background: #fe0000;
 	border: 2px solid #fe0000;
-	border-radius: 8px;
-	cursor: pointer;
+    border-radius: 8px;
+    cursor: pointer;
 	transition: all 0.3s ease;
 	font-family: robotob, sans-serif;
 	text-transform: uppercase;
 	letter-spacing: 0.5px;
-}
-
-.btn_submit:hover {
+  }
+  
+  .btn_submit:hover {
 	background: #d00000;
 	border-color: #d00000;
 	transform: translateY(-1px);
 	box-shadow: 0 4px 12px rgba(254, 0, 0, 0.3);
-}
+  }
 
 /* Изоляция: все формы админки внутри .adm_theme */
 .adm_theme interfaceform {
-	display: block;
+display: block;
 }
 
 .adm_theme .form_title {
@@ -610,13 +610,13 @@ label[for="sidebarbutton"] i:after{
 .adm_theme .form_title_sm {
 	font-size: 18px;
 	font-weight: 600;
-	padding: 10px 0px;
+padding: 10px 0px;
 	color: #1a1a1a;
 	font-family: robotob, sans-serif;
 }
 
 .adm_theme label > i {
-	display: inline-block;
+display: inline-block;
 	color: #fe0000;
 	font-weight: 700;
 }
@@ -628,8 +628,8 @@ label[for="sidebarbutton"] i:after{
 .adm_theme input[type="datetime-local"],
 .adm_theme interfaceform input[type="url"] {
 	padding: 12px 16px;
-	margin: 5px 0px;
-	box-sizing: border-box;
+margin: 5px 0px;
+box-sizing: border-box;
 	border: 2px solid rgba(255, 255, 255, 0.1);
 	border-radius: 8px;
 	background: rgba(255, 255, 255, 0.05);
@@ -660,9 +660,9 @@ label[for="sidebarbutton"] i:after{
 
 .adm_theme interfaceform input[type="button"] {
 	padding: 12px 28px;
-	margin: 5px 0px;
-	box-sizing: border-box;
-	cursor: pointer;
+margin: 5px 0px;
+box-sizing: border-box;
+cursor: pointer;
 	font-weight: 600;
 	border: none;
 	border-radius: 8px;
@@ -683,8 +683,8 @@ label[for="sidebarbutton"] i:after{
 }
 
 .adm_theme interfaceform textarea {
-	box-sizing: border-box;
-	margin: 5px 0px;
+box-sizing: border-box;
+margin: 5px 0px;
 	padding: 12px 16px;
 	border: 2px solid rgba(255, 255, 255, 0.1);
 	border-radius: 8px;
@@ -710,8 +710,8 @@ label[for="sidebarbutton"] i:after{
 
 .adm_theme interfaceform select {
 	padding: 12px 40px 12px 16px;
-	margin: 5px 0px;
-	box-sizing: border-box;
+margin: 5px 0px;
+box-sizing: border-box;
 	border: 2px solid rgba(255, 255, 255, 0.1);
 	border-radius: 8px;
 	font-size: 14px;
@@ -740,19 +740,19 @@ label[for="sidebarbutton"] i:after{
 }
 
 .adm_theme iw {
-	position: relative;
+position: relative;
 }
 
 .adm_theme iv {
-	position: absolute;
-	right: 5px;
-	top: 50%;
-	transform: translate(0,-50%);
+position: absolute;
+right: 5px;
+top: 50%;
+transform: translate(0,-50%);
 }
 
 .adm_theme iv.left {
-	left: 5px;
-	right: auto;
+left: 5px;
+right: auto;
 }
 
 .adm_theme iv[error] {
@@ -764,41 +764,41 @@ label[for="sidebarbutton"] i:after{
 }
 
 .adm_theme iv[error]:after {
-	content: '!';
-	position: absolute;
-	color: white;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%,-50%);
-	cursor: pointer;
+content: '!';
+position: absolute;
+color: white;
+top: 50%;
+left: 50%;
+transform: translate(-50%,-50%);
+cursor: pointer;
 	font-weight: 700;
 	font-size: 12px;
 }
 
 .adm_theme iv[error] message {
-	display: none;
-	position: absolute;
-	right: -5px;
-	bottom: 30px;
+display: none;
+position: absolute;
+right: -5px;
+bottom: 30px;
 	padding: 12px 16px;
 	border-radius: 8px;
 	background: #ffffff;
 	border: 2px solid #fe0000;
 	color: #fe0000;
-	min-width: 300px;
+min-width: 300px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-	box-sizing: border-box;
+box-sizing: border-box;
 	font-size: 13px;
 	font-weight: 500;
 }
 
 .adm_theme iv.left[error] message {
-	left: -5px;
-	right: auto;
+left: -5px;
+right: auto;
 }
 
 .adm_theme iv[error]:hover message {
-	display: block;
+display: block;
 }
 
 .adm_theme iv[right] {
@@ -807,56 +807,56 @@ label[for="sidebarbutton"] i:after{
 }
 
 .adm_theme iv[right]:before {
-	position: absolute;
-	content: '';
+position: absolute;
+content: '';
 	width: 3px;
-	height: 10px;
+height: 10px;
 	background-color: #00B442;
-	transform: rotate(-45deg);
+transform: rotate(-45deg);
 	left: 4px;
 	bottom: 4px;
 	border-radius: 2px;
 }
 
 .adm_theme iv[right]:after {
-	position: absolute;
-	content: '';
+position: absolute;
+content: '';
 	width: 3px;
-	height: 16px;
+height: 16px;
 	background-color: #00B442;
-	transform: rotate(45deg);
+transform: rotate(45deg);
 	left: 11px;
 	bottom: 2px;
 	border-radius: 2px;
 }
 
 .admin_content_alignment {
-	width: 100%;
-	display: flex;
-	justify-content: start;
-	flex-wrap: wrap;
-	align-items: end;
+width: 100%;
+display: flex;
+justify-content: start;
+flex-wrap: wrap;
+align-items: end;
 	gap: 20px;
 }
 
 .admin_content_alignment_forimg {
-	width: 100%;
-	display: flex;
-	justify-content: start;
-	flex-wrap: wrap;
-	align-items: start;
+width: 100%;
+display: flex;
+justify-content: start;
+flex-wrap: wrap;
+align-items: start;
 	gap: 20px;
 }
 
 .admin_content_widht300 {
-	width: 300px;
-	padding: 0px 10px 0px 0px;
-	box-sizing: border-box;
+width: 300px;
+padding: 0px 10px 0px 0px;
+box-sizing: border-box;
 }
 
 .admin_roller_menu {
-	width: 100%;
-	text-align: left;
+width: 100%;
+text-align: left;
 	margin-bottom: 15px;
 	background: linear-gradient(135deg, #2b2b2b 0%, #252525 100%);
 	border-radius: 12px;
@@ -893,7 +893,7 @@ label[for="sidebarbutton"] i:after{
 }
 
 .admin_roller_menu > input[type="checkbox"],.admin_roller_menu > input[type="radio"]{
-	display: none;
+display: none;
 }
 
 .admin_roller_menu  > label {
@@ -903,9 +903,9 @@ label[for="sidebarbutton"] i:after{
 	background: rgba(255, 255, 255, 0.03);
 	border: none;
 	border-radius: 0;
-	cursor: pointer;
+cursor: pointer;
 	transition: all 0.3s ease;
-	user-select: none;
+user-select: none;
 	color: #e0e0e0;
 	font-weight: 600;
 	font-size: 15px;
@@ -929,12 +929,12 @@ label[for="sidebarbutton"] i:after{
 
 /* Разделитель между label и контейнером */
 .admin_roller_menu > label:not(:last-of-type)::after {
-	content: '';
-	position: absolute;
+content: '';
+position: absolute;
 	bottom: 0;
 	left: 0;
 	right: 0;
-	height: 1px;
+height: 1px;
 	background-color: #e5e5e5;
 }
 
@@ -966,12 +966,12 @@ label[for="sidebarbutton"] i:after{
 }
 
 .admin_roller_menu > input[type="checkbox"]:checked ~ .admin_roller_container {
-	max-height: none;
+max-height: none;
 	padding: 25px;
 }
 
 .admin_roller_menu > input[type="checkbox"]:checked ~ .admin_roller_container.admin_roler_with_overflow {
-	overflow-y: auto;
+overflow-y: auto;
 	max-height: 600px;
 }
 
@@ -987,20 +987,20 @@ label[for="sidebarbutton"] i:after{
 }
 
 .admin_roller_menu > input[type="radio"].hide:checked ~ label.hide {
-	display: none;
+display: none;
 }
 
 .admin_roller_menu > input[type="radio"].one:checked ~ .admin_roller_container.one,
 .admin_roller_menu > input[type="radio"].two:checked ~ .admin_roller_container.two,
 .admin_roller_menu > input[type="radio"].three:checked ~ .admin_roller_container.three {
-	max-height: none;
+max-height: none;
 	padding: 25px;
 }
 
 .admin_roller_menu > input[type="radio"].one:checked ~ .admin_roller_container.one.admin_roler_with_overflow,
 .admin_roller_menu > input[type="radio"].two:checked ~ .admin_roller_container.two.admin_roler_with_overflow,
 .admin_roller_menu > input[type="radio"].three:checked ~ .admin_roller_container.three.admin_roler_with_overflow {
-	overflow-y: auto;
+overflow-y: auto;
 	max-height: 600px;
 }
 
@@ -1008,7 +1008,7 @@ label[for="sidebarbutton"] i:after{
 	font-size: 15px;
 	font-weight: 600;
 	padding: 0px 0px 10px 0px;
-	position: relative;
+position: relative;
 	color: #e0e0e0;
 	font-family: robotob, sans-serif;
 	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
@@ -1019,7 +1019,7 @@ label[for="sidebarbutton"] i:after{
 }
 
 .admin_group_checkboxes_title i {
-	display: inline-block;
+display: inline-block;
 	color: #fe0000;
 }
 
@@ -1030,8 +1030,8 @@ label[for="sidebarbutton"] i:after{
 	background: rgba(255, 255, 255, 0.05);
 	border: 2px solid rgba(255, 255, 255, 0.1);
 	border-radius: 8px;
-	cursor: pointer;
-	user-select: none;
+cursor: pointer;
+user-select: none;
 	margin-right: 10px;
 	margin-bottom: 10px;
 	color: #e0e0e0;
@@ -1076,11 +1076,11 @@ label[for="sidebarbutton"] i:after{
 }
 
 messagelog {
-	transform: translate(-50%);
-	position: fixed;
+transform: translate(-50%);
+position: fixed;
 	top: 20px;
-	left: 50%;
-	z-index: 600;
+left: 50%;
+z-index: 600;
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
@@ -1088,20 +1088,20 @@ messagelog {
 
 messagelog > report {
 	padding: 14px 20px;
-	text-align: center;
+text-align: center;
 	width: 320px;
-	box-sizing: border-box;
-	color: white;
+box-sizing: border-box;
+color: white;
 	margin: 0;
 	border-radius: 8px;
-	display: block;
+display: block;
 	font-weight: 500;
 	font-size: 14px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .adm_theme messagelog > report[right] {
-	background-color: #00B442;
+background-color: #00B442;
 }
 
 .adm_theme messagelog > report[error] {
@@ -1113,11 +1113,11 @@ messagelog > report {
 }
 
 .admin_separator {
-	width: 100%;
-	height: 2px;
+width: 100%;
+height: 2px;
 	background: linear-gradient(90deg, transparent, rgba(254, 0, 0, 0.3), transparent);
-	display: block;
-	border-radius: 2px;
+display: block;
+border-radius: 2px;
 	margin: 20px 0;
 }
 
@@ -1125,20 +1125,20 @@ messagelog > report {
 	padding: 12px 16px;
 	border-radius: 8px;
 	border: 2px solid rgba(254, 0, 0, 0.2);
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
-	align-items: center;
+display: flex;
+justify-content: space-between;
+flex-wrap: wrap;
+align-items: center;
 	background: linear-gradient(135deg, #2b2b2b 0%, #252525 100%);
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .admin_inline_ittem > div {
-	padding: 5px 7px;
+padding: 5px 7px;
 }
 
 .admin_inline_ittem > div  sup{
-	display: block;
+display: block;
 }
 
 .admin_inline_ittem .w50{ width: 50px; }
@@ -1149,7 +1149,7 @@ messagelog > report {
 .admin_inline_ittem .w300{ width: 300px; }
 
 indicateddate {
-	display: block;
+display: block;
 	font-weight: 500;
 }
 
@@ -1163,7 +1163,7 @@ indicateddate.month { color: #9a9a9a; }
 
 .admin_items_href {
 	color: #fe0000;
-	text-decoration: none;
+text-decoration: none;
 	transition: color 0.2s ease;
 }
 
@@ -1173,40 +1173,40 @@ indicateddate.month { color: #9a9a9a; }
 }
 
 peni {
-	display: inline-block;
-	width: 16px;
-	height: 16px;
-	position: relative;
-	margin: 0px 0px 0px 10px;
+display: inline-block;
+width: 16px;
+height: 16px;
+position: relative;
+margin: 0px 0px 0px 10px;
 }
 
 peni:before{
-	content: '';
-	position: absolute;
-	bottom: 0px;
-	left: 0px;
-	width: 5px;
-	height: 5px;
+content: '';
+position: absolute;
+bottom: 0px;
+left: 0px;
+width: 5px;
+height: 5px;
 	background-color: #404554;
-	clip-path: polygon(0.00% 0.00%,0% 100%,100% 100%);
+clip-path: polygon(0.00% 0.00%,0% 100%,100% 100%);
 }
 
 peni:after{
-	content: '';
-	position: absolute;
-	top: 0px;
-	right: 4px;
-	width: 6px;
-	height: 14px;
+content: '';
+position: absolute;
+top: 0px;
+right: 4px;
+width: 6px;
+height: 14px;
 	background-color: #404554;
-	transform: rotate(45deg);
+transform: rotate(45deg);
 }
 
 .admin_sort_and_search input[type="text"]{
 	padding: 10px 14px;
-	margin: 5px 0px;
-	box-sizing: border-box;
-	width: 260px;
+margin: 5px 0px;
+box-sizing: border-box;
+width: 260px;
 	border: 2px solid rgba(255, 255, 255, 0.1);
 	border-radius: 8px;
 	background: rgba(255, 255, 255, 0.05);
@@ -1227,9 +1227,9 @@ peni:after{
 .admin_sort_and_search input[type="submit"]{
 	width: 40px;
 	height: 40px;
-	margin: 5px 0px 5px -10px;
-	box-sizing: border-box;
-	cursor: pointer;
+margin: 5px 0px 5px -10px;
+box-sizing: border-box;
+cursor: pointer;
 	background: #fe0000;
 	border: 2px solid #fe0000;
 	border-radius: 0px 8px 8px 0px;
@@ -1256,8 +1256,8 @@ peni:after{
 
 .admin_sort_and_search select {
 	padding: 10px 14px;
-	margin: 5px 0px;
-	box-sizing: border-box;
+margin: 5px 0px;
+box-sizing: border-box;
 	border: 2px solid rgba(255, 255, 255, 0.1);
 	border-radius: 8px;
 	background: rgba(255, 255, 255, 0.05);
@@ -1272,27 +1272,27 @@ peni:after{
 }
 
 .admin_page_pagination {
-	text-align: left;
+text-align: left;
 }
 
 .admin_page_pagination ul{
-	margin: 10px 0px;
-	padding: 0px;
-	text-align: left;
-	list-style: none;
+margin: 10px 0px;
+padding: 0px;
+text-align: left;
+list-style: none;
 	display: flex;
 	gap: 5px;
 }
 
 .admin_page_pagination ul li{
-	display: inline-block;
+display: inline-block;
 	padding: 10px 14px;
 	background: rgba(255, 255, 255, 0.05);
 	border: 2px solid rgba(255, 255, 255, 0.1);
 	border-radius: 8px;
-	cursor: pointer;
+cursor: pointer;
 	transition: all 0.2s ease;
-	user-select: none;
+user-select: none;
 	margin: 0;
 	color: #e0e0e0;
 	font-weight: 500;
@@ -1314,17 +1314,17 @@ peni:after{
 }
 
 .admin_casual_button {
-	display: inline-block;
+display: inline-block;
 	padding: 10px 16px;
 	background: rgba(255, 255, 255, 0.05);
 	border: 2px solid rgba(255, 255, 255, 0.1);
 	border-radius: 8px;
-	cursor: pointer;
+cursor: pointer;
 	transition: all 0.2s ease;
-	user-select: none;
+user-select: none;
 	margin: 0px 5px 0px 0px;
 	color: #e0e0e0;
-	text-decoration: none;
+text-decoration: none;
 	font-weight: 500;
 }
 
@@ -1337,18 +1337,18 @@ peni:after{
 }
 
 .admin_image_select {
-	display: inline-block;
+display: inline-block;
 	padding: 10px 16px;
 	background: rgba(255, 255, 255, 0.05);
 	border: 2px solid rgba(255, 255, 255, 0.1);
 	border-radius: 8px;
-	cursor: pointer;
+cursor: pointer;
 	transition: all 0.2s ease;
-	user-select: none;
+user-select: none;
 	margin: 0px 5px 0px 0px;
 	color: #e0e0e0;
-	text-decoration: none;
-	position: relative;
+text-decoration: none;
+position: relative;
 	font-weight: 500;
 }
 
@@ -1361,32 +1361,32 @@ peni:after{
 }
 
 .admin_image_select input[type="file"] {
-	position: absolute;
-	top: 0px;
-	left: -5000px;
+position: absolute;
+top: 0px;
+left: -5000px;
 }
 
 modalbg {
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	top: 0px;
-	left: 0px;
+width: 100%;
+height: 100%;
+position: fixed;
+top: 0px;
+left: 0px;
 	background: rgba(0, 0, 0, 0.85);
 	backdrop-filter: blur(4px);
-	z-index: 500;
-	display: none;
+z-index: 500;
+display: none;
 }
 
 modalbg cross {
-	position: absolute;
-	top: 10px;
-	right: 10px;
+position: absolute;
+top: 10px;
+right: 10px;
 	border: 2px solid rgba(254, 0, 0, 0.3);
 	border-radius: 50%;
-	width: 40px;
-	height: 40px;
-	cursor: pointer;
+width: 40px;
+height: 40px;
+cursor: pointer;
 	background: rgba(255, 255, 255, 0.1);
 	transition: all 0.2s ease;
 	backdrop-filter: blur(10px);
@@ -1400,27 +1400,27 @@ modalbg cross:hover {
 }
 
 modalbg cross:before {
-	content: '';
-	top: 50%;
-	left: 50%;
-	width: 60%;
+content: '';
+top: 50%;
+left: 50%;
+width: 60%;
 	height: 3px;
 	background-color: #e0e0e0;
-	position: absolute;
-	transform: translate(-50%,-50%) rotate(45deg);
+position: absolute;
+transform: translate(-50%,-50%) rotate(45deg);
 	border-radius: 2px;
 	transition: background-color 0.2s ease;
 }
 
 modalbg cross:after {
-	content: '';
-	top: 50%;
-	left: 50%;
-	width: 60%;
+content: '';
+top: 50%;
+left: 50%;
+width: 60%;
 	height: 3px;
 	background-color: #e0e0e0;
-	position: absolute;
-	transform: translate(-50%,-50%) rotate(-45deg);
+position: absolute;
+transform: translate(-50%,-50%) rotate(-45deg);
 	border-radius: 2px;
 	transition: background-color 0.2s ease;
 }
@@ -1431,16 +1431,16 @@ modalbg cross:hover:after {
 }
 
 modalwindow {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%,-50%);
-	z-index: 501;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%,-50%);
+z-index: 501;
 	border: 1px solid rgba(254, 0, 0, 0.2);
 	border-radius: 16px;
-	box-sizing: border-box;
+box-sizing: border-box;
 	padding: 30px;
-	display: none;
+display: none;
 	background: linear-gradient(135deg, #2b2b2b 0%, #252525 100%);
 	box-shadow: 0 8px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(254, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 	max-width: 90%;
@@ -1468,14 +1468,14 @@ modalwindow::-webkit-scrollbar-thumb:hover {
 }
 
 .admin_back_header {
-	margin: 0px 10px 0px 0px;
-	height: 40px;
-	box-sizing: border-box;
+margin: 0px 10px 0px 0px;
+height: 40px;
+box-sizing: border-box;
 	border-radius: 8px;
 	padding: 8px 16px 8px 40px;
 	background: rgba(255, 255, 255, 0.05);
 	display: inline-block;
-	text-decoration: none;
+text-decoration: none;
 	border: 2px solid rgba(255, 255, 255, 0.1);
 	transition: all 0.3s ease;
 	position: relative;
@@ -1527,32 +1527,32 @@ modalwindow::-webkit-scrollbar-thumb:hover {
 }
 
 .admin_imgblock {
-	width: 300px;
-	box-sizing: border-box;
-	margin: 0px 10px 0px 0px;
-	height: 100%;
+width: 300px;
+box-sizing: border-box;
+margin: 0px 10px 0px 0px;
+height: 100%;
 }
 
 .admin_content_alignment_remain {
-	display: flex;
-	justify-content: start;
-	flex-wrap: wrap;
-	align-items: end;
-	flex: 1;
+display: flex;
+justify-content: start;
+flex-wrap: wrap;
+align-items: end;
+flex: 1;
 	gap: 20px;
 }
 
 .admin_image_label {
-	width: 100%;
+width: 100%;
 	height: 120px;
-	position: relative;
+position: relative;
 	border-radius: 8px;
 	border: 2px dashed rgba(254, 0, 0, 0.3);
-	display: block;
-	cursor: pointer;
+display: block;
+cursor: pointer;
 	transition: all 0.3s ease;
-	background-position: center center;
-	background-repeat: no-repeat;
+background-position: center center;
+background-repeat: no-repeat;
 	background-size: cover;
 	background-color: rgba(255, 255, 255, 0.03);
 }
@@ -1564,19 +1564,19 @@ modalwindow::-webkit-scrollbar-thumb:hover {
 }
 
 .admin_image_label input {
-	position: absolute;
-	left: -4000px;
-	top: 0px;	
+position: absolute;
+left: -4000px;
+top: 0px;	
 }
 
 .admin_addimage_tip {
-	transform: translate(-50%,-50%);
-	position: absolute;
-	top: 50%;
-	left: 50%;
+transform: translate(-50%,-50%);
+position: absolute;
+top: 50%;
+left: 50%;
 	color: #666;
 	font-size: 40px;
-	text-align: center;
+text-align: center;	
 	transition: all 0.3s ease;
 }
 
@@ -1586,7 +1586,7 @@ modalwindow::-webkit-scrollbar-thumb:hover {
 }
 
 .admin_addimage_tip span {
-	display: block;
+display: block;
 	font-size: 13px;
 	margin-top: 8px;
 	color: #b0b0b0;
@@ -1598,19 +1598,19 @@ modalwindow::-webkit-scrollbar-thumb:hover {
 }
 
 .admin_file_label_wraper {
-	position: relative;
-	display: block;
-	width: 100%;
+position: relative;
+display: block;
+width: 100%;
 }
 
 .admin_file_label_wraper .admin_file_cross,.admin_file_cross_multiple {
 	width: 32px;
 	height: 32px;
-	position: absolute;
+position: absolute;
 	top: 8px;
 	right: 8px;
 	background: #fe0000;
-	cursor: pointer;
+cursor: pointer;
 	border-radius: 50%;
 	opacity: 0.9;
 	border: 2px solid #ffffff;
@@ -1639,10 +1639,10 @@ modalwindow::-webkit-scrollbar-thumb:hover {
 }
 
 .admin_mediafiles_general_con {
-	width: 100%;
-	margin: 20px 0px 0px 0px;
-	overflow-y: auto;
-	height: calc(100% - 180px);
+width: 100%;
+margin: 20px 0px 0px 0px;
+overflow-y: auto;
+height: calc(100% - 180px);	
 	background: linear-gradient(135deg, #2b2b2b 0%, #252525 100%);
 	border-radius: 8px;
 	padding: 15px;
@@ -1670,20 +1670,20 @@ modalwindow::-webkit-scrollbar-thumb:hover {
 }
 
 .admin_roller100 > label{
-	width: 100%;
-	box-sizing: border-box;
+width: 100%;
+box-sizing: border-box;
 }
 
 .adm_matrol_marg {
-	margin: 0px 0px 0px 10px;	
+margin: 0px 0px 0px 10px;	
 }
 
 .mediafiles_image_con {
 	width: 160px;
 	margin: 8px;
 	height: 120px;
-	display: inline-block;
-	position: relative;
+display: inline-block;
+position: relative;
 	border-radius: 8px;
 	overflow: hidden;
 	border: 2px solid rgba(255, 255, 255, 0.1);
@@ -1700,10 +1700,10 @@ modalwindow::-webkit-scrollbar-thumb:hover {
 .mediafiles_image_con_img {
 	border: none;
 	border-radius: 6px;
-	width: 100%;
-	height: 100%;
-	cursor: pointer;
-	background-size: cover;
+width: 100%;
+height: 100%;
+cursor: pointer;
+background-size: cover;
 	background-position: center center;
 	transition: transform 0.3s ease;
 }
@@ -1713,7 +1713,7 @@ modalwindow::-webkit-scrollbar-thumb:hover {
 }
 
 .admin_delet_img {
-	position: absolute;
+position: absolute;
 	top: 5px;
 	right: 5px;
 	width: 28px;
@@ -1721,8 +1721,8 @@ modalwindow::-webkit-scrollbar-thumb:hover {
 	border-radius: 50%;
 	background: #fe0000;
 	border: 2px solid #ffffff;
-	margin: 0px !Important;
-	display: none;
+margin: 0px !Important;
+display: none;
 	opacity: 0.9;
 	transition: all 0.2s ease;
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
@@ -1742,7 +1742,7 @@ modalwindow::-webkit-scrollbar-thumb:hover {
 }
 
 .mediafiles_image_con:hover .admin_delet_img{
-	display: block;
+display: block;
 }
 
 .admin_delet_img:hover {
@@ -1752,41 +1752,41 @@ modalwindow::-webkit-scrollbar-thumb:hover {
 }
 
 .hyst_all_zoomer {
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	top: 0px;
-	left: 0px;
+width: 100%;
+height: 100%;
+position: fixed;
+top: 0px;
+left: 0px;
 	background-color: rgba(0, 0, 0, 0.85);
-	z-index: 999;
+z-index: 999;
 }
 
 .hyst_imageselect_modal {
-	width: 100%;
-	height: 100%;
-	box-sizing: border-box;
+width: 100%;
+height: 100%;
+box-sizing: border-box;
 	padding: 20px;
-	position: fixed;
-	top: 0px;
-	left: 0px;
+position: fixed;
+top: 0px;
+left: 0px;
 	background: linear-gradient(135deg, #1a1a1a 0%, #151515 100%);
 	backdrop-filter: blur(10px);
-	z-index: 999;
+z-index: 999;
 }
 
 .hyst_all_zoomerrel {
-	width: 100%;
-	height: 100%;
-	position: relative;
+width: 100%;
+height: 100%;
+position: relative;
 }
 
 .hyst_all_zoomclose {
 	width: 50px;
 	height: 50px;
-	position: absolute;
+position: absolute;
 	top: 20px;
 	right: 20px;
-	cursor: pointer;
+cursor: pointer;
 	background: rgba(255, 255, 255, 0.1);
 	border: 2px solid rgba(254, 0, 0, 0.3);
 	border-radius: 50%;
@@ -1805,12 +1805,12 @@ modalwindow::-webkit-scrollbar-thumb:hover {
 .hyst_all_zoomclose:before {
 	width: 24px;
 	height: 3px;
-	content: '';
-	position: absolute;
-	transform: rotate(45deg);
+content: '';
+position: absolute;
+transform: rotate(45deg);
 	margin-left: -12px;
 	top: 24px;
-	left: 50%;
+left: 50%;
 	background-color: #e0e0e0;
 	border-radius: 2px;
 	transition: background-color 0.3s ease;
@@ -1819,12 +1819,12 @@ modalwindow::-webkit-scrollbar-thumb:hover {
 .hyst_all_zoomclose:after {
 	width: 24px;
 	height: 3px;
-	content: '';
-	position: absolute;
-	transform: rotate(315deg);
+content: '';
+position: absolute;
+transform: rotate(315deg);
 	margin-left: -12px;
 	top: 24px;
-	left: 50%;
+left: 50%;
 	background-color: #e0e0e0;
 	border-radius: 2px;
 	transition: background-color 0.3s ease;
@@ -1836,29 +1836,29 @@ modalwindow::-webkit-scrollbar-thumb:hover {
 }
 
 .hyst_all_zoomcontainer {
-	width: 100%;
-	height: 100%;
-	text-align: center;
+width: 100%;
+height: 100%;
+text-align: center;
 }
 
 .admin_select_img_input {
-	width: 100%;
+width: 100%;
 	height: 120px;
-	position: relative;
+position: relative;
 	border-radius: 8px;
 	border: 2px dashed rgba(254, 0, 0, 0.3);
-	display: block;
-	cursor: pointer;
+display: block;
+cursor: pointer;
 	transition: all 0.3s ease;
-	background-position: center center;
-	background-repeat: no-repeat;
+background-position: center center;
+background-repeat: no-repeat;
 	background-size: cover;
 	background-color: rgba(255, 255, 255, 0.03);
 }
 
 .admin_select_img_input[multiple] {
 	width: 120px;
-	display: inline-block;
+display: inline-block;
 }
 
 .admin_select_img_input:hover {
@@ -1868,24 +1868,24 @@ modalwindow::-webkit-scrollbar-thumb:hover {
 }
 
 .admin_select_img_field {
-	position: relative;
+position: relative;	
 }
 
 .admin_select_img_field.multiple {
 	width: 120px;
-	display: inline-block;
+display: inline-block;
 }
 
 .admin_multiple_image_select {
-	display: inline-block;
+display: inline-block;
 	border-radius: 8px;
 	border: 2px solid rgba(255, 255, 255, 0.1);
-	position: relative;
+position: relative;
 	width: 120px;
 	height: 120px;
 	margin: 0px 0px 0px 8px;
-	background-size: cover;
-	background-repeat: no-repeat;
+background-size: cover;
+background-repeat: no-repeat;
 	transition: all 0.3s ease;
 	background: rgba(255, 255, 255, 0.03);
 }
@@ -1897,9 +1897,9 @@ modalwindow::-webkit-scrollbar-thumb:hover {
 }
 
 .admin_detet_button {
-	width: 36px;
+width: 36px;
 	height: 36px;
-	margin: 0px 0px 0px 10px !important;
+margin: 0px 0px 0px 10px !important;
 	background: #fe0000;
 	border: 2px solid #fe0000;
 	border-radius: 8px;
@@ -1927,19 +1927,19 @@ modalwindow::-webkit-scrollbar-thumb:hover {
 }
 
 hystwysiwyg {
-	display: block;
+display: block;
 	border: 2px solid #e5e5e5;
-	box-sizing: border-box;
+box-sizing: border-box;
 	border-radius: 8px;
 	overflow: hidden;
 }
 
 .adm_theme redactorbar {
 	background-color: #fafafa;
-	display: flex;
-	justify-content: start;
-	align-items: start;
-	box-sizing: border-box;
+display: flex;
+justify-content: start;
+align-items: start;
+box-sizing: border-box;
 	padding: 8px;
 	border-bottom: 2px solid #e5e5e5;
 	gap: 5px;
@@ -1947,11 +1947,11 @@ hystwysiwyg {
 }
 
 .adm_theme wysiwygarea {
-	display: block;
+display: block;
 	min-height: 200px;
 	border: none;
-	box-sizing: border-box;
-	font-weight: normal;
+box-sizing: border-box;
+font-weight: normal;
 	background: #ffffff;
 	color: #404554;
 	font-family: roboto, sans-serif;
@@ -1965,7 +1965,7 @@ hystwysiwyg {
 	padding: 8px 12px;
 	border-radius: 6px;
 	font-weight: 500;
-	cursor: pointer;
+cursor: pointer;
 	margin: 0;
 	transition: all 0.2s ease;
 	position: relative;
@@ -2048,7 +2048,7 @@ hystwysiwyg {
 	padding: 8px 12px;
 	border-radius: 6px;
 	font-weight: 500;
-	cursor: pointer;
+cursor: pointer;
 	margin: 0;
 	transition: all 0.2s ease;
 	font-family: roboto, sans-serif;
@@ -2103,24 +2103,24 @@ iv[error] message {
 }
 
 .hyst_twodown_control_buttons {
-	margin: 0px 0px 20px 0px;
-	padding: 0px;
-	list-style: none;
+margin: 0px 0px 20px 0px;
+padding: 0px;
+list-style: none;
 	display: flex;
 	gap: 10px;
 }
 
 .hyst_twodown_control_buttons a {
-	display: inline-block;
+display: inline-block;
 	padding: 10px 16px;
 	background-color: #ffffff;
 	border: 2px solid #e5e5e5;
 	border-radius: 8px;
-	cursor: pointer;
+cursor: pointer;
 	transition: all 0.2s ease;
-	user-select: none;
+user-select: none;
 	color: #404554;
-	text-decoration: none;
+text-decoration: none;
 	font-weight: 500;
 }
 
@@ -2131,12 +2131,12 @@ iv[error] message {
 }
 
 .admin_small_img_preview {
-	margin: 0px 10px 0px 0px;
+margin: 0px 10px 0px 0px;
 	width: 32px;
 	height: 32px;
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center center;
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center center;
 	border-radius: 8px;
 	border: 2px solid #e5e5e5;
 }
@@ -2149,9 +2149,9 @@ iv[error] message {
 }
 
 .admin_form_repeater_label {
-	display: flex;
-	justify-content: start;
-	align-items: start;
+display: flex;
+justify-content: start;
+align-items: start;	
 	gap: 10px;
 }
 
@@ -2160,14 +2160,14 @@ iv[error] message {
 }
 
 .admin_form_repeater_label > div {
-	display: inline-block;
+display: inline-block;
 	padding: 10px 16px;
 	background-color: #ffffff;
 	border: 2px solid #e5e5e5;
 	border-radius: 8px;
-	cursor: pointer;
+cursor: pointer;
 	transition: all 0.2s ease;
-	user-select: none;
+user-select: none;
 	font-weight: 500;
 }
 
@@ -2178,11 +2178,11 @@ iv[error] message {
 }
 
 .admin_repeat_items_flex {
-	display: flex;
-	justify-content: start;
-	flex-wrap: wrap;
-	align-items: end;
-	position: relative;
+display: flex;
+justify-content: start;
+flex-wrap: wrap;
+align-items: end;
+position: relative;
 	padding: 15px 15px 15px 50px;
 	background-color: #ffffff;
 	border-radius: 8px;
@@ -2196,9 +2196,9 @@ iv[error] message {
 	height: 32px;
 	border: 2px solid #ffffff;
 	border-radius: 50%;
-	cursor: pointer;
-	user-select: none;
-	position: absolute;
+cursor: pointer;
+user-select: none;
+position: absolute;
 	top: 10px;
 	left: 10px;
 	transition: all 0.2s ease;
@@ -2224,7 +2224,7 @@ iv[error] message {
 }
 
 .hyst_margintop20 {
-	margin-top: 20px;
+margin-top: 20px;	
 }
 
 /* Адаптивность админ-панели */

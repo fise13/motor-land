@@ -49,8 +49,8 @@ $SITE_DESCRIPTION = 'Страница не найдена. Возможно, о�
 					<circle class="error-circle-3" cx="80" cy="150" r="10" fill="#fe0000" opacity="0.7"/>
 					<path class="error-path" d="M30 100 Q100 50 170 100" stroke="#fe0000" stroke-width="2" fill="none" opacity="0.3"/>
 				</svg>
-			</div>
-			
+</div>
+
 			<h1 id="error-title" class="error-404-title">Страница не найдена</h1>
 			
 			<p class="error-404-description">
@@ -70,7 +70,7 @@ $SITE_DESCRIPTION = 'Страница не найдена. Возможно, о�
 					</svg>
 					<span>Каталог товаров</span>
 				</a>
-			</div>
+	</div>
 			
 			<div class="error-404-links">
 				<p class="error-404-links-title">Полезные ссылки:</p>
@@ -80,8 +80,8 @@ $SITE_DESCRIPTION = 'Страница не найдена. Возможно, о�
 					<li><a href="/guarantees">Гарантии</a></li>
 					<li><a href="/contacts">Контакты</a></li>
 				</ul>
-			</div>
-			
+</div>
+
 			<p class="error-404-help">
 				Если вы уверены, что страница должна существовать, пожалуйста, 
 				<a href="/contacts" class="error-404-help-link">свяжитесь с нами</a>.
