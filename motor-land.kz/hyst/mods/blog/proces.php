@@ -1,5 +1,8 @@
 <?php
-session_start();
+// Защита от повторного запуска сессии
+if (session_status() === PHP_SESSION_NONE) {
+	session_start();
+}
 include_once($_SERVER['DOCUMENT_ROOT'].'/hyst/config.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/hyst/core/constants.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/hyst/core/functions.php');

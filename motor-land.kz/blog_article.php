@@ -1,8 +1,15 @@
 <?php
+// Включаем обработку ошибок для отладки
+error_reporting(E_ALL);
+ini_set('display_errors', 0); // Не показываем ошибки пользователям, но логируем
+ini_set('log_errors', 1);
+
 include('hyst/php.php');
 
 // Загружаем функции блога
-include_once('hyst/mods/blog/proces.php');
+if (!function_exists('get_blog_article')) {
+	include_once('hyst/mods/blog/proces.php');
+}
 
 // Получаем slug из URL
 $article_slug = isset($_GET['slug']) ? trim($_GET['slug']) : '';
@@ -14,17 +21,25 @@ if (empty($article_slug)) {
 }
 
 // Получаем статью по slug
-$article = get_blog_article($article_slug);
-
-if (!$article) {
-	header('HTTP/1.0 404 Not Found');
+try {
+	$article = get_blog_article($article_slug);
+	
+	if (!$article) {
+		header('HTTP/1.0 404 Not Found');
+		include('404.php');
+		exit;
+	}
+} catch (Exception $e) {
+	error_log('Blog article error: ' . $e->getMessage());
+	header('HTTP/1.0 500 Internal Server Error');
 	include('404.php');
 	exit;
 }
 
 // SEO: Оптимизированные мета-теги для статьи
-$SITE_TITLE = htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') . ' | Блог | Моторленд';
-$SITE_DESCRIPTION = htmlspecialchars($article['description'], ENT_QUOTES, 'UTF-8');
+// Защита от ошибок при отсутствии данных
+$SITE_TITLE = (!empty($article['title']) ? htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') : 'Статья') . ' | Блог | Моторленд';
+$SITE_DESCRIPTION = !empty($article['description']) ? htmlspecialchars($article['description'], ENT_QUOTES, 'UTF-8') : 'Статья в блоге Motor Land';
 $SITE_KEYWORDS = !empty($article['keywords']) ? htmlspecialchars($article['keywords'], ENT_QUOTES, 'UTF-8') : 'блог контрактные двигатели, статьи о двигателях';
 ?>
 <!doctype html>
@@ -32,24 +47,24 @@ $SITE_KEYWORDS = !empty($article['keywords']) ? htmlspecialchars($article['keywo
 <head>
 <?php include("hyst/head.php"); ?>
 <!-- SEO: Canonical URL -->
-<link rel="canonical" href="https://motor-land.kz/blog/<?=$article['slug'];?>"/>
+<link rel="canonical" href="https://motor-land.kz/blog/<?=!empty($article['slug']) ? htmlspecialchars($article['slug'], ENT_QUOTES, 'UTF-8') : '';?>"/>
 <!-- SEO: Meta keywords -->
 <meta name="keywords" content="<?=$SITE_KEYWORDS;?>">
 <!-- SEO: Open Graph для статьи -->
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://motor-land.kz/blog/<?=$article['slug'];?>">
+<meta property="og:url" content="https://motor-land.kz/blog/<?=!empty($article['slug']) ? htmlspecialchars($article['slug'], ENT_QUOTES, 'UTF-8') : '';?>">
 <meta property="og:title" content="<?=$SITE_TITLE;?>">
 <meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
-<meta property="og:image" content="https://motor-land.kz<?=!empty($article['image']) ? $article['image'] : '/img/logo.webp';?>">
-<meta property="article:published_time" content="<?=$article['date'];?>">
-<meta property="article:modified_time" content="<?=$article['date_modified'];?>">
-<meta property="article:author" content="<?=htmlspecialchars($article['author'], ENT_QUOTES, 'UTF-8');?>">
-<meta property="article:section" content="<?=htmlspecialchars($article['category'], ENT_QUOTES, 'UTF-8');?>">
+<meta property="og:image" content="https://motor-land.kz<?=!empty($article['image']) ? htmlspecialchars($article['image'], ENT_QUOTES, 'UTF-8') : '/img/logo.webp';?>">
+<meta property="article:published_time" content="<?=!empty($article['date']) ? htmlspecialchars($article['date'], ENT_QUOTES, 'UTF-8') : date('Y-m-d H:i:s');?>">
+<meta property="article:modified_time" content="<?=!empty($article['date_modified']) ? htmlspecialchars($article['date_modified'], ENT_QUOTES, 'UTF-8') : date('Y-m-d H:i:s');?>">
+<meta property="article:author" content="<?=!empty($article['author']) ? htmlspecialchars($article['author'], ENT_QUOTES, 'UTF-8') : 'Motor Land';?>">
+<meta property="article:section" content="<?=!empty($article['category']) ? htmlspecialchars($article['category'], ENT_QUOTES, 'UTF-8') : 'Общее';?>">
 <!-- SEO: Twitter Cards -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="<?=$SITE_TITLE;?>">
 <meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
-<meta name="twitter:image" content="https://motor-land.kz<?=!empty($article['image']) ? $article['image'] : '/img/logo.webp';?>">
+<meta name="twitter:image" content="https://motor-land.kz<?=!empty($article['image']) ? htmlspecialchars($article['image'], ENT_QUOTES, 'UTF-8') : '/img/logo.webp';?>">
 <!-- SEO: BreadcrumbList -->
 <script type="application/ld+json">
 {
@@ -68,8 +83,8 @@ $SITE_KEYWORDS = !empty($article['keywords']) ? htmlspecialchars($article['keywo
   }, {
     "@type": "ListItem",
     "position": 3,
-    "name": "<?=htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8');?>",
-    "item": "https://motor-land.kz/blog/<?=$article['slug'];?>"
+    "name": "<?=!empty($article['title']) ? htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') : 'Статья';?>",
+    "item": "https://motor-land.kz/blog/<?=!empty($article['slug']) ? htmlspecialchars($article['slug'], ENT_QUOTES, 'UTF-8') : '';?>"
   }]
 }
 </script>
@@ -78,14 +93,14 @@ $SITE_KEYWORDS = !empty($article['keywords']) ? htmlspecialchars($article['keywo
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "<?=htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8');?>",
-  "description": "<?=htmlspecialchars($article['description'], ENT_QUOTES, 'UTF-8');?>",
-  "image": "https://motor-land.kz<?=!empty($article['image']) ? $article['image'] : '/img/logo.webp';?>",
-  "datePublished": "<?=$article['date'];?>",
-  "dateModified": "<?=$article['date_modified'];?>",
+  "headline": "<?=!empty($article['title']) ? htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') : 'Статья';?>",
+  "description": "<?=!empty($article['description']) ? htmlspecialchars($article['description'], ENT_QUOTES, 'UTF-8') : 'Статья в блоге Motor Land';?>",
+  "image": "https://motor-land.kz<?=!empty($article['image']) ? htmlspecialchars($article['image'], ENT_QUOTES, 'UTF-8') : '/img/logo.webp';?>",
+  "datePublished": "<?=!empty($article['date']) ? htmlspecialchars($article['date'], ENT_QUOTES, 'UTF-8') : date('Y-m-d H:i:s');?>",
+  "dateModified": "<?=!empty($article['date_modified']) ? htmlspecialchars($article['date_modified'], ENT_QUOTES, 'UTF-8') : date('Y-m-d H:i:s');?>",
   "author": {
     "@type": "Organization",
-    "name": "<?=htmlspecialchars($article['author'], ENT_QUOTES, 'UTF-8');?>",
+    "name": "<?=!empty($article['author']) ? htmlspecialchars($article['author'], ENT_QUOTES, 'UTF-8') : 'Motor Land';?>",
     "url": "https://motor-land.kz"
   },
   "publisher": {
@@ -98,7 +113,7 @@ $SITE_KEYWORDS = !empty($article['keywords']) ? htmlspecialchars($article['keywo
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://motor-land.kz/blog/<?=$article['slug'];?>"
+    "@id": "https://motor-land.kz/blog/<?=!empty($article['slug']) ? htmlspecialchars($article['slug'], ENT_QUOTES, 'UTF-8') : '';?>"
   }
 }
 </script>
@@ -122,7 +137,7 @@ $SITE_KEYWORDS = !empty($article['keywords']) ? htmlspecialchars($article['keywo
 			<meta itemprop="position" content="2" />
 		</span> / 
 		<span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-			<span itemprop="name"><?=htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8');?></span>
+			<span itemprop="name"><?=!empty($article['title']) ? htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') : 'Статья';?></span>
 			<meta itemprop="position" content="3" />
 		</span>
 		</div>
@@ -137,12 +152,12 @@ $SITE_KEYWORDS = !empty($article['keywords']) ? htmlspecialchars($article['keywo
 			<!-- Заголовок статьи -->
 			<header class="blog-article-header">
 				<div class="blog-article-meta">
-					<span class="blog-article-category"><?=htmlspecialchars($article['category'], ENT_QUOTES, 'UTF-8');?></span>
-					<time datetime="<?=$article['date'];?>" class="blog-article-date" itemprop="datePublished"><?=date('d.m.Y', strtotime($article['date']));?></time>
-					<span class="blog-article-read-time"><?=htmlspecialchars($article['read_time'], ENT_QUOTES, 'UTF-8');?> чтения</span>
+					<span class="blog-article-category"><?=!empty($article['category']) ? htmlspecialchars($article['category'], ENT_QUOTES, 'UTF-8') : 'Общее';?></span>
+					<time datetime="<?=!empty($article['date']) ? htmlspecialchars($article['date'], ENT_QUOTES, 'UTF-8') : date('Y-m-d H:i:s');?>" class="blog-article-date" itemprop="datePublished"><?=!empty($article['date']) ? date('d.m.Y', strtotime($article['date'])) : date('d.m.Y');?></time>
+					<span class="blog-article-read-time"><?=!empty($article['read_time']) ? htmlspecialchars($article['read_time'], ENT_QUOTES, 'UTF-8') : '5 мин';?> чтения</span>
 				</div>
-				<h1 class="blog-article-title" itemprop="headline"><?=htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8');?></h1>
-				<p class="blog-article-description" itemprop="description"><?=htmlspecialchars($article['description'], ENT_QUOTES, 'UTF-8');?></p>
+				<h1 class="blog-article-title" itemprop="headline"><?=!empty($article['title']) ? htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') : 'Статья';?></h1>
+				<p class="blog-article-description" itemprop="description"><?=!empty($article['description']) ? htmlspecialchars($article['description'], ENT_QUOTES, 'UTF-8') : '';?></p>
 				
 				<!-- Автор статьи (E-E-A-T) -->
 				<div class="blog-article-author" itemprop="author" itemscope itemtype="https://schema.org/Organization">
@@ -150,8 +165,8 @@ $SITE_KEYWORDS = !empty($article['keywords']) ? htmlspecialchars($article['keywo
 						<img src="/img/logo.webp" alt="Motor Land" itemprop="logo">
 					</div>
 					<div class="blog-author-info">
-						<span class="blog-author-name" itemprop="name"><?=htmlspecialchars($article['author'], ENT_QUOTES, 'UTF-8');?></span>
-						<p class="blog-author-bio" itemprop="description"><?=htmlspecialchars($article['author_bio'], ENT_QUOTES, 'UTF-8');?></p>
+						<span class="blog-author-name" itemprop="name"><?=!empty($article['author']) ? htmlspecialchars($article['author'], ENT_QUOTES, 'UTF-8') : 'Motor Land';?></span>
+						<p class="blog-author-bio" itemprop="description"><?=!empty($article['author_bio']) ? htmlspecialchars($article['author_bio'], ENT_QUOTES, 'UTF-8') : '';?></p>
 					</div>
 				</div>
 			</header>
@@ -159,7 +174,7 @@ $SITE_KEYWORDS = !empty($article['keywords']) ? htmlspecialchars($article['keywo
 			<!-- Изображение статьи -->
 			<?php if (!empty($article['image'])): ?>
 			<div class="blog-article-image">
-				<img src="<?=$article['image'];?>" alt="<?=htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8');?>" itemprop="image" loading="eager">
+				<img src="<?=htmlspecialchars($article['image'], ENT_QUOTES, 'UTF-8');?>" alt="<?=!empty($article['title']) ? htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') : 'Статья';?>" itemprop="image" loading="eager">
 			</div>
 			<?php endif; ?>
 			
@@ -168,24 +183,38 @@ $SITE_KEYWORDS = !empty($article['keywords']) ? htmlspecialchars($article['keywo
 			<div class="blog-video-wrapper">
 				<?php
 				// Определяем тип видео и формируем iframe
-				$video_url = $article['video'];
-				if (strpos($video_url, 'youtube.com') !== false || strpos($video_url, 'youtu.be') !== false) {
-					// YouTube
-					preg_match('/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/', $video_url, $matches);
-					if (!empty($matches[1])) {
-						$video_id = $matches[1];
-						echo '<iframe src="https://www.youtube.com/embed/'.$video_id.'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+				$video_url = trim($article['video']);
+				$video_embed = '';
+				
+				try {
+					if (strpos($video_url, 'youtube.com') !== false || strpos($video_url, 'youtu.be') !== false) {
+						// YouTube
+						if (preg_match('/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/', $video_url, $matches)) {
+							if (!empty($matches[1])) {
+								$video_id = htmlspecialchars($matches[1], ENT_QUOTES, 'UTF-8');
+								$video_embed = '<iframe src="https://www.youtube.com/embed/'.$video_id.'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="blog-video-iframe"></iframe>';
+							}
+						}
+					} else if (strpos($video_url, 'vimeo.com') !== false) {
+						// Vimeo
+						if (preg_match('/vimeo\.com\/(\d+)/', $video_url, $matches)) {
+							if (!empty($matches[1])) {
+								$video_id = htmlspecialchars($matches[1], ENT_QUOTES, 'UTF-8');
+								$video_embed = '<iframe src="https://player.vimeo.com/video/'.$video_id.'" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen class="blog-video-iframe"></iframe>';
+							}
+						}
+					} else {
+						// Прямая ссылка на видео
+						$video_url_escaped = htmlspecialchars($video_url, ENT_QUOTES, 'UTF-8');
+						$video_embed = '<video controls class="blog-video-direct"><source src="'.$video_url_escaped.'" type="video/mp4">Ваш браузер не поддерживает видео.</video>';
 					}
-				} else if (strpos($video_url, 'vimeo.com') !== false) {
-					// Vimeo
-					preg_match('/vimeo\.com\/(\d+)/', $video_url, $matches);
-					if (!empty($matches[1])) {
-						$video_id = $matches[1];
-						echo '<iframe src="https://player.vimeo.com/video/'.$video_id.'" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+					
+					if (!empty($video_embed)) {
+						echo $video_embed;
 					}
-				} else {
-					// Прямая ссылка на видео
-					echo '<video controls><source src="'.$video_url.'" type="video/mp4">Ваш браузер не поддерживает видео.</video>';
+				} catch (Exception $e) {
+					// В случае ошибки просто не выводим видео
+					error_log('Blog video error: ' . $e->getMessage());
 				}
 				?>
 			</div>
@@ -193,7 +222,7 @@ $SITE_KEYWORDS = !empty($article['keywords']) ? htmlspecialchars($article['keywo
 			
 			<!-- Содержание статьи -->
 			<div class="blog-article-content" itemprop="articleBody">
-				<?=$article['content'];?>
+				<?=!empty($article['content']) ? $article['content'] : '<p>Содержание статьи отсутствует.</p>';?>
 			</div>
 			
 			<!-- Кнопки действий -->
@@ -204,12 +233,20 @@ $SITE_KEYWORDS = !empty($article['keywords']) ? htmlspecialchars($article['keywo
 			
 			<!-- Связанные статьи -->
 			<?php
-			$related_articles = get_blog_articles(3, $article['category'], 'published');
-			// Убираем текущую статью из списка
-			$related_articles = array_filter($related_articles, function($item) use ($article) {
-				return $item['id'] != $article['id'];
-			});
-			$related_articles = array_slice($related_articles, 0, 3);
+			try {
+				$category = !empty($article['category']) ? $article['category'] : 'Общее';
+				$related_articles = get_blog_articles(3, $category, 'published');
+				// Убираем текущую статью из списка
+				if (!empty($article['id'])) {
+					$related_articles = array_filter($related_articles, function($item) use ($article) {
+						return isset($item['id']) && $item['id'] != $article['id'];
+					});
+				}
+				$related_articles = array_slice($related_articles, 0, 3);
+			} catch (Exception $e) {
+				error_log('Blog related articles error: ' . $e->getMessage());
+				$related_articles = [];
+			}
 			?>
 			<?php if (count($related_articles) > 0): ?>
 			<div class="blog-related-articles">
