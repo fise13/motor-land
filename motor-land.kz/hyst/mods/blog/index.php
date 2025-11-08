@@ -2,7 +2,6 @@
 	<input type="checkbox" id="moderator_roller_add0">
 	<label for="moderator_roller_add0">➕ Добавить новую статью</label>
 	<div class="admin_roller_container admin_roler_with_overflow">
-		<div class="form_title">📝 Добавить статью в блог</div>
 		<interfaceform target="hyst/mods/blog/proces">
 			<div class="admin_content_alignment">
 				<!-- Основная информация -->
