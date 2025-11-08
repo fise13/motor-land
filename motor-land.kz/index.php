@@ -131,7 +131,9 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 <main id="main-content" role="main">
 <!-- SEO: Семантический тег <section> для секции слайдера -->
 <section class="slider" aria-label="Главный слайдер">
-	<div id="slidess">
+	<!-- Фоновый контейнер для слайдов - покрывает всю область до формы консультации -->
+	<div class="slider-background-wrapper">
+		<div id="slidess">
 		<?php
 		$slider = get_slider ('index_slider');
 		$slide_index = 0;
@@ -161,6 +163,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		$slide_index++;
 		endwhile;
 		?>
+		</div>
 	</div>
 	<!-- Performance: Скрипт слайдера выполняется после загрузки DOM и jQuery -->
 	<script>
@@ -189,22 +192,38 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 				}
 				
 				function slider() {
-					var cil = $("#slidess").children('div, img').length - 1;
+					var cil = $("#slidess").children('div, img, picture').length - 1;
 			var cur = 0;
-					$("#slidess").children('div, img').each(function(index, element){	
-						if ($(element).css('display') == 'block' || $(element).is(':visible')) {
+					$("#slidess").children('div, img, picture').each(function(index, element){
+						var $el = $(element);
+						// Для picture берем img внутри
+						if ($el.is('picture')) {
+							$el = $el.find('img');
+						}
+						if ($el.css('display') == 'block' || $el.is(':visible') || $el.css('opacity') != '0') {
 				cur = index;
 				}	
 			});
 			
 			if (cur >= cil) { cur = 0; } else { cur++; }
 			
-					$("#slidess").children('div, img').each(function(index, element){	
-						if ($(element).css('display') == 'block' || $(element).is(':visible')) { 
-							$(element).fadeOut(500); 
+					$("#slidess").children('div, img, picture').each(function(index, element){
+						var $el = $(element);
+						// Для picture берем img внутри
+						if ($el.is('picture')) {
+							$el = $el.find('img');
+						}
+						if ($el.css('display') == 'block' || $el.is(':visible') || $el.css('opacity') != '0') { 
+							$el.fadeOut(500); 
 						}
 				if (cur == index) {
-				$(element).fadeIn(500);
+					// Для picture показываем picture элемент
+					if ($(element).is('picture')) {
+						$(element).fadeIn(500);
+						$(element).find('img').fadeIn(500);
+					} else {
+						$el.fadeIn(500);
+					}
 				}	
 			});
 			
@@ -316,32 +335,33 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		</form>
 		</div>
 	</div>
-</section>
-
-<!-- SEO: Семантический тег <section> для формы консультации -->
-<!-- Accessibility: Форма консультации с полной поддержкой screen readers -->
-<section class="generalw forsbgf consult-section" aria-labelledby="consult-title" role="region">
-	<div class="shirina forsliderform JF_parent_form consult-container">
-		<h2 id="consult-title" class="consult-title">Хотите получить бесплатную консультацию?</h2>
-		<div class="consult-subtitle" id="consult-subtitle">заполните форму</div>
-		<form method="post" class="consult-form" aria-labelledby="consult-title" aria-describedby="consult-subtitle" novalidate>
-			<!-- Security: Honeypot поле для защиты от спама (скрыто от пользователей) -->
-			<input type="text" name="website" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;z-index:-1;" tabindex="-1" autocomplete="off" aria-hidden="true">
-			<!-- Security: Время загрузки формы (для защиты от быстрых отправок) -->
-			<input type="hidden" name="form_time" value="<?=time();?>" aria-hidden="true">
-			<div class="form-control consult-form-control">
-				<label for="consult-name">Имя <span aria-label="обязательное поле">*</span></label>
-				<input type="text" name="name" id="consult-name" class="consult-input consult-name" placeholder="Имя" required aria-required="true" autocomplete="name" maxlength="100">
-			</div>
-			<div class="form-control consult-form-control">
-				<label for="consult-phone">Телефон <span aria-label="обязательное поле">*</span></label>
-				<input type="tel" name="phon" id="consult-phone" class="consult-input consult-phone" placeholder="Телефон" required aria-required="true" autocomplete="tel" maxlength="20">
-			</div>
-			<div class="consult-btn-wrapper">
-				<input type="hidden" name="send_one" value="send" aria-hidden="true">
-				<button type="button" name="JF_send_casual" class="consult-btn" aria-label="Отправить форму обратной связи"><span>Отправить</span></button>
-			</div>
-		</form>
+	
+	<!-- SEO: Форма консультации внутри секции слайдера для общего фона -->
+	<!-- Accessibility: Форма консультации с полной поддержкой screen readers -->
+	<div class="slidercoun shirina consult-section-wrapper" aria-labelledby="consult-title" role="region">
+		<div class="consult-form-container">
+			<form method="post" class="consult-form-glass" role="search" aria-labelledby="consult-title" aria-describedby="consult-subtitle" novalidate>
+				<label for="consult-form" class="sr-only">Форма консультации</label>
+				<h2 id="consult-title" class="consult-form-title">Хотите получить бесплатную консультацию?</h2>
+				<div class="consult-form-subtitle" id="consult-subtitle">заполните форму</div>
+				<!-- Security: Honeypot поле для защиты от спама (скрыто от пользователей) -->
+				<input type="text" name="website" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;z-index:-1;" tabindex="-1" autocomplete="off" aria-hidden="true">
+				<!-- Security: Время загрузки формы (для защиты от быстрых отправок) -->
+				<input type="hidden" name="form_time" value="<?=time();?>" aria-hidden="true">
+				<div class="consult-form-fields">
+					<div class="consult-form-field">
+						<input type="text" name="name" id="consult-name" class="consult-input-field" placeholder="ИМЯ *" required aria-required="true" autocomplete="name" maxlength="100">
+					</div>
+					<div class="consult-form-field">
+						<input type="tel" name="phon" id="consult-phone" class="consult-input-field" placeholder="ТЕЛЕФОН *" required aria-required="true" autocomplete="tel" maxlength="20">
+					</div>
+					<div class="consult-form-submit-wrapper">
+						<input type="hidden" name="send_one" value="send" aria-hidden="true">
+						<button type="button" name="JF_send_casual" class="consult-submit-btn" aria-label="Отправить форму обратной связи">ОТПРАВИТЬ</button>
+					</div>
+				</div>
+			</form>
+		</div>
 	</div>
 </section>
 

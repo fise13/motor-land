@@ -112,7 +112,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 <!-- SEO: Семантический тег <section> для заголовка каталога -->
 <section class="generalw" aria-labelledby="catalog-title">
 	<div class="shirina zgolovorleft">
-		<h1 id="catalog-title" class="sttitle"><span>Каталог Контрактных Моторов Алматы</span></h1>
+		<h1 id="catalog-title" class="sttitle"><span>Каталог</span></h1>
 		
 		<ul class="actionperekl">
 			<a href="/actions"><li>акции</li></a>

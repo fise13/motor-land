@@ -478,10 +478,14 @@ margin: 20px 10px !important;
 	}
 
 	.slider {
-	height: 800px;
-		margin-top: 0 !important;
-		position: relative !important;
-		z-index: 1 !important;
+	/* Высота автоматическая для включения формы консультации */
+	height: auto !important;
+	min-height: 800px !important;
+	margin-top: 0 !important;
+	position: relative !important;
+	z-index: 1 !important;
+	/* Расширяем фон слайдера на всю высоту, включая форму консультации */
+	padding-bottom: 60px !important;
 	}
 
 	.titlephon {
@@ -681,6 +685,20 @@ margin: 20px 10px !important;
 	.sliderslid {
 		background-size: cover !important;
 		background-position: center center !important;
+		/* Растягиваем фон слайдов на всю высоту слайдера, включая форму консультации */
+		height: 100% !important;
+		min-height: 100% !important;
+	}
+	
+	/* Растягиваем обертку фона слайдера на всю высоту на мобильных */
+	.slider-background-wrapper {
+		height: 100% !important;
+		min-height: 100% !important;
+	}
+	
+	#slidess {
+		height: 100% !important;
+		min-height: 100% !important;
 	}
 	
 	
@@ -837,7 +855,8 @@ margin: 20px 10px !important;
 	/* Форма консультации "Хотите получить бесплатную консультацию?" должна быть ниже выпадающих списков */
 	.consult-section,
 	.forsbgf,
-	.generalw.forsbgf {
+	.generalw.forsbgf,
+	.consult-section-wrapper {
 		z-index: 50 !important;
 		position: relative !important;
 		/* Не создаем новый stacking context, чтобы выпадающие списки могли выйти за пределы */
@@ -845,9 +864,66 @@ margin: 20px 10px !important;
 	}
 	
 	.consult-container,
-	.consult-container * {
+	.consult-container *,
+	.consult-form-container {
 		z-index: auto !important;
 		position: relative !important;
+	}
+	
+	/* Адаптивные стили для формы консультации */
+	.consult-form-container {
+		padding: 0 20px !important;
+		text-align: center !important;
+	}
+	
+	.consult-form-glass {
+		min-width: 100% !important;
+		max-width: 100% !important;
+		width: 100% !important;
+		padding: 20px 15px !important;
+		margin: 20px 0 !important;
+		display: block !important;
+	}
+	
+	.consult-form-title {
+		font-size: 24px !important;
+		text-align: center !important;
+		margin-bottom: 8px !important;
+	}
+	
+	.consult-form-subtitle {
+		font-size: 14px !important;
+		text-align: center !important;
+		margin-bottom: 20px !important;
+	}
+	
+	.consult-form-fields {
+		flex-direction: column !important;
+		gap: 15px !important;
+	}
+	
+	.consult-form-field {
+		min-width: 100% !important;
+		width: 100% !important;
+	}
+	
+	.consult-form-submit-wrapper {
+		width: 100% !important;
+		margin-top: 10px !important;
+	}
+	
+	.consult-submit-btn {
+		width: 100% !important;
+		min-width: 100% !important;
+	}
+	
+	/* Адаптивность для слайдера с формой консультации */
+	.slider {
+		padding-bottom: 60px !important;
+	}
+	
+	.consult-section-wrapper {
+		padding-bottom: 60px !important;
 	}
 	
 	.foterinline h3 {
