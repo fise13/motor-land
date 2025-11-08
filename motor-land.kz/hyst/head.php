@@ -87,7 +87,12 @@ body{margin:0;padding:0;width:100%;height:100%;font-family:roboto,sans-serif;fon
 .shirina{max-width:1200px;margin:0 auto;position:relative}
 </style>
 
-<?php if ($_HYST_ADMIN): ?>
+<?php 
+// Определяем, находимся ли мы в админ-панели
+$is_admin = isset($_HYST_ADMIN) && $_HYST_ADMIN !== false && is_array($_HYST_ADMIN);
+?>
+
+<?php if ($is_admin): ?>
 <!-- Admin Panel: Стили админ-панели загружаются ТОЛЬКО в админке -->
 <!-- Performance: Критические стили загружаем первыми -->
 <link rel="stylesheet" href="/hyst/visual/admin.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
@@ -101,13 +106,14 @@ body{margin:0;padding:0;width:100%;height:100%;font-family:roboto,sans-serif;fon
 <link href="tab.css?<?=$INTERFACE_VERSION;?>" rel="stylesheet" type="text/css" media="(min-width: 768px)" />
 <link href="mob.css?<?=$INTERFACE_VERSION;?>" rel="stylesheet" type="text/css" media="(max-width: 767px)" />
 <?php endif; ?>
-<?php if (!$_HYST_ADMIN): ?>
+
+<?php if (!$is_admin): ?>
 <!-- Site: Revealator CSS загружаем асинхронно (только на сайте) -->
 <link rel="preload" href="des/fm.revealator.jquery.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="des/fm.revealator.jquery.min.css"></noscript>
 <?php endif; ?>
 
-<?php if ($_HYST_ADMIN): ?>
+<?php if ($is_admin): ?>
 <!-- Admin Panel: JavaScript для админ-панели -->
 <script src="/hyst/visual/jquery.js" defer></script>
 <script src="/hyst/visual/jquery-ui.js" defer></script>
@@ -122,7 +128,8 @@ body{margin:0;padding:0;width:100%;height:100%;font-family:roboto,sans-serif;fon
 <?php endif; ?>
 
 <?php
-if ($_HYST_ADMIN) {
+// Загружаем стили и скрипты модулей только в админ-панели
+if ($is_admin) {
 	$mods_folders = scandir($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/');
 	array_splice($mods_folders, 0, 2);
 	for ($q = 0; $q < count($mods_folders); $q++) {
