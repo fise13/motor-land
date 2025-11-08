@@ -144,6 +144,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		<!-- Performance: Preload первого изображения с высоким приоритетом для улучшения LCP -->
 		<link rel="preload" as="image" href="<?=$slide_img['webp'] ?: $slide_img['original'];?>" fetchpriority="high">
 		<!-- Performance: Используем <img> для LCP элемента вместо background-image с WebP поддержкой -->
+		<!-- SEO: H1 заголовок на главной странице должен быть только один -->
 		<picture>
 			<?php if ($slide_img['webp']): ?>
 			<source srcset="<?=$slide_img['webp'];?>" type="image/webp">
@@ -223,8 +224,9 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		})();
 		</script>
 	<div class="slidercoun shirina">
+		<!-- SEO: H1 заголовок на главной странице (единственный H1 на странице) -->
 		<!-- Accessibility: Заголовок слайдера -->
-		<h2 class="titlephon" role="heading" aria-level="2"><?=get_simple_texts ('index_slider_title');?></h2>
+		<h1 class="titlephon" role="heading" aria-level="1"><?=get_simple_texts ('index_slider_title');?></h1>
 		<!-- Accessibility: Кнопки действий с ARIA атрибутами -->
 		<div class="sliderbtns" role="group" aria-label="Действия на главной странице">
 			<a href="tel:<?=get_simple_texts ('index_slider_phone');?>" class="phone" aria-label="Позвонить по телефону <?=get_simple_texts ('index_slider_phone');?>" role="button" tabindex="0" onclick="if(typeof gtag==='function'){gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});}"><?=get_simple_texts ('index_slider_phone');?></a><br>
@@ -323,13 +325,17 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		<h2 id="consult-title" class="consult-title">Хотите получить бесплатную консультацию?</h2>
 		<div class="consult-subtitle" id="consult-subtitle">заполните форму</div>
 		<form method="post" class="consult-form" aria-labelledby="consult-title" aria-describedby="consult-subtitle" novalidate>
+			<!-- Security: Honeypot поле для защиты от спама (скрыто от пользователей) -->
+			<input type="text" name="website" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;z-index:-1;" tabindex="-1" autocomplete="off" aria-hidden="true">
+			<!-- Security: Время загрузки формы (для защиты от быстрых отправок) -->
+			<input type="hidden" name="form_time" value="<?=time();?>" aria-hidden="true">
 			<div class="form-control consult-form-control">
 				<label for="consult-name">Имя <span aria-label="обязательное поле">*</span></label>
-				<input type="text" name="name" id="consult-name" class="consult-input consult-name" placeholder="Имя" required aria-required="true" autocomplete="name">
+				<input type="text" name="name" id="consult-name" class="consult-input consult-name" placeholder="Имя" required aria-required="true" autocomplete="name" maxlength="100">
 			</div>
 			<div class="form-control consult-form-control">
 				<label for="consult-phone">Телефон <span aria-label="обязательное поле">*</span></label>
-				<input type="tel" name="phon" id="consult-phone" class="consult-input consult-phone" placeholder="Телефон" required aria-required="true" autocomplete="tel">
+				<input type="tel" name="phon" id="consult-phone" class="consult-input consult-phone" placeholder="Телефон" required aria-required="true" autocomplete="tel" maxlength="20">
 			</div>
 			<div class="consult-btn-wrapper">
 				<input type="hidden" name="send_one" value="send" aria-hidden="true">
@@ -340,6 +346,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 </section>
 
 <!-- SEO: Семантический тег <section> для секции "О нас" -->
+<!-- SEO: Правильная иерархия заголовков: после H1 идет H2 -->
 <section class="generalw" aria-labelledby="about-title">
 	<div class="shirina zgolovorleft">
 		<h2 id="about-title" class="sttitle"><span>О нас</span></h2>

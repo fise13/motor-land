@@ -34,6 +34,28 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.+)\.php$ $1 [R=301,L]
 
+# SEO: Каноникализация URL - убираем параметры из URL товаров (редирект на ЧПУ URL)
+# Редирект /detal?id=XXX на /katalog/product-name-XXX
+RewriteCond %{QUERY_STRING} ^id=(\d+)$
+RewriteRule ^detal\.php$ /detal?id=%1 [R=301,L]
+
+# SEO: Редирект с www на без www (если нужно)
+# RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+# RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+# SEO: Редирект с http на https (если SSL настроен)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# SEO: Каноникализация - убираем параметры отслеживания из URL
+RewriteCond %{QUERY_STRING} (utm_source|utm_medium|utm_campaign|ref|fbclid|gclid)= [NC]
+RewriteRule ^(.*)$ /$1? [R=301,L]
+
+# SEO: Редирект на версию без trailing slash для директорий
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} (.+)/$
+RewriteRule ^ %1 [R=301,L]
+
 # Performance: Сжатие Gzip/Brotli для улучшения скорости загрузки
 <IfModule mod_deflate.c>
     # Включаем сжатие для текстовых файлов
@@ -99,4 +121,21 @@ RewriteRule ^(.+)\.php$ $1 [R=301,L]
     <FilesMatch "\.(jpg|jpeg|png)$">
         Header append Vary "Accept"
     </FilesMatch>
+    
+    # Performance: CDN настройки - заголовки для CDN проксирования
+    # Если используется CDN, раскомментируйте и настройте:
+    # Header set Access-Control-Allow-Origin "*"
+    # Header set Access-Control-Allow-Methods "GET, HEAD, OPTIONS"
+    # Header set Access-Control-Max-Age "3600"
+    
+    # Security: Заголовки безопасности
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Performance: Включение Brotli сжатия (если модуль доступен)
+<IfModule mod_brotli.c>
+    AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml
 </IfModule>

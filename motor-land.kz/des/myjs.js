@@ -518,10 +518,17 @@
 		
 		if (name == '' || phon == '') { alert('Вы должны заполнить поля Имя и Телефон!'); return; }
 		
+		// Security: Добавляем время отправки формы для защиты от спама
+		var form_time = parent_form.find('input[name="form_time"]').val() || Math.floor(Date.now() / 1000);
+		
 		var data = new FormData();
 		data.append('send_leed',true);
 		data.append('name', name);
 		data.append('phon', phon);
+		data.append('form_time', form_time);
+		data.append('form_submit_time', Math.floor(Date.now() / 1000));
+		// Security: Honeypot поле (должно быть пустым)
+		data.append('website', '');
 		
 		$.ajax({
 			url: '/send_form.php',
@@ -565,11 +572,18 @@
 		
 		if (name == '' || phon == '') { alert('Вы должны заполнить поля Имя и Телефон!'); return; }
 		
+		// Security: Добавляем время отправки формы для защиты от спама
+		var form_time = parent_form.find('input[name="form_time"]').val() || Math.floor(Date.now() / 1000);
+		
 		var data = new FormData();
 		data.append('zakaz',true);
 		data.append('name', name);
 		data.append('phon', phon);
 		data.append('id', product);
+		data.append('form_time', form_time);
+		data.append('form_submit_time', Math.floor(Date.now() / 1000));
+		// Security: Honeypot поле (должно быть пустым)
+		data.append('website', '');
 		
 		$.ajax({
 			url: '/send_form.php',

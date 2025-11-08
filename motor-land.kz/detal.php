@@ -34,13 +34,17 @@ $SITE_KEYWORDS = 'купить контрактный мотор '.mb_strtolower
 // SEO: Формируем URL для Open Graph изображения
 $product_image = get_farrimg($print['images'])[0];
 $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : 'https://motor-land.kz'.$product_image;
+
+// SEO: Генерируем ЧПУ URL для товара (канонический URL)
+$canonical_url = seo_get_product_url($print['id'], $print['name']);
+$full_canonical_url = 'https://motor-land.kz' . $canonical_url;
 ?>
 <!doctype html>
 <html lang="ru">
 <head>
 <?php include("hyst/head.php"); ?>
-<!-- SEO: Canonical URL для страницы товара -->
-<link rel="canonical" href="https://motor-land.kz/detal?id=<?=$print['id'];?>"/>
+<!-- SEO: Canonical URL для страницы товара (ЧПУ URL) -->
+<link rel="canonical" href="<?=$full_canonical_url;?>"/>
 <!-- SEO: Meta keywords для товара -->
 <meta name="keywords" content="<?=$SITE_KEYWORDS;?>">
 <!-- SEO: Open Graph мета-теги для товара -->

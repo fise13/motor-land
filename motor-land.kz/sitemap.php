@@ -27,7 +27,7 @@ $pages = [
     ['/service', 'monthly', '0.8'],     // Автосервис
     ['/pay', 'monthly', '0.8'],         // Оплата и доставка
     ['/guarantees', 'monthly', '0.8'],  // Гарантии
-    ['/contacts.php', 'monthly', '0.8'] // Контакты
+    ['/contacts', 'monthly', '0.8']     // Контакты (без .php)
 ];
 
 foreach ($pages as $page) {
@@ -39,17 +39,26 @@ foreach ($pages as $page) {
     echo '  </url>' . "\n";
 }
 
-// SEO: Товары из каталога - динамически добавляются
-$stmt = $_DB_CONECT->prepare("SELECT id FROM internet_magazin_tovari ORDER BY id DESC");
+// SEO: Товары из каталога - динамически добавляются с ЧПУ URL
+$stmt = $_DB_CONECT->prepare("SELECT id, name FROM internet_magazin_tovari ORDER BY id DESC");
 $stmt->execute();
 $result = $stmt->get_result();
 
 while ($row = $result->fetch_assoc()) {
+    // Генерируем ЧПУ URL для товара
+    $product_url = seo_get_product_url($row['id'], $row['name']);
     echo '  <url>' . "\n";
-    echo '    <loc>' . $base_url . '/detal?id=' . $row['id'] . '</loc>' . "\n";
+    echo '    <loc>' . $base_url . htmlspecialchars($product_url, ENT_XML1, 'UTF-8') . '</loc>' . "\n";
     echo '    <lastmod>' . date('Y-m-d') . '</lastmod>' . "\n";
     echo '    <changefreq>weekly</changefreq>' . "\n";
     echo '    <priority>0.7</priority>' . "\n";
+    echo '  </url>' . "\n";
+    // Также добавляем старый URL с параметром для обратной совместимости (низкий приоритет)
+    echo '  <url>' . "\n";
+    echo '    <loc>' . $base_url . '/detal?id=' . $row['id'] . '</loc>' . "\n";
+    echo '    <lastmod>' . date('Y-m-d') . '</lastmod>' . "\n";
+    echo '    <changefreq>monthly</changefreq>' . "\n";
+    echo '    <priority>0.5</priority>' . "\n";
     echo '  </url>' . "\n";
 }
 

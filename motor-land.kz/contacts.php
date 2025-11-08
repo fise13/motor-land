@@ -10,13 +10,13 @@ $SITE_KEYWORDS = 'контакты моторленд, адрес автосер
 <html lang="ru">
 <head>
 <?php include("hyst/head.php"); ?>
-<!-- SEO: Canonical URL -->
-<link rel="canonical" href="https://motor-land.kz/contacts.php"/>
+<!-- SEO: Canonical URL (без .php расширения) -->
+<link rel="canonical" href="https://motor-land.kz/contacts"/>
 <!-- SEO: Meta keywords -->
 <meta name="keywords" content="<?=$SITE_KEYWORDS;?>">
 <!-- SEO: Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://motor-land.kz/contacts.php">
+<meta property="og:url" content="https://motor-land.kz/contacts">
 <meta property="og:title" content="<?=$SITE_TITLE;?>">
 <meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
 <meta property="og:image" content="https://motor-land.kz/img/logo.webp">
@@ -84,7 +84,7 @@ $SITE_KEYWORDS = 'контакты моторленд, адрес автосер
     "@type": "ListItem",
     "position": 2,
     "name": "Контакты",
-    "item": "https://motor-land.kz/contacts.php"
+    "item": "https://motor-land.kz/contacts"
   }]
 }
 </script>

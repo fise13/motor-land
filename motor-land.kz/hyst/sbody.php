@@ -54,14 +54,18 @@ if (isset($_HYST_REPORT['message'])) {
 		<h2 id="modal-title" class="formza">Сделать заказ на: <span id="playpayidv"><?=(isset($print['name'])?$print['name']:'');?></span></h2>
 		<div id="modal-description" class="sr-only">Заполните форму для оформления заказа</div>
 		<form method="post" aria-labelledby="modal-title">
+			<!-- Security: Honeypot поле для защиты от спама (скрыто от пользователей) -->
+			<input type="text" name="website" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;z-index:-1;" tabindex="-1" autocomplete="off" aria-hidden="true">
+			<!-- Security: Время загрузки формы (для защиты от быстрых отправок) -->
+			<input type="hidden" name="form_time" value="<?=time();?>" aria-hidden="true">
 			<input type="hidden" name="id" id="playpayid" value="<?=(isset($print['name'])?$print['name']:'');?>" aria-hidden="true">
 			<div class="form-control">
 				<label for="order-name" class="sr-only">Ваше имя</label>
-				<input type="text" name="name" id="order-name" placeholder="Имя" required aria-required="true" autocomplete="name" aria-label="Введите ваше имя">
+				<input type="text" name="name" id="order-name" placeholder="Имя" required aria-required="true" autocomplete="name" aria-label="Введите ваше имя" maxlength="100">
 			</div>
 			<div class="form-control">
 				<label for="order-phone" class="sr-only">Ваш телефон</label>
-				<input type="tel" name="phon" id="order-phone" placeholder="Телефон" required aria-required="true" autocomplete="tel" aria-label="Введите ваш телефон">
+				<input type="tel" name="phon" id="order-phone" placeholder="Телефон" required aria-required="true" autocomplete="tel" aria-label="Введите ваш телефон" maxlength="20">
 			</div>
 			<button type="button" name="JF_send_order" aria-label="Отправить заказ" class="order-submit-btn">Заказать</button>
 		</form>
