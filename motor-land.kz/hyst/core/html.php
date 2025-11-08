@@ -81,10 +81,6 @@ function hyst_show_adm () {
 		$mods_folders = scandir($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/');
 		array_splice($mods_folders, 0, 2);
 		for ($q = 0; $q < count($mods_folders); $q++) {
-			// Пропускаем seo_queries, simple_texts и customtexts (объединены с page_content)
-			if ($mods_folders[$q] == 'seo_queries' || $mods_folders[$q] == 'simple_texts' || $mods_folders[$q] == 'customtexts') {
-				continue;
-			}
 			if (array_search('general',explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false || array_search('all',explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false || array_search($mods_folders[$q],explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false) {
 				if (file_exists($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/'.$mods_folders[$q].'/info.ini') && $module_info = parse_ini_file($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/'.$mods_folders[$q].'/info.ini')) {
 				$module_name = $module_info['name'];
@@ -103,11 +99,7 @@ function hyst_show_adm () {
 		include($_SERVER['DOCUMENT_ROOT'].'/hyst/visual/html/moderators.php');
 			} else if (isset($_GET['mediafiles']) && (array_search('general',explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false || array_search('all',explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false || array_search('mediafiles',explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false)) {
 		include($_SERVER['DOCUMENT_ROOT'].'/hyst/visual/html/mediafiles.php');		
-			} else if (isset($_GET['displayed']) && (array_search('general',explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false || array_search('all',explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false || array_search($_GET['displayed'],explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false || array_search('simple_texts',explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false || array_search('customtexts',explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false)) {
-				// Если запрашивается simple_texts или customtexts, перенаправляем на page_content
-				if ($_GET['displayed'] == 'simple_texts' || $_GET['displayed'] == 'customtexts') {
-					$_GET['displayed'] = 'page_content';
-				}
+			} else if (isset($_GET['displayed']) && (array_search('general',explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false || array_search('all',explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false || array_search($_GET['displayed'],explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false)) {
 				if (file_exists($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/'.$_GET['displayed'].'/index.php')) {
 		include($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/'.$_GET['displayed'].'/index.php');			
 				} else {

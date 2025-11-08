@@ -26,12 +26,7 @@ if (isset($_POST['send_one'])) {
 	if (!empty($_POST['name']) && !empty($_POST['phon'])) {
 	$name = $_POST['name']; $phone = $_POST['phon'];
 	
-	$email_to = get_simple_texts('general_post_box');
-	if (empty($email_to)) {
-		$email_to = SITE_MAIL;
-	}
-	
-	$letter = new send_message($email_to, 
+	$letter = new send_message(get_simple_texts ('general_post_box'), 
 	'Заявка с сайта', 
 	'На сайте была заполненна форма заявки \n\n 
 	От: '.$name.' \n\n Телефон: '.$phone.'\n\n');
@@ -53,12 +48,7 @@ if (isset($_POST['zakazat_one'])) {
 	$name = $_POST['name']; $phone = $_POST['phon'];
 	$id = $_POST['id']; 
 	
-	$email_to = get_simple_texts('general_post_box');
-	if (empty($email_to)) {
-		$email_to = SITE_MAIL;
-	}
-	
-	$letter = new send_message($email_to, 
+	$letter = new send_message(get_simple_texts ('general_post_box'), 
 	'Заявка с сайта', 
 	'На сайте была заполненна форма заявки на: '.$id.' \n\n 
 	От: '.$name.' \n\n Телефон: '.$phone.'\n\n');
