@@ -1,21 +1,33 @@
-html,body {
+/* ========================================
+   СТИЛИ АДМИН-ПАНЕЛИ - ПОЛНОСТЬЮ ИЗОЛИРОВАНЫ
+   Все стили обернуты в .adm_theme для изоляции от сайта
+   ======================================== */
+
+/* Изоляция: все стили админки применяются только внутри .adm_theme */
+.adm_theme,
+.adm_theme html,
+.adm_theme body {
 margin: 0px;
 padding: 0px;
 height: 100%;
 font-family: arial;
 }
+
 .adm_theme {
 color: rgb(0, 0, 0);
 background-color: #000000;
 }
 
 
-adm_header,adm_content,adm_footer {
+/* Изоляция: все элементы админки внутри .adm_theme */
+.adm_theme adm_header,
+.adm_theme adm_content,
+.adm_theme adm_footer {
 width: 100%;
 display: flex;
 }
 
-adm_header {
+.adm_theme adm_header {
 background-color: #000000;
 height: 40px;
 justify-content: space-between;
@@ -116,7 +128,7 @@ padding: 7px 5px 7px 5px;
 margin: 0px 0px 0px 0px;
 }
 
-adm_content {
+.adm_theme adm_content {
 justify-content: space-between;
 overflow-x: hidden;
 height: calc(100% - 40px);
@@ -126,7 +138,7 @@ height: calc(100% - 40px);
 display: none;
 }
 
-sidebar {
+.adm_theme sidebar {
 width: 300px;
 min-width: 300px;
 background-color: #1d1a26;
@@ -233,7 +245,7 @@ min-width: 60px;
 display: none;
 }
 
-content {
+.adm_theme content {
 display: block;
 height: 100%;
 overflow-y: auto;
@@ -349,11 +361,12 @@ width: 100%;
     background: #2a2a2a;
   }
 
-interfaceform {
+/* Изоляция: все формы админки внутри .adm_theme */
+.adm_theme interfaceform {
 display: block;
 }
 
-.form_title {
+.adm_theme .form_title {
 font-size: 24px;
 font-weight: 700;
 padding: 15px 0;
@@ -365,18 +378,23 @@ text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 letter-spacing: 0.5px;
 }
 
-.form_title_sm {
+.adm_theme .form_title_sm {
 font-size: 16px;
 font-weight: bold;
 padding: 10px 0px;
 }
 
-label > i {
+.adm_theme label > i {
 display: inline-block;
 color: #ff4f70;
 }
 
-interfaceform input[type="text"],interfaceform input[type="password"],interfaceform input[type="number"], input[type="date"], input[type="datetime-local"], interfaceform input[type="url"]{
+.adm_theme interfaceform input[type="text"],
+.adm_theme interfaceform input[type="password"],
+.adm_theme interfaceform input[type="number"],
+.adm_theme input[type="date"],
+.adm_theme input[type="datetime-local"],
+.adm_theme interfaceform input[type="url"] {
 padding: 10px 12px;
 margin: 5px 0px;
 box-sizing: border-box;
@@ -388,14 +406,19 @@ font-size: 14px;
 transition: all 0.3s ease;
 }
 
-interfaceform input[type="text"]:focus, interfaceform input[type="password"]:focus, interfaceform input[type="number"]:focus, input[type="date"]:focus, input[type="datetime-local"]:focus, interfaceform input[type="url"]:focus {
+.adm_theme interfaceform input[type="text"]:focus,
+.adm_theme interfaceform input[type="password"]:focus,
+.adm_theme interfaceform input[type="number"]:focus,
+.adm_theme input[type="date"]:focus,
+.adm_theme input[type="datetime-local"]:focus,
+.adm_theme interfaceform input[type="url"]:focus {
 outline: none;
 border-color: #4a90e2;
 background: #2f2e38;
 box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
 }
 
-interfaceform input[type="button"]{
+.adm_theme interfaceform input[type="button"] {
 padding: 12px 24px;
 margin: 5px 0px;
 box-sizing: border-box;
@@ -412,13 +435,13 @@ background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
 color: #ffffff;
 }
 
-interfaceform input[type="button"]:hover {
+.adm_theme interfaceform input[type="button"]:hover {
 transform: translateY(-2px);
 box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
 background: linear-gradient(135deg, #5aa0f2 0%, #458acd 100%);
 }
 
-interfaceform textarea{
+.adm_theme interfaceform textarea {
 box-sizing: border-box;
 margin: 5px 0px;
 padding: 10px 12px;
@@ -433,14 +456,14 @@ resize: vertical;
 transition: all 0.3s ease;
 }
 
-interfaceform textarea:focus {
+.adm_theme interfaceform textarea:focus {
 outline: none;
 border-color: #4a90e2;
 background: #2f2e38;
 box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
 }
 
-interfaceform select {
+.adm_theme interfaceform select {
 padding: 10px 35px 10px 12px;
 margin: 5px 0px;
 box-sizing: border-box;
@@ -457,43 +480,44 @@ background-repeat: no-repeat;
 background-position: right 12px center;
 }
 
-interfaceform select:focus {
+.adm_theme interfaceform select:focus {
 outline: none;
 border-color: #4a90e2;
 background-color: #2f2e38;
 box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
 }
 
-interfaceform select option {
+.adm_theme interfaceform select option {
 background: #2b2a33;
 color: #e0e0e0;
 padding: 8px;
 }
 
-iw {
+.adm_theme iw {
 position: relative;
 }
 
-iv {
+.adm_theme iv {
 position: absolute;
 right: 5px;
 top: 50%;
 transform: translate(0,-50%);
 }
 
-iv.left {
+.adm_theme iv.left {
 left: 5px;
 right: auto;
 }
 
-iv[error] {
+.adm_theme iv[error] {
 border-radius: 20px;
 width: 18px;
 height: 18px;
-background-color: #ff4f70;
+background: linear-gradient(135deg, #ff4f70 0%, #e63950 100%);
+box-shadow: 0 2px 6px rgba(255, 79, 112, 0.3);
 }
 
-iv[error]:after {
+.adm_theme iv[error]:after {
 content: '!';
 position: absolute;
 color: white;
@@ -503,35 +527,36 @@ transform: translate(-50%,-50%);
 cursor: pointer;
 }
 
-iv[error] message {
+.adm_theme iv[error] message {
 display: none;
 position: absolute;
 right: -5px;
 bottom: 30px;
 padding: 10px;
-border-radius: 5px;
-background-color: white;
-border: solid 1px #ff4f70;
+border-radius: 6px;
+background: #2b2a33;
+border: 1px solid #ff4f70;
 color: #ff4f70;
 min-width: 300px;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 box-sizing: border-box;
 }
 
-iv.left[error] message {
+.adm_theme iv.left[error] message {
 left: -5px;
 right: auto;
 }
 
-iv[error]:hover message {
+.adm_theme iv[error]:hover message {
 display: block;
 }
 
-iv[right] {
+.adm_theme iv[right] {
 width: 18px;
 height: 18px;
 }
 
-iv[right]:before {
+.adm_theme iv[right]:before {
 position: absolute;
 content: '';
 width: 2px;
@@ -542,7 +567,7 @@ left: 2px;
 bottom: 2px;
 }
 
-iv[right]:after {
+.adm_theme iv[right]:after {
 position: absolute;
 content: '';
 width: 2px;
@@ -717,11 +742,11 @@ border-radius: 10px;
 display: block;
 }
 
-messagelog > report[right] {
+.adm_theme messagelog > report[right] {
 background-color: #00B442;
 }
 
-messagelog > report[error] {
+.adm_theme messagelog > report[error] {
 background-color: #ff4f70;
 }
 
@@ -1237,7 +1262,7 @@ border: solid 1px #8f8f9d;
 box-sizing: border-box;
 }
 
-redactorbar {
+.adm_theme redactorbar {
 background-color: #1d1a26;
 display: flex;
 justify-content: start;
@@ -1245,7 +1270,7 @@ align-items: start;
 box-sizing: border-box;
 }
 
-wysiwygarea {
+.adm_theme wysiwygarea {
 display: block;
 min-height: 100px;
 border: solid 1px #1d1a26;
@@ -1253,7 +1278,7 @@ box-sizing: border-box;
 font-weight: normal;
 }
 
-redactorbar button {
+.adm_theme redactorbar button {
 background-color: #312c3e;
 border: none;
 color: white;
@@ -1267,36 +1292,36 @@ background-size: auto 60%;
 margin: 1px 3px;
 }
 
-redactorbar button[action="align-left"],
-redactorbar button[action="align-center"],
-redactorbar button[action="align-right"],
-redactorbar button[action="link"],
-redactorbar button[action="img"] {
+.adm_theme redactorbar button[action="align-left"],
+.adm_theme redactorbar button[action="align-center"],
+.adm_theme redactorbar button[action="align-right"],
+.adm_theme redactorbar button[action="link"],
+.adm_theme redactorbar button[action="img"] {
 width: 30px;
 height: 26px;
 }
 
-redactorbar button[action="align-left"] {
+.adm_theme redactorbar button[action="align-left"] {
 background-image: url(/hyst/visual/images/alignleft_icon.svg);
 }
 
-redactorbar button[action="align-center"] {
+.adm_theme redactorbar button[action="align-center"] {
 background-image: url(/hyst/visual/images/aligncenter_icon.svg);
 }
 
-redactorbar button[action="align-right"] {
+.adm_theme redactorbar button[action="align-right"] {
 background-image: url(/hyst/visual/images/alignright_icon.svg);
 }
 
-redactorbar button[action="link"] {
+.adm_theme redactorbar button[action="link"] {
 background-image: url(/hyst/visual/images/link_icon.svg);
 }
 
-redactorbar button[action="img"] {
+.adm_theme redactorbar button[action="img"] {
 background-image: url(/hyst/visual/images/img_icon.svg);
 }
 
-redactorbar select[action="font-size"] {
+.adm_theme redactorbar select[action="font-size"] {
 background: linear-gradient(135deg, #312c3e 0%, #2a2538 100%);
 border: 1px solid #3a3a45;
 color: #e0e0e0;
@@ -1309,8 +1334,8 @@ transition: all 0.3s ease;
 box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Улучшенные стили для label в админке */
-interfaceform label {
+/* Изоляция: улучшенные стили для label в админке */
+.adm_theme interfaceform label {
 display: block;
 margin-bottom: 8px;
 font-size: 13px;
@@ -1319,7 +1344,7 @@ color: #d0d0d0;
 letter-spacing: 0.3px;
 }
 
-interfaceform label > i {
+.adm_theme interfaceform label > i {
 color: #ff4f70;
 margin-left: 3px;
 font-style: normal;
