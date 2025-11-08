@@ -99,18 +99,15 @@ $is_admin = isset($_HYST_ADMIN) && $_HYST_ADMIN !== false && is_array($_HYST_ADM
 <link rel="stylesheet" href="/hyst/visual/admin_mob.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
 <?php else: ?>
 <!-- Site: Стили сайта загружаются ТОЛЬКО на обычном сайте -->
-<!-- Performance: Основные стили загружаем асинхронно для улучшения SI (Speed Index) -->
-<!-- Non-critical CSS загружаем после рендеринга критического контента -->
-<link rel="preload" href="css.css?<?=$INTERFACE_VERSION;?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="css.css?<?=$INTERFACE_VERSION;?>" type="text/css" /></noscript>
-<link href="tab.css?<?=$INTERFACE_VERSION;?>" rel="stylesheet" type="text/css" media="(min-width: 768px)" />
-<link href="mob.css?<?=$INTERFACE_VERSION;?>" rel="stylesheet" type="text/css" media="(max-width: 767px)" />
+<!-- Основные стили загружаем синхронно для гарантированной загрузки -->
+<link rel="stylesheet" href="/css.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
+<link rel="stylesheet" href="/tab.css?<?=$INTERFACE_VERSION;?>" type="text/css" media="(min-width: 768px)" />
+<link rel="stylesheet" href="/mob.css?<?=$INTERFACE_VERSION;?>" type="text/css" media="(max-width: 767px)" />
 <?php endif; ?>
 
 <?php if (!$is_admin): ?>
-<!-- Site: Revealator CSS загружаем асинхронно (только на сайте) -->
-<link rel="preload" href="des/fm.revealator.jquery.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="des/fm.revealator.jquery.min.css"></noscript>
+<!-- Site: Revealator CSS загружаем синхронно (только на сайте) -->
+<link rel="stylesheet" href="/des/fm.revealator.jquery.min.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
 <?php endif; ?>
 
 <?php if ($is_admin): ?>
@@ -123,8 +120,8 @@ $is_admin = isset($_HYST_ADMIN) && $_HYST_ADMIN !== false && is_array($_HYST_ADM
 <script src="/hyst/visual/jquery.js" defer></script>
 <script src="/hyst/visual/jquery-ui.js" defer></script>
 <script src="/hyst/visual/main.js?<?=$INTERFACE_VERSION?>" defer></script>
-<script src="des/myjs.js?<?=$INTERFACE_VERSION;?>" defer></script>
-<script src="des/fm.revealator.jquery.js" defer></script>
+<script src="/des/myjs.js?<?=$INTERFACE_VERSION;?>" defer></script>
+<script src="/des/fm.revealator.jquery.js" defer></script>
 <?php endif; ?>
 
 <?php
