@@ -51,8 +51,6 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 <html lang="ru">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Accessibility: Skip link для быстрой навигации с клавиатуры -->
-<a href="#main-content" class="skip-link">Перейти к основному содержимому</a>
 <?php include("hyst/head.php"); ?>
 <!-- SEO: Canonical URL для предотвращения дублей контента -->
 <link rel="canonical" href="https://motor-land.kz/"/>
@@ -123,6 +121,8 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 </script>
 </head>
 <body>
+<!-- Accessibility: Skip link для быстрой навигации с клавиатуры -->
+<a href="#main-content" class="skip-link">Перейти к основному содержимому</a>
 <?php include("hyst/sbody.php"); ?>
 <?php include("des/head.php"); ?>
 
