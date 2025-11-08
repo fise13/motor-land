@@ -254,11 +254,18 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		<!-- Accessibility: Карточка товара с полной поддержкой screen readers -->
 		<article class="toverblock" itemscope itemtype="https://schema.org/Product" role="article" aria-labelledby="product-title-<?=$get['id'];?>">
 			<a href="/detal?id=<?=$get['id'];?>" itemprop="url" aria-label="Подробнее о товаре <?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>">
-				<!-- Performance: Оптимизированное изображение товара с WebP и lazy loading -->
+				<!-- Performance: Оптимизированное изображение товара с WebP, lazy loading и правильными alt атрибутами -->
 				<?php 
 				$product_img = get_optimized_image(get_farrimg($get['images'])[0]);
+				$product_alt = htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии', ENT_QUOTES, 'UTF-8');
 				?>
-				<div class="toverimg" style="background-image: url(<?=$product_img['webp'] ?: $product_img['original'];?>);" loading="lazy" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии', ENT_QUOTES, 'UTF-8');?>" itemprop="image" role="img">
+				<div class="toverimg">
+					<picture>
+						<?php if ($product_img['webp']): ?>
+						<source srcset="<?=$product_img['webp'];?>" type="image/webp">
+						<?php endif; ?>
+						<img src="<?=$product_img['original'];?>" alt="<?=$product_alt;?>" itemprop="image" loading="lazy" width="400" height="300" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;">
+					</picture>
 			<?php if ($get['sale'] != 'noting') { ?>
 			<div class="cationsale" aria-label="Скидка: <?=htmlspecialchars($get['sale'], ENT_QUOTES, 'UTF-8');?>"><?=$get['sale'];?></div>
 			<?php } ?>
