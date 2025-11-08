@@ -1,54 +1,30 @@
 # SEO и Performance оптимизации для motor-land.kz
+# Упрощенная версия для устранения проблем с 404 ошибками
 
 # Включаем mod_rewrite для ЧПУ и редиректов
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /
 
-# SEO: Редирект с www на без www (канонический домен)
-RewriteCond %{HTTP_HOST} ^www\.motor-land\.kz [NC]
-RewriteRule ^(.*)$ https://motor-land.kz/$1 [R=301,L]
-
-# SEO: Редирект с HTTP на HTTPS (обязательно для SEO)
-RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://motor-land.kz/$1 [R=301,L]
-
-# SEO: Убираем trailing slash с директорий (кроме корня)
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} (.+)/$
-RewriteRule ^ %1 [R=301,L]
-
-# SEO: Добавляем trailing slash к файлам без расширения (опционально)
-# RewriteCond %{REQUEST_FILENAME} !-f
-# RewriteCond %{REQUEST_URI} !(.*)/$
-# RewriteRule ^(.*)$ $1/ [R=301,L]
-
-# SEO: Редирект sitemap.php на sitemap.xml для лучшей индексации
-RewriteRule ^sitemap\.xml$ sitemap.php [L]
-
-# SEO: Каноникализация URL - убираем лишние параметры из URL
-# Редиректим дубли с лишними параметрами на канонический URL
-RewriteCond %{QUERY_STRING} ^id=([0-9]+)$
-RewriteRule ^detal$ detal.php?id=%1 [L]
-
-# SEO: Убираем параметры отслеживания из URL (utm, fbclid, gclid и т.д.)
-RewriteCond %{QUERY_STRING} ^(.+?&)?(utm_[^&]*|fbclid=[^&]*|gclid=[^&]*|ref=[^&]*)(&.*)?$
-RewriteRule ^(.*)$ /$1?%1%3 [R=301,L]
-
-# SEO: Редирект старых URL на новые (примеры)
-# RewriteRule ^old-page\.php$ /new-page [R=301,L]
-
 # Performance: Блокируем доступ к служебным файлам
 RewriteRule ^\.git - [F,L]
 RewriteRule ^\.svn - [F,L]
 RewriteRule ^\.env - [F,L]
-RewriteRule ^composer\.(json|lock) - [F,L]
-RewriteRule ^package(-lock)?\.json - [F,L]
+
+# SEO: Редирект sitemap.php на sitemap.xml
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+
+# ВАЖНО: Редиректы на HTTPS и www ЗАКОММЕНТИРОВАНЫ до установки SSL
+# Раскомментируйте после установки SSL сертификата:
+# RewriteCond %{HTTP_HOST} ^www\.motor-land\.kz [NC]
+# RewriteRule ^(.*)$ https://motor-land.kz/$1 [R=301,L]
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://motor-land.kz/$1 [R=301,L]
+
 </IfModule>
 
 # Performance: Включаем Gzip сжатие для ускорения загрузки
 <IfModule mod_deflate.c>
-    # Сжимаем HTML, CSS, JavaScript, Text, XML и шрифты
     AddOutputFilterByType DEFLATE text/html
     AddOutputFilterByType DEFLATE text/plain
     AddOutputFilterByType DEFLATE text/xml
@@ -61,131 +37,57 @@ RewriteRule ^package(-lock)?\.json - [F,L]
     AddOutputFilterByType DEFLATE application/x-javascript
     AddOutputFilterByType DEFLATE application/json
     AddOutputFilterByType DEFLATE image/svg+xml
-    AddOutputFilterByType DEFLATE font/truetype
-    AddOutputFilterByType DEFLATE font/opentype
-    AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
-    AddOutputFilterByType DEFLATE application/x-font-ttf
-    AddOutputFilterByType DEFLATE application/x-font-opentype
-    AddOutputFilterByType DEFLATE application/x-font-truetype
-    
-    # Не сжимаем изображения (они уже сжаты)
-    SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|webp|avif)$ no-gzip dont-vary
 </IfModule>
 
 # Performance: Кэширование браузера для ускорения загрузки
 <IfModule mod_expires.c>
     ExpiresActive On
-    
-    # Изображения - кэш на 1 год
     ExpiresByType image/jpeg "access plus 1 year"
     ExpiresByType image/jpg "access plus 1 year"
     ExpiresByType image/png "access plus 1 year"
     ExpiresByType image/gif "access plus 1 year"
     ExpiresByType image/webp "access plus 1 year"
-    ExpiresByType image/avif "access plus 1 year"
     ExpiresByType image/svg+xml "access plus 1 year"
     ExpiresByType image/x-icon "access plus 1 year"
-    
-    # Шрифты - кэш на 1 год
     ExpiresByType font/truetype "access plus 1 year"
     ExpiresByType font/opentype "access plus 1 year"
     ExpiresByType font/woff "access plus 1 year"
     ExpiresByType font/woff2 "access plus 1 year"
-    ExpiresByType application/vnd.ms-fontobject "access plus 1 year"
-    ExpiresByType application/x-font-ttf "access plus 1 year"
-    ExpiresByType application/x-font-opentype "access plus 1 year"
-    
-    # CSS и JavaScript - кэш на 1 месяц (с версионированием можно увеличить)
     ExpiresByType text/css "access plus 1 month"
     ExpiresByType text/javascript "access plus 1 month"
     ExpiresByType application/javascript "access plus 1 month"
-    ExpiresByType application/x-javascript "access plus 1 month"
-    
-    # HTML и XML - кэш на 1 час
     ExpiresByType text/html "access plus 1 hour"
-    ExpiresByType application/xml "access plus 1 hour"
-    ExpiresByType text/xml "access plus 1 hour"
-    
-    # Другие файлы - кэш на 1 неделю
-    ExpiresByType application/pdf "access plus 1 week"
-    ExpiresByType application/json "access plus 1 week"
 </IfModule>
 
 # Performance: Заголовки кэширования
 <IfModule mod_headers.c>
-    # Кэширование статических ресурсов
-    <FilesMatch "\.(jpg|jpeg|png|gif|webp|avif|svg|ico|css|js|woff|woff2|ttf|eot)$">
+    <FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|ico|css|js|woff|woff2|ttf|eot)$">
         Header set Cache-Control "max-age=31536000, public, immutable"
     </FilesMatch>
-    
-    # Кэширование HTML
     <FilesMatch "\.(html|htm|php)$">
         Header set Cache-Control "max-age=3600, public, must-revalidate"
     </FilesMatch>
-    
-    # Убираем ETag для лучшей производительности
     Header unset ETag
     FileETag None
 </IfModule>
 
 # Security: Заголовки безопасности
 <IfModule mod_headers.c>
-    # Защита от XSS атак
     Header set X-XSS-Protection "1; mode=block"
-    
-    # Защита от MIME-sniffing
     Header set X-Content-Type-Options "nosniff"
-    
-    # Защита от clickjacking
     Header set X-Frame-Options "SAMEORIGIN"
-    
-    # Strict Transport Security (HSTS) - обязательно для HTTPS
-    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-    
-    # Content Security Policy (CSP) - настройте под ваши нужды
-    # Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com;"
-    
-    # Referrer Policy
+    # HSTS - раскомментируйте после установки SSL
+    # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
     Header set Referrer-Policy "strict-origin-when-cross-origin"
-    
-    # Permissions Policy
     Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
 </IfModule>
 
-# Security: Блокируем доступ к служебным файлам и директориям
-<FilesMatch "^\.">
-    Order allow,deny
-    Deny from all
-</FilesMatch>
-
-# Блокируем доступ к файлам конфигурации
-<FilesMatch "(^#.*#|\.(bak|conf|dist|fla|in[ci]|log|orig|psd|sh|sql|sw[op])|~)$">
-    Order allow,deny
-    Deny from all
-</FilesMatch>
-
 # Security: Защита от directory browsing
 Options -Indexes
-
-# Performance: Улучшаем производительность PHP (если используется)
-<IfModule mod_php7.c>
-    php_value max_execution_time 300
-    php_value memory_limit 256M
-    php_value upload_max_filesize 64M
-    php_value post_max_size 64M
-</IfModule>
 
 # SEO: Настройки для корректной работы с UTF-8
 AddDefaultCharset UTF-8
 AddCharset UTF-8 .html .css .js .xml .json .rss .atom
 
-# Performance: Отключаем ETags для лучшей производительности
-<IfModule mod_headers.c>
-    Header unset ETag
-</IfModule>
-FileETag None
-
-# Custom Error Pages (опционально, если нужны кастомные страницы ошибок)
-# ErrorDocument 404 /404.php
-# ErrorDocument 403 /403.php
-# ErrorDocument 500 /500.php
+# Custom Error Pages
+ErrorDocument 404 /404.php
