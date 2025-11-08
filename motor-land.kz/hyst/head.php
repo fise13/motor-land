@@ -65,8 +65,9 @@ if (mb_strlen($SITE_DESCRIPTION) < 50) {
 <meta property="og:site_name" content="Motor Land">
 
 <!-- Performance: Preload критических шрифтов для устранения блокировки рендеринга -->
-<link rel="preload" href="./des/roboto.ttf" as="font" type="font/ttf" crossorigin="anonymous">
-<link rel="preload" href="./des/robotob.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<!-- Используем абсолютные пути для работы на всех страницах -->
+<link rel="preload" href="/des/roboto.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="/des/robotob.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
 <!-- Performance: Inline Critical CSS для улучшения SI (Speed Index) и LCP -->
 <!-- Critical CSS для слайдера и hero-секции - рендерится сразу без ожидания основного CSS -->
@@ -93,21 +94,22 @@ body{margin:0;padding:0;width:100%;height:100%;font-family:roboto,sans-serif;fon
 
 <!-- Performance: Основные стили загружаем асинхронно для улучшения SI (Speed Index) -->
 <!-- Non-critical CSS загружаем после рендеринга критического контента -->
-<link rel="preload" href="css.css?<?=$INTERFACE_VERSION;?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="css.css?<?=$INTERFACE_VERSION;?>" type="text/css" /></noscript>
-<link href="tab.css?<?=$INTERFACE_VERSION;?>" rel="stylesheet" type="text/css" media="(min-width: 768px)" />
-<link href="mob.css?<?=$INTERFACE_VERSION;?>" rel="stylesheet" type="text/css" media="(max-width: 767px)" />
+<!-- Используем абсолютные пути для работы на всех страницах -->
+<link rel="preload" href="/css.css?<?=$INTERFACE_VERSION;?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="/css.css?<?=$INTERFACE_VERSION;?>" type="text/css" /></noscript>
+<link href="/tab.css?<?=$INTERFACE_VERSION;?>" rel="stylesheet" type="text/css" media="(min-width: 768px)" />
+<link href="/mob.css?<?=$INTERFACE_VERSION;?>" rel="stylesheet" type="text/css" media="(max-width: 767px)" />
 <!-- Performance: Revealator CSS загружаем асинхронно -->
-<link rel="preload" href="des/fm.revealator.jquery.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="des/fm.revealator.jquery.min.css"></noscript>
+<link rel="preload" href="/des/fm.revealator.jquery.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="/des/fm.revealator.jquery.min.css"></noscript>
 
 <!-- Performance: JavaScript загружаем с defer для неблокирующей загрузки -->
 <!-- Важно: jQuery должен загрузиться первым, но используем defer для неблокирующей загрузки -->
 <script src="/hyst/visual/jquery.js" defer></script>
 <script src="/hyst/visual/jquery-ui.js" defer></script>
 <script src="/hyst/visual/main.js?<?=$INTERFACE_VERSION?>" defer></script>
-<script src="des/myjs.js?<?=$INTERFACE_VERSION;?>" defer></script>
-<script src="des/fm.revealator.jquery.js" defer></script>
+<script src="/des/myjs.js?<?=$INTERFACE_VERSION;?>" defer></script>
+<script src="/des/fm.revealator.jquery.js" defer></script>
 
 <?php
 if ($_HYST_ADMIN) {
