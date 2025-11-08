@@ -5,8 +5,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/hyst/core/functions.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/hyst/core/setups.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/page_content/proces.php');
 
-// Получаем список всех страниц
-$stmt = $_DB_CONECT->query("SELECT * FROM page_content ORDER BY id ASC");
+// Получаем список только разрешенных страниц (автосервис, оплата, гарантия)
+$stmt = $_DB_CONECT->query("SELECT * FROM page_content WHERE page_key IN ('service_page', 'pay_page', 'guarantees_page') ORDER BY id ASC");
 $pages_list = [];
 while ($row = $stmt->fetch_assoc()) {
 	$pages_list[] = $row;
@@ -14,11 +14,9 @@ while ($row = $stmt->fetch_assoc()) {
 
 // Определяем иконки для страниц
 $page_icons = [
-	'catalog_page' => '📦',
 	'service_page' => '🔧',
 	'pay_page' => '💳',
-	'guarantees_page' => '🛡️',
-	'contacts_page' => '📞'
+	'guarantees_page' => '🛡️'
 ];
 ?>
 
