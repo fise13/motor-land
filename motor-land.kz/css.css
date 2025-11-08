@@ -5188,15 +5188,27 @@ to {
 }
 
 .blog-article-author {
-	display: none; /* Скрываем блок автора с логотипом */
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	padding: 20px;
+	background: #f8f9fa;
+	border-radius: 12px;
+	border-left: 4px solid #fe0000;
 }
 
 .blog-author-avatar {
-	display: none; /* Скрываем аватар с логотипом */
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	overflow: hidden;
+	flex-shrink: 0;
 }
 
 .blog-author-avatar img {
-	display: none; /* Скрываем изображение логотипа */
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 .blog-author-info {

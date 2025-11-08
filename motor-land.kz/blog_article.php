@@ -269,19 +269,21 @@ try {
 				
 				try {
 					if (strpos($video_url, 'youtube.com') !== false || strpos($video_url, 'youtu.be') !== false) {
-						// YouTube
+						// YouTube - убираем логотип и улучшаем отображение
 						if (preg_match('/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/', $video_url, $matches)) {
 							if (!empty($matches[1])) {
 								$video_id = htmlspecialchars($matches[1], ENT_QUOTES, 'UTF-8');
-								$video_embed = '<iframe src="https://www.youtube.com/embed/'.$video_id.'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="blog-video-iframe"></iframe>';
+								// Параметры: modestbranding=1 убирает логотип YouTube, rel=0 не показывает похожие видео, controls=1 показывает контролы
+								$video_embed = '<iframe src="https://www.youtube.com/embed/'.$video_id.'?modestbranding=1&rel=0&showinfo=0&controls=1&iv_load_policy=3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="blog-video-iframe"></iframe>';
 							}
 						}
 					} else if (strpos($video_url, 'vimeo.com') !== false) {
-						// Vimeo
+						// Vimeo - убираем логотип и улучшаем отображение
 						if (preg_match('/vimeo\.com\/(\d+)/', $video_url, $matches)) {
 							if (!empty($matches[1])) {
 								$video_id = htmlspecialchars($matches[1], ENT_QUOTES, 'UTF-8');
-								$video_embed = '<iframe src="https://player.vimeo.com/video/'.$video_id.'" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen class="blog-video-iframe"></iframe>';
+								// Параметры: title=0, byline=0, portrait=0 убирают информацию и логотип
+								$video_embed = '<iframe src="https://player.vimeo.com/video/'.$video_id.'?title=0&byline=0&portrait=0&badge=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen class="blog-video-iframe"></iframe>';
 							}
 						}
 					} else {
