@@ -274,7 +274,11 @@ label[for="sidebarbutton"] i:after{
 	margin: 0px 0px 8px 0px;
 	border-radius: 10px;
 	transition: all 0.3s ease;
-	background: rgba(255, 255, 255, 0.03);
+	background: rgba(255, 255, 255, 0.03) !important; /* Перезаписываем inline стили */
+	background-image: none !important; /* Убираем фоновые изображения */
+	background-repeat: no-repeat !important;
+	background-position: center !important;
+	background-size: auto !important;
 	border: 1px solid transparent;
 	position: relative;
 	overflow: hidden;
@@ -287,21 +291,65 @@ label[for="sidebarbutton"] i:after{
 	margin-right: 12px;
 	transition: transform 0.3s ease;
 	display: inline-block;
+	flex-shrink: 0;
+	z-index: 2;
+	position: relative;
 }
 
 /* Специальные эмодзи для разных пунктов меню */
+/* Контрольная панель */
+.admin_sidebar_menu[href="/adm"]::before,
+.admin_sidebar_menu[href="/adm.php"]::before,
 .admin_sidebar_menu[href*="control"]::before { content: '🎛️'; }
+
+/* Модераторы */
 .admin_sidebar_menu[href*="moderator"]::before { content: '👥'; }
+
+/* Медиафайлы */
+.admin_sidebar_menu[href*="mediafile"]::before,
 .admin_sidebar_menu[href*="media"]::before { content: '📁'; }
-.admin_sidebar_menu[href*="blog"]::before { content: '📝'; }
-.admin_sidebar_menu[href*="content"]::before { content: '📄'; }
-.admin_sidebar_menu[href*="store"]::before { content: '🛒'; }
-.admin_sidebar_menu[href*="image"]::before { content: '🖼️'; }
-.admin_sidebar_menu[href*="string"]::before { content: '📝'; }
-.admin_sidebar_menu[href*="slider"]::before { content: '🎠'; }
+
+/* Блог */
+.admin_sidebar_menu[href*="blog"]::before,
+.admin_sidebar_menu[href*="displayed=blog"]::before { content: '📝'; }
+
+/* Контент */
+.admin_sidebar_menu[href*="content"]::before,
+.admin_sidebar_menu[href*="displayed=content"]::before { content: '📄'; }
+
+/* Интернет магазин */
+.admin_sidebar_menu[href*="store"]::before,
+.admin_sidebar_menu[href*="online_store"]::before,
+.admin_sidebar_menu[href*="displayed=online_store"]::before { content: '🛒'; }
+
+/* Картинки */
+.admin_sidebar_menu[href*="image"]::before,
+.admin_sidebar_menu[href*="simple_images"]::before,
+.admin_sidebar_menu[href*="displayed=simple_images"]::before { content: '🖼️'; }
+
+/* Строки */
+.admin_sidebar_menu[href*="string"]::before,
+.admin_sidebar_menu[href*="strings"]::before,
+.admin_sidebar_menu[href*="displayed=strings"]::before { content: '📝'; }
+
+/* Слайдеры */
+.admin_sidebar_menu[href*="slider"]::before,
+.admin_sidebar_menu[href*="sliders"]::before,
+.admin_sidebar_menu[href*="displayed=sliders"]::before { content: '🎠'; }
 
 .admin_sidebar_menu img {
-	display: none; /* Скрываем старые иконки */
+	display: none !important; /* Полностью скрываем старые иконки */
+	width: 0 !important;
+	height: 0 !important;
+	opacity: 0 !important;
+	visibility: hidden !important;
+}
+
+/* Убираем любой фон за текстом */
+.admin_sidebar_menu span {
+	position: relative;
+	z-index: 2;
+	background: transparent !important;
 }
 
 /* Эффект свечения при наведении */
@@ -317,7 +365,8 @@ label[for="sidebarbutton"] i:after{
 }
 
 .admin_sidebar_menu:hover {
-	background: rgba(254, 0, 0, 0.15);
+	background: rgba(254, 0, 0, 0.15) !important;
+	background-image: none !important; /* Убираем фоновые изображения при наведении */
 	color: #ffffff;
 	border-color: rgba(254, 0, 0, 0.3);
 	transform: translateX(5px);
@@ -333,7 +382,8 @@ label[for="sidebarbutton"] i:after{
 }
 
 .admin_sidebar_menu.active {
-	background: linear-gradient(135deg, #fe0000 0%, #d00000 100%);
+	background: linear-gradient(135deg, #fe0000 0%, #d00000 100%) !important;
+	background-image: none !important; /* Убираем фоновые изображения даже для активного состояния */
 	color: #ffffff;
 	font-weight: 600;
 	border-color: #fe0000;
@@ -362,7 +412,13 @@ label[for="sidebarbutton"] i:after{
 }
 
 #sidebarbutton:checked ~ adm_content sidebar .admin_sidebar_menu img {
+	display: none !important;
 	margin-right: 0;
+}
+
+/* Убираем фоновые изображения в свернутом меню */
+#sidebarbutton:checked ~ adm_content sidebar .admin_sidebar_menu {
+	background-image: none !important;
 }
 
 .adm_theme content {
