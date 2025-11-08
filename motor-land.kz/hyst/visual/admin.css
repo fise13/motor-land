@@ -354,9 +354,15 @@ display: block;
 }
 
 .form_title {
-font-size: 20px;
-font-weight: bold;
-padding: 10px 0px;
+font-size: 24px;
+font-weight: 700;
+padding: 15px 0;
+color: #ffffff;
+margin-bottom: 20px;
+border-bottom: 2px solid #4a90e2;
+padding-bottom: 15px;
+text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+letter-spacing: 0.5px;
 }
 
 .form_title_sm {
@@ -370,29 +376,98 @@ display: inline-block;
 color: #ff4f70;
 }
 
-interfaceform input[type="text"],interfaceform input[type="password"],interfaceform input[type="number"], input[type="date"], input[type="datetime-local"]{
-padding: 5px 40px 5px 10px;
+interfaceform input[type="text"],interfaceform input[type="password"],interfaceform input[type="number"], input[type="date"], input[type="datetime-local"], interfaceform input[type="url"]{
+padding: 10px 12px;
 margin: 5px 0px;
 box-sizing: border-box;
+border: 1px solid #3a3a45;
+border-radius: 6px;
+background: #2b2a33;
+color: #e0e0e0;
+font-size: 14px;
+transition: all 0.3s ease;
+}
+
+interfaceform input[type="text"]:focus, interfaceform input[type="password"]:focus, interfaceform input[type="number"]:focus, input[type="date"]:focus, input[type="datetime-local"]:focus, interfaceform input[type="url"]:focus {
+outline: none;
+border-color: #4a90e2;
+background: #2f2e38;
+box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
 }
 
 interfaceform input[type="button"]{
-padding: 5px 10px;
+padding: 12px 24px;
 margin: 5px 0px;
 box-sizing: border-box;
 cursor: pointer;
-font-weight: bold;
+font-weight: 600;
+border: none;
+border-radius: 6px;
+font-size: 14px;
+transition: all 0.3s ease;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+color: #ffffff;
+}
+
+interfaceform input[type="button"]:hover {
+transform: translateY(-2px);
+box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
+background: linear-gradient(135deg, #5aa0f2 0%, #458acd 100%);
 }
 
 interfaceform textarea{
 box-sizing: border-box;
 margin: 5px 0px;
+padding: 10px 12px;
+border: 1px solid #3a3a45;
+border-radius: 6px;
+background: #2b2a33;
+color: #e0e0e0;
+font-size: 14px;
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+line-height: 1.6;
+resize: vertical;
+transition: all 0.3s ease;
+}
+
+interfaceform textarea:focus {
+outline: none;
+border-color: #4a90e2;
+background: #2f2e38;
+box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
 }
 
 interfaceform select {
-padding: 5px 40px 5px 10px;
+padding: 10px 35px 10px 12px;
 margin: 5px 0px;
 box-sizing: border-box;
+border: 1px solid #3a3a45;
+border-radius: 6px;
+font-size: 14px;
+background: #2b2a33;
+color: #e0e0e0;
+cursor: pointer;
+transition: all 0.3s ease;
+appearance: none;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23e0e0e0' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+background-repeat: no-repeat;
+background-position: right 12px center;
+}
+
+interfaceform select:focus {
+outline: none;
+border-color: #4a90e2;
+background-color: #2f2e38;
+box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+}
+
+interfaceform select option {
+background: #2b2a33;
+color: #e0e0e0;
+padding: 8px;
 }
 
 iw {
@@ -512,23 +587,33 @@ display: none;
 
 .admin_roller_menu  > label {
 display: inline-block;
-padding: 7px 10px;
-background-color: #2b2a33;
-border: solid 1px #8f8f9d;
-border-radius: 4px;
+padding: 12px 18px;
+background: linear-gradient(135deg, #2b2a33 0%, #25242d 100%);
+border: 1px solid #3a3a45;
+border-radius: 8px;
 cursor: pointer;
-opacity: 0.7;
-transition: all 0.5s;
+opacity: 0.85;
+transition: all 0.3s ease;
 user-select: none;
+color: #e0e0e0;
+font-weight: 600;
+font-size: 14px;
+letter-spacing: 0.3px;
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .admin_roller_container {
 max-height: 0px;
 overflow: hidden;
 width: 100%;
-margin: 10px 0px 0px 0px;
-transition: all 0.5s;
+margin: 15px 0px 0px 0px;
+transition: all 0.4s ease;
 position: relative;
+background: #25242d;
+border-radius: 8px;
+padding: 0;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+border: 1px solid #3a3a45;
 }
 
 .admin_roller_container:after {
@@ -538,15 +623,22 @@ bottom: 0px;
 left: 0px;
 width: 100%;
 height: 1px;
-background-color: #8f8f9d;
+background: linear-gradient(90deg, transparent, #4a90e2, transparent);
+opacity: 0.3;
 }
 
 .admin_roller_menu > input[type="checkbox"]:checked ~ label {
 opacity: 1;
+background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+border-color: #4a90e2;
+color: #ffffff;
+box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
+transform: translateY(-2px);
 }
 
 .admin_roller_menu > input[type="checkbox"]:checked ~ .admin_roller_container {
 max-height: none;
+padding: 20px;
 }
 
 .admin_roller_menu > input[type="checkbox"]:checked ~ .admin_roller_container.admin_roler_with_overflow {
@@ -1205,14 +1297,57 @@ background-image: url(/hyst/visual/images/img_icon.svg);
 }
 
 redactorbar select[action="font-size"] {
-background-color: #312c3e;
-border: none;
-color: white;
-padding: 5px 7px;
-border-radius: 3px;
-font-weight: bold;
+background: linear-gradient(135deg, #312c3e 0%, #2a2538 100%);
+border: 1px solid #3a3a45;
+color: #e0e0e0;
+padding: 8px 12px;
+border-radius: 6px;
+font-weight: 600;
 cursor: pointer;
-margin: 1px 3px;
+margin: 2px 4px;
+transition: all 0.3s ease;
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Улучшенные стили для label в админке */
+interfaceform label {
+display: block;
+margin-bottom: 8px;
+font-size: 13px;
+font-weight: 600;
+color: #d0d0d0;
+letter-spacing: 0.3px;
+}
+
+interfaceform label > i {
+color: #ff4f70;
+margin-left: 3px;
+font-style: normal;
+font-weight: 700;
+}
+
+/* Улучшенные стили для admin_content_widht300 */
+.admin_content_widht300 {
+margin-bottom: 15px;
+}
+
+/* Улучшенные стили для admin_content_alignment */
+.admin_content_alignment {
+gap: 15px;
+}
+
+/* Улучшенные стили для сообщений об ошибках */
+iv[error] {
+background: linear-gradient(135deg, #ff4f70 0%, #e63950 100%);
+box-shadow: 0 2px 6px rgba(255, 79, 112, 0.3);
+}
+
+iv[error] message {
+background: #2b2a33;
+border: 1px solid #ff4f70;
+color: #ff4f70;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+border-radius: 6px;
 }
 
 .hyst_twodown_control_buttons {

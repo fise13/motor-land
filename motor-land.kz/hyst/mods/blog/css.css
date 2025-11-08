@@ -1,73 +1,471 @@
-/* Стили для админ-панели блога - отдельные от основного сайта */
+/* ========================================
+   СТИЛИ ДЛЯ АДМИН-ПАНЕЛИ БЛОГА
+   Полностью изолированы от стилей сайта
+   ======================================== */
 
+/* Статусы статей */
 .blog-status-published {
 	display: inline-block;
-	padding: 3px 8px;
-	background: #4caf50;
+	padding: 4px 10px;
+	background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
 	color: #ffffff;
-	border-radius: 3px;
+	border-radius: 12px;
 	font-size: 11px;
 	font-weight: 600;
-	margin-left: 10px;
+	margin-left: 12px;
 	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	box-shadow: 0 2px 6px rgba(76, 175, 80, 0.3);
+	transition: all 0.3s ease;
+}
+
+.blog-status-published:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 4px 10px rgba(76, 175, 80, 0.4);
 }
 
 .blog-status-draft {
 	display: inline-block;
-	padding: 3px 8px;
-	background: #ff9800;
+	padding: 4px 10px;
+	background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
 	color: #ffffff;
-	border-radius: 3px;
+	border-radius: 12px;
 	font-size: 11px;
 	font-weight: 600;
-	margin-left: 10px;
+	margin-left: 12px;
 	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	box-shadow: 0 2px 6px rgba(255, 152, 0, 0.3);
+	transition: all 0.3s ease;
 }
 
-/* Улучшение отображения форм в админке */
+.blog-status-draft:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 4px 10px rgba(255, 152, 0, 0.4);
+}
+
+/* Улучшенные стили для форм в админке блога */
 .admin_content_alignment_forimg {
 	display: flex;
-	gap: 20px;
-	margin: 20px 0;
+	gap: 25px;
+	margin: 25px 0;
 	flex-wrap: wrap;
+	align-items: flex-start;
 }
 
 .admin_imgblock {
-	flex: 0 0 300px;
+	flex: 0 0 320px;
+	min-width: 280px;
 }
 
 .admin_content_alignment_remain {
 	flex: 1;
 	min-width: 300px;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
 }
 
-/* Стили для textarea в админке */
-.admin_content_alignment textarea {
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+/* Улучшенные стили для textarea в админке */
+.admin_content_alignment textarea,
+.admin_content_alignment_remain textarea {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 	font-size: 14px;
-	line-height: 1.5;
+	line-height: 1.6;
 	resize: vertical;
+	padding: 10px 12px;
+	border: 1px solid #3a3a45;
+	border-radius: 6px;
+	background: #2b2a33;
+	color: #e0e0e0;
+	transition: all 0.3s ease;
+	box-sizing: border-box;
 }
 
-/* Стили для select в админке */
-.admin_content_alignment select {
-	padding: 8px 12px;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	font-size: 14px;
-	background: #ffffff;
-	cursor: pointer;
-}
-
-.admin_content_alignment select:focus {
+.admin_content_alignment textarea:focus,
+.admin_content_alignment_remain textarea:focus {
 	outline: none;
 	border-color: #4a90e2;
-	box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.1);
+	background: #2f2e38;
+	box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+}
+
+.admin_content_alignment textarea::placeholder,
+.admin_content_alignment_remain textarea::placeholder {
+	color: #888;
+}
+
+/* Улучшенные стили для input в админке блога */
+.admin_content_alignment input[type="text"],
+.admin_content_alignment_remain input[type="text"],
+.admin_content_alignment input[type="url"],
+.admin_content_alignment_remain input[type="url"] {
+	padding: 10px 12px;
+	border: 1px solid #3a3a45;
+	border-radius: 6px;
+	background: #2b2a33;
+	color: #e0e0e0;
+	font-size: 14px;
+	transition: all 0.3s ease;
+	box-sizing: border-box;
+}
+
+.admin_content_alignment input[type="text"]:focus,
+.admin_content_alignment_remain input[type="text"]:focus,
+.admin_content_alignment input[type="url"]:focus,
+.admin_content_alignment_remain input[type="url"]:focus {
+	outline: none;
+	border-color: #4a90e2;
+	background: #2f2e38;
+	box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+}
+
+.admin_content_alignment input[type="text"]::placeholder,
+.admin_content_alignment_remain input[type="text"]::placeholder {
+	color: #888;
+}
+
+/* Улучшенные стили для select в админке */
+.admin_content_alignment select,
+.admin_content_alignment_remain select {
+	padding: 10px 12px;
+	border: 1px solid #3a3a45;
+	border-radius: 6px;
+	font-size: 14px;
+	background: #2b2a33;
+	color: #e0e0e0;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-sizing: border-box;
+	appearance: none;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23e0e0e0' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 12px center;
+	padding-right: 35px;
+}
+
+.admin_content_alignment select:focus,
+.admin_content_alignment_remain select:focus {
+	outline: none;
+	border-color: #4a90e2;
+	background-color: #2f2e38;
+	box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+}
+
+.admin_content_alignment select option,
+.admin_content_alignment_remain select option {
+	background: #2b2a33;
+	color: #e0e0e0;
+	padding: 8px;
 }
 
 /* Улучшение отображения readonly полей */
-.admin_content_alignment input[readonly] {
+.admin_content_alignment input[readonly],
+.admin_content_alignment_remain input[readonly] {
 	cursor: not-allowed;
-	opacity: 0.7;
+	opacity: 0.6;
+	background: #25242d;
+	border-color: #2a2933;
 }
 
+/* Улучшенные стили для label */
+.admin_content_alignment label,
+.admin_content_alignment_remain label {
+	display: block;
+	margin-bottom: 8px;
+	font-size: 13px;
+	font-weight: 600;
+	color: #d0d0d0;
+	letter-spacing: 0.3px;
+}
+
+.admin_content_alignment label > i,
+.admin_content_alignment_remain label > i {
+	color: #ff4f70;
+	margin-left: 3px;
+	font-style: normal;
+}
+
+/* Улучшенные стили для кнопок */
+.admin_content_alignment input[type="button"][role="submit"],
+.admin_content_alignment_remain input[type="button"][role="submit"] {
+	padding: 12px 24px;
+	border: none;
+	border-radius: 6px;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.admin_content_alignment input[type="button"][name="blog_add"],
+.admin_content_alignment input[type="button"][name="blog_red"] {
+	background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+	color: #ffffff;
+}
+
+.admin_content_alignment input[type="button"][name="blog_add"]:hover,
+.admin_content_alignment input[type="button"][name="blog_red"]:hover {
+	background: linear-gradient(135deg, #5aa0f2 0%, #458acd 100%);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
+}
+
+.admin_content_alignment input[type="button"][name="blog_del"] {
+	background: linear-gradient(135deg, #ff4f70 0%, #e63950 100%);
+	color: #ffffff;
+}
+
+.admin_content_alignment input[type="button"][name="blog_del"]:hover {
+	background: linear-gradient(135deg, #ff5f80 0%, #f64960 100%);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(255, 79, 112, 0.4);
+}
+
+/* Улучшенные стили для выбора изображения */
+.admin_select_img_input {
+	border: 2px dashed #4a90e2;
+	background: #2b2a33;
+	transition: all 0.3s ease;
+}
+
+.admin_select_img_input:hover {
+	border-color: #5aa0f2;
+	background: #2f2e38;
+	transform: scale(1.02);
+}
+
+.admin_selected_img {
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	background-position: center;
+	border-radius: 8px;
+}
+
+/* Улучшенные стили для заголовков форм */
+.form_title {
+	font-size: 24px;
+	font-weight: 700;
+	padding: 15px 0;
+	color: #ffffff;
+	margin-bottom: 20px;
+	border-bottom: 2px solid #4a90e2;
+	padding-bottom: 15px;
+	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+	letter-spacing: 0.5px;
+}
+
+/* Улучшенные стили для контейнеров */
+.admin_roller_container {
+	background: #25242d;
+	border-radius: 8px;
+	padding: 20px;
+	margin-top: 15px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+	border: 1px solid #3a3a45;
+}
+
+.admin_roller_menu > label {
+	background: linear-gradient(135deg, #2b2a33 0%, #25242d 100%);
+	border: 1px solid #4a90e2;
+	color: #e0e0e0;
+	font-weight: 600;
+	padding: 10px 15px;
+	border-radius: 6px;
+	transition: all 0.3s ease;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.admin_roller_menu > label:hover {
+	background: linear-gradient(135deg, #3a3a45 0%, #2f2e38 100%);
+	border-color: #5aa0f2;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 10px rgba(74, 144, 226, 0.3);
+}
+
+.admin_roller_menu > input[type="checkbox"]:checked ~ label {
+	background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+	border-color: #4a90e2;
+	color: #ffffff;
+	box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
+}
+
+/* Улучшенные стили для WYSIWYG редактора */
+wysiwygarea {
+	border: 1px solid #3a3a45 !important;
+	border-radius: 6px !important;
+	background: #2b2a33 !important;
+}
+
+/* Группировка полей */
+.admin_blog_field_group {
+	background: #2b2a33;
+	border: 1px solid #3a3a45;
+	border-radius: 8px;
+	padding: 20px;
+	margin: 15px 0;
+}
+
+.admin_blog_field_group_title {
+	font-size: 16px;
+	font-weight: 600;
+	color: #4a90e2;
+	margin-bottom: 15px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #3a3a45;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+/* Информационные подсказки */
+.admin_blog_hint {
+	display: inline-block;
+	margin-left: 8px;
+	font-size: 11px;
+	color: #888;
+	font-weight: normal;
+	font-style: italic;
+}
+
+/* Улучшенные стили для разделителей */
+.admin_blog_separator {
+	height: 1px;
+	background: linear-gradient(90deg, transparent, #3a3a45, transparent);
+	margin: 25px 0;
+	border: none;
+}
+
+/* Улучшенные стили для label с подсказками */
+.admin_content_alignment label,
+.admin_content_alignment_remain label {
+	position: relative;
+}
+
+.admin_blog_hint {
+	display: block;
+	margin-top: 4px;
+	font-size: 11px;
+	color: #888;
+	font-weight: normal;
+	font-style: italic;
+	line-height: 1.4;
+}
+
+/* Улучшенные стили для WYSIWYG редактора в админке */
+wysiwygarea {
+	border: 1px solid #3a3a45 !important;
+	border-radius: 6px !important;
+	background: #2b2a33 !important;
+	min-height: 400px !important;
+}
+
+/* Улучшенные стили для выбора изображения */
+.admin_select_img_field {
+	margin-top: 8px;
+}
+
+.admin_select_img_input {
+	height: 120px;
+	background: #2b2a33;
+	border: 2px dashed #4a90e2;
+	transition: all 0.3s ease;
+}
+
+.admin_select_img_input:hover {
+	border-color: #5aa0f2;
+	background: #2f2e38;
+	transform: scale(1.02);
+}
+
+.admin_addimage_tip {
+	font-size: 40px;
+	color: #4a90e2;
+}
+
+.admin_addimage_tip span {
+	font-size: 13px;
+	color: #888;
+	margin-top: 8px;
+}
+
+/* Улучшенные стили для readonly полей */
+.admin_content_alignment input[readonly],
+.admin_content_alignment_remain input[readonly] {
+	background: #1f1e27 !important;
+	border-color: #2a2933 !important;
+	color: #999 !important;
+	cursor: not-allowed;
+}
+
+/* Улучшенные стили для разделителей */
+.admin_blog_separator {
+	height: 1px;
+	background: linear-gradient(90deg, transparent, #3a3a45, transparent);
+	margin: 25px 0;
+	border: none;
+}
+
+/* Информационные блоки */
+.admin_blog_info_block {
+	background: #2b2a33;
+	border-left: 4px solid #4a90e2;
+	border-radius: 6px;
+	padding: 15px;
+	margin: 15px 0;
+	color: #d0d0d0;
+	font-size: 13px;
+	line-height: 1.6;
+}
+
+.admin_blog_info_block strong {
+	color: #4a90e2;
+	font-weight: 600;
+}
+
+/* Улучшенные стили для кнопки удаления */
+.admin_content_alignment input[type="button"][name="blog_del"],
+.admin_content_alignment_remain input[type="button"][name="blog_del"] {
+	background: linear-gradient(135deg, #ff4f70 0%, #e63950 100%);
+	color: #ffffff;
+}
+
+.admin_content_alignment input[type="button"][name="blog_del"]:hover,
+.admin_content_alignment_remain input[type="button"][name="blog_del"]:hover {
+	background: linear-gradient(135deg, #ff5f80 0%, #f64960 100%);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(255, 79, 112, 0.4);
+}
+
+/* Адаптивность для админки блога */
+@media (max-width: 768px) {
+	.admin_content_alignment_forimg {
+		flex-direction: column;
+		gap: 15px;
+	}
+	
+	.admin_imgblock {
+		flex: 1 1 100%;
+		min-width: 100%;
+	}
+	
+	.admin_content_alignment_remain {
+		flex: 1 1 100%;
+		min-width: 100%;
+	}
+	
+	.form_title {
+		font-size: 20px;
+	}
+	
+	.admin_blog_field_group {
+		padding: 15px;
+	}
+	
+	.admin_blog_field_group_title {
+		font-size: 14px;
+	}
+}

@@ -87,27 +87,39 @@ body{margin:0;padding:0;width:100%;height:100%;font-family:roboto,sans-serif;fon
 .shirina{max-width:1200px;margin:0 auto;position:relative}
 </style>
 
+<?php if ($_HYST_ADMIN): ?>
+<!-- Admin Panel: Стили админ-панели загружаются ТОЛЬКО в админке -->
 <!-- Performance: Критические стили загружаем первыми -->
 <link rel="stylesheet" href="/hyst/visual/admin.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
 <link rel="stylesheet" href="/hyst/visual/admin_mob.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
-
+<?php else: ?>
+<!-- Site: Стили сайта загружаются ТОЛЬКО на обычном сайте -->
 <!-- Performance: Основные стили загружаем асинхронно для улучшения SI (Speed Index) -->
 <!-- Non-critical CSS загружаем после рендеринга критического контента -->
 <link rel="preload" href="css.css?<?=$INTERFACE_VERSION;?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="css.css?<?=$INTERFACE_VERSION;?>" type="text/css" /></noscript>
 <link href="tab.css?<?=$INTERFACE_VERSION;?>" rel="stylesheet" type="text/css" media="(min-width: 768px)" />
 <link href="mob.css?<?=$INTERFACE_VERSION;?>" rel="stylesheet" type="text/css" media="(max-width: 767px)" />
-<!-- Performance: Revealator CSS загружаем асинхронно -->
+<?php endif; ?>
+<?php if (!$_HYST_ADMIN): ?>
+<!-- Site: Revealator CSS загружаем асинхронно (только на сайте) -->
 <link rel="preload" href="des/fm.revealator.jquery.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="des/fm.revealator.jquery.min.css"></noscript>
+<?php endif; ?>
 
-<!-- Performance: JavaScript загружаем с defer для неблокирующей загрузки -->
-<!-- Важно: jQuery должен загрузиться первым, но используем defer для неблокирующей загрузки -->
+<?php if ($_HYST_ADMIN): ?>
+<!-- Admin Panel: JavaScript для админ-панели -->
+<script src="/hyst/visual/jquery.js" defer></script>
+<script src="/hyst/visual/jquery-ui.js" defer></script>
+<script src="/hyst/visual/main.js?<?=$INTERFACE_VERSION?>" defer></script>
+<?php else: ?>
+<!-- Site: JavaScript для обычного сайта -->
 <script src="/hyst/visual/jquery.js" defer></script>
 <script src="/hyst/visual/jquery-ui.js" defer></script>
 <script src="/hyst/visual/main.js?<?=$INTERFACE_VERSION?>" defer></script>
 <script src="des/myjs.js?<?=$INTERFACE_VERSION;?>" defer></script>
 <script src="des/fm.revealator.jquery.js" defer></script>
+<?php endif; ?>
 
 <?php
 if ($_HYST_ADMIN) {
