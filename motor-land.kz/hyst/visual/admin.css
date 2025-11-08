@@ -1,7 +1,7 @@
 /* ========================================
-   СТИЛИ АДМИН-ПАНЕЛИ - АДАПТИРОВАНЫ ПОД ДИЗАЙН САЙТА
+   СТИЛИ АДМИН-ПАНЕЛИ - ТЕМНАЯ ТЕМА С ЭМОДЗИ ИКОНКАМИ
    Все стили обернуты в .adm_theme для изоляции от сайта
-   Цветовая схема: белый фон, красный акцент (#fe0000), шрифты roboto/robotob
+   Цветовая схема: темный фон (#1a1a1a, #2b2b2b), красный акцент (#fe0000), эмодзи иконки
    ======================================== */
 
 /* Подключение шрифтов сайта */
@@ -30,13 +30,14 @@
 	height: 100%;
 	font-family: roboto, sans-serif;
 	font-size: 14px;
-	color: #404554;
-	background-color: #fafafa;
+	color: #e0e0e0;
+	background-color: #0f0f0f;
 }
 
 .adm_theme {
-	color: #404554;
-	background-color: #fafafa;
+	color: #e0e0e0;
+	background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+	min-height: 100vh;
 }
 
 /* Изоляция: все элементы админки внутри .adm_theme */
@@ -48,11 +49,11 @@
 }
 
 .adm_theme adm_header {
-	background-color: #ffffff;
-	height: 60px;
+	background: linear-gradient(135deg, #1a1a1a 0%, #2b2b2b 100%);
+	height: 70px;
 	justify-content: space-between;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-	border-bottom: 1px solid #e5e5e5;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 1px rgba(254, 0, 0, 0.3);
+	border-bottom: 2px solid #fe0000;
 	position: relative;
 	z-index: 100;
 }
@@ -67,24 +68,27 @@
 }
 
 .admin_header_name {
-	color: #1a1a1a;
-	font-size: 16px;
-	font-weight: 600;
+	color: #ffffff;
+	font-size: 18px;
+	font-weight: 700;
 	font-family: robotob, sans-serif;
+	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+	letter-spacing: 0.5px;
 }
 
 .admin_header_exit {
 	display: block;
 	margin: 0 10px 0 0;
 	text-decoration: none;
-	color: #404554;
+	color: #e0e0e0;
 	position: relative;
 	font-weight: 600;
-	transition: color 0.2s ease;
+	transition: all 0.2s ease;
 }
 
 .admin_header_exit:hover {
 	color: #fe0000;
+	text-shadow: 0 0 8px rgba(254, 0, 0, 0.5);
 }
 
 /* Button style for logout */
@@ -169,14 +173,33 @@
 .adm_theme sidebar {
 	width: 280px;
 	min-width: 280px;
-	background-color: #ffffff;
+	background: linear-gradient(180deg, #1a1a1a 0%, #151515 100%);
 	height: 100%;
 	display: block;
 	box-sizing: border-box;
-	padding: 20px;
+	padding: 20px 15px;
 	transition: all 0.3s ease;
-	box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
-	border-right: 1px solid #e5e5e5;
+	box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+	border-right: 1px solid rgba(254, 0, 0, 0.2);
+	overflow-y: auto;
+}
+
+/* Кастомный скроллбар для сайдбара */
+.adm_theme sidebar::-webkit-scrollbar {
+	width: 6px;
+}
+
+.adm_theme sidebar::-webkit-scrollbar-track {
+	background: #1a1a1a;
+}
+
+.adm_theme sidebar::-webkit-scrollbar-thumb {
+	background: #fe0000;
+	border-radius: 3px;
+}
+
+.adm_theme sidebar::-webkit-scrollbar-thumb:hover {
+	background: #d00000;
 }
 
 label[for="sidebarbutton"] {
@@ -243,39 +266,84 @@ label[for="sidebarbutton"] i:after{
 .admin_sidebar_menu {
 	display: flex;
 	align-items: center;
-	padding: 12px 15px;
+	padding: 14px 16px;
 	text-decoration: none;
-	color: #404554;
+	color: #b0b0b0;
 	font-size: 15px;
 	font-weight: 500;
-	margin: 0px 0px 5px 0px;
-	border-radius: 8px;
-	transition: all 0.2s ease;
-	background-color: transparent;
+	margin: 0px 0px 8px 0px;
+	border-radius: 10px;
+	transition: all 0.3s ease;
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid transparent;
+	position: relative;
+	overflow: hidden;
 }
 
-.admin_sidebar_menu img {
-	width: 20px;
-	height: 20px;
+/* Эмодзи иконка перед текстом */
+.admin_sidebar_menu::before {
+	content: '📋';
+	font-size: 20px;
 	margin-right: 12px;
-	filter: none;
-	opacity: 0.7;
+	transition: transform 0.3s ease;
+	display: inline-block;
+}
+
+/* Специальные эмодзи для разных пунктов меню */
+.admin_sidebar_menu[href*="control"]::before { content: '🎛️'; }
+.admin_sidebar_menu[href*="moderator"]::before { content: '👥'; }
+.admin_sidebar_menu[href*="media"]::before { content: '📁'; }
+.admin_sidebar_menu[href*="blog"]::before { content: '📝'; }
+.admin_sidebar_menu[href*="content"]::before { content: '📄'; }
+.admin_sidebar_menu[href*="store"]::before { content: '🛒'; }
+.admin_sidebar_menu[href*="image"]::before { content: '🖼️'; }
+.admin_sidebar_menu[href*="string"]::before { content: '📝'; }
+.admin_sidebar_menu[href*="slider"]::before { content: '🎠'; }
+
+.admin_sidebar_menu img {
+	display: none; /* Скрываем старые иконки */
+}
+
+/* Эффект свечения при наведении */
+.admin_sidebar_menu::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(254, 0, 0, 0.1), transparent);
+	transition: left 0.5s ease;
 }
 
 .admin_sidebar_menu:hover {
-	background-color: #f5f5f5;
-	color: #1a1a1a;
+	background: rgba(254, 0, 0, 0.15);
+	color: #ffffff;
+	border-color: rgba(254, 0, 0, 0.3);
+	transform: translateX(5px);
+	box-shadow: 0 4px 12px rgba(254, 0, 0, 0.2);
+}
+
+.admin_sidebar_menu:hover::before {
+	transform: scale(1.2);
+}
+
+.admin_sidebar_menu:hover::after {
+	left: 100%;
 }
 
 .admin_sidebar_menu.active {
-	background-color: #fe0000;
+	background: linear-gradient(135deg, #fe0000 0%, #d00000 100%);
 	color: #ffffff;
 	font-weight: 600;
+	border-color: #fe0000;
+	box-shadow: 0 4px 16px rgba(254, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+	transform: translateX(5px);
 }
 
-.admin_sidebar_menu.active img {
-	filter: brightness(0) invert(1);
-	opacity: 1;
+.admin_sidebar_menu.active::before {
+	transform: scale(1.2);
+	filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
 }
 
 #sidebarbutton:checked ~ adm_content sidebar {
@@ -304,7 +372,27 @@ label[for="sidebarbutton"] i:after{
 	flex-grow: 1;
 	box-sizing: border-box;
 	padding: 30px;
-	background-color: #fafafa;
+	background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #151515 100%);
+	background-attachment: fixed;
+}
+
+/* Кастомный скроллбар для контента */
+.adm_theme content::-webkit-scrollbar {
+	width: 10px;
+}
+
+.adm_theme content::-webkit-scrollbar-track {
+	background: #1a1a1a;
+}
+
+.adm_theme content::-webkit-scrollbar-thumb {
+	background: linear-gradient(180deg, #fe0000 0%, #d00000 100%);
+	border-radius: 5px;
+	border: 2px solid #1a1a1a;
+}
+
+.adm_theme content::-webkit-scrollbar-thumb:hover {
+	background: linear-gradient(180deg, #ff1111 0%, #e01111 100%);
 }
 
 .text-center {
@@ -322,8 +410,26 @@ label[for="sidebarbutton"] i:after{
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
-	background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+	background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #151515 100%);
 	font-family: roboto, sans-serif;
+	position: relative;
+	overflow: hidden;
+}
+
+.auth_container::before {
+	content: '';
+	position: absolute;
+	top: -50%;
+	left: -50%;
+	width: 200%;
+	height: 200%;
+	background: radial-gradient(circle, rgba(254, 0, 0, 0.1) 0%, transparent 70%);
+	animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+	0%, 100% { transform: scale(1); opacity: 0.5; }
+	50% { transform: scale(1.1); opacity: 0.8; }
 }
 
 .auth_form {
@@ -333,15 +439,17 @@ label[for="sidebarbutton"] i:after{
 	gap: 22px;
 	width: 380px;
 	padding: 50px 40px;
-	border-radius: 12px;
-	background: #ffffff;
-	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+	border-radius: 16px;
+	background: linear-gradient(135deg, #2b2b2b 0%, #252525 100%);
+	box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(254, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	position: relative;
+	z-index: 1;
 }
 
 .auth_form:hover {
-	transform: translateY(-2px);
-	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+	transform: translateY(-4px);
+	box-shadow: 0 12px 50px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(254, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .auth_form_logo {
@@ -360,20 +468,21 @@ label[for="sidebarbutton"] i:after{
 }
 
 .form_title {
-	color: #1a1a1a;
+	color: #ffffff;
 	font-size: 24px;
 	font-weight: 700;
 	margin-bottom: 10px;
 	font-family: robotob, sans-serif;
+	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .input_field {
 	width: 100%;
 	padding: 12px 16px;
 	font-size: 14px;
-	color: #404554;
-	background: #ffffff;
-	border: 2px solid #e5e5e5;
+	color: #e0e0e0;
+	background: rgba(255, 255, 255, 0.05);
+	border: 2px solid rgba(255, 255, 255, 0.1);
 	border-radius: 8px;
 	outline: none;
 	transition: all 0.3s ease;
@@ -381,12 +490,13 @@ label[for="sidebarbutton"] i:after{
 }
 
 .input_field::placeholder {
-	color: #9a9a9a;
+	color: #666;
 }
 
 .input_field:focus {
 	border-color: #fe0000;
-	box-shadow: 0 0 0 3px rgba(254, 0, 0, 0.1);
+	background: rgba(255, 255, 255, 0.08);
+	box-shadow: 0 0 0 3px rgba(254, 0, 0, 0.2), 0 0 15px rgba(254, 0, 0, 0.1);
 }
 
 .btn_submit {
@@ -421,12 +531,24 @@ label[for="sidebarbutton"] i:after{
 	font-size: 28px;
 	font-weight: 700;
 	padding: 0;
-	color: #1a1a1a;
+	color: #ffffff;
 	margin-bottom: 30px;
 	border-bottom: 3px solid #fe0000;
 	padding-bottom: 15px;
 	font-family: robotob, sans-serif;
 	letter-spacing: -0.5px;
+	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+	position: relative;
+}
+
+.adm_theme .form_title::after {
+	content: '';
+	position: absolute;
+	bottom: -3px;
+	left: 0;
+	width: 100px;
+	height: 3px;
+	background: linear-gradient(90deg, #fe0000 0%, transparent 100%);
 }
 
 .adm_theme .form_title_sm {
@@ -452,13 +574,20 @@ label[for="sidebarbutton"] i:after{
 	padding: 12px 16px;
 	margin: 5px 0px;
 	box-sizing: border-box;
-	border: 2px solid #e5e5e5;
+	border: 2px solid rgba(255, 255, 255, 0.1);
 	border-radius: 8px;
-	background: #ffffff;
-	color: #404554;
+	background: rgba(255, 255, 255, 0.05);
+	color: #e0e0e0;
 	font-size: 14px;
 	font-family: roboto, sans-serif;
 	transition: all 0.3s ease;
+}
+
+.adm_theme interfaceform input[type="text"]::placeholder,
+.adm_theme interfaceform input[type="password"]::placeholder,
+.adm_theme interfaceform input[type="number"]::placeholder,
+.adm_theme interfaceform input[type="url"]::placeholder {
+	color: #666;
 }
 
 .adm_theme interfaceform input[type="text"]:focus,
@@ -469,7 +598,8 @@ label[for="sidebarbutton"] i:after{
 .adm_theme interfaceform input[type="url"]:focus {
 	outline: none;
 	border-color: #fe0000;
-	box-shadow: 0 0 0 3px rgba(254, 0, 0, 0.1);
+	background: rgba(255, 255, 255, 0.08);
+	box-shadow: 0 0 0 3px rgba(254, 0, 0, 0.2), 0 0 15px rgba(254, 0, 0, 0.1);
 }
 
 .adm_theme interfaceform input[type="button"] {
@@ -500,10 +630,10 @@ label[for="sidebarbutton"] i:after{
 	box-sizing: border-box;
 	margin: 5px 0px;
 	padding: 12px 16px;
-	border: 2px solid #e5e5e5;
+	border: 2px solid rgba(255, 255, 255, 0.1);
 	border-radius: 8px;
-	background: #ffffff;
-	color: #404554;
+	background: rgba(255, 255, 255, 0.05);
+	color: #e0e0e0;
 	font-size: 14px;
 	font-family: roboto, sans-serif;
 	line-height: 1.6;
@@ -511,26 +641,31 @@ label[for="sidebarbutton"] i:after{
 	transition: all 0.3s ease;
 }
 
+.adm_theme interfaceform textarea::placeholder {
+	color: #666;
+}
+
 .adm_theme interfaceform textarea:focus {
 	outline: none;
 	border-color: #fe0000;
-	box-shadow: 0 0 0 3px rgba(254, 0, 0, 0.1);
+	background: rgba(255, 255, 255, 0.08);
+	box-shadow: 0 0 0 3px rgba(254, 0, 0, 0.2), 0 0 15px rgba(254, 0, 0, 0.1);
 }
 
 .adm_theme interfaceform select {
 	padding: 12px 40px 12px 16px;
 	margin: 5px 0px;
 	box-sizing: border-box;
-	border: 2px solid #e5e5e5;
+	border: 2px solid rgba(255, 255, 255, 0.1);
 	border-radius: 8px;
 	font-size: 14px;
-	background: #ffffff;
-	color: #404554;
+	background: rgba(255, 255, 255, 0.05);
+	color: #e0e0e0;
 	cursor: pointer;
 	transition: all 0.3s ease;
 	appearance: none;
 	font-family: roboto, sans-serif;
-	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23404554' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23e0e0e0' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
 	background-repeat: no-repeat;
 	background-position: right 12px center;
 }
@@ -538,12 +673,13 @@ label[for="sidebarbutton"] i:after{
 .adm_theme interfaceform select:focus {
 	outline: none;
 	border-color: #fe0000;
-	box-shadow: 0 0 0 3px rgba(254, 0, 0, 0.1);
+	background: rgba(255, 255, 255, 0.08);
+	box-shadow: 0 0 0 3px rgba(254, 0, 0, 0.2), 0 0 15px rgba(254, 0, 0, 0.1);
 }
 
 .adm_theme interfaceform select option {
-	background: #ffffff;
-	color: #404554;
+	background: #2b2b2b;
+	color: #e0e0e0;
 	padding: 8px;
 }
 
@@ -666,11 +802,17 @@ label[for="sidebarbutton"] i:after{
 	width: 100%;
 	text-align: left;
 	margin-bottom: 15px;
-	background-color: #ffffff;
+	background: linear-gradient(135deg, #2b2b2b 0%, #252525 100%);
 	border-radius: 12px;
 	overflow: hidden;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-	border: 1px solid #e5e5e5;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(254, 0, 0, 0.1);
+	border: 1px solid rgba(254, 0, 0, 0.2);
+	transition: all 0.3s ease;
+}
+
+.admin_roller_menu:hover {
+	box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(254, 0, 0, 0.3);
+	border-color: rgba(254, 0, 0, 0.4);
 }
 
 /* Убираем верхнюю границу у всех элементов кроме первого, чтобы не было двойных границ */
@@ -701,20 +843,32 @@ label[for="sidebarbutton"] i:after{
 .admin_roller_menu  > label {
 	display: flex;
 	align-items: center;
-	padding: 15px 20px;
-	background: #ffffff;
+	padding: 16px 20px;
+	background: rgba(255, 255, 255, 0.03);
 	border: none;
 	border-radius: 0;
 	cursor: pointer;
-	transition: all 0.2s ease;
+	transition: all 0.3s ease;
 	user-select: none;
-	color: #404554;
+	color: #e0e0e0;
 	font-weight: 600;
 	font-size: 15px;
 	font-family: robotob, sans-serif;
 	box-shadow: none;
 	margin: 0;
 	position: relative;
+}
+
+.admin_roller_menu > label::before {
+	content: '➕';
+	font-size: 18px;
+	margin-right: 12px;
+	transition: transform 0.3s ease;
+}
+
+.admin_roller_menu > input[type="checkbox"]:checked ~ label::before {
+	content: '➖';
+	transform: rotate(180deg);
 }
 
 /* Разделитель между label и контейнером */
@@ -740,18 +894,19 @@ label[for="sidebarbutton"] i:after{
 	margin: 0;
 	transition: all 0.4s ease;
 	position: relative;
-	background: #ffffff;
+	background: rgba(0, 0, 0, 0.3);
 	border-radius: 0;
 	padding: 0;
-	box-shadow: none;
+	box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
 	border: none;
 }
 
 .admin_roller_menu > input[type="checkbox"]:checked ~ label {
-	background: #fe0000;
+	background: linear-gradient(135deg, #fe0000 0%, #d00000 100%);
 	color: #ffffff;
-	box-shadow: none;
+	box-shadow: 0 4px 16px rgba(254, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 	transform: none;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .admin_roller_menu > input[type="checkbox"]:checked ~ .admin_roller_container {
@@ -798,8 +953,9 @@ label[for="sidebarbutton"] i:after{
 	font-weight: 600;
 	padding: 0px 0px 10px 0px;
 	position: relative;
-	color: #1a1a1a;
+	color: #e0e0e0;
 	font-family: robotob, sans-serif;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .admin_group_checkboxes {
@@ -815,21 +971,22 @@ label[for="sidebarbutton"] i:after{
 	display: inline-flex;
 	align-items: center;
 	padding: 8px 14px;
-	background-color: #ffffff;
-	border: 2px solid #e5e5e5;
+	background: rgba(255, 255, 255, 0.05);
+	border: 2px solid rgba(255, 255, 255, 0.1);
 	border-radius: 8px;
 	cursor: pointer;
 	user-select: none;
 	margin-right: 10px;
 	margin-bottom: 10px;
-	color: #404554;
+	color: #e0e0e0;
 	font-size: 14px;
 	transition: all 0.2s ease;
 }
 
 .admin_label_checkbox:hover {
-	background-color: #f5f5f5;
+	background: rgba(254, 0, 0, 0.15);
 	border-color: #fe0000;
+	box-shadow: 0 0 10px rgba(254, 0, 0, 0.2);
 }
 
 .admin_label_checkbox input[type="checkbox"] {
@@ -837,17 +994,18 @@ label[for="sidebarbutton"] i:after{
 	appearance: none;
 	width: 18px;
 	height: 18px;
-	border: 2px solid #e5e5e5;
+	border: 2px solid rgba(255, 255, 255, 0.3);
 	border-radius: 4px;
-	background-color: #ffffff;
+	background: rgba(255, 255, 255, 0.05);
 	position: relative;
 	cursor: pointer;
 	transition: all 0.2s ease;
 }
 
 .admin_label_checkbox input[type="checkbox"]:checked {
-	background-color: #fe0000;
+	background: linear-gradient(135deg, #fe0000 0%, #d00000 100%);
 	border-color: #fe0000;
+	box-shadow: 0 0 10px rgba(254, 0, 0, 0.4);
 }
 
 .admin_label_checkbox input[type="checkbox"]:checked::before {
@@ -901,7 +1059,7 @@ messagelog > report {
 .admin_separator {
 	width: 100%;
 	height: 2px;
-	background-color: #e5e5e5;
+	background: linear-gradient(90deg, transparent, rgba(254, 0, 0, 0.3), transparent);
 	display: block;
 	border-radius: 2px;
 	margin: 20px 0;
@@ -910,12 +1068,13 @@ messagelog > report {
 .admin_inline_ittem {
 	padding: 12px 16px;
 	border-radius: 8px;
-	border: 2px solid #e5e5e5;
+	border: 2px solid rgba(254, 0, 0, 0.2);
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
 	align-items: center;
-	background-color: #ffffff;
+	background: linear-gradient(135deg, #2b2b2b 0%, #252525 100%);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .admin_inline_ittem > div {
@@ -992,11 +1151,21 @@ peni:after{
 	margin: 5px 0px;
 	box-sizing: border-box;
 	width: 260px;
-	border: 2px solid #e5e5e5;
+	border: 2px solid rgba(255, 255, 255, 0.1);
 	border-radius: 8px;
-	background: #ffffff;
-	color: #404554;
+	background: rgba(255, 255, 255, 0.05);
+	color: #e0e0e0;
 	font-family: roboto, sans-serif;
+}
+
+.admin_sort_and_search input[type="text"]::placeholder {
+	color: #666;
+}
+
+.admin_sort_and_search input[type="text"]:focus {
+	border-color: #fe0000;
+	background: rgba(255, 255, 255, 0.08);
+	box-shadow: 0 0 0 3px rgba(254, 0, 0, 0.2);
 }
 
 .admin_sort_and_search input[type="submit"]{
@@ -1033,11 +1202,17 @@ peni:after{
 	padding: 10px 14px;
 	margin: 5px 0px;
 	box-sizing: border-box;
-	border: 2px solid #e5e5e5;
+	border: 2px solid rgba(255, 255, 255, 0.1);
 	border-radius: 8px;
-	background: #ffffff;
-	color: #404554;
+	background: rgba(255, 255, 255, 0.05);
+	color: #e0e0e0;
 	font-family: roboto, sans-serif;
+}
+
+.admin_sort_and_search select:focus {
+	border-color: #fe0000;
+	background: rgba(255, 255, 255, 0.08);
+	box-shadow: 0 0 0 3px rgba(254, 0, 0, 0.2);
 }
 
 .admin_page_pagination {
@@ -1056,71 +1231,77 @@ peni:after{
 .admin_page_pagination ul li{
 	display: inline-block;
 	padding: 10px 14px;
-	background-color: #ffffff;
-	border: 2px solid #e5e5e5;
+	background: rgba(255, 255, 255, 0.05);
+	border: 2px solid rgba(255, 255, 255, 0.1);
 	border-radius: 8px;
 	cursor: pointer;
 	transition: all 0.2s ease;
 	user-select: none;
 	margin: 0;
-	color: #404554;
+	color: #e0e0e0;
 	font-weight: 500;
 }
 
 .admin_page_pagination ul li:hover {
-	background-color: #f5f5f5;
+	background: rgba(254, 0, 0, 0.15);
 	border-color: #fe0000;
-	color: #fe0000;
+	color: #ffffff;
+	box-shadow: 0 0 10px rgba(254, 0, 0, 0.2);
 }
 
 .admin_page_pagination ul li.active {
-	background-color: #fe0000;
+	background: linear-gradient(135deg, #fe0000 0%, #d00000 100%);
 	border-color: #fe0000;
 	color: #ffffff;
 	font-weight: 600;
+	box-shadow: 0 4px 12px rgba(254, 0, 0, 0.4);
 }
 
 .admin_casual_button {
 	display: inline-block;
 	padding: 10px 16px;
-	background-color: #ffffff;
-	border: 2px solid #e5e5e5;
+	background: rgba(255, 255, 255, 0.05);
+	border: 2px solid rgba(255, 255, 255, 0.1);
 	border-radius: 8px;
 	cursor: pointer;
 	transition: all 0.2s ease;
 	user-select: none;
 	margin: 0px 5px 0px 0px;
-	color: #404554;
+	color: #e0e0e0;
 	text-decoration: none;
 	font-weight: 500;
 }
 
 .admin_casual_button:hover {
-	background-color: #fe0000;
+	background: linear-gradient(135deg, #fe0000 0%, #d00000 100%);
 	border-color: #fe0000;
 	color: #ffffff;
+	box-shadow: 0 4px 12px rgba(254, 0, 0, 0.3);
+	transform: translateY(-2px);
 }
 
 .admin_image_select {
 	display: inline-block;
 	padding: 10px 16px;
-	background-color: #ffffff;
-	border: 2px solid #e5e5e5;
+	background: rgba(255, 255, 255, 0.05);
+	border: 2px solid rgba(255, 255, 255, 0.1);
 	border-radius: 8px;
 	cursor: pointer;
 	transition: all 0.2s ease;
 	user-select: none;
 	margin: 0px 5px 0px 0px;
-	color: #404554;
+	color: #e0e0e0;
 	text-decoration: none;
 	position: relative;
 	font-weight: 500;
 }
 
 .admin_image_select:hover {
-	background-color: #fe0000;
+	background: linear-gradient(135deg, #fe0000 0%, #d00000 100%);
 	border-color: #fe0000;
 	color: #ffffff;
+	box-shadow: 0 4px 12px rgba(254, 0, 0, 0.3);
+	transform: translateY(-2px);
 }
 
 .admin_image_select input[type="file"] {
@@ -1135,7 +1316,8 @@ modalbg {
 	position: fixed;
 	top: 0px;
 	left: 0px;
-	background: rgba(0,0,0,0.6);
+	background: rgba(0, 0, 0, 0.85);
+	backdrop-filter: blur(4px);
 	z-index: 500;
 	display: none;
 }
@@ -1144,18 +1326,21 @@ modalbg cross {
 	position: absolute;
 	top: 10px;
 	right: 10px;
-	border: 2px solid #e5e5e5;
+	border: 2px solid rgba(254, 0, 0, 0.3);
 	border-radius: 50%;
 	width: 40px;
 	height: 40px;
 	cursor: pointer;
-	background-color: #ffffff;
+	background: rgba(255, 255, 255, 0.1);
 	transition: all 0.2s ease;
+	backdrop-filter: blur(10px);
 }
 
 modalbg cross:hover {
-	background-color: #fe0000;
+	background: linear-gradient(135deg, #fe0000 0%, #d00000 100%);
 	border-color: #fe0000;
+	transform: scale(1.1);
+	box-shadow: 0 4px 12px rgba(254, 0, 0, 0.4);
 }
 
 modalbg cross:before {
@@ -1164,10 +1349,11 @@ modalbg cross:before {
 	left: 50%;
 	width: 60%;
 	height: 3px;
-	background-color: #404554;
+	background-color: #e0e0e0;
 	position: absolute;
 	transform: translate(-50%,-50%) rotate(45deg);
 	border-radius: 2px;
+	transition: background-color 0.2s ease;
 }
 
 modalbg cross:after {
@@ -1176,10 +1362,11 @@ modalbg cross:after {
 	left: 50%;
 	width: 60%;
 	height: 3px;
-	background-color: #404554;
+	background-color: #e0e0e0;
 	position: absolute;
 	transform: translate(-50%,-50%) rotate(-45deg);
 	border-radius: 2px;
+	transition: background-color 0.2s ease;
 }
 
 modalbg cross:hover:before,
@@ -1193,16 +1380,35 @@ modalwindow {
 	left: 50%;
 	transform: translate(-50%,-50%);
 	z-index: 501;
-	border: none;
-	border-radius: 12px;
+	border: 1px solid rgba(254, 0, 0, 0.2);
+	border-radius: 16px;
 	box-sizing: border-box;
-	padding: 20px;
+	padding: 30px;
 	display: none;
-	background: #ffffff;
-	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+	background: linear-gradient(135deg, #2b2b2b 0%, #252525 100%);
+	box-shadow: 0 8px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(254, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 	max-width: 90%;
 	max-height: 90%;
 	overflow: auto;
+}
+
+/* Кастомный скроллбар для модального окна */
+modalwindow::-webkit-scrollbar {
+	width: 8px;
+}
+
+modalwindow::-webkit-scrollbar-track {
+	background: #1a1a1a;
+	border-radius: 4px;
+}
+
+modalwindow::-webkit-scrollbar-thumb {
+	background: #fe0000;
+	border-radius: 4px;
+}
+
+modalwindow::-webkit-scrollbar-thumb:hover {
+	background: #d00000;
 }
 
 .admin_back_header {
@@ -1211,11 +1417,11 @@ modalwindow {
 	box-sizing: border-box;
 	border-radius: 8px;
 	padding: 8px 16px 8px 40px;
-	background: #ffffff;
+	background: rgba(255, 255, 255, 0.05);
 	display: inline-block;
 	text-decoration: none;
-	border: 2px solid #e5e5e5;
-	transition: all 0.2s ease;
+	border: 2px solid rgba(255, 255, 255, 0.1);
+	transition: all 0.3s ease;
 	position: relative;
 }
 
@@ -1227,27 +1433,31 @@ modalwindow {
 	transform: translateY(-50%);
 	font-size: 18px;
 	font-weight: 700;
-	color: #404554;
-	transition: color 0.2s ease;
+	color: #e0e0e0;
+	transition: all 0.3s ease;
 }
 
 .admin_back_header:hover {
-	background-color: #f5f5f5;
+	background: rgba(254, 0, 0, 0.15);
 	border-color: #fe0000;
+	box-shadow: 0 0 15px rgba(254, 0, 0, 0.2);
+	transform: translateX(-3px);
 }
 
 .admin_back_header span {
-	color: #404554;
+	color: #e0e0e0;
 	font-size: 14px;
 	font-weight: 500;
+	transition: color 0.3s ease;
 }
 
 .admin_back_header:hover span {
-	color: #fe0000;
+	color: #ffffff;
 }
 
 .admin_back_header:hover::before {
-	color: #fe0000;
+	color: #ffffff;
+	transform: translateY(-50%) translateX(-3px);
 }
 
 .green_submit_button {
@@ -1281,19 +1491,20 @@ modalwindow {
 	height: 120px;
 	position: relative;
 	border-radius: 8px;
-	border: 2px dashed #e5e5e5;
+	border: 2px dashed rgba(254, 0, 0, 0.3);
 	display: block;
 	cursor: pointer;
 	transition: all 0.3s ease;
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-color: #fafafa;
+	background-color: rgba(255, 255, 255, 0.03);
 }
 
 .admin_image_label:hover {
 	border-color: #fe0000;
-	background-color: #fff5f5;
+	background-color: rgba(254, 0, 0, 0.1);
+	box-shadow: 0 0 20px rgba(254, 0, 0, 0.2);
 }
 
 .admin_image_label input {
@@ -1307,17 +1518,27 @@ modalwindow {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	color: #9a9a9a;
+	color: #666;
 	font-size: 40px;
 	text-align: center;
+	transition: all 0.3s ease;
+}
+
+.admin_image_label:hover .admin_addimage_tip {
+	color: #fe0000;
+	transform: translate(-50%,-50%) scale(1.1);
 }
 
 .admin_addimage_tip span {
 	display: block;
 	font-size: 13px;
 	margin-top: 8px;
-	color: #404554;
+	color: #b0b0b0;
 	font-weight: 500;
+}
+
+.admin_image_label:hover .admin_addimage_tip span {
+	color: #ffffff;
 }
 
 .admin_file_label_wraper {
@@ -1366,10 +1587,30 @@ modalwindow {
 	margin: 20px 0px 0px 0px;
 	overflow-y: auto;
 	height: calc(100% - 180px);
-	background-color: #ffffff;
+	background: linear-gradient(135deg, #2b2b2b 0%, #252525 100%);
 	border-radius: 8px;
 	padding: 15px;
-	border: 2px solid #e5e5e5;
+	border: 2px solid rgba(254, 0, 0, 0.2);
+	box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Кастомный скроллбар для медиафайлов */
+.admin_mediafiles_general_con::-webkit-scrollbar {
+	width: 8px;
+}
+
+.admin_mediafiles_general_con::-webkit-scrollbar-track {
+	background: #1a1a1a;
+	border-radius: 4px;
+}
+
+.admin_mediafiles_general_con::-webkit-scrollbar-thumb {
+	background: #fe0000;
+	border-radius: 4px;
+}
+
+.admin_mediafiles_general_con::-webkit-scrollbar-thumb:hover {
+	background: #d00000;
 }
 
 .admin_roller100 > label{
@@ -1389,14 +1630,15 @@ modalwindow {
 	position: relative;
 	border-radius: 8px;
 	overflow: hidden;
-	border: 2px solid #e5e5e5;
-	transition: all 0.2s ease;
+	border: 2px solid rgba(255, 255, 255, 0.1);
+	transition: all 0.3s ease;
+	background: rgba(255, 255, 255, 0.03);
 }
 
 .mediafiles_image_con:hover {
 	border-color: #fe0000;
-	transform: translateY(-2px);
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	transform: translateY(-4px) scale(1.02);
+	box-shadow: 0 8px 20px rgba(254, 0, 0, 0.4), 0 0 0 2px rgba(254, 0, 0, 0.2);
 }
 
 .mediafiles_image_con_img {
@@ -1407,6 +1649,11 @@ modalwindow {
 	cursor: pointer;
 	background-size: cover;
 	background-position: center center;
+	transition: transform 0.3s ease;
+}
+
+.mediafiles_image_con:hover .mediafiles_image_con_img {
+	transform: scale(1.05);
 }
 
 .admin_delet_img {
@@ -1466,7 +1713,8 @@ modalwindow {
 	position: fixed;
 	top: 0px;
 	left: 0px;
-	background-color: rgba(255, 255, 255, 0.98);
+	background: linear-gradient(135deg, #1a1a1a 0%, #151515 100%);
+	backdrop-filter: blur(10px);
 	z-index: 999;
 }
 
@@ -1483,15 +1731,19 @@ modalwindow {
 	top: 20px;
 	right: 20px;
 	cursor: pointer;
-	background-color: #ffffff;
+	background: rgba(255, 255, 255, 0.1);
+	border: 2px solid rgba(254, 0, 0, 0.3);
 	border-radius: 50%;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-	transition: all 0.2s ease;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+	transition: all 0.3s ease;
+	backdrop-filter: blur(10px);
 }
 
 .hyst_all_zoomclose:hover {
-	background-color: #fe0000;
-	transform: scale(1.1);
+	background: linear-gradient(135deg, #fe0000 0%, #d00000 100%);
+	border-color: #fe0000;
+	transform: scale(1.1) rotate(90deg);
+	box-shadow: 0 6px 20px rgba(254, 0, 0, 0.5);
 }
 
 .hyst_all_zoomclose:before {
@@ -1503,8 +1755,9 @@ modalwindow {
 	margin-left: -12px;
 	top: 24px;
 	left: 50%;
-	background-color: #404554;
+	background-color: #e0e0e0;
 	border-radius: 2px;
+	transition: background-color 0.3s ease;
 }
 
 .hyst_all_zoomclose:after {
@@ -1516,8 +1769,9 @@ modalwindow {
 	margin-left: -12px;
 	top: 24px;
 	left: 50%;
-	background-color: #404554;
+	background-color: #e0e0e0;
 	border-radius: 2px;
+	transition: background-color 0.3s ease;
 }
 
 .hyst_all_zoomclose:hover:before,
@@ -1536,14 +1790,14 @@ modalwindow {
 	height: 120px;
 	position: relative;
 	border-radius: 8px;
-	border: 2px dashed #e5e5e5;
+	border: 2px dashed rgba(254, 0, 0, 0.3);
 	display: block;
 	cursor: pointer;
 	transition: all 0.3s ease;
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-color: #fafafa;
+	background-color: rgba(255, 255, 255, 0.03);
 }
 
 .admin_select_img_input[multiple] {
@@ -1553,7 +1807,8 @@ modalwindow {
 
 .admin_select_img_input:hover {
 	border-color: #fe0000;
-	background-color: #fff5f5;
+	background-color: rgba(254, 0, 0, 0.1);
+	box-shadow: 0 0 20px rgba(254, 0, 0, 0.2);
 }
 
 .admin_select_img_field {
@@ -1568,20 +1823,21 @@ modalwindow {
 .admin_multiple_image_select {
 	display: inline-block;
 	border-radius: 8px;
-	border: 2px solid #e5e5e5;
+	border: 2px solid rgba(255, 255, 255, 0.1);
 	position: relative;
 	width: 120px;
 	height: 120px;
 	margin: 0px 0px 0px 8px;
 	background-size: cover;
 	background-repeat: no-repeat;
-	transition: all 0.2s ease;
+	transition: all 0.3s ease;
+	background: rgba(255, 255, 255, 0.03);
 }
 
 .admin_multiple_image_select:hover {
 	border-color: #fe0000;
-	transform: translateY(-2px);
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	transform: translateY(-4px) scale(1.05);
+	box-shadow: 0 8px 20px rgba(254, 0, 0, 0.4), 0 0 0 2px rgba(254, 0, 0, 0.2);
 }
 
 .admin_detet_button {
@@ -1753,9 +2009,10 @@ hystwysiwyg {
 	margin-bottom: 10px;
 	font-size: 14px;
 	font-weight: 600;
-	color: #1a1a1a;
+	color: #e0e0e0;
 	letter-spacing: 0.2px;
 	font-family: robotob, sans-serif;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .adm_theme interfaceform label > i {
