@@ -1,11 +1,10 @@
 <?php
 include('hyst/php.php');
-include_once('hyst/mods/page_content/proces.php');
+include_once('hyst/mods/customtexts/proces.php');
 
-$service_content = get_page_content('service_page');
-$SITE_TITLE = $service_content && !empty($service_content['meta_title']) ? htmlspecialchars($service_content['meta_title'], ENT_QUOTES, 'UTF-8') : 'Автосервис - Замена Двигателей и КПП в Алматы | Моторленд';
-$SITE_DESCRIPTION = $service_content && !empty($service_content['meta_description']) ? htmlspecialchars($service_content['meta_description'], ENT_QUOTES, 'UTF-8') : 'Профессиональная замена и обслуживание контрактных двигателей и КПП в Алматы.';
-$SITE_KEYWORDS = $service_content && !empty($service_content['meta_keywords']) ? htmlspecialchars($service_content['meta_keywords'], ENT_QUOTES, 'UTF-8') : 'замена двигателя алматы, автосервис замена КПП, установка контрактного двигателя';
+$SITE_TITLE = 'Автосервис - Замена Двигателей и КПП в Алматы | Моторленд';
+$SITE_DESCRIPTION = 'Профессиональная замена и обслуживание контрактных двигателей и КПП в Алматы.';
+$SITE_KEYWORDS = 'замена двигателя алматы, автосервис замена КПП, установка контрактного двигателя';
 ?>
 <!doctype html>
 <html lang="ru">
@@ -64,45 +63,40 @@ $SITE_KEYWORDS = $service_content && !empty($service_content['meta_keywords']) ?
 <?php include("hyst/sbody.php"); ?>
 <?php include("des/head.php"); ?>
 <main>
-<div class="guarantees-page">
-	<div class="guarantees-container">
-		<nav class="generalw" aria-label="Навигационная цепочка">
-			<div class="shirina">
-				<div class="crumbsblock" itemscope itemtype="https://schema.org/BreadcrumbList">
-				<span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-					<a href="/" itemprop="item"><span itemprop="name">Главная</span></a>
-					<meta itemprop="position" content="1" />
-				</span> / 
-				<span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-					<span itemprop="name">Автосервис</span>
-					<meta itemprop="position" content="2" />
-				</span>
-				</div>
+<div class="service-page">
+	<nav class="generalw" aria-label="Навигационная цепочка">
+		<div class="shirina">
+			<div class="crumbsblock" itemscope itemtype="https://schema.org/BreadcrumbList">
+			<span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+				<a href="/" itemprop="item"><span itemprop="name">Главная</span></a>
+				<meta itemprop="position" content="1" />
+			</span> / 
+			<span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+				<span itemprop="name">Автосервис</span>
+				<meta itemprop="position" content="2" />
+			</span>
 			</div>
-		</nav>
+		</div>
+	</nav>
 
 		<section class="generalw" aria-labelledby="service-title">
 			<div class="shirina zgolovorleft">
-				<h1 id="service-title" class="sttitle"><span><?=$service_content && !empty($service_content['h1_text']) ? htmlspecialchars($service_content['h1_text'], ENT_QUOTES, 'UTF-8') : 'Замена Контрактного Двигателя в Алматы';?></span></h1>
+				<h1 id="service-title" class="sttitle"><span>Замена Контрактного Двигателя в Алматы</span></h1>
 			</div>
 		</section>
 
-		<div class="guarantees-content-wrapper">
-			<?php if ($service_content && !empty($service_content['content'])): ?>
-			<div class="guarantees-main-content">
-				<?=$service_content['content'];?>
-			</div>
-			<?php else: ?>
-			<div class="guarantees-main-content">
-				<div class="guarantee-hero">
-					<h2>Профессиональный автосервис по замене контрактных двигателей и КПП</h2>
-					<p>Компания Motor Land предлагает полный спектр услуг по замене и обслуживанию контрактных двигателей и коробок передач. Наш автосервис оснащен современным оборудованием, а наши мастера имеют многолетний опыт работы с автомобилями всех марок и моделей.</p>
+		<section class="generalw">
+			<div class="shirina">
+				<div class="service-hero">
+					<div class="service-hero-content">
+						<div class="service-hero-text">
+							<?=get_customtexts('service_page') ?: '<p>Компания Motor Land предлагает полный спектр услуг по замене и обслуживанию контрактных двигателей и коробок передач. Наш автосервис оснащен современным оборудованием, а наши мастера имеют многолетний опыт работы с автомобилями всех марок и моделей.</p>';?>
+						</div>
+						<div class="service-hero-image" style="background-image: url(/img/slide.webp);"></div>
+					</div>
 				</div>
 			</div>
-			<?php endif; ?>
-		</div>
-
-	</div>
+		</section>
 </div>
 </main>
 

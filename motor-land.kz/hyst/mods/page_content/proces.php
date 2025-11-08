@@ -24,7 +24,10 @@ if ($check->num_rows == 0) {
 		INDEX idx_page_key (page_key)
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
 	
-	// Инициализация страниц с дефолтными значениями (только автосервис и оплата для редактирования в админке)
+	// Инициализация страниц отключена - страницы редактируются через customtexts
+	// Если нужно снова активировать, раскомментируйте код ниже
+	$default_pages = [];
+	/*
 	$default_pages = [
 		['service_page', 'Автосервис', 'Замена Контрактного Двигателя в Алматы', '<div class="guarantee-hero">
 <h2>Профессиональный автосервис по замене контрактных двигателей и КПП</h2>
@@ -201,13 +204,16 @@ if ($check->num_rows == 0) {
 <p>Все товары поставляются с документами, подтверждающими покупку, которые необходимы для гарантийного обслуживания.</p>
 		</div>', 'Доставка и Оплата | Контрактные Двигатели и КПП | Моторленд', 'Доставка контрактных двигателей и КПП по Казахстану и СНГ. Удобные способы оплаты: наличные, карта, Kaspi. Доставка до двери или самовывоз.', 'доставка двигателей алматы, оплата контрактных моторов, доставка КПП по казахстану, транспортные компании, курьерская доставка']
 	];
+	*/
 	
-	$stmt = $_DB_CONECT->prepare("INSERT INTO page_content (page_key, page_name, h1_text, content, meta_title, meta_description, meta_keywords) VALUES (?, ?, ?, ?, ?, ?, ?)");
-	foreach ($default_pages as $page) {
-		$stmt->bind_param("sssssss", $page[0], $page[1], $page[2], $page[3], $page[4], $page[5], $page[6]);
-		$stmt->execute();
+	if (!empty($default_pages)) {
+		$stmt = $_DB_CONECT->prepare("INSERT INTO page_content (page_key, page_name, h1_text, content, meta_title, meta_description, meta_keywords) VALUES (?, ?, ?, ?, ?, ?, ?)");
+		foreach ($default_pages as $page) {
+			$stmt->bind_param("sssssss", $page[0], $page[1], $page[2], $page[3], $page[4], $page[5], $page[6]);
+			$stmt->execute();
+		}
+		$stmt->close();
 	}
-	$stmt->close();
 }
 
 // Функция для получения контента страницы
@@ -266,8 +272,8 @@ if (isset($_REQUEST['page_content_save']) || isset($_REQUEST['comand']) && $_REQ
 	$meta_description = isset($_REQUEST['meta_description']) ? trim($_REQUEST['meta_description']) : '';
 	$meta_keywords = isset($_REQUEST['meta_keywords']) ? trim($_REQUEST['meta_keywords']) : '';
 	
-	// Разрешенные страницы для редактирования (только автосервис и оплата)
-	$allowed_pages = ['service_page', 'pay_page'];
+	// Разрешенные страницы для редактирования (модуль отключен - страницы редактируются через customtexts)
+	$allowed_pages = [];
 	
 	if (empty($page_key)) {
 		echo json_encode(['success' => false, 'error' => 'Page key is required']);

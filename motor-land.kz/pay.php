@@ -1,11 +1,10 @@
 <?php
 include('hyst/php.php');
-include_once('hyst/mods/page_content/proces.php');
+include_once('hyst/mods/customtexts/proces.php');
 
-$pay_content = get_page_content('pay_page');
-$SITE_TITLE = $pay_content && !empty($pay_content['meta_title']) ? htmlspecialchars($pay_content['meta_title'], ENT_QUOTES, 'UTF-8') : 'Доставка и Оплата | Контрактные Двигатели и КПП | Моторленд';
-$SITE_DESCRIPTION = $pay_content && !empty($pay_content['meta_description']) ? htmlspecialchars($pay_content['meta_description'], ENT_QUOTES, 'UTF-8') : 'Доставка контрактных двигателей и КПП по Казахстану и СНГ.';
-$SITE_KEYWORDS = $pay_content && !empty($pay_content['meta_keywords']) ? htmlspecialchars($pay_content['meta_keywords'], ENT_QUOTES, 'UTF-8') : 'доставка двигателей алматы, оплата контрактных моторов, доставка КПП по казахстану';
+$SITE_TITLE = 'Доставка и Оплата | Контрактные Двигатели и КПП | Моторленд';
+$SITE_DESCRIPTION = 'Доставка контрактных двигателей и КПП по Казахстану и СНГ.';
+$SITE_KEYWORDS = 'доставка двигателей алматы, оплата контрактных моторов, доставка КПП по казахстану';
 ?>
 <!doctype html>
 <html lang="ru">
@@ -56,34 +55,25 @@ $SITE_KEYWORDS = $pay_content && !empty($pay_content['meta_keywords']) ? htmlspe
 			<meta itemprop="position" content="2" />
 		</span>
 		</div>
-		
 	</div>
 </nav>
 
 <section class="generalw" aria-labelledby="pay-title">
 	<div class="shirina zgolovorleft">
-		<h1 id="pay-title" class="sttitle"><span><?=$pay_content && !empty($pay_content['h1_text']) ? htmlspecialchars($pay_content['h1_text'], ENT_QUOTES, 'UTF-8') : 'Доставка и Оплата Контрактных Двигателей';?></span></h1>
+		<h1 id="pay-title" class="sttitle"><span>Доставка и Оплата Контрактных Двигателей</span></h1>
 	</div>
 </section>
 
-<div class="guarantees-page">
-	<div class="guarantees-container">
-		<div class="guarantees-content-wrapper">
-			<?php if ($pay_content && !empty($pay_content['content'])): ?>
-			<div class="guarantees-main-content">
-				<?=$pay_content['content'];?>
+<section class="generalw">
+	<div class="shirina">
+		<div class="pay-delivery-hero">
+			<div class="pay-delivery-hero-text">
+				<?=get_customtexts('pay_page') ?: '<p>Компания Motor Land предлагает различные способы оплаты и доставки для вашего удобства. Мы доставляем контрактные двигатели и коробки передач по всему Казахстану и в страны СНГ, обеспечивая безопасную транспортировку и сохранность груза.</p>';?>
 			</div>
-			<?php else: ?>
-			<div class="guarantees-main-content">
-				<div class="guarantee-hero">
-					<h2>Удобная доставка и оплата контрактных двигателей и КПП</h2>
-					<p>Компания Motor Land предлагает различные способы оплаты и доставки для вашего удобства. Мы доставляем контрактные двигатели и коробки передач по всему Казахстану и в страны СНГ, обеспечивая безопасную транспортировку и сохранность груза.</p>
-				</div>
-			</div>
-			<?php endif; ?>
+			<div class="pay-delivery-hero-image" style="background-image: url(/img/dost.webp);"></div>
 		</div>
 	</div>
-</div>
+</section>
 </main>
 
 <br><br>

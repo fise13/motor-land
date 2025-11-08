@@ -5,20 +5,25 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/hyst/core/functions.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/hyst/core/setups.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/page_content/proces.php');
 
-// Получаем список только разрешенных страниц (автосервис, оплата)
+// Модуль page_content отключен - страницы редактируются через customtexts
+// Если нужно снова активировать редактирование через админ-панель, раскомментируйте код ниже
+/*
 $stmt = $_DB_CONECT->query("SELECT * FROM page_content WHERE page_key IN ('service_page', 'pay_page') ORDER BY id ASC");
 $pages_list = [];
 while ($row = $stmt->fetch_assoc()) {
 	$pages_list[] = $row;
 }
 
-// Определяем иконки для страниц
 $page_icons = [
 	'service_page' => '🔧',
 	'pay_page' => '💳'
 ];
+*/
+$pages_list = [];
+$page_icons = [];
 ?>
 
+<?php if (!empty($pages_list)): ?>
 <?php foreach ($pages_list as $page): ?>
 <div class="admin_roller_menu admin_roller100">
 	<input type="checkbox" id="moderator_roller_page_<?=$page['id'];?>">
@@ -79,4 +84,9 @@ $page_icons = [
 	</div>
 </div>
 <?php endforeach; ?>
+<?php else: ?>
+<div class="admin_content_alignment">
+	<p style="padding: 20px; color: #888; text-align: center;">Модуль редактирования страниц отключен. Страницы редактируются через модуль "Тексты" (customtexts).</p>
+</div>
+<?php endif; ?>
 
