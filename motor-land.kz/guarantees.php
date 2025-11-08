@@ -1,11 +1,9 @@
 <?php
 include('hyst/php.php');
-include_once('hyst/mods/page_content/proces.php');
 
-$guarantees_content = get_page_content('guarantees_page');
-$SITE_TITLE = $guarantees_content && !empty($guarantees_content['meta_title']) ? htmlspecialchars($guarantees_content['meta_title'], ENT_QUOTES, 'UTF-8') : 'Гарантии на Контрактные Двигатели и КПП | Моторленд';
-$SITE_DESCRIPTION = $guarantees_content && !empty($guarantees_content['meta_description']) ? htmlspecialchars($guarantees_content['meta_description'], ENT_QUOTES, 'UTF-8') : 'Гарантии на контрактные двигатели и КПП в Алматы.';
-$SITE_KEYWORDS = $guarantees_content && !empty($guarantees_content['meta_keywords']) ? htmlspecialchars($guarantees_content['meta_keywords'], ENT_QUOTES, 'UTF-8') : 'гарантия на контрактные двигатели, гарантия на КПП, возврат двигателя';
+$SITE_TITLE = 'Гарантии на Контрактные Двигатели и КПП | Моторленд';
+$SITE_DESCRIPTION = 'Гарантии на контрактные двигатели и КПП в Алматы.';
+$SITE_KEYWORDS = 'гарантия на контрактные двигатели, гарантия на КПП, возврат двигателя';
 ?>
 <!doctype html>
 <html lang="ru">
@@ -62,43 +60,11 @@ $SITE_KEYWORDS = $guarantees_content && !empty($guarantees_content['meta_keyword
 
 		<section class="generalw" aria-labelledby="guarantees-title">
 			<div class="shirina zgolovorleft">
-				<h1 id="guarantees-title" class="sttitle"><span><?=$guarantees_content && !empty($guarantees_content['h1_text']) ? htmlspecialchars($guarantees_content['h1_text'], ENT_QUOTES, 'UTF-8') : 'Гарантия на Контрактные Двигатели и КПП';?></span></h1>
+				<h1 id="guarantees-title" class="sttitle"><span>Гарантия на Контрактные Двигатели и КПП</span></h1>
 			</div>
 		</section>
 
-		<div class="guarantees-content-wrapper">
-			<?php if ($guarantees_content && !empty($guarantees_content['content'])): ?>
-			<div class="guarantees-main-content">
-				<?=$guarantees_content['content'];?>
-			</div>
-			<div class="guarantees-sidebar">
-				<div class="guarantee-card warning-card">
-					<h3 class="card-title">⚠️ Гарантия не действительна при:</h3>
-					<ul class="guarantee-list">
-						<li>потере масла в двигателе, КПП</li>
-						<li>любого внешнего повреждения при установке, доставки или неправильной эксплуатации</li>
-						<li>перегрева двигателя, КПП</li>
-						<li>переделок и использование нештатных агрегатов</li>
-						<li>участия в гонках</li>
-						<li>вследствие использования неоригинальных запчастей</li>
-						<li>неисправности системы охлаждения</li>
-						<li>повреждения вследствие разрыва ремня ГРМ</li>
-						<li>коммерческого использования авто</li>
-						<li>при повреждении или отсутствия меток</li>
-						<li>в случаях пропуска срока данного на проверку</li>
-					</ul>
-				</div>
-				
-				<div class="guarantee-card info-card">
-					<h3 class="card-title">📋 При возврате необходимо:</h3>
-					<ul class="guarantee-list">
-						<li>Документ, подтверждающий приобретение запасной части у компании «Motor Land»</li>
-						<li>Наличие сертификата СТО на проведение данного вида работ</li>
-						<li>Заключение о неработоспособности детали</li>
-					</ul>
-				</div>
-			</div>
-			<?php else: ?>
+		<div class="guarantees-content">
 			<div class="guarantees-sidebar">
 				<div class="guarantee-card warning-card">
 					<h3 class="card-title">Гарантия не действительна при следующих условиях:</h3>
@@ -177,7 +143,6 @@ $SITE_KEYWORDS = $guarantees_content && !empty($guarantees_content['meta_keyword
 					<p>Если покупатель хочет вернуть товар по причине "НЕ ПОНАДОБИЛСЯ" или "ПЕРЕДУМАЛ" (РАЗОНРАВИЛСЯ), проданный товар может быть принят обратно только с удержанием 20% от продажной стоимости в качестве погашения убытков от потери коммерческой выгоды.</p>
 				</div>
 			</div>
-			<?php endif; ?>
 		</div>
 	</div>
 </div>

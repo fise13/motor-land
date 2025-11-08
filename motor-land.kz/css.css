@@ -1345,7 +1345,7 @@ background-repeat: no-repeat;
 overflow: hidden;
 }
 
-/* Новый минималистичный дизайн страницы гарантий */
+/* Дизайн страницы гарантий */
 .guarantees-page {
 	min-height: calc(100vh - 200px);
 	padding: 60px 0 80px;
@@ -1358,174 +1358,17 @@ overflow: hidden;
 	padding: 0 20px;
 }
 
-.guarantees-header {
-	margin-bottom: 50px;
-	text-align: center;
-}
-
-.breadcrumbs {
-	font-size: 14px;
-	color: #888;
-	margin-bottom: 20px;
-}
-
-.breadcrumbs a {
-	color: #fe0000;
-	text-decoration: none;
-	transition: color 0.2s ease;
-}
-
-.breadcrumbs a:hover {
-	color: #d00000;
-}
-
-.breadcrumbs span {
-	color: #333;
-}
-
-.guarantees-title {
-	font-size: 48px;
-	font-weight: 700;
-	color: #1a1a1a;
-	margin: 0 0 15px 0;
-	letter-spacing: -1px;
-}
-
-.guarantees-subtitle {
-	font-size: 18px;
-	color: #666;
-	margin: 0;
-	font-weight: 400;
-}
-
-.guarantees-content-wrapper {
+.guarantees-content {
 	display: grid;
 	grid-template-columns: 350px 1fr;
-	gap: 40px;
+	gap: 30px;
 	margin-top: 50px;
-}
-
-.guarantees-main-content {
-	display: flex;
-	flex-direction: column;
-	gap: 0;
-}
-
-.guarantee-hero {
-	background: linear-gradient(135deg, #fe0000 0%, #d00000 100%);
-	color: white;
-	padding: 40px;
-	border-radius: 16px;
-	margin-bottom: 30px;
-	box-shadow: 0 8px 24px rgba(254, 0, 0, 0.2);
-}
-
-.guarantee-hero h2 {
-	font-size: 32px;
-	font-weight: 700;
-	margin: 0 0 20px 0;
-	color: white;
-	line-height: 1.3;
-}
-
-.guarantee-hero p {
-	font-size: 17px;
-	line-height: 1.7;
-	margin: 0;
-	color: rgba(255, 255, 255, 0.95);
-}
-
-.guarantee-section {
-	background: #ffffff;
-	border-radius: 12px;
-	padding: 32px;
-	margin-bottom: 24px;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-	border: 1px solid #f0f0f0;
-	transition: all 0.3s ease;
-}
-
-.guarantee-section:hover {
-	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-	transform: translateY(-2px);
-}
-
-.guarantee-section h3 {
-	font-size: 22px;
-	font-weight: 600;
-	color: #1a1a1a;
-	margin: 0 0 20px 0;
-	padding-bottom: 12px;
-	border-bottom: 2px solid #fe0000;
-	line-height: 1.3;
-}
-
-.guarantee-section p {
-	font-size: 16px;
-	line-height: 1.8;
-	color: #444;
-	margin: 0 0 16px 0;
-}
-
-.guarantee-section p:last-child {
-	margin-bottom: 0;
-}
-
-.guarantee-section strong {
-	color: #fe0000;
-	font-weight: 600;
-}
-
-.guarantee-section ul {
-	list-style: none;
-	padding: 0;
-	margin: 16px 0;
-}
-
-.guarantee-section ul li {
-	font-size: 16px;
-	line-height: 1.8;
-	color: #444;
-	padding: 10px 0;
-	padding-left: 28px;
-	position: relative;
-}
-
-.guarantee-section ul li::before {
-	content: "✓";
-	position: absolute;
-	left: 0;
-	color: #fe0000;
-	font-weight: bold;
-	font-size: 18px;
-	width: 20px;
-	height: 20px;
-	background: rgba(254, 0, 0, 0.1);
-	border-radius: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 12px;
-}
-
-.guarantee-section a {
-	color: #fe0000;
-	text-decoration: underline;
-	transition: color 0.2s ease;
-}
-
-.guarantee-section a:hover {
-	color: #d00000;
-	text-decoration: underline;
 }
 
 .guarantees-sidebar {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	position: sticky;
-	top: 20px;
-	height: fit-content;
 }
 
 .guarantees-main {
@@ -1606,48 +1449,23 @@ overflow: hidden;
 }
 
 @media (max-width: 1024px) {
-	.guarantees-content-wrapper {
+	.guarantees-content {
 		grid-template-columns: 1fr;
-		gap: 30px;
+		gap: 25px;
 	}
 	
 	.guarantees-sidebar {
 		order: 2;
-		position: static;
 	}
 	
-	.guarantees-main-content {
+	.guarantees-main {
 		order: 1;
-	}
-	
-	.guarantee-hero {
-		padding: 30px;
-	}
-	
-	.guarantee-hero h2 {
-		font-size: 26px;
-	}
-	
-	.guarantee-section {
-		padding: 24px;
-	}
-	
-	.guarantee-section h3 {
-		font-size: 20px;
 	}
 }
 
 @media (max-width: 768px) {
 	.guarantees-page {
 		padding: 40px 0 60px;
-	}
-	
-	.guarantees-title {
-		font-size: 36px;
-	}
-	
-	.guarantees-subtitle {
-		font-size: 16px;
 	}
 	
 	.guarantee-card {
@@ -1661,35 +1479,6 @@ overflow: hidden;
 	.guarantee-card p,
 	.guarantee-list li {
 		font-size: 14px;
-	}
-	
-	.guarantee-hero {
-		padding: 24px;
-	}
-	
-	.guarantee-hero h2 {
-		font-size: 22px;
-		margin-bottom: 16px;
-	}
-	
-	.guarantee-hero p {
-		font-size: 15px;
-	}
-	
-	.guarantee-section {
-		padding: 20px;
-		margin-bottom: 20px;
-	}
-	
-	.guarantee-section h3 {
-		font-size: 18px;
-		margin-bottom: 16px;
-	}
-	
-	.guarantee-section p,
-	.guarantee-section ul li {
-		font-size: 15px;
-		line-height: 1.7;
 	}
 }
 
