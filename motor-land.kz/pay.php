@@ -1,10 +1,17 @@
 <?php
 include('hyst/php.php');
 
+// Загружаем функции для работы с контентом страниц
+include_once('hyst/mods/page_content/proces.php');
+
+// Получаем контент страницы оплаты и доставки
+$pay_content = get_page_content('pay_page');
+
 // SEO: Оптимизированные мета-теги для страницы оплаты и доставки
-$SITE_TITLE = 'Доставка и Оплата | Контрактные Двигатели и КПП | Моторленд';
-$SITE_DESCRIPTION = 'Доставка контрактных двигателей и КПП по Казахстану и СНГ. Способы оплаты: наличные, карта, Kaspi.kz. Быстрая доставка транспортными компаниями.';
-$SITE_KEYWORDS = 'доставка двигателей алматы, оплата контрактных моторов, доставка КПП по казахстану, способы оплаты двигателей';
+// Если контент загружен из базы, используем его, иначе дефолтные значения
+$SITE_TITLE = $pay_content && !empty($pay_content['meta_title']) ? htmlspecialchars($pay_content['meta_title'], ENT_QUOTES, 'UTF-8') : 'Доставка и Оплата | Контрактные Двигатели и КПП | Моторленд';
+$SITE_DESCRIPTION = $pay_content && !empty($pay_content['meta_description']) ? htmlspecialchars($pay_content['meta_description'], ENT_QUOTES, 'UTF-8') : 'Доставка контрактных двигателей и КПП по Казахстану и СНГ.';
+$SITE_KEYWORDS = $pay_content && !empty($pay_content['meta_keywords']) ? htmlspecialchars($pay_content['meta_keywords'], ENT_QUOTES, 'UTF-8') : 'доставка двигателей алматы, оплата контрактных моторов, доставка КПП по казахстану';
 ?>
 <!doctype html>
 <html lang="ru">
@@ -70,12 +77,26 @@ $SITE_KEYWORDS = 'доставка двигателей алматы, оплат
 <!-- SEO: Семантический тег <section> для заголовка -->
 <section class="generalw" aria-labelledby="pay-title">
 	<div class="shirina zgolovorleft">
-		<h1 id="pay-title" class="sttitle"><span>Доставка и Оплата Контрактных Двигателей</span></h1>
+		<h1 id="pay-title" class="sttitle"><span><?=$pay_content && !empty($pay_content['h1_text']) ? htmlspecialchars($pay_content['h1_text'], ENT_QUOTES, 'UTF-8') : 'Доставка и Оплата Контрактных Двигателей';?></span></h1>
 	</div>
 </section>
 
 <div class="pay-delivery-page">
 	<div class="pay-delivery-container">
+		<?php if ($pay_content && !empty($pay_content['content'])): ?>
+		<div class="pay-delivery-hero">
+			<?php 
+			$delivery_image = get_simple_images('delivery_pay_image');
+			if (!empty($delivery_image[0])): 
+			?>
+			<div class="pay-delivery-hero-image" style="background-image: url(<?=$delivery_image[0];?>);">
+			</div>
+			<?php endif; ?>
+			<div class="pay-delivery-hero-text">
+				<?=$pay_content['content'];?>
+			</div>
+		</div>
+		<?php else: ?>
 		<div class="pay-delivery-hero">
 			<?php 
 			$delivery_image = get_simple_images('delivery_pay_image');
@@ -88,6 +109,7 @@ $SITE_KEYWORDS = 'доставка двигателей алматы, оплат
 				<?=get_customtexts('payment_page');?>
 			</div>
 		</div>
+		<?php endif; ?>
 
 		<div class="pay-delivery-methods">
 			<h2 class="pay-section-title">Способы оплаты</h2>

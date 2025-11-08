@@ -1,10 +1,17 @@
 <?php
 include('hyst/php.php');
 
+// Загружаем функции для работы с контентом страниц
+include_once('hyst/mods/page_content/proces.php');
+
+// Получаем контент страницы сервиса
+$service_content = get_page_content('service_page');
+
 // SEO: Оптимизированные мета-теги для страницы автосервиса
-$SITE_TITLE = 'Автосервис - Замена Двигателей и КПП в Алматы | Моторленд';
-$SITE_DESCRIPTION = 'Профессиональная замена и обслуживание контрактных двигателей и КПП в Алматы. Опытные мастера, гарантия на работы. Все марки автомобилей.';
-$SITE_KEYWORDS = 'замена двигателя алматы, автосервис замена КПП, установка контрактного двигателя, автосервис алматы, замена моторов';
+// Если контент загружен из базы, используем его, иначе дефолтные значения
+$SITE_TITLE = $service_content && !empty($service_content['meta_title']) ? htmlspecialchars($service_content['meta_title'], ENT_QUOTES, 'UTF-8') : 'Автосервис - Замена Двигателей и КПП в Алматы | Моторленд';
+$SITE_DESCRIPTION = $service_content && !empty($service_content['meta_description']) ? htmlspecialchars($service_content['meta_description'], ENT_QUOTES, 'UTF-8') : 'Профессиональная замена и обслуживание контрактных двигателей и КПП в Алматы.';
+$SITE_KEYWORDS = $service_content && !empty($service_content['meta_keywords']) ? htmlspecialchars($service_content['meta_keywords'], ENT_QUOTES, 'UTF-8') : 'замена двигателя алматы, автосервис замена КПП, установка контрактного двигателя';
 ?>
 <!doctype html>
 <html lang="ru">
@@ -91,10 +98,26 @@ $SITE_KEYWORDS = 'замена двигателя алматы, автосерв
 		<!-- SEO: Семантический тег <section> для заголовка -->
 		<section class="generalw" aria-labelledby="service-title">
 			<div class="shirina zgolovorleft">
-				<h1 id="service-title" class="sttitle"><span>Замена Контрактного Двигателя в Алматы</span></h1>
+				<h1 id="service-title" class="sttitle"><span><?=$service_content && !empty($service_content['h1_text']) ? htmlspecialchars($service_content['h1_text'], ENT_QUOTES, 'UTF-8') : 'Замена Контрактного Двигателя в Алматы';?></span></h1>
 			</div>
 		</section>
 
+		<?php if ($service_content && !empty($service_content['content'])): ?>
+		<div class="service-hero">
+			<div class="service-hero-content">
+				<div class="service-hero-text">
+					<?=$service_content['content'];?>
+				</div>
+				<?php 
+				$service_image = get_simple_images('service_image');
+				if (!empty($service_image[0])): 
+				?>
+				<div class="service-hero-image" style="background-image: url(<?=$service_image[0];?>);">
+				</div>
+				<?php endif; ?>
+			</div>
+		</div>
+		<?php else: ?>
 		<div class="service-hero">
 			<div class="service-hero-content">
 				<div class="service-hero-text">
@@ -109,6 +132,7 @@ $SITE_KEYWORDS = 'замена двигателя алматы, автосерв
 				<?php endif; ?>
 			</div>
 		</div>
+		<?php endif; ?>
 
 		<div class="service-services">
 			<h2 class="service-section-title">Наши услуги</h2>

@@ -1,11 +1,17 @@
 <?php
 include('hyst/php.php');
 
+// Загружаем функции для работы с контентом страниц
+include_once('hyst/mods/page_content/proces.php');
+
+// Получаем контент страницы каталога
+$catalog_content = get_page_content('catalog_page');
+
 // SEO: Оптимизированные мета-теги для страницы каталога с целевыми ключевыми запросами
-// Целевые запросы: "купить контрактный мотор Алматы", "контрактные двигатели Казахстан", "привозные моторы Алматы"
-$SITE_TITLE = 'Каталог Контрактных Моторов Алматы | Привозные Моторы Малайзия | Контрактные Двигатели Казахстан';
-$SITE_DESCRIPTION = 'Каталог контрактных моторов в Алматы. Привозные моторы из Малайзии. Контрактные двигатели Казахстан - большой выбор двигателей бу. Контрактный двигатель Toyota, Honda, Nissan, Mazda, Mitsubishi. Двигатель 1NZ, 2AZ, 3S, K24A, QR25DE. Контрактный двигатель Camry, CRV, Corolla. Подбор по марке, модели и году. Гарантия качества.';
-$SITE_KEYWORDS = 'купить контрактный мотор Алматы, контрактные двигатели Казахстан, привозные моторы Алматы, каталог контрактных моторов, двигатель бу Малайзия, контрактные двигатели каталог, контрактный двигатель Toyota, контрактный двигатель Honda, контрактный двигатель Nissan, контрактный двигатель Mazda, контрактный двигатель Mitsubishi, двигатель бу, контрактные двигатели, двигатели бу, двигатель 1NZ, двигатель 2AZ, двигатель 3S, двигатель K24A, двигатель QR25DE, контрактный двигатель Camry, контрактный двигатель CRV, контрактный двигатель Corolla, контрактный двигатель Almera, контрактный двигатель Accord';
+// Если контент загружен из базы, используем его, иначе дефолтные значения
+$SITE_TITLE = $catalog_content && !empty($catalog_content['meta_title']) ? htmlspecialchars($catalog_content['meta_title'], ENT_QUOTES, 'UTF-8') : 'Каталог Контрактных Моторов Алматы | Привозные Моторы Малайзия | Контрактные Двигатели Казахстан';
+$SITE_DESCRIPTION = $catalog_content && !empty($catalog_content['meta_description']) ? htmlspecialchars($catalog_content['meta_description'], ENT_QUOTES, 'UTF-8') : 'Каталог контрактных моторов в Алматы. Привозные моторы из Малайзии. Контрактные двигатели Казахстан - большой выбор двигателей бу.';
+$SITE_KEYWORDS = $catalog_content && !empty($catalog_content['meta_keywords']) ? htmlspecialchars($catalog_content['meta_keywords'], ENT_QUOTES, 'UTF-8') : 'купить контрактный мотор Алматы, контрактные двигатели Казахстан, привозные моторы Алматы';
 
 $mark = false;
 $mode = false;
@@ -112,7 +118,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 <!-- SEO: Семантический тег <section> для заголовка каталога -->
 <section class="generalw" aria-labelledby="catalog-title">
 	<div class="shirina zgolovorleft">
-		<h1 id="catalog-title" class="sttitle"><span>Каталог</span></h1>
+		<h1 id="catalog-title" class="sttitle"><span><?=$catalog_content && !empty($catalog_content['h1_text']) ? htmlspecialchars($catalog_content['h1_text'], ENT_QUOTES, 'UTF-8') : 'Каталог';?></span></h1>
 		
 		<ul class="actionperekl">
 			<a href="/actions"><li>акции</li></a>
@@ -120,6 +126,17 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		</ul>
 	</div>
 </section>
+
+<?php if ($catalog_content && !empty($catalog_content['content'])): ?>
+<!-- Контент страницы каталога -->
+<section class="generalw" style="padding: 20px 0;">
+	<div class="shirina">
+		<div class="catalog-page-content" style="max-width: 1200px; margin: 0 auto; padding: 20px; background: #f9f9f9; border-radius: 8px; margin-bottom: 30px;">
+			<?=$catalog_content['content'];?>
+		</div>
+	</div>
+</section>
+<?php endif; ?>
 
 <!-- SEO: Семантический тег <section> для фильтров и товаров -->
 <section class="generalw" aria-label="Фильтры и товары каталога">
