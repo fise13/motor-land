@@ -37,29 +37,58 @@ $SITE_DESCRIPTION = 'Страница не найдена. Возможно, о�
 </nav>
 
 <!-- SEO: Семантический тег <section> для контента 404 -->
-<section class="generalw" aria-labelledby="error-title">
-	<div class="shirina zgolovorleft">
-		<h1 id="error-title">404 - Страница не найдена</h1>
-	</div>
-</section>
-
-<div class="generalw">
-	<div class="shirina">
-		<div class="abouttext1">
-			<p>Извините, такой страницы не существует. Возможно, она была перемещена или удалена.</p>
-			<p>Вы можете:</p>
-			<ul style="margin: 20px 0; padding-left: 30px;">
-				<li><a href="/">Вернуться на главную страницу</a></li>
-				<li><a href="/catalog">Перейти в каталог товаров</a></li>
-				<li><a href="/service">Посмотреть услуги автосервиса</a></li>
-				<li><a href="/contacts">Связаться с нами</a></li>
-			</ul>
-			<p>Если вы уверены, что страница должна существовать, пожалуйста, <a href="/contacts">свяжитесь с нами</a>.</p>
+<section class="error-404-section">
+	<div class="error-404-container">
+		<div class="error-404-content">
+			<!-- Анимированная иконка 404 -->
+			<div class="error-404-icon">
+				<div class="error-404-number">404</div>
+				<svg class="error-404-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+					<circle class="error-circle-1" cx="50" cy="50" r="8" fill="#fe0000" opacity="0.8"/>
+					<circle class="error-circle-2" cx="150" cy="80" r="6" fill="#fe0000" opacity="0.6"/>
+					<circle class="error-circle-3" cx="80" cy="150" r="10" fill="#fe0000" opacity="0.7"/>
+					<path class="error-path" d="M30 100 Q100 50 170 100" stroke="#fe0000" stroke-width="2" fill="none" opacity="0.3"/>
+				</svg>
+			</div>
+			
+			<h1 id="error-title" class="error-404-title">Страница не найдена</h1>
+			
+			<p class="error-404-description">
+				Извините, такой страницы не существует. Возможно, она была перемещена или удалена.
+			</p>
+			
+			<div class="error-404-actions">
+				<a href="/" class="error-404-btn error-404-btn-primary">
+					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M10 2L3 7V17H8V12H12V17H17V7L10 2Z" fill="currentColor"/>
+					</svg>
+					<span>Вернуться на главную</span>
+				</a>
+				<a href="/catalog" class="error-404-btn error-404-btn-secondary">
+					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M2 4H4V18H2V4ZM6 4H8V18H6V4ZM10 4H12V18H10V4ZM14 4H16V18H14V4Z" fill="currentColor"/>
+					</svg>
+					<span>Каталог товаров</span>
+				</a>
+			</div>
+			
+			<div class="error-404-links">
+				<p class="error-404-links-title">Полезные ссылки:</p>
+				<ul class="error-404-links-list">
+					<li><a href="/service">Автосервис</a></li>
+					<li><a href="/pay">Доставка и оплата</a></li>
+					<li><a href="/guarantees">Гарантии</a></li>
+					<li><a href="/contacts">Контакты</a></li>
+				</ul>
+			</div>
+			
+			<p class="error-404-help">
+				Если вы уверены, что страница должна существовать, пожалуйста, 
+				<a href="/contacts" class="error-404-help-link">свяжитесь с нами</a>.
+			</p>
 		</div>
 	</div>
-</div>
-
-<br><br>
+</section>
 </main>
 <?php include("des/foter.php"); ?>
 <?php include("hyst/fbody.php"); ?>
