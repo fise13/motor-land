@@ -95,6 +95,88 @@ $SITE_KEYWORDS = 'замена двигателя алматы, автосерв
 						<div class="service-hero-image" style="background-image: url(/img/slide.webp);"></div>
 					</div>
 				</div>
+
+				<div class="service-services">
+					<h2 class="service-section-title">Наши услуги</h2>
+					<div class="service-cards">
+						<div class="service-card">
+							<span class="service-card-icon">🔧</span>
+							<h3 class="service-card-title">Замена двигателя</h3>
+							<p class="service-card-text">Профессиональная замена контрактного двигателя с полной диагностикой и гарантией на работы.</p>
+						</div>
+						<div class="service-card">
+							<span class="service-card-icon">⚙️</span>
+							<h3 class="service-card-title">Замена КПП</h3>
+							<p class="service-card-text">Установка контрактных коробок передач (АКПП и МКПП) с заменой масла и фильтров.</p>
+						</div>
+						<div class="service-card">
+							<span class="service-card-icon">🔍</span>
+							<h3 class="service-card-title">Диагностика</h3>
+							<p class="service-card-text">Компьютерная диагностика двигателя и всех систем автомобиля.</p>
+						</div>
+						<div class="service-card">
+							<span class="service-card-icon">🛠️</span>
+							<h3 class="service-card-title">Техническое обслуживание</h3>
+							<p class="service-card-text">Регулярное ТО для обеспечения долгой и надежной работы агрегата.</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="service-advantages">
+					<h2 class="service-section-title">Почему выбирают нас</h2>
+					<div class="advantages-grid">
+						<div class="advantage-item">
+							<div class="advantage-icon">✓</div>
+							<div class="advantage-content">
+								<h3 class="advantage-title">Опытные мастера</h3>
+								<p class="advantage-text">Многолетний опыт работы с автомобилями всех марок</p>
+							</div>
+						</div>
+						<div class="advantage-item">
+							<div class="advantage-icon">✓</div>
+							<div class="advantage-content">
+								<h3 class="advantage-title">Современное оборудование</h3>
+								<p class="advantage-text">Профессиональное оборудование для диагностики и ремонта</p>
+							</div>
+						</div>
+						<div class="advantage-item">
+							<div class="advantage-icon">✓</div>
+							<div class="advantage-content">
+								<h3 class="advantage-title">Гарантия на работы</h3>
+								<p class="advantage-text">Предоставляем гарантию на все виды выполненных работ</p>
+							</div>
+						</div>
+						<div class="advantage-item">
+							<div class="advantage-icon">✓</div>
+							<div class="advantage-content">
+								<h3 class="advantage-title">Качественные запчасти</h3>
+								<p class="advantage-text">Используем только проверенные контрактные агрегаты</p>
+							</div>
+						</div>
+						<div class="advantage-item">
+							<div class="advantage-icon">✓</div>
+							<div class="advantage-content">
+								<h3 class="advantage-title">Быстрое выполнение</h3>
+								<p class="advantage-text">Выполняем работы в кратчайшие сроки без потери качества</p>
+							</div>
+						</div>
+						<div class="advantage-item">
+							<div class="advantage-icon">✓</div>
+							<div class="advantage-content">
+								<h3 class="advantage-title">Прозрачные цены</h3>
+								<p class="advantage-text">Честное ценообразование без скрытых доплат</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="service-cta">
+					<div class="service-cta-content">
+						<h2 class="service-cta-title">Записаться на обслуживание</h2>
+						<p class="service-cta-text">Свяжитесь с нами для записи на обслуживание или консультации</p>
+						<a href="/contacts.php" class="service-cta-btn">Связаться с нами</a>
+					</div>
+				</div>
 			</div>
 		</section>
 </div>
