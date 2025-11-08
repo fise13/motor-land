@@ -153,13 +153,8 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		<?php else: 
 			$slide_img = get_optimized_image($slide['image']);
 		?>
-		<!-- Performance: Оптимизированные изображения слайдера с WebP и правильными alt атрибутами -->
-		<picture>
-			<?php if ($slide_img['webp']): ?>
-			<source srcset="<?=$slide_img['webp'];?>" type="image/webp">
-			<?php endif; ?>
-			<img src="<?=$slide_img['original'];?>" alt="Купить контрактный мотор Алматы - привозные моторы из Малайзии, контрактные двигатели Казахстан" class="sliderslid" loading="lazy" width="1920" height="600" decoding="async" style="object-fit:cover;width:100%;height:100%;position:absolute;top:0;left:0;display:block;">
-		</picture>
+		<!-- Performance: Оптимизированные изображения слайдера с WebP -->
+		<div class="sliderslid" style="background-image: url(<?=$slide_img['webp'] ?: $slide_img['original'];?>);" aria-label="Купить контрактный мотор Алматы - привозные моторы из Малайзии, контрактные двигатели Казахстан" loading="lazy"></div>
 		<?php endif; ?>
 		<?php
 		$slide_index++;
@@ -358,14 +353,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 			<?php 
 			$about_img = get_optimized_image(get_simple_images('index_about_image')[0]);
 			?>
-			<div class="sssskartins revealator-slideright">
-				<picture>
-					<?php if ($about_img['webp']): ?>
-					<source srcset="<?=$about_img['webp'];?>" type="image/webp">
-					<?php endif; ?>
-					<img src="<?=$about_img['original'];?>" alt="Контрактные двигатели и привозные моторы из Малайзии в Алматы - Моторленд" loading="lazy" width="600" height="400" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;">
-				</picture>
-			</div>
+			<div class="sssskartins revealator-slideright" style="background-image: url(<?=$about_img['webp'] ?: $about_img['original'];?>);" aria-label="Контрактные двигатели и привозные моторы из Малайзии в Алматы - Моторленд" loading="lazy"></div>
 			<div class="abouttext revealator-slideleft">
 			<?=get_customtexts('index_about_text');?>
 			</div>
@@ -407,23 +395,16 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 			<article class="toverblock" itemscope itemtype="https://schema.org/Product" role="article" aria-labelledby="home-product-title-<?=$get['id'];?>">
 			<!-- SEO: Внутренняя ссылка на товар -->
 			<a href="/detal?id=<?=$get['id'];?>" itemprop="url" aria-label="Подробнее о товаре <?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>">
-				<!-- Performance: Оптимизированное изображение товара с WebP, lazy loading и правильными alt атрибутами -->
+				<!-- Performance: Оптимизированное изображение товара с WebP и lazy loading -->
 				<?php 
 				$product_img = get_optimized_image(get_farrimg($get['images'])[0]);
 				$product_alt = htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии', ENT_QUOTES, 'UTF-8');
 				?>
-				<div class="toverimg">
-					<picture>
-						<?php if ($product_img['webp']): ?>
-						<source srcset="<?=$product_img['webp'];?>" type="image/webp">
-						<?php endif; ?>
-						<img src="<?=$product_img['original'];?>" alt="<?=$product_alt;?>" itemprop="image" loading="lazy" width="400" height="300" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;">
-					</picture>
-				</div>
+				<div class="toverimg" style="background-image: url(<?=$product_img['webp'] ?: $product_img['original'];?>);" aria-label="<?=$product_alt;?>" itemprop="image" role="img" loading="lazy">
 			<?php if ($get['sale'] != 'noting') { ?>
 			<div class="cationsale" aria-label="Скидка: <?=htmlspecialchars($get['sale'], ENT_QUOTES, 'UTF-8');?>"><?=$get['sale'];?></div>
 			<?php } ?>
-			</a>
+			</div></a>
 			<h3 id="home-product-title-<?=$get['id'];?>" class="tovertitle" itemprop="name"><?=$get['name'];?></h3>
 			<div class="tovaropis" itemprop="description" aria-label="Описание товара">
 				<?=$get['stext'];?>
@@ -457,18 +438,12 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 			?>
 			<article class="toverblock revealator-slideup" itemscope itemtype="https://schema.org/Product">
 			<a href="/detal?id=<?=$get['id'];?>" itemprop="url">
-				<!-- SEO: Изображение товара с правильными alt атрибутами и целевыми ключевыми словами -->
+				<!-- Performance: Оптимизированное изображение товара с WebP и lazy loading -->
 				<?php 
 				$product_img = get_optimized_image(get_farrimg($get['images'])[0]);
 				$product_alt = htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии', ENT_QUOTES, 'UTF-8');
 				?>
-				<div class="toverimg">
-					<picture>
-						<?php if ($product_img['webp']): ?>
-						<source srcset="<?=$product_img['webp'];?>" type="image/webp">
-						<?php endif; ?>
-						<img src="<?=$product_img['original'];?>" alt="<?=$product_alt;?>" itemprop="image" loading="lazy" width="400" height="300" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;">
-					</picture>
+				<div class="toverimg" style="background-image: url(<?=$product_img['webp'] ?: $product_img['original'];?>);" aria-label="<?=$product_alt;?>" itemprop="image" role="img" loading="lazy">
 			<?php if ($get['sale'] != 'noting') { ?>
 			<div class="cationsale"><?=$get['sale'];?></div>
 			<?php } ?>
