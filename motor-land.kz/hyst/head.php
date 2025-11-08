@@ -60,7 +60,7 @@ if (mb_strlen($SITE_DESCRIPTION) < 50) {
 <link rel="shortcut icon" href="favicon.ico?<?=$INTERFACE_VERSION;?>" />
 <link rel="apple-touch-icon" href="favicon_apple.png?<?=$INTERFACE_VERSION;?>">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-<meta property="og:image" content="https://motor-land.kz/img/logo.jpg">
+<meta property="og:image" content="https://motor-land.kz/img/logo.webp">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Motor Land">
 

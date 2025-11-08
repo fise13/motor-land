@@ -63,7 +63,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 <meta property="og:url" content="https://motor-land.kz/">
 <meta property="og:title" content="<?=$SITE_TITLE;?>">
 <meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
-<meta property="og:image" content="https://motor-land.kz/img/logo.jpg">
+<meta property="og:image" content="https://motor-land.kz/img/logo.webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ru_RU">
@@ -73,7 +73,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 <meta name="twitter:url" content="https://motor-land.kz/">
 <meta name="twitter:title" content="<?=$SITE_TITLE;?>">
 <meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
-<meta name="twitter:image" content="https://motor-land.kz/img/logo.jpg">
+<meta name="twitter:image" content="https://motor-land.kz/img/logo.webp">
 <!-- SEO: Schema.org разметка для лучшего понимания структуры сайта поисковыми системами -->
 <script type="application/ld+json">
 {
@@ -82,7 +82,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
   "name": "Motor Land",
   "alternateName": "Моторленд",
   "url": "https://motor-land.kz",
-  "logo": "https://motor-land.kz/img/logo.jpg",
+  "logo": "https://motor-land.kz/img/logo.webp",
   "description": "Купить контрактный мотор в Алматы. Контрактные двигатели Казахстан - привозные моторы из Малайзии. Двигатель бу Малайзия Алматы с гарантией.",
   "address": [{
     "@type": "PostalAddress",

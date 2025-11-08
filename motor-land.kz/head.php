@@ -1,6 +1,6 @@
 <div class="headercon mobilefix">
 	<div class="shirina relhead">
-		<a href="/" class="logo"><img src="img/logo.png" alt="Моторленд"></a>
+		<a href="/" class="logo"><img src="img/logo.webp" alt="Моторленд"></a>
 		<ul class="menu">
 			<a href="/"><li>Главная</li></a>
 			<a href="/catalog.php"><li>Каталог</li></a>

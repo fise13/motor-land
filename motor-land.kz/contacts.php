@@ -19,7 +19,7 @@ $SITE_KEYWORDS = 'контакты моторленд, адрес автосер
 <meta property="og:url" content="https://motor-land.kz/contacts.php">
 <meta property="og:title" content="<?=$SITE_TITLE;?>">
 <meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
-<meta property="og:image" content="https://motor-land.kz/img/logo.jpg">
+<meta property="og:image" content="https://motor-land.kz/img/logo.webp">
 <!-- SEO: Twitter Cards -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="<?=$SITE_TITLE;?>">
@@ -31,7 +31,7 @@ $SITE_KEYWORDS = 'контакты моторленд, адрес автосер
   "@type": "LocalBusiness",
   "name": "Motor Land",
   "alternateName": "Моторленд",
-  "image": "https://motor-land.kz/img/logo.jpg",
+  "image": "https://motor-land.kz/img/logo.webp",
   "description": "<?=$SITE_DESCRIPTION;?>",
   "address": [{
     "@type": "PostalAddress",

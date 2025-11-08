@@ -19,7 +19,7 @@ $SITE_KEYWORDS = 'замена двигателя алматы, автосерв
 <meta property="og:url" content="https://motor-land.kz/service">
 <meta property="og:title" content="<?=$SITE_TITLE;?>">
 <meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
-<meta property="og:image" content="https://motor-land.kz/img/logo.jpg">
+<meta property="og:image" content="https://motor-land.kz/img/logo.webp">
 <!-- SEO: Twitter Cards -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="<?=$SITE_TITLE;?>">
