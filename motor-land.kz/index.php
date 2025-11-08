@@ -200,9 +200,14 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		})();
 		</script>
 	<div class="slidercoun shirina">
-		<h1 class="titlephon" role="heading" aria-level="1"><?=get_simple_texts ('index_slider_title');?></h1>
+		<h1 class="titlephon" role="heading" aria-level="1"><?php $title = get_simple_texts('index_slider_title'); echo !empty($title) ? htmlspecialchars($title, ENT_QUOTES, 'UTF-8') : 'Контрактные Двигатели и КПП в Алматы'; ?></h1>
 		<div class="sliderbtns" role="group" aria-label="Действия на главной странице">
-			<a href="tel:<?=get_simple_texts ('index_slider_phone');?>" class="phone" aria-label="Позвонить по телефону <?=get_simple_texts ('index_slider_phone');?>" role="button" tabindex="0" onclick="if(typeof gtag==='function'){gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});}"><?=get_simple_texts ('index_slider_phone');?></a><br>
+			<?php 
+			$phone_text = get_simple_texts('index_slider_phone');
+			$phone_display = !empty($phone_text) ? htmlspecialchars($phone_text, ENT_QUOTES, 'UTF-8') : '+7-777-144-5445';
+			$phone_link = !empty($phone_text) ? htmlspecialchars($phone_text, ENT_QUOTES, 'UTF-8') : '+7-777-144-5445';
+			?>
+			<a href="tel:<?=$phone_link;?>" class="phone" aria-label="Позвонить по телефону <?=$phone_display;?>" role="button" tabindex="0" onclick="if(typeof gtag==='function'){gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});}"><?=$phone_display;?></a><br>
 			<a href="catalog.php" aria-label="Перейти в каталог товаров"><div class="atalogb" role="button" tabindex="0">Каталог</div></a>
 		</div>
 		<div class="sliderform" role="search" aria-label="Поиск товаров по параметрам">

@@ -551,46 +551,58 @@ function hyst_get_os() {
 if (!function_exists('get_simple_texts')) {
 	function get_simple_texts ($i) {
 		global $_DB_CONECT;
-		if (!isset($_DB_CONECT) || !$_DB_CONECT) {
-			return false;
+		if (!isset($_DB_CONECT) || !$_DB_CONECT || !is_object($_DB_CONECT)) {
+			return '';
 		}
-		if (empty($i)) {
-			return false;
+		if (empty($i) || !is_string($i)) {
+			return '';
 		}
-		$result = @$_DB_CONECT->query("SHOW TABLES LIKE 'simple_texts'");
-		if (!$result || $result->num_rows == 0) {
-			return false;
+		try {
+			$result = @$_DB_CONECT->query("SHOW TABLES LIKE 'simple_texts'");
+			if (!$result || $result->num_rows == 0) {
+				return '';
+			}
+			$escaped_key = mysqli_real_escape_string($_DB_CONECT, $i);
+			$hyst_sql = @$_DB_CONECT->query("SELECT text FROM simple_texts WHERE key_id='".$escaped_key."' ORDER BY id DESC LIMIT 1");
+			if ($hyst_sql && $hyst_sql->num_rows > 0) { 
+				$row = mysqli_fetch_assoc($hyst_sql);
+				return isset($row['text']) ? $row['text'] : '';
+			}
+		} catch (Exception $e) {
+			return '';
+		} catch (Error $e) {
+			return '';
 		}
-		$escaped_key = mysqli_real_escape_string($_DB_CONECT, $i);
-		$hyst_sql = @$_DB_CONECT->query("SELECT * FROM simple_texts WHERE key_id='".$escaped_key."' ORDER BY id DESC LIMIT 1");
-		if ($hyst_sql && $hyst_sql->num_rows > 0) { 
-			$row = mysqli_fetch_assoc($hyst_sql);
-			return isset($row['text']) ? $row['text'] : false;
-		}
-		return false;
+		return '';
 	}
 }
 
 if (!function_exists('get_customtexts')) {
 	function get_customtexts ($i) {
 		global $_DB_CONECT;
-		if (!isset($_DB_CONECT) || !$_DB_CONECT) {
-			return false;
+		if (!isset($_DB_CONECT) || !$_DB_CONECT || !is_object($_DB_CONECT)) {
+			return '';
 		}
-		if (empty($i)) {
-			return false;
+		if (empty($i) || !is_string($i)) {
+			return '';
 		}
-		$result = @$_DB_CONECT->query("SHOW TABLES LIKE 'customtexts'");
-		if (!$result || $result->num_rows == 0) {
-			return false;
+		try {
+			$result = @$_DB_CONECT->query("SHOW TABLES LIKE 'customtexts'");
+			if (!$result || $result->num_rows == 0) {
+				return '';
+			}
+			$escaped_key = mysqli_real_escape_string($_DB_CONECT, $i);
+			$hyst_sql = @$_DB_CONECT->query("SELECT text FROM customtexts WHERE key_id='".$escaped_key."' ORDER BY id DESC LIMIT 1");
+			if ($hyst_sql && $hyst_sql->num_rows > 0) { 
+				$row = mysqli_fetch_assoc($hyst_sql);
+				return isset($row['text']) ? $row['text'] : '';
+			}
+		} catch (Exception $e) {
+			return '';
+		} catch (Error $e) {
+			return '';
 		}
-		$escaped_key = mysqli_real_escape_string($_DB_CONECT, $i);
-		$hyst_sql = @$_DB_CONECT->query("SELECT * FROM customtexts WHERE key_id='".$escaped_key."' ORDER BY id DESC LIMIT 1");
-		if ($hyst_sql && $hyst_sql->num_rows > 0) { 
-			$row = mysqli_fetch_assoc($hyst_sql);
-			return isset($row['text']) ? $row['text'] : false;
-		}
-		return false;
+		return '';
 	}
 }
 ?>
