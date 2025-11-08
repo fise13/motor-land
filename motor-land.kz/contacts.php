@@ -1,14 +1,8 @@
 <?php
 include('hyst/php.php');
-
-// Загружаем функции для работы с контентом страниц
 include_once('hyst/mods/page_content/proces.php');
 
-// Получаем контент страницы контактов
 $contacts_content = get_page_content('contacts_page');
-
-// SEO: Оптимизированные мета-теги для страницы контактов
-// Если контент загружен из базы, используем его, иначе дефолтные значения
 $SITE_TITLE = $contacts_content && !empty($contacts_content['meta_title']) ? htmlspecialchars($contacts_content['meta_title'], ENT_QUOTES, 'UTF-8') : 'Контакты | Моторленд - Контрактные Двигатели и КПП в Алматы';
 $SITE_DESCRIPTION = $contacts_content && !empty($contacts_content['meta_description']) ? htmlspecialchars($contacts_content['meta_description'], ENT_QUOTES, 'UTF-8') : 'Контакты компании Motor Land в Алматы. Адреса офисов, телефоны, режим работы.';
 $SITE_KEYWORDS = $contacts_content && !empty($contacts_content['meta_keywords']) ? htmlspecialchars($contacts_content['meta_keywords'], ENT_QUOTES, 'UTF-8') : 'контакты моторленд, адрес автосервиса алматы, телефон контрактных двигателей';
@@ -17,21 +11,16 @@ $SITE_KEYWORDS = $contacts_content && !empty($contacts_content['meta_keywords'])
 <html lang="ru">
 <head>
 <?php include("hyst/head.php"); ?>
-<!-- SEO: Canonical URL (без .php расширения) -->
 <link rel="canonical" href="https://motor-land.kz/contacts"/>
-<!-- SEO: Meta keywords -->
 <meta name="keywords" content="<?=$SITE_KEYWORDS;?>">
-<!-- SEO: Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://motor-land.kz/contacts">
 <meta property="og:title" content="<?=$SITE_TITLE;?>">
 <meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
 <meta property="og:image" content="https://motor-land.kz/img/logo.webp">
-<!-- SEO: Twitter Cards -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="<?=$SITE_TITLE;?>">
 <meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
-<!-- SEO: Schema.org LocalBusiness для страницы контактов -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -77,7 +66,6 @@ $SITE_KEYWORDS = $contacts_content && !empty($contacts_content['meta_keywords'])
   }
 }
 </script>
-<!-- SEO: BreadcrumbList -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -99,10 +87,8 @@ $SITE_KEYWORDS = $contacts_content && !empty($contacts_content['meta_keywords'])
 <body>
 <?php include("hyst/sbody.php"); ?>
 <?php include("des/head.php"); ?>
-<!-- SEO: Семантический тег <main> -->
 <main>
 <br><br>
-<!-- SEO: Семантический тег <nav> для хлебных крошек -->
 <nav class="generalw" aria-label="Навигационная цепочка">
 	<div class="shirina">
 		<div class="crumbsblock" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -119,7 +105,6 @@ $SITE_KEYWORDS = $contacts_content && !empty($contacts_content['meta_keywords'])
 	</div>
 </nav>	
 
-<!-- SEO: Семантический тег <section> для заголовка -->
 <section class="generalw" aria-labelledby="contacts-title">
 	<div class="shirina zgolovorleft">
 		<h1 id="contacts-title" class="sttitle"><span><?=$contacts_content && !empty($contacts_content['h1_text']) ? htmlspecialchars($contacts_content['h1_text'], ENT_QUOTES, 'UTF-8') : 'Контакты';?></span></h1>
@@ -127,7 +112,6 @@ $SITE_KEYWORDS = $contacts_content && !empty($contacts_content['meta_keywords'])
 </section>
 
 <?php if ($contacts_content && !empty($contacts_content['content'])): ?>
-<!-- Редактируемый контент страницы контактов -->
 <section class="generalw" style="padding: 20px 0;">
 	<div class="shirina">
 		<div class="contacts-page-content" style="max-width: 1200px; margin: 0 auto; padding: 20px; background: #f9f9f9; border-radius: 8px; margin-bottom: 30px;">
@@ -137,7 +121,6 @@ $SITE_KEYWORDS = $contacts_content && !empty($contacts_content['meta_keywords'])
 </section>
 <?php endif; ?>
 
-<!-- SEO: Семантический тег <section> для контактной информации -->
 <section class="generalw contacts-main" aria-label="Контактная информация">
 	<div class="shirina">
 		<div class="footer_contacts contacts-page">

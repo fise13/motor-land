@@ -1,14 +1,8 @@
 <?php
 include('hyst/php.php');
-
-// Загружаем функции для работы с контентом страниц
 include_once('hyst/mods/page_content/proces.php');
 
-// Получаем контент страницы сервиса
 $service_content = get_page_content('service_page');
-
-// SEO: Оптимизированные мета-теги для страницы автосервиса
-// Если контент загружен из базы, используем его, иначе дефолтные значения
 $SITE_TITLE = $service_content && !empty($service_content['meta_title']) ? htmlspecialchars($service_content['meta_title'], ENT_QUOTES, 'UTF-8') : 'Автосервис - Замена Двигателей и КПП в Алматы | Моторленд';
 $SITE_DESCRIPTION = $service_content && !empty($service_content['meta_description']) ? htmlspecialchars($service_content['meta_description'], ENT_QUOTES, 'UTF-8') : 'Профессиональная замена и обслуживание контрактных двигателей и КПП в Алматы.';
 $SITE_KEYWORDS = $service_content && !empty($service_content['meta_keywords']) ? htmlspecialchars($service_content['meta_keywords'], ENT_QUOTES, 'UTF-8') : 'замена двигателя алматы, автосервис замена КПП, установка контрактного двигателя';
@@ -17,21 +11,16 @@ $SITE_KEYWORDS = $service_content && !empty($service_content['meta_keywords']) ?
 <html lang="ru">
 <head>
 <?php include("hyst/head.php"); ?>
-<!-- SEO: Canonical URL -->
 <link rel="canonical" href="https://motor-land.kz/service"/>
-<!-- SEO: Meta keywords -->
 <meta name="keywords" content="<?=$SITE_KEYWORDS;?>">
-<!-- SEO: Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://motor-land.kz/service">
 <meta property="og:title" content="<?=$SITE_TITLE;?>">
 <meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
 <meta property="og:image" content="https://motor-land.kz/img/logo.webp">
-<!-- SEO: Twitter Cards -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="<?=$SITE_TITLE;?>">
 <meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
-<!-- SEO: Schema.org Service для страницы автосервиса -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,7 +42,6 @@ $SITE_KEYWORDS = $service_content && !empty($service_content['meta_keywords']) ?
   "description": "<?=$SITE_DESCRIPTION;?>"
 }
 </script>
-<!-- SEO: BreadcrumbList -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -75,11 +63,9 @@ $SITE_KEYWORDS = $service_content && !empty($service_content['meta_keywords']) ?
 <body>
 <?php include("hyst/sbody.php"); ?>
 <?php include("des/head.php"); ?>
-<!-- SEO: Семантический тег <main> -->
 <main>
 <div class="service-page">
 	<div class="service-container">
-		<!-- SEO: Семантический тег <nav> для хлебных крошек -->
 		<nav class="generalw" aria-label="Навигационная цепочка">
 			<div class="shirina">
 				<div class="crumbsblock" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -95,7 +81,6 @@ $SITE_KEYWORDS = $service_content && !empty($service_content['meta_keywords']) ?
 			</div>
 		</nav>
 
-		<!-- SEO: Семантический тег <section> для заголовка -->
 		<section class="generalw" aria-labelledby="service-title">
 			<div class="shirina zgolovorleft">
 				<h1 id="service-title" class="sttitle"><span><?=$service_content && !empty($service_content['h1_text']) ? htmlspecialchars($service_content['h1_text'], ENT_QUOTES, 'UTF-8') : 'Замена Контрактного Двигателя в Алматы';?></span></h1>

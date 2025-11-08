@@ -1,14 +1,8 @@
 <?php
 include('hyst/php.php');
-
-// Загружаем функции для работы с контентом страниц
 include_once('hyst/mods/page_content/proces.php');
 
-// Получаем контент страницы оплаты и доставки
 $pay_content = get_page_content('pay_page');
-
-// SEO: Оптимизированные мета-теги для страницы оплаты и доставки
-// Если контент загружен из базы, используем его, иначе дефолтные значения
 $SITE_TITLE = $pay_content && !empty($pay_content['meta_title']) ? htmlspecialchars($pay_content['meta_title'], ENT_QUOTES, 'UTF-8') : 'Доставка и Оплата | Контрактные Двигатели и КПП | Моторленд';
 $SITE_DESCRIPTION = $pay_content && !empty($pay_content['meta_description']) ? htmlspecialchars($pay_content['meta_description'], ENT_QUOTES, 'UTF-8') : 'Доставка контрактных двигателей и КПП по Казахстану и СНГ.';
 $SITE_KEYWORDS = $pay_content && !empty($pay_content['meta_keywords']) ? htmlspecialchars($pay_content['meta_keywords'], ENT_QUOTES, 'UTF-8') : 'доставка двигателей алматы, оплата контрактных моторов, доставка КПП по казахстану';
@@ -17,21 +11,16 @@ $SITE_KEYWORDS = $pay_content && !empty($pay_content['meta_keywords']) ? htmlspe
 <html lang="ru">
 <head>
 	<?php include("hyst/head.php"); ?>
-	<!-- SEO: Canonical URL -->
 	<link rel="canonical" href="https://motor-land.kz/pay"/>
-	<!-- SEO: Meta keywords -->
 	<meta name="keywords" content="<?=$SITE_KEYWORDS;?>">
-	<!-- SEO: Open Graph -->
 	<meta property="og:type" content="website">
 	<meta property="og:url" content="https://motor-land.kz/pay">
 	<meta property="og:title" content="<?=$SITE_TITLE;?>">
 	<meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
 	<meta property="og:image" content="https://motor-land.kz/img/logo.webp">
-	<!-- SEO: Twitter Cards -->
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:title" content="<?=$SITE_TITLE;?>">
 	<meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
-	<!-- SEO: BreadcrumbList -->
 	<script type="application/ld+json">
 	{
 	  "@context": "https://schema.org",
@@ -53,10 +42,8 @@ $SITE_KEYWORDS = $pay_content && !empty($pay_content['meta_keywords']) ? htmlspe
 <body>
 <?php include("hyst/sbody.php"); ?>
 <?php include("des/head.php"); ?>
-<!-- SEO: Семантический тег <main> -->
 <main>
 <br><br>
-<!-- SEO: Семантический тег <nav> для хлебных крошек -->
 <nav class="generalw" aria-label="Навигационная цепочка">
 	<div class="shirina">
 		<div class="crumbsblock" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -73,8 +60,6 @@ $SITE_KEYWORDS = $pay_content && !empty($pay_content['meta_keywords']) ? htmlspe
 	</div>
 </nav>
 
-
-<!-- SEO: Семантический тег <section> для заголовка -->
 <section class="generalw" aria-labelledby="pay-title">
 	<div class="shirina zgolovorleft">
 		<h1 id="pay-title" class="sttitle"><span><?=$pay_content && !empty($pay_content['h1_text']) ? htmlspecialchars($pay_content['h1_text'], ENT_QUOTES, 'UTF-8') : 'Доставка и Оплата Контрактных Двигателей';?></span></h1>

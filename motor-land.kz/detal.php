@@ -1,9 +1,6 @@
 <?php
 include('hyst/php.php');
 
-
-
-//Фильтр гет
 if (hyst_test_id($_GET['id'])) {
 	$id = (int)$_GET['id'];
 	$stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_tovari WHERE id = ?");
@@ -22,20 +19,15 @@ if (hyst_test_id($_GET['id'])) {
 	exit;
 }
 
-
-// SEO: Оптимизированные мета-теги для страницы товара с целевыми ключевыми запросами
-// Целевые запросы: "купить контрактный мотор Алматы", "привозные моторы Алматы", "двигатель бу Малайзия Алматы"
 $product_name = htmlspecialchars($print['name'], ENT_QUOTES, 'UTF-8');
 $product_meta = htmlspecialchars($print['tmeta'], ENT_QUOTES, 'UTF-8');
 $SITE_TITLE = 'Купить Контрактный Мотор '.$product_name.' Алматы | Привозные Моторы Малайзия | Моторленд';
 $SITE_DESCRIPTION = 'Купить контрактный мотор '.$product_name.' в Алматы. Привозные моторы из Малайзии. '.$product_meta.'. Двигатель бу Малайзия Алматы с гарантией. Контрактные двигатели Казахстан. Контрактный двигатель Toyota, Honda, Nissan. Двигатель бу. Быстрая доставка. Цена: '.($print['cash']!=0?$print['cash'].' KZT':'уточняйте').'.';
 $SITE_KEYWORDS = 'купить контрактный мотор '.mb_strtolower($product_name).' алматы, привозные моторы '.mb_strtolower($product_name).', двигатель бу малайзия алматы, контрактные двигатели казахстан, '.mb_strtolower($product_meta).', контрактный двигатель Toyota, контрактный двигатель Honda, контрактный двигатель Nissan, двигатель бу, контрактные двигатели, двигатели бу';
 
-// SEO: Формируем URL для Open Graph изображения
 $product_image = get_farrimg($print['images'])[0];
 $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : 'https://motor-land.kz'.$product_image;
 
-// SEO: Генерируем ЧПУ URL для товара (канонический URL)
 $canonical_url = seo_get_product_url($print['id'], $print['name']);
 $full_canonical_url = 'https://motor-land.kz' . $canonical_url;
 ?>
@@ -43,11 +35,8 @@ $full_canonical_url = 'https://motor-land.kz' . $canonical_url;
 <html lang="ru">
 <head>
 <?php include("hyst/head.php"); ?>
-<!-- SEO: Canonical URL для страницы товара (ЧПУ URL) -->
 <link rel="canonical" href="<?=$full_canonical_url;?>"/>
-<!-- SEO: Meta keywords для товара -->
 <meta name="keywords" content="<?=$SITE_KEYWORDS;?>">
-<!-- SEO: Open Graph мета-теги для товара -->
 <meta property="og:type" content="product">
 <meta property="og:url" content="https://motor-land.kz/detal?id=<?=$print['id'];?>">
 <meta property="og:title" content="<?=$SITE_TITLE;?>">
@@ -60,12 +49,10 @@ $full_canonical_url = 'https://motor-land.kz' . $canonical_url;
 <meta property="product:price:amount" content="<?=$print['cash'];?>">
 <meta property="product:price:currency" content="KZT">
 <?php } ?>
-<!-- SEO: Twitter Cards для товара -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="<?=$SITE_TITLE;?>">
 <meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
 <meta name="twitter:image" content="<?=$product_image_url;?>">
-<!-- SEO: Schema.org Product разметка для товара -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -96,7 +83,6 @@ $full_canonical_url = 'https://motor-land.kz' . $canonical_url;
   }
 }
 </script>
-<!-- SEO: Schema.org BreadcrumbList для навигации -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -123,10 +109,8 @@ $full_canonical_url = 'https://motor-land.kz' . $canonical_url;
 <body>
 <?php include("hyst/sbody.php"); ?>
 <?php include("des/head.php"); ?>
-<!-- SEO: Семантический тег <main> для основного контента -->
 <main>
 <br><br>
-<!-- SEO: Семантический тег <nav> для хлебных крошек -->
 <nav class="generalw" aria-label="Навигационная цепочка">
 	<div class="shirina">
 		<div class="crumbsblock" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -146,26 +130,20 @@ $full_canonical_url = 'https://motor-land.kz' . $canonical_url;
 		</div>
 </nav>
 
-<!-- SEO: Семантический тег <article> для товара -->
 <section class="generalw">
 	<div class="shirina">
 		<article class="product-detail-wrapper" itemscope itemtype="https://schema.org/Product">
 			<div class="product-detail-container">
-				<!-- Изображение товара -->
 				<div class="product-image-wrapper">
-					<!-- Performance: Preload изображения товара для ускорения LCP на странице товара -->
 					<?php 
 					$product_img = get_optimized_image(get_farrimg($print['images'])[0]);
 					?>
 					<link rel="preload" as="image" href="<?=$product_img['webp'] ?: $product_img['original'];?>">
 			<div class="tovarimage">
-						<!-- Performance: WebP изображение с fallback для оптимизации размера -->
 						<picture>
 							<?php if ($product_img['webp']): ?>
 							<source srcset="<?=$product_img['webp'];?>" type="image/webp">
 							<?php endif; ?>
-							<!-- SEO: Улучшенный alt-текст для изображения товара с целевыми ключевыми словами -->
-							<!-- Performance: width и height для предотвращения CLS (Cumulative Layout Shift) -->
 							<img src="<?=$product_img['original'];?>" alt="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы из Малайзии';?>" title="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы';?>" itemprop="image" loading="eager" fetchpriority="high" width="600" height="450" decoding="async">
 						</picture>
 				<?php if ($print['sale'] != 'noting') { ?>
@@ -174,11 +152,9 @@ $full_canonical_url = 'https://motor-land.kz' . $canonical_url;
 			</div>
 		</div>
 				
-				<!-- Информация о товаре -->
 				<div class="product-info-wrapper">
 					<h1 class="product-title" itemprop="name"><?=$print['name'];?></h1>
 			
-					<!-- Цена -->
 					<div class="product-price-section" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
 						<?php if ($print['cash'] != 0 && $print['cash'] != '0') { ?>
 						<div class="product-price">
@@ -193,13 +169,10 @@ $full_canonical_url = 'https://motor-land.kz' . $canonical_url;
 						<link itemprop="availability" href="https://schema.org/InStock" />
 					</div>
 					
-					<!-- Accessibility: Кнопка покупки с ARIA атрибутами -->
 					<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="product-buy-button" role="button" aria-label="Купить товар <?=htmlspecialchars($product_name, ENT_QUOTES, 'UTF-8');?>" tabindex="0" onclick="if(typeof gtag==='function'){gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});}">Купить</a>
 					
-					<!-- Описание товара -->
 					<div class="product-description" itemprop="description">
 						<?php
-						// Убираем текст "В наличии - на выбор более 100шт." из описания
 						$text = $print['text'];
 						$text = preg_replace('/В наличии\s*[-–—]\s*на выбор более\s*\d+шт\.?/iu', '', $text);
 						$text = preg_replace('/В наличии\s*на выбор более\s*\d+шт\.?/iu', '', $text);
@@ -222,8 +195,6 @@ $full_canonical_url = 'https://motor-land.kz' . $canonical_url;
 <?php include("des/foter.php"); ?>
 <?php include("hyst/fbody.php"); ?>
 
-<!-- JavaScript для обработки кнопки покупки -->
-<!-- Performance: Ожидание загрузки jQuery для предотвращения ошибки "$ is not defined" -->
 <script defer>
 (function() {
 	function waitForJQuery(callback) {
@@ -241,12 +212,9 @@ $full_canonical_url = 'https://motor-land.kz' . $canonical_url;
 			return;
 		}
 		
-		// Performance: Унифицированный обработчик для кнопок покупки
-		// Обработчик клика на кнопку покупки (новая кнопка product-buy-button)
 		$(document).on('click', '.product-buy-button', function(e) {
-			// Если ссылка tel:, не открываем модал
 			if ($(this).attr('href') && $(this).attr('href').indexOf('tel:') === 0) {
-				return; // Позволяем стандартному поведению ссылки
+				return;
 			}
 			e.preventDefault();
 			var productName = $(this).closest('.product-info-wrapper').find('.product-title').text() || 
@@ -264,11 +232,9 @@ $full_canonical_url = 'https://motor-land.kz' . $canonical_url;
 			}
 		});
 		
-		// Обработчик клика на старую кнопку toverbuton (для обратной совместимости)
 		$(document).on('click', '.toverbuton', function(e) {
-			// Если ссылка tel:, не открываем модал
 			if ($(this).attr('href') && $(this).attr('href').indexOf('tel:') === 0) {
-				return; // Позволяем стандартному поведению ссылки
+				return;
 			}
 			e.preventDefault();
 			var productName = $(this).closest('article').find('.tovertitle').text() || 

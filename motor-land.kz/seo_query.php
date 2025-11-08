@@ -1,10 +1,8 @@
 <?php
-// Включаем обработку ошибок для отладки
 error_reporting(E_ALL);
 ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 
-// Начинаем буферизацию вывода для перехвата ошибок
 if (ob_get_level() == 0) {
 	ob_start();
 }
@@ -12,17 +10,14 @@ if (ob_get_level() == 0) {
 try {
 	include('hyst/php.php');
 	
-	// Убеждаемся, что переменная версии определена
 	if (!isset($INTERFACE_VERSION)) {
 		$INTERFACE_VERSION = 0.91;
 	}
 	
-	// Загружаем функции SEO-запросов
 	if (!function_exists('get_seo_query')) {
 		include_once('hyst/mods/seo_queries/proces.php');
 	}
 	
-	// Проверяем, что функция загружена
 	if (!function_exists('get_seo_query')) {
 		throw new Exception('Функция get_seo_query не найдена');
 	}
@@ -42,7 +37,6 @@ try {
 	die('Ошибка инициализации. Пожалуйста, попробуйте позже.');
 }
 
-// Получаем slug из URL
 $query_slug = isset($_GET['slug']) ? trim($_GET['slug']) : '';
 
 if (empty($query_slug)) {
@@ -54,7 +48,6 @@ if (empty($query_slug)) {
 	exit;
 }
 
-// Получаем запрос по slug
 try {
 	if (!function_exists('get_seo_query')) {
 		throw new Exception('Функция get_seo_query не определена');
@@ -88,7 +81,6 @@ try {
 	exit;
 }
 
-// SEO: Оптимизированные мета-теги для запроса
 $SITE_TITLE = !empty($query['meta_title']) ? htmlspecialchars($query['meta_title'], ENT_QUOTES, 'UTF-8') : (!empty($query['query_text']) ? htmlspecialchars($query['query_text'], ENT_QUOTES, 'UTF-8') . ' | Motor Land' : 'Запрос | Motor Land');
 $SITE_DESCRIPTION = !empty($query['meta_description']) ? htmlspecialchars($query['meta_description'], ENT_QUOTES, 'UTF-8') : 'Контрактные двигатели в Алматы';
 $SITE_KEYWORDS = !empty($query['meta_keywords']) ? htmlspecialchars($query['meta_keywords'], ENT_QUOTES, 'UTF-8') : 'контрактные двигатели, двигатель бу';
@@ -102,26 +94,20 @@ if (!isset($INTERFACE_VERSION)) {
 }
 include("hyst/head.php"); 
 ?>
-<!-- Блог: Стили для страницы запроса загружаем синхронно с абсолютными путями -->
 <link rel="stylesheet" href="/css.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
 <link rel="stylesheet" href="/tab.css?<?=$INTERFACE_VERSION;?>" type="text/css" media="(min-width: 768px)" />
 <link rel="stylesheet" href="/mob.css?<?=$INTERFACE_VERSION;?>" type="text/css" media="(max-width: 767px)" />
-<!-- SEO: Canonical URL -->
 <link rel="canonical" href="https://motor-land.kz/query/<?=!empty($query['slug']) ? htmlspecialchars($query['slug'], ENT_QUOTES, 'UTF-8') : '';?>"/>
-<!-- SEO: Meta keywords -->
 <meta name="keywords" content="<?=$SITE_KEYWORDS;?>">
-<!-- SEO: Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://motor-land.kz/query/<?=!empty($query['slug']) ? htmlspecialchars($query['slug'], ENT_QUOTES, 'UTF-8') : '';?>">
 <meta property="og:title" content="<?=$SITE_TITLE;?>">
 <meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
 <meta property="og:image" content="https://motor-land.kz/img/logo.webp">
-<!-- SEO: Twitter Cards -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="<?=$SITE_TITLE;?>">
 <meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
 <meta name="twitter:image" content="https://motor-land.kz/img/logo.webp">
-<!-- SEO: BreadcrumbList -->
 <script type="application/ld+json">
 <?php
 $breadcrumb_data = [
@@ -154,7 +140,6 @@ echo json_encode($breadcrumb_data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASH
 </head>
 <body>
 <?php 
-// Очищаем буфер перед выводом контента
 while (ob_get_level() > 0) {
 	ob_end_flush();
 }
@@ -165,10 +150,8 @@ try {
 	error_log('SEO query includes error: ' . $e->getMessage());
 }
 ?>
-<!-- SEO: Семантический тег <main> -->
 <main>
 <br><br>
-<!-- SEO: Семантический тег <nav> для хлебных крошек -->
 <nav class="generalw" aria-label="Навигационная цепочка">
 	<div class="shirina">
 		<div class="crumbsblock" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -190,7 +173,6 @@ try {
 	</div>
 </nav>
 
-<!-- SEO: Семантический тег <article> для страницы запроса -->
 <article class="blog-article-section" itemscope itemtype="https://schema.org/WebPage">
 	<div class="blog-article-container">
 		<header class="blog-article-header">
@@ -202,12 +184,10 @@ try {
 			<?php endif; ?>
 		</header>
 
-		<!-- Содержание страницы -->
 		<div class="blog-article-content" itemprop="mainContentOfPage">
 			<?=!empty($query['content']) ? $query['content'] : '<p>Содержание страницы отсутствует.</p>';?>
 		</div>
 
-		<!-- Кнопки действий -->
 		<div class="blog-article-actions">
 			<a href="/catalog" class="blog-action-btn blog-action-btn-primary">Перейти в каталог</a>
 			<a href="/contacts" class="blog-action-btn blog-action-btn-secondary">Связаться с нами</a>

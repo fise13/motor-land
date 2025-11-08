@@ -1,14 +1,8 @@
 <?php
 include('hyst/php.php');
-
-// Загружаем функции для работы с контентом страниц
 include_once('hyst/mods/page_content/proces.php');
 
-// Получаем контент страницы гарантий
 $guarantees_content = get_page_content('guarantees_page');
-
-// SEO: Оптимизированные мета-теги для страницы гарантий
-// Если контент загружен из базы, используем его, иначе дефолтные значения
 $SITE_TITLE = $guarantees_content && !empty($guarantees_content['meta_title']) ? htmlspecialchars($guarantees_content['meta_title'], ENT_QUOTES, 'UTF-8') : 'Гарантии на Контрактные Двигатели и КПП | Моторленд';
 $SITE_DESCRIPTION = $guarantees_content && !empty($guarantees_content['meta_description']) ? htmlspecialchars($guarantees_content['meta_description'], ENT_QUOTES, 'UTF-8') : 'Гарантии на контрактные двигатели и КПП в Алматы.';
 $SITE_KEYWORDS = $guarantees_content && !empty($guarantees_content['meta_keywords']) ? htmlspecialchars($guarantees_content['meta_keywords'], ENT_QUOTES, 'UTF-8') : 'гарантия на контрактные двигатели, гарантия на КПП, возврат двигателя';
@@ -17,21 +11,16 @@ $SITE_KEYWORDS = $guarantees_content && !empty($guarantees_content['meta_keyword
 <html lang="ru">
 <head>
 <?php include("hyst/head.php"); ?>
-<!-- SEO: Canonical URL -->
 <link rel="canonical" href="https://motor-land.kz/guarantees"/>
-<!-- SEO: Meta keywords -->
 <meta name="keywords" content="<?=$SITE_KEYWORDS;?>">
-<!-- SEO: Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://motor-land.kz/guarantees">
 <meta property="og:title" content="<?=$SITE_TITLE;?>">
 <meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
 <meta property="og:image" content="https://motor-land.kz/img/logo.webp">
-<!-- SEO: Twitter Cards -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="<?=$SITE_TITLE;?>">
 <meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
-<!-- SEO: BreadcrumbList -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,11 +42,9 @@ $SITE_KEYWORDS = $guarantees_content && !empty($guarantees_content['meta_keyword
 <body>
 <?php include("hyst/sbody.php"); ?>
 <?php include("des/head.php"); ?>
-<!-- SEO: Семантический тег <main> -->
 <main>
 <div class="guarantees-page">
 	<div class="guarantees-container">
-		<!-- SEO: Семантический тег <nav> для хлебных крошек -->
 		<nav class="generalw" aria-label="Навигационная цепочка">
 			<div class="shirina">
 				<div class="crumbsblock" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -73,7 +60,6 @@ $SITE_KEYWORDS = $guarantees_content && !empty($guarantees_content['meta_keyword
 			</div>
 		</nav>
 
-		<!-- SEO: Семантический тег <section> для заголовка -->
 		<section class="generalw" aria-labelledby="guarantees-title">
 			<div class="shirina zgolovorleft">
 				<h1 id="guarantees-title" class="sttitle"><span><?=$guarantees_content && !empty($guarantees_content['h1_text']) ? htmlspecialchars($guarantees_content['h1_text'], ENT_QUOTES, 'UTF-8') : 'Гарантия на Контрактные Двигатели и КПП';?></span></h1>
@@ -82,14 +68,12 @@ $SITE_KEYWORDS = $guarantees_content && !empty($guarantees_content['meta_keyword
 
 		<div class="guarantees-content">
 			<?php if ($guarantees_content && !empty($guarantees_content['content'])): ?>
-			<!-- Редактируемый контент из админ-панели -->
 			<div class="guarantees-main" style="width: 100%;">
 				<div class="guarantee-card">
 					<?=$guarantees_content['content'];?>
 				</div>
 			</div>
 			<?php else: ?>
-			<!-- Дефолтный контент (если не задан в админ-панели) -->
 			<div class="guarantees-sidebar">
 				<div class="guarantee-card warning-card">
 					<h3 class="card-title">Гарантия не действительна при следующих условиях:</h3>

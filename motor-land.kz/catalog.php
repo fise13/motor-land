@@ -1,14 +1,8 @@
 <?php
 include('hyst/php.php');
-
-// Загружаем функции для работы с контентом страниц
 include_once('hyst/mods/page_content/proces.php');
 
-// Получаем контент страницы каталога
 $catalog_content = get_page_content('catalog_page');
-
-// SEO: Оптимизированные мета-теги для страницы каталога с целевыми ключевыми запросами
-// Если контент загружен из базы, используем его, иначе дефолтные значения
 $SITE_TITLE = $catalog_content && !empty($catalog_content['meta_title']) ? htmlspecialchars($catalog_content['meta_title'], ENT_QUOTES, 'UTF-8') : 'Каталог Контрактных Моторов Алматы | Привозные Моторы Малайзия | Контрактные Двигатели Казахстан';
 $SITE_DESCRIPTION = $catalog_content && !empty($catalog_content['meta_description']) ? htmlspecialchars($catalog_content['meta_description'], ENT_QUOTES, 'UTF-8') : 'Каталог контрактных моторов в Алматы. Привозные моторы из Малайзии. Контрактные двигатели Казахстан - большой выбор двигателей бу.';
 $SITE_KEYWORDS = $catalog_content && !empty($catalog_content['meta_keywords']) ? htmlspecialchars($catalog_content['meta_keywords'], ENT_QUOTES, 'UTF-8') : 'купить контрактный мотор Алматы, контрактные двигатели Казахстан, привозные моторы Алматы';
@@ -57,22 +51,17 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 <html lang="ru">
 <head>
 <?php include("hyst/head.php"); ?>
-<!-- SEO: Canonical URL для страницы каталога -->
 <link rel="canonical" href="https://motor-land.kz/catalog"/>
-<!-- SEO: Meta keywords -->
 <meta name="keywords" content="<?=$SITE_KEYWORDS;?>">
-<!-- SEO: Open Graph для социальных сетей -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://motor-land.kz/catalog">
 <meta property="og:title" content="<?=$SITE_TITLE;?>">
 <meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
 <meta property="og:image" content="https://motor-land.kz/img/logo.webp">
 <meta property="og:locale" content="ru_RU">
-<!-- SEO: Twitter Cards -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="<?=$SITE_TITLE;?>">
 <meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
-<!-- SEO: Schema.org BreadcrumbList для навигации -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -94,10 +83,8 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 <body>
 <?php include("hyst/sbody.php"); ?>
 <?php include("des/head.php"); ?>
-<!-- SEO: Семантический тег <main> для основного контента -->
 <main>
 <br><br>
-<!-- SEO: Семантический тег <nav> для хлебных крошек -->
 <nav class="generalw" aria-label="Навигационная цепочка">
 	<div class="shirina">
 		<div class="crumbsblock" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -114,8 +101,6 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 	</div>
 </nav>	
 
-
-<!-- SEO: Семантический тег <section> для заголовка каталога -->
 <section class="generalw" aria-labelledby="catalog-title">
 	<div class="shirina zgolovorleft">
 		<h1 id="catalog-title" class="sttitle"><span><?=$catalog_content && !empty($catalog_content['h1_text']) ? htmlspecialchars($catalog_content['h1_text'], ENT_QUOTES, 'UTF-8') : 'Каталог';?></span></h1>
@@ -128,7 +113,6 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 </section>
 
 <?php if ($catalog_content && !empty($catalog_content['content'])): ?>
-<!-- Контент страницы каталога -->
 <section class="generalw" style="padding: 20px 0;">
 	<div class="shirina">
 		<div class="catalog-page-content" style="max-width: 1200px; margin: 0 auto; padding: 20px; background: #f9f9f9; border-radius: 8px; margin-bottom: 30px;">
@@ -138,14 +122,12 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 </section>
 <?php endif; ?>
 
-<!-- SEO: Семантический тег <section> для фильтров и товаров -->
 <section class="generalw" aria-label="Фильтры и товары каталога">
 	<div class="shirina">		
 
 		
 		<div class="filtersblock">
 		<form method="get" action="catalog.php">
-			<!---<input type="text" name="setxt" class="searchbloinput" placeholder="Что вы хотели найти.."><br>--->
 			<div class="maipttee">
 				<div class="meinputer" style="border: solid 1px black;"><div class="madiv" data-val="Марка"><?php if ($_GET['mk'] != '') { echo htmlspecialchars($_GET['mk'], ENT_QUOTES, 'UTF-8'); } else { echo "Марка"; } ?></div>
 					<input type="hidden" name="mk" value="<?php if ($_GET['mk'] != '') { echo htmlspecialchars($_GET['mk'], ENT_QUOTES, 'UTF-8'); } else { echo ""; } ?>">
@@ -267,11 +249,8 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		if ($tmps->num_rows != 0) { 
 			while($get = $tmps->fetch_array()):
 		?>
-		<!-- SEO: Семантический тег <article> для каждого товара в каталоге -->
-		<!-- Accessibility: Карточка товара с полной поддержкой screen readers -->
 		<article class="toverblock" itemscope itemtype="https://schema.org/Product" role="article" aria-labelledby="product-title-<?=$get['id'];?>">
 			<a href="/detal?id=<?=$get['id'];?>" itemprop="url" aria-label="Подробнее о товаре <?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>">
-				<!-- Performance: Оптимизированное изображение товара с WebP и lazy loading -->
 				<?php 
 				$product_img = get_optimized_image(get_farrimg($get['images'])[0]);
 				?>

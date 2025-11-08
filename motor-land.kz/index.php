@@ -1,8 +1,6 @@
 <?php
 include('hyst/php.php');
 
-// SEO: Оптимизированные мета-теги с целевыми ключевыми запросами для главной страницы
-// Целевые запросы: "купить контрактный мотор Алматы", "контрактные двигатели Казахстан", "привозные моторы Алматы", "двигатель бу Малайзия Алматы"
 $SITE_TITLE = 'Купить Контрактный Мотор Алматы | Привозные Моторы Малайзия | Двигатель БУ | Моторленд';
 $SITE_DESCRIPTION = 'Купить контрактный мотор в Алматы. Контрактные двигатели Казахстан - привозные моторы из Малайзии. Контрактный двигатель Toyota, Honda, Nissan, Mazda, Mitsubishi. Двигатель бу Малайзия Алматы с гарантией. Двигатель 1NZ, 2AZ, 3S, K24A, QR25DE. Контрактный двигатель Camry, CRV. Огромный выбор контрактных двигателей. Доставка по всему Казахстану.';
 $SITE_KEYWORDS = 'купить контрактный мотор Алматы, контрактные двигатели Казахстан, привозные моторы Алматы, двигатель бу Малайзия Алматы, контрактные двигатели алматы, купить мотор б/у, привозные двигатели, контрактный мотор малайзия, контрактный двигатель Toyota, контрактный двигатель Honda, контрактный двигатель Nissan, контрактный двигатель Mazda, контрактный двигатель Mitsubishi, двигатель бу, контрактные двигатели, двигатели бу, двигатель 1NZ, двигатель 2AZ, двигатель 3S, двигатель K24A, двигатель QR25DE, контрактный двигатель Camry, контрактный двигатель CRV, контрактный двигатель Corolla, контрактный двигатель Almera, контрактный двигатель Accord';
@@ -51,14 +49,10 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 <html lang="ru">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Accessibility: Skip link для быстрой навигации с клавиатуры -->
 <a href="#main-content" class="skip-link">Перейти к основному содержимому</a>
 <?php include("hyst/head.php"); ?>
-<!-- SEO: Canonical URL для предотвращения дублей контента -->
 <link rel="canonical" href="https://motor-land.kz/"/>
-<!-- SEO: Meta keywords для дополнительной индексации -->
 <meta name="keywords" content="<?=$SITE_KEYWORDS;?>">
-<!-- SEO: Open Graph мета-теги для социальных сетей (Facebook, VK) -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://motor-land.kz/">
 <meta property="og:title" content="<?=$SITE_TITLE;?>">
@@ -68,13 +62,11 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="Motor Land">
-<!-- SEO: Twitter Cards для красивого отображения при репостах -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="https://motor-land.kz/">
 <meta name="twitter:title" content="<?=$SITE_TITLE;?>">
 <meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
 <meta name="twitter:image" content="https://motor-land.kz/img/logo.webp">
-<!-- SEO: Schema.org разметка для лучшего понимания структуры сайта поисковыми системами -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -126,10 +118,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 <?php include("hyst/sbody.php"); ?>
 <?php include("des/head.php"); ?>
 
-<!-- SEO: Семантический тег <main> для основного контента страницы -->
-<!-- Accessibility: Основной контент страницы с идентификатором для skip link -->
 <main id="main-content" role="main">
-<!-- SEO: Семантический тег <section> для секции слайдера -->
 <section class="slider" aria-label="Главный слайдер">
 	<div id="slidess">
 		<?php
@@ -137,14 +126,10 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		$slide_index = 0;
 		while($slide=$slider->fetch_array()):
 		?>
-		<!-- Performance: Оптимизация LCP - первый слайд использует <img> вместо background-image -->
 		<?php if ($slide_index == 0): 
 			$slide_img = get_optimized_image($slide['image']);
 		?>
-		<!-- Performance: Preload первого изображения с высоким приоритетом для улучшения LCP -->
 		<link rel="preload" as="image" href="<?=$slide_img['webp'] ?: $slide_img['original'];?>" fetchpriority="high">
-		<!-- Performance: Используем <img> для LCP элемента вместо background-image с WebP поддержкой -->
-		<!-- SEO: H1 заголовок на главной странице должен быть только один -->
 		<picture>
 			<?php if ($slide_img['webp']): ?>
 			<source srcset="<?=$slide_img['webp'];?>" type="image/webp">
@@ -154,7 +139,6 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		<?php else: 
 			$slide_img = get_optimized_image($slide['image']);
 		?>
-		<!-- Performance: Оптимизированные изображения слайдера с WebP -->
 		<div class="sliderslid" style="background-image: url(<?=$slide_img['webp'] ?: $slide_img['original'];?>);" aria-label="Купить контрактный мотор Алматы - привозные моторы из Малайзии, контрактные двигатели Казахстан" loading="lazy"></div>
 		<?php endif; ?>
 		<?php
@@ -162,16 +146,8 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		endwhile;
 		?>
 	</div>
-	<!-- Performance: Скрипт слайдера выполняется после загрузки DOM и jQuery -->
 	<script>
-		/**
-		 * Функция: Автоматическая смена слайдов
-		 * Описание: Переключает слайды в главном слайдере каждые 3 секунды.
-		 * 			Находит текущий отображаемый слайд и плавно показывает следующий.
-		 * Performance: Ожидает загрузки jQuery перед использованием
-		 * Параметры: нет
-		 * Возвращает: ничего
-		 */
+		// Автоматическая смена слайдов каждые 3 секунды
 		(function() {
 			function waitForJQuery(callback) {
 				if (typeof window.jQuery !== 'undefined' && typeof window.$ !== 'undefined') {
@@ -224,15 +200,11 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		})();
 		</script>
 	<div class="slidercoun shirina">
-		<!-- SEO: H1 заголовок на главной странице (единственный H1 на странице) -->
-		<!-- Accessibility: Заголовок слайдера -->
 		<h1 class="titlephon" role="heading" aria-level="1"><?=get_simple_texts ('index_slider_title');?></h1>
-		<!-- Accessibility: Кнопки действий с ARIA атрибутами -->
 		<div class="sliderbtns" role="group" aria-label="Действия на главной странице">
 			<a href="tel:<?=get_simple_texts ('index_slider_phone');?>" class="phone" aria-label="Позвонить по телефону <?=get_simple_texts ('index_slider_phone');?>" role="button" tabindex="0" onclick="if(typeof gtag==='function'){gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});}"><?=get_simple_texts ('index_slider_phone');?></a><br>
 			<a href="catalog.php" aria-label="Перейти в каталог товаров"><div class="atalogb" role="button" tabindex="0">Каталог</div></a>
 		</div>
-		<!-- Accessibility: Форма поиска с правильными labels -->
 		<div class="sliderform" role="search" aria-label="Поиск товаров по параметрам">
 			<label for="search-form" class="sr-only">Поиск товаров</label>
 			<span id="search-form-label">что ищем?</span>
@@ -318,16 +290,12 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 	</div>
 </section>
 
-<!-- SEO: Семантический тег <section> для формы консультации -->
-<!-- Accessibility: Форма консультации с полной поддержкой screen readers -->
 <section class="generalw forsbgf consult-section" aria-labelledby="consult-title" role="region">
 	<div class="shirina forsliderform JF_parent_form consult-container">
 		<h2 id="consult-title" class="consult-title">Хотите получить бесплатную консультацию?</h2>
 		<div class="consult-subtitle" id="consult-subtitle">заполните форму</div>
 		<form method="post" class="consult-form" aria-labelledby="consult-title" aria-describedby="consult-subtitle" novalidate>
-			<!-- Security: Honeypot поле для защиты от спама (скрыто от пользователей) -->
 			<input type="text" name="website" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;z-index:-1;" tabindex="-1" autocomplete="off" aria-hidden="true">
-			<!-- Security: Время загрузки формы (для защиты от быстрых отправок) -->
 			<input type="hidden" name="form_time" value="<?=time();?>" aria-hidden="true">
 			<div class="form-control consult-form-control">
 				<label for="consult-name">Имя <span aria-label="обязательное поле">*</span></label>
@@ -345,8 +313,6 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 	</div>
 </section>
 
-<!-- SEO: Семантический тег <section> для секции "О нас" -->
-<!-- SEO: Правильная иерархия заголовков: после H1 идет H2 -->
 <section class="generalw" aria-labelledby="about-title">
 	<div class="shirina zgolovorleft">
 		<h2 id="about-title" class="sttitle"><span>О нас</span></h2>
@@ -356,7 +322,6 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 <section class="generalw">
 	<div class="shirina">
 		<div class="aboutblock">
-			<!-- SEO: Alt-текст для изображения через aria-label с ключевыми словами -->
 			<?php 
 			$about_img = get_optimized_image(get_simple_images('index_about_image')[0]);
 			?>
@@ -373,10 +338,8 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 	</div>
 </div>
 
-<!-- SEO: Семантический тег <section> для каталога товаров -->
 <section class="generalw frayalpfhon" aria-labelledby="catalog-title">
 	<div class="shirina">
-		<!-- Accessibility: Вкладки с ARIA атрибутами -->
 		<ul class="actionbtms" role="tablist" aria-label="Переключение между каталогом и акциями">
 			<li class="liacactive" data-typ="ac" role="tab" aria-selected="true" aria-controls="actionb" id="tab-catalog" tabindex="0">Каталог</li>
 			<li data-typ="ca" role="tab" aria-selected="false" aria-controls="goodsb" id="tab-sales" tabindex="-1">Акции</li>
@@ -387,8 +350,6 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 <section class="generalw" aria-label="Каталог товаров">
 	<div class="shirina">
 		<br>
-		<!-- SEO: Семантический тег <article> для каждого товара -->
-		<!-- Accessibility: Контейнер каталога с ARIA атрибутами -->
 		<div id="actionb" role="tabpanel" aria-labelledby="tab-catalog">
 			<?php
 			$limit = 4;
@@ -398,11 +359,8 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 			$tmp = $stmt->get_result();
 			while($get = $tmp->fetch_array()):
 			?>
-			<!-- Accessibility: Карточка товара с полной поддержкой screen readers -->
 			<article class="toverblock" itemscope itemtype="https://schema.org/Product" role="article" aria-labelledby="home-product-title-<?=$get['id'];?>">
-			<!-- SEO: Внутренняя ссылка на товар -->
 			<a href="/detal?id=<?=$get['id'];?>" itemprop="url" aria-label="Подробнее о товаре <?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>">
-				<!-- Performance: Оптимизированное изображение товара с WebP и lazy loading -->
 				<?php 
 				$product_img = get_optimized_image(get_farrimg($get['images'])[0]);
 				?>
@@ -442,9 +400,8 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 			$tmp = $stmt->get_result();
 			while($get = $tmp->fetch_array()):
 			?>
-			<article class="toverblock revealator-slideup" itemscope itemtype="https://schema.org/Product">
+				<article class="toverblock revealator-slideup" itemscope itemtype="https://schema.org/Product">
 			<a href="/detal?id=<?=$get['id'];?>" itemprop="url">
-				<!-- SEO: Alt-текст для изображения товара с целевыми ключевыми словами -->
 				<?php 
 				$product_img = get_optimized_image(get_farrimg($get['images'])[0]);
 				?>
@@ -476,7 +433,6 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		</div>
 		<br>
 		<br>
-		<!-- SEO: Внутренняя ссылка на каталог с ключевыми словами в тексте -->
 		<a href="/catalog" class="okazatybolsh-link" style="text-decoration: none; color: inherit; display: inline-block;"><div class="okazatybolsh">Подробнее</div></a>
 		<br>
 		<br>

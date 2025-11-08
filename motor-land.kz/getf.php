@@ -1,41 +1,14 @@
 <?php
 include('hyst/php.php');
 
-/**
- * Обработчик: Получение списка моделей или годов для фильтра
- * Описание: В зависимости от типа запроса (2 - модели, 3 - годы) возвращает список элементов
- * 			для выпадающего списка фильтров каталога. Для моделей выбирает по родительской категории (марке),
- * 			для годов - по связанным товарам через атрибуты.
- * Параметры: $_POST['tex'] - ID выбранной марки или модели, $_POST['typ'] - тип (2=модели, 3=годы)
- * Возвращает: JSON с полем 'report' содержащим HTML разметку списка элементов
- */
-
-/*
-if (!empty($_POST['tex']) && hystnempnumb ($_POST['typ'])) {
-	if ($_POST['typ'] == 1) { $tbnam = 'marks'; } 
-	else if ($_POST['typ'] == 2) { $tbnam = 'models'; $loc = "idm='".$_POST['tex']."'"; } 
-	else if ($_POST['typ'] == 3) { $tbnam = 'years'; $loc = "LOCATE('[".$_POST['tex']."]', lower(idm))"; }
-	$db = new mysqli($hystbdserver,$hystbduser,$hystbdpassword,$hystbdname);
-	$db->set_charset("utf8");
-	$tmp = $db->query("SELECT * FROM ".$tbnam." WHERE ".$loc." ");
-	mysqli_close($db);
-	if ($tmp->num_rows != 0) {
-	$res['report'] = '';
-	while($get=$tmp->fetch_array()):
-	$res['report'] .= "<div data-id='".$get['id']."'>".$get['name']."</div>";
-	endwhile;
-	}
-	echo json_encode($res);
-}*/
+// Возвращает список моделей (typ=2) или годов (typ=3) для фильтра каталога
 
 if (hyst_test_id($_POST['tex']) && hyst_test_id($_POST['typ'])) {
 	$res['report'] = '';
 	$tex_id = (int)$_POST['tex'];
 	$typ = (int)$_POST['typ'];
 	
-	if ($typ == 1) { 
-		// Marks - не используется в текущей реализации
-	} else if ($typ == 2) { 
+	if ($typ == 2) { 
 		$stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_category WHERE idp = ? ORDER BY name ASC");
 		$stmt->bind_param("i", $tex_id);
 		$stmt->execute();
