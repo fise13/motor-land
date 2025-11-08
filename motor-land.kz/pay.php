@@ -70,7 +70,7 @@ $SITE_KEYWORDS = 'доставка двигателей алматы, оплат
 			<div class="pay-delivery-hero-text">
 				<?=get_customtexts('pay_page') ?: '<p>Компания Motor Land предлагает различные способы оплаты и доставки для вашего удобства. Мы доставляем контрактные двигатели и коробки передач по всему Казахстану и в страны СНГ, обеспечивая безопасную транспортировку и сохранность груза.</p>';?>
 			</div>
-			<div class="pay-delivery-hero-image" style="background-image: url(/img/dost.webp);"></div>
+			<div class="pay-delivery-hero-image" style="background-image: url(/cms_img/2025-02/1740628959_67bfe3df8a09d.png);"></div>
 		</div>
 
 		<div class="pay-delivery-methods">
