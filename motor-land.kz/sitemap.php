@@ -66,5 +66,17 @@ while ($row = $result->fetch_assoc()) {
 
 $stmt->close();
 
+// SEO: Статьи блога - динамически добавляются
+include_once('hyst/mods/blog/proces.php');
+$blog_articles = get_blog_articles(null, null, 'published');
+foreach ($blog_articles as $article) {
+    echo '  <url>' . "\n";
+    echo '    <loc>' . $base_url . '/blog/' . htmlspecialchars($article['slug'], ENT_XML1, 'UTF-8') . '</loc>' . "\n";
+    echo '    <lastmod>' . date('Y-m-d', strtotime($article['date_modified'])) . '</lastmod>' . "\n";
+    echo '    <changefreq>monthly</changefreq>' . "\n";
+    echo '    <priority>0.6</priority>' . "\n";
+    echo '  </url>' . "\n";
+}
+
 echo '</urlset>';
 

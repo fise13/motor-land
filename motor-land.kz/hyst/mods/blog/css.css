@@ -1,0 +1,73 @@
+/* Стили для админ-панели блога - отдельные от основного сайта */
+
+.blog-status-published {
+	display: inline-block;
+	padding: 3px 8px;
+	background: #4caf50;
+	color: #ffffff;
+	border-radius: 3px;
+	font-size: 11px;
+	font-weight: 600;
+	margin-left: 10px;
+	text-transform: uppercase;
+}
+
+.blog-status-draft {
+	display: inline-block;
+	padding: 3px 8px;
+	background: #ff9800;
+	color: #ffffff;
+	border-radius: 3px;
+	font-size: 11px;
+	font-weight: 600;
+	margin-left: 10px;
+	text-transform: uppercase;
+}
+
+/* Улучшение отображения форм в админке */
+.admin_content_alignment_forimg {
+	display: flex;
+	gap: 20px;
+	margin: 20px 0;
+	flex-wrap: wrap;
+}
+
+.admin_imgblock {
+	flex: 0 0 300px;
+}
+
+.admin_content_alignment_remain {
+	flex: 1;
+	min-width: 300px;
+}
+
+/* Стили для textarea в админке */
+.admin_content_alignment textarea {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	font-size: 14px;
+	line-height: 1.5;
+	resize: vertical;
+}
+
+/* Стили для select в админке */
+.admin_content_alignment select {
+	padding: 8px 12px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	font-size: 14px;
+	background: #ffffff;
+	cursor: pointer;
+}
+
+.admin_content_alignment select:focus {
+	outline: none;
+	border-color: #4a90e2;
+	box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.1);
+}
+
+/* Улучшение отображения readonly полей */
+.admin_content_alignment input[readonly] {
+	cursor: not-allowed;
+	opacity: 0.7;
+}
+
