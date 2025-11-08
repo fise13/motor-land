@@ -88,10 +88,6 @@ body{margin:0;padding:0;width:100%;height:100%;font-family:roboto,sans-serif;fon
 .shirina{max-width:1200px;margin:0 auto;position:relative}
 </style>
 
-<!-- Performance: Критические стили загружаем первыми -->
-<link rel="stylesheet" href="/hyst/visual/admin.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
-<link rel="stylesheet" href="/hyst/visual/admin_mob.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
-
 <!-- Performance: Основные стили загружаем асинхронно для улучшения SI (Speed Index) -->
 <!-- Non-critical CSS загружаем после рендеринга критического контента -->
 <!-- Используем абсолютные пути для работы на всех страницах -->

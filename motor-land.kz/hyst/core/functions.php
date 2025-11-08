@@ -548,29 +548,49 @@ function hyst_get_os() {
     return 'Unknown OS';
 }
 
-function get_simple_texts ($i) {
-	global $_DB_CONECT;
-	if (!isset($_DB_CONECT) || !$_DB_CONECT) {
+if (!function_exists('get_simple_texts')) {
+	function get_simple_texts ($i) {
+		global $_DB_CONECT;
+		if (!isset($_DB_CONECT) || !$_DB_CONECT) {
+			return false;
+		}
+		if (empty($i)) {
+			return false;
+		}
+		$result = @$_DB_CONECT->query("SHOW TABLES LIKE 'simple_texts'");
+		if (!$result || $result->num_rows == 0) {
+			return false;
+		}
+		$escaped_key = mysqli_real_escape_string($_DB_CONECT, $i);
+		$hyst_sql = @$_DB_CONECT->query("SELECT * FROM simple_texts WHERE key_id='".$escaped_key."' ORDER BY id DESC LIMIT 1");
+		if ($hyst_sql && $hyst_sql->num_rows > 0) { 
+			$row = mysqli_fetch_assoc($hyst_sql);
+			return isset($row['text']) ? $row['text'] : false;
+		}
 		return false;
-	}
-	$hyst_sql = $_DB_CONECT->query("SELECT * FROM simple_texts WHERE key_id='".$i."' ORDER BY id DESC");
-	if (mysqli_num_rows($hyst_sql) != 0) { 
-		return mysqli_fetch_array($hyst_sql)['text']; 
-	} else { 
-		return false; 
 	}
 }
 
-function get_customtexts ($i) {
-	global $_DB_CONECT;
-	if (!isset($_DB_CONECT) || !$_DB_CONECT) {
+if (!function_exists('get_customtexts')) {
+	function get_customtexts ($i) {
+		global $_DB_CONECT;
+		if (!isset($_DB_CONECT) || !$_DB_CONECT) {
+			return false;
+		}
+		if (empty($i)) {
+			return false;
+		}
+		$result = @$_DB_CONECT->query("SHOW TABLES LIKE 'customtexts'");
+		if (!$result || $result->num_rows == 0) {
+			return false;
+		}
+		$escaped_key = mysqli_real_escape_string($_DB_CONECT, $i);
+		$hyst_sql = @$_DB_CONECT->query("SELECT * FROM customtexts WHERE key_id='".$escaped_key."' ORDER BY id DESC LIMIT 1");
+		if ($hyst_sql && $hyst_sql->num_rows > 0) { 
+			$row = mysqli_fetch_assoc($hyst_sql);
+			return isset($row['text']) ? $row['text'] : false;
+		}
 		return false;
-	}
-	$hyst_sql = $_DB_CONECT->query("SELECT * FROM customtexts WHERE key_id='".$i."' ORDER BY id DESC");
-	if (mysqli_num_rows($hyst_sql) != 0) { 
-		return mysqli_fetch_array($hyst_sql)['text']; 
-	} else { 
-		return false; 
 	}
 }
 ?>
