@@ -89,7 +89,11 @@ body{margin:0;padding:0;width:100%;height:100%;font-family:roboto,sans-serif;fon
 
 <?php 
 // Определяем, находимся ли мы в админ-панели
-$is_admin = isset($_HYST_ADMIN) && $_HYST_ADMIN !== false && is_array($_HYST_ADMIN);
+// На обычных страницах $_HYST_ADMIN = FALSE (булево), в админке - массив
+$is_admin = false;
+if (isset($_HYST_ADMIN) && $_HYST_ADMIN !== false && is_array($_HYST_ADMIN)) {
+	$is_admin = true;
+}
 ?>
 
 <?php if ($is_admin): ?>
