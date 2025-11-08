@@ -78,5 +78,40 @@ foreach ($blog_articles as $article) {
     echo '  </url>' . "\n";
 }
 
+// SEO: Кластеры SEO-запросов - динамически добавляются
+if (file_exists('hyst/mods/seo_queries/proces.php')) {
+    include_once('hyst/mods/seo_queries/proces.php');
+    if (function_exists('get_seo_clusters')) {
+        $clusters = get_seo_clusters();
+        foreach ($clusters as $cluster) {
+            echo '  <url>' . "\n";
+            echo '    <loc>' . $base_url . '/query-cluster/' . htmlspecialchars(urlencode($cluster['cluster']), ENT_XML1, 'UTF-8') . '</loc>' . "\n";
+            echo '    <lastmod>' . date('Y-m-d') . '</lastmod>' . "\n";
+            echo '    <changefreq>weekly</changefreq>' . "\n";
+            echo '    <priority>0.7</priority>' . "\n";
+            echo '  </url>' . "\n";
+        }
+    }
+}
+
+// SEO: SEO-запросы - динамически добавляются (только активные)
+if (file_exists('hyst/mods/seo_queries/proces.php')) {
+    include_once('hyst/mods/seo_queries/proces.php');
+    $stmt = $_DB_CONECT->prepare("SELECT slug, date_modified, priority FROM seo_queries WHERE status = 'active' ORDER BY priority DESC, date_modified DESC");
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($query = $result->fetch_assoc()) {
+        echo '  <url>' . "\n";
+        echo '    <loc>' . $base_url . '/query/' . htmlspecialchars($query['slug'], ENT_XML1, 'UTF-8') . '</loc>' . "\n";
+        echo '    <lastmod>' . date('Y-m-d', strtotime($query['date_modified'])) . '</lastmod>' . "\n";
+        echo '    <changefreq>monthly</changefreq>' . "\n";
+        // Приоритет зависит от приоритета запроса (0.5-0.8)
+        $priority = 0.5 + ($query['priority'] / 10 * 0.3);
+        echo '    <priority>' . number_format($priority, 1) . '</priority>' . "\n";
+        echo '  </url>' . "\n";
+    }
+    $stmt->close();
+}
+
 echo '</urlset>';
 

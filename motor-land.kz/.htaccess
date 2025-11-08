@@ -35,6 +35,18 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^blog/([a-zA-Z0-9_-]+)$ /blog_article.php?slug=$1 [L,QSA]
 
+# SEO: ЧПУ URL для SEO-запросов - /query/query-slug
+# Если запрашивается URL вида /query/..., перенаправляем на seo_query.php с slug
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^query/([a-z0-9_-]+)$ /seo_query.php?slug=$1 [L,QSA]
+
+# SEO: ЧПУ URL для кластеров SEO-запросов - /query-cluster/cluster-name
+# Если запрашивается URL вида /query-cluster/..., перенаправляем на seo_cluster.php с именем кластера
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^query-cluster/(.+)$ /seo_cluster.php?cluster=$1 [L,QSA]
+
 # SEO: Поддержка старых URL с ?id= для обратной совместимости
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
