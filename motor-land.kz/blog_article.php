@@ -193,8 +193,7 @@ try {
 
 <!-- SEO: Семантический тег <article> для статьи -->
 <article class="blog-article-section" itemscope itemtype="https://schema.org/BlogPosting">
-	<div class="shirina">
-		<div class="blog-article-container">
+	<div class="blog-article-container">
 			
 			<!-- Заголовок статьи -->
 			<header class="blog-article-header">
