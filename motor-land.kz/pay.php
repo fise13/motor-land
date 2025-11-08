@@ -60,7 +60,7 @@ $SITE_KEYWORDS = 'доставка двигателей алматы, оплат
 
 <section class="generalw" aria-labelledby="pay-title">
 	<div class="shirina zgolovorleft">
-		<h1 id="pay-title" class="sttitle"><span>Доставка и Оплата Контрактных Двигателей</span></h1>
+		<h1 id="pay-title" class="sttitle"><span>Доставка и Оплата</span></h1>
 	</div>
 </section>
 

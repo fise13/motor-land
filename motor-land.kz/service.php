@@ -81,7 +81,7 @@ $SITE_KEYWORDS = 'замена двигателя алматы, автосерв
 
 		<section class="generalw" aria-labelledby="service-title">
 			<div class="shirina zgolovorleft">
-				<h1 id="service-title" class="sttitle"><span>Замена Контрактного Двигателя в Алматы</span></h1>
+				<h1 id="service-title" class="sttitle"><span>Автосервис</span></h1>
 			</div>
 		</section>
 
