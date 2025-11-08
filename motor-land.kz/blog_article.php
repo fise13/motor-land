@@ -74,7 +74,17 @@ $SITE_KEYWORDS = !empty($article['keywords']) ? htmlspecialchars($article['keywo
 <!doctype html>
 <html lang="ru">
 <head>
-<?php include("hyst/head.php"); ?>
+<?php 
+// Убеждаемся, что переменная версии определена
+if (!isset($INTERFACE_VERSION)) {
+	$INTERFACE_VERSION = 0.91;
+}
+include("hyst/head.php"); 
+?>
+<!-- Блог: Стили для страницы статьи загружаем синхронно для гарантированной загрузки -->
+<link rel="stylesheet" href="/css.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
+<link rel="stylesheet" href="/tab.css?<?=$INTERFACE_VERSION;?>" type="text/css" media="(min-width: 768px)" />
+<link rel="stylesheet" href="/mob.css?<?=$INTERFACE_VERSION;?>" type="text/css" media="(max-width: 767px)" />
 <!-- SEO: Canonical URL -->
 <link rel="canonical" href="https://motor-land.kz/blog/<?=!empty($article['slug']) ? htmlspecialchars($article['slug'], ENT_QUOTES, 'UTF-8') : '';?>"/>
 <!-- SEO: Meta keywords -->
