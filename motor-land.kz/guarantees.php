@@ -69,7 +69,7 @@ $SITE_KEYWORDS = 'гарантия на контрактные двигател�
 		<!-- SEO: Семантический тег <section> для заголовка -->
 		<section class="generalw" aria-labelledby="guarantees-title">
 			<div class="shirina zgolovorleft">
-				<h1 id="guarantees-title" class="sttitle"><span>Гарантии</span></h1>
+				<h1 id="guarantees-title" class="sttitle"><span>Гарантия на Контрактные Двигатели и КПП</span></h1>
 			</div>
 		</section>
 

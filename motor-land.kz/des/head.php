@@ -12,6 +12,7 @@
 			<a href="/service" aria-label="Перейти на страницу автосервиса"><li>Автосервис</li></a>
 			<a href="/pay" aria-label="Перейти на страницу оплаты и доставки"><li>Оплата / Доставка</li></a>
 			<a href="/guarantees" aria-label="Перейти на страницу гарантий"><li>Гарантии</li></a>
+			<a href="/blog" aria-label="Перейти в блог"><li>Блог</li></a>
 			<a href="/contacts.php" aria-label="Перейти на страницу контактов"><li>Контакты</li></a>
 		</nav>
 		<!-- Accessibility: Кнопка мобильного меню с ARIA атрибутами -->

@@ -67,6 +67,8 @@
 		<div class="footer-links">
 			<a href="/faq" class="footer-link-faq">FAQ</a>
 			<span class="footer-separator">|</span>
+			<a href="/blog" class="footer-link">Блог</a>
+			<span class="footer-separator">|</span>
 			<a href="/guarantees" class="footer-link">Гарантии</a>
 			<span class="footer-separator">|</span>
 			<a href="/pay" class="footer-link">Доставка и оплата</a>

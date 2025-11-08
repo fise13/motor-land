@@ -10,6 +10,7 @@ Allow: /service
 Allow: /pay
 Allow: /guarantees
 Allow: /faq
+Allow: /blog
 Allow: /contacts
 
 # Запрещаем индексацию админ-панели и служебных директорий
