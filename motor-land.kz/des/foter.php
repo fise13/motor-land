@@ -3,17 +3,21 @@
 		<div class="foterinline JF_parent_form">
 			<div class="foterzago">Закажите обратный звонок</div>
 			<form method="post" style="display: flex; flex-direction: column; align-items: center;">
+				<!-- Security: Honeypot поле для защиты от спама (скрыто от пользователей) -->
+				<input type="text" name="website" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;z-index:-1;" tabindex="-1" autocomplete="off" aria-hidden="true">
+				<!-- Security: Время загрузки формы (для защиты от быстрых отправок) -->
+				<input type="hidden" name="form_time" value="<?=time();?>" aria-hidden="true">
 				<div class="form-control">
 					<label for="name">
 						<span style="transition-delay:0ms">И</span><span style="transition-delay:50ms">м</span><span style="transition-delay:100ms">я</span>
 					</label>
-					<input type="text" name="name" id="name" required>
+					<input type="text" name="name" id="name" required maxlength="100">
 				</div>
 				<div class="form-control">
 					<label for="phon">
 						<span style="transition-delay:0ms">Т</span><span style="transition-delay:50ms">е</span><span style="transition-delay:100ms">л</span><span style="transition-delay:150ms">е</span><span style="transition-delay:200ms">ф</span><span style="transition-delay:250ms">о</span><span style="transition-delay:300ms">н</span>
 					</label>
-					<input type="text" name="phon" id="phon" required>
+					<input type="text" name="phon" id="phon" required maxlength="20">
 				</div>
 				<input type="hidden" name="send_one" value="send">
 				<input type="button" name="JF_send_casual" value="Отправить" style="margin-top: 20px;">
@@ -60,6 +64,15 @@
 
 <div class="generalw frayalpfhon">
 	<div class="shirina copyr">
+		<div class="footer-links">
+			<a href="/faq" class="footer-link-faq">FAQ</a>
+			<span class="footer-separator">|</span>
+			<a href="/guarantees" class="footer-link">Гарантии</a>
+			<span class="footer-separator">|</span>
+			<a href="/pay" class="footer-link">Доставка и оплата</a>
+			<span class="footer-separator">|</span>
+			<a href="/contacts" class="footer-link">Контакты</a>
+		</div>
 		&copy; MOTORLAND 2025
 	</div>
 </div>

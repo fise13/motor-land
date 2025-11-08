@@ -27,6 +27,7 @@ $pages = [
     ['/service', 'monthly', '0.8'],     // Автосервис
     ['/pay', 'monthly', '0.8'],         // Оплата и доставка
     ['/guarantees', 'monthly', '0.8'],  // Гарантии
+    ['/faq', 'monthly', '0.7'],         // FAQ - часто задаваемые вопросы
     ['/contacts', 'monthly', '0.8']     // Контакты (без .php)
 ];
 
