@@ -524,6 +524,20 @@ color: white;
 /* Гарантируем кликабельность всех элементов внутри формы */
 .sliderform * {
   pointer-events: auto !important;
+  color: white;
+}
+
+/* Белый цвет текста для полей "Марка", "Модель", "Год" в форме "что ищем?" */
+.sliderform .meinputer {
+	color: white !important;
+}
+
+.sliderform .madiv {
+	color: white !important;
+}
+
+.sliderform .btmmearrow {
+	color: white !important;
 }
 
 .btmmearrow {
@@ -1392,13 +1406,13 @@ overflow: hidden;
 }
 
 .guarantee-card.warning-card {
-	border-left: 4px solid #ff9800;
-	background: #fffaf5;
+	border-left: 4px solid #808080;
+	background: #f5f5f5;
 }
 
 .guarantee-card.info-card {
-	border-left: 4px solid #2196f3;
-	background: #f5f9ff;
+	border-left: 4px solid #fe0000;
+	background: #fff5f5;
 }
 
 .card-title {
@@ -1441,11 +1455,11 @@ overflow: hidden;
 }
 
 .guarantee-card.warning-card .guarantee-list li::before {
-	color: #ff9800;
+	color: #808080;
 }
 
 .guarantee-card.info-card .guarantee-list li::before {
-	color: #2196f3;
+	color: #fe0000;
 }
 
 @media (max-width: 1024px) {
