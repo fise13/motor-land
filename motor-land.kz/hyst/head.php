@@ -87,50 +87,30 @@ body{margin:0;padding:0;width:100%;height:100%;font-family:roboto,sans-serif;fon
 .shirina{max-width:1200px;margin:0 auto;position:relative}
 </style>
 
-<?php 
-// Определяем, находимся ли мы в админ-панели
-// На обычных страницах $_HYST_ADMIN = FALSE (булево), в админке - массив
-$is_admin = false;
-if (isset($_HYST_ADMIN) && $_HYST_ADMIN !== false && is_array($_HYST_ADMIN)) {
-	$is_admin = true;
-}
-?>
-
-<?php if ($is_admin): ?>
-<!-- Admin Panel: Стили админ-панели загружаются ТОЛЬКО в админке -->
 <!-- Performance: Критические стили загружаем первыми -->
 <link rel="stylesheet" href="/hyst/visual/admin.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
 <link rel="stylesheet" href="/hyst/visual/admin_mob.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
-<?php else: ?>
-<!-- Site: Стили сайта загружаются ТОЛЬКО на обычном сайте -->
-<!-- Основные стили загружаем синхронно для гарантированной загрузки -->
-<link rel="stylesheet" href="/css.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
-<link rel="stylesheet" href="/tab.css?<?=$INTERFACE_VERSION;?>" type="text/css" media="(min-width: 768px)" />
-<link rel="stylesheet" href="/mob.css?<?=$INTERFACE_VERSION;?>" type="text/css" media="(max-width: 767px)" />
-<?php endif; ?>
 
-<?php if (!$is_admin): ?>
-<!-- Site: Revealator CSS загружаем синхронно (только на сайте) -->
-<link rel="stylesheet" href="/des/fm.revealator.jquery.min.css?<?=$INTERFACE_VERSION;?>" type="text/css"/>
-<?php endif; ?>
+<!-- Performance: Основные стили загружаем асинхронно для улучшения SI (Speed Index) -->
+<!-- Non-critical CSS загружаем после рендеринга критического контента -->
+<link rel="preload" href="css.css?<?=$INTERFACE_VERSION;?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="css.css?<?=$INTERFACE_VERSION;?>" type="text/css" /></noscript>
+<link href="tab.css?<?=$INTERFACE_VERSION;?>" rel="stylesheet" type="text/css" media="(min-width: 768px)" />
+<link href="mob.css?<?=$INTERFACE_VERSION;?>" rel="stylesheet" type="text/css" media="(max-width: 767px)" />
+<!-- Performance: Revealator CSS загружаем асинхронно -->
+<link rel="preload" href="des/fm.revealator.jquery.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="des/fm.revealator.jquery.min.css"></noscript>
 
-<?php if ($is_admin): ?>
-<!-- Admin Panel: JavaScript для админ-панели -->
+<!-- Performance: JavaScript загружаем с defer для неблокирующей загрузки -->
+<!-- Важно: jQuery должен загрузиться первым, но используем defer для неблокирующей загрузки -->
 <script src="/hyst/visual/jquery.js" defer></script>
 <script src="/hyst/visual/jquery-ui.js" defer></script>
 <script src="/hyst/visual/main.js?<?=$INTERFACE_VERSION?>" defer></script>
-<?php else: ?>
-<!-- Site: JavaScript для обычного сайта -->
-<script src="/hyst/visual/jquery.js" defer></script>
-<script src="/hyst/visual/jquery-ui.js" defer></script>
-<script src="/hyst/visual/main.js?<?=$INTERFACE_VERSION?>" defer></script>
-<script src="/des/myjs.js?<?=$INTERFACE_VERSION;?>" defer></script>
-<script src="/des/fm.revealator.jquery.js" defer></script>
-<?php endif; ?>
+<script src="des/myjs.js?<?=$INTERFACE_VERSION;?>" defer></script>
+<script src="des/fm.revealator.jquery.js" defer></script>
 
 <?php
-// Загружаем стили и скрипты модулей только в админ-панели
-if ($is_admin) {
+if ($_HYST_ADMIN) {
 	$mods_folders = scandir($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/');
 	array_splice($mods_folders, 0, 2);
 	for ($q = 0; $q < count($mods_folders); $q++) {
