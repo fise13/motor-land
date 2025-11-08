@@ -51,6 +51,8 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 <html lang="ru">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Accessibility: Skip link для быстрой навигации с клавиатуры -->
+<a href="#main-content" class="skip-link">Перейти к основному содержимому</a>
 <?php include("hyst/head.php"); ?>
 <!-- SEO: Canonical URL для предотвращения дублей контента -->
 <link rel="canonical" href="https://motor-land.kz/"/>
@@ -121,8 +123,6 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 </script>
 </head>
 <body>
-<!-- Accessibility: Skip link для быстрой навигации с клавиатуры -->
-<a href="#main-content" class="skip-link">Перейти к основному содержимому</a>
 <?php include("hyst/sbody.php"); ?>
 <?php include("des/head.php"); ?>
 
@@ -223,8 +223,8 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		})();
 		</script>
 	<div class="slidercoun shirina">
-		<!-- SEO: Главный заголовок страницы H1 -->
-		<h1 class="titlephon" role="heading" aria-level="1"><?=get_simple_texts ('index_slider_title');?></h1>
+		<!-- Accessibility: Заголовок слайдера -->
+		<h2 class="titlephon" role="heading" aria-level="2"><?=get_simple_texts ('index_slider_title');?></h2>
 		<!-- Accessibility: Кнопки действий с ARIA атрибутами -->
 		<div class="sliderbtns" role="group" aria-label="Действия на главной странице">
 			<a href="tel:<?=get_simple_texts ('index_slider_phone');?>" class="phone" aria-label="Позвонить по телефону <?=get_simple_texts ('index_slider_phone');?>" role="button" tabindex="0" onclick="if(typeof gtag==='function'){gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});}"><?=get_simple_texts ('index_slider_phone');?></a><br>
@@ -349,7 +349,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 <section class="generalw">
 	<div class="shirina">
 		<div class="aboutblock">
-			<!-- SEO: Изображение с правильными alt атрибутами и ключевыми словами -->
+			<!-- SEO: Alt-текст для изображения через aria-label с ключевыми словами -->
 			<?php 
 			$about_img = get_optimized_image(get_simple_images('index_about_image')[0]);
 			?>
@@ -398,13 +398,12 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 				<!-- Performance: Оптимизированное изображение товара с WebP и lazy loading -->
 				<?php 
 				$product_img = get_optimized_image(get_farrimg($get['images'])[0]);
-				$product_alt = htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии', ENT_QUOTES, 'UTF-8');
 				?>
-				<div class="toverimg" style="background-image: url(<?=$product_img['webp'] ?: $product_img['original'];?>);" aria-label="<?=$product_alt;?>" itemprop="image" role="img" loading="lazy">
+				<div class="toverimg" style="background-image: url(<?=$product_img['webp'] ?: $product_img['original'];?>);" loading="lazy" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии', ENT_QUOTES, 'UTF-8');?>" itemprop="image" role="img"></div>
 			<?php if ($get['sale'] != 'noting') { ?>
 			<div class="cationsale" aria-label="Скидка: <?=htmlspecialchars($get['sale'], ENT_QUOTES, 'UTF-8');?>"><?=$get['sale'];?></div>
 			<?php } ?>
-			</div></a>
+			</a>
 			<h3 id="home-product-title-<?=$get['id'];?>" class="tovertitle" itemprop="name"><?=$get['name'];?></h3>
 			<div class="tovaropis" itemprop="description" aria-label="Описание товара">
 				<?=$get['stext'];?>
@@ -438,12 +437,11 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 			?>
 			<article class="toverblock revealator-slideup" itemscope itemtype="https://schema.org/Product">
 			<a href="/detal?id=<?=$get['id'];?>" itemprop="url">
-				<!-- Performance: Оптимизированное изображение товара с WebP и lazy loading -->
+				<!-- SEO: Alt-текст для изображения товара с целевыми ключевыми словами -->
 				<?php 
 				$product_img = get_optimized_image(get_farrimg($get['images'])[0]);
-				$product_alt = htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии', ENT_QUOTES, 'UTF-8');
 				?>
-				<div class="toverimg" style="background-image: url(<?=$product_img['webp'] ?: $product_img['original'];?>);" aria-label="<?=$product_alt;?>" itemprop="image" role="img" loading="lazy">
+				<div class="toverimg" style="background-image: url(<?=$product_img['webp'] ?: $product_img['original'];?>);" loading="lazy" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии', ENT_QUOTES, 'UTF-8');?>" itemprop="image">
 			<?php if ($get['sale'] != 'noting') { ?>
 			<div class="cationsale"><?=$get['sale'];?></div>
 			<?php } ?>

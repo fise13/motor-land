@@ -1,0 +1,102 @@
+Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
+
+# Performance: Оптимизация TTFB через кэширование заголовков
+<IfModule mod_headers.c>
+    # Кэширование HTML для уменьшения TTFB
+    <FilesMatch "\.(html|htm|php)$">
+        Header set Cache-Control "max-age=3600, public, must-revalidate"
+        Header set Vary "Accept-Encoding"
+    </FilesMatch>
+    # Улучшение производительности через раннее установление соединения
+    Header always set Connection "keep-alive"
+    Header always set Keep-Alive "timeout=5, max=1000"
+</IfModule>
+
+# SEO: Включаем модуль перезаписи URL
+RewriteEngine On
+RewriteBase /
+
+ErrorDocument 404 /404.php
+
+# SEO: ЧПУ URL для товаров - /katalog/product-name-123
+# Если запрашивается URL вида /katalog/..., перенаправляем на detal.php с извлеченным ID
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^katalog/([a-z0-9-]+)-(\d+)$ /detal.php?id=$2 [L,QSA]
+
+# SEO: Поддержка старых URL с ?id= для обратной совместимости
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [L]
+
+# SEO: Убираем .php из URL (редирект на версию без расширения)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+)\.php$ $1 [R=301,L]
+
+# Performance: Сжатие Gzip/Brotli для улучшения скорости загрузки
+<IfModule mod_deflate.c>
+    # Включаем сжатие для текстовых файлов
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml application/xhtml+xml text/xml
+    # Включаем сжатие для SVG
+    AddOutputFilterByType DEFLATE image/svg+xml
+    # Включаем сжатие для шрифтов
+    AddOutputFilterByType DEFLATE application/x-font-ttf application/x-font-opentype font/opentype font/ttf font/eot font/otf
+    # Включаем сжатие для PHP
+    AddOutputFilterByType DEFLATE application/x-httpd-php
+    # Включаем сжатие для всех текстовых типов
+    AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css application/xml application/xhtml+xml application/rss+xml application/javascript application/x-javascript
+</IfModule>
+
+# Performance: Улучшенное кэширование статических ресурсов
+<IfModule mod_expires.c>
+    ExpiresActive On
+    # Изображения - кеш на 1 год
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    # Шрифты - кеш на 1 год
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+    # CSS и JS - кеш на 1 месяц
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    # HTML - кеш на 1 час
+    ExpiresByType text/html "access plus 1 hour"
+</IfModule>
+
+# Performance: Cache-Control заголовки для дополнительной оптимизации
+<IfModule mod_headers.c>
+    # Кеширование изображений - 1 год с immutable для стабильных версий
+    <FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|ico)$">
+        Header set Cache-Control "max-age=31536000, public, immutable"
+        # Performance: Добавляем Vary для правильного кеширования WebP
+        Header append Vary "Accept"
+    </FilesMatch>
+    # Кеширование шрифтов
+    <FilesMatch "\.(ttf|otf|woff|woff2|eot)$">
+        Header set Cache-Control "max-age=31536000, public, immutable"
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+    # Кеширование CSS и JS - 1 месяц с версионированием
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "max-age=2592000, public"
+    </FilesMatch>
+    # Удаляем ETag для статических ресурсов (используем Cache-Control)
+    <FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|ico|css|js|ttf|otf|woff|woff2)$">
+        Header unset ETag
+        FileETag None
+    </FilesMatch>
+    # Performance: Поддержка WebP формата через Accept заголовок
+    <FilesMatch "\.(jpg|jpeg|png)$">
+        Header append Vary "Accept"
+    </FilesMatch>
+</IfModule>

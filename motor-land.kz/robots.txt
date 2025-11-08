@@ -1,12 +1,8 @@
 # SEO: robots.txt для поисковых роботов
-# Указываем основной домен для индексации
-User-agent: *
-Host: https://motor-land.kz
-
 # Разрешаем индексацию всех основных страниц
+User-agent: *
 Allow: /
 Allow: /catalog
-Allow: /catalog.php
 Allow: /detal
 Allow: /service
 Allow: /pay
@@ -23,25 +19,10 @@ Disallow: /getdtls.php
 Disallow: /getdtlsaa.php
 Disallow: /getf.php
 Disallow: /send_form.php
-Disallow: /*?*utm_
-Disallow: /*?*ref=
-Disallow: /*?*fbclid=
-Disallow: /*?*gclid=
 
 # SEO: Указываем расположение sitemap
-Sitemap: https://motor-land.kz/sitemap.xml
 Sitemap: https://motor-land.kz/sitemap.php
 
-# SEO: Специальные правила для основных поисковых систем
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 0
-
-User-agent: Yandex
-Allow: /
-Crawl-delay: 1
-
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 1
+# SEO: Указываем задержку для вежливых роботов (опционально)
+# Crawl-delay: 1
 

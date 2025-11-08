@@ -1,6 +1,6 @@
 <div class="headercon mobilefix">
 	<div class="shirina relhead">
-		<a href="/" class="logo"><img src="img/logo.webp" alt="Моторленд - Контрактные двигатели и привозные моторы из Малайзии в Алматы" width="200" height="60" loading="eager"></a>
+		<a href="/" class="logo"><img src="img/logo.webp" alt="Моторленд"></a>
 		<ul class="menu">
 			<a href="/"><li>Главная</li></a>
 			<a href="/catalog.php"><li>Каталог</li></a>
