@@ -673,6 +673,27 @@ label[for="sidebarbutton"] i:after{
 	border: 1px solid #e5e5e5;
 }
 
+/* Убираем верхнюю границу у всех элементов кроме первого, чтобы не было двойных границ */
+.admin_roller_menu + .admin_roller_menu {
+	border-top: none;
+	margin-top: -1px;
+	border-radius: 0 0 12px 12px;
+}
+
+.admin_roller_menu:first-of-type {
+	border-radius: 12px 12px 0 0;
+}
+
+.admin_roller_menu:last-of-type {
+	border-radius: 0 0 12px 12px;
+	margin-bottom: 15px;
+}
+
+/* Если только один элемент */
+.admin_roller_menu:only-of-type {
+	border-radius: 12px;
+}
+
 .admin_roller_menu > input[type="checkbox"],.admin_roller_menu > input[type="radio"]{
 	display: none;
 }
@@ -692,7 +713,24 @@ label[for="sidebarbutton"] i:after{
 	font-size: 15px;
 	font-family: robotob, sans-serif;
 	box-shadow: none;
-	border-bottom: 1px solid #e5e5e5;
+	margin: 0;
+	position: relative;
+}
+
+/* Разделитель между label и контейнером */
+.admin_roller_menu > label:not(:last-of-type)::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 1px;
+	background-color: #e5e5e5;
+}
+
+/* Убираем разделитель у последнего label */
+.admin_roller_menu > label:last-of-type::after {
+	display: none;
 }
 
 .admin_roller_container {
@@ -714,7 +752,6 @@ label[for="sidebarbutton"] i:after{
 	color: #ffffff;
 	box-shadow: none;
 	transform: none;
-	border-bottom-color: #fe0000;
 }
 
 .admin_roller_menu > input[type="checkbox"]:checked ~ .admin_roller_container {
@@ -968,10 +1005,23 @@ peni:after{
 	margin: 5px 0px 5px -10px;
 	box-sizing: border-box;
 	cursor: pointer;
-	background: #fe0000 url(/hyst/visual/images/search_icon.svg) center center/56% auto no-repeat;
+	background: #fe0000;
 	border: 2px solid #fe0000;
 	border-radius: 0px 8px 8px 0px;
 	transition: all 0.2s ease;
+	position: relative;
+	font-size: 0;
+}
+
+.admin_sort_and_search input[type="submit"]::before {
+	content: '⌕';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 18px;
+	line-height: 1;
+	color: #ffffff;
 }
 
 .admin_sort_and_search input[type="submit"]:hover {
@@ -1161,11 +1211,24 @@ modalwindow {
 	box-sizing: border-box;
 	border-radius: 8px;
 	padding: 8px 16px 8px 40px;
-	background: #ffffff url(/hyst/visual/images/back_icon.svg) 12px center/auto 60% no-repeat;
+	background: #ffffff;
 	display: inline-block;
 	text-decoration: none;
 	border: 2px solid #e5e5e5;
 	transition: all 0.2s ease;
+	position: relative;
+}
+
+.admin_back_header::before {
+	content: '←';
+	position: absolute;
+	left: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 18px;
+	font-weight: 700;
+	color: #404554;
+	transition: color 0.2s ease;
 }
 
 .admin_back_header:hover {
@@ -1180,6 +1243,10 @@ modalwindow {
 }
 
 .admin_back_header:hover span {
+	color: #fe0000;
+}
+
+.admin_back_header:hover::before {
 	color: #fe0000;
 }
 
@@ -1265,13 +1332,27 @@ modalwindow {
 	position: absolute;
 	top: 8px;
 	right: 8px;
-	background: #fe0000 url(/hyst/visual/images/cross_icon.svg) center center/auto 50% no-repeat;
+	background: #fe0000;
 	cursor: pointer;
 	border-radius: 50%;
 	opacity: 0.9;
 	border: 2px solid #ffffff;
 	transition: all 0.2s ease;
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+	font-size: 0;
+}
+
+.admin_file_label_wraper .admin_file_cross::before,
+.admin_file_label_wraper .admin_file_cross_multiple::before {
+	content: '×';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 24px;
+	font-weight: 700;
+	color: #ffffff;
+	line-height: 1;
 }
 
 .admin_file_label_wraper .admin_file_cross:hover {
@@ -1335,13 +1416,26 @@ modalwindow {
 	width: 28px;
 	height: 28px;
 	border-radius: 50%;
-	background: #fe0000 url(/hyst/visual/images/cross_icon.svg) center center/auto 50% no-repeat;
+	background: #fe0000;
 	border: 2px solid #ffffff;
 	margin: 0px !Important;
 	display: none;
 	opacity: 0.9;
 	transition: all 0.2s ease;
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+	font-size: 0;
+}
+
+.admin_delet_img::before {
+	content: '×';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 20px;
+	font-weight: 700;
+	color: #ffffff;
+	line-height: 1;
 }
 
 .mediafiles_image_con:hover .admin_delet_img{
@@ -1494,10 +1588,24 @@ modalwindow {
 	width: 36px;
 	height: 36px;
 	margin: 0px 0px 0px 10px !important;
-	background: #fe0000 url(/hyst/visual/images/cross_icon.svg) center center/50% 50% no-repeat;
+	background: #fe0000;
 	border: 2px solid #fe0000;
 	border-radius: 8px;
 	transition: all 0.2s ease;
+	font-size: 0;
+	position: relative;
+}
+
+.admin_detet_button::before {
+	content: '×';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 22px;
+	font-weight: 700;
+	color: #ffffff;
+	line-height: 1;
 }
 
 .admin_detet_button:hover {
@@ -1546,11 +1654,12 @@ hystwysiwyg {
 	border-radius: 6px;
 	font-weight: 500;
 	cursor: pointer;
-	background-position: center center;
-	background-repeat: no-repeat;
-	background-size: auto 60%;
 	margin: 0;
 	transition: all 0.2s ease;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .adm_theme redactorbar button:hover {
@@ -1568,23 +1677,56 @@ hystwysiwyg {
 }
 
 .adm_theme redactorbar button[action="align-left"] {
-	background-image: url(/hyst/visual/images/alignleft_icon.svg);
+	background: none;
+}
+
+.adm_theme redactorbar button[action="align-left"]::before {
+	content: '◄';
+	font-size: 14px;
+	line-height: 1;
+	color: #404554;
 }
 
 .adm_theme redactorbar button[action="align-center"] {
-	background-image: url(/hyst/visual/images/aligncenter_icon.svg);
+	background: none;
+}
+
+.adm_theme redactorbar button[action="align-center"]::before {
+	content: '↔';
+	font-size: 14px;
+	line-height: 1;
+	color: #404554;
 }
 
 .adm_theme redactorbar button[action="align-right"] {
-	background-image: url(/hyst/visual/images/alignright_icon.svg);
+	background: none;
+}
+
+.adm_theme redactorbar button[action="align-right"]::before {
+	content: '►';
+	font-size: 14px;
+	line-height: 1;
+	color: #404554;
 }
 
 .adm_theme redactorbar button[action="link"] {
-	background-image: url(/hyst/visual/images/link_icon.svg);
+	background: none;
+}
+
+.adm_theme redactorbar button[action="link"]::before {
+	content: '🔗';
+	font-size: 14px;
+	line-height: 1;
 }
 
 .adm_theme redactorbar button[action="img"] {
-	background-image: url(/hyst/visual/images/img_icon.svg);
+	background: none;
+}
+
+.adm_theme redactorbar button[action="img"]::before {
+	content: '🖼';
+	font-size: 14px;
+	line-height: 1;
 }
 
 .adm_theme redactorbar select[action="font-size"] {
@@ -1736,7 +1878,7 @@ iv[error] message {
 }
 
 .admin_repeater_cros {
-	background: #fe0000 url(/hyst/visual/images/cross_icon.svg) center center/auto 50% no-repeat;
+	background: #fe0000;
 	width: 32px;
 	height: 32px;
 	border: 2px solid #ffffff;
@@ -1748,6 +1890,19 @@ iv[error] message {
 	left: 10px;
 	transition: all 0.2s ease;
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+	font-size: 0;
+}
+
+.admin_repeater_cros::before {
+	content: '×';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 22px;
+	font-weight: 700;
+	color: #ffffff;
+	line-height: 1;
 }
 
 .admin_repeater_cros:hover {
