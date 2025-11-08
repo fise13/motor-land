@@ -32,12 +32,37 @@ function get_blog_articles($limit = null, $category = null, $status = 'published
 // Функция для получения статьи по slug
 function get_blog_article($slug) {
 	global $_DB_CONECT;
-	$slug = mysqli_real_escape_string($_DB_CONECT, $slug);
-	$result = $_DB_CONECT->query("SELECT * FROM blog_articles WHERE slug='".$slug."' AND status='published' LIMIT 1");
-	if ($result && mysqli_num_rows($result) > 0) {
-		return mysqli_fetch_assoc($result);
+	
+	if (!isset($_DB_CONECT) || !$_DB_CONECT) {
+		error_log('get_blog_article: Database connection not available');
+		return false;
 	}
-	return false;
+	
+	if (empty($slug)) {
+		error_log('get_blog_article: Empty slug provided');
+		return false;
+	}
+	
+	try {
+		$slug = mysqli_real_escape_string($_DB_CONECT, $slug);
+		$query = "SELECT * FROM blog_articles WHERE slug='".$slug."' AND status='published' LIMIT 1";
+		$result = $_DB_CONECT->query($query);
+		
+		if ($result === false) {
+			error_log('get_blog_article: Query error - ' . mysqli_error($_DB_CONECT));
+			return false;
+		}
+		
+		if (mysqli_num_rows($result) > 0) {
+			$article = mysqli_fetch_assoc($result);
+			return $article;
+		}
+		
+		return false;
+	} catch (Exception $e) {
+		error_log('get_blog_article exception: ' . $e->getMessage());
+		return false;
+	}
 }
 
 if ($_HYST_ADMIN && ($_HYST_ADMIN[AUC_PREFIX.'_role']=='general' || $_HYST_ADMIN[AUC_PREFIX.'_role']=='all' || array_search('blog',explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false)) {

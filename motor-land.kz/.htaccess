@@ -26,9 +26,10 @@ RewriteRule ^katalog/([a-z0-9-]+)-(\d+)$ /detal.php?id=$2 [L,QSA]
 
 # SEO: ЧПУ URL для статей блога - /blog/article-slug
 # Если запрашивается URL вида /blog/..., перенаправляем на blog_article.php с slug
+# Поддерживаем как строчные, так и заглавные буквы в slug
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^blog/([a-z0-9_-]+)$ /blog_article.php?slug=$1 [L,QSA]
+RewriteRule ^blog/([a-zA-Z0-9_-]+)$ /blog_article.php?slug=$1 [L,QSA]
 
 # SEO: Поддержка старых URL с ?id= для обратной совместимости
 RewriteCond %{REQUEST_FILENAME} !-d

@@ -3,18 +3,35 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 0); // Не показываем ошибки пользователям, но логируем
 ini_set('log_errors', 1);
+ini_set('error_log', $_SERVER['DOCUMENT_ROOT'] . '/logs/php_errors.log');
 
-include('hyst/php.php');
+// Начинаем буферизацию вывода для перехвата ошибок
+ob_start();
 
-// Загружаем функции блога
-if (!function_exists('get_blog_article')) {
-	include_once('hyst/mods/blog/proces.php');
+try {
+	include('hyst/php.php');
+	
+	// Загружаем функции блога
+	if (!function_exists('get_blog_article')) {
+		include_once('hyst/mods/blog/proces.php');
+	}
+	
+	// Проверяем, что функция загружена
+	if (!function_exists('get_blog_article')) {
+		throw new Exception('Функция get_blog_article не найдена');
+	}
+} catch (Exception $e) {
+	error_log('Blog article initialization error: ' . $e->getMessage());
+	ob_end_clean();
+	header('HTTP/1.0 500 Internal Server Error');
+	die('Ошибка инициализации. Пожалуйста, попробуйте позже.');
 }
 
 // Получаем slug из URL
 $article_slug = isset($_GET['slug']) ? trim($_GET['slug']) : '';
 
 if (empty($article_slug)) {
+	ob_end_clean();
 	header('HTTP/1.0 404 Not Found');
 	include('404.php');
 	exit;
@@ -22,15 +39,27 @@ if (empty($article_slug)) {
 
 // Получаем статью по slug
 try {
+	if (!function_exists('get_blog_article')) {
+		throw new Exception('Функция get_blog_article не определена');
+	}
+	
 	$article = get_blog_article($article_slug);
 	
-	if (!$article) {
+	if (!$article || !is_array($article)) {
+		ob_end_clean();
 		header('HTTP/1.0 404 Not Found');
 		include('404.php');
 		exit;
 	}
 } catch (Exception $e) {
-	error_log('Blog article error: ' . $e->getMessage());
+	error_log('Blog article error: ' . $e->getMessage() . ' | Slug: ' . $article_slug . ' | Trace: ' . $e->getTraceAsString());
+	ob_end_clean();
+	header('HTTP/1.0 500 Internal Server Error');
+	include('404.php');
+	exit;
+} catch (Error $e) {
+	error_log('Blog article fatal error: ' . $e->getMessage() . ' | Slug: ' . $article_slug . ' | Trace: ' . $e->getTraceAsString());
+	ob_end_clean();
 	header('HTTP/1.0 500 Internal Server Error');
 	include('404.php');
 	exit;
@@ -67,60 +96,78 @@ $SITE_KEYWORDS = !empty($article['keywords']) ? htmlspecialchars($article['keywo
 <meta name="twitter:image" content="https://motor-land.kz<?=!empty($article['image']) ? htmlspecialchars($article['image'], ENT_QUOTES, 'UTF-8') : '/img/logo.webp';?>">
 <!-- SEO: BreadcrumbList -->
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [{
-    "@type": "ListItem",
-    "position": 1,
-    "name": "Главная",
-    "item": "https://motor-land.kz/"
-  }, {
-    "@type": "ListItem",
-    "position": 2,
-    "name": "Блог",
-    "item": "https://motor-land.kz/blog"
-  }, {
-    "@type": "ListItem",
-    "position": 3,
-    "name": "<?=!empty($article['title']) ? htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') : 'Статья';?>",
-    "item": "https://motor-land.kz/blog/<?=!empty($article['slug']) ? htmlspecialchars($article['slug'], ENT_QUOTES, 'UTF-8') : '';?>"
-  }]
-}
+<?php
+$breadcrumb_data = [
+  "@context" => "https://schema.org",
+  "@type" => "BreadcrumbList",
+  "itemListElement" => [
+    [
+      "@type" => "ListItem",
+      "position" => 1,
+      "name" => "Главная",
+      "item" => "https://motor-land.kz/"
+    ],
+    [
+      "@type" => "ListItem",
+      "position" => 2,
+      "name" => "Блог",
+      "item" => "https://motor-land.kz/blog"
+    ],
+    [
+      "@type" => "ListItem",
+      "position" => 3,
+      "name" => !empty($article['title']) ? $article['title'] : 'Статья',
+      "item" => "https://motor-land.kz/blog/" . (!empty($article['slug']) ? $article['slug'] : '')
+    ]
+  ]
+];
+echo json_encode($breadcrumb_data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_QUOT | JSON_HEX_APOS);
+?>
 </script>
 <!-- SEO: Article Schema.org -->
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "<?=!empty($article['title']) ? htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') : 'Статья';?>",
-  "description": "<?=!empty($article['description']) ? htmlspecialchars($article['description'], ENT_QUOTES, 'UTF-8') : 'Статья в блоге Motor Land';?>",
-  "image": "https://motor-land.kz<?=!empty($article['image']) ? htmlspecialchars($article['image'], ENT_QUOTES, 'UTF-8') : '/img/logo.webp';?>",
-  "datePublished": "<?=!empty($article['date']) ? htmlspecialchars($article['date'], ENT_QUOTES, 'UTF-8') : date('Y-m-d H:i:s');?>",
-  "dateModified": "<?=!empty($article['date_modified']) ? htmlspecialchars($article['date_modified'], ENT_QUOTES, 'UTF-8') : date('Y-m-d H:i:s');?>",
-  "author": {
-    "@type": "Organization",
-    "name": "<?=!empty($article['author']) ? htmlspecialchars($article['author'], ENT_QUOTES, 'UTF-8') : 'Motor Land';?>",
-    "url": "https://motor-land.kz"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Motor Land",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://motor-land.kz/img/logo.webp"
-    }
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://motor-land.kz/blog/<?=!empty($article['slug']) ? htmlspecialchars($article['slug'], ENT_QUOTES, 'UTF-8') : '';?>"
-  }
-}
+<?php
+$article_data = [
+  "@context" => "https://schema.org",
+  "@type" => "BlogPosting",
+  "headline" => !empty($article['title']) ? $article['title'] : 'Статья',
+  "description" => !empty($article['description']) ? $article['description'] : 'Статья в блоге Motor Land',
+  "image" => "https://motor-land.kz" . (!empty($article['image']) ? $article['image'] : '/img/logo.webp'),
+  "datePublished" => !empty($article['date']) ? $article['date'] : date('Y-m-d H:i:s'),
+  "dateModified" => !empty($article['date_modified']) ? $article['date_modified'] : date('Y-m-d H:i:s'),
+  "author" => [
+    "@type" => "Organization",
+    "name" => !empty($article['author']) ? $article['author'] : 'Motor Land',
+    "url" => "https://motor-land.kz"
+  ],
+  "publisher" => [
+    "@type" => "Organization",
+    "name" => "Motor Land",
+    "logo" => [
+      "@type" => "ImageObject",
+      "url" => "https://motor-land.kz/img/logo.webp"
+    ]
+  ],
+  "mainEntityOfPage" => [
+    "@type" => "WebPage",
+    "@id" => "https://motor-land.kz/blog/" . (!empty($article['slug']) ? $article['slug'] : '')
+  ]
+];
+echo json_encode($article_data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_QUOT | JSON_HEX_APOS);
+?>
 </script>
 </head>
 <body>
-<?php include("hyst/sbody.php"); ?>
-<?php include("des/head.php"); ?>
+<?php 
+// Очищаем буфер перед выводом контента
+ob_end_flush();
+try {
+	include("hyst/sbody.php"); 
+	include("des/head.php");
+} catch (Exception $e) {
+	error_log('Blog article includes error: ' . $e->getMessage());
+}
+?>
 <!-- SEO: Семантический тег <main> -->
 <main>
 <br><br>
