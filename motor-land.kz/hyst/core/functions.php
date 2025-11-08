@@ -547,4 +547,30 @@ function hyst_get_os() {
     }
     return 'Unknown OS';
 }
+
+function get_simple_texts ($i) {
+	global $_DB_CONECT;
+	if (!isset($_DB_CONECT) || !$_DB_CONECT) {
+		return false;
+	}
+	$hyst_sql = $_DB_CONECT->query("SELECT * FROM simple_texts WHERE key_id='".$i."' ORDER BY id DESC");
+	if (mysqli_num_rows($hyst_sql) != 0) { 
+		return mysqli_fetch_array($hyst_sql)['text']; 
+	} else { 
+		return false; 
+	}
+}
+
+function get_customtexts ($i) {
+	global $_DB_CONECT;
+	if (!isset($_DB_CONECT) || !$_DB_CONECT) {
+		return false;
+	}
+	$hyst_sql = $_DB_CONECT->query("SELECT * FROM customtexts WHERE key_id='".$i."' ORDER BY id DESC");
+	if (mysqli_num_rows($hyst_sql) != 0) { 
+		return mysqli_fetch_array($hyst_sql)['text']; 
+	} else { 
+		return false; 
+	}
+}
 ?>
