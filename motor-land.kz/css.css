@@ -527,256 +527,230 @@ color: white;
   color: white;
 }
 
-/* Улучшенный дизайн для формы "что ищем?" */
-
-.sliderform {
-  padding: 35px 50px 30px 50px;
-  background: rgba(25, 27, 38, 0.22);
-  border-radius: 30px;
-  box-shadow: 0 10px 48px 0 rgba(31,38,135,0.12);
-  border: 2px solid rgba(255,255,255,0.32);
-  backdrop-filter: blur(8px) saturate(140%);
-  -webkit-backdrop-filter: blur(8px) saturate(140%);
-  isolation: isolate;
-}
-
-/* Стили для выпадаемых dropdown-ов */
-.meinputer {
-  display: inline-flex;
-  align-items: center;
-  border-radius: 18px;
-  border: 2px solid #f14343;
-  background: rgba(45,41,66,0.11);
-  padding: 10px 36px 10px 16px;
-  font-size: 18px;
-  color: #fff !important;
-  font-weight: 500;
-  min-width: 182px;
-  width: 182px;
-  margin: 0 14px 0 0;
-  position: relative;
-  height: 48px;
-  box-shadow: 0 2px 12px rgba(93,23,23,0.03);
-  transition: border-color 0.24s, box-shadow 0.24s, background 0.22s;
-  z-index: 10002;
-  outline: none;
-  overflow: visible;
-  pointer-events: auto !important;
-}
-
-.meinputer:focus, .meinputer:hover {
-  border-color: #ff3636;
-  background: rgba(255,255,255,0.08);
-  box-shadow: 0 4px 18px rgba(255,31,52,0.10);
-}
-
+/* Белый цвет текста для полей "Марка", "Модель", "Год" в форме "что ищем?" */
 .sliderform .meinputer {
-  color: #fff !important;
+	color: white !important;
 }
 
 .sliderform .madiv {
-  color: #fff !important;
-  font-weight: 500;
-  font-size: 18px;
-  padding-right: 10px;
-  letter-spacing: 0.01em;
+	color: white !important;
 }
 
-/* Добавим плавность стрелке селектора */
+.sliderform .btmmearrow {
+	color: white !important;
+}
+
 .btmmearrow {
-  position: absolute;
-  right: 4px;
-  top: 8px;
-  background: none;
-  color: #f14343 !important;
-  font-size: 22px;
-  border-radius: 7px;
-  padding: 4px 9px 4px 6px;
-  border: none;
-  cursor: pointer;
-  transition: background 0.17s, color 0.19s;
-  z-index: 1;
-}
-.btmmearrow:hover, .sliderform .btmmearrow:hover {
-  background: rgba(254,0,0,0.12);
-  color: #e90c2c !important;
+position: absolute;
+right: 0px;
+top: 0px;
+background-color: white;
+padding: 8px 10px;
+font-size: 18px;
+border-radius: 0px 15px 15px 0px;
+cursor: pointer;
 }
 
-/* Более округлые и чистые dropdown блоки */
+/* Performance: Унифицированные стили для всех кнопок dropdown в форме поиска */
+.sliderform .btmmearrow {
+background-color: white;
+border: 1px solid white;
+}
+
+.meinputer {
+display: inline-block;
+border-radius: 15px;
+border: solid 1px white;
+padding: 8px 30px 8px 10px;
+font-size: 18px;
+color: rgb(91, 91, 91);
+font-weight: normal;
+width: 170px;
+margin: 5px;
+position: relative;
+height: 20px;
+vertical-align: top;
+  /* Performance: Увеличен z-index чтобы поля формы были поверх всего контента, включая меню */
+  z-index: 10002;
+/* Performance: Разрешаем overflow для выпадающих списков */
+overflow: visible;
+/* Гарантируем что элементы внутри кликабельны */
+pointer-events: auto !important;
+}
+
+/* Performance: Стили для поля ввода .madiv - кликабельное поле */
+.madiv {
+cursor: pointer;
+user-select: none;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+}
+
 .ddwnblock {
-  width: 215px;
-  padding: 12px 0 12px 0;
-  transform: translateY(-2px) scaleY(0.96);
-  transform-origin: top;
-  background: #23222b;
-  border: 2px solid #f14343;
-  border-radius: 14px;
-  box-shadow: 0 12px 32px rgba(31,38,102,0.16);
-  transition: max-height 0.35s ease, opacity 0.15s;
-  position: absolute;
-  top: 52px;
-  left: 0px;
+width: 190px;
+padding: 10px 10px 10px 10px;
+/* unified border/background below */
+transform: translateY(-6px) scaleY(0.98);
+transform-origin: top;
+background: #fff;
+border: 1px solid #e5e5e5;
+border-radius: 10px;
+box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+transition: max-height 0.35s ease;
+/* keep single border-radius definition */
+position: absolute;
+top: 38px;
+left: -1px;
+  /* z-index выше всего, чтобы выпадающие списки были поверх всех элементов */
   z-index: 10003;
-  display: none;
-  max-height: 400px;
-  overflow-y: auto;
-  opacity: 0;
-  pointer-events: none;
-  isolation: auto;
+display: none;
+max-height: 400px;
+overflow-y: auto;
+opacity: 0;
+pointer-events: none;
+/* Не создаем новый stacking context, чтобы элемент был в том же контексте что и форма */
+isolation: auto;
 }
 
+/* Dropdown внутри .sliderform - используем absolute позиционирование */
 .sliderform .ddwnblock {
-  position: absolute;
-  z-index: 10003;
-  isolation: auto;
-  contain: none !important;
-  clip: auto !important;
-  clip-path: none !important;
+position: absolute;
+/* z-index выше всего, чтобы выпадающие списки были поверх всех элементов */
+z-index: 10003;
+/* Не создаем новый stacking context, остаемся в контексте слайдера */
+isolation: auto;
+/* Убеждаемся что элемент не обрезается родителями */
+contain: none !important;
+clip: auto !important;
+clip-path: none !important;
 }
 
-.sliderform .ddwnblock.open,
-.ddwnblock.open {
-  max-height: 300px;
-  opacity: 1 !important;
-  transform: translateY(0) scaleY(1);
-  display: block !important;
-  z-index: 10003 !important;
-  pointer-events: auto !important;
-  isolation: auto;
-  visibility: visible !important;
+.sliderform .ddwnblock.open {
+/* z-index выше всего, чтобы открытые выпадающие списки были поверх всех элементов */
+z-index: 10003 !important;
+/* Используем absolute позиционирование в контексте формы */
+position: absolute !important;
+/* Не создаем новый stacking context */
+isolation: auto !important;
+/* Гарантируем что элемент видим и не обрезан */
+display: block !important;
+visibility: visible !important;
+opacity: 1 !important;
+pointer-events: auto !important;
 }
 
 .ddwnblock div {
-  cursor: pointer;
-  color: #fff;
-  padding: 12px 18px;
-  border-radius: 5px;
-  transition: background-color 0.18s, color 0.14s, transform 0.13s;
-  font-size: 17px;
-  font-weight: 400;
-  letter-spacing: 0.005em;
+cursor: pointer;
+color: #434343;
+padding: 8px 5px;
+border-radius: 5px;
+transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
-.ddwnblock div:hover, .ddwnblock div:focus {
-  background-color: #f14343;
-  color: #fff;
-  transform: translateX(5px) scale(1.02);
-  outline: none;
+.ddwnblock div:hover {
+background-color: #f5f5f5;
+transform: translateX(3px);
 }
 
-.meinputer.disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  background: #dbdbdb;
-  color: #aaa !important;
-  border-color: #ccc;
-}
-.meinputer.disabled .madiv,
-.meinputer.disabled .btmmearrow {
-  opacity: 0.35;
-  cursor: not-allowed;
+.ddwnblock.open {
+    max-height: 300px;
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+    display: block !important;
+    /* z-index выше всего, чтобы открытые выпадающие списки были поверх всех элементов */
+    z-index: 10003;
+    pointer-events: auto !important;
+    /* Не создаем новый stacking context, остаемся в контексте слайдера */
+    isolation: auto;
+    /* Гарантируем видимость */
+    visibility: visible !important;
 }
 
+/* Анимация тряски для недоступных полей */
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
     10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
     20%, 40%, 60%, 80% { transform: translateX(5px); }
 }
 
-/* Чуть крупнее компактные секции */
+.meinputer.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.meinputer.disabled .madiv,
+.meinputer.disabled .btmmearrow {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
 .maipttee {
-  display: inline-flex;
-  gap: 0;
-  width: auto;
-  min-width: 620px;
-  height: 58px;
-  position: relative;
-  z-index: 1001;
-  overflow: visible;
-  align-items: center;
-  background: none;
-  box-shadow: none;
+display: inline-block;
+width: 700px;
+height: 40px;
+position: relative;
+/* Performance: Увеличен z-index чтобы форма поиска была поверх всего контента */
+z-index: 1001;
+/* Performance: Разрешаем overflow для выпадающих списков */
+overflow: visible;
 }
 
 /* Когда открыт выпадающий список, другие поля должны быть под ним */
 .maipttee:has(.ddwnblock.open) {
+	/* Performance: Увеличен z-index когда открыт dropdown */
 	z-index: 1001;
 }
 
 .maipttee:has(.ddwnblock.open) .meinputer:not(:has(.ddwnblock.open)) {
+	/* Performance: Увеличен z-index для неактивных полей когда открыт dropdown */
 	z-index: 1000;
 	pointer-events: none !important;
-	opacity: 0.18 !important;
-	filter: blur(0.5px);
+	opacity: 0.3 !important;
 }
 
+/* Дополнительная блокировка через JavaScript класс */
 .maipttee.dropdown-open .meinputer:not(:has(.ddwnblock.open)) {
 	pointer-events: none !important;
-	opacity: 0.18 !important;
+	opacity: 0.3 !important;
+	/* Performance: Увеличен z-index для неактивных полей */
 	z-index: 1000 !important;
-	filter: blur(0.5px);
 }
 
 .sliderform input[type="text"]{
-  background: rgba(255,255,255,0.11);
-  border: 2px solid #f14343;
-  border-radius: 15px;
-  color: #21283c;
-  font-size: 20px;
-  font-family: 'roboto', Arial, Helvetica, sans-serif;
-  font-weight: 400;
-  padding: 11px 30px 11px 16px;
-  width: 98%;
-  letter-spacing: 0.01em;
-  margin: 13px 18px 13px 5px;
-  outline: none;
-  transition: border-color .18s, background .12s, box-shadow .17s;
-  box-shadow: 0 1px 4px rgba(231,34,50,0.06);
-}
-.sliderform input[type="text"]:focus {
-  background: rgba(255,255,255,0.21);
-  border-color: #ff2929;
-  box-shadow: 0 2px 12px rgba(255,49,49,0.09);
+background: transparent;
+border: solid 1px #ffffff;
+border-radius: 15px;
+color: black;
+font-size: 18px;
+font-family: roboto;
+padding: 8px 20px;
+width: 650px;
+margin: 10px 20px 20px 5px;
 }
 
 .sliderform input[type="submit"]{
-  background: linear-gradient(140deg,#fa3535 0 80%,#b51c1c 100%);
-  background-image: url(./img/sertch.webp), linear-gradient(140deg,#fa3535 0 80%,#b51c1c 100%);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 70% auto, 100% 100%;
-  width: 60px;
-  height: 60px;
-  border: none;
-  cursor: pointer;
-  border-radius: 50%;
-  box-shadow: 0 2px 16px 0 rgba(254,0,0,0.16);
-  transition: transform 0.15s, box-shadow 0.15s, background 0.14s;
-  position: relative;
-  outline: none;
-}
-.sliderform input[type="submit"]:hover,
-.sliderform input[type="submit"]:focus {
-  background-color: #ff2525;
-  transform: scale(1.055) translateY(-2px) rotate(-2deg);
-  box-shadow: 0 4px 20px 0 rgba(254,0,0,0.25);
+background: transparent url(./img/sertch.webp) no-repeat;
+background-size: contain;
+background-position: center center;
+width: 60px;
+height: 60px;
+border: none;
+cursor: pointer;
 }
 
 .sliderform input[type="submit"]:active{
-  background: linear-gradient(125deg,#ee2525 10%,#8d0404 100%);
-  background-image: url(./img/sertchh.webp), linear-gradient(130deg,#ee2525 15%,#8d0404 100%);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 71% auto, 100% 100%;
+background: transparent url(./img/sertchh.webp) no-repeat;
+background-size: contain;
+background-position: center center;
 }
 
-/* Общий стиль обертки секции */
 .generalw {
-  width: 100%;
-  display: block;
-  text-align: center;
-  position: relative;
-  z-index: 1;
+width: 100%;
+display: block;
+text-align: center;
+/* Правильный stacking context для секций: они должны быть под выпадающим списком */
+position: relative;
+z-index: 1;
 }
 
 .zgolovorleft {
