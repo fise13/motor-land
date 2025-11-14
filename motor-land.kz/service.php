@@ -2,9 +2,9 @@
 include('hyst/php.php');
 include_once('hyst/mods/customtexts/proces.php');
 
-$SITE_TITLE = 'Автосервис - Замена Двигателей и КПП в Алматы | Моторленд';
-$SITE_DESCRIPTION = 'Профессиональная замена и обслуживание контрактных двигателей и КПП в Алматы.';
-$SITE_KEYWORDS = 'замена двигателя алматы, автосервис замена КПП, установка контрактного двигателя';
+$SITE_TITLE = 'Автосервис - Замена Двигателей и КПП в Алматы | Моторленд | Доставка по СНГ';
+$SITE_DESCRIPTION = 'Профессиональная замена и обслуживание контрактных двигателей и КПП в Алматы. Доставка контрактных двигателей по Казахстану и странам СНГ.';
+$SITE_KEYWORDS = 'замена двигателя алматы, автосервис замена КПП, установка контрактного двигателя, доставка двигателей СНГ, контрактные двигатели Россия, контрактные двигатели Беларусь';
 ?>
 <!doctype html>
 <html lang="ru">
@@ -34,10 +34,21 @@ $SITE_KEYWORDS = 'замена двигателя алматы, автосерв
       "addressCountry": "KZ"
     }
   },
-  "areaServed": {
-    "@type": "City",
-    "name": "Алматы"
-  },
+  "areaServed": [
+    {"@type": "City", "name": "Алматы"},
+    {"@type": "Country", "name": "Kazakhstan"},
+    {"@type": "Country", "name": "Russia"},
+    {"@type": "Country", "name": "Belarus"},
+    {"@type": "Country", "name": "Ukraine"},
+    {"@type": "Country", "name": "Armenia"},
+    {"@type": "Country", "name": "Azerbaijan"},
+    {"@type": "Country", "name": "Georgia"},
+    {"@type": "Country", "name": "Kyrgyzstan"},
+    {"@type": "Country", "name": "Moldova"},
+    {"@type": "Country", "name": "Tajikistan"},
+    {"@type": "Country", "name": "Turkmenistan"},
+    {"@type": "Country", "name": "Uzbekistan"}
+  ],
   "description": "<?=$SITE_DESCRIPTION;?>"
 }
 </script>

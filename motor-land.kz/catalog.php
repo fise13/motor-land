@@ -1,9 +1,9 @@
 <?php
 include('hyst/php.php');
 
-$SITE_TITLE = 'Каталог Контрактных Моторов Алматы | Привозные Моторы Малайзия | Контрактные Двигатели Казахстан';
-$SITE_DESCRIPTION = 'Каталог контрактных моторов в Алматы. Привозные моторы из Малайзии. Контрактные двигатели Казахстан - большой выбор двигателей бу.';
-$SITE_KEYWORDS = 'купить контрактный мотор Алматы, контрактные двигатели Казахстан, привозные моторы Алматы';
+$SITE_TITLE = 'Каталог Контрактных Моторов Алматы | Привозные Моторы Малайзия | Контрактные Двигатели Казахстан, СНГ';
+$SITE_DESCRIPTION = 'Каталог контрактных моторов в Алматы. Привозные моторы из Малайзии. Контрактные двигатели Казахстан, Россия, Беларусь, Украина, СНГ - большой выбор двигателей бу. Доставка по странам СНГ.';
+$SITE_KEYWORDS = 'купить контрактный мотор Алматы, контрактные двигатели Казахстан, контрактные двигатели Россия, контрактные двигатели СНГ, привозные моторы Алматы, контрактные моторы Беларусь, контрактные моторы Украина, доставка двигателей СНГ';
 
 $mark = false;
 $mode = false;
@@ -242,7 +242,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 				<?php 
 				$product_img = get_optimized_image(get_farrimg($get['images'])[0]);
 				?>
-				<div class="toverimg" style="background-image: url(<?=$product_img['webp'] ?: $product_img['original'];?>);" loading="lazy" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии', ENT_QUOTES, 'UTF-8');?>" itemprop="image" role="img">
+				<div class="toverimg" style="background-image: url(<?=$product_img['webp'] ?: $product_img['original'];?>);" loading="lazy" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии, доставка по СНГ', ENT_QUOTES, 'UTF-8');?>" itemprop="image" role="img">
 			<?php if ($get['sale'] != 'noting') { ?>
 			<div class="cationsale" aria-label="Скидка: <?=htmlspecialchars($get['sale'], ENT_QUOTES, 'UTF-8');?>"><?=$get['sale'];?></div>
 			<?php } ?>

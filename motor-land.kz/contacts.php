@@ -1,9 +1,9 @@
 <?php
 include('hyst/php.php');
 
-$SITE_TITLE = 'Контакты | Моторленд - Контрактные Двигатели и КПП в Алматы';
-$SITE_DESCRIPTION = 'Контакты компании Motor Land в Алматы. Адреса офисов, телефоны, режим работы.';
-$SITE_KEYWORDS = 'контакты моторленд, адрес автосервиса алматы, телефон контрактных двигателей';
+$SITE_TITLE = 'Контакты | Моторленд - Контрактные Двигатели и КПП в Алматы | Доставка по СНГ';
+$SITE_DESCRIPTION = 'Контакты компании Motor Land в Алматы. Адреса офисов, телефоны, режим работы. Доставка контрактных двигателей по Казахстану и странам СНГ.';
+$SITE_KEYWORDS = 'контакты моторленд, адрес автосервиса алматы, телефон контрактных двигателей, доставка двигателей СНГ, контрактные двигатели Россия, контрактные двигатели Беларусь';
 ?>
 <!doctype html>
 <html lang="ru">
@@ -58,10 +58,20 @@ $SITE_KEYWORDS = 'контакты моторленд, адрес автосер
     "closes": "15:00"
   }],
   "priceRange": "$$",
-  "areaServed": {
-    "@type": "Country",
-    "name": "Kazakhstan"
-  }
+  "areaServed": [
+    {"@type": "Country", "name": "Kazakhstan"},
+    {"@type": "Country", "name": "Russia"},
+    {"@type": "Country", "name": "Belarus"},
+    {"@type": "Country", "name": "Ukraine"},
+    {"@type": "Country", "name": "Armenia"},
+    {"@type": "Country", "name": "Azerbaijan"},
+    {"@type": "Country", "name": "Georgia"},
+    {"@type": "Country", "name": "Kyrgyzstan"},
+    {"@type": "Country", "name": "Moldova"},
+    {"@type": "Country", "name": "Tajikistan"},
+    {"@type": "Country", "name": "Turkmenistan"},
+    {"@type": "Country", "name": "Uzbekistan"}
+  ]
 }
 </script>
 <script type="application/ld+json">

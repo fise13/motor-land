@@ -81,9 +81,9 @@ try {
 	exit;
 }
 
-$SITE_TITLE = !empty($query['meta_title']) ? htmlspecialchars($query['meta_title'], ENT_QUOTES, 'UTF-8') : (!empty($query['query_text']) ? htmlspecialchars($query['query_text'], ENT_QUOTES, 'UTF-8') . ' | Motor Land' : 'Запрос | Motor Land');
-$SITE_DESCRIPTION = !empty($query['meta_description']) ? htmlspecialchars($query['meta_description'], ENT_QUOTES, 'UTF-8') : 'Контрактные двигатели в Алматы';
-$SITE_KEYWORDS = !empty($query['meta_keywords']) ? htmlspecialchars($query['meta_keywords'], ENT_QUOTES, 'UTF-8') : 'контрактные двигатели, двигатель бу';
+$SITE_TITLE = !empty($query['meta_title']) ? htmlspecialchars($query['meta_title'], ENT_QUOTES, 'UTF-8') : (!empty($query['query_text']) ? htmlspecialchars($query['query_text'], ENT_QUOTES, 'UTF-8') . ' | Motor Land | Доставка по СНГ' : 'Запрос | Motor Land | Доставка по СНГ');
+$SITE_DESCRIPTION = !empty($query['meta_description']) ? htmlspecialchars($query['meta_description'], ENT_QUOTES, 'UTF-8') : 'Контрактные двигатели в Алматы. Доставка по Казахстану и странам СНГ.';
+$SITE_KEYWORDS = !empty($query['meta_keywords']) ? htmlspecialchars($query['meta_keywords'], ENT_QUOTES, 'UTF-8') : 'контрактные двигатели, двигатель бу, контрактные двигатели СНГ, доставка двигателей СНГ';
 ?>
 <!doctype html>
 <html lang="ru">

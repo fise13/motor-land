@@ -1,9 +1,9 @@
 <?php
 include('hyst/php.php');
 
-$SITE_TITLE = 'Купить Контрактный Мотор Алматы | Привозные Моторы Малайзия | Двигатель БУ | Моторленд';
-$SITE_DESCRIPTION = 'Купить контрактный мотор в Алматы. Контрактные двигатели Казахстан - привозные моторы из Малайзии. Контрактный двигатель Toyota, Honda, Nissan, Mazda, Mitsubishi. Двигатель бу Малайзия Алматы с гарантией. Двигатель 1NZ, 2AZ, 3S, K24A, QR25DE. Контрактный двигатель Camry, CRV. Огромный выбор контрактных двигателей. Доставка по всему Казахстану.';
-$SITE_KEYWORDS = 'купить контрактный мотор Алматы, контрактные двигатели Казахстан, привозные моторы Алматы, двигатель бу Малайзия Алматы, контрактные двигатели алматы, купить мотор б/у, привозные двигатели, контрактный мотор малайзия, контрактный двигатель Toyota, контрактный двигатель Honda, контрактный двигатель Nissan, контрактный двигатель Mazda, контрактный двигатель Mitsubishi, двигатель бу, контрактные двигатели, двигатели бу, двигатель 1NZ, двигатель 2AZ, двигатель 3S, двигатель K24A, двигатель QR25DE, контрактный двигатель Camry, контрактный двигатель CRV, контрактный двигатель Corolla, контрактный двигатель Almera, контрактный двигатель Accord';
+$SITE_TITLE = 'Купить Контрактный Мотор Алматы | Привозные Моторы Малайзия | Двигатель БУ | Моторленд | Доставка по СНГ';
+$SITE_DESCRIPTION = 'Купить контрактный мотор в Алматы. Контрактные двигатели Казахстан, Россия, Беларусь, Украина, СНГ - привозные моторы из Малайзии. Контрактный двигатель Toyota, Honda, Nissan, Mazda, Mitsubishi. Двигатель бу Малайзия Алматы с гарантией. Двигатель 1NZ, 2AZ, 3S, K24A, QR25DE. Контрактный двигатель Camry, CRV. Огромный выбор контрактных двигателей. Доставка по всему Казахстану и странам СНГ.';
+$SITE_KEYWORDS = 'купить контрактный мотор Алматы, контрактные двигатели Казахстан, контрактные двигатели Россия, контрактные двигатели СНГ, привозные моторы Алматы, двигатель бу Малайзия Алматы, контрактные двигатели алматы, купить мотор б/у, привозные двигатели, контрактный мотор малайзия, контрактный двигатель Toyota, контрактный двигатель Honda, контрактный двигатель Nissan, контрактный двигатель Mazda, контрактный двигатель Mitsubishi, двигатель бу, контрактные двигатели, двигатели бу, двигатель 1NZ, двигатель 2AZ, двигатель 3S, двигатель K24A, двигатель QR25DE, контрактный двигатель Camry, контрактный двигатель CRV, контрактный двигатель Corolla, контрактный двигатель Almera, контрактный двигатель Accord, доставка двигателей СНГ, контрактные моторы Беларусь, контрактные моторы Украина';
 
 $mark = false;
 $mode = false;
@@ -75,7 +75,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
   "alternateName": "Моторленд",
   "url": "https://motor-land.kz",
   "logo": "https://motor-land.kz/img/logo.webp",
-  "description": "Купить контрактный мотор в Алматы. Контрактные двигатели Казахстан - привозные моторы из Малайзии. Двигатель бу Малайзия Алматы с гарантией.",
+  "description": "Купить контрактный мотор в Алматы. Контрактные двигатели Казахстан, Россия, Беларусь, Украина, СНГ - привозные моторы из Малайзии. Двигатель бу Малайзия Алматы с гарантией. Доставка по странам СНГ.",
   "address": [{
     "@type": "PostalAddress",
     "streetAddress": "РВ-90, 7-линия, 29",
@@ -93,13 +93,13 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
     "@type": "ContactPoint",
     "telephone": "+7-777-144-5445",
     "contactType": "Sales",
-    "areaServed": "KZ",
+    "areaServed": ["KZ", "RU", "BY", "UA", "AM", "AZ", "GE", "KG", "MD", "TJ", "TM", "UZ"],
     "availableLanguage": ["Russian", "Kazakh"]
   }, {
     "@type": "ContactPoint",
     "telephone": "+7-701-144-5445",
     "contactType": "Sales",
-    "areaServed": "KZ",
+    "areaServed": ["KZ", "RU", "BY", "UA", "AM", "AZ", "GE", "KG", "MD", "TJ", "TM", "UZ"],
     "availableLanguage": ["Russian", "Kazakh"]
   }],
   "sameAs": [
@@ -134,12 +134,12 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 			<?php if ($slide_img['webp']): ?>
 			<source srcset="<?=$slide_img['webp'];?>" type="image/webp">
 			<?php endif; ?>
-			<img src="<?=$slide_img['original'];?>" alt="Купить контрактный мотор Алматы - привозные моторы из Малайзии, контрактные двигатели Казахстан" class="sliderslid" loading="eager" fetchpriority="high" width="1920" height="600" decoding="async" style="object-fit:cover;width:100%;height:100%;position:absolute;top:0;left:0;display:block;">
+							<img src="<?=$slide_img['original'];?>" alt="Купить контрактный мотор Алматы - привозные моторы из Малайзии, контрактные двигатели Казахстан, Россия, СНГ" class="sliderslid" loading="eager" fetchpriority="high" width="1920" height="600" decoding="async" style="object-fit:cover;width:100%;height:100%;position:absolute;top:0;left:0;display:block;">
 		</picture>
 		<?php else: 
 			$slide_img = get_optimized_image($slide['image']);
 		?>
-		<div class="sliderslid" style="background-image: url(<?=$slide_img['webp'] ?: $slide_img['original'];?>);" aria-label="Купить контрактный мотор Алматы - привозные моторы из Малайзии, контрактные двигатели Казахстан" loading="lazy"></div>
+		<div class="sliderslid" style="background-image: url(<?=$slide_img['webp'] ?: $slide_img['original'];?>);" aria-label="Купить контрактный мотор Алматы - привозные моторы из Малайзии, контрактные двигатели Казахстан, Россия, СНГ" loading="lazy"></div>
 		<?php endif; ?>
 		<?php
 		$slide_index++;
@@ -364,7 +364,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 				<?php 
 				$product_img = get_optimized_image(get_farrimg($get['images'])[0]);
 				?>
-				<div class="toverimg" style="background-image: url(<?=$product_img['webp'] ?: $product_img['original'];?>);" loading="lazy" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии', ENT_QUOTES, 'UTF-8');?>" itemprop="image" role="img"></div>
+				<div class="toverimg" style="background-image: url(<?=$product_img['webp'] ?: $product_img['original'];?>);" loading="lazy" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии, доставка по СНГ', ENT_QUOTES, 'UTF-8');?>" itemprop="image" role="img"></div>
 			<?php if ($get['sale'] != 'noting') { ?>
 			<div class="cationsale" aria-label="Скидка: <?=htmlspecialchars($get['sale'], ENT_QUOTES, 'UTF-8');?>"><?=$get['sale'];?></div>
 			<?php } ?>
@@ -405,7 +405,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 				<?php 
 				$product_img = get_optimized_image(get_farrimg($get['images'])[0]);
 				?>
-				<div class="toverimg" style="background-image: url(<?=$product_img['webp'] ?: $product_img['original'];?>);" loading="lazy" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии', ENT_QUOTES, 'UTF-8');?>" itemprop="image">
+				<div class="toverimg" style="background-image: url(<?=$product_img['webp'] ?: $product_img['original'];?>);" loading="lazy" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии, доставка по СНГ', ENT_QUOTES, 'UTF-8');?>" itemprop="image">
 			<?php if ($get['sale'] != 'noting') { ?>
 			<div class="cationsale"><?=$get['sale'];?></div>
 			<?php } ?>

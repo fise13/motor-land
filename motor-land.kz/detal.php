@@ -21,9 +21,9 @@ if (hyst_test_id($_GET['id'])) {
 
 $product_name = htmlspecialchars($print['name'], ENT_QUOTES, 'UTF-8');
 $product_meta = htmlspecialchars($print['tmeta'], ENT_QUOTES, 'UTF-8');
-$SITE_TITLE = 'Купить Контрактный Мотор '.$product_name.' Алматы | Привозные Моторы Малайзия | Моторленд';
-$SITE_DESCRIPTION = 'Купить контрактный мотор '.$product_name.' в Алматы. Привозные моторы из Малайзии. '.$product_meta.'. Двигатель бу Малайзия Алматы с гарантией. Контрактные двигатели Казахстан. Контрактный двигатель Toyota, Honda, Nissan. Двигатель бу. Быстрая доставка. Цена: '.($print['cash']!=0?$print['cash'].' KZT':'уточняйте').'.';
-$SITE_KEYWORDS = 'купить контрактный мотор '.mb_strtolower($product_name).' алматы, привозные моторы '.mb_strtolower($product_name).', двигатель бу малайзия алматы, контрактные двигатели казахстан, '.mb_strtolower($product_meta).', контрактный двигатель Toyota, контрактный двигатель Honda, контрактный двигатель Nissan, двигатель бу, контрактные двигатели, двигатели бу';
+$SITE_TITLE = 'Купить Контрактный Мотор '.$product_name.' Алматы | Привозные Моторы Малайзия | Моторленд | Доставка по СНГ';
+$SITE_DESCRIPTION = 'Купить контрактный мотор '.$product_name.' в Алматы. Привозные моторы из Малайзии. '.$product_meta.'. Двигатель бу Малайзия Алматы с гарантией. Контрактные двигатели Казахстан, Россия, Беларусь, Украина, СНГ. Контрактный двигатель Toyota, Honda, Nissan. Двигатель бу. Быстрая доставка по странам СНГ. Цена: '.($print['cash']!=0?$print['cash'].' KZT':'уточняйте').'.';
+$SITE_KEYWORDS = 'купить контрактный мотор '.mb_strtolower($product_name).' алматы, привозные моторы '.mb_strtolower($product_name).', двигатель бу малайзия алматы, контрактные двигатели казахстан, контрактные двигатели россия, контрактные двигатели СНГ, '.mb_strtolower($product_meta).', контрактный двигатель Toyota, контрактный двигатель Honda, контрактный двигатель Nissan, двигатель бу, контрактные двигатели, двигатели бу, доставка двигателей СНГ, контрактные моторы Беларусь, контрактные моторы Украина';
 
 $product_image = get_farrimg($print['images'])[0];
 $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : 'https://motor-land.kz'.$product_image;
@@ -58,7 +58,7 @@ $full_canonical_url = 'https://motor-land.kz' . $canonical_url;
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "<?=$product_name;?>",
-  "description": "Купить контрактный мотор <?=$product_name;?> в Алматы. Привозные моторы из Малайзии. <?=htmlspecialchars(strip_tags($print['text'] ? $print['text'] : $print['stext']), ENT_QUOTES, 'UTF-8');?>",
+  "description": "Купить контрактный мотор <?=$product_name;?> в Алматы. Привозные моторы из Малайзии. Доставка по странам СНГ. <?=htmlspecialchars(strip_tags($print['text'] ? $print['text'] : $print['stext']), ENT_QUOTES, 'UTF-8');?>",
   "image": "<?=$product_image_url;?>",
   "brand": {
     "@type": "Brand",
@@ -144,7 +144,7 @@ $full_canonical_url = 'https://motor-land.kz' . $canonical_url;
 							<?php if ($product_img['webp']): ?>
 							<source srcset="<?=$product_img['webp'];?>" type="image/webp">
 							<?php endif; ?>
-							<img src="<?=$product_img['original'];?>" alt="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы из Малайзии';?>" title="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы';?>" itemprop="image" loading="eager" fetchpriority="high" width="600" height="450" decoding="async">
+							<img src="<?=$product_img['original'];?>" alt="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы из Малайзии, доставка по СНГ';?>" title="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы, доставка по СНГ';?>" itemprop="image" loading="eager" fetchpriority="high" width="600" height="450" decoding="async">
 						</picture>
 				<?php if ($print['sale'] != 'noting') { ?>
 				<div class="cationsale"><?=$print['sale'];?></div>
