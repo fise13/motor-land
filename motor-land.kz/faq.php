@@ -9,6 +9,15 @@ $SITE_KEYWORDS = 'FAQ контрактные двигатели, вопросы 
 <!doctype html>
 <html lang="ru">
 <head>
+	<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MCG7EP4276"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MCG7EP4276');
+</script>
 <?php include("hyst/head.php"); ?>
 <!-- SEO: Canonical URL -->
 <link rel="canonical" href="https://motor-land.kz/faq"/>
