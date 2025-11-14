@@ -1160,6 +1160,15 @@ background-color: #fe0000;
   min-height: 540px;
   vertical-align: top;
   gap: 15px;
+  /* Для плавности при наведении */
+  transition: transform 0.25s cubic-bezier(.22,.61,.36,1), box-shadow 0.25s cubic-bezier(.22,.61,.36,1);
+  box-shadow: 0 2px 8px rgba(30,30,30,0.05);
+}
+
+/* Анимация при наведении: блок слегка приподнимается и тень усиливается */
+.toverblock:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 32px rgba(30,30,30,0.11);
 }
 
 .toverimg {
@@ -1198,9 +1207,7 @@ position: relative;
 .delay-400 { animation-delay: .4s; }
 .delay-500 { animation-delay: .5s; }
 
-/* Optional hover lift util */
-.hover-lift { transition: transform .25s ease, box-shadow .25s ease; }
-.hover-lift:hover { transform: translateY(-6px); box-shadow: 0 10px 24px rgba(0,0,0,0.15); }
+/* Удалён неиспользуемый .hover-lift, теперь анимация ховера встроена в .toverblock */
 
 /* Apply gentle appear to catalog cards without HTML changes */
 .toverblock { opacity: 0; animation: fadeUp .55s ease forwards; }
