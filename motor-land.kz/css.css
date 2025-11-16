@@ -537,14 +537,14 @@ color: white;
 }
 
 .sliderform .btmmearrow {
-	color: white !important;
+	color: rgb(85, 82, 82) !important;
 }
 
 .btmmearrow {
 position: absolute;
 right: 0px;
 top: 0px;
-background-color: white;
+background-color: rgb(85, 82, 82);
 padding: 8px 10px;
 font-size: 18px;
 border-radius: 0px 15px 15px 0px;
@@ -553,8 +553,8 @@ cursor: pointer;
 
 /* Performance: Унифицированные стили для всех кнопок dropdown в форме поиска */
 .sliderform .btmmearrow {
-background-color: white;
-border: 1px solid white;
+background-color: rgb(85, 82, 82);
+border: 1px solid rgb(85, 82, 82);
 }
 
 .meinputer {
