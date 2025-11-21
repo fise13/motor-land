@@ -27,27 +27,53 @@ if (isset($_GET['exit_admin'])) { unset($_SESSION[AUSK_LOGIN]); unset($_SESSION[
 
 
 $_HYST_ADMIN = FALSE;
-$hyst_admin_data_sql = $_DB_CONECT->query("SELECT id FROM ".AUT_NAME." WHERE ".AUC_PREFIX."_role='general' LIMIT 1");
+// Безопасный запрос с prepared statement
+$stmt = $_DB_CONECT->prepare("SELECT id FROM `".AUT_NAME."` WHERE `".AUC_PREFIX."_role` = 'general' LIMIT 1");
+if ($stmt) {
+	$stmt->execute();
+	$hyst_admin_data_sql = $stmt->get_result();
+	$stmt->close();
+} else {
+	$hyst_admin_data_sql = false;
+}
 
-if (mysqli_num_rows ($hyst_admin_data_sql) != 0) {
-$_HYST_ADMIN_SETUP = FALSE;
+if ($hyst_admin_data_sql && $hyst_admin_data_sql->num_rows != 0) {
+	$_HYST_ADMIN_SETUP = FALSE;
 
-	if (hyst_test_val($_SESSION[AUSK_LOGIN],REGEXP_MAIL) && hyst_test_val ($_SESSION[AUSK_PASSW],REGEXP_MD5)) {
-		
-		$hyst_sql = $_DB_CONECT->query("SELECT * FROM ".AUT_NAME." WHERE ".AUC_PREFIX."_mail='".$_SESSION[AUSK_LOGIN]."'"); 
-		if (mysqli_num_rows($hyst_sql) != 0) { 
-			$_HYST_ADMIN = mysqli_fetch_array($hyst_sql);
-			if ($_HYST_ADMIN[AUC_PREFIX."_pass"] != $_SESSION[AUSK_PASSW]) {
-			unset($_SESSION[AUSK_LOGIN]);
-			unset($_SESSION[AUSK_PASSW]);
-			$_HYST_ADMIN = false; 
+	if (hyst_test_val($_SESSION[AUSK_LOGIN],REGEXP_MAIL) && isset($_SESSION[AUSK_PASSW])) {
+		// Безопасный запрос с prepared statement
+		$stmt = $_DB_CONECT->prepare("SELECT * FROM `".AUT_NAME."` WHERE `".AUC_PREFIX."_mail` = ? LIMIT 1");
+		if ($stmt) {
+			$stmt->bind_param("s", $_SESSION[AUSK_LOGIN]);
+			$stmt->execute();
+			$hyst_sql = $stmt->get_result();
+			
+			if ($hyst_sql && $hyst_sql->num_rows != 0) { 
+				$_HYST_ADMIN = $hyst_sql->fetch_assoc();
+				// Используем новую функцию проверки пароля
+				if (!function_exists('hyst_verify_admin_password')) {
+					// Fallback для старого формата
+					if ($_HYST_ADMIN[AUC_PREFIX."_pass"] != $_SESSION[AUSK_PASSW]) {
+						unset($_SESSION[AUSK_LOGIN]);
+						unset($_SESSION[AUSK_PASSW]);
+						$_HYST_ADMIN = false; 
+					}
+				} else {
+					// Проверяем пароль через новую функцию
+					if (!hyst_verify_admin_password($_SESSION[AUSK_PASSW], $_HYST_ADMIN[AUC_PREFIX."_pass"])) {
+						unset($_SESSION[AUSK_LOGIN]);
+						unset($_SESSION[AUSK_PASSW]);
+						$_HYST_ADMIN = false;
+					}
+				}
+			} else {
+				unset($_SESSION[AUSK_LOGIN]);
+				unset($_SESSION[AUSK_PASSW]);
 			}
-		} else {
-		unset($_SESSION[AUSK_LOGIN]);
-		unset($_SESSION[AUSK_PASSW]);
+			$stmt->close();
 		}
 	} 
 } else {
-$_HYST_ADMIN_SETUP = TRUE;
+	$_HYST_ADMIN_SETUP = TRUE;
 }
 ?>
