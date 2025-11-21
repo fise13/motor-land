@@ -102,179 +102,81 @@ function get_farrimg ($i) {
 	return $r;
 }
 
-/**
- * Безопасная функция для работы с БД через prepared statements
- * @param string $c - команда: 'i' (insert), 'u' (update), 's' (select), 'd' (delete)
- * @param string $t - имя таблицы
- * @param array|string $v - данные для insert/update или поля для select
- * @param array|null $w - условия WHERE
- * @param string|null $s - ORDER BY
- * @param int|null $l - LIMIT
- * @return mysqli_result|false
- */
 function hyst_idus($c,$t,$v,$w=null,$s=null,$l=null) {
-	global $_DB_CONECT;
-	
-	if (!isset($_DB_CONECT) || !$_DB_CONECT) {
-		return false;
-	}
-	
-	// Валидация имени таблицы (только буквы, цифры, подчеркивания)
-	if (!preg_match('/^[a-zA-Z0-9_]+$/', $t)) {
-		return false;
-	}
+global $hyst_db;
 
 	if ($c == 'i') {
-		if (is_array($v) && !empty($v)) {
-			$columns = array_keys($v);
-			$values = array_values($v);
-			
-			// Валидация имен колонок
-			foreach ($columns as $col) {
-				if (!preg_match('/^[a-zA-Z0-9_]+$/', $col)) {
-					return false;
-				}
+
+		if (is_array($v)) {
+		$co = '';
+		$vl = '';
+			$c = 0;
+			foreach ($v as $k=>$z) {
+			$co .= $k;
+			$vl .= "'".$z."'";
+			if (count($v) > ($c+1)) { $c++; $co .= ","; $vl .= ","; }
 			}
-			
-			$placeholders = str_repeat('?,', count($values) - 1) . '?';
-			$columns_str = implode(',', $columns);
-			$types = str_repeat('s', count($values));
-			
-			$stmt = $_DB_CONECT->prepare("INSERT INTO `{$t}` ({$columns_str}) VALUES ({$placeholders})");
-			if ($stmt) {
-				$stmt->bind_param($types, ...$values);
-				$result = $stmt->execute();
-				$stmt->close();
-				return $result;
-			}
-		}
+		$sql = mysqli_query($HYST_dbconect,"INSERT INTO ".$t." (".$co.") VALUES (".$vl.")");
+		return $sql;
+		} else {
 		return false;
+		}
 	} else if ($c == 'u') {
-		if (is_array($v) && !empty($v)) {
-			$set_parts = [];
-			$set_values = [];
-			$types = '';
-			
-			foreach ($v as $k => $z) {
-				if (!preg_match('/^[a-zA-Z0-9_]+$/', $k)) {
-					return false;
+		if (is_array($v)) {
+		$co = '';
+			$c = 0;
+			foreach ($v as $k=>$z) {
+			$co .= $k."='".$z."'";
+			if (count($v) > ($c+1)) { $c++; $co .= ","; }
+			}
+			$wh = '';
+			if (is_array($w)) {
+				$wh = ' WHERE';
+				$c = 0;
+				foreach ($w as $k=>$z) {
+				$wh .= " ".$k."='".$z."'";
+				if (count($w) > ($c+1)) { $c++; $wh .= " AND"; }
 				}
-				$set_parts[] = "`{$k}` = ?";
-				$set_values[] = $z;
-				$types .= 's';
 			}
-			
-			$where_clause = '';
-			$where_values = [];
-			
-			if (is_array($w) && !empty($w)) {
-				$where_parts = [];
-				foreach ($w as $k => $z) {
-					if (!preg_match('/^[a-zA-Z0-9_]+$/', $k)) {
-						return false;
-					}
-					$where_parts[] = "`{$k}` = ?";
-					$where_values[] = $z;
-					$types .= 's';
-				}
-				$where_clause = ' WHERE ' . implode(' AND ', $where_parts);
-			}
-			
-			$all_values = array_merge($set_values, $where_values);
-			$stmt = $_DB_CONECT->prepare("UPDATE `{$t}` SET " . implode(', ', $set_parts) . $where_clause);
-			if ($stmt) {
-				$stmt->bind_param($types, ...$all_values);
-				$result = $stmt->execute();
-				$stmt->close();
-				return $result;
-			}
-		}
+		$sql = mysqli_query($HYST_dbconect,"UPDATE ".$t." SET ".$co.$wh);
+		return $sql;
+		} else {
 		return false;
+		}
 	} else if ($c == 's') {
-		// Валидация полей для SELECT
-		if (is_string($v)) {
-			// Разрешаем только безопасные символы для полей
-			if (!preg_match('/^[a-zA-Z0-9_,\s`*]+$/', $v)) {
-				return false;
-			}
-		} else {
-			return false;
-		}
-		
-		$where_clause = '';
-		$where_values = [];
-		$types = '';
-		
-		if (is_array($w) && !empty($w)) {
-			$where_parts = [];
-			foreach ($w as $k => $z) {
-				if (!preg_match('/^[a-zA-Z0-9_]+$/', $k)) {
-					return false;
-				}
-				$where_parts[] = "`{$k}` = ?";
-				$where_values[] = $z;
-				$types .= 's';
-			}
-			$where_clause = ' WHERE ' . implode(' AND ', $where_parts);
-		}
-		
-		$order_clause = '';
-		if ($s != null && is_string($s)) {
-			// Валидация ORDER BY (только безопасные символы)
-			if (preg_match('/^[a-zA-Z0-9_,\s`]+$/', $s)) {
-				$order_clause = ' ORDER BY ' . $s;
+		$wh = '';
+		if (is_array($w)) {
+			$wh = ' WHERE';
+			$c = 0;
+			foreach ($w as $k=>$z) {
+			$wh .= " ".$k."='".$z."'";
+			if (count($w) > ($c+1)) { $c++; $wh .= " AND"; }
 			}
 		}
-		
-		$limit_clause = '';
-		if ($l != null && is_numeric($l) && $l > 0) {
-			$limit_clause = ' LIMIT ' . (int)$l;
+		$so = '';
+		if ($s != null) {
+			$so = ' ORDER BY '.$s;
 		}
-		
-		$query = "SELECT {$v} FROM `{$t}`{$where_clause}{$order_clause}{$limit_clause}";
-		$stmt = $_DB_CONECT->prepare($query);
-		
-		if ($stmt) {
-			if (!empty($where_values)) {
-				$stmt->bind_param($types, ...$where_values);
-			}
-			$stmt->execute();
-			$result = $stmt->get_result();
-			$stmt->close();
-			return $result;
+		$li = '';
+		if ($l != null) {
+			$li = ' LIMIT '.$l;
 		}
-		return false;
+		$sql = mysqli_query($HYST_dbconect,"SELECT ".$v." FROM ".$t.$wh.$so.$li);
+		return $sql;
 	} else if ($c == 'd') {
-		$where_clause = '';
-		$where_values = [];
-		$types = '';
-		
-		if (is_array($v) && !empty($v)) {
-			$where_parts = [];
-			foreach ($v as $k => $z) {
-				if (!preg_match('/^[a-zA-Z0-9_]+$/', $k)) {
-					return false;
-				}
-				$where_parts[] = "`{$k}` = ?";
-				$where_values[] = $z;
-				$types .= 's';
+		$wh = '';
+		if (is_array($v)) {
+			$wh = ' WHERE';
+			$c = 0;
+			foreach ($v as $k=>$z) {
+			$wh .= " ".$k."='".$z."'";
+			if (count($v) > ($c+1)) { $c++; $wh .= " AND"; }
 			}
-			$where_clause = ' WHERE ' . implode(' AND ', $where_parts);
-		} else {
-			// Без WHERE нельзя удалять все записи
-			return false;
 		}
-		
-		$stmt = $_DB_CONECT->prepare("DELETE FROM `{$t}`{$where_clause}");
-		if ($stmt) {
-			$stmt->bind_param($types, ...$where_values);
-			$result = $stmt->execute();
-			$stmt->close();
-			return $result;
-		}
-		return false;
+		$sql = mysqli_query($HYST_dbconect,"DELETE FROM ".$t.$wh);
+		return $sql;
 	} else {
-		return false;
+	return false;
 	}
 }
 
@@ -538,37 +440,8 @@ function hyst_getdescription ($t,$l) {
 	return strip_tags($tx);
 }
 
-/**
- * Безопасное хеширование пароля администратора
- * @param string $v - пароль
- * @param string $d - дополнительная соль (deprecated, оставлено для обратной совместимости)
- * @return string - хеш пароля
- */
 function hyst_hash_admin_password($v,$d='hervam') {
-	// Используем password_hash для новых паролей
-	// Для обратной совместимости проверяем старый формат при проверке
-	return password_hash($v, PASSWORD_BCRYPT, ['cost' => 12]);
-}
-
-/**
- * Проверка пароля администратора (поддерживает старый и новый формат)
- * @param string $password - введенный пароль
- * @param string $hash - сохраненный хеш
- * @param string $d - дополнительная соль для старого формата
- * @return bool
- */
-function hyst_verify_admin_password($password, $hash, $d='hervam') {
-	// Сначала пробуем новый формат
-	if (password_verify($password, $hash)) {
-		return true;
-	}
-	// Проверяем старый формат для обратной совместимости
-	$old_hash = hash('ripemd160', strrev(md5($password)) . $d);
-	if (hash_equals($old_hash, $hash)) {
-		// Перехешируем в новый формат при следующем входе
-		return true;
-	}
-	return false;
+	return hash('ripemd160',strrev(md5($v)).$d);
 }
 
 function hyst_setmeta($file_path,$metadata) {
