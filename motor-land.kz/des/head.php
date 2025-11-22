@@ -7,12 +7,14 @@
 		</a>
 		<!-- Accessibility: Основная навигация сайта -->
 		<nav class="menu" role="navigation" aria-label="Основная навигация">
-			<a href="/" aria-label="Перейти на главную страницу"><li>Главная</li></a>
-			<a href="/catalog" aria-label="Перейти в каталог товаров"><li>Каталог</li></a>
-			<a href="/service" aria-label="Перейти на страницу автосервиса"><li>Автосервис</li></a>
-			<a href="/pay" aria-label="Перейти на страницу оплаты и доставки"><li>Оплата / Доставка</li></a>
-			<a href="/guarantees" aria-label="Перейти на страницу гарантий"><li>Гарантии</li></a>
-			<a href="/contacts.php" aria-label="Перейти на страницу контактов"><li>Контакты</li></a>
+			<ul>
+				<li><a href="/" aria-label="Перейти на главную страницу">Главная</a></li>
+				<li><a href="/catalog" aria-label="Перейти в каталог товаров">Каталог</a></li>
+				<li><a href="/service" aria-label="Перейти на страницу автосервиса">Автосервис</a></li>
+				<li><a href="/pay" aria-label="Перейти на страницу оплаты и доставки">Оплата / Доставка</a></li>
+				<li><a href="/guarantees" aria-label="Перейти на страницу гарантий">Гарантии</a></li>
+				<li><a href="/contacts.php" aria-label="Перейти на страницу контактов">Контакты</a></li>
+			</ul>
 		</nav>
 		<!-- Accessibility: Кнопка мобильного меню с ARIA атрибутами -->
 		<button class="modilebtn" onclick="mobilemenu();" aria-label="Открыть меню навигации" aria-expanded="false" aria-controls="mobile-menu" type="button">

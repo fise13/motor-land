@@ -212,7 +212,9 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 					</div>
 				</div>
 			</div>
-			<input type="submit" name="sear" value=" ">
+			<button type="submit" name="sear" class="sliderform-submit-btn" aria-label="Найти товары по параметрам" title="Найти товары">
+				<span class="sr-only">Найти товары</span>
+			</button>
 		</form>
 		</div>
 		<?php
@@ -264,7 +266,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 				<?php 
 				$product_img = get_optimized_image(get_farrimg($get['images'])[0]);
 				?>
-				<div class="toverimg" style="background-image: url(<?=$product_img['webp'] ?: $product_img['original'];?>);" loading="lazy" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии, доставка по СНГ', ENT_QUOTES, 'UTF-8');?>" itemprop="image" role="img">
+				<div class="toverimg" data-bg-src="<?=$product_img['webp'] ?: $product_img['original'];?>" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии, доставка по СНГ', ENT_QUOTES, 'UTF-8');?>" itemprop="image" role="img">
 			<?php if ($get['sale'] != 'noting') { ?>
 			<div class="cationsale" aria-label="Скидка: <?=htmlspecialchars($get['sale'], ENT_QUOTES, 'UTF-8');?>"><?=$get['sale'];?></div>
 			<?php } ?>

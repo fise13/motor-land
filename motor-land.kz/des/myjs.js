@@ -662,4 +662,64 @@
 	} else {
 		waitForJQuery(initMainScript);
 	}
+	
+	// Performance: Lazy loading for background images using Intersection Observer
+	function initLazyBackgroundImages() {
+		// Check if IntersectionObserver is supported
+		if ('IntersectionObserver' in window) {
+			var lazyBackgroundObserver = new IntersectionObserver(function(entries, observer) {
+				entries.forEach(function(entry) {
+					if (entry.isIntersecting) {
+						var element = entry.target;
+						var bgSrc = element.getAttribute('data-bg-src');
+						
+						if (bgSrc) {
+							// Create image to preload
+							var img = new Image();
+							img.onload = function() {
+								element.style.backgroundImage = 'url(' + bgSrc + ')';
+								element.classList.add('bg-loaded');
+							};
+							img.src = bgSrc;
+							
+							// Remove data attribute and stop observing
+							element.removeAttribute('data-bg-src');
+							observer.unobserve(element);
+						}
+					}
+				});
+			}, {
+				// Start loading when element is 200px away from viewport
+				rootMargin: '200px 0px'
+			});
+			
+			// Observe all elements with data-bg-src attribute
+			var lazyBackgrounds = document.querySelectorAll('[data-bg-src]');
+			lazyBackgrounds.forEach(function(lazyBackground) {
+				lazyBackgroundObserver.observe(lazyBackground);
+			});
+		} else {
+			// Fallback for browsers without IntersectionObserver support
+			var lazyBackgrounds = document.querySelectorAll('[data-bg-src]');
+			lazyBackgrounds.forEach(function(lazyBackground) {
+				var bgSrc = lazyBackground.getAttribute('data-bg-src');
+				if (bgSrc) {
+					var img = new Image();
+					img.onload = function() {
+						lazyBackground.style.backgroundImage = 'url(' + bgSrc + ')';
+						lazyBackground.classList.add('bg-loaded');
+					};
+					img.src = bgSrc;
+					lazyBackground.removeAttribute('data-bg-src');
+				}
+			});
+		}
+	}
+	
+	// Initialize lazy loading after DOM is ready
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initLazyBackgroundImages);
+	} else {
+		initLazyBackgroundImages();
+	}
 })();

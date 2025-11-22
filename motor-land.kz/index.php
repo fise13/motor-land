@@ -151,7 +151,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		<?php else: 
 			$slide_img = get_optimized_image($slide['image']);
 		?>
-		<div class="sliderslid" style="background-image: url(<?=$slide_img['webp'] ?: $slide_img['original'];?>);" aria-label="Купить контрактный мотор Алматы - привозные моторы из Малайзии, контрактные двигатели Казахстан, Россия, СНГ" loading="lazy"></div>
+		<div class="sliderslid" style="background-image: url(<?=$slide_img['webp'] ?: $slide_img['original'];?>);" aria-label="Купить контрактный мотор Алматы - привозные моторы из Малайзии, контрактные двигатели Казахстан, Россия, СНГ"></div>
 		<?php endif; ?>
 		<?php
 		$slide_index++;
@@ -212,7 +212,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		})();
 		</script>
 	<div class="slidercoun shirina">
-		<h1 class="titlephon" role="heading" aria-level="1"><?=get_simple_texts ('index_slider_title');?></h1>
+		<h1 class="titlephon"><?=get_simple_texts ('index_slider_title');?></h1>
 		<div class="sliderbtns" role="group" aria-label="Действия на главной странице">
 			<a href="tel:<?=get_simple_texts ('index_slider_phone');?>" class="phone" aria-label="Позвонить по телефону <?=get_simple_texts ('index_slider_phone');?>" role="button" tabindex="0" onclick="if(typeof gtag==='function'){gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});}"><?=get_simple_texts ('index_slider_phone');?></a><br>
 			<a href="catalog.php" aria-label="Перейти в каталог товаров"><div class="atalogb" role="button" tabindex="0">Каталог</div></a>
@@ -296,7 +296,9 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 					</div>
 				</div>
 			</div>
-			<input type="submit" name="sear" value=" ">
+			<button type="submit" name="sear" class="sliderform-submit-btn" aria-label="Найти товары по параметрам" title="Найти товары">
+				<span class="sr-only">Найти товары</span>
+			</button>
 		</form>
 		</div>
 	</div>
@@ -337,7 +339,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 			<?php 
 			$about_img = get_optimized_image(get_simple_images('index_about_image')[0]);
 			?>
-			<div class="sssskartins revealator-slideright" style="background-image: url(<?=$about_img['webp'] ?: $about_img['original'];?>);" aria-label="Контрактные двигатели и привозные моторы из Малайзии в Алматы - Моторленд" loading="lazy"></div>
+			<div class="sssskartins revealator-slideright" data-bg-src="<?=$about_img['webp'] ?: $about_img['original'];?>" aria-label="Контрактные двигатели и привозные моторы из Малайзии в Алматы - Моторленд"></div>
 			<div class="abouttext revealator-slideleft">
 			<?=get_customtexts('index_about_text');?>
 			</div>
@@ -376,7 +378,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 				<?php 
 				$product_img = get_optimized_image(get_farrimg($get['images'])[0]);
 				?>
-				<div class="toverimg" style="background-image: url(<?=$product_img['webp'] ?: $product_img['original'];?>);" loading="lazy" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии, доставка по СНГ', ENT_QUOTES, 'UTF-8');?>" itemprop="image" role="img"></div>
+				<div class="toverimg" data-bg-src="<?=$product_img['webp'] ?: $product_img['original'];?>" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии, доставка по СНГ', ENT_QUOTES, 'UTF-8');?>" itemprop="image" role="img"></div>
 			<?php if ($get['sale'] != 'noting') { ?>
 			<div class="cationsale" aria-label="Скидка: <?=htmlspecialchars($get['sale'], ENT_QUOTES, 'UTF-8');?>"><?=$get['sale'];?></div>
 			<?php } ?>
@@ -417,7 +419,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 				<?php 
 				$product_img = get_optimized_image(get_farrimg($get['images'])[0]);
 				?>
-				<div class="toverimg" style="background-image: url(<?=$product_img['webp'] ?: $product_img['original'];?>);" loading="lazy" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии, доставка по СНГ', ENT_QUOTES, 'UTF-8');?>" itemprop="image">
+				<div class="toverimg" data-bg-src="<?=$product_img['webp'] ?: $product_img['original'];?>" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии, доставка по СНГ', ENT_QUOTES, 'UTF-8');?>" itemprop="image">
 			<?php if ($get['sale'] != 'noting') { ?>
 			<div class="cationsale"><?=$get['sale'];?></div>
 			<?php } ?>
