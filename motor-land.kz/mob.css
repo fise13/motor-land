@@ -478,8 +478,7 @@ margin: 20px 10px !important;
 	}
 
 	.slider {
-		height: auto !important;
-		min-height: 1000px !important; /* Растягиваем слайдер на обе секции на мобильных */
+	height: 800px;
 		margin-top: 0 !important;
 		position: relative !important;
 		z-index: 1 !important;
@@ -682,7 +681,6 @@ margin: 20px 10px !important;
 	.sliderslid {
 		background-size: cover !important;
 		background-position: center center !important;
-		min-height: 1000px !important; /* Растягиваем слайды на всю высоту на мобильных */
 	}
 	
 	
@@ -836,23 +834,7 @@ margin: 20px 10px !important;
 		z-index: 50 !important;
 	}
 	
-	/* Форма консультации теперь внутри слайдера */
-	.consult-section-wrapper {
-		padding: 40px 15px !important;
-		min-height: 300px !important;
-		position: absolute !important;
-		top: 500px !important; /* На мобильных позиционируем ниже */
-		left: 0 !important;
-		right: 0 !important;
-		width: 100% !important;
-		margin-top: 0 !important;
-	}
-	
-	.consult-container.glass-effect {
-		max-width: 100% !important;
-		padding: 25px 20px !important;
-	}
-	
+	/* Форма консультации "Хотите получить бесплатную консультацию?" должна быть ниже выпадающих списков */
 	.consult-section,
 	.forsbgf,
 	.generalw.forsbgf {

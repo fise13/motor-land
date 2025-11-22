@@ -300,29 +300,28 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		</form>
 		</div>
 	</div>
-	
-	<!-- Секция консультации внутри слайдера -->
-	<div class="slidercoun shirina consult-section-wrapper">
-		<div class="forsliderform JF_parent_form consult-container glass-effect">
-			<h2 id="consult-title" class="consult-title">Хотите получить бесплатную консультацию?</h2>
-			<div class="consult-subtitle" id="consult-subtitle">заполните форму</div>
-			<form method="post" class="consult-form" aria-labelledby="consult-title" aria-describedby="consult-subtitle" novalidate>
-				<input type="text" name="website" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;z-index:-1;" tabindex="-1" autocomplete="off" aria-hidden="true">
-				<input type="hidden" name="form_time" value="<?=time();?>" aria-hidden="true">
-				<div class="form-control consult-form-control">
-					<label for="consult-name">Имя <span aria-label="обязательное поле">*</span></label>
-					<input type="text" name="name" id="consult-name" class="consult-input consult-name" placeholder="Имя" required aria-required="true" autocomplete="name" maxlength="100">
-				</div>
-				<div class="form-control consult-form-control">
-					<label for="consult-phone">Телефон <span aria-label="обязательное поле">*</span></label>
-					<input type="tel" name="phon" id="consult-phone" class="consult-input consult-phone" placeholder="Телефон" required aria-required="true" autocomplete="tel" maxlength="20">
-				</div>
-				<div class="consult-btn-wrapper">
-					<input type="hidden" name="send_one" value="send" aria-hidden="true">
-					<button type="button" name="JF_send_casual" class="consult-btn" aria-label="Отправить форму обратной связи"><span>Отправить</span></button>
-				</div>
-			</form>
-		</div>
+</section>
+
+<section class="generalw forsbgf consult-section" aria-labelledby="consult-title" role="region">
+	<div class="shirina forsliderform JF_parent_form consult-container">
+		<h2 id="consult-title" class="consult-title">Хотите получить бесплатную консультацию?</h2>
+		<div class="consult-subtitle" id="consult-subtitle">заполните форму</div>
+		<form method="post" class="consult-form" aria-labelledby="consult-title" aria-describedby="consult-subtitle" novalidate>
+			<input type="text" name="website" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;z-index:-1;" tabindex="-1" autocomplete="off" aria-hidden="true">
+			<input type="hidden" name="form_time" value="<?=time();?>" aria-hidden="true">
+			<div class="form-control consult-form-control">
+				<label for="consult-name">Имя <span aria-label="обязательное поле">*</span></label>
+				<input type="text" name="name" id="consult-name" class="consult-input consult-name" placeholder="Имя" required aria-required="true" autocomplete="name" maxlength="100">
+			</div>
+			<div class="form-control consult-form-control">
+				<label for="consult-phone">Телефон <span aria-label="обязательное поле">*</span></label>
+				<input type="tel" name="phon" id="consult-phone" class="consult-input consult-phone" placeholder="Телефон" required aria-required="true" autocomplete="tel" maxlength="20">
+			</div>
+			<div class="consult-btn-wrapper">
+				<input type="hidden" name="send_one" value="send" aria-hidden="true">
+				<button type="button" name="JF_send_casual" class="consult-btn" aria-label="Отправить форму обратной связи"><span>Отправить</span></button>
+			</div>
+		</form>
 	</div>
 </section>
 

@@ -389,8 +389,8 @@ background-repeat: no-repeat;
 
 .slider {
 width: 100%;
-height: 1200px; /* Растягиваем слайдер на обе секции */
-min-height: 1200px; /* Performance: Предотвращение layout shift */
+height: 600px;
+min-height: 600px; /* Performance: Предотвращение layout shift */
 display: block;
 text-align: center;
 position: relative;
@@ -420,7 +420,7 @@ width: 100%;
 height: 100%;
 /* Performance: Оптимизация для LCP - предотвращение layout shift */
 object-fit: cover;
-min-height: 1200px; /* Растягиваем слайды на всю высоту */
+min-height: 600px;
 /* z-index ниже формы поиска, чтобы выпадающий список был поверх фона */
 z-index: 0;
 }
@@ -441,17 +441,6 @@ z-index: auto;
 overflow: visible;
 /* Решение 8: Убеждаемся что не создаем новый stacking context который может мешать */
 isolation: auto;
-}
-
-/* Для секции консультации переопределяем height и позиционирование */
-.slidercoun.consult-section-wrapper {
-height: auto !important;
-min-height: 400px;
-position: absolute !important;
-top: 600px !important; /* Позиционируем ниже первого контейнера */
-left: 0 !important;
-right: 0 !important;
-width: 100% !important;
 }
 
 .titlephon {
@@ -901,10 +890,13 @@ text-transform: uppercase;
 }
 
 .forsbgf {
-/* Фон убран, так как секция консультации теперь внутри слайдера */
-background-image: none;
-background-color: transparent;
-border-bottom: none;
+background-image: url(./img/forbg.webp);
+background-size: cover;
+background-position: center center;
+border-bottom: solid 1px #9a9a9a;
+/* Правильный stacking context: секция должна быть ниже формы поиска и её выпадающих списков */
+position: relative;
+z-index: 100; /* Ниже формы поиска (10001) и выпадающих списков (10003) */
 }
 
 .forsliderform {
@@ -932,38 +924,6 @@ margin: 0;
   box-shadow: none;
 }
 
-/* Секция консультации внутри слайдера */
-.consult-section-wrapper {
-  position: relative;
-  padding: 60px 0;
-  z-index: 1;
-  height: auto !important; /* Переопределяем height: 100% от .slidercoun */
-  min-height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 500px; /* Отступ сверху, чтобы секция была ниже формы поиска */
-  /* Убеждаемся, что секция видна и не перекрывается */
-  visibility: visible !important;
-  opacity: 1 !important;
-  width: 100%;
-}
-
-/* Стеклянный эффект для контейнера консультации (как в .sliderform) */
-.consult-container.glass-effect {
-  padding: 30px 25px;
-  background: rgba(255, 255, 255, 0.18);
-  border-radius: 20px;
-  backdrop-filter: blur(6px) saturate(180%);
-  -webkit-backdrop-filter: blur(6px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.26);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
-  background-clip: padding-box;
-  max-width: 550px; /* Компактный размер */
-  width: 100%;
-  margin: 0 auto;
-}
-
 .consult-title {
   font-size: 18px;
   text-transform: none;
@@ -978,11 +938,6 @@ margin: 0;
   text-align: center;
 }
 
-/* Белый текст для стеклянного эффекта */
-.glass-effect .consult-title {
-  color: white !important;
-}
-
 .consult-subtitle {
   font-size: 12px;
   color: #666666;
@@ -990,11 +945,6 @@ margin: 0;
   font-weight: 400;
   letter-spacing: 0;
   text-align: center;
-}
-
-/* Белый подзаголовок для стеклянного эффекта */
-.glass-effect .consult-subtitle {
-  color: rgba(255, 255, 255, 0.9) !important;
 }
 
 .consult-form {
@@ -1030,15 +980,6 @@ margin: 0;
 
 .consult-form-control:has(.consult-input:focus) label {
   color: #fe0000;
-}
-
-/* Белые лейблы для стеклянного эффекта */
-.glass-effect .consult-form-control label {
-  color: white !important;
-}
-
-.glass-effect .consult-form-control:has(.consult-input:focus) label {
-  color: white !important;
 }
 
 .consult-input {
@@ -1077,28 +1018,6 @@ margin: 0;
   background: #ffffff;
 }
 
-/* Поля формы с прозрачным фоном и белыми границами для стеклянного эффекта */
-.glass-effect .consult-input {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border: 2px solid rgba(255, 255, 255, 0.9) !important;
-  color: white !important;
-}
-
-.glass-effect .consult-input::placeholder {
-  color: rgba(255, 255, 255, 0.7) !important;
-}
-
-.glass-effect .consult-input:focus {
-  background: rgba(255, 255, 255, 0.25) !important;
-  border-color: white !important;
-  color: white !important;
-}
-
-.glass-effect .consult-input:hover:not(:focus) {
-  border-color: rgba(255, 255, 255, 0.95) !important;
-  background: rgba(255, 255, 255, 0.2) !important;
-}
-
 .consult-btn-wrapper {
   flex: 0 0 auto;
   margin-top: 20px;
@@ -1135,28 +1054,6 @@ margin: 0;
 
 .consult-btn:active {
   background: #b71c1c;
-}
-
-/* Кнопка с прозрачным фоном для стеклянного эффекта */
-.glass-effect .consult-btn {
-  background: rgba(255, 255, 255, 0.2) !important;
-  border: 2px solid rgba(255, 255, 255, 0.9) !important;
-  color: white !important;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  transition: all 0.3s ease;
-}
-
-.glass-effect .consult-btn:hover {
-  background: rgba(255, 255, 255, 0.3) !important;
-  border-color: white !important;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-}
-
-.glass-effect .consult-btn:active {
-  background: rgba(255, 255, 255, 0.25) !important;
-  transform: translateY(0);
 }
 
 .consult-btn span {
