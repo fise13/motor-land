@@ -53,14 +53,15 @@ RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php [L]
 
 # SEO: Убираем .php из URL (редирект на версию без расширения)
+# Исключаем URL с параметрами, чтобы избежать циклов редиректов
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteCond %{QUERY_STRING} ^$
 RewriteRule ^(.+)\.php$ $1 [R=301,L]
 
-# SEO: Каноникализация URL - убираем параметры из URL товаров (редирект на ЧПУ URL)
-# Редирект /detal?id=XXX на /katalog/product-name-XXX
-RewriteCond %{QUERY_STRING} ^id=(\d+)$
-RewriteRule ^detal\.php$ /detal?id=%1 [R=301,L]
+# SEO: Каноникализация URL - убираем параметры из URL товаров
+# Разрешаем прямой доступ к /detal?id=XXX без редиректа, чтобы избежать циклов
+# Редирект на ЧПУ URL будет выполняться через PHP в detal.php
 
 # SEO: Редирект с www на без www (если нужно)
 # RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]

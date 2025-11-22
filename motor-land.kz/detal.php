@@ -30,6 +30,16 @@ $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : '
 
 $canonical_url = seo_get_product_url($print['id'], $print['name']);
 $full_canonical_url = 'https://motor-land.kz' . $canonical_url;
+
+// SEO: Редирект на ЧПУ URL, если доступ через старый URL с параметром id
+// Проверяем, что это не прямой доступ к ЧПУ URL (чтобы избежать циклов)
+$request_uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+$request_path = parse_url($request_uri, PHP_URL_PATH);
+// Если это доступ через /detal или /detal.php с параметром id, и это НЕ ЧПУ URL, перенаправляем на ЧПУ URL
+if (preg_match('#^/detal(\.php)?$#', $request_path) && isset($_GET['id']) && !preg_match('#^/katalog/#', $request_path)) {
+	header('Location: ' . $canonical_url, true, 301);
+	exit;
+}
 ?>
 <!doctype html>
 <html lang="ru">
