@@ -53,6 +53,13 @@ if (mb_strlen($SITE_DESCRIPTION) < 50) {
 <!-- SEO: Meta description всегда должен быть в head (обязательно для SEO) -->
 <!-- Performance: Убеждаемся что метаописание всегда выводится и не пустое -->
 <meta name="description" content="<?=htmlspecialchars($SITE_DESCRIPTION, ENT_QUOTES, 'UTF-8');?>">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="yandex" content="index, follow">
+<meta name="author" content="Motor Land">
+<meta name="copyright" content="Motor Land">
+<meta name="language" content="ru">
+<meta name="revisit-after" content="7 days">
 <title><?=htmlspecialchars($SITE_TITLE ?? 'Купить Контрактный Мотор Алматы | Моторленд', ENT_QUOTES, 'UTF-8');?></title>
 <!-- Accessibility: Убираем maximum-scale для разрешения масштабирования (требование PageSpeed) -->
 <meta name="viewport" content="width=device-width, initial-scale=1">

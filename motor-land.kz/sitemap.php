@@ -20,7 +20,7 @@ $pages = [
     ['/pay', 'monthly', '0.8'],
     ['/guarantees', 'monthly', '0.8'],
     ['/faq', 'monthly', '0.7'],
-    ['/blog', 'weekly', '0.7'],
+    ['/blog', 'weekly', '0.8'],
     ['/contacts', 'monthly', '0.8']
 ];
 
@@ -38,19 +38,15 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 while ($row = $result->fetch_assoc()) {
+    // Используем только ЧПУ URL для товаров (SEO-friendly)
     $product_url = seo_get_product_url($row['id'], $row['name']);
     echo '  <url>' . "\n";
     echo '    <loc>' . $base_url . htmlspecialchars($product_url, ENT_XML1, 'UTF-8') . '</loc>' . "\n";
     echo '    <lastmod>' . date('Y-m-d') . '</lastmod>' . "\n";
     echo '    <changefreq>weekly</changefreq>' . "\n";
-    echo '    <priority>0.7</priority>' . "\n";
+    echo '    <priority>0.8</priority>' . "\n";
     echo '  </url>' . "\n";
-    echo '  <url>' . "\n";
-    echo '    <loc>' . $base_url . '/detal?id=' . $row['id'] . '</loc>' . "\n";
-    echo '    <lastmod>' . date('Y-m-d') . '</lastmod>' . "\n";
-    echo '    <changefreq>monthly</changefreq>' . "\n";
-    echo '    <priority>0.5</priority>' . "\n";
-    echo '  </url>' . "\n";
+    // Не добавляем /detal?id= - это дубликат, используем только ЧПУ URL
 }
 
 $stmt->close();

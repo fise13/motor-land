@@ -1,5 +1,8 @@
 # SEO: robots.txt для поисковых роботов
 # Оптимизирован для лучшей индексации поисковыми системами
+# Версия: 2.0
+
+# Основные правила для всех роботов
 User-agent: *
 
 # Разрешаем индексацию всех основных страниц
@@ -11,10 +14,14 @@ Allow: /pay
 Allow: /guarantees
 Allow: /faq
 Allow: /blog
+Allow: /blog/
 Allow: /contacts
+Allow: /query/
+Allow: /query-cluster/
 
 # Запрещаем индексацию админ-панели и служебных директорий
 Disallow: /hyst/
+Disallow: /adm
 Disallow: /adm.php
 Disallow: /cms_img/
 Disallow: /logs/
@@ -23,6 +30,11 @@ Disallow: /getdtls.php
 Disallow: /getdtlsaa.php
 Disallow: /getf.php
 Disallow: /send_form.php
+Disallow: /detal?id=*
+Disallow: /*?*id=*
+Disallow: /*?*page=*
+Disallow: /*?*sort=*
+Disallow: /*?*filter=*
 
 # Запрещаем индексацию служебных параметров URL
 Disallow: /*?*utm_source=
@@ -31,6 +43,46 @@ Disallow: /*?*utm_campaign=
 Disallow: /*?*ref=
 Disallow: /*?*fbclid=
 Disallow: /*?*gclid=
+Disallow: /*?*yclid=
+Disallow: /*?*_ga=
+Disallow: /*?*_gid=
+
+# Специальные правила для Google
+User-agent: Googlebot
+Allow: /
+Disallow: /hyst/
+Disallow: /adm
+Disallow: /cms_img/
+Disallow: /logs/
+Crawl-delay: 0
+
+# Специальные правила для Yandex
+User-agent: Yandex
+Allow: /
+Disallow: /hyst/
+Disallow: /adm
+Disallow: /cms_img/
+Disallow: /logs/
+Crawl-delay: 1
+
+# Специальные правила для Bing
+User-agent: Bingbot
+Allow: /
+Disallow: /hyst/
+Disallow: /adm
+Disallow: /cms_img/
+Disallow: /logs/
+Crawl-delay: 1
+
+# Запрещаем агрессивных ботов
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
 
 # SEO: Указываем расположение sitemap
 Sitemap: https://motor-land.kz/sitemap.php

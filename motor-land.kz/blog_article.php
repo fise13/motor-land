@@ -122,6 +122,10 @@ include("hyst/head.php");
 <meta property="article:modified_time" content="<?=!empty($article['date_modified']) ? htmlspecialchars($article['date_modified'], ENT_QUOTES, 'UTF-8') : date('Y-m-d H:i:s');?>">
 <meta property="article:author" content="<?=!empty($article['author']) ? htmlspecialchars($article['author'], ENT_QUOTES, 'UTF-8') : 'Motor Land';?>">
 <meta property="article:section" content="<?=!empty($article['category']) ? htmlspecialchars($article['category'], ENT_QUOTES, 'UTF-8') : 'Общее';?>">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Motor Land">
+<meta property="og:locale" content="ru_RU">
 <!-- SEO: Twitter Cards -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="<?=$SITE_TITLE;?>">

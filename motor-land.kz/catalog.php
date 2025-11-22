@@ -66,9 +66,13 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 <meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
 <meta property="og:image" content="https://motor-land.kz/img/logo.webp">
 <meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Motor Land">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="<?=$SITE_TITLE;?>">
 <meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
+<meta name="twitter:image" content="https://motor-land.kz/img/logo.webp">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -84,6 +88,15 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
     "name": "Каталог",
     "item": "https://motor-land.kz/catalog"
   }]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Каталог контрактных двигателей",
+  "description": "Каталог контрактных моторов в Алматы. Привозные моторы из Малайзии. Контрактные двигатели Казахстан, Россия, Беларусь, Украина, СНГ.",
+  "url": "https://motor-land.kz/catalog"
 }
 </script>
 </head>

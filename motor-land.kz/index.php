@@ -71,11 +71,14 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="Motor Land">
+<meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="https://motor-land.kz/">
 <meta name="twitter:title" content="<?=$SITE_TITLE;?>">
 <meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
 <meta name="twitter:image" content="https://motor-land.kz/img/logo.webp">
+<meta name="twitter:site" content="@motorland">
+<meta name="twitter:creator" content="@motorland">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

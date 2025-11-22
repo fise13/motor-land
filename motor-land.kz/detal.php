@@ -54,6 +54,9 @@ $full_canonical_url = 'https://motor-land.kz' . $canonical_url;
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Motor Land">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <?php if ($print['cash'] != 0 && $print['cash'] != '0') { ?>
 <meta property="product:price:amount" content="<?=$print['cash'];?>">
 <meta property="product:price:currency" content="KZT">
@@ -79,17 +82,46 @@ $full_canonical_url = 'https://motor-land.kz' . $canonical_url;
     "url": "https://motor-land.kz/detal?id=<?=$print['id'];?>",
     "priceCurrency": "KZT",
     "price": "<?=($print['cash'] != 0 && $print['cash'] != '0') ? $print['cash'] : '0';?>",
+    "priceValidUntil": "<?=date('Y-m-d', strtotime('+1 year'));?>",
     "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/UsedCondition",
     "seller": {
       "@type": "Organization",
-      "name": "Motor Land"
+      "name": "Motor Land",
+      "url": "https://motor-land.kz"
+    },
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+        "@type": "MonetaryAmount",
+        "value": "0",
+        "currency": "KZT"
+      },
+      "shippingDestination": {
+        "@type": "DefinedRegion",
+        "addressCountry": ["KZ", "RU", "BY", "UA", "AM", "AZ", "GE", "KG", "MD", "TJ", "TM", "UZ"]
+      }
     }
   },
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.8",
-    "reviewCount": "15"
-  }
+    "reviewCount": "15",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "sku": "<?=$print['id'];?>",
+  "mpn": "<?=$product_name;?>",
+  "gtin": "",
+  "additionalProperty": [{
+    "@type": "PropertyValue",
+    "name": "Состояние",
+    "value": "Бывший в употреблении"
+  }, {
+    "@type": "PropertyValue",
+    "name": "Страна происхождения",
+    "value": "Малайзия"
+  }]
 }
 </script>
 <script type="application/ld+json">
