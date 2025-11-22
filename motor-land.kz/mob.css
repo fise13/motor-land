@@ -840,6 +840,12 @@ margin: 20px 10px !important;
 	.consult-section-wrapper {
 		padding: 40px 15px !important;
 		min-height: 300px !important;
+		position: absolute !important;
+		top: 500px !important; /* На мобильных позиционируем ниже */
+		left: 0 !important;
+		right: 0 !important;
+		width: 100% !important;
+		margin-top: 0 !important;
 	}
 	
 	.consult-container.glass-effect {

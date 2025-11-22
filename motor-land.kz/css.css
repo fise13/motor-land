@@ -443,6 +443,17 @@ overflow: visible;
 isolation: auto;
 }
 
+/* Для секции консультации переопределяем height и позиционирование */
+.slidercoun.consult-section-wrapper {
+height: auto !important;
+min-height: 400px;
+position: absolute !important;
+top: 600px !important; /* Позиционируем ниже первого контейнера */
+left: 0 !important;
+right: 0 !important;
+width: 100% !important;
+}
+
 .titlephon {
 color: white;
 font-family: robotob, sans-serif; /* Fallback для предотвращения FOIT */
@@ -926,11 +937,16 @@ margin: 0;
   position: relative;
   padding: 60px 0;
   z-index: 1;
-  height: auto;
+  height: auto !important; /* Переопределяем height: 100% от .slidercoun */
   min-height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 500px; /* Отступ сверху, чтобы секция была ниже формы поиска */
+  /* Убеждаемся, что секция видна и не перекрывается */
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100%;
 }
 
 /* Стеклянный эффект для контейнера консультации (как в .sliderform) */
