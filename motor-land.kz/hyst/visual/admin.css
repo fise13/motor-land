@@ -5,6 +5,25 @@
    ======================================== */
 
 /* Подключение шрифтов сайта */
+
+/* ========================================
+   ★ Новая минималистичная тёмная тема
+   Цвета вынесены в переменные
+   ======================================== */
+
+:root {
+  --bg-main: #121212;
+  --bg-secondary: #1b1b1b;
+  --bg-panel: #1f1f1f;
+  --bg-hover: #262626;
+  --accent: #d63737;
+  --accent-hover: #b92e2e;
+  --text-main: #e0e0e0;
+  --text-light: #bcbcbc;
+  --border-light: rgba(255,255,255,0.06);
+  --radius: 10px;
+  --transition: 0.25s ease;
+}
 @font-face {
 	font-family: roboto;
 	src: url(/des/roboto.ttf);
@@ -25,19 +44,19 @@
 .adm_theme,
 .adm_theme html,
 .adm_theme body {
-margin: 0px;
-padding: 0px;
-height: 100%;
-	font-family: roboto, sans-serif;
-	font-size: 14px;
-	color: #e0e0e0;
-	background-color: #0f0f0f;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: roboto, sans-serif;
+  font-size: 14px;
+  color: var(--text-main);
+  background-color: var(--bg-main);
 }
 
 .adm_theme {
-	color: #e0e0e0;
-	background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
-	min-height: 100vh;
+  background: var(--bg-main);
+  min-height: 100vh;
+  color: var(--text-main);
 }
 
 /* Изоляция: все элементы админки внутри .adm_theme */
@@ -49,13 +68,12 @@ display: flex;
 }
 
 .adm_theme adm_header {
-	background: linear-gradient(135deg, #1a1a1a 0%, #2b2b2b 100%);
-	height: 70px;
-justify-content: space-between;
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 1px rgba(254, 0, 0, 0.3);
-	border-bottom: 2px solid #fe0000;
-	position: relative;
-	z-index: 100;
+  background: var(--bg-secondary);
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--border-light);
 }
 
 .admin_header_profile {
@@ -95,69 +113,22 @@ align-items: center;
 .Btn {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-	width: 40px;
-	height: 40px;
-  border: none;
-	border-radius: 8px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-	transition: all 0.3s ease;
-	box-shadow: 0 2px 6px rgba(254, 0, 0, 0.2);
-	background-color: #fe0000;
-}
-
-.sign {
-  width: 100%;
-  transition-duration: .3s;
-  display: flex;
-  align-items: center;
   justify-content: center;
-}
-
-.sign svg {
-	width: 16px;
-}
-
-.sign svg path {
-  fill: white;
-}
-
-.text {
-  position: absolute;
-  right: 0%;
-  width: 0%;
-  opacity: 0;
-  color: white;
-	font-size: 14px;
-  font-weight: 600;
-  transition-duration: .3s;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: var(--radius);
+  background-color: var(--accent);
+  transition: background-color var(--transition), transform var(--transition);
 }
 
 .Btn:hover {
-	width: 100px;
-	border-radius: 8px;
-  transition-duration: .3s;
-	background-color: #d00000;
-	box-shadow: 0 4px 12px rgba(254, 0, 0, 0.3);
-}
-
-.Btn:hover .sign {
-  width: 30%;
-  transition-duration: .3s;
-	padding-left: 12px;
-}
-
-.Btn:hover .text {
-  opacity: 1;
-  width: 70%;
-  transition-duration: .3s;
-  padding-right: 8px;
+  background-color: var(--accent-hover);
+  transform: translateY(-1px);
 }
 
 .Btn:active {
-	transform: translateY(1px);
+  transform: translateY(1px);
 }
 
 .adm_theme adm_content {
@@ -171,17 +142,13 @@ display: none;
 }
 
 .adm_theme sidebar {
-	width: 280px;
-	min-width: 280px;
-	background: linear-gradient(180deg, #1a1a1a 0%, #151515 100%);
-height: 100%;
-display: block;
-box-sizing: border-box;
-	padding: 20px 15px;
-	transition: all 0.3s ease;
-	box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
-	border-right: 1px solid rgba(254, 0, 0, 0.2);
-	overflow-y: auto;
+  width: 260px;
+  min-width: 260px;
+  background: var(--bg-panel);
+  padding: 20px 15px;
+  border-right: 1px solid var(--border-light);
+  overflow-y: auto;
+  transition: width var(--transition);
 }
 
 /* Кастомный скроллбар для сайдбара */
@@ -264,136 +231,26 @@ left: auto;
 }
 
 .admin_sidebar_menu {
-	display: flex;
-	align-items: center;
-	padding: 14px 16px;
-text-decoration: none;
-	color: #b0b0b0;
-	font-size: 15px;
-	font-weight: 500;
-	margin: 0px 0px 8px 0px;
-	border-radius: 10px;
-	transition: all 0.3s ease;
-	background: rgba(255, 255, 255, 0.03) !important; /* Перезаписываем inline стили */
-	background-image: none !important; /* Убираем фоновые изображения */
-	background-repeat: no-repeat !important;
-	background-position: center !important;
-	background-size: auto !important;
-	border: 1px solid transparent;
-	position: relative;
-overflow: hidden;
-}
-
-/* Эмодзи иконка перед текстом */
-.admin_sidebar_menu::before {
-	content: '📋';
-	font-size: 20px;
-	margin-right: 12px;
-	transition: transform 0.3s ease;
-	display: inline-block;
-	flex-shrink: 0;
-	z-index: 2;
-	position: relative;
-}
-
-/* Специальные эмодзи для разных пунктов меню */
-/* Контрольная панель */
-.admin_sidebar_menu[href="/adm"]::before,
-.admin_sidebar_menu[href="/adm.php"]::before,
-.admin_sidebar_menu[href*="control"]::before { content: '🎛️'; }
-
-/* Модераторы */
-.admin_sidebar_menu[href*="moderator"]::before { content: '👥'; }
-
-/* Медиафайлы */
-.admin_sidebar_menu[href*="mediafile"]::before,
-.admin_sidebar_menu[href*="media"]::before { content: '📁'; }
-
-/* Блог */
-.admin_sidebar_menu[href*="blog"]::before,
-.admin_sidebar_menu[href*="displayed=blog"]::before { content: '📝'; }
-
-/* Контент */
-.admin_sidebar_menu[href*="content"]::before,
-.admin_sidebar_menu[href*="displayed=content"]::before { content: '📄'; }
-
-/* Интернет магазин */
-.admin_sidebar_menu[href*="store"]::before,
-.admin_sidebar_menu[href*="online_store"]::before,
-.admin_sidebar_menu[href*="displayed=online_store"]::before { content: '🛒'; }
-
-/* Картинки */
-.admin_sidebar_menu[href*="image"]::before,
-.admin_sidebar_menu[href*="simple_images"]::before,
-.admin_sidebar_menu[href*="displayed=simple_images"]::before { content: '🖼️'; }
-
-/* Строки */
-.admin_sidebar_menu[href*="string"]::before,
-.admin_sidebar_menu[href*="strings"]::before,
-.admin_sidebar_menu[href*="displayed=strings"]::before { content: '📝'; }
-
-/* Слайдеры */
-.admin_sidebar_menu[href*="slider"]::before,
-.admin_sidebar_menu[href*="sliders"]::before,
-.admin_sidebar_menu[href*="displayed=sliders"]::before { content: '🎠'; }
-
-.admin_sidebar_menu img {
-	display: none !important; /* Полностью скрываем старые иконки */
-	width: 0 !important;
-	height: 0 !important;
-	opacity: 0 !important;
-	visibility: hidden !important;
-}
-
-/* Убираем любой фон за текстом */
-.admin_sidebar_menu span {
-	position: relative;
-	z-index: 2;
-	background: transparent !important;
-}
-
-/* Эффект свечения при наведении */
-.admin_sidebar_menu::after {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: -100%;
-	width: 100%;
-	height: 100%;
-	background: linear-gradient(90deg, transparent, rgba(254, 0, 0, 0.1), transparent);
-	transition: left 0.5s ease;
+  display: flex;
+  align-items: center;
+  padding: 12px 14px;
+  margin: 6px 0;
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 15px;
+  transition: background-color var(--transition), color var(--transition);
 }
 
 .admin_sidebar_menu:hover {
-	background: rgba(254, 0, 0, 0.15) !important;
-	background-image: none !important; /* Убираем фоновые изображения при наведении */
-	color: #ffffff;
-	border-color: rgba(254, 0, 0, 0.3);
-	transform: translateX(5px);
-	box-shadow: 0 4px 12px rgba(254, 0, 0, 0.2);
-}
-
-.admin_sidebar_menu:hover::before {
-	transform: scale(1.2);
-}
-
-.admin_sidebar_menu:hover::after {
-	left: 100%;
+  background: var(--bg-hover);
+  color: var(--text-main);
 }
 
 .admin_sidebar_menu.active {
-	background: linear-gradient(135deg, #fe0000 0%, #d00000 100%) !important;
-	background-image: none !important; /* Убираем фоновые изображения даже для активного состояния */
-	color: #ffffff;
-	font-weight: 600;
-	border-color: #fe0000;
-	box-shadow: 0 4px 16px rgba(254, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-	transform: translateX(5px);
-}
-
-.admin_sidebar_menu.active::before {
-	transform: scale(1.2);
-	filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
+  background: var(--accent);
+  color: #ffffff;
 }
 
 #sidebarbutton:checked ~ adm_content sidebar {
@@ -460,123 +317,72 @@ width: 100%;
 	box-sizing: border-box;
 }
 
-/* Форма авторизации */
-.auth_container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-	background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #151515 100%);
-	font-family: roboto, sans-serif;
-	position: relative;
-	overflow: hidden;
+/* Форма авторизации - Новый стиль */
+.auth_page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: var(--bg-main);
+  padding: 20px;
 }
 
-.auth_container::before {
-	content: '';
-	position: absolute;
-	top: -50%;
-	left: -50%;
-	width: 200%;
-	height: 200%;
-	background: radial-gradient(circle, rgba(254, 0, 0, 0.1) 0%, transparent 70%);
-	animation: pulse 4s ease-in-out infinite;
-  }
-
-@keyframes pulse {
-	0%, 100% { transform: scale(1); opacity: 0.5; }
-	50% { transform: scale(1.1); opacity: 0.8; }
+.auth_box {
+  width: 380px;
+  background: var(--bg-panel);
+  padding: 32px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
 }
 
-  .auth_form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 22px;
-	width: 380px;
-	padding: 50px 40px;
-	border-radius: 16px;
-	background: linear-gradient(135deg, #2b2b2b 0%, #252525 100%);
-	box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(254, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-	transition: transform 0.3s ease, box-shadow 0.3s ease;
-	position: relative;
-	z-index: 1;
+.auth_box input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-light);
+  background: var(--bg-secondary);
+  color: var(--text-main);
+  font-size: 15px;
+  transition: border var(--transition), background var(--transition);
 }
 
-  .auth_form:hover {
-	transform: translateY(-4px);
-	box-shadow: 0 12px 50px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(254, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  }
+.auth_box input:focus {
+  border-color: var(--accent);
+  background: var(--bg-hover);
+  outline: none;
+}
 
-  .auth_form_logo {
-	border-radius: 8px;
-	width: 120px;
-	height: 80px;
-	margin: -48px auto 20px auto;
-    overflow: hidden;
-  }
+.auth_box button {
+  width: 100%;
+  padding: 14px;
+  border-radius: var(--radius);
+  background: var(--accent);
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background var(--transition), transform var(--transition);
+}
 
-  .auth_form_logo img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: contain;
-  }
+.auth_box button:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
 
-  .form_title {
-	color: #ffffff;
-	font-size: 24px;
-	font-weight: 700;
-    margin-bottom: 10px;
-	font-family: robotob, sans-serif;
-	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  }
-  
-  .input_field {
-    width: 100%;
-	padding: 12px 16px;
-    font-size: 14px;
-	color: #e0e0e0;
-	background: rgba(255, 255, 255, 0.05);
-	border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    outline: none;
-	transition: all 0.3s ease;
-	font-family: roboto, sans-serif;
-  }
-  
-  .input_field::placeholder {
-	color: #666;
-  }
-  
-  .input_field:focus {
-	border-color: #fe0000;
-	background: rgba(255, 255, 255, 0.08);
-	box-shadow: 0 0 0 3px rgba(254, 0, 0, 0.2), 0 0 15px rgba(254, 0, 0, 0.1);
-  }
-  
-    .btn_submit {
-    width: 100%;
-	padding: 14px 0;
-    font-size: 15px;
-    font-weight: 600;
-	color: #ffffff;
-	background: #fe0000;
-	border: 2px solid #fe0000;
-    border-radius: 8px;
-    cursor: pointer;
-	transition: all 0.3s ease;
-	font-family: robotob, sans-serif;
-	text-transform: uppercase;
-	letter-spacing: 0.5px;
-  }
-  
-  .btn_submit:hover {
-	background: #d00000;
-	border-color: #d00000;
-	transform: translateY(-1px);
-	box-shadow: 0 4px 12px rgba(254, 0, 0, 0.3);
-  }
+.auth_box button:active {
+  transform: translateY(1px);
+}
+
+.auth_box h1 {
+  margin: 0;
+  font-size: 22px;
+  color: var(--text-main);
+  text-align: center;
+  font-weight: 600;
+}
 
 /* Изоляция: все формы админки внутри .adm_theme */
 .adm_theme interfaceform {
