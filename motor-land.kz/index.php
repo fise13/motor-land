@@ -143,10 +143,8 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		?>
 		<link rel="preload" as="image" href="<?=$slide_img['webp'] ?: $slide_img['original'];?>" fetchpriority="high">
 		<picture>
-			<?php if ($slide_img['webp']): ?>
-			<source srcset="<?=$slide_img['webp'];?>" type="image/webp">
-			<?php endif; ?>
-							<img src="<?=$slide_img['original'];?>" alt="Купить контрактный мотор Алматы - привозные моторы из Малайзии, контрактные двигатели Казахстан, Россия, СНГ" class="sliderslid" loading="eager" fetchpriority="high" width="1920" height="600" decoding="async" style="object-fit:cover;width:100%;height:100%;position:absolute;top:0;left:0;display:block;">
+			<source srcset="<?=$slide_img['webp'] ?: $slide_img['original'];?>" type="image/webp">
+			<img src="<?=$slide_img['webp'] ?: $slide_img['original'];?>" alt="Купить контрактный мотор Алматы - привозные моторы из Малайзии, контрактные двигатели Казахстан, Россия, СНГ" class="sliderslid" loading="eager" fetchpriority="high" width="1920" height="600" decoding="async" style="object-fit:cover;width:100%;height:100%;position:absolute;top:0;left:0;display:block;">
 		</picture>
 		<?php else: 
 			$slide_img = get_optimized_image($slide['image']);

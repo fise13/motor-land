@@ -124,7 +124,7 @@ $SITE_KEYWORDS = 'замена двигателя алматы, автосерв
 							}
 							?>
 						</div>
-						<div class="service-hero-image" style="background-image: url(/cms_img/2025-02/1740464745_67bd626973430.png);"></div>
+						<div class="service-hero-image" style="background-image: url(/cms_img/2025-02/1740464745_67bd626973430.webp);"></div>
 					</div>
 				</div>
 

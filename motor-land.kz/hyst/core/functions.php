@@ -63,31 +63,34 @@ function seo_get_product_id_from_slug($slug) {
 
 
 /**
- * Performance: Функция для оптимизации изображений - возвращает WebP с fallback
- * @param string $image_path - путь к изображению
- * @return array - массив с webp и оригинальным форматом
+ * Performance: Функция для оптимизации изображений - все изображения теперь в формате WebP
+ * @param string $image_path - путь к изображению (все изображения теперь .webp)
+ * @return array - массив с webp путем (основной формат) для совместимости с существующим кодом
  */
 function get_optimized_image($image_path) {
 	if (empty($image_path)) {
-		return ['original' => '', 'webp' => ''];
+		return ['original' => '', 'webp' => '', 'has_webp' => false];
 	}
 	
-	// Проверяем поддержку WebP через Accept заголовок
-	$webp_path = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $image_path);
-	
-	// Если WebP существует, возвращаем его
-	if (file_exists($_SERVER['DOCUMENT_ROOT'] . $webp_path)) {
+	// Все изображения теперь в формате WebP
+	// Если путь уже содержит .webp, используем его напрямую
+	if (preg_match('/\.webp$/i', $image_path)) {
 		return [
 			'original' => $image_path,
-			'webp' => $webp_path,
+			'webp' => $image_path,
 			'has_webp' => true
 		];
 	}
 	
+	// Если путь в старом формате (jpg/jpeg/png), автоматически конвертируем расширение в .webp
+	// Это для обратной совместимости с путями в базе данных
+	$webp_path = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $image_path);
+	
+	// Возвращаем webp путь (все изображения теперь в webp формате)
 	return [
-		'original' => $image_path,
-		'webp' => '',
-		'has_webp' => false
+		'original' => $image_path, // Оставляем оригинальный путь для совместимости
+		'webp' => $webp_path,      // Основной путь к webp изображению
+		'has_webp' => true         // Всегда true, так как все изображения теперь webp
 	];
 }
 

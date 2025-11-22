@@ -48,7 +48,11 @@ $SITE_KEYWORDS = 'акции контрактные моторы, скидки �
 			while($get = $tmps->fetch_array()):
 		?>
 		<div class="toverblock revealator-slideup">
-			<a href="/detal?id=<?=$get['id'];?>"><div class="toverimg" style="background-image: url(<?=get_farrimg($get['images'])[0];?>);">
+			<a href="/detal?id=<?=$get['id'];?>">
+				<?php 
+				$product_img = get_optimized_image(get_farrimg($get['images'])[0]);
+				?>
+				<div class="toverimg" data-bg-src="<?=$product_img['webp'] ?: $product_img['original'];?>" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии, доставка по СНГ', ENT_QUOTES, 'UTF-8');?>" itemprop="image">
 			<?php if ($get['sale'] != 'noting') { ?>
 			<div class="cationsale"><?=$get['sale'];?></div>
 			<?php } ?>

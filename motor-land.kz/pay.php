@@ -92,7 +92,7 @@ $SITE_KEYWORDS = 'доставка двигателей алматы, оплат
 				}
 				?>
 			</div>
-			<div class="pay-delivery-hero-image" style="background-image: url(/cms_img/2025-02/1740628959_67bfe3df8a09d.png);"></div>
+			<div class="pay-delivery-hero-image" style="background-image: url(/cms_img/2025-02/1740628959_67bfe3df8a09d.webp);"></div>
 		</div>
 
 		<div class="pay-delivery-methods">

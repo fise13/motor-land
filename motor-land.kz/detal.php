@@ -182,10 +182,8 @@ $full_canonical_url = 'https://motor-land.kz' . $canonical_url;
 					<link rel="preload" as="image" href="<?=$product_img['webp'] ?: $product_img['original'];?>">
 			<div class="tovarimage">
 						<picture>
-							<?php if ($product_img['webp']): ?>
-							<source srcset="<?=$product_img['webp'];?>" type="image/webp">
-							<?php endif; ?>
-							<img src="<?=$product_img['original'];?>" alt="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы из Малайзии, доставка по СНГ';?>" title="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы, доставка по СНГ';?>" itemprop="image" loading="eager" fetchpriority="high" width="600" height="450" decoding="async">
+							<source srcset="<?=$product_img['webp'] ?: $product_img['original'];?>" type="image/webp">
+							<img src="<?=$product_img['webp'] ?: $product_img['original'];?>" alt="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы из Малайзии, доставка по СНГ';?>" title="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы, доставка по СНГ';?>" itemprop="image" loading="eager" fetchpriority="high" width="600" height="450" decoding="async">
 						</picture>
 				<?php if ($print['sale'] != 'noting') { ?>
 				<div class="cationsale"><?=$print['sale'];?></div>
