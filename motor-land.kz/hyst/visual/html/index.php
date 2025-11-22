@@ -1,3 +1,11 @@
+<div class="admin_page_header">
+	<div class="admin_page_header_breadcrumb">
+		<span class="current">Контрольная панель</span>
+	</div>
+	<div class="admin_page_title">📊 Контрольная панель</div>
+	<div class="admin_page_subtitle">Главная страница административной панели</div>
+</div>
+
 <interfaceform target="hyst/core/admin_profile">
 	<div class="form_title">Сменить учетные данные</div>
 	<div class="admin_content_alignment">
