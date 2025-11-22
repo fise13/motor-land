@@ -2212,29 +2212,33 @@ opacity: 1;
 }
 
 /* Иконка WhatsApp */
-.footer-icon-whatsapp::before {
-  content: '';
-  width: 12px;
-  height: 12px;
-  border: 2px solid #fe0000;
-  border-radius: 2px;
-  left: 2px;
-  top: 50%;
-  transform: translateY(-50%);
-  opacity: 1;
-  background: transparent;
+.footer-icon-whatsapp a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
 }
 
-.footer-icon-whatsapp::after {
-  content: '';
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%) rotate(45deg);
-  width: 4px;
-  height: 4px;
-  border-right: 2px solid #fe0000;
-  border-bottom: 2px solid #fe0000;
+.footer-icon-whatsapp a:hover {
+  color: #fe0000;
+  transform: translateX(2px);
+}
+
+.footer-icon-whatsapp svg {
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  fill: #fe0000;
+}
+
+.footer-icon-whatsapp a:hover svg {
+  transform: scale(1.1);
+  fill: #fe0000;
+}
+
+.footer-icon-whatsapp span {
+  line-height: 1;
 }
 
 /* Иконка расписания */
