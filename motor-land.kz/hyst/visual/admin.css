@@ -12,16 +12,17 @@
    ======================================== */
 
 :root {
-  --bg-main: #121212;
-  --bg-secondary: #1b1b1b;
+  --bg-main: #0f0f0f;
+  --bg-secondary: #1a1a1a;
   --bg-panel: #1f1f1f;
-  --bg-hover: #262626;
+  --bg-hover: #2a2a2a;
   --accent: #d63737;
   --accent-hover: #b92e2e;
-  --text-main: #e0e0e0;
-  --text-light: #bcbcbc;
-  --border-light: rgba(255,255,255,0.06);
-  --radius: 10px;
+  --text-main: #f5f5f5;
+  --text-light: #d0d0d0;
+  --text-muted: #a0a0a0;
+  --border-light: rgba(255,255,255,0.08);
+  --radius: 12px;
   --transition: 0.25s ease;
 }
 @font-face {
@@ -48,9 +49,12 @@
   padding: 0;
   height: 100%;
   font-family: roboto, sans-serif;
-  font-size: 14px;
+  font-size: 15px;
+  line-height: 1.6;
   color: var(--text-main);
   background-color: var(--bg-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .adm_theme {
@@ -68,12 +72,15 @@ display: flex;
 }
 
 .adm_theme adm_header {
-  background: var(--bg-secondary);
-  height: 64px;
+  background: linear-gradient(135deg, #1a1a1a 0%, #1f1f1f 100%);
+  height: 70px;
   display: flex;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 24px;
   border-bottom: 1px solid var(--border-light);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 100;
 }
 
 .admin_header_profile {
@@ -87,11 +94,12 @@ align-items: center;
 
 .admin_header_name {
 	color: #ffffff;
-	font-size: 18px;
+	font-size: 20px;
 	font-weight: 700;
 	font-family: robotob, sans-serif;
 	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 	letter-spacing: 0.5px;
+	line-height: 1.4;
 }
 
 .admin_header_exit {
@@ -142,13 +150,14 @@ display: none;
 }
 
 .adm_theme sidebar {
-  width: 260px;
-  min-width: 260px;
-  background: var(--bg-panel);
-  padding: 20px 15px;
+  width: 280px;
+  min-width: 280px;
+  background: linear-gradient(180deg, #1f1f1f 0%, #1a1a1a 100%);
+  padding: 24px 16px;
   border-right: 1px solid var(--border-light);
   overflow-y: auto;
   transition: width var(--transition);
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Кастомный скроллбар для сайдбара */
@@ -233,24 +242,101 @@ left: auto;
 .admin_sidebar_menu {
   display: flex;
   align-items: center;
-  padding: 12px 14px;
-  margin: 6px 0;
+  padding: 14px 16px;
+  margin: 4px 0;
   border-radius: var(--radius);
   background: transparent;
   color: var(--text-light);
   text-decoration: none;
-  font-size: 15px;
-  transition: background-color var(--transition), color var(--transition);
+  font-size: 16px;
+  font-weight: 500;
+  transition: all var(--transition);
+  position: relative;
+  background-image: none !important;
+  background-size: 0 !important;
+  background-position: 0 !important;
+  background-repeat: no-repeat !important;
+  padding-left: 48px;
+}
+
+.admin_sidebar_menu::before {
+  content: '';
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+  transition: opacity var(--transition);
+}
+
+/* Иконки для разных пунктов меню через data-атрибуты или классы */
+.admin_sidebar_menu[href="/adm"]::before {
+  content: '📊';
+}
+
+.admin_sidebar_menu[href*="moderators"]::before {
+  content: '👥';
+}
+
+.admin_sidebar_menu[href*="mediafiles"]::before {
+  content: '📁';
+}
+
+.admin_sidebar_menu[href*="blog"]::before {
+  content: '📝';
+}
+
+.admin_sidebar_menu[href*="sliders"]::before {
+  content: '🖼️';
+}
+
+.admin_sidebar_menu[href*="online_store"]::before {
+  content: '🛒';
+}
+
+.admin_sidebar_menu[href*="simple_texts"]::before {
+  content: '📄';
+}
+
+.admin_sidebar_menu[href*="simple_images"]::before {
+  content: '🖼️';
+}
+
+.admin_sidebar_menu[href*="customtexts"]::before {
+  content: '✏️';
+}
+
+.admin_sidebar_menu span {
+  flex: 1;
+  line-height: 1.5;
+  font-weight: 500;
 }
 
 .admin_sidebar_menu:hover {
   background: var(--bg-hover);
   color: var(--text-main);
+  transform: translateX(4px);
+}
+
+.admin_sidebar_menu:hover::before {
+  opacity: 1;
 }
 
 .admin_sidebar_menu.active {
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
   color: #ffffff;
+  box-shadow: 0 4px 12px rgba(214, 55, 55, 0.3);
+  font-weight: 600;
+}
+
+.admin_sidebar_menu.active::before {
+  opacity: 1;
 }
 
 #sidebarbutton:checked ~ adm_content sidebar {
@@ -264,18 +350,19 @@ display: none;
 }
 
 #sidebarbutton:checked ~ adm_content sidebar .admin_sidebar_menu {
-	padding: 12px;
+	padding: 14px;
 	justify-content: center;
+	padding-left: 14px;
+}
+
+#sidebarbutton:checked ~ adm_content sidebar .admin_sidebar_menu::before {
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 #sidebarbutton:checked ~ adm_content sidebar .admin_sidebar_menu img {
 	display: none !important;
 	margin-right: 0;
-}
-
-/* Убираем фоновые изображения в свернутом меню */
-#sidebarbutton:checked ~ adm_content sidebar .admin_sidebar_menu {
-	background-image: none !important;
 }
 
 .adm_theme content {
@@ -284,9 +371,10 @@ height: 100%;
 overflow-y: auto;
 flex-grow: 1;
 box-sizing: border-box;
-	padding: 30px;
-	background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #151515 100%);
+	padding: 36px;
+	background: linear-gradient(135deg, #0f0f0f 0%, #151515 50%, #0f0f0f 100%);
 	background-attachment: fixed;
+	line-height: 1.7;
 }
 
 /* Кастомный скроллбар для контента */
@@ -613,17 +701,18 @@ display: block;
 }
 
 .adm_theme .form_title {
-	font-size: 28px;
+	font-size: 30px;
 	font-weight: 700;
 	padding: 0;
 	color: #ffffff;
-	margin-bottom: 30px;
-	border-bottom: 3px solid #fe0000;
-	padding-bottom: 15px;
+	margin-bottom: 32px;
+	border-bottom: 3px solid var(--accent);
+	padding-bottom: 16px;
 	font-family: robotob, sans-serif;
 	letter-spacing: -0.5px;
 	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 	position: relative;
+	line-height: 1.4;
 }
 
 .adm_theme .form_title::after {
@@ -655,24 +744,28 @@ display: inline-block;
 .adm_theme interfaceform input[type="number"],
 .adm_theme input[type="date"],
 .adm_theme input[type="datetime-local"],
-.adm_theme interfaceform input[type="url"] {
-	padding: 12px 16px;
-margin: 5px 0px;
+.adm_theme interfaceform input[type="url"],
+.adm_theme interfaceform input[type="email"] {
+	padding: 14px 18px;
+margin: 6px 0px;
 box-sizing: border-box;
-	border: 2px solid rgba(255, 255, 255, 0.1);
-	border-radius: 8px;
-	background: rgba(255, 255, 255, 0.05);
-	color: #e0e0e0;
-	font-size: 14px;
+	border: 2px solid rgba(255, 255, 255, 0.12);
+	border-radius: 10px;
+	background: rgba(255, 255, 255, 0.06);
+	color: var(--text-main);
+	font-size: 15px;
 	font-family: roboto, sans-serif;
 	transition: all 0.3s ease;
+	line-height: 1.5;
 }
 
 .adm_theme interfaceform input[type="text"]::placeholder,
 .adm_theme interfaceform input[type="password"]::placeholder,
 .adm_theme interfaceform input[type="number"]::placeholder,
-.adm_theme interfaceform input[type="url"]::placeholder {
-	color: #666;
+.adm_theme interfaceform input[type="url"]::placeholder,
+.adm_theme interfaceform input[type="email"]::placeholder {
+	color: var(--text-muted);
+	font-size: 15px;
 }
 
 .adm_theme interfaceform input[type="text"]:focus,
@@ -680,11 +773,13 @@ box-sizing: border-box;
 .adm_theme interfaceform input[type="number"]:focus,
 .adm_theme input[type="date"]:focus,
 .adm_theme input[type="datetime-local"]:focus,
-.adm_theme interfaceform input[type="url"]:focus {
+.adm_theme interfaceform input[type="url"]:focus,
+.adm_theme interfaceform input[type="email"]:focus {
 	outline: none;
-	border-color: #fe0000;
-	background: rgba(255, 255, 255, 0.08);
-	box-shadow: 0 0 0 3px rgba(254, 0, 0, 0.2), 0 0 15px rgba(254, 0, 0, 0.1);
+	border-color: var(--accent);
+	background: rgba(255, 255, 255, 0.1);
+	box-shadow: 0 0 0 4px rgba(214, 55, 55, 0.15), 0 4px 16px rgba(214, 55, 55, 0.2);
+	color: var(--text-main);
 }
 
 .adm_theme interfaceform input[type="button"] {
@@ -713,53 +808,63 @@ cursor: pointer;
 
 .adm_theme interfaceform textarea {
 box-sizing: border-box;
-margin: 5px 0px;
-	padding: 12px 16px;
-	border: 2px solid rgba(255, 255, 255, 0.1);
-	border-radius: 8px;
-	background: rgba(255, 255, 255, 0.05);
-	color: #e0e0e0;
-	font-size: 14px;
+margin: 6px 0px;
+	padding: 14px 18px;
+	border: 2px solid rgba(255, 255, 255, 0.12);
+	border-radius: 10px;
+	background: rgba(255, 255, 255, 0.06);
+	color: var(--text-main);
+	font-size: 15px;
 	font-family: roboto, sans-serif;
-	line-height: 1.6;
+	line-height: 1.7;
 	resize: vertical;
 	transition: all 0.3s ease;
 }
 
 .adm_theme interfaceform textarea::placeholder {
-	color: #666;
+	color: var(--text-muted);
+	font-size: 15px;
 }
 
 .adm_theme interfaceform textarea:focus {
 	outline: none;
-	border-color: #fe0000;
-	background: rgba(255, 255, 255, 0.08);
-	box-shadow: 0 0 0 3px rgba(254, 0, 0, 0.2), 0 0 15px rgba(254, 0, 0, 0.1);
+	border-color: var(--accent);
+	background: rgba(255, 255, 255, 0.1);
+	box-shadow: 0 0 0 4px rgba(214, 55, 55, 0.15), 0 4px 16px rgba(214, 55, 55, 0.2);
+	color: var(--text-main);
 }
 
 .adm_theme interfaceform select {
-	padding: 12px 40px 12px 16px;
-margin: 5px 0px;
+	padding: 14px 45px 14px 18px;
+margin: 6px 0px;
 box-sizing: border-box;
-	border: 2px solid rgba(255, 255, 255, 0.1);
-	border-radius: 8px;
-	font-size: 14px;
-	background: rgba(255, 255, 255, 0.05);
-	color: #e0e0e0;
+	border: 2px solid rgba(255, 255, 255, 0.12);
+	border-radius: 10px;
+	font-size: 15px;
+	background: rgba(255, 255, 255, 0.06);
+	color: var(--text-main);
 	cursor: pointer;
 	transition: all 0.3s ease;
 	appearance: none;
 	font-family: roboto, sans-serif;
-	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23e0e0e0' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+	background-image: linear-gradient(45deg, transparent 50%, var(--text-light) 50%), linear-gradient(135deg, var(--text-light) 50%, transparent 50%);
+	background-position: right 18px top 50%, right 13px top 50%;
+	background-size: 5px 5px, 5px 5px;
 	background-repeat: no-repeat;
-	background-position: right 12px center;
+	line-height: 1.5;
+}
+
+.adm_theme interfaceform select:focus {
+	background-image: linear-gradient(45deg, transparent 50%, var(--accent) 50%), linear-gradient(135deg, var(--accent) 50%, transparent 50%);
+	background-position: right 18px top 50%, right 13px top 50%;
 }
 
 .adm_theme interfaceform select:focus {
 	outline: none;
-	border-color: #fe0000;
-	background: rgba(255, 255, 255, 0.08);
-	box-shadow: 0 0 0 3px rgba(254, 0, 0, 0.2), 0 0 15px rgba(254, 0, 0, 0.1);
+	border-color: var(--accent);
+	background: rgba(255, 255, 255, 0.1);
+	box-shadow: 0 0 0 4px rgba(214, 55, 55, 0.15), 0 4px 16px rgba(214, 55, 55, 0.2);
+	color: var(--text-main);
 }
 
 .adm_theme interfaceform select option {
@@ -949,20 +1054,21 @@ display: none;
 	display: flex;
 	align-items: center;
 	padding: 18px 24px;
-	background: rgba(255, 255, 255, 0.03);
+	background: rgba(255, 255, 255, 0.04);
 	border: none;
 	border-radius: 0;
 	cursor: pointer;
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 user-select: none;
-	color: #e0e0e0;
+	color: var(--text-main);
 	font-weight: 600;
-	font-size: 15px;
+	font-size: 16px;
 	font-family: robotob, sans-serif;
 	box-shadow: none;
 	margin: 0;
 	position: relative;
 	z-index: 1;
+	line-height: 1.5;
 }
 
 .admin_roller_menu > label::before {
@@ -1095,13 +1201,14 @@ display: none;
 }
 
 .admin_group_checkboxes_title {
-	font-size: 15px;
+	font-size: 16px;
 	font-weight: 600;
-	padding: 0px 0px 10px 0px;
+	padding: 0px 0px 12px 0px;
 position: relative;
-	color: #e0e0e0;
+	color: var(--text-main);
 	font-family: robotob, sans-serif;
 	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+	line-height: 1.5;
 }
 
 .admin_group_checkboxes {
@@ -1116,17 +1223,19 @@ display: inline-block;
 .admin_label_checkbox {
 	display: inline-flex;
 	align-items: center;
-	padding: 8px 14px;
-	background: rgba(255, 255, 255, 0.05);
-	border: 2px solid rgba(255, 255, 255, 0.1);
-	border-radius: 8px;
+	padding: 10px 16px;
+	background: rgba(255, 255, 255, 0.06);
+	border: 2px solid rgba(255, 255, 255, 0.12);
+	border-radius: 10px;
 cursor: pointer;
 user-select: none;
 	margin-right: 10px;
 	margin-bottom: 10px;
-	color: #e0e0e0;
-	font-size: 14px;
+	color: var(--text-main);
+	font-size: 15px;
+	font-weight: 500;
 	transition: all 0.2s ease;
+	line-height: 1.5;
 }
 
 .admin_label_checkbox:hover {
@@ -1212,15 +1321,18 @@ border-radius: 2px;
 }
 
 .admin_inline_ittem {
-	padding: 12px 16px;
-	border-radius: 8px;
-	border: 2px solid rgba(254, 0, 0, 0.2);
+	padding: 16px 20px;
+	border-radius: 12px;
+	border: 2px solid rgba(214, 55, 55, 0.2);
 display: flex;
 justify-content: space-between;
 flex-wrap: wrap;
 align-items: center;
 	background: linear-gradient(135deg, #2b2b2b 0%, #252525 100%);
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+	color: var(--text-main);
+	font-size: 15px;
+	line-height: 1.6;
 }
 
 .admin_inline_ittem > div {
@@ -2365,13 +2477,13 @@ margin-top: 20px;
 	}
 
 	.form_title {
-		font-size: 22px;
-		margin-bottom: 20px;
+		font-size: 24px;
+		margin-bottom: 24px;
 	}
 
 	.form_title_sm {
-		font-size: 16px;
-		margin-bottom: 10px;
+		font-size: 18px;
+		margin-bottom: 12px;
 	}
 
 	.admin_content_widht300 {
@@ -2480,6 +2592,89 @@ margin-top: 20px;
 .adm_theme .cke_wysiwyg_frame {
 	background-color: #ffffff !important;
 	color: #404554 !important;
+}
+
+/* Общие стили для улучшения читаемости текста */
+.adm_theme p,
+.adm_theme div,
+.adm_theme span,
+.adm_theme label,
+.adm_theme li {
+	color: var(--text-main);
+	line-height: 1.7;
+	font-size: 15px;
+}
+
+.adm_theme p {
+	margin: 0 0 16px 0;
+}
+
+.adm_theme strong,
+.adm_theme b {
+	font-weight: 700;
+	color: var(--text-main);
+	font-family: robotob, sans-serif;
+}
+
+.adm_theme h1,
+.adm_theme h2,
+.adm_theme h3,
+.adm_theme h4,
+.adm_theme h5,
+.adm_theme h6 {
+	color: var(--text-main);
+	font-family: robotob, sans-serif;
+	line-height: 1.4;
+	margin: 0 0 16px 0;
+}
+
+.adm_theme h1 { font-size: 32px; font-weight: 700; }
+.adm_theme h2 { font-size: 26px; font-weight: 700; }
+.adm_theme h3 { font-size: 22px; font-weight: 600; }
+.adm_theme h4 { font-size: 18px; font-weight: 600; }
+.adm_theme h5 { font-size: 16px; font-weight: 600; }
+.adm_theme h6 { font-size: 15px; font-weight: 600; }
+
+/* Улучшение контраста для ссылок */
+.adm_theme a {
+	color: var(--accent);
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.adm_theme a:hover {
+	color: var(--accent-hover);
+	text-decoration: underline;
+}
+
+/* Улучшение читаемости для таблиц */
+.adm_theme table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 20px 0;
+	color: var(--text-main);
+	font-size: 15px;
+	line-height: 1.6;
+}
+
+.adm_theme table th {
+	background: rgba(214, 55, 55, 0.15);
+	color: var(--text-main);
+	font-weight: 600;
+	padding: 12px 16px;
+	text-align: left;
+	border-bottom: 2px solid var(--accent);
+	font-family: robotob, sans-serif;
+}
+
+.adm_theme table td {
+	padding: 12px 16px;
+	border-bottom: 1px solid var(--border-light);
+	background: rgba(255, 255, 255, 0.02);
+}
+
+.adm_theme table tr:hover td {
+	background: rgba(255, 255, 255, 0.05);
 }
 
 /* Стили для выбранных изображений */
