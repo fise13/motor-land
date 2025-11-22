@@ -359,58 +359,6 @@ position: relative;
   }
 }
 
-/* Десктопная версия - компактный header */
-@media (min-width: 769px) {
-  .headercon {
-    padding: 0;
-  }
-  
-  .relhead {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 80px;
-    position: relative;
-  }
-  
-  .relhead .shirina {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-  }
-  
-  .menu {
-    display: inline-block;
-    margin: 0 auto;
-  }
-  
-  .menu li {
-    padding: 20px 5px 15px 5px;
-    font-size: 12px;
-    width: auto;
-    min-width: 90px;
-  }
-  
-  .logo {
-    width: 120px;
-    height: 80px;
-    margin-left: -60px;
-    top: 0;
-  }
-  
-  .menu ul li:nth-child(3) {
-    margin-right: 60px;
-  }
-  
-  .menu ul li:nth-child(4) {
-    margin-left: 60px;
-  }
-}
-
 .logo {
 width: 150px;
 height: 100px;
