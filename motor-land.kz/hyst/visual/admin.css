@@ -1076,57 +1076,27 @@ box-sizing: border-box;
 }
 
 .adm_theme interfaceform input[type="button"] {
-	padding: 14px 32px;
-	min-width: 140px;
-	height: 48px;
-	margin: 6px 0px;
-	box-sizing: border-box;
-	cursor: pointer;
+	padding: 12px 28px;
+margin: 5px 0px;
+box-sizing: border-box;
+cursor: pointer;
 	font-weight: 600;
 	border: none;
-	border-radius: 12px;
-	font-size: 15px;
+	border-radius: 8px;
+	font-size: 14px;
 	font-family: robotob, sans-serif;
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	transition: all 0.3s ease;
 	text-transform: uppercase;
 	letter-spacing: 0.5px;
-	box-shadow: 
-		0 4px 12px rgba(214, 55, 55, 0.3),
-		inset 0 1px 0 rgba(255, 255, 255, 0.2);
-	background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	background: #fe0000;
 	color: #ffffff;
-	position: relative;
-	overflow: hidden;
-}
-
-.adm_theme interfaceform input[type="button"]::before {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: -100%;
-	width: 100%;
-	height: 100%;
-	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-	transition: left 0.5s;
 }
 
 .adm_theme interfaceform input[type="button"]:hover {
-	transform: translateY(-3px) scale(1.02);
-	box-shadow: 
-		0 6px 20px rgba(214, 55, 55, 0.5),
-		inset 0 1px 0 rgba(255, 255, 255, 0.3);
-	background: linear-gradient(135deg, #e63939 0%, #c92e2e 100%);
-}
-
-.adm_theme interfaceform input[type="button"]:hover::before {
-	left: 100%;
-}
-
-.adm_theme interfaceform input[type="button"]:active {
-	transform: translateY(-1px) scale(1);
-	box-shadow: 
-		0 2px 8px rgba(214, 55, 55, 0.4),
-		inset 0 2px 4px rgba(0, 0, 0, 0.2);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(254, 0, 0, 0.3);
+	background: #d00000;
 }
 
 .adm_theme interfaceform textarea {
@@ -1307,37 +1277,21 @@ align-items: start;
 
 .admin_content_widht300 {
 width: 300px;
-min-width: 300px;
-max-width: 300px;
 padding: 0px 10px 0px 0px;
 box-sizing: border-box;
-	transition: all 0.3s ease;
 }
 
 .admin_roller_menu {
 width: 100%;
-min-height: 60px;
 text-align: left;
-	margin-bottom: 16px;
+	margin-bottom: 15px;
 	background: linear-gradient(135deg, #2b2b2b 0%, #252525 100%);
 	border-radius: 12px;
 	overflow: hidden;
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(214, 55, 55, 0.15);
-	border: 1px solid rgba(214, 55, 55, 0.2);
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(254, 0, 0, 0.1);
+	border: 1px solid rgba(254, 0, 0, 0.2);
+	transition: all 0.3s ease;
 	position: relative;
-	animation: slideIn 0.4s ease-out;
-}
-
-@keyframes slideIn {
-	from {
-		opacity: 0;
-		transform: translateY(10px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
 }
 
 .admin_roller_menu::before {
@@ -1359,19 +1313,9 @@ text-align: left;
 }
 
 .admin_roller_menu:hover {
-	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(214, 55, 55, 0.4);
-	border-color: rgba(214, 55, 55, 0.5);
-	transform: translateY(-2px);
-	animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-	0%, 100% {
-		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(214, 55, 55, 0.4);
-	}
-	50% {
-		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(214, 55, 55, 0.6);
-	}
+	box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(254, 0, 0, 0.3);
+	border-color: rgba(254, 0, 0, 0.4);
+	transform: translateY(-1px);
 }
 
 /* Убираем верхнюю границу у всех элементов кроме первого, чтобы не было двойных границ */
@@ -1422,51 +1366,24 @@ user-select: none;
 
 .admin_roller_menu > label::before {
 	content: '➕';
-	font-size: 18px;
+	font-size: 20px;
 	margin-right: 14px;
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	width: 32px;
-	height: 32px;
-	min-width: 32px;
-	min-height: 32px;
-	background: rgba(214, 55, 55, 0.15);
-	border-radius: 8px;
-	border: 1px solid rgba(214, 55, 55, 0.3);
-	animation: iconPulse 2s ease-in-out infinite;
-}
-
-@keyframes iconPulse {
-	0%, 100% {
-		transform: scale(1);
-		box-shadow: 0 0 0 0 rgba(214, 55, 55, 0.4);
-	}
-	50% {
-		transform: scale(1.05);
-		box-shadow: 0 0 0 4px rgba(214, 55, 55, 0);
-	}
+	width: 28px;
+	height: 28px;
+	background: rgba(254, 0, 0, 0.1);
+	border-radius: 6px;
+	border: 1px solid rgba(254, 0, 0, 0.2);
 }
 
 .admin_roller_menu > input[type="checkbox"]:checked ~ label::before {
 	content: '➖';
-	transform: rotate(180deg) scale(1.1);
-	background: rgba(255, 255, 255, 0.25);
-	border-color: rgba(255, 255, 255, 0.4);
-	animation: iconRotate 0.3s ease-out;
-}
-
-@keyframes iconRotate {
-	0% {
-		transform: rotate(0deg) scale(1);
-	}
-	50% {
-		transform: rotate(90deg) scale(1.2);
-	}
-	100% {
-		transform: rotate(180deg) scale(1.1);
-	}
+	transform: rotate(180deg);
+	background: rgba(255, 255, 255, 0.2);
+	border-color: rgba(255, 255, 255, 0.3);
 }
 
 /* Разделитель между label и контейнером - убран, теперь используется border-top у контейнера */
@@ -1488,47 +1405,21 @@ user-select: none;
 }
 
 .admin_roller_menu > input[type="checkbox"]:checked ~ label {
-	background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+	background: linear-gradient(135deg, #fe0000 0%, #d00000 100%);
 	color: #ffffff;
-	box-shadow: 
-		0 4px 16px rgba(214, 55, 55, 0.4), 
-		inset 0 1px 0 rgba(255, 255, 255, 0.1);
+	box-shadow: 0 4px 16px rgba(254, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 	transform: none;
 	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-	animation: activePulse 2s ease-in-out infinite;
-}
-
-@keyframes activePulse {
-	0%, 100% {
-		box-shadow: 0 4px 16px rgba(214, 55, 55, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-	}
-	50% {
-		box-shadow: 0 6px 20px rgba(214, 55, 55, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-	}
 }
 
 .admin_roller_menu > input[type="checkbox"]:checked ~ .admin_roller_container {
 	max-height: 5000px;
-	padding: 32px;
+	padding: 30px;
 	background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(20, 20, 20, 0.98) 100%);
-	border-top: 2px solid rgba(214, 55, 55, 0.3);
+	border-top: 2px solid rgba(254, 0, 0, 0.3);
 	box-shadow: inset 0 4px 20px rgba(0, 0, 0, 0.4), 0 -2px 10px rgba(0, 0, 0, 0.2);
 	opacity: 1;
 	visibility: visible;
-	animation: expandDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes expandDown {
-	from {
-		opacity: 0;
-		transform: translateY(-10px);
-		max-height: 0;
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-		max-height: 5000px;
-	}
 }
 
 .admin_roller_menu > input[type="checkbox"]:checked ~ .admin_roller_container.admin_roler_with_overflow {
@@ -1625,8 +1516,7 @@ display: inline-block;
 .admin_label_checkbox {
 	display: inline-flex;
 	align-items: center;
-	padding: 12px 18px;
-	min-height: 44px;
+	padding: 10px 16px;
 	background: rgba(255, 255, 255, 0.06);
 	border: 2px solid rgba(255, 255, 255, 0.12);
 	border-radius: 10px;
@@ -1637,71 +1527,33 @@ user-select: none;
 	color: var(--text-main);
 	font-size: 15px;
 	font-weight: 500;
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	transition: all 0.2s ease;
 	line-height: 1.5;
-	position: relative;
-	overflow: hidden;
-}
-
-.admin_label_checkbox::before {
-	content: '';
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 0;
-	height: 0;
-	background: rgba(214, 55, 55, 0.2);
-	border-radius: 50%;
-	transform: translate(-50%, -50%);
-	transition: width 0.4s, height 0.4s;
 }
 
 .admin_label_checkbox:hover {
-	background: rgba(214, 55, 55, 0.15);
-	border-color: var(--accent);
-	box-shadow: 0 4px 12px rgba(214, 55, 55, 0.3);
-	transform: translateY(-2px) scale(1.02);
-}
-
-.admin_label_checkbox:hover::before {
-	width: 200px;
-	height: 200px;
+	background: rgba(254, 0, 0, 0.15);
+	border-color: #fe0000;
+	box-shadow: 0 0 10px rgba(254, 0, 0, 0.2);
 }
 
 .admin_label_checkbox input[type="checkbox"] {
-	margin-right: 10px;
+	margin-right: 8px;
 	appearance: none;
-	width: 20px;
-	height: 20px;
-	min-width: 20px;
-	min-height: 20px;
+	width: 18px;
+	height: 18px;
 	border: 2px solid rgba(255, 255, 255, 0.3);
-	border-radius: 6px;
+	border-radius: 4px;
 	background: rgba(255, 255, 255, 0.05);
 	position: relative;
 	cursor: pointer;
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-	flex-shrink: 0;
+	transition: all 0.2s ease;
 }
 
 .admin_label_checkbox input[type="checkbox"]:checked {
-	background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
-	border-color: var(--accent);
-	box-shadow: 0 0 12px rgba(214, 55, 55, 0.5);
-	transform: scale(1.1);
-	animation: checkPulse 0.3s ease-out;
-}
-
-@keyframes checkPulse {
-	0% {
-		transform: scale(1);
-	}
-	50% {
-		transform: scale(1.2);
-	}
-	100% {
-		transform: scale(1.1);
-	}
+	background: linear-gradient(135deg, #fe0000 0%, #d00000 100%);
+	border-color: #fe0000;
+	box-shadow: 0 0 10px rgba(254, 0, 0, 0.4);
 }
 
 .admin_label_checkbox input[type="checkbox"]:checked::before {
@@ -1727,32 +1579,17 @@ z-index: 600;
 }
 
 messagelog > report {
-	padding: 16px 24px;
-	min-height: 48px;
+	padding: 14px 20px;
 text-align: center;
-	width: 360px;
-	max-width: 90vw;
+	width: 320px;
 box-sizing: border-box;
 color: white;
 	margin: 0;
-	border-radius: 12px;
+	border-radius: 8px;
 display: block;
 	font-weight: 500;
-	font-size: 15px;
-	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-	animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-	line-height: 1.5;
-}
-
-@keyframes slideDown {
-	from {
-		opacity: 0;
-		transform: translateY(-20px) scale(0.95);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0) scale(1);
-	}
+	font-size: 14px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .adm_theme messagelog > report[right] {
@@ -1777,8 +1614,7 @@ border-radius: 2px;
 }
 
 .admin_inline_ittem {
-	padding: 20px 24px;
-	min-height: 60px;
+	padding: 16px 20px;
 	border-radius: 12px;
 	border: 2px solid rgba(214, 55, 55, 0.2);
 display: flex;
@@ -1790,25 +1626,6 @@ align-items: center;
 	color: var(--text-main);
 	font-size: 15px;
 	line-height: 1.6;
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-	animation: fadeIn 0.4s ease-out;
-}
-
-@keyframes fadeIn {
-	from {
-		opacity: 0;
-		transform: translateY(5px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
-}
-
-.admin_inline_ittem:hover {
-	border-color: rgba(214, 55, 55, 0.4);
-	box-shadow: 0 6px 16px rgba(214, 55, 55, 0.2);
-	transform: translateY(-2px);
 }
 
 .admin_inline_ittem > div {
@@ -1840,32 +1657,14 @@ indicateddate.week { color: #fe0000; }
 indicateddate.month { color: #9a9a9a; }
 
 .admin_items_href {
-	color: var(--accent);
+	color: #fe0000;
 text-decoration: none;
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-	font-weight: 500;
-	position: relative;
-	display: inline-block;
-}
-
-.admin_items_href::after {
-	content: '';
-	position: absolute;
-	bottom: -2px;
-	left: 0;
-	width: 0;
-	height: 2px;
-	background: var(--accent);
-	transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	transition: color 0.2s ease;
 }
 
 .admin_items_href:hover {
-	color: var(--accent-hover);
-	transform: translateY(-1px);
-}
-
-.admin_items_href:hover::after {
-	width: 100%;
+	color: #d00000;
+	text-decoration: underline;
 }
 
 peni {
@@ -2224,12 +2023,9 @@ text-decoration: none;
 
 .admin_imgblock {
 width: 300px;
-min-width: 300px;
-max-width: 300px;
 box-sizing: border-box;
 margin: 0px 10px 0px 0px;
-min-height: 200px;
-	transition: all 0.3s ease;
+height: 100%;
 }
 
 .admin_content_alignment_remain {
@@ -2243,41 +2039,23 @@ flex: 1;
 
 .admin_image_label {
 width: 100%;
-	height: 160px;
-	min-height: 160px;
+	height: 120px;
 position: relative;
-	border-radius: 12px;
-	border: 2px dashed rgba(214, 55, 55, 0.3);
+	border-radius: 8px;
+	border: 2px dashed rgba(254, 0, 0, 0.3);
 display: block;
 cursor: pointer;
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	transition: all 0.3s ease;
 background-position: center center;
 background-repeat: no-repeat;
 	background-size: cover;
-	background-color: rgba(255, 255, 255, 0.04);
-	overflow: hidden;
-}
-
-.admin_image_label::before {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: -100%;
-	width: 100%;
-	height: 100%;
-	background: linear-gradient(90deg, transparent, rgba(214, 55, 55, 0.1), transparent);
-	transition: left 0.5s;
+	background-color: rgba(255, 255, 255, 0.03);
 }
 
 .admin_image_label:hover {
-	border-color: var(--accent);
-	background-color: rgba(214, 55, 55, 0.12);
-	box-shadow: 0 8px 24px rgba(214, 55, 55, 0.3);
-	transform: translateY(-2px) scale(1.01);
-}
-
-.admin_image_label:hover::before {
-	left: 100%;
+	border-color: #fe0000;
+	background-color: rgba(254, 0, 0, 0.1);
+	box-shadow: 0 0 20px rgba(254, 0, 0, 0.2);
 }
 
 .admin_image_label input {
@@ -2291,53 +2069,27 @@ transform: translate(-50%,-50%);
 position: absolute;
 top: 50%;
 left: 50%;
-	color: var(--text-muted);
-	font-size: 48px;
+	color: #666;
+	font-size: 40px;
 text-align: center;	
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-	z-index: 1;
-	animation: iconBounce 2s ease-in-out infinite;
-}
-
-@keyframes iconBounce {
-	0%, 100% {
-		transform: translate(-50%, -50%) scale(1);
-	}
-	50% {
-		transform: translate(-50%, -50%) scale(1.1) translateY(-5px);
-	}
+	transition: all 0.3s ease;
 }
 
 .admin_image_label:hover .admin_addimage_tip {
-	color: var(--accent);
-	transform: translate(-50%,-50%) scale(1.2);
-	animation: iconBounceHover 0.5s ease-out;
-}
-
-@keyframes iconBounceHover {
-	0% {
-		transform: translate(-50%, -50%) scale(1);
-	}
-	50% {
-		transform: translate(-50%, -50%) scale(1.3);
-	}
-	100% {
-		transform: translate(-50%, -50%) scale(1.2);
-	}
+	color: #fe0000;
+	transform: translate(-50%,-50%) scale(1.1);
 }
 
 .admin_addimage_tip span {
 display: block;
-	font-size: 14px;
-	margin-top: 12px;
-	color: var(--text-light);
+	font-size: 13px;
+	margin-top: 8px;
+	color: #b0b0b0;
 	font-weight: 500;
-	transition: all 0.3s ease;
 }
 
 .admin_image_label:hover .admin_addimage_tip span {
 	color: #ffffff;
-	transform: translateY(-2px);
 }
 
 .admin_file_label_wraper {
@@ -2642,49 +2394,28 @@ flex-direction: column;
 
 .admin_select_img_input {
 width: 100%;
-	height: 160px;
-	min-height: 160px;
+	height: 120px;
 position: relative;
-	border-radius: 12px;
-	border: 2px dashed rgba(214, 55, 55, 0.3);
+	border-radius: 8px;
+	border: 2px dashed rgba(254, 0, 0, 0.3);
 display: block;
 cursor: pointer;
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	transition: all 0.3s ease;
 background-position: center center;
 background-repeat: no-repeat;
 	background-size: cover;
-	background-color: rgba(255, 255, 255, 0.04);
-	overflow: hidden;
-}
-
-.admin_select_img_input::before {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: -100%;
-	width: 100%;
-	height: 100%;
-	background: linear-gradient(90deg, transparent, rgba(214, 55, 55, 0.1), transparent);
-	transition: left 0.5s;
+	background-color: rgba(255, 255, 255, 0.03);
 }
 
 .admin_select_img_input[multiple] {
-	width: 140px;
-	min-width: 140px;
-	height: 140px;
-	min-height: 140px;
+	width: 120px;
 display: inline-block;
 }
 
 .admin_select_img_input:hover {
-	border-color: var(--accent);
-	background-color: rgba(214, 55, 55, 0.12);
-	box-shadow: 0 8px 24px rgba(214, 55, 55, 0.3);
-	transform: translateY(-2px) scale(1.01);
-}
-
-.admin_select_img_input:hover::before {
-	left: 100%;
+	border-color: #fe0000;
+	background-color: rgba(254, 0, 0, 0.1);
+	box-shadow: 0 0 20px rgba(254, 0, 0, 0.2);
 }
 
 .admin_select_img_field {
@@ -2692,45 +2423,28 @@ position: relative;
 }
 
 .admin_select_img_field.multiple {
-	width: 140px;
-	min-width: 140px;
+	width: 120px;
 display: inline-block;
 }
 
 .admin_multiple_image_select {
 display: inline-block;
-	border-radius: 10px;
-	border: 2px solid rgba(255, 255, 255, 0.12);
+	border-radius: 8px;
+	border: 2px solid rgba(255, 255, 255, 0.1);
 position: relative;
-	width: 140px;
-	height: 140px;
-	min-width: 140px;
-	min-height: 140px;
-	margin: 0px 8px 8px 0px;
+	width: 120px;
+	height: 120px;
+	margin: 0px 0px 0px 8px;
 background-size: cover;
 background-repeat: no-repeat;
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-	background: rgba(255, 255, 255, 0.04);
-	overflow: hidden;
-	animation: fadeInScale 0.4s ease-out;
-}
-
-@keyframes fadeInScale {
-	from {
-		opacity: 0;
-		transform: scale(0.9);
-	}
-	to {
-		opacity: 1;
-		transform: scale(1);
-	}
+	transition: all 0.3s ease;
+	background: rgba(255, 255, 255, 0.03);
 }
 
 .admin_multiple_image_select:hover {
-	border-color: var(--accent);
+	border-color: #fe0000;
 	transform: translateY(-4px) scale(1.05);
-	box-shadow: 0 8px 24px rgba(214, 55, 55, 0.4), 0 0 0 2px rgba(214, 55, 55, 0.2);
-	z-index: 10;
+	box-shadow: 0 8px 20px rgba(254, 0, 0, 0.4), 0 0 0 2px rgba(254, 0, 0, 0.2);
 }
 
 .admin_detet_button {
@@ -2940,101 +2654,31 @@ iv[error] message {
 }
 
 .hyst_twodown_control_buttons {
-margin: 0px 0px 24px 0px;
+margin: 0px 0px 20px 0px;
 padding: 0px;
 list-style: none;
 	display: flex;
-	gap: 12px;
-	flex-wrap: wrap;
-	position: relative;
+	gap: 10px;
 }
 
 .hyst_twodown_control_buttons a {
 display: inline-block;
-	padding: 14px 20px;
-	min-width: 120px;
-	height: 44px;
-	box-sizing: border-box;
-	background: rgba(255, 255, 255, 0.05);
-	border: 2px solid rgba(255, 255, 255, 0.12);
-	border-radius: 12px;
+	padding: 10px 16px;
+	background-color: #ffffff;
+	border: 2px solid #e5e5e5;
+	border-radius: 8px;
 cursor: pointer;
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	transition: all 0.2s ease;
 user-select: none;
-	color: var(--text-light);
+	color: #404554;
 text-decoration: none;
 	font-weight: 500;
-	font-size: 15px;
-	line-height: 1.4;
-	text-align: center;
-	position: relative;
-	overflow: hidden;
-	white-space: nowrap;
 }
 
-.hyst_twodown_control_buttons a::before {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: -100%;
-	width: 100%;
-	height: 100%;
-	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-	transition: left 0.5s;
-}
-
-.hyst_twodown_control_buttons a:hover {
-	color: var(--text-main);
-	background: rgba(214, 55, 55, 0.15);
-	border-color: rgba(214, 55, 55, 0.4);
-	transform: translateY(-2px);
-	box-shadow: 0 4px 12px rgba(214, 55, 55, 0.2);
-}
-
-.hyst_twodown_control_buttons a:hover::before {
-	left: 100%;
-}
-
-.hyst_twodown_control_buttons a.active {
+.hyst_twodown_control_buttons a.active,.hyst_twodown_control_buttons a:hover {
 	color: #ffffff;
-	background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
-	border-color: var(--accent);
-	box-shadow: 
-		0 4px 16px rgba(214, 55, 55, 0.4),
-		inset 0 1px 0 rgba(255, 255, 255, 0.2);
-	transform: translateY(-2px);
-	font-weight: 600;
-	position: relative;
-}
-
-.hyst_twodown_control_buttons a.active::after {
-	content: '';
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	height: 3px;
-	background: rgba(255, 255, 255, 0.3);
-	border-radius: 0 0 12px 12px;
-}
-
-.hyst_twodown_control_buttons a.active:hover {
-	background: linear-gradient(135deg, #e63939 0%, #c92e2e 100%);
-	box-shadow: 
-		0 6px 20px rgba(214, 55, 55, 0.5),
-		inset 0 1px 0 rgba(255, 255, 255, 0.3);
-	transform: translateY(-3px);
-}
-
-.hyst_twodown_control_buttons a li {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100%;
-	width: 100%;
+	background-color: #fe0000;
+	border-color: #fe0000;
 }
 
 .admin_small_img_preview {
@@ -3441,136 +3085,28 @@ margin-top: 20px;
 	background: rgba(214, 55, 55, 0.15);
 	color: var(--text-main);
 	font-weight: 600;
-	padding: 14px 18px;
-	min-height: 48px;
+	padding: 12px 16px;
 	text-align: left;
 	border-bottom: 2px solid var(--accent);
 	font-family: robotob, sans-serif;
-	font-size: 15px;
-	transition: all 0.3s ease;
-	position: relative;
-}
-
-.adm_theme table th::after {
-	content: '';
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	height: 2px;
-	background: linear-gradient(90deg, transparent, var(--accent), transparent);
-	opacity: 0;
-	transition: opacity 0.3s ease;
-}
-
-.adm_theme table th:hover::after {
-	opacity: 1;
 }
 
 .adm_theme table td {
-	padding: 14px 18px;
-	min-height: 44px;
+	padding: 12px 16px;
 	border-bottom: 1px solid var(--border-light);
 	background: rgba(255, 255, 255, 0.02);
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-	font-size: 15px;
 }
-
-.adm_theme table tr {
-	animation: rowFadeIn 0.3s ease-out;
-	animation-fill-mode: both;
-}
-
-@keyframes rowFadeIn {
-	from {
-		opacity: 0;
-		transform: translateX(-10px);
-	}
-	to {
-		opacity: 1;
-		transform: translateX(0);
-	}
-}
-
-.adm_theme table tr:nth-child(1) { animation-delay: 0.05s; }
-.adm_theme table tr:nth-child(2) { animation-delay: 0.1s; }
-.adm_theme table tr:nth-child(3) { animation-delay: 0.15s; }
-.adm_theme table tr:nth-child(4) { animation-delay: 0.2s; }
-.adm_theme table tr:nth-child(5) { animation-delay: 0.25s; }
 
 .adm_theme table tr:hover td {
-	background: rgba(214, 55, 55, 0.08);
-	transform: translateX(4px);
-	box-shadow: -4px 0 8px rgba(214, 55, 55, 0.2);
+	background: rgba(255, 255, 255, 0.05);
 }
 
 /* Стили для выбранных изображений */
 .admin_selected_img {
 	width: 100%;
 	height: 100%;
-	min-height: 200px;
 	background-size: cover;
 	background-position: center center;
 	background-repeat: no-repeat;
-	border-radius: 8px;
-	transition: transform 0.3s ease;
-}
-
-.admin_selected_img:hover {
-	transform: scale(1.05);
-}
-
-/* Дополнительные анимации и фиксированные размеры */
-.adm_theme label {
-	font-size: 15px;
-	line-height: 1.6;
-	color: var(--text-main);
-	margin-bottom: 8px;
-	display: block;
-	font-weight: 500;
-	transition: color 0.2s ease;
-}
-
-.adm_theme label:hover {
-	color: var(--text-light);
-}
-
-.adm_theme iw {
-	display: block;
-	width: 100%;
-	min-height: 44px;
-	position: relative;
-}
-
-/* Анимация для всех интерактивных элементов */
-.adm_theme * {
-	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Фиксированные размеры для форм */
-.adm_theme interfaceform {
-	display: block;
-	width: 100%;
-}
-
-.adm_theme interfaceform > * {
-	animation: fadeInUp 0.3s ease-out;
-	animation-fill-mode: both;
-}
-
-.adm_theme interfaceform > *:nth-child(1) { animation-delay: 0.05s; }
-.adm_theme interfaceform > *:nth-child(2) { animation-delay: 0.1s; }
-.adm_theme interfaceform > *:nth-child(3) { animation-delay: 0.15s; }
-.adm_theme interfaceform > *:nth-child(4) { animation-delay: 0.2s; }
-.adm_theme interfaceform > *:nth-child(5) { animation-delay: 0.25s; }
-
-@keyframes fadeInUp {
-	from {
-		opacity: 0;
-		transform: translateY(10px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
+	border-radius: 6px;
 }
