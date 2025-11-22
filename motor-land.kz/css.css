@@ -538,30 +538,50 @@ color: white;
 }
 
 .sliderform .btmmearrow {
-	color: rgb(85, 82, 82) !important;
+	color: white !important;
 }
 
 .btmmearrow {
 position: absolute;
 right: 0px;
 top: 0px;
-background-color: rgb(85, 82, 82);
+background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.15));
+backdrop-filter: blur(4px);
+-webkit-backdrop-filter: blur(4px);
 padding: 8px 10px;
 font-size: 18px;
 border-radius: 0px 15px 15px 0px;
 cursor: pointer;
+border-left: 1px solid rgba(255, 255, 255, 0.3);
+transition: all 0.3s ease;
+color: white !important;
+box-shadow: inset -2px 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.btmmearrow:hover {
+background: linear-gradient(135deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.25));
+box-shadow: inset -2px 0 6px rgba(0, 0, 0, 0.15);
+transform: scale(1.05);
+}
+
+.btmmearrow:active {
+transform: scale(0.98);
 }
 
 /* Performance: Унифицированные стили для всех кнопок dropdown в форме поиска */
 .sliderform .btmmearrow {
-background-color: rgb(85, 82, 82);
-border: 1px solid rgb(85, 82, 82);
+background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.15));
+backdrop-filter: blur(4px);
+-webkit-backdrop-filter: blur(4px);
+border-left: 1px solid rgba(255, 255, 255, 0.3);
+box-shadow: inset -2px 0 4px rgba(0, 0, 0, 0.1);
+color: white !important;
 }
 
 .meinputer {
 display: inline-block;
 border-radius: 15px;
-border: solid 1px white;
+border: solid 2px rgba(255, 255, 255, 0.9);
 padding: 8px 30px 8px 10px;
 font-size: 18px;
 color: rgb(91, 91, 91);
@@ -577,6 +597,25 @@ vertical-align: top;
 overflow: visible;
 /* Гарантируем что элементы внутри кликабельны */
 pointer-events: auto !important;
+/* Улучшенный дизайн */
+background: rgba(255, 255, 255, 0.15);
+backdrop-filter: blur(4px);
+-webkit-backdrop-filter: blur(4px);
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+transition: all 0.3s ease;
+cursor: pointer;
+}
+
+.meinputer:hover {
+border-color: rgba(255, 255, 255, 1);
+background: rgba(255, 255, 255, 0.22);
+box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+transform: translateY(-1px);
+}
+
+.meinputer:active {
+transform: translateY(0);
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 /* Performance: Стили для поля ввода .madiv - кликабельное поле */
@@ -730,19 +769,51 @@ margin: 10px 20px 20px 5px;
 }
 
 .sliderform input[type="submit"]{
-background: transparent url(./img/sertch.webp) no-repeat;
-background-size: contain;
+background: rgba(255, 255, 255, 0.2) url(./img/sertch.webp) no-repeat;
+background-size: 50% 50%;
 background-position: center center;
 width: 60px;
 height: 60px;
-border: none;
+border: 2px solid rgba(255, 255, 255, 0.9);
+border-radius: 15px;
 cursor: pointer;
+backdrop-filter: blur(4px);
+-webkit-backdrop-filter: blur(4px);
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+transition: all 0.3s ease;
+position: relative;
+overflow: hidden;
+}
+
+.sliderform input[type="submit"]::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: rgba(255, 255, 255, 0.1);
+opacity: 0;
+transition: opacity 0.3s ease;
+}
+
+.sliderform input[type="submit"]:hover {
+background-color: rgba(255, 255, 255, 0.3);
+border-color: rgba(255, 255, 255, 1);
+box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+transform: translateY(-2px) scale(1.05);
+}
+
+.sliderform input[type="submit"]:hover::before {
+opacity: 1;
 }
 
 .sliderform input[type="submit"]:active{
-background: transparent url(./img/sertchh.webp) no-repeat;
-background-size: contain;
+background: rgba(255, 255, 255, 0.25) url(./img/sertchh.webp) no-repeat;
+background-size: 50% 50%;
 background-position: center center;
+transform: translateY(0) scale(1);
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .generalw {
