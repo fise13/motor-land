@@ -1,13 +1,3 @@
-<div class="admin_page_header">
-	<div class="admin_page_header_breadcrumb">
-		<a href="/adm">Главная</a>
-		<span>›</span>
-		<span class="current">Модераторы</span>
-	</div>
-	<div class="admin_page_title">👥 Административные учетные записи</div>
-	<div class="admin_page_subtitle">Управление пользователями и их правами доступа</div>
-</div>
-
 <div class="admin_roller_menu">
 	<input type="checkbox" id="moderator_roller">
 	<label for="moderator_roller">+</label>

@@ -1,14 +1,4 @@
 
-<div class="admin_page_header">
-	<div class="admin_page_header_breadcrumb">
-		<a href="/adm">Главная</a>
-		<span>›</span>
-		<span class="current">Медиафайлы</span>
-	</div>
-	<div class="admin_page_title">📁 Медиафайлы</div>
-	<div class="admin_page_subtitle">Управление изображениями и медиа контентом</div>
-</div>
-
 <interfaceform target="hyst/core/admin_profile">
 	<div class="form_title">Добавить изображение</div>
 	

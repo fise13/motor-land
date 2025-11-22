@@ -96,6 +96,79 @@ function hyst_show_adm () {
 		
 		$html .= '</sidebar>';
 		$html .= '<content>';
+		
+		// Автоматическое формирование заголовков страниц
+		$page_titles = array(
+			'moderators' => array(
+				'icon' => '👥',
+				'title' => 'Административные учетные записи',
+				'subtitle' => 'Управление пользователями и их правами доступа',
+				'breadcrumb' => array('Главная' => '/adm', 'Модераторы' => '')
+			),
+			'mediafiles' => array(
+				'icon' => '📁',
+				'title' => 'Медиафайлы',
+				'subtitle' => 'Управление изображениями и медиа контентом',
+				'breadcrumb' => array('Главная' => '/adm', 'Медиафайлы' => '')
+			)
+		);
+		
+		$current_page = '';
+		$page_info = null;
+		
+		if (isset($_GET['moderators'])) {
+			$current_page = 'moderators';
+		} else if (isset($_GET['mediafiles'])) {
+			$current_page = 'mediafiles';
+		} else if (isset($_GET['displayed'])) {
+			$current_page = $_GET['displayed'];
+			// Получаем название модуля из info.ini
+			$module_info_file = $_SERVER['DOCUMENT_ROOT'].'/hyst/mods/'.$current_page.'/info.ini';
+			if (file_exists($module_info_file)) {
+				$module_info = parse_ini_file($module_info_file);
+				$module_name = isset($module_info['name']) ? $module_info['name'] : $current_page;
+				$page_titles[$current_page] = array(
+					'icon' => '📋',
+					'title' => $module_name,
+					'subtitle' => 'Управление модулем',
+					'breadcrumb' => array('Главная' => '/adm', $module_name => '')
+				);
+			}
+		} else {
+			$current_page = 'index';
+			$page_titles['index'] = array(
+				'icon' => '📊',
+				'title' => 'Контрольная панель',
+				'subtitle' => 'Главная страница административной панели',
+				'breadcrumb' => array('Контрольная панель' => '')
+			);
+		}
+		
+		if (isset($page_titles[$current_page])) {
+			$page_info = $page_titles[$current_page];
+			$html .= '<div class="admin_page_header">';
+			if (!empty($page_info['breadcrumb'])) {
+				$html .= '<div class="admin_page_header_breadcrumb">';
+				$breadcrumb_count = count($page_info['breadcrumb']);
+				$breadcrumb_index = 0;
+				foreach ($page_info['breadcrumb'] as $name => $url) {
+					$breadcrumb_index++;
+					if ($url) {
+						$html .= '<a href="'.$url.'">'.$name.'</a>';
+					} else {
+						$html .= '<span class="current">'.$name.'</span>';
+					}
+					if ($breadcrumb_index < $breadcrumb_count) {
+						$html .= '<span>›</span>';
+					}
+				}
+				$html .= '</div>';
+			}
+			$html .= '<div class="admin_page_title">'.$page_info['icon'].' '.$page_info['title'].'</div>';
+			$html .= '<div class="admin_page_subtitle">'.$page_info['subtitle'].'</div>';
+			$html .= '</div>';
+		}
+		
 		echo $html;
 			
 			if (isset($_GET['moderators']) && (array_search('general',explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false || array_search('all',explode(',',$_HYST_ADMIN[AUC_PREFIX.'_role']))!==false)) {
