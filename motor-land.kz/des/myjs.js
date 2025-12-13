@@ -722,4 +722,49 @@
 	} else {
 		initLazyBackgroundImages();
 	}
+	
+	/**
+	 * Premium Header Scroll Effect
+	 * Adds 'scrolled' class when user scrolls down
+	 */
+	function initHeaderScroll() {
+		const header = document.querySelector('.headercon');
+		if (!header) return;
+		
+		let lastScroll = 0;
+		const scrollThreshold = 50;
+		
+		function handleScroll() {
+			const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+			
+			if (currentScroll > scrollThreshold) {
+				header.classList.add('scrolled');
+			} else {
+				header.classList.remove('scrolled');
+			}
+			
+			lastScroll = currentScroll;
+		}
+		
+		// Throttle scroll events for performance
+		let ticking = false;
+		window.addEventListener('scroll', function() {
+			if (!ticking) {
+				window.requestAnimationFrame(function() {
+					handleScroll();
+					ticking = false;
+				});
+				ticking = true;
+			}
+		}, { passive: true });
+		
+		// Initial check
+		handleScroll();
+	}
+	
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initHeaderScroll);
+	} else {
+		initHeaderScroll();
+	}
 })();

@@ -30,6 +30,8 @@ body {
 	transform: translateY(30px);
 	animation: none;
 	transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+	/* Padding for fixed header */
+	padding-top: 100px; /* Space for fixed header */
 }
 
 body.page-loaded {
@@ -41,14 +43,78 @@ body.page-transitioning {
 	pointer-events: none;
 }
 
+/* ============================================
+   PREMIUM AUTOMOTIVE MARKETPLACE DESIGN
+   ============================================ */
+
+/* Color Palette - Premium Automotive */
+:root {
+  /* Primary Colors - Automotive Dark */
+  --color-primary: #1a1a1a;        /* Deep black for headers */
+  --color-primary-dark: #0d0d0d;   /* Ultra dark */
+  --color-primary-light: #2d2d2d;  /* Slightly lighter */
+  
+  /* Accent Colors - Automotive Red */
+  --color-accent: #dc2626;        /* Premium red (was #fe0000) */
+  --color-accent-dark: #b91c1c;   /* Darker red */
+  --color-accent-light: #ef4444;   /* Lighter red */
+  --color-accent-hover: #991b1b;  /* Hover state */
+  
+  /* Neutral Colors */
+  --color-bg: #ffffff;            /* Pure white */
+  --color-bg-light: #f8f9fa;      /* Light gray */
+  --color-bg-medium: #e9ecef;      /* Medium gray */
+  --color-text: #1a1a1a;          /* Dark text */
+  --color-text-secondary: #4a5568; /* Secondary text */
+  --color-text-light: #718096;     /* Light text */
+  --color-border: #e2e8f0;        /* Border color */
+  
+  /* Shadows - Premium depth */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.15);
+  
+  /* Typography */
+  --font-primary: 'roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-bold: 'robotob', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  
+  /* Spacing */
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 40px;
+  --spacing-xl: 60px;
+  
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 html,body {
 margin: 0px;
 padding: 0px;
 width: 100%;
 height: 100%;
-font-family: roboto;
-font-size: 14px;
-color: #404554;
+font-family: var(--font-primary);
+font-size: 16px; /* Increased from 14px for better readability */
+color: var(--color-text);
+line-height: 1.6; /* Better line height for readability */
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+/* Body padding for fixed header - only on desktop */
+@media (min-width: 769px) {
+  body {
+    padding-top: 100px;
+  }
+  
+  /* Hero section doesn't need padding since it's fullscreen */
+  .slider {
+    margin-top: -100px; /* Compensate for body padding */
+  }
 }
 
 table { 
@@ -169,12 +235,29 @@ left: 860px;
 bottom: 100px;
 }
 
+/* ============================================
+   PREMIUM HEADER - Fixed Navigation
+   ============================================ */
 .headercon {
 width: 100%;
 display: block;
 text-align: center;
-border-bottom: solid 1px #9a9a9a;
-background-color: #000000;
+border-bottom: 1px solid rgba(226, 232, 240, 0.1);
+background-color: var(--color-primary);
+position: fixed;
+top: 0;
+left: 0;
+z-index: 1000;
+box-shadow: var(--shadow-md);
+transition: all var(--transition-base);
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
+}
+
+/* Header scroll effect */
+.headercon.scrolled {
+box-shadow: var(--shadow-lg);
+background-color: rgba(26, 26, 26, 0.95);
 }
 
 .shirina {
@@ -387,26 +470,36 @@ background-repeat: no-repeat;
 	}
 }
 
+/* ============================================
+   PREMIUM HERO SECTION - Fullscreen
+   ============================================ */
 .slider {
 width: 100%;
-height: 600px;
-min-height: 600px; /* Performance: Предотвращение layout shift */
+height: 100vh; /* Fullscreen hero */
+min-height: 100vh;
 display: block;
 text-align: center;
 position: relative;
-/* Performance: Оптимизация для LCP - убираем contain чтобы не обрезать выпадающие списки */
-/* contain: layout style paint; */
-/* Решение 15: Переопределяем contain из критического CSS */
 contain: none !important;
-/* Performance: Разрешаем overflow для выпадающих списков формы поиска */
 overflow: visible !important;
-/* z-index слайдера должен быть ниже формы поиска (10001), чтобы форма могла быть поверх секции консультации */
 z-index: 200;
-/* Решение 16: Гарантируем что дочерние элементы не обрезаются */
 clip: auto !important;
 clip-path: none !important;
-/* Не создаем новый stacking context, чтобы форма поиска могла выйти за пределы слайдера */
 isolation: auto;
+background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+}
+
+/* Hero overlay for better text readability */
+.slider::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%);
+z-index: 1;
+pointer-events: none;
 }
 
 .sliderslid {
@@ -443,24 +536,61 @@ overflow: visible;
 isolation: auto;
 }
 
+/* ============================================
+   PREMIUM HERO TITLE
+   ============================================ */
 .titlephon {
-color: white;
-font-family: robotob, sans-serif; /* Fallback для предотвращения FOIT */
-text-transform: uppercase;
-font-size: 40px;
+color: #ffffff;
+font-family: var(--font-bold);
+text-transform: none; /* Removed uppercase for premium feel */
+font-size: 56px; /* Larger, more impactful */
+font-weight: 700;
+line-height: 1.2;
 position: absolute;
 left: 0px;
-top: 100px;
-width: 500px;
+top: 120px;
+width: 600px;
+max-width: 90%;
 text-align: left;
-/* Performance: Предотвращение layout shift */
-min-height: 60px;
+min-height: 80px;
+z-index: 10;
+text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+letter-spacing: -0.5px; /* Tighter letter spacing for modern look */
 }
 
-/* On-load animations for hero elements */
-.titlephon { animation: fadeUp .6s ease .15s both; }
-.sliderbtns { animation: fadeIn .6s ease .35s both; }
-.sliderform { animation: scaleIn .5s ease .30s both; }
+/* On-load animations for hero elements - Premium timing */
+.titlephon { 
+  animation: fadeUpHero .8s cubic-bezier(0.4, 0, 0.2, 1) .2s both; 
+}
+.sliderbtns { 
+  animation: fadeIn .8s cubic-bezier(0.4, 0, 0.2, 1) .4s both; 
+}
+.sliderform { 
+  animation: scaleInHero .7s cubic-bezier(0.4, 0, 0.2, 1) .5s both; 
+}
+
+/* Enhanced hero animations */
+@keyframes fadeUpHero {
+  from { 
+    opacity: 0; 
+    transform: translateY(40px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes scaleInHero {
+  from { 
+    opacity: 0; 
+    transform: scale(0.95) translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1) translateY(0); 
+  }
+}
 
 
 .phone {
@@ -1261,37 +1391,69 @@ border-radius: 0px 15px 15px 0px;
 background-color: #fe0000;
 }
 
+/* ============================================
+   PREMIUM PRODUCT CARDS
+   ============================================ */
 .toverblock {
   display: inline-block;
-  margin: 15px;
-  width: 250px;
-  border-radius: 12px;
-  background-color: #efefef;
-  min-height: 540px;
+  margin: 20px;
+  width: 280px; /* Slightly wider for premium feel */
+  border-radius: 16px; /* More rounded corners */
+  background-color: var(--color-bg);
+  min-height: 560px;
   vertical-align: top;
-  gap: 15px;
-  /* Для плавности при наведении */
-  transition: transform 0.25s cubic-bezier(.22,.61,.36,1), box-shadow 0.25s cubic-bezier(.22,.61,.36,1);
-  box-shadow: 0 2px 8px rgba(30,30,30,0.05);
+  gap: 0;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  position: relative;
+  /* Premium card styling */
+  background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
 }
 
-/* Анимация при наведении: блок слегка приподнимается и тень усиливается */
+/* Premium hover effect - smooth lift with enhanced shadow */
 .toverblock:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 12px 32px rgba(30,30,30,0.11);
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--color-accent);
+}
+
+/* Card image container */
+.toverblock:hover .toverimg {
+  transform: scale(1.05);
 }
 
 .toverimg {
-width: 248px;
-height: 248px;
-border-radius: 12px;
-border: solid 1px black;
+width: 100%;
+height: 280px; /* Taller for better product visibility */
+border-radius: 0;
+border: none;
 background-size: cover;
-border-top-left-radius: 12px;
-border-top-right-radius: 12px;
 background-position: center center;
 display: block;
 position: relative;
+transition: transform var(--transition-slow);
+background-color: var(--color-bg-light);
+overflow: hidden;
+}
+
+/* Premium image overlay on hover */
+.toverimg::after {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
+opacity: 0;
+transition: opacity var(--transition-base);
+pointer-events: none;
+}
+
+.toverblock:hover .toverimg::after {
+opacity: 1;
 }
 
 /* Animations: keyframes and helpers (no visual restyle) */
@@ -1377,23 +1539,36 @@ font-size: 16px;
 }
 
 .tovertitle {
-font-size: 18px;
-color: #fe0000;
+font-size: 20px; /* Larger for premium feel */
+color: var(--color-text);
 text-align: left;
-padding: 15px 10px;
+padding: 20px 20px 10px 20px;
 margin: 0px;
+font-weight: 600;
+line-height: 1.4;
+font-family: var(--font-bold);
+transition: color var(--transition-base);
+}
+
+.toverblock:hover .tovertitle {
+color: var(--color-accent);
 }
 
 .tovaropis {
-padding: 10px;
+padding: 0 20px;
 text-align: left;
-min-height: 80px;
+min-height: 90px;
+color: var(--color-text-secondary);
+font-size: 14px;
+line-height: 1.6;
 }
 
 .tovercena {
-font-size: 18px;
-color: #fe0000;
-padding: 15px 10px;
+font-size: 24px; /* Larger, more prominent */
+color: var(--color-accent);
+padding: 15px 20px 10px 20px;
+font-weight: 700;
+font-family: var(--font-bold);
 }
 
 .tovercenaca {
@@ -1402,31 +1577,63 @@ color: #fe0000;
 padding: 15px 10px;
 }
 
-/* Accessibility: Ensure minimum touch target size and proper contrast */
+/* ============================================
+   PREMIUM BUY BUTTON
+   ============================================ */
 .toverbuton {
   text-transform: uppercase;
   color: white;
-  font-size: 16px;
-  padding: 12px 24px;
-  background-color: #2c2c2c;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
   display: inline-block;
   cursor: pointer;
-  border-radius: 8px;
-  box-shadow: none;
-  transition: none;
-  text-decoration: none; /* убрать подчёркивание у ссылки */
-  -webkit-tap-highlight-color: transparent; /* убрать подсветку на iOS/Android */
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
   outline: none;
-  /* Accessibility: Minimum touch target size of 44x44px */
   min-width: 44px;
   min-height: 44px;
   box-sizing: border-box;
-  /* Accessibility: Ensure sufficient contrast (white on #2c2c2c = 12.63:1) */
   touch-action: manipulation;
+  margin: 0 20px 20px 20px;
+  width: calc(100% - 40px);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
-/* небольшой эффект при наведении */
-.toverbuton:hover { background-color: #2c2c2c; box-shadow: none; transform: none; text-decoration: none; }
+/* Premium button hover effect */
+.toverbuton::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+transition: left 0.5s ease;
+}
+
+.toverbuton:hover {
+  background: linear-gradient(135deg, var(--color-accent-light) 0%, var(--color-accent) 100%);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.toverbuton:hover::before {
+left: 100%;
+}
+
+.toverbuton:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
 
 /* Гарантируем отсутствие подчёркивания и одинаковый цвет для всех состояний ссылки */
 a.toverbuton:link { color: white; text-decoration: none; }
@@ -6038,5 +6245,244 @@ to {
 	.blog-table th,
 	.blog-table td {
 		padding: 10px 8px;
+	}
+}
+
+/* ============================================
+   PREMIUM TRUST BLOCKS - Почему нам доверяют
+   ============================================ */
+.trust-section {
+	padding: var(--spacing-xl) 0;
+	background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-light) 100%);
+	position: relative;
+	overflow: hidden;
+}
+
+.trust-section::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 1px;
+	background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+}
+
+.trust-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 var(--spacing-md);
+}
+
+.trust-title {
+	font-size: 42px;
+	font-weight: 700;
+	color: var(--color-text);
+	text-align: center;
+	margin-bottom: var(--spacing-lg);
+	font-family: var(--font-bold);
+	letter-spacing: -0.5px;
+}
+
+.trust-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: var(--spacing-md);
+	margin-top: var(--spacing-lg);
+}
+
+.trust-card {
+	background: var(--color-bg);
+	border-radius: 16px;
+	padding: var(--spacing-md);
+	text-align: center;
+	box-shadow: var(--shadow-md);
+	border: 1px solid var(--color-border);
+	transition: all var(--transition-base);
+	opacity: 0;
+	transform: translateY(30px);
+}
+
+.trust-card.animate-in {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.trust-card:hover {
+	transform: translateY(-8px);
+	box-shadow: var(--shadow-lg);
+	border-color: var(--color-accent);
+}
+
+.trust-icon {
+	width: 80px;
+	height: 80px;
+	margin: 0 auto var(--spacing-sm);
+	background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 36px;
+	color: white;
+	box-shadow: var(--shadow-md);
+	transition: all var(--transition-base);
+}
+
+.trust-card:hover .trust-icon {
+	transform: scale(1.1) rotate(5deg);
+	box-shadow: var(--shadow-lg);
+}
+
+.trust-card-title {
+	font-size: 20px;
+	font-weight: 600;
+	color: var(--color-text);
+	margin-bottom: var(--spacing-xs);
+	font-family: var(--font-bold);
+}
+
+.trust-card-text {
+	font-size: 14px;
+	color: var(--color-text-secondary);
+	line-height: 1.6;
+}
+
+/* Trust Stats */
+.trust-stats {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: var(--spacing-md);
+	margin-top: var(--spacing-xl);
+	padding: var(--spacing-lg) 0;
+	border-top: 1px solid var(--color-border);
+}
+
+.trust-stat {
+	text-align: center;
+	opacity: 0;
+	transform: translateY(20px);
+}
+
+.trust-stat.animate-in {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.trust-stat-number {
+	font-size: 48px;
+	font-weight: 700;
+	color: var(--color-accent);
+	font-family: var(--font-bold);
+	line-height: 1;
+	margin-bottom: var(--spacing-xs);
+}
+
+.trust-stat-label {
+	font-size: 14px;
+	color: var(--color-text-secondary);
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 600;
+}
+
+/* Premium Section Titles */
+.sttitle {
+	padding: 12px 24px;
+	display: inline-block;
+	border: 2px solid var(--color-accent);
+	border-radius: 8px;
+	background: var(--color-bg);
+	position: relative;
+}
+
+.sttitle span {
+	background-color: var(--color-bg);
+	font-family: var(--font-bold);
+	font-size: 32px; /* Larger for premium feel */
+	margin-left: -15px;
+	text-transform: none; /* Removed uppercase */
+	color: var(--color-text);
+	font-weight: 700;
+	letter-spacing: -0.5px;
+	padding: 0 15px;
+}
+
+/* Premium Filters Sidebar */
+.filtersblock {
+	background: var(--color-bg);
+	border-radius: 16px;
+	padding: var(--spacing-md);
+	margin-bottom: var(--spacing-lg);
+	box-shadow: var(--shadow-md);
+	border: 1px solid var(--color-border);
+}
+
+.filtersblock h3 {
+	font-size: 20px;
+	font-weight: 600;
+	color: var(--color-text);
+	margin-bottom: var(--spacing-md);
+	font-family: var(--font-bold);
+	padding-bottom: var(--spacing-sm);
+	border-bottom: 2px solid var(--color-border);
+}
+
+.catalog-products {
+	flex: 1;
+	min-width: 0; /* Prevents overflow */
+}
+
+/* Improved Catalog Layout */
+@media (min-width: 769px) {
+	.catalog-wrapper {
+		display: grid;
+		grid-template-columns: 300px 1fr;
+		gap: var(--spacing-lg);
+		align-items: start;
+	}
+	
+	.filtersblock {
+		position: sticky;
+		top: 120px; /* Below header */
+		max-height: calc(100vh - 140px);
+		overflow-y: auto;
+	}
+	
+	.catalog-products {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		align-items: flex-start;
+	}
+}
+
+/* Mobile Catalog Layout */
+@media (max-width: 768px) {
+	.catalog-wrapper {
+		display: block;
+	}
+	
+	.filtersblock {
+		margin-bottom: var(--spacing-md);
+		position: relative;
+		top: auto;
+		max-height: none;
+	}
+	
+	.catalog-products {
+		display: block;
+	}
+	
+	.toverblock {
+		width: 100%;
+		max-width: 100%;
+		margin: var(--spacing-md) 0;
+		display: block;
+	}
+	
+	.toverimg {
+		width: 100%;
+		height: 250px;
 	}
 }
