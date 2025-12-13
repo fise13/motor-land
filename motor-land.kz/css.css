@@ -1191,14 +1191,11 @@ top: 0px;
   }
 
 .frayalpfhon {
-/* Минималистичный подход: более темный, чистый фон */
-background-color: #1a1a1a;
+background-color: #2c2c2c;
 position: relative;
 overflow: hidden;
 animation: slideInFromBottom 0.8s ease-out 1.2s both;
 opacity: 0;
-/* Добавляем разделитель сверху */
-border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .frayalpfhon::before {
@@ -1207,13 +1204,12 @@ position: absolute;
 top: 0;
 left: 0;
 right: 0;
-height: 1px;
-/* Минималистичный подход: простая линия вместо градиента */
-background: rgba(255, 255, 255, 0.08);
-/* Убираем анимацию для минималистичного вида */
-max-width: 100%;
+height: 2px;
+background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+animation: expandLineHorizontal 1s ease-out 1.5s forwards;
+max-width: 0;
 margin: 0 auto;
-width: 100%;
+width: 80%;
 }
 
 @keyframes slideInFromBottom {
@@ -1854,21 +1850,18 @@ background-position: center center;
 position: relative;
 animation: fadeIn 1s ease-out;
 overflow: hidden;
-/* Минималистичный подход: убираем shimmer, делаем более чистый фон */
-background-color: #1a1a1a;
 }
 
 .foterbag::before {
 content: '';
 position: absolute;
 top: 0;
-left: 0;
+left: -100%;
 width: 100%;
 height: 100%;
-/* Упрощаем overlay - вместо анимации shimmer используем статичный overlay */
-background: rgba(0, 0, 0, 0.75);
+background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+animation: shimmerFooter 4s ease-in-out infinite;
 z-index: 0;
-/* Убираем анимацию shimmer для минималистичного вида */
 }
 
 @keyframes shimmerFooter {
@@ -1894,10 +1887,10 @@ opacity: 1;
 ================================ */
 .foterinline {
   display: block;
-  padding: 50px 40px 40px;
+  padding: 40px 30px 30px;
   width: 100%;
-  max-width: 420px;
-  margin: 0 auto 50px;
+  max-width: 400px;
+  margin: 0 auto 40px;
   box-sizing: border-box;
   text-align: left;
   color: white;
@@ -1907,7 +1900,7 @@ opacity: 1;
   animation: fadeInUp 0.4s ease-out;
   opacity: 0;
   animation-fill-mode: forwards;
-  /* Минималистичный подход: больше воздуха, чище вид */
+  /* Полупрозрачный фон как в "что ищем?" */
   background: rgba(255, 255, 255, 0.18);
   backdrop-filter: blur(6px) saturate(180%);
   -webkit-backdrop-filter: blur(6px) saturate(180%);
@@ -2116,52 +2109,52 @@ opacity: 1;
 ================================ */
 @media (max-width: 768px) {
   .foterinline {
-    padding: 40px 25px 35px;
-    margin-bottom: 40px;
+    padding: 30px 20px 25px;
+    margin-bottom: 30px;
     max-width: 100%;
   }
   
   .foterzago {
-    font-size: 18px;
-    margin-bottom: 28px;
-    padding-bottom: 14px;
+    font-size: 16px;
+    margin-bottom: 22px;
+    padding-bottom: 10px;
   }
   
   .footer_contacts {
-    gap: 40px;
-    padding: 0 20px 40px;
+    gap: 30px;
+    padding: 0 15px 30px;
   }
   
   .footer_contact_block {
     width: 100%;
-    max-width: 300px;
+    max-width: 280px;
   }
 }
 
 @media (max-width: 420px) {
   .foterinline {
-    padding: 35px 20px 30px;
+    padding: 25px 18px 20px;
   }
   
   .foterzago {
-    font-size: 17px;
-    margin-bottom: 24px;
-    padding-bottom: 12px;
+    font-size: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
   }
   
   .form-control {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
   
   .form-control input {
-    font-size: 15px;
-    padding: 10px 0;
+    font-size: 14px;
+    padding: 6px 0;
   }
   
   .foterinline input[type="button"] {
-    font-size: 13px;
-    padding: 12px 24px;
-    margin-top: 24px;
+    font-size: 12px;
+    padding: 9px 20px;
+    margin-top: 16px;
   }
   
   .footer_contact_block {
@@ -2186,18 +2179,17 @@ opacity: 1;
 }
 
 .foterzago {
-  font-size: 20px;
+  font-size: 18px;
   text-transform: none;
   color: white;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  margin: 0 0 32px 0;
-  padding-bottom: 16px;
+  margin: 0 0 28px 0;
+  padding-bottom: 12px;
   position: relative;
   display: block;
-  letter-spacing: -0.3px;
-  font-weight: 500;
-  /* Минималистичный подход: тонкая линия, больше отступы */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  letter-spacing: 0;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   animation: slideInLeft 0.5s ease-out 0.2s both;
 }
 
@@ -2246,46 +2238,41 @@ opacity: 1;
 .foterinline .form-control input[type="text"] {
   background-color: transparent;
   border: 0;
-  /* Минималистичный подход: более тонкая линия */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-  padding: 12px 0;
+  border-bottom: 2px #fff solid;
+  padding: 15px 0;
   border-radius: 0;
-  font-size: 16px;
+  font-size: 18px;
   width: 100%;
   margin: 0;
   color: white;
-  /* Улучшаем читаемость */
-  font-weight: 400;
-  letter-spacing: 0;
 }
 
 .foterinline input[type="submit"],
 .foterinline input[type="button"] {
-  padding: 14px 28px;
-  border-radius: 4px;
-  font-size: 14px;
+  padding: 10px 24px;
+  border-radius: 0;
+  font-size: 13px;
   font-weight: 500;
   width: 100%;
-  margin: 28px 0 0 0;
+  margin: 20px 0 0 0;
   background: #fe0000;
   color: white;
   border: none;
   cursor: pointer;
-  /* Минималистичный подход: простая, плавная анимация */
-  transition: background-color 0.2s ease, opacity 0.2s ease;
-  letter-spacing: 0.3px;
-  text-transform: none;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
   animation: fadeIn 0.4s ease-out 0.5s both;
 }
 
 .foterinline input[type="button"]:hover {
-  background: #e00000;
-  opacity: 0.95;
+  background: #d50000;
+  transform: translateY(-1px);
 }
 
 .foterinline input[type="button"]:active {
-  background: #cc0000;
-  opacity: 1;
+  background: #b71c1c;
+  transform: translateY(0);
 }
 
 .fonetininelis {
@@ -2299,18 +2286,17 @@ opacity: 1;
 
 .foterconicon {
   padding: 0 0 0 28px;
-  margin: 0 0 20px 0;
+  margin: 0 0 16px 0;
   text-align: left;
   position: relative;
-  /* Минималистичный подход: убираем transform, используем только color transition */
-  transition: color 0.2s ease;
-  font-size: 15px;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.85);
+  transition: transform 0.15s ease;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .foterconicon:hover {
-  color: rgba(255, 255, 255, 1);
+  transform: translateX(3px);
 }
 
 .foterconicon::before {
@@ -2326,26 +2312,23 @@ opacity: 1;
 
 .foterconicon a {
   text-decoration: none;
-  color: inherit;
-  transition: color 0.2s ease;
+  color: white;
+  transition: color 0.15s ease;
   display: inline-block;
-  font-size: 15px;
-  line-height: 1.6;
-  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .foterconicon a:hover {
-  color: rgba(255, 255, 255, 1);
-  /* Минималистичный подход: без яркого красного, только легкое осветление */
+  color: #fe0000;
 }
 
-/* Иконка локации - минималистичный стиль */
+/* Иконка локации */
 .footer-icon-location::before {
   content: '';
   width: 10px;
   height: 10px;
-  /* Минималистичный подход: нейтральный цвет вместо красного */
-  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  border: 2px solid #fe0000;
   border-radius: 50% 50% 50% 0;
   transform: translateY(-50%) rotate(-45deg);
   left: 2px;
@@ -2354,13 +2337,12 @@ opacity: 1;
   background: transparent;
 }
 
-/* Иконка телефона - минималистичный стиль */
+/* Иконка телефона */
 .footer-icon-phone::before {
   content: '';
   width: 12px;
   height: 12px;
-  /* Минималистичный подход: нейтральный цвет */
-  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  border: 2px solid #fe0000;
   border-radius: 2px;
   left: 2px;
   top: 50%;
@@ -2377,51 +2359,47 @@ opacity: 1;
   transform: translateY(-50%);
   width: 3px;
   height: 3px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid #fe0000;
   border-left: none;
   border-radius: 0 2px 2px 0;
 }
 
-/* Иконка WhatsApp - минималистичный стиль */
+/* Иконка WhatsApp */
 .footer-icon-whatsapp a {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   text-decoration: none;
   color: inherit;
-  /* Минималистичный подход: простая анимация */
-  transition: color 0.2s ease, opacity 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .footer-icon-whatsapp a:hover {
-  color: rgba(255, 255, 255, 1);
-  opacity: 1;
+  color: #fe0000;
+  transform: translateX(2px);
 }
 
 .footer-icon-whatsapp svg {
   flex-shrink: 0;
-  transition: fill 0.2s ease, opacity 0.2s ease;
-  /* Минималистичный подход: нейтральный цвет */
-  fill: rgba(255, 255, 255, 0.7);
-  width: 18px;
-  height: 18px;
+  transition: all 0.3s ease;
+  fill: #fe0000;
 }
 
 .footer-icon-whatsapp a:hover svg {
-  fill: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+  fill: #fe0000;
 }
 
 .footer-icon-whatsapp span {
   line-height: 1;
 }
 
-/* Иконка расписания - минималистичный стиль */
+/* Иконка расписания */
 .footer-icon-schedule::before {
   content: '';
   width: 12px;
   height: 12px;
-  /* Минималистичный подход: нейтральный цвет */
-  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  border: 2px solid #fe0000;
   border-radius: 50%;
   left: 2px;
   top: 50%;
@@ -2438,28 +2416,26 @@ opacity: 1;
   transform: translate(-50%, -50%);
   width: 1px;
   height: 4px;
-  background: rgba(255, 255, 255, 0.6);
+  background: #fe0000;
 }
 
 .copyr {
-/* Минималистичный подход: обычный регистр, меньше буквенного интервала */
-text-transform: none;
-font-size: 14px;
-padding: 20px 15px;
-color: rgba(255, 255, 255, 0.6);
+text-transform: uppercase;
+font-size: 16px;
+padding: 15px;
+color: white;
 text-align: center;
 animation: fadeInUp 0.8s ease-out 1s both;
 opacity: 0;
 position: relative;
-letter-spacing: 0.3px;
-font-weight: 400;
-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-/* Убираем hover эффекты для минималистичного вида */
-transition: color 0.2s ease;
+letter-spacing: 1px;
+transition: all 0.3s ease;
 }
 
 .copyr:hover {
-color: rgba(255, 255, 255, 0.7);
+color: #ffeb3b;
+text-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
+transform: scale(1.05);
 }
 
 .filtersblock {
@@ -3004,9 +2980,8 @@ display: flex;
 justify-content: center;
 flex-wrap: wrap;
 align-items: start;
-/* Минималистичный подход: больше пространства между блоками */
-gap: 60px;
-padding: 0 30px 50px;
+gap: 40px;
+padding: 0 20px 40px;
 position: relative;
 z-index: 1;
 animation: fadeInUp 0.4s ease-out 0.6s both;
@@ -3014,11 +2989,9 @@ animation: fadeInUp 0.4s ease-out 0.6s both;
 
 .footer_contact_block {
 margin: 0;
-/* Минималистичный подход: немного шире для лучшей читаемости */
-width: 300px;
+width: 280px;
 color: white;
-/* Убираем transform для минималистичного вида */
-transition: opacity 0.2s ease;
+transition: transform 0.2s ease;
 padding: 0;
 position: relative;
 }
@@ -5210,75 +5183,64 @@ to {
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
-	/* Минималистичный подход: больше пространства */
-	gap: 16px;
-	margin-bottom: 20px;
-	padding-bottom: 20px;
-	/* Минималистичный подход: более тонкая линия */
-	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	gap: 10px;
+	margin-bottom: 15px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .footer-link,
 .footer-link-faq {
-	color: rgba(255, 255, 255, 0.8);
+	color: #ffffff;
 	text-decoration: none;
 	font-size: 14px;
-	font-weight: 400;
-	/* Минималистичный подход: простая анимация */
-	transition: color 0.2s ease;
-	padding: 0;
-	border-radius: 0;
+	font-weight: 500;
+	transition: all 0.3s ease;
+	padding: 5px 10px;
+	border-radius: 5px;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-	letter-spacing: 0;
 }
 
 .footer-link:hover,
 .footer-link-faq:hover {
-	color: rgba(255, 255, 255, 1);
-	/* Убираем фон и transform для минималистичного вида */
+	color: #fe0000;
+	background: rgba(255, 255, 255, 0.1);
+	transform: translateY(-2px);
 }
 
 .footer-link-faq {
-	font-weight: 400;
-	color: rgba(255, 255, 255, 0.8);
-	/* Убираем фон для минималистичного вида */
+	font-weight: 600;
+	color: #fe0000;
+	background: rgba(255, 255, 255, 0.15);
 }
 
 .footer-link-faq:hover {
-	color: rgba(255, 255, 255, 1);
+	background: rgba(255, 255, 255, 0.25);
+	color: #ff1a1a;
 }
 
 .footer-separator {
-	color: rgba(255, 255, 255, 0.25);
-	margin: 0 8px;
+	color: rgba(255, 255, 255, 0.4);
+	margin: 0 5px;
 	font-size: 14px;
 }
 
 .copyr {
-	/* Минималистичный подход: обычный регистр, меньше буквенного интервала */
-	text-transform: none;
-	font-size: 14px;
-	padding: 20px 15px;
-	color: rgba(255, 255, 255, 0.6);
+	text-transform: uppercase;
+	font-size: 16px;
+	padding: 15px;
+	color: white;
 	text-align: center;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-	font-weight: 400;
-	letter-spacing: 0.3px;
-	/* Убираем hover эффекты для минималистичного вида */
-	transition: color 0.2s ease;
+	font-family: robotob, sans-serif;
 }
 
-.copyr:hover {
-	color: rgba(255, 255, 255, 0.7);
-}
-
-/* Адаптивные стили для footer links - минималистичный подход */
+/* Адаптивные стили для footer links */
 @media (max-width: 768px) {
 	.footer-links {
 		flex-direction: column;
-		gap: 12px;
-		padding-bottom: 16px;
-		margin-bottom: 16px;
+		gap: 8px;
+		padding-bottom: 12px;
+		margin-bottom: 12px;
 	}
 	
 	.footer-separator {
@@ -5287,26 +5249,26 @@ to {
 	
 	.footer-link,
 	.footer-link-faq {
-		font-size: 14px;
-		padding: 0;
+		font-size: 13px;
+		padding: 8px 15px;
 		display: inline-block;
 	}
 }
 
 @media (max-width: 480px) {
 	.footer-links {
-		gap: 10px;
+		gap: 6px;
 	}
 	
 	.footer-link,
 	.footer-link-faq {
-		font-size: 13px;
-		padding: 0;
+		font-size: 12px;
+		padding: 6px 12px;
 	}
 	
 	.copyr {
-		font-size: 13px;
-		padding: 18px 12px;
+		font-size: 14px;
+		padding: 12px;
 	}
 }
 
