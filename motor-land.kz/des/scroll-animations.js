@@ -166,51 +166,12 @@
 		});
 	}
 
-	/**
-	 * Инициализация анимаций для блоков доверия
-	 */
-	function initTrustAnimations() {
-		const trustCards = document.querySelectorAll('.trust-card, .trust-stat');
-		
-		if (trustCards.length === 0) {
-			return;
-		}
-
-		const observer = new IntersectionObserver(function(entries, observer) {
-			entries.forEach(function(entry, index) {
-				if (entry.isIntersecting) {
-					const element = entry.target;
-					
-					// Stagger animation - каждая карточка появляется с задержкой
-					const delay = (index % 6) * 100;
-					
-					setTimeout(function() {
-						element.classList.add('animate-in');
-					}, delay);
-
-					observer.unobserve(element);
-				}
-			});
-		}, {
-			threshold: 0.1,
-			rootMargin: '50px 0px'
-		});
-
-		trustCards.forEach(function(card) {
-			observer.observe(card);
-		});
-	}
-
 	// Инициализация после загрузки DOM
 	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', function() {
-			initCatalogAnimations();
-			initTrustAnimations();
-		});
+		document.addEventListener('DOMContentLoaded', initCatalogAnimations);
 	} else {
 		// DOM уже загружен
 		initCatalogAnimations();
-		initTrustAnimations();
 	}
 
 })();

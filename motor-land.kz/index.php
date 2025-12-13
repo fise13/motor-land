@@ -210,11 +210,10 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		})();
 		</script>
 	<div class="slidercoun shirina">
-		<h1 class="titlephon">Контрактные моторы и КПП<br>с проверкой и гарантией</h1>
-		<p style="color: white; font-size: 20px; position: absolute; left: 0px; top: 220px; width: 600px; max-width: 90%; text-align: left; z-index: 10; line-height: 1.5; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); animation: fadeUpHero .8s cubic-bezier(0.4, 0, 0.2, 1) .3s both;">Привозные двигатели из Малайзии. Проверка, гарантия, доставка по СНГ</p>
+		<h1 class="titlephon"><?=get_simple_texts ('index_slider_title');?></h1>
 		<div class="sliderbtns" role="group" aria-label="Действия на главной странице">
 			<a href="tel:<?=get_simple_texts ('index_slider_phone');?>" class="phone" aria-label="Позвонить по телефону <?=get_simple_texts ('index_slider_phone');?>" role="button" tabindex="0" onclick="if(typeof gtag==='function'){gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});}"><?=get_simple_texts ('index_slider_phone');?></a><br>
-			<a href="catalog.php" aria-label="Перейти в каталог товаров"><div class="atalogb" role="button" tabindex="0">Подобрать двигатель</div></a>
+			<a href="catalog.php" aria-label="Перейти в каталог товаров"><div class="atalogb" role="button" tabindex="0">Каталог</div></a>
 		</div>
 		<div class="sliderform" role="search" aria-label="Поиск товаров по параметрам">
 			<label for="search-form" class="sr-only">Поиск товаров</label>
@@ -350,53 +349,6 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 	<div class="shirina zgolovorright">
 	</div>
 </div>
-
-<!-- Premium Trust Section -->
-<section class="generalw trust-section" aria-labelledby="trust-title">
-	<div class="trust-container">
-		<h2 id="trust-title" class="trust-title">Почему нам доверяют</h2>
-		<div class="trust-grid">
-			<div class="trust-card">
-				<div class="trust-icon">✓</div>
-				<h3 class="trust-card-title">Проверка качества</h3>
-				<p class="trust-card-text">Каждый двигатель проходит тщательную проверку перед отправкой. Мы гарантируем работоспособность всех систем.</p>
-			</div>
-			<div class="trust-card">
-				<div class="trust-icon">🛡️</div>
-				<h3 class="trust-card-title">Гарантия</h3>
-				<p class="trust-card-text">Предоставляем официальную гарантию на все двигатели и КПП. Ваша уверенность — наш приоритет.</p>
-			</div>
-			<div class="trust-card">
-				<div class="trust-icon">📦</div>
-				<h3 class="trust-card-title">Собственный склад</h3>
-				<p class="trust-card-text">Большой склад в Алматы с постоянным наличием. Быстрая отгрузка и доставка по всему СНГ.</p>
-			</div>
-			<div class="trust-card">
-				<div class="trust-icon">🚚</div>
-				<h3 class="trust-card-title">Доставка</h3>
-				<p class="trust-card-text">Доставляем в любую точку Казахстана и стран СНГ. Безопасная упаковка и страховка груза.</p>
-			</div>
-		</div>
-		<div class="trust-stats">
-			<div class="trust-stat">
-				<div class="trust-stat-number">10+</div>
-				<div class="trust-stat-label">Лет опыта</div>
-			</div>
-			<div class="trust-stat">
-				<div class="trust-stat-number">5000+</div>
-				<div class="trust-stat-label">Проданных моторов</div>
-			</div>
-			<div class="trust-stat">
-				<div class="trust-stat-number">15+</div>
-				<div class="trust-stat-label">Городов доставки</div>
-			</div>
-			<div class="trust-stat">
-				<div class="trust-stat-number">98%</div>
-				<div class="trust-stat-label">Довольных клиентов</div>
-			</div>
-		</div>
-	</div>
-</section>
 
 <section class="generalw frayalpfhon" aria-labelledby="catalog-title">
 	<div class="shirina">

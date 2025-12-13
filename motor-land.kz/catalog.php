@@ -133,11 +133,10 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 </section>
 
 <section class="generalw" aria-label="Фильтры и товары каталога">
-	<div class="shirina catalog-wrapper">		
+	<div class="shirina">		
 
 		
 		<div class="filtersblock">
-		<h3>Фильтры поиска</h3>
 		<form method="get" action="catalog.php">
 			<div class="maipttee">
 				<div class="meinputer" style="border: solid 1px black;"><div class="madiv" data-val="Марка"><?php if ($_GET['mk'] != '') { echo htmlspecialchars($_GET['mk'], ENT_QUOTES, 'UTF-8'); } else { echo "Марка"; } ?></div>
@@ -218,8 +217,6 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 			</button>
 		</form>
 		</div>
-		
-		<div class="catalog-products">
 		<?php
 		$conditions = [];
 		$types = '';
@@ -295,7 +292,6 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 			$stmt->close();
 		}
 		?>
-		</div>
 		
 	</div>
 </section>
