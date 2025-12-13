@@ -1,30 +1,16 @@
 @media screen and (max-width: 660px), only screen and (max-device-width : 660px) {
-	/* Общие улучшения для мобильных устройств */
-	* {
-		-webkit-tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
-		tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
-	}
-	
-	html {
-		-webkit-text-size-adjust: 100% !important;
-		-ms-text-size-adjust: 100% !important;
-		text-size-adjust: 100% !important;
-	}
-	
 	/* Отступ для body, чтобы контент не перекрывал фиксированный header */
 	body {
 		padding-top: 70px !important;
-		-webkit-font-smoothing: antialiased !important;
-		-moz-osx-font-smoothing: grayscale !important;
 	}
 
 	.logo {
-		width: 100px !important;
-		height: 65px !important;
-		margin-left: -50px !important;
+		width: 120px !important;
+		height: 80px !important;
+		margin-left: -60px !important;
 		left: 50% !important;
 		position: absolute !important;
-		top: 3px !important;
+		top: -10px !important;
 		z-index: 201 !important;
 		background-image: url(./img/logo.webp) !important;
 		background-size: contain !important;
@@ -47,94 +33,52 @@
 	}
 	
 	.zgolovorleft {
-		padding-top: 20px;
+	padding-top: 20px;
 	}
 	
 	.zgolovorright {
-		padding-top: 20px;
-		text-align: left;
+	padding-top: 20px;
+	text-align: left;
 	}
 
+	
 	.sliderbtns {
-		position: absolute !important;
-		bottom: auto !important;
-		top: 50% !important;
-		left: 50% !important;
-		transform: translate(-50%, -50%) !important;
-		width: 90% !important;
-		max-width: 350px !important;
-		text-align: center !important;
-		z-index: 50 !important;
+	bottom: 400px !important;
+	left: 50px !important;
 	}
 
-	.phone {
-		display: inline-block !important;
-		margin-bottom: 15px !important;
-		font-size: 18px !important;
-		padding: 12px 24px !important;
-		min-height: 44px !important;
-	}
+.maipttee {
+width: 280px !important;
+height: auto !important;
+}
 
-	.atalogb {
-		display: inline-block !important;
-		margin: 0 auto !important;
-		padding: 12px 30px !important;
-		min-height: 44px !important;
-		font-size: 16px !important;
-	}
+.sliderform input[type="text"] {
+width: 260px !important;
+}
 
-	.maipttee {
-		width: 100% !important;
-		max-width: 100% !important;
-		height: auto !important;
-		padding: 0 10px !important;
-		box-sizing: border-box !important;
-		display: flex !important;
-		flex-direction: column !important;
-		gap: 10px !important;
-	}
+/* Выпадающие списки на мобильных */
+.meinputer {
+	width: 100% !important;
+	max-width: 250px !important;
+	margin: 5px auto !important;
+	display: block !important;
+}
 
-	.sliderform input[type="text"] {
-		width: 100% !important;
-	}
+.madiv {
+	cursor: pointer !important;
+}
 
-	/* Выпадающие списки на мобильных */
-	.meinputer {
-		width: 100% !important;
-		max-width: 100% !important;
-		margin: 0 auto !important;
-		display: block !important;
-	}
+.btmmearrow {
+	cursor: pointer !important;
+}
 
-	.madiv {
-		cursor: pointer !important;
-		min-height: 44px !important;
-		display: flex !important;
-		align-items: center !important;
-		padding: 0 12px !important;
-	}
-
-	.btmmearrow {
-		cursor: pointer !important;
-		min-width: 44px !important;
-		min-height: 44px !important;
-		display: flex !important;
-		align-items: center !important;
-		justify-content: center !important;
-	}
 
 	.shirina {
-		width: 100% !important;
-		max-width: 100% !important;
-		padding: 0 15px !important;
-		box-sizing: border-box !important;
+	width: 340px !important;
 	}
 	
 	.detalinlines {
-		width: 100% !important;
-		max-width: 100% !important;
-		padding: 0 15px !important;
-		box-sizing: border-box !important;
+	width: 320px;
 	}
 	
 	/* Улучшенные стили для страницы товара на мобильных */
@@ -235,19 +179,16 @@
 		word-break: break-word;
 	}
 	
-	.modalwindow {
-		width: 90% !important;
-		max-width: 400px !important;
-		margin-left: -45% !important;
-		padding: 25px 20px !important;
-		box-sizing: border-box !important;
+	.modalwindow  {
+	width: 280px;
+	margin-left: -170px;
 	}
 	
-	.actionperekl {
-		transform: translate(0%);
-		position: static;
-		left: auto;
-		top: auto;
+	.actionperekl  {
+	transform: translate(0%);
+	position: static;
+	left: auto;
+	top: auto;
 	}
 	
 	.actionbtms {
@@ -255,31 +196,21 @@
 		justify-content: center !important;
 		flex-wrap: wrap !important;
 		margin: 20px auto !important;
-		gap: 10px !important;
 	}
 	
 	.actionbtms li {
-		min-width: 140px !important;
-		flex: 1 1 calc(50% - 5px) !important;
-		max-width: 200px !important;
-		margin: 0 !important;
-		padding: 14px 20px !important;
-		min-height: 44px !important;
-		display: flex !important;
-		align-items: center !important;
-		justify-content: center !important;
-		font-size: 15px !important;
+		width: 120px !important;
+		margin: 5px !important;
 	}
 	
 	.toverblock {
-		width: 100% !important;
-		max-width: 100% !important;
+		width: 280px !important;
 		margin: 15px auto !important;
 		display: block !important;
 	}
 	
 	.toverimg {
-		width: 100% !important;
+		width: 278px !important;
 	}
 
 /* Минималистичное меню - выпадает из кнопки */
@@ -287,11 +218,10 @@
 	display: block !important;
     position: fixed !important;
     top: 70px !important;
-    right: 10px !important;
+    right: 15px !important;
     left: auto !important;
-    width: calc(100% - 20px) !important;
-    max-width: 300px !important;
-    max-height: calc(100vh - 90px) !important;
+    width: 280px !important;
+    max-height: calc(100vh - 90px);
     background: rgba(0, 0, 0, 0.95) !important;
     backdrop-filter: blur(12px) !important;
     -webkit-backdrop-filter: blur(12px) !important;
@@ -309,7 +239,6 @@
     text-align: left !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
     pointer-events: none !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
 }
 
 /* Когда меню открыто - выпадает из кнопки */
@@ -350,23 +279,21 @@
 /* Минималистичная кнопка меню */
 .modilebtn {
     position: fixed !important;
-    top: 12px !important;
-    right: 12px !important;
+    top: 15px !important;
+    right: 15px !important;
     left: auto !important;
-    width: 48px !important;
-    height: 48px !important;
-    min-width: 48px !important;
-    min-height: 48px !important;
+    width: 50px !important;
+    height: 50px !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
     align-items: center !important;
     gap: 6px !important;
-    background: rgba(255, 255, 255, 0.15) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    border: 2px solid rgba(255, 255, 255, 0.3) !important;
-    border-radius: 10px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 8px !important;
     cursor: pointer !important;
     z-index: 10000 !important;
     padding: 0 !important;
@@ -375,7 +302,6 @@
     opacity: 1 !important;
     pointer-events: auto !important;
     transition: all 0.2s ease !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
 }
 
 .modilebtn:hover {
@@ -443,19 +369,16 @@ margin: 20px 10px !important;
 
 	.menu li {
 		display: block !important;
-		padding: 16px 20px !important;
-		min-height: 44px !important;
+		padding: 14px 20px !important;
 		width: 100% !important;
 		border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
 		margin: 0 !important;
 		text-align: left !important;
 		transition: background-color 0.2s ease !important;
 		color: #ffffff !important;
-		font-size: 16px !important;
+		font-size: 15px !important;
 		pointer-events: auto !important;
 		cursor: pointer !important;
-		display: flex !important;
-		align-items: center !important;
 	}
 	
 	.menu li:hover {
@@ -534,19 +457,17 @@ margin: 20px 10px !important;
 		visibility: visible !important;
 		opacity: 1 !important;
 		position: fixed !important;
-		top: 12px !important;
-		right: 12px !important;
-		width: 48px !important;
-		height: 48px !important;
-		min-width: 48px !important;
-		min-height: 48px !important;
+		top: 15px !important;
+		right: 15px !important;
+		width: 50px !important;
+		height: 50px !important;
 		z-index: 10000 !important;
 		background: rgba(255, 255, 255, 0.15) !important;
 		backdrop-filter: blur(10px) !important;
 		-webkit-backdrop-filter: blur(10px) !important;
-		border: 2px solid rgba(255, 255, 255, 0.3) !important;
+		border: 2px solid rgba(255, 255, 255, 0.4) !important;
 		border-radius: 10px !important;
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
 		pointer-events: auto !important;
 		margin: 0 !important;
 		padding: 0 !important;
@@ -557,34 +478,20 @@ margin: 20px 10px !important;
 	}
 
 	.slider {
-		height: 70vh !important;
-		min-height: 500px !important;
-		max-height: 800px !important;
+	height: 800px;
 		margin-top: 0 !important;
 		position: relative !important;
 		z-index: 1 !important;
 	}
 
 	.titlephon {
-		width: 100% !important;
-		max-width: 100% !important;
-		height: auto !important;
-		padding: 20px 15px !important;
-		box-sizing: border-box !important;
-		font-size: 24px !important;
-		line-height: 1.3 !important;
-		text-align: center !important;
+	width: 340px;
+	height: 300px;
 	}
 
 	.sliderform {
 		text-align: center !important;
-		bottom: 20px !important;
-		left: 50% !important;
-		transform: translateX(-50%) !important;
-		width: calc(100% - 30px) !important;
-		max-width: 100% !important;
-		padding: 0 15px !important;
-		box-sizing: border-box !important;
+		bottom: 10px !important;
 		/* Performance: Увеличен z-index чтобы форма поиска была поверх всего контента, включая меню и секцию консультации */
 		z-index: 10001 !important;
 		/* Создаем новый stacking context для формы, чтобы она была поверх секции консультации */
@@ -642,87 +549,69 @@ margin: 20px 10px !important;
 	}
 
 	.aboutblock {
-		background-position: center top !important;
-		background-size: 100% auto !important;
-		width: 100% !important;
-		max-width: 100% !important;
-		height: auto !important;
-		min-height: auto !important;
-		overflow: visible !important;
-		position: relative !important;
-		padding: 20px 0 !important;
+	background-position: center top !important;
+	background-size: 100% auto !important;
+	width: 340px !important;
+	height: auto !important;
+	min-height: 600px !important;
+	overflow: visible !important;
+	position: relative !important;
+	padding: 0 !important;
 	}
 	
 	.sssskartins {
-		width: 100% !important;
-		max-width: 100% !important;
-		height: 250px !important;
-		min-height: 200px !important;
-		position: relative !important;
-		left: auto !important;
-		top: auto !important;
-		display: block !important;
-		margin: 0 auto 20px !important;
-		aspect-ratio: 16/9 !important;
-		border-radius: 8px !important;
-		overflow: hidden !important;
+	width: 340px !important;
+	height: 300px !important;
+	position: relative !important;
+	left: auto !important;
+	top: auto !important;
+	display: block !important;
+	margin: 0 auto !important;
+	aspect-ratio: auto !important;
 	}
 	
 	.abouttext {
-		transform: translate(0,0) !important;
-		width: 100% !important;
-		max-width: 100% !important;
-		margin: 0 auto !important;
-		left: auto !important;
-		right: auto !important;
-		top: auto !important;
-		position: relative !important;
-		padding: 0 15px 20px !important;
-		text-align: left !important;
-		box-sizing: border-box !important;
-		font-size: 15px !important;
-		line-height: 1.6 !important;
+	transform: translate(0,0) !important;
+	width: 300px !important;
+	margin: 20px auto !important;
+	left: auto !important;
+	right: auto !important;
+	top: auto !important;
+	position: relative !important;
+	padding: 20px 15px !important;
+	text-align: left !important;
 	}
 	
 	.aboutblock1 {
-		background-position: center top !important;
-		background-size: 100% auto !important;
-		width: 100% !important;
-		max-width: 100% !important;
-		padding: 40px 0 0 0 !important;
+	background-position: center top !important;
+	background-size: 100% auto !important;
+	width: 340px !important;
+	padding: 180px 0px 0px 0px !important;
 	}
 	
 	.abouttext1 {
-		transform: translate(0,0) !important;
-		width: 100% !important;
-		max-width: 100% !important;
-		top: auto !important;
-		margin: 20px auto 0 !important;
-		position: static !important;
-		text-align: left !important;
-		padding: 0 15px !important;
-		box-sizing: border-box !important;
+	transform: translate(0,0) !important;
+	width: 300px !important;
+	/*margin-left: -160px;
+	left: 50%;*/
+	top: 200px !important;
+	margin: 0px auto !important;
+	position: static !important;
+	text-align: left !important;
 	}
 	
 	.leftcolonka {
-		padding: 10px 15px !important;
-		width: 100% !important;
-		max-width: 100% !important;
-		box-sizing: border-box !important;
+	padding: 10px;
+	width: 300px !important;
 	}
 	
-	.righcolonka {
-		width: 100% !important;
-		max-width: 100% !important;
-		padding: 10px 15px !important;
-		box-sizing: border-box !important;
+	.righcolonka{
+	width: 320px !important;
 	}
 	
 	.foterinline {
-		width: 100% !important;
-		max-width: 100% !important;
-		padding: 15px !important;
-		box-sizing: border-box !important;
+	width: 320px;
+	padding: 10px;
 	}
 	
 	/* Оптимизация каталога для мобильных */
@@ -732,7 +621,7 @@ margin: 20px 10px !important;
 	
 	.toverblock {
 		width: 100% !important;
-		max-width: 100% !important;
+		max-width: 320px !important;
 		margin: 15px auto !important;
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
 		border-radius: 8px !important;
@@ -797,15 +686,13 @@ margin: 20px 10px !important;
 	
 	/* Кнопка "Подробнее" */
 	.okazatybolsh {
-		width: calc(100% - 30px) !important;
-		max-width: 100% !important;
+		width: calc(100% - 40px) !important;
+		max-width: 300px !important;
 		margin: 20px auto !important;
 		padding: 14px 20px !important;
 		font-size: 16px !important;
 		text-align: center !important;
 		display: block !important;
-		min-height: 44px !important;
-		box-sizing: border-box !important;
 	}
 	
 	/* Performance: Убираем синий цвет ссылки для кнопки "Подробнее" на мобильных */
@@ -821,11 +708,10 @@ margin: 20px 10px !important;
 	/* Оптимизация модального окна */
 	.modalwindow {
 		width: 90% !important;
-		max-width: 400px !important;
+		max-width: 350px !important;
 		margin-left: -45% !important;
 		padding: 25px 20px !important;
 		border-radius: 12px !important;
-		box-sizing: border-box !important;
 	}
 	
 	.modalwindow input[type="text"],
@@ -922,30 +808,20 @@ margin: 20px 10px !important;
 		padding: 15px 10px !important;
 	}
 	
-	.filtersblock {
-		width: 100% !important;
-		max-width: 100% !important;
-		padding: 15px !important;
-		box-sizing: border-box !important;
-	}
-
 	.filtersblock input[type="text"] {
-		width: 100% !important;
+		width: calc(100% - 20px) !important;
 		max-width: 100% !important;
 		margin: 10px 0 !important;
-		box-sizing: border-box !important;
-		min-height: 44px !important;
 	}
 	
 	/* Оптимизация футера */
 	.foterinline {
 		width: 100% !important;
-		max-width: 100% !important;
-		padding: 20px 15px !important;
+		max-width: 320px !important;
+		padding: 15px 10px !important;
 		text-align: center !important;
 		z-index: 50 !important;
 		position: relative !important;
-		box-sizing: border-box !important;
 	}
 	
 	.foterbag {
@@ -1044,6 +920,10 @@ margin: 20px 10px !important;
 		height: auto !important;
 	}
 	
+	/* Улучшение скролла */
+	* {
+		-webkit-tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
+	}
 	
 	/* Адаптивные стили для блога на мобильных */
 	.blog-article-section {
@@ -1108,117 +988,5 @@ margin: 20px 10px !important;
 	.blog-article-author {
 		flex-direction: column !important;
 		text-align: center !important;
-	}
-}
-
-/* Дополнительные улучшения для очень маленьких экранов (до 400px) */
-@media screen and (max-width: 400px) {
-	.logo {
-		width: 90px !important;
-		height: 60px !important;
-		margin-left: -45px !important;
-		top: 5px !important;
-	}
-	
-	.modilebtn {
-		top: 10px !important;
-		right: 10px !important;
-		width: 44px !important;
-		height: 44px !important;
-		min-width: 44px !important;
-		min-height: 44px !important;
-	}
-	
-	.menu {
-		right: 5px !important;
-		width: calc(100% - 10px) !important;
-		max-width: calc(100% - 10px) !important;
-	}
-	
-	.titlephon {
-		font-size: 20px !important;
-		padding: 15px 10px !important;
-	}
-	
-	.slider {
-		height: 60vh !important;
-		min-height: 400px !important;
-	}
-	
-	.sliderform {
-		bottom: 15px !important;
-		padding: 0 10px !important;
-		width: calc(100% - 20px) !important;
-	}
-	
-	.phone {
-		font-size: 16px !important;
-		padding: 10px 20px !important;
-	}
-	
-	.atalogb {
-		font-size: 15px !important;
-		padding: 10px 24px !important;
-	}
-	
-	.actionbtms li {
-		min-width: 120px !important;
-		font-size: 14px !important;
-		padding: 12px 16px !important;
-	}
-	
-	.tovertitle {
-		font-size: 16px !important;
-		padding: 10px 12px !important;
-	}
-	
-	.tovaropis {
-		font-size: 13px !important;
-		padding: 0 12px 8px !important;
-	}
-	
-	.tovercena {
-		font-size: 18px !important;
-		padding: 8px 12px !important;
-	}
-	
-	.toverbuton {
-		font-size: 15px !important;
-		padding: 12px 18px !important;
-		margin: 0 12px 12px !important;
-		width: calc(100% - 24px) !important;
-	}
-	
-	.sttitle {
-		font-size: 22px !important;
-		padding: 12px 0 !important;
-	}
-	
-	.sttitle span {
-		font-size: 22px !important;
-	}
-	
-	.abouttext {
-		font-size: 14px !important;
-		padding: 0 10px 15px !important;
-	}
-	
-	.sssskartins {
-		height: 200px !important;
-		min-height: 180px !important;
-		margin: 0 auto 15px !important;
-	}
-	
-	.foterinline {
-		padding: 15px 10px !important;
-	}
-	
-	.foterinline h3 {
-		font-size: 16px !important;
-	}
-	
-	.foterinline p,
-	.foterinline a {
-		font-size: 13px !important;
 	}
 }	
