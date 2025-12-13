@@ -814,11 +814,11 @@ margin: 20px 10px !important;
 		margin: 10px 0 !important;
 	}
 	
-	/* Оптимизация футера */
+	/* Оптимизация футера - минималистичный подход */
 	.foterinline {
 		width: 100% !important;
 		max-width: 320px !important;
-		padding: 15px 10px !important;
+		padding: 35px 20px 30px !important;
 		text-align: center !important;
 		z-index: 50 !important;
 		position: relative !important;
