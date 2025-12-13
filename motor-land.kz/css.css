@@ -1319,14 +1319,51 @@ position: relative;
 
 /* Удалён неиспользуемый .hover-lift, теперь анимация ховера встроена в .toverblock */
 
-/* Apply gentle appear to catalog cards without HTML changes */
-.toverblock { opacity: 0; animation: fadeUp .55s ease forwards; }
-.toverblock:nth-of-type(1)  { animation-delay: .05s; }
-.toverblock:nth-of-type(2)  { animation-delay: .10s; }
-.toverblock:nth-of-type(3)  { animation-delay: .15s; }
-.toverblock:nth-of-type(4)  { animation-delay: .20s; }
-.toverblock:nth-of-type(5)  { animation-delay: .25s; }
-.toverblock:nth-of-type(6)  { animation-delay: .30s; }
+/* Scroll animations для карточек каталога */
+/* Начальное состояние: скрыты (opacity и transform устанавливаются через JS) */
+.toverblock {
+	opacity: 0;
+	/* Transform устанавливается через inline styles в JS */
+	/* Используем GPU-ускоренные свойства для плавности (opacity и transform) */
+	/* cubic-bezier для естественного движения */
+	transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+	            transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+	/* Предотвращаем layout thrashing */
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	perspective: 1000px;
+	-webkit-perspective: 1000px;
+}
+
+/* Состояние во время анимации */
+.toverblock.animating {
+	/* will-change устанавливается через JS перед началом анимации */
+}
+
+/* Состояние после анимации - элемент виден */
+.toverblock.animate-in {
+	opacity: 1 !important;
+	transform: translate(0, 0) !important;
+}
+
+/* Уважаем prefers-reduced-motion: отключаем анимации для пользователей с ограниченными движениями */
+@media (prefers-reduced-motion: reduce) {
+	.toverblock {
+		opacity: 1 !important;
+		transform: translate(0, 0) !important;
+		transition: none !important;
+		backface-visibility: visible !important;
+		-webkit-backface-visibility: visible !important;
+		perspective: none !important;
+		-webkit-perspective: none !important;
+	}
+	
+	.toverblock.animating,
+	.toverblock.animate-in {
+		opacity: 1 !important;
+		transform: translate(0, 0) !important;
+	}
+}
 
 
 .cationsale {

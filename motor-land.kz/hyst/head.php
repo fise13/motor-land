@@ -117,6 +117,7 @@ body{margin:0;padding:0;width:100%;height:100%;font-family:roboto,sans-serif;fon
 <script src="/hyst/visual/main.js?<?=$INTERFACE_VERSION?>" defer></script>
 <script src="/des/myjs.js?<?=$INTERFACE_VERSION;?>" defer></script>
 <script src="/des/fm.revealator.jquery.js" defer></script>
+<script src="/des/scroll-animations.js?<?=$INTERFACE_VERSION;?>" defer></script>
 
 <?php
 if ($_HYST_ADMIN) {
