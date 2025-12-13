@@ -1,56 +1,8 @@
-/* ========================================
-   МИНИМАЛИСТИЧНЫЙ ДИЗАЙН - ЦВЕТОВАЯ ПАЛИТРА
-   ======================================== */
-
-:root {
-	/* Нейтральная база */
-	--color-bg: #ffffff;
-	--color-bg-secondary: #f8f8f8;
-	--color-bg-dark: #0a0a0a;
-	--color-bg-overlay: rgba(0, 0, 0, 0.4);
-	
-	/* Текст */
-	--color-text: #1a1a1a;
-	--color-text-secondary: #666666;
-	--color-text-light: #999999;
-	--color-text-inverse: #ffffff;
-	
-	/* Акцентный цвет - один, спокойный */
-	--color-accent: #1a1a1a;
-	--color-accent-hover: #333333;
-	
-	/* Границы */
-	--color-border: rgba(0, 0, 0, 0.08);
-	--color-border-light: rgba(0, 0, 0, 0.04);
-	
-	/* Отступы - модульная сетка */
-	--spacing-xs: 8px;
-	--spacing-sm: 16px;
-	--spacing-md: 24px;
-	--spacing-lg: 32px;
-	--spacing-xl: 48px;
-	--spacing-xxl: 64px;
-	
-	/* Типографика */
-	--font-family: roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-	--font-family-bold: robotob, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-	
-	/* Анимации - медленные и плавные */
-	--transition-fast: 0.2s ease;
-	--transition-base: 0.4s ease;
-	--transition-slow: 0.6s ease;
-	
-	/* Тени - мягкие */
-	--shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-	--shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
-	--shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
-}
-
 /* Плавные переходы между страницами */
 @keyframes pageFadeIn {
 	from {
 		opacity: 0;
-		transform: translateY(16px);
+		transform: translateY(30px);
 	}
 	to {
 		opacity: 1;
@@ -65,7 +17,7 @@
 	}
 	to {
 		opacity: 0;
-		transform: translateY(-16px);
+		transform: translateY(-30px);
 	}
 }
 
@@ -75,32 +27,28 @@ html {
 
 body {
 	opacity: 0;
-	transform: translateY(16px);
+	transform: translateY(30px);
 	animation: none;
-	transition: opacity var(--transition-slow) ease-out, transform var(--transition-slow) ease-out;
+	transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 body.page-loaded {
-	animation: pageFadeIn var(--transition-slow) ease-out forwards;
+	animation: pageFadeIn 0.6s ease-out forwards;
 }
 
 body.page-transitioning {
-	animation: pageFadeOut var(--transition-base) ease-in forwards;
+	animation: pageFadeOut 0.4s ease-in forwards;
 	pointer-events: none;
 }
 
 html,body {
-	margin: 0px;
-	padding: 0px;
-	width: 100%;
-	height: 100%;
-	font-family: var(--font-family);
-	font-size: 16px;
-	line-height: 1.6;
-	color: var(--color-text);
-	background-color: var(--color-bg);
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+margin: 0px;
+padding: 0px;
+width: 100%;
+height: 100%;
+font-family: roboto;
+font-size: 14px;
+color: #404554;
 }
 
 table { 
@@ -214,23 +162,19 @@ font-style: normal;
 
 
 .sliderbtns {
-	position: absolute;
-	z-index: 50;
-	left: 0px;
-	bottom: var(--spacing-xxl);
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-sm);
-	align-items: flex-start;
+position: absolute;
+/* z-index для кнопок слайдера - ниже формы поиска */
+z-index: 50;
+left: 860px;
+bottom: 100px;
 }
 
 .headercon {
-	width: 100%;
-	display: block;
-	text-align: center;
-	border-bottom: 1px solid var(--color-border);
-	background-color: var(--color-bg);
-	position: relative;
+width: 100%;
+display: block;
+text-align: center;
+border-bottom: solid 1px #9a9a9a;
+background-color: #000000;
 }
 
 .shirina {
@@ -252,7 +196,7 @@ position: relative;
 }
 
 .menu {
-	/* Navigation container */
+  /* Navigation container - no list styles */
 }
 
 .menu ul {
@@ -263,59 +207,70 @@ position: relative;
 }
 
 .menu a {
-	text-decoration: none;
-	color: var(--color-text);
-	display: block;
-	width: 100%;
-	height: 100%;
-	/* Accessibility: Ensure touch targets are at least 44x44px */
-	min-height: 44px;
-	min-width: 44px;
-	transition: color var(--transition-base);
-}
-
-.menu a:hover {
-	color: var(--color-text-secondary);
+  text-decoration: none;
+  color: white;
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* Accessibility: Ensure touch targets are at least 44x44px */
+  min-height: 44px;
+  min-width: 44px;
 }
 
 .menu li {
-	display: inline-block;
-	padding: var(--spacing-lg) var(--spacing-md);
-	text-transform: none;
-	text-align: center;
-	width: auto;
-	min-width: 100px;
-	color: var(--color-text);
-	cursor: pointer;
-	position: relative;
-	transition: color var(--transition-base);
-	font-size: 15px;
-	font-weight: 400;
-	letter-spacing: 0.02em;
-	/* Accessibility: Ensure touch targets meet minimum size requirements */
-	min-height: 44px;
-	line-height: 1.5;
+  display: inline-block;
+  padding: 40px 5px 35px 5px;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100px;
+  color: white;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.4s cubic-bezier(0.4,0,0.2,1), color 0.3s;
+  /* Accessibility: Ensure touch targets meet minimum size requirements */
+  min-height: 44px;
 }
 
 .menu li::before {
-	display: none;
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scaleX(0);
+  width: 120%;
+  height: 100%;
+  background: linear-gradient(90deg, #fe4757 0%, #ff9500 100%);
+  opacity: 0.13;
+  z-index: 0;
+  transition: transform 0.45s cubic-bezier(.55,0,.1,1);
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.menu li:hover::before {
+  transform: translate(-50%, -50%) scaleX(1);
+  opacity: 0.26;
 }
 
 .menu li span {
-	position: relative;
-	display: inline-block;
-	transition: transform var(--transition-base);
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  transition: color 0.2s;
+}
+
+/* Поднимаем на пару пикселей текст при ховере */
+.menu li:hover span {
+  color: #fff;
+  transform: translateY(-3px) scale(1.06);
+  text-shadow: 0 2px 12px rgba(254, 0, 0, 0.11);
+  transition: transform 0.4s cubic-bezier(.55,0,.1,1), color 0.2s;
 }
 
 .menu li:hover {
-	background-color: transparent;
-	color: var(--color-text-secondary);
-}
-
-.menu li:hover span {
-	transform: translateY(-2px);
-	color: var(--color-text-secondary);
-	text-shadow: none;
+  background-color: #fe0000;
+  color: #fff;
 }
 
 /* Accessibility: Updated selectors for proper list structure */
@@ -405,28 +360,22 @@ position: relative;
 }
 
 .logo {
-	width: 140px;
-	height: 60px;
-	margin-left: -70px;
-	border-radius: 0;
-	position: absolute;
-	top: var(--spacing-md);
-	left: 50%;
-	z-index: 10;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	overflow: hidden;
-	background-image: url(./img/logo.webp);
-	background-size: contain;
-	background-position: center center;
-	background-repeat: no-repeat;
-	opacity: 1;
-	transition: opacity var(--transition-base);
-}
-
-.logo:hover {
-	opacity: 0.8;
+width: 150px;
+height: 100px;
+margin-left: -75px;
+border-radius: 12px;
+position: absolute;
+top: 5px;
+left: 50%;
+z-index: 10;
+display: flex;
+align-items: center;
+justify-content: center;
+overflow: hidden;
+background-image: url(./img/logo.webp);
+background-size: contain;
+background-position: center center;
+background-repeat: no-repeat;
 }
 
 /* В мобильной версии */
@@ -439,20 +388,25 @@ position: relative;
 }
 
 .slider {
-	width: 100%;
-	height: 70vh;
-	min-height: 500px;
-	max-height: 800px;
-	display: block;
-	text-align: center;
-	position: relative;
-	contain: none !important;
-	overflow: visible !important;
-	z-index: 200;
-	clip: auto !important;
-	clip-path: none !important;
-	isolation: auto;
-	background-color: var(--color-bg-dark);
+width: 100%;
+height: 600px;
+min-height: 600px; /* Performance: Предотвращение layout shift */
+display: block;
+text-align: center;
+position: relative;
+/* Performance: Оптимизация для LCP - убираем contain чтобы не обрезать выпадающие списки */
+/* contain: layout style paint; */
+/* Решение 15: Переопределяем contain из критического CSS */
+contain: none !important;
+/* Performance: Разрешаем overflow для выпадающих списков формы поиска */
+overflow: visible !important;
+/* z-index слайдера должен быть ниже формы поиска (10001), чтобы форма могла быть поверх секции консультации */
+z-index: 200;
+/* Решение 16: Гарантируем что дочерние элементы не обрезаются */
+clip: auto !important;
+clip-path: none !important;
+/* Не создаем новый stacking context, чтобы форма поиска могла выйти за пределы слайдера */
+isolation: auto;
 }
 
 .sliderslid {
@@ -490,187 +444,202 @@ isolation: auto;
 }
 
 .titlephon {
-	color: var(--color-text-inverse);
-	font-family: var(--font-family-bold);
-	text-transform: none;
-	font-size: 56px;
-	font-weight: 300;
-	letter-spacing: -0.02em;
-	line-height: 1.2;
-	position: absolute;
-	left: 0px;
-	top: var(--spacing-xxl);
-	width: 600px;
-	max-width: 80%;
-	text-align: left;
-	min-height: 80px;
+color: white;
+font-family: robotob, sans-serif; /* Fallback для предотвращения FOIT */
+text-transform: uppercase;
+font-size: 40px;
+position: absolute;
+left: 0px;
+top: 100px;
+width: 500px;
+text-align: left;
+/* Performance: Предотвращение layout shift */
+min-height: 60px;
 }
 
-/* On-load animations for hero elements - медленные и плавные */
-.titlephon { animation: fadeUp var(--transition-slow) ease 0.2s both; }
-.sliderbtns { animation: fadeIn var(--transition-slow) ease 0.4s both; }
-.sliderform { animation: fadeIn var(--transition-slow) ease 0.3s both; }
+/* On-load animations for hero elements */
+.titlephon { animation: fadeUp .6s ease .15s both; }
+.sliderbtns { animation: fadeIn .6s ease .35s both; }
+.sliderform { animation: scaleIn .5s ease .30s both; }
 
 
 .phone {
-	text-decoration: none;
-	padding: var(--spacing-sm) var(--spacing-lg);
-	border: 1px solid var(--color-text-inverse);
-	border-radius: 0;
-	font-size: 16px;
-	font-weight: 400;
-	display: inline-block;
-	background-color: transparent;
-	transition: all var(--transition-base);
-	margin: 0;
-	color: var(--color-text-inverse);
-	letter-spacing: 0.02em;
+text-decoration: none;
+padding: 10px 30px;
+border: solid 2px white;
+border-radius: 30px;
+font-size: 22px;
+display: inline-block;
+background-image: url(./img/whitebg.webp);
+background-position: -700px 0px;
+background-repeat: no-repeat;
+-webkit-transition: all 0.5s;
+-moz-transition: all 0.5s;
+-o-transition: all 0.5s;
+transition: all 0.5s;
+margin: 10px 0px;
+color: white;
 }
 
 .phone:hover {
-	background-color: var(--color-text-inverse);
-	color: var(--color-bg-dark);
-	transform: translateY(-2px);
+background-position: -300px 0px;
+color: black;
 }
 
 .atalogb {
-	padding: var(--spacing-sm) var(--spacing-lg);
-	border-radius: 0;
-	font-size: 16px;
-	font-weight: 400;
-	width: auto;
-	min-width: 170px;
-	margin: 0px;
-	color: var(--color-text-inverse);
-	border: 1px solid var(--color-text-inverse);
-	cursor: pointer;
-	text-align: center;
-	display: inline-block;
-	background-color: transparent;
-	transition: all var(--transition-base);
-	letter-spacing: 0.02em;
+padding: 10px 28px;
+border-radius: 25px;
+font-size: 20px;
+width: 170px;
+margin: 0px;
+color: black;
+border: solid 1px white;
+cursor: pointer;
+text-align: center;
+display: inline-block;
+background-image: url(./img/whitebg.webp);
+background-position: -300px 0px;
+background-repeat: no-repeat;
+-webkit-transition: all 0.5s;
+-moz-transition: all 0.5s;
+-o-transition: all 0.5s;
+transition: all 0.5s;
 }
 
 .atalogb:hover {
-	background-color: var(--color-text-inverse);
-	color: var(--color-bg-dark);
-	transform: translateY(-2px);
+background-position: -700px 0px;
+color: white;
 }
 
 .sliderform {
-	padding: var(--spacing-lg);
-	background: rgba(255, 255, 255, 0.95);
-	border-radius: 0;
-	display: inline-block;
-	position: absolute;
-	bottom: var(--spacing-xxl);
-	left: 0px;
-	font-size: 14px;
-	color: var(--color-text);
-	font-family: var(--font-family);
-	text-align: left;
-	border: 1px solid var(--color-border);
-	box-shadow: var(--shadow-md);
-	z-index: 10001 !important;
-	isolation: isolate;
-	overflow: visible !important;
-	clip: auto !important;
-	clip-path: none !important;
-	pointer-events: auto !important;
-	max-width: 700px;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 20px;
+  display: inline-block;
+  position: absolute;
+  bottom: 80px;
+  left: 0px;
+  font-size: 40px;
+  color: white;
+  font-family: robotob;
+  text-align: left;
+  /* Liquid glass effect */
+  backdrop-filter: blur(6px) saturate(180%);
+  -webkit-backdrop-filter: blur(6px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.26);
+  box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
+  background-clip: padding-box;
+  /* Performance: Увеличен z-index чтобы форма поиска была поверх всего контента, включая меню и секцию консультации */
+  z-index: 10001 !important;
+  /* Создаем новый stacking context для формы, чтобы она была поверх секции консультации */
+  isolation: isolate;
+  /* Performance: Разрешаем overflow для выпадающих списков */
+  overflow: visible !important;
+  /* Решение 14: Гарантируем что дочерние элементы могут выходить за границы */
+  clip: auto !important;
+  clip-path: none !important;
+  /* Гарантируем что форма и все её элементы кликабельны */
+  pointer-events: auto !important;
 }
 
 /* Гарантируем кликабельность всех элементов внутри формы */
 .sliderform * {
-	pointer-events: auto !important;
-	color: var(--color-text);
+  pointer-events: auto !important;
+  color: white;
 }
 
-/* Стили для полей формы поиска */
+/* Белый цвет текста для полей "Марка", "Модель", "Год" в форме "что ищем?" */
+/* Accessibility: Ensure sufficient contrast for form inputs on dark background */
 .sliderform .meinputer {
-	color: var(--color-text) !important;
+	color: white !important;
+	/* Contrast ratio: white (#FFFFFF) on rgba(255,255,255,0.15) with dark bg = sufficient for WCAG AA */
 }
 
 .sliderform .madiv {
-	color: var(--color-text) !important;
-	font-weight: 400;
+	color: white !important;
+	/* Accessibility: White text ensures high contrast on dark slider background */
+	font-weight: 500;
 }
 
 .sliderform .btmmearrow {
-	color: var(--color-text) !important;
+	color: white !important;
 }
 
 .btmmearrow {
-	position: absolute;
-	right: 0px;
-	top: 0px;
-	background: transparent;
-	padding: var(--spacing-sm) var(--spacing-md);
-	font-size: 14px;
-	border-radius: 0;
-	cursor: pointer;
-	border-left: 1px solid var(--color-border);
-	transition: all var(--transition-base);
-	color: var(--color-text) !important;
-	box-shadow: none;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+position: absolute;
+right: 0px;
+top: 0px;
+background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.15));
+backdrop-filter: blur(4px);
+-webkit-backdrop-filter: blur(4px);
+padding: 8px 10px;
+font-size: 18px;
+border-radius: 0px 15px 15px 0px;
+cursor: pointer;
+border-left: 1px solid rgba(255, 255, 255, 0.3);
+transition: all 0.3s ease;
+color: white !important;
+box-shadow: inset -2px 0 4px rgba(0, 0, 0, 0.1);
 }
 
 .btmmearrow:hover {
-	background: var(--color-bg-secondary);
-	box-shadow: none;
-	transform: none;
-	color: var(--color-text) !important;
+background: linear-gradient(135deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.25));
+box-shadow: inset -2px 0 6px rgba(0, 0, 0, 0.15);
+transform: scale(1.05);
 }
 
 .btmmearrow:active {
-	transform: none;
-	background: var(--color-bg-secondary);
+transform: scale(0.98);
 }
 
-/* Унифицированные стили для всех кнопок dropdown в форме поиска */
+/* Performance: Унифицированные стили для всех кнопок dropdown в форме поиска */
 .sliderform .btmmearrow {
-	background: transparent;
-	border-left: 1px solid var(--color-border);
-	box-shadow: none;
-	color: var(--color-text) !important;
+background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.15));
+backdrop-filter: blur(4px);
+-webkit-backdrop-filter: blur(4px);
+border-left: 1px solid rgba(255, 255, 255, 0.3);
+box-shadow: inset -2px 0 4px rgba(0, 0, 0, 0.1);
+color: white !important;
 }
 
 .meinputer {
-	display: inline-block;
-	border-radius: 0;
-	border: 1px solid var(--color-border);
-	padding: var(--spacing-sm) var(--spacing-lg) var(--spacing-sm) var(--spacing-md);
-	font-size: 15px;
-	color: var(--color-text);
-	font-weight: 400;
-	width: 170px;
-	margin: var(--spacing-xs);
-	position: relative;
-	min-height: 48px;
-	vertical-align: top;
-	z-index: 10002;
-	overflow: visible;
-	pointer-events: auto !important;
-	background: var(--color-bg);
-	box-shadow: none;
-	transition: border-color var(--transition-base);
-	cursor: pointer;
+display: inline-block;
+border-radius: 15px;
+border: solid 2px rgba(255, 255, 255, 0.9);
+padding: 8px 30px 8px 10px;
+font-size: 18px;
+color: rgb(91, 91, 91);
+font-weight: normal;
+width: 170px;
+margin: 5px;
+position: relative;
+height: 20px;
+vertical-align: top;
+  /* Performance: Увеличен z-index чтобы поля формы были поверх всего контента, включая меню */
+  z-index: 10002;
+/* Performance: Разрешаем overflow для выпадающих списков */
+overflow: visible;
+/* Гарантируем что элементы внутри кликабельны */
+pointer-events: auto !important;
+/* Улучшенный дизайн */
+background: rgba(255, 255, 255, 0.15);
+backdrop-filter: blur(4px);
+-webkit-backdrop-filter: blur(4px);
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+transition: all 0.3s ease;
+cursor: pointer;
 }
 
 .meinputer:hover {
-	border-color: var(--color-text-secondary);
-	background: var(--color-bg);
-	box-shadow: none;
-	transform: none;
+border-color: rgba(255, 255, 255, 1);
+background: rgba(255, 255, 255, 0.22);
+box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+transform: translateY(-1px);
 }
 
 .meinputer:active {
-	transform: none;
-	box-shadow: none;
+transform: translateY(0);
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 /* Performance: Стили для поля ввода .madiv - кликабельное поле */
@@ -683,25 +652,29 @@ user-select: none;
 }
 
 .ddwnblock {
-	width: 190px;
-	padding: var(--spacing-xs) 0;
-	transform: translateY(-8px);
-	transform-origin: top;
-	background: var(--color-bg);
-	border: 1px solid var(--color-border);
-	border-radius: 0;
-	box-shadow: var(--shadow-md);
-	transition: opacity var(--transition-base), transform var(--transition-base);
-	position: absolute;
-	top: 100%;
-	left: -1px;
-	z-index: 10003;
-	display: none;
-	max-height: 400px;
-	overflow-y: auto;
-	opacity: 0;
-	pointer-events: none;
-	isolation: auto;
+width: 190px;
+padding: 10px 10px 10px 10px;
+/* unified border/background below */
+transform: translateY(-6px) scaleY(0.98);
+transform-origin: top;
+background: #fff;
+border: 1px solid #e5e5e5;
+border-radius: 10px;
+box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+transition: max-height 0.35s ease;
+/* keep single border-radius definition */
+position: absolute;
+top: 38px;
+left: -1px;
+  /* z-index выше всего, чтобы выпадающие списки были поверх всех элементов */
+  z-index: 10003;
+display: none;
+max-height: 400px;
+overflow-y: auto;
+opacity: 0;
+pointer-events: none;
+/* Не создаем новый stacking context, чтобы элемент был в том же контексте что и форма */
+isolation: auto;
 }
 
 /* Dropdown внутри .sliderform - используем absolute позиционирование */
@@ -732,17 +705,16 @@ pointer-events: auto !important;
 }
 
 .ddwnblock div {
-	cursor: pointer;
-	color: var(--color-text);
-	padding: var(--spacing-sm) var(--spacing-md);
-	border-radius: 0;
-	transition: background-color var(--transition-fast);
-	font-size: 15px;
+cursor: pointer;
+color: #434343;
+padding: 8px 5px;
+border-radius: 5px;
+transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
 .ddwnblock div:hover {
-	background-color: var(--color-bg-secondary);
-	transform: none;
+background-color: #f5f5f5;
+transform: translateX(3px);
 }
 
 .ddwnblock.open {
@@ -820,96 +792,111 @@ width: 650px;
 margin: 10px 20px 20px 5px;
 }
 
-/* Кнопка отправки формы поиска - минималистичная */
+/* Accessibility: Button with proper label for screen readers */
 .sliderform input[type="submit"],
 .sliderform button[type="submit"],
 .sliderform-submit-btn {
-	background: var(--color-accent) url(./img/sertch.webp) no-repeat;
-	background-size: 20px 20px;
-	background-position: center center;
-	width: 56px;
-	height: 56px;
-	min-width: 44px;
-	min-height: 44px;
-	border: 1px solid var(--color-accent);
-	border-radius: 0;
-	cursor: pointer;
-	box-shadow: none;
-	transition: background-color var(--transition-base), transform var(--transition-base);
-	position: relative;
-	overflow: hidden;
+background: rgba(255, 255, 255, 0.2) url(./img/sertch.webp) no-repeat;
+background-size: 50% 50%;
+background-position: center center;
+width: 60px;
+height: 60px;
+/* Accessibility: Ensure minimum touch target size of 44x44px */
+min-width: 44px;
+min-height: 44px;
+border: 2px solid rgba(255, 255, 255, 0.9);
+border-radius: 15px;
+cursor: pointer;
+backdrop-filter: blur(4px);
+-webkit-backdrop-filter: blur(4px);
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+transition: all 0.3s ease;
+position: relative;
+overflow: hidden;
 }
 
 .sliderform input[type="submit"]::before,
 .sliderform button[type="submit"]::before,
 .sliderform-submit-btn::before {
-	display: none;
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: rgba(255, 255, 255, 0.1);
+opacity: 0;
+transition: opacity 0.3s ease;
 }
 
 .sliderform input[type="submit"]:hover,
 .sliderform button[type="submit"]:hover,
 .sliderform-submit-btn:hover {
-	background-color: var(--color-accent-hover);
-	border-color: var(--color-accent-hover);
-	box-shadow: none;
-	transform: translateY(-2px);
+background-color: rgba(255, 255, 255, 0.3);
+border-color: rgba(255, 255, 255, 1);
+box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+transform: translateY(-2px) scale(1.05);
+}
+
+.sliderform input[type="submit"]:hover::before,
+.sliderform button[type="submit"]:hover::before,
+.sliderform-submit-btn:hover::before {
+opacity: 1;
 }
 
 .sliderform input[type="submit"]:active,
 .sliderform button[type="submit"]:active,
 .sliderform-submit-btn:active {
-	background-color: var(--color-accent);
-	transform: translateY(0);
-	box-shadow: none;
+background: rgba(255, 255, 255, 0.25) url(./img/sertchh.webp) no-repeat;
+background-size: 50% 50%;
+background-position: center center;
+transform: translateY(0) scale(1);
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .generalw {
-	width: 100%;
-	display: block;
-	text-align: center;
-	position: relative;
-	z-index: 1;
-	padding: var(--spacing-xl) 0;
+width: 100%;
+display: block;
+text-align: center;
+/* Правильный stacking context для секций: они должны быть под выпадающим списком */
+position: relative;
+z-index: 1;
 }
 
 .zgolovorleft {
-	text-align: left;
-	margin: var(--spacing-xl) 0 var(--spacing-lg);
-	position: relative;
+text-align: left;
+margin: 20px 0px;
+position: relative;
 }
 
 .zgolovorright {
-	text-align: right;
-	margin: var(--spacing-xl) 0 var(--spacing-lg);
-	position: relative;
+text-align: right;
+margin: 20px 0px;
+position: relative;
 }
 
 .sttitle {
-	padding: 0;
-	display: inline-block;
-	border: none;
+padding: 10px;
+display: inline-block;
+border: solid 1px #fe0000;
 }
 
 .sttitle span {
-	background-color: transparent;
-	font-family: var(--font-family-bold);
-	font-size: 48px;
-	margin-left: 0;
-	text-transform: none;
-	font-weight: 300;
-	letter-spacing: -0.02em;
-	line-height: 1.2;
-	color: var(--color-text);
+background-color: white;
+font-family: 'robotob';
+font-size: 36px;
+margin-left: -15px;
+text-transform: uppercase;
 }
 
 .forsbgf {
-	background-color: var(--color-bg-secondary);
-	background-size: cover;
-	background-position: center center;
-	border-bottom: 1px solid var(--color-border);
-	position: relative;
-	z-index: 100;
-	padding: var(--spacing-xxl) 0;
+background-image: url(./img/forbg.webp);
+background-size: cover;
+background-position: center center;
+border-bottom: solid 1px #9a9a9a;
+/* Правильный stacking context: секция должна быть ниже формы поиска и её выпадающих списков */
+position: relative;
+z-index: 100; /* Ниже формы поиска (10001) и выпадающих списков (10003) */
 }
 
 .forsliderform {
@@ -938,26 +925,26 @@ margin: 0;
 }
 
 .consult-title {
-	font-size: 32px;
-	text-transform: none;
-	color: var(--color-text);
-	font-family: var(--font-family-bold);
-	margin: 0 0 var(--spacing-xs) 0;
-	position: relative;
-	display: block;
-	letter-spacing: -0.02em;
-	font-weight: 300;
-	line-height: 1.2;
-	text-align: center;
+  font-size: 18px;
+  text-transform: none;
+  color: #fe0000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  margin: 0 0 5px 0;
+  position: relative;
+  display: block;
+  letter-spacing: 0;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
 }
 
 .consult-subtitle {
-	font-size: 15px;
-	color: var(--color-text-secondary);
-	margin: 0 0 var(--spacing-lg) 0;
-	font-weight: 400;
-	letter-spacing: 0;
-	text-align: center;
+  font-size: 12px;
+  color: #666666;
+  margin: 0 0 20px 0;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-align: center;
 }
 
 .consult-form {
@@ -996,39 +983,39 @@ margin: 0;
 }
 
 .consult-input {
-	background: var(--color-bg);
-	border: 1px solid var(--color-border) !important;
-	display: block;
-	width: 100%;
-	padding: var(--spacing-sm) var(--spacing-md);
-	font-size: 15px;
-	color: var(--color-text);
-	transition: border-color var(--transition-base), background-color var(--transition-base);
-	font-weight: 400;
-	box-sizing: border-box;
-	border-radius: 0;
-	height: auto;
-	margin: 0;
-	text-align: left;
-	font-family: var(--font-family);
-	position: relative;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  display: block;
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #333333;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  font-weight: 400;
+  box-sizing: border-box;
+  border-radius: 8px;
+  height: auto;
+  margin: 0;
+  text-align: left;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  position: relative;
 }
 
 .consult-input::placeholder {
-	color: var(--color-text-light);
-	font-size: 15px;
+  color: #999999;
+  font-size: 14px;
 }
 
 .consult-input:focus {
-	outline: 0 !important;
-	border: 1px solid var(--color-accent) !important;
-	color: var(--color-text);
-	background: var(--color-bg);
+  outline: 0 !important;
+  border: 1px solid #fe0000 !important;
+  color: #333333;
+  background: #ffffff;
 }
 
 .consult-input:hover:not(:focus) {
-	border-color: var(--color-text-secondary);
-	background: var(--color-bg);
+  border-color: rgba(0, 0, 0, 0.25);
+  background: #ffffff;
 }
 
 .consult-btn-wrapper {
@@ -1039,37 +1026,34 @@ margin: 0;
 }
 
 .consult-btn {
-	padding: var(--spacing-sm) var(--spacing-lg);
-	border-radius: 0;
-	font-size: 15px;
-	font-weight: 400;
-	margin: 0;
-	background: var(--color-accent);
-	color: var(--color-text-inverse);
-	border: 1px solid var(--color-accent);
-	cursor: pointer;
-	transition: background-color var(--transition-base), transform var(--transition-base);
-	letter-spacing: 0.02em;
-	text-transform: none;
-	box-sizing: border-box;
-	height: auto;
-	line-height: 1.4;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	font-family: var(--font-family);
-	white-space: nowrap;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  background: #fe0000;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  box-sizing: border-box;
+  height: auto;
+  line-height: 1.4;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  white-space: nowrap;
 }
 
 .consult-btn:hover {
-	background: var(--color-accent-hover);
-	border-color: var(--color-accent-hover);
-	transform: translateY(-2px);
+  background: #d50000;
 }
 
 .consult-btn:active {
-	background: var(--color-accent);
-	transform: translateY(0);
+  background: #b71c1c;
 }
 
 .consult-btn span {
@@ -1171,37 +1155,40 @@ cursor: pointer;
 }
 
 .aboutblock {
-	width: 1200px;
-	min-height: 500px;
-	margin: var(--spacing-xl) 0;
-	position: relative;
-	display: flex;
-	align-items: center;
-	gap: var(--spacing-xl);
+width: 1200px;
+height: 450px;
+/*background-image: url(./img/gandex.webp);
+background-repeat: no-repeat;
+background-size: auto 100%;
+background-position: left center;*/
+margin: 30px 0px;
+position: relative;
 }
 
 .sssskartins {
-	height: 500px;
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center center;
-	width: 50%;
-	flex: 0 0 50%;
-	position: relative;
+height: 450px;
+background-repeat: no-repeat;
+background-size: auto 100%;
+background-position: left center;
+width: 600px;
+position: absolute;
+left: 0px;
+top: 0px;
 }
 
 .abouttext {
-	padding: var(--spacing-lg);
-	background-color: transparent;
-	border-radius: 0;
-	position: relative;
-	width: 50%;
-	flex: 0 0 50%;
-	text-align: left;
-	font-size: 16px;
-	line-height: 1.8;
-	color: var(--color-text);
-}
+  padding: 20px 10px;
+  background-color: #efefef;
+  border-radius: 12px;
+  position: absolute;
+  right: 50px;
+  top: 42%;
+  margin-top: -180px;
+  width: 550px;
+  text-align: left;
+  font-size: 16px;
+  line-height: 2.0;
+  }
 
 .frayalpfhon {
 background-color: #2c2c2c;
@@ -1243,86 +1230,82 @@ max-width: 80%;
 }
 
 .actionbtms {
-	list-style: none;
-	margin: var(--spacing-xl) 0;
-	text-align: center;
-	padding: 0px;
-	display: flex;
-	justify-content: center;
-	gap: 0;
+list-style: none;
+margin: 20px 0px;
+text-align: center;
+padding: 0px;
 }
 
 .actionbtms li {
-	border: 1px solid var(--color-border);
-	padding: var(--spacing-sm) var(--spacing-lg);
-	text-transform: none;
-	font-size: 15px;
-	color: var(--color-text);
-	display: inline-block;
-	width: 140px;
-	cursor: pointer;
-	border-radius: 0;
-	background-color: var(--color-bg);
-	transition: background-color var(--transition-base), color var(--transition-base);
-	font-weight: 400;
+border: solid 1px #fe0000;
+padding: 10px 15px;
+text-transform: uppercase;
+font-size: 16px;
+color: white;
+display: inline-block;
+width: 120px;
+cursor: pointer;
 }
 
 .actionbtms li:first-child {
-	margin-right: 0;
-	border-right: none;
+margin-right: -3px;
+border-radius: 15px 0px 0px 15px;
 }
 
 .actionbtms li:last-child {
-	margin-left: 0;
+margin-left: -2px;
+border-radius: 0px 15px 15px 0px;
 }
 
 .liacactive {
-	background-color: var(--color-accent);
-	color: var(--color-text-inverse);
-	border-color: var(--color-accent);
+background-color: #fe0000;
 }
 
 .toverblock {
-	display: inline-block;
-	margin: var(--spacing-md);
-	width: 280px;
-	border-radius: 0;
-	background-color: var(--color-bg);
-	border: 1px solid var(--color-border);
-	min-height: auto;
-	vertical-align: top;
-	transition: transform var(--transition-base), box-shadow var(--transition-base);
-	box-shadow: none;
-	overflow: hidden;
+  display: inline-block;
+  margin: 15px;
+  width: 250px;
+  border-radius: 12px;
+  background-color: #efefef;
+  min-height: 540px;
+  vertical-align: top;
+  gap: 15px;
+  /* Для плавности при наведении */
+  transition: transform 0.25s cubic-bezier(.22,.61,.36,1), box-shadow 0.25s cubic-bezier(.22,.61,.36,1);
+  box-shadow: 0 2px 8px rgba(30,30,30,0.05);
 }
 
-/* Анимация при наведении: легкое смещение и мягкая тень */
+/* Анимация при наведении: блок слегка приподнимается и тень усиливается */
 .toverblock:hover {
-	transform: translateY(-8px);
-	box-shadow: var(--shadow-md);
+  transform: translateY(-10px);
+  box-shadow: 0 12px 32px rgba(30,30,30,0.11);
 }
 
 .toverimg {
-	width: 100%;
-	height: 280px;
-	border-radius: 0;
-	border: none;
-	border-bottom: 1px solid var(--color-border);
-	background-size: cover;
-	background-position: center center;
-	display: block;
-	position: relative;
+width: 248px;
+height: 248px;
+border-radius: 12px;
+border: solid 1px black;
+background-size: cover;
+border-top-left-radius: 12px;
+border-top-right-radius: 12px;
+background-position: center center;
+display: block;
+position: relative;
 }
 
-/* Анимации - только fade и translate на 8-16px, медленные и плавные */
+/* Animations: keyframes and helpers (no visual restyle) */
 @keyframes fadeUp {
-	from { opacity: 0; transform: translateY(16px); }
-	to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes fadeIn {
-	from { opacity: 0; }
-	to   { opacity: 1; }
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
 .animate-fadeUp   { opacity: 0; animation: fadeUp .5s ease forwards; }
@@ -1384,43 +1367,33 @@ max-width: 80%;
 
 
 .cationsale {
-	background-color: var(--color-accent);
-	color: var(--color-text-inverse);
-	position: absolute;
-	bottom: var(--spacing-sm);
-	right: var(--spacing-sm);
-	padding: var(--spacing-xs) var(--spacing-md);
-	font-size: 13px;
-	font-weight: 400;
-	letter-spacing: 0.02em;
+background-color: #fe0000;
+color: white;
+position: absolute;
+bottom: 10px;
+right: 0px;
+padding: 10px 20px;
+font-size: 16px;
 }
 
 .tovertitle {
-	font-size: 18px;
-	color: var(--color-text);
-	text-align: left;
-	padding: var(--spacing-md);
-	margin: 0px;
-	font-weight: 400;
-	line-height: 1.4;
-	letter-spacing: 0;
+font-size: 18px;
+color: #fe0000;
+text-align: left;
+padding: 15px 10px;
+margin: 0px;
 }
 
 .tovaropis {
-	padding: 0 var(--spacing-md) var(--spacing-md);
-	text-align: left;
-	min-height: auto;
-	font-size: 14px;
-	color: var(--color-text-secondary);
-	line-height: 1.6;
+padding: 10px;
+text-align: left;
+min-height: 80px;
 }
 
 .tovercena {
-	font-size: 20px;
-	color: var(--color-text);
-	padding: var(--spacing-md);
-	font-weight: 400;
-	letter-spacing: 0;
+font-size: 18px;
+color: #fe0000;
+padding: 15px 10px;
 }
 
 .tovercenaca {
@@ -1429,66 +1402,55 @@ color: #fe0000;
 padding: 15px 10px;
 }
 
-/* Кнопка "Купить" в карточке товара */
+/* Accessibility: Ensure minimum touch target size and proper contrast */
 .toverbuton {
-	text-transform: none;
-	color: var(--color-text-inverse);
-	font-size: 15px;
-	padding: var(--spacing-sm) var(--spacing-lg);
-	background-color: var(--color-accent);
-	display: inline-block;
-	cursor: pointer;
-	border-radius: 0;
-	border: 1px solid var(--color-accent);
-	box-shadow: none;
-	transition: background-color var(--transition-base), transform var(--transition-base);
-	text-decoration: none;
-	-webkit-tap-highlight-color: transparent;
-	outline: none;
-	min-width: 44px;
-	min-height: 44px;
-	box-sizing: border-box;
-	touch-action: manipulation;
-	font-weight: 400;
-	letter-spacing: 0.02em;
-	margin: 0 var(--spacing-md) var(--spacing-md);
-	width: calc(100% - var(--spacing-lg) * 2);
-	text-align: center;
+  text-transform: uppercase;
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  background-color: #2c2c2c;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: none;
+  transition: none;
+  text-decoration: none; /* убрать подчёркивание у ссылки */
+  -webkit-tap-highlight-color: transparent; /* убрать подсветку на iOS/Android */
+  outline: none;
+  /* Accessibility: Minimum touch target size of 44x44px */
+  min-width: 44px;
+  min-height: 44px;
+  box-sizing: border-box;
+  /* Accessibility: Ensure sufficient contrast (white on #2c2c2c = 12.63:1) */
+  touch-action: manipulation;
 }
 
-.toverbuton:hover {
-	background-color: var(--color-accent-hover);
-	border-color: var(--color-accent-hover);
-	transform: translateY(-2px);
-	text-decoration: none;
-}
+/* небольшой эффект при наведении */
+.toverbuton:hover { background-color: #2c2c2c; box-shadow: none; transform: none; text-decoration: none; }
 
-a.toverbuton:link,
-a.toverbuton:visited,
-a.toverbuton:hover,
-a.toverbuton:active {
-	color: var(--color-text-inverse);
-	text-decoration: none;
-}
+/* Гарантируем отсутствие подчёркивания и одинаковый цвет для всех состояний ссылки */
+a.toverbuton:link { color: white; text-decoration: none; }
+a.toverbuton:visited { color: white; text-decoration: none; }
+a.toverbuton:hover { color: white; text-decoration: none; }
+a.toverbuton:active { color: white; text-decoration: none; }
 
 .okazatybolsh {
-	padding: var(--spacing-sm) var(--spacing-lg);
-	color: var(--color-text);
-	border: 1px solid var(--color-border);
-	display: inline-block;
-	background-color: transparent;
-	transition: all var(--transition-base);
-	text-decoration: none;
-	font-size: 15px;
-	font-weight: 400;
-	letter-spacing: 0.02em;
+padding: 10px 20px;
+color: #fe0000;
+border: solid 1px #fe0000;
+display: inline-block;
+background-image: url(./img/redbg.webp);
+background-position: -700px 0px;
+background-repeat: no-repeat;
+-webkit-transition: all 0.5s;
+-moz-transition: all 0.5s;
+-o-transition: all 0.5s;
+transition: all 0.5s;
 }
 
 .okazatybolsh:hover {
-	background-color: var(--color-accent);
-	color: var(--color-text-inverse);
-	border-color: var(--color-accent);
-	transform: translateY(-2px);
+background-position: -300px 0px;
+color: white;
 }
 
 /* Performance: Убираем синий цвет ссылки для кнопки "Подробнее" */
@@ -1555,7 +1517,7 @@ background-repeat: no-repeat;
 }
 
 .hisflow {
-	overflow: hidden;
+overflow: hidden;
 }
 
 /* Дизайн страницы гарантий */
@@ -1882,16 +1844,33 @@ background-repeat: no-repeat;
 }
 
 .foterbag {
-	background-color: var(--color-bg-dark);
-	background-size: cover;
-	background-position: center center;
-	position: relative;
-	overflow: hidden;
-	padding: var(--spacing-xxl) 0;
+background-image: url(./img/footer.webp);
+background-size: cover;
+background-position: center center;
+position: relative;
+animation: fadeIn 1s ease-out;
+overflow: hidden;
 }
 
 .foterbag::before {
-	display: none;
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+animation: shimmerFooter 4s ease-in-out infinite;
+z-index: 0;
+}
+
+@keyframes shimmerFooter {
+0% {
+left: -100%;
+}
+50%, 100% {
+left: 100%;
+}
 }
 
 @keyframes fadeIn {
@@ -1907,16 +1886,16 @@ opacity: 1;
    CALLBACK FORM — стеклянный минимализм с анимациями
 ================================ */
 .foterinline {
-	display: block;
-	padding: var(--spacing-xl) var(--spacing-lg);
-	width: 100%;
-	max-width: 400px;
-	margin: 0 auto var(--spacing-xl);
-	box-sizing: border-box;
-	text-align: left;
-	color: var(--color-text-inverse);
-	font-family: var(--font-family);
-	position: relative;
+  display: block;
+  padding: 40px 30px 30px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 40px;
+  box-sizing: border-box;
+  text-align: left;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  position: relative;
   z-index: 1;
   animation: fadeInUp 0.4s ease-out;
   opacity: 0;
@@ -2200,18 +2179,16 @@ opacity: 1;
 }
 
 .foterzago {
-	font-size: 24px;
-	text-transform: none;
-	color: var(--color-text-inverse);
-	font-family: var(--font-family-bold);
-	margin: 0 0 var(--spacing-lg) 0;
-	padding-bottom: var(--spacing-md);
-	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-	position: relative;
-	display: block;
-	letter-spacing: -0.02em;
-	font-weight: 300;
-	line-height: 1.2;
+  font-size: 18px;
+  text-transform: none;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  margin: 0 0 28px 0;
+  padding-bottom: 12px;
+  position: relative;
+  display: block;
+  letter-spacing: 0;
+  font-weight: 600;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   animation: slideInLeft 0.5s ease-out 0.2s both;
 }
@@ -2259,43 +2236,29 @@ opacity: 1;
 }
 
 .foterinline .form-control input[type="text"] {
-	background-color: transparent;
-	border: 0;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-	padding: var(--spacing-md) 0;
-	border-radius: 0;
-	font-size: 15px;
-	width: 100%;
-	margin: 0;
-	color: var(--color-text-inverse);
-	transition: border-color var(--transition-base);
-	font-family: var(--font-family);
-}
-
-.foterinline .form-control input[type="text"]:focus {
-	outline: 0;
-	border-bottom-color: rgba(255, 255, 255, 0.5);
-}
-
-.foterinline .form-control input[type="text"]::placeholder {
-	color: rgba(255, 255, 255, 0.5);
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px #fff solid;
+  padding: 15px 0;
+  border-radius: 0;
+  font-size: 18px;
+  width: 100%;
+  margin: 0;
+  color: white;
 }
 
 .foterinline input[type="submit"],
 .foterinline input[type="button"] {
-	padding: var(--spacing-sm) var(--spacing-lg);
-	border-radius: 0;
-	font-size: 15px;
-	font-weight: 400;
-	width: 100%;
-	margin: var(--spacing-lg) 0 0 0;
-	background: var(--color-text-inverse);
-	color: var(--color-bg-dark);
-	border: 1px solid var(--color-text-inverse);
-	cursor: pointer;
-	transition: background-color var(--transition-base), transform var(--transition-base);
-	font-family: var(--font-family);
-	letter-spacing: 0.02em;
+  padding: 10px 24px;
+  border-radius: 0;
+  font-size: 13px;
+  font-weight: 500;
+  width: 100%;
+  margin: 20px 0 0 0;
+  background: #fe0000;
+  color: white;
+  border: none;
+  cursor: pointer;
   transition: background-color 0.15s ease, transform 0.15s ease;
   letter-spacing: 0.5px;
   text-transform: uppercase;
@@ -2303,15 +2266,13 @@ opacity: 1;
 }
 
 .foterinline input[type="button"]:hover {
-	background: transparent;
-	color: var(--color-text-inverse);
-	transform: translateY(-2px);
+  background: #d50000;
+  transform: translateY(-1px);
 }
 
 .foterinline input[type="button"]:active {
-	background: var(--color-text-inverse);
-	color: var(--color-bg-dark);
-	transform: translateY(0);
+  background: #b71c1c;
+  transform: translateY(0);
 }
 
 .fonetininelis {
@@ -2324,19 +2285,18 @@ opacity: 1;
 }
 
 .foterconicon {
-	padding: 0 0 0 var(--spacing-lg);
-	margin: 0 0 var(--spacing-md) 0;
-	text-align: left;
-	position: relative;
-	transition: transform var(--transition-base);
-	font-size: 15px;
-	line-height: 1.6;
-	color: rgba(255, 255, 255, 0.8);
-	font-family: var(--font-family);
+  padding: 0 0 0 28px;
+  margin: 0 0 16px 0;
+  text-align: left;
+  position: relative;
+  transition: transform 0.15s ease;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .foterconicon:hover {
-	transform: translateY(-2px);
+  transform: translateX(3px);
 }
 
 .foterconicon::before {
@@ -2351,16 +2311,16 @@ opacity: 1;
 }
 
 .foterconicon a {
-	text-decoration: none;
-	color: rgba(255, 255, 255, 0.9);
-	transition: color var(--transition-base);
-	display: inline-block;
-	font-size: 15px;
-	line-height: 1.6;
+  text-decoration: none;
+  color: white;
+  transition: color 0.15s ease;
+  display: inline-block;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .foterconicon a:hover {
-	color: var(--color-text-inverse);
+  color: #fe0000;
 }
 
 /* Иконка локации */
@@ -5231,49 +5191,45 @@ to {
 
 .footer-link,
 .footer-link-faq {
-	color: rgba(255, 255, 255, 0.8);
+	color: #ffffff;
 	text-decoration: none;
 	font-size: 14px;
-	font-weight: 400;
-	transition: color var(--transition-base);
-	padding: var(--spacing-xs) var(--spacing-sm);
-	border-radius: 0;
-	font-family: var(--font-family);
-	letter-spacing: 0;
+	font-weight: 500;
+	transition: all 0.3s ease;
+	padding: 5px 10px;
+	border-radius: 5px;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 .footer-link:hover,
 .footer-link-faq:hover {
-	color: var(--color-text-inverse);
-	background: transparent;
-	transform: none;
+	color: #fe0000;
+	background: rgba(255, 255, 255, 0.1);
+	transform: translateY(-2px);
 }
 
 .footer-link-faq {
-	font-weight: 400;
-	color: rgba(255, 255, 255, 0.8);
-	background: transparent;
+	font-weight: 600;
+	color: #fe0000;
+	background: rgba(255, 255, 255, 0.15);
 }
 
 .footer-link-faq:hover {
-	background: transparent;
-	color: var(--color-text-inverse);
+	background: rgba(255, 255, 255, 0.25);
+	color: #ff1a1a;
 }
 
 .footer-separator {
-	color: rgba(255, 255, 255, 0.3);
-	margin: 0 var(--spacing-xs);
+	color: rgba(255, 255, 255, 0.4);
+	margin: 0 5px;
 	font-size: 14px;
 }
 
 .copyr {
-	text-transform: none;
-	font-size: 14px;
-	padding: var(--spacing-lg);
-	color: rgba(255, 255, 255, 0.6);
-	font-family: var(--font-family);
-	font-weight: 400;
-	letter-spacing: 0;
+	text-transform: uppercase;
+	font-size: 16px;
+	padding: 15px;
+	color: white;
 	text-align: center;
 	font-family: robotob, sans-serif;
 }
