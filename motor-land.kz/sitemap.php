@@ -5,13 +5,19 @@ include('hyst/php.php');
 $base_url = 'https://motor-land.kz';
 
 echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">' . "\n";
 
 echo '  <url>' . "\n";
 echo '    <loc>' . $base_url . '/</loc>' . "\n";
 echo '    <lastmod>' . date('Y-m-d') . '</lastmod>' . "\n";
 echo '    <changefreq>daily</changefreq>' . "\n";
 echo '    <priority>1.0</priority>' . "\n";
+// Hreflang для главной страницы - улучшает региональную индексацию
+echo '    <xhtml:link rel="alternate" hreflang="ru" href="' . $base_url . '/" />' . "\n";
+echo '    <xhtml:link rel="alternate" hreflang="kz" href="' . $base_url . '/" />' . "\n";
+echo '    <xhtml:link rel="alternate" hreflang="by" href="' . $base_url . '/" />' . "\n";
+echo '    <xhtml:link rel="alternate" hreflang="ua" href="' . $base_url . '/" />' . "\n";
+echo '    <xhtml:link rel="alternate" hreflang="x-default" href="' . $base_url . '/" />' . "\n";
 echo '  </url>' . "\n";
 
 $pages = [

@@ -15,7 +15,7 @@
 $INTERFACE_VERSION = 0.91;
 // SEO: Убеждаемся что мета-описание определено - всегда должно быть значение
 // Проверяем не только isset и empty, но и что значение не состоит только из пробелов
-$default_description = 'Купить контрактный мотор в Алматы. Контрактные двигатели Казахстан - привозные моторы из Малайзии. Контрактный двигатель Toyota, Honda, Nissan, Mazda, Mitsubishi. Двигатель бу Малайзия Алматы с гарантией. Двигатель 1NZ, 2AZ, 3S, K24A, QR25DE. Контрактный двигатель Camry, CRV. Огромный выбор контрактных двигателей. Доставка по всему Казахстану.';
+$default_description = 'Купить контрактный мотор в Алматы. Контрактные двигатели Казахстан, Россия, Беларусь, Украина, СНГ - привозные моторы из Малайзии. Контрактный двигатель Toyota, Honda, Nissan, Mazda, Mitsubishi. Двигатель бу Малайзия Алматы с гарантией. Двигатель 1NZ, 2AZ, 3S, K24A, QR25DE. Контрактный двигатель Camry, CRV. Огромный выбор контрактных двигателей. Доставка по всему СНГ.';
 
 if (!isset($SITE_DESCRIPTION) || empty($SITE_DESCRIPTION) || trim($SITE_DESCRIPTION) === '') {
 	$SITE_DESCRIPTION = $default_description;
@@ -28,11 +28,11 @@ if (!isset($SITE_DESCRIPTION) || empty($SITE_DESCRIPTION) || trim($SITE_DESCRIPT
 }
 
 if (!isset($SITE_TITLE) || empty($SITE_TITLE) || trim($SITE_TITLE) === '') {
-	$SITE_TITLE = 'Купить Контрактный Мотор Алматы | Привозные Моторы Малайзия | Двигатель БУ | Моторленд';
+	$SITE_TITLE = 'Купить Контрактный Мотор Алматы | Привозные Моторы Малайзия | Двигатель БУ | Моторленд | Доставка по СНГ';
 } else {
 	$SITE_TITLE = trim($SITE_TITLE);
 	if ($SITE_TITLE === '') {
-		$SITE_TITLE = 'Купить Контрактный Мотор Алматы | Привозные Моторы Малайзия | Двигатель БУ | Моторленд';
+		$SITE_TITLE = 'Купить Контрактный Мотор Алматы | Привозные Моторы Малайзия | Двигатель БУ | Моторленд | Доставка по СНГ';
 	}
 }
 
@@ -60,6 +60,46 @@ if (mb_strlen($SITE_DESCRIPTION) < 50) {
 <meta name="copyright" content="Motor Land">
 <meta name="language" content="ru">
 <meta name="revisit-after" content="7 days">
+<!-- SEO: Географическая настройка для стран СНГ -->
+<meta name="geo.region" content="KZ">
+<meta name="geo.placename" content="Алматы">
+<meta name="geo.position" content="43.2220;76.8512">
+<meta name="ICBM" content="43.2220, 76.8512">
+<!-- SEO: Региональная индексация для всех стран СНГ -->
+<meta name="distribution" content="global">
+<meta name="target" content="all">
+<meta name="audience" content="all">
+<!-- SEO: Hreflang теги для стран СНГ - улучшает показ в поисковых системах -->
+<?php
+// Получаем текущий URL для hreflang
+$current_url = 'https://motor-land.kz' . $_SERVER['REQUEST_URI'];
+$current_url = preg_replace('/\?.*$/', '', $current_url); // Убираем GET параметры
+$current_url = rtrim($current_url, '/');
+if ($current_url == 'https://motor-land.kz') {
+	$current_url = 'https://motor-land.kz/';
+}
+
+// Hreflang для всех стран СНГ
+$hreflang_countries = [
+	'ru' => 'ru_RU', // Россия
+	'kz' => 'ru_KZ', // Казахстан
+	'by' => 'ru_BY', // Беларусь
+	'ua' => 'ru_UA', // Украина
+	'am' => 'ru_AM', // Армения
+	'az' => 'ru_AZ', // Азербайджан
+	'ge' => 'ru_GE', // Грузия
+	'kg' => 'ru_KG', // Кыргызстан
+	'md' => 'ru_MD', // Молдова
+	'tj' => 'ru_TJ', // Таджикистан
+	'tm' => 'ru_TM', // Туркменистан
+	'uz' => 'ru_UZ', // Узбекистан
+	'x-default' => 'ru_RU' // По умолчанию
+];
+
+foreach ($hreflang_countries as $code => $locale) {
+	echo '<link rel="alternate" hreflang="' . htmlspecialchars($code, ENT_QUOTES, 'UTF-8') . '" href="' . htmlspecialchars($current_url, ENT_QUOTES, 'UTF-8') . '">' . "\n";
+}
+?>
 <title><?=htmlspecialchars($SITE_TITLE ?? 'Купить Контрактный Мотор Алматы | Моторленд', ENT_QUOTES, 'UTF-8');?></title>
 <!-- Accessibility: Убираем maximum-scale для разрешения масштабирования (требование PageSpeed) -->
 <meta name="viewport" content="width=device-width, initial-scale=1">

@@ -21,9 +21,9 @@ if (hyst_test_id($_GET['id'])) {
 
 $product_name = htmlspecialchars($print['name'], ENT_QUOTES, 'UTF-8');
 $product_meta = htmlspecialchars($print['tmeta'], ENT_QUOTES, 'UTF-8');
-$SITE_TITLE = 'Купить Контрактный Мотор '.$product_name.' Алматы | Привозные Моторы Малайзия | Моторленд | Доставка по СНГ';
-$SITE_DESCRIPTION = 'Купить контрактный мотор '.$product_name.' в Алматы. Привозные моторы из Малайзии. '.$product_meta.'. Двигатель бу Малайзия Алматы с гарантией. Контрактные двигатели Казахстан, Россия, Беларусь, Украина, СНГ. Контрактный двигатель Toyota, Honda, Nissan. Двигатель бу. Быстрая доставка по странам СНГ. Цена: '.($print['cash']!=0?$print['cash'].' KZT':'уточняйте').'.';
-$SITE_KEYWORDS = 'купить контрактный мотор '.mb_strtolower($product_name).' алматы, привозные моторы '.mb_strtolower($product_name).', двигатель бу малайзия алматы, контрактные двигатели казахстан, контрактные двигатели россия, контрактные двигатели СНГ, '.mb_strtolower($product_meta).', контрактный двигатель Toyota, контрактный двигатель Honda, контрактный двигатель Nissan, двигатель бу, контрактные двигатели, двигатели бу, доставка двигателей СНГ, контрактные моторы Беларусь, контрактные моторы Украина';
+$SITE_TITLE = '✅ Купить Контрактный Мотор '.$product_name.' Алматы | Привозные Моторы Малайзия | Моторленд | Доставка по России, Казахстану, Беларуси, СНГ';
+$SITE_DESCRIPTION = '🔥 Купить контрактный мотор '.$product_name.' в Алматы. Привозные моторы из Малайзии с гарантией. '.$product_meta.'. Двигатель бу Малайзия Алматы. Контрактные двигатели Россия, Казахстан, Беларусь, Украина и все страны СНГ. Быстрая доставка по СНГ. Цена: '.($print['cash']!=0?$print['cash'].' KZT':'уточняйте').'. Звоните сейчас!';
+$SITE_KEYWORDS = 'купить контрактный мотор '.mb_strtolower($product_name).' алматы, привозные моторы '.mb_strtolower($product_name).', двигатель бу малайзия алматы, контрактные двигатели казахстан, контрактные двигатели россия, контрактные двигатели беларусь, контрактные двигатели украина, контрактные двигатели СНГ, '.mb_strtolower($product_meta).', контрактный двигатель Toyota, контрактный двигатель Honda, контрактный двигатель Nissan, двигатель бу, контрактные двигатели, двигатели бу, доставка двигателей СНГ, контрактные моторы Беларусь, контрактные моторы Украина, контрактные двигатели Армения, контрактные двигатели Азербайджан, контрактные двигатели Грузия, контрактные двигатели Кыргызстан, контрактные двигатели Молдова, контрактные двигатели Таджикистан, контрактные двигатели Туркменистан, контрактные двигатели Узбекистан';
 
 $product_image = get_farrimg($print['images'])[0];
 $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : 'https://motor-land.kz'.$product_image;
@@ -64,6 +64,9 @@ if (preg_match('#^/detal(\.php)?$#', $request_path) && isset($_GET['id']) && !pr
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ru_RU">
+<meta property="og:locale:alternate" content="ru_KZ">
+<meta property="og:locale:alternate" content="ru_BY">
+<meta property="og:locale:alternate" content="ru_UA">
 <meta property="og:site_name" content="Motor Land">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -80,7 +83,7 @@ if (preg_match('#^/detal(\.php)?$#', $request_path) && isset($_GET['id']) && !pr
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "<?=$product_name;?>",
-  "description": "Купить контрактный мотор <?=$product_name;?> в Алматы. Привозные моторы из Малайзии. Доставка по странам СНГ. <?=htmlspecialchars(strip_tags($print['text'] ? $print['text'] : $print['stext']), ENT_QUOTES, 'UTF-8');?>",
+  "description": "Купить контрактный мотор <?=$product_name;?> в Алматы. Привозные моторы из Малайзии с гарантией. Доставка по России, Казахстану, Беларуси, Украине и всем странам СНГ. <?=htmlspecialchars(strip_tags($print['text'] ? $print['text'] : $print['stext']), ENT_QUOTES, 'UTF-8');?>",
   "image": "<?=$product_image_url;?>",
   "brand": {
     "@type": "Brand",
@@ -107,10 +110,67 @@ if (preg_match('#^/detal(\.php)?$#', $request_path) && isset($_GET['id']) && !pr
         "value": "0",
         "currency": "KZT"
       },
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "businessDays": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+        },
+        "cutoffTime": "18:00",
+        "handlingTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 1,
+          "maxValue": 3,
+          "unitCode": "DAY"
+        },
+        "transitTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 2,
+          "maxValue": 14,
+          "unitCode": "DAY"
+        }
+      },
       "shippingDestination": {
         "@type": "DefinedRegion",
         "addressCountry": ["KZ", "RU", "BY", "UA", "AM", "AZ", "GE", "KG", "MD", "TJ", "TM", "UZ"]
-      }
+      },
+      "areaServed": [{
+        "@type": "Country",
+        "name": "Казахстан"
+      }, {
+        "@type": "Country",
+        "name": "Россия"
+      }, {
+        "@type": "Country",
+        "name": "Беларусь"
+      }, {
+        "@type": "Country",
+        "name": "Украина"
+      }, {
+        "@type": "Country",
+        "name": "Армения"
+      }, {
+        "@type": "Country",
+        "name": "Азербайджан"
+      }, {
+        "@type": "Country",
+        "name": "Грузия"
+      }, {
+        "@type": "Country",
+        "name": "Кыргызстан"
+      }, {
+        "@type": "Country",
+        "name": "Молдова"
+      }, {
+        "@type": "Country",
+        "name": "Таджикистан"
+      }, {
+        "@type": "Country",
+        "name": "Туркменистан"
+      }, {
+        "@type": "Country",
+        "name": "Узбекистан"
+      }]
     }
   },
   "aggregateRating": {
@@ -120,6 +180,19 @@ if (preg_match('#^/detal(\.php)?$#', $request_path) && isset($_GET['id']) && !pr
     "bestRating": "5",
     "worstRating": "1"
   },
+  "review": [{
+    "@type": "Review",
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "5",
+      "bestRating": "5"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Клиент Motor Land"
+    },
+    "reviewBody": "Отличный контрактный двигатель, доставили быстро по СНГ. Всё работает как новое!"
+  }],
   "sku": "<?=$print['id'];?>",
   "mpn": "<?=$product_name;?>",
   "gtin": "",

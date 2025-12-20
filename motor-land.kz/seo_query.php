@@ -81,9 +81,9 @@ try {
 	exit;
 }
 
-$SITE_TITLE = !empty($query['meta_title']) ? htmlspecialchars($query['meta_title'], ENT_QUOTES, 'UTF-8') : (!empty($query['query_text']) ? htmlspecialchars($query['query_text'], ENT_QUOTES, 'UTF-8') . ' | Motor Land | Доставка по СНГ' : 'Запрос | Motor Land | Доставка по СНГ');
-$SITE_DESCRIPTION = !empty($query['meta_description']) ? htmlspecialchars($query['meta_description'], ENT_QUOTES, 'UTF-8') : 'Контрактные двигатели в Алматы. Доставка по Казахстану и странам СНГ.';
-$SITE_KEYWORDS = !empty($query['meta_keywords']) ? htmlspecialchars($query['meta_keywords'], ENT_QUOTES, 'UTF-8') : 'контрактные двигатели, двигатель бу, контрактные двигатели СНГ, доставка двигателей СНГ';
+$SITE_TITLE = !empty($query['meta_title']) ? htmlspecialchars($query['meta_title'], ENT_QUOTES, 'UTF-8') : (!empty($query['query_text']) ? '✅ ' . htmlspecialchars($query['query_text'], ENT_QUOTES, 'UTF-8') . ' | Motor Land | Доставка по России, Казахстану, Беларуси, СНГ' : 'Запрос | Motor Land | Доставка по СНГ');
+$SITE_DESCRIPTION = !empty($query['meta_description']) ? htmlspecialchars($query['meta_description'], ENT_QUOTES, 'UTF-8') : 'Контрактные двигатели в Алматы. Доставка по России, Казахстану, Беларуси, Украине и всем странам СНГ. Привозные моторы из Малайзии с гарантией.';
+$SITE_KEYWORDS = !empty($query['meta_keywords']) ? htmlspecialchars($query['meta_keywords'], ENT_QUOTES, 'UTF-8') . ', контрактные двигатели Россия, контрактные двигатели Беларусь, контрактные двигатели Украина, контрактные двигатели СНГ, доставка двигателей СНГ' : 'контрактные двигатели, двигатель бу, контрактные двигатели СНГ, контрактные двигатели Россия, контрактные двигатели Беларусь, контрактные двигатели Украина, доставка двигателей СНГ';
 ?>
 <!doctype html>
 <html lang="ru">
@@ -108,6 +108,9 @@ include("hyst/head.php");
 <meta property="og:image:height" content="630">
 <meta property="og:site_name" content="Motor Land">
 <meta property="og:locale" content="ru_RU">
+<meta property="og:locale:alternate" content="ru_KZ">
+<meta property="og:locale:alternate" content="ru_BY">
+<meta property="og:locale:alternate" content="ru_UA">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="<?=$SITE_TITLE;?>">
 <meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">

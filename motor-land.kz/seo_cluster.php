@@ -34,9 +34,9 @@ if (count($queries) == 0) {
 }
 
 // SEO: Оптимизированные мета-теги для кластера
-$SITE_TITLE = 'Купить ' . htmlspecialchars($cluster_name, ENT_QUOTES, 'UTF-8') . ' в Алматы | Контрактные двигатели | Motor Land | Доставка по СНГ';
-$SITE_DESCRIPTION = 'Каталог контрактных двигателей ' . htmlspecialchars($cluster_name, ENT_QUOTES, 'UTF-8') . ' в Алматы. Привозные моторы из Малайзии с гарантией. Большой выбор двигателей. Быстрая доставка по Казахстану и странам СНГ (Россия, Беларусь, Украина и др.).';
-$SITE_KEYWORDS = mb_strtolower($cluster_name) . ', купить контрактный двигатель алматы, привозные моторы, двигатель бу малайзия, контрактные двигатели СНГ, контрактные двигатели Россия, контрактные двигатели Беларусь, доставка двигателей СНГ';
+$SITE_TITLE = '✅ Купить ' . htmlspecialchars($cluster_name, ENT_QUOTES, 'UTF-8') . ' в Алматы | Контрактные двигатели | Motor Land | Доставка по России, Казахстану, Беларуси, СНГ';
+$SITE_DESCRIPTION = '🔥 Каталог контрактных двигателей ' . htmlspecialchars($cluster_name, ENT_QUOTES, 'UTF-8') . ' в Алматы. Привозные моторы из Малайзии с гарантией. Большой выбор двигателей. Быстрая доставка по России, Казахстану, Беларуси, Украине и всем странам СНГ. Звоните сейчас!';
+$SITE_KEYWORDS = mb_strtolower($cluster_name) . ', купить контрактный двигатель алматы, привозные моторы, двигатель бу малайзия, контрактные двигатели СНГ, контрактные двигатели Россия, контрактные двигатели Беларусь, контрактные двигатели Украина, контрактные двигатели Армения, контрактные двигатели Азербайджан, контрактные двигатели Грузия, контрактные двигатели Кыргызстан, контрактные двигатели Молдова, контрактные двигатели Таджикистан, контрактные двигатели Туркменистан, контрактные двигатели Узбекистан, доставка двигателей СНГ';
 ?>
 <!doctype html>
 <html lang="ru">
@@ -53,6 +53,9 @@ $SITE_KEYWORDS = mb_strtolower($cluster_name) . ', купить контракт
 <meta property="og:image:height" content="630">
 <meta property="og:site_name" content="Motor Land">
 <meta property="og:locale" content="ru_RU">
+<meta property="og:locale:alternate" content="ru_KZ">
+<meta property="og:locale:alternate" content="ru_BY">
+<meta property="og:locale:alternate" content="ru_UA">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="<?=$SITE_TITLE;?>">
 <meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">

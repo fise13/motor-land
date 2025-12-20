@@ -1,9 +1,9 @@
 <?php
 include('hyst/php.php');
 
-$SITE_TITLE = 'Купить Контрактный Мотор Алматы | Привозные Моторы Малайзия | Двигатель БУ | Моторленд | Доставка по СНГ';
-$SITE_DESCRIPTION = 'Купить контрактный мотор в Алматы. Контрактные двигатели Казахстан, Россия, Беларусь, Украина, СНГ - привозные моторы из Малайзии. Контрактный двигатель Toyota, Honda, Nissan, Mazda, Mitsubishi. Двигатель бу Малайзия Алматы с гарантией. Двигатель 1NZ, 2AZ, 3S, K24A, QR25DE. Контрактный двигатель Camry, CRV. Огромный выбор контрактных двигателей. Доставка по всему Казахстану и странам СНГ.';
-$SITE_KEYWORDS = 'купить контрактный мотор Алматы, контрактные двигатели Казахстан, контрактные двигатели Россия, контрактные двигатели СНГ, привозные моторы Алматы, двигатель бу Малайзия Алматы, контрактные двигатели алматы, купить мотор б/у, привозные двигатели, контрактный мотор малайзия, контрактный двигатель Toyota, контрактный двигатель Honda, контрактный двигатель Nissan, контрактный двигатель Mazda, контрактный двигатель Mitsubishi, двигатель бу, контрактные двигатели, двигатели бу, двигатель 1NZ, двигатель 2AZ, двигатель 3S, двигатель K24A, двигатель QR25DE, контрактный двигатель Camry, контрактный двигатель CRV, контрактный двигатель Corolla, контрактный двигатель Almera, контрактный двигатель Accord, доставка двигателей СНГ, контрактные моторы Беларусь, контрактные моторы Украина';
+$SITE_TITLE = '🔥 Контрактные Двигатели СНГ | Купить Мотор Алматы | Доставка по России, Казахстану, Беларуси | Motor Land';
+$SITE_DESCRIPTION = '✅ Контрактные двигатели с гарантией! Доставка по России, Казахстану, Беларуси, Украине и всему СНГ. Привозные моторы из Малайзии. Toyota, Honda, Nissan, Mazda, Mitsubishi. Большой выбор, быстрая доставка, официальная гарантия. Звоните сейчас!';
+$SITE_KEYWORDS = 'купить контрактный мотор Алматы, контрактные двигатели Казахстан, контрактные двигатели Россия, контрактные двигатели Беларусь, контрактные двигатели Украина, контрактные двигатели СНГ, привозные моторы Алматы, двигатель бу Малайзия Алматы, контрактные двигатели алматы, купить мотор б/у, привозные двигатели, контрактный мотор малайзия, контрактный двигатель Toyota, контрактный двигатель Honda, контрактный двигатель Nissan, контрактный двигатель Mazda, контрактный двигатель Mitsubishi, двигатель бу, контрактные двигатели, двигатели бу, двигатель 1NZ, двигатель 2AZ, двигатель 3S, двигатель K24A, двигатель QR25DE, контрактный двигатель Camry, контрактный двигатель CRV, контрактный двигатель Corolla, контрактный двигатель Almera, контрактный двигатель Accord, доставка двигателей СНГ, контрактные моторы Беларусь, контрактные моторы Украина, контрактные двигатели Армения, контрактные двигатели Азербайджан, контрактные двигатели Грузия, контрактные двигатели Кыргызстан, контрактные двигатели Молдова, контрактные двигатели Таджикистан, контрактные двигатели Туркменистан, контрактные двигатели Узбекистан';
 
 $mark = false;
 $mode = false;
@@ -70,6 +70,17 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ru_RU">
+<meta property="og:locale:alternate" content="ru_KZ">
+<meta property="og:locale:alternate" content="ru_BY">
+<meta property="og:locale:alternate" content="ru_UA">
+<meta property="og:locale:alternate" content="ru_AM">
+<meta property="og:locale:alternate" content="ru_AZ">
+<meta property="og:locale:alternate" content="ru_GE">
+<meta property="og:locale:alternate" content="ru_KG">
+<meta property="og:locale:alternate" content="ru_MD">
+<meta property="og:locale:alternate" content="ru_TJ">
+<meta property="og:locale:alternate" content="ru_TM">
+<meta property="og:locale:alternate" content="ru_UZ">
 <meta property="og:site_name" content="Motor Land">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -106,13 +117,25 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
     "telephone": "+7-777-144-5445",
     "contactType": "Sales",
     "areaServed": ["KZ", "RU", "BY", "UA", "AM", "AZ", "GE", "KG", "MD", "TJ", "TM", "UZ"],
-    "availableLanguage": ["Russian", "Kazakh"]
+    "availableLanguage": ["Russian", "Kazakh"],
+    "hoursAvailable": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "09:00",
+      "closes": "20:00"
+    }
   }, {
     "@type": "ContactPoint",
     "telephone": "+7-701-144-5445",
     "contactType": "Sales",
     "areaServed": ["KZ", "RU", "BY", "UA", "AM", "AZ", "GE", "KG", "MD", "TJ", "TM", "UZ"],
-    "availableLanguage": ["Russian", "Kazakh"]
+    "availableLanguage": ["Russian", "Kazakh"],
+    "hoursAvailable": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "09:00",
+      "closes": "20:00"
+    }
   }],
   "sameAs": [
     "https://2gis.kz/almaty/geo/70000001083496996",
@@ -121,8 +144,62 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.8",
-    "reviewCount": "150"
-  }
+    "reviewCount": "150",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "priceRange": "$$",
+  "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+  "currenciesAccepted": "KZT, RUB, USD, EUR"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "Доставляете ли вы контрактные двигатели в Россию, Беларусь и другие страны СНГ?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Да, мы доставляем контрактные двигатели во все страны СНГ: Россия, Беларусь, Украина, Армения, Азербайджан, Грузия, Кыргызстан, Молдова, Таджикистан, Туркменистан, Узбекистан. Доставка осуществляется надежными транспортными компаниями с полной страховкой груза."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Какая гарантия на контрактные двигатели?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "На все контрактные двигатели предоставляется официальная гарантия. Срок гарантии зависит от модели двигателя и условий покупки. Подробности гарантии уточняйте у наших менеджеров."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Откуда привозные моторы?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Мы привозим контрактные двигатели из Малайзии. Все моторы проходят тщательную проверку перед отправкой. Мы работаем только с проверенными поставщиками и гарантируем качество."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Сколько стоит доставка контрактного двигателя в Россию или Беларусь?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Стоимость доставки зависит от веса и габаритов двигателя, а также от региона доставки. Мы рассчитаем точную стоимость доставки после выбора конкретного двигателя. Доставка по Казахстану и странам СНГ осуществляется надежными транспортными компаниями."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Как быстро можно получить контрактный двигатель?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Сроки доставки зависят от наличия двигателя на складе и региона доставки. Обычно доставка по Казахстану занимает 2-5 дней, в страны СНГ - 5-14 дней. При наличии на складе можем отправить в день заказа."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Какие марки контрактных двигателей у вас есть?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "У нас большой выбор контрактных двигателей для автомобилей Toyota, Honda, Nissan, Mazda, Mitsubishi, Hyundai, Kia и других популярных марок. В каталоге представлены двигатели различных моделей и годов выпуска."
+    }
+  }]
 }
 </script>
 </head>
