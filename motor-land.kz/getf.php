@@ -15,7 +15,7 @@ if (hyst_test_id($_POST['tex']) && hyst_test_id($_POST['typ'])) {
 		$sql = $stmt->get_result();
 		if ($sql->num_rows != 0) {
 			while($get = $sql->fetch_array()):
-				$res['report'] .= "<div data-id='" . htmlspecialchars($get['id'], ENT_QUOTES, 'UTF-8') . "'>" . htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8') . "</div>";
+				$res['report'] .= "<div class='dropdown-item px-4 py-2 hover:bg-primary-100 cursor-pointer' data-value='" . htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8') . "' data-id='" . htmlspecialchars($get['id'], ENT_QUOTES, 'UTF-8') . "'>" . htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8') . "</div>";
 			endwhile;
 		}
 		$stmt->close();
@@ -35,7 +35,7 @@ if (hyst_test_id($_POST['tex']) && hyst_test_id($_POST['typ'])) {
 		if ($sql->num_rows != 0) {
 			while($get = $sql->fetch_array()):
 				if (array_search($get['name'], $exist) === false) {
-					$res['report'] .= "<div data-id='" . htmlspecialchars($get['id'], ENT_QUOTES, 'UTF-8') . "'>" . htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8') . "</div>";
+					$res['report'] .= "<div class='dropdown-item px-4 py-2 hover:bg-primary-100 cursor-pointer' data-value='" . htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8') . "' data-id='" . htmlspecialchars($get['id'], ENT_QUOTES, 'UTF-8') . "'>" . htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8') . "</div>";
 					array_push($exist, $get['name']);
 				}
 			endwhile;
