@@ -44,419 +44,492 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 	}
 	$stmt->close();
 }
-
-ob_start();
 ?>
-  <!-- Hero Section -->
-  <section class="relative min-h-[600px] lg:min-h-[700px] flex items-center justify-center overflow-hidden">
-    <?php
-    $slider = get_slider('index_slider');
-    $slide_index = 0;
-    $first_slide = null;
-    while($slide = $slider->fetch_array()):
-      if ($slide_index == 0) {
-        $first_slide = $slide;
-      }
-      $slide_index++;
-    endwhile;
-    
-    if ($first_slide):
-      $slide_img = get_optimized_image($first_slide['image']);
-    ?>
-    <div class="absolute inset-0 z-0">
-      <picture>
-        <source srcset="<?=$slide_img['webp'] ?: $slide_img['original'];?>" type="image/webp">
-        <img src="<?=$slide_img['webp'] ?: $slide_img['original'];?>" 
-             alt="Контрактные двигатели Motor Land" 
-             class="w-full h-full object-cover"
-             loading="eager"
-             fetchpriority="high"
-             width="1920" 
-             height="700">
-      </picture>
-      <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70"></div>
-    </div>
-    <?php endif; ?>
-
-    <div class="container-custom relative z-10">
-      <div class="max-w-3xl">
-        <h1 class="text-4xl lg:text-6xl font-bold text-white mb-6 reveal">
-          <?=get_simple_texts('index_slider_title') ?: 'Контрактные двигатели с гарантией';?>
-        </h1>
-        
-        <div class="flex flex-col sm:flex-row gap-4 mb-12 reveal">
-          <a href="tel:<?=get_simple_texts('index_slider_phone') ?: '+77771445445';?>" 
-             class="btn btn-primary text-lg px-8 py-4"
-             onclick="if(typeof gtag==='function'){gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});}">
-            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-            </svg>
-            <?=get_simple_texts('index_slider_phone') ?: '+7 777 144 5445';?>
-          </a>
-          <a href="/catalog.php" class="btn btn-outline text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-primary-900">
-            Перейти в каталог
-          </a>
-        </div>
-
-        <!-- Search Form -->
-        <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 lg:p-8 reveal">
-          <form method="get" action="catalog.php" class="space-y-4">
-            <div class="text-white text-lg font-medium mb-4">Найти двигатель</div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <!-- Марка -->
-              <div class="dropdown relative">
-                <button type="button" class="dropdown-trigger w-full form-input bg-white/20 border-white/30 text-white placeholder-white/70 focus:border-white relative pr-10">
-                  <span class="selected-value"><?=isset($_GET['mk']) && $_GET['mk'] != '' ? htmlspecialchars($_GET['mk'], ENT_QUOTES, 'UTF-8') : 'Марка';?></span>
-                  <input type="hidden" name="mk" value="<?=isset($_GET['mk']) && $_GET['mk'] != '' ? htmlspecialchars($_GET['mk'], ENT_QUOTES, 'UTF-8') : '';?>">
-                  <svg class="w-5 h-5 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                <div class="dropdown-menu absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-strong max-h-60 overflow-y-auto z-50 hidden text-primary-900">
-                  <?php
-                  $parent_id = 'noting';
-                  $stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_category WHERE idp = ? ORDER BY id ASC");
-                  $stmt->bind_param("s", $parent_id);
-                  $stmt->execute();
-                  $tmp = $stmt->get_result();
-                  if ($tmp->num_rows != 0) {
-                    while($get = $tmp->fetch_array()):
-                  ?>
-                  <div class="dropdown-item px-4 py-2 hover:bg-primary-100 cursor-pointer" data-value="<?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>" data-id="<?=$get['id'];?>">
-                    <?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>
-                  </div>
-                  <?php
-                    endwhile;
-                  }
-                  $stmt->close();
-                  ?>
-                </div>
-              </div>
-
-              <!-- Модель -->
-              <div class="dropdown relative">
-                <button type="button" class="dropdown-trigger w-full form-input bg-white/20 border-white/30 text-white placeholder-white/70 focus:border-white relative pr-10" <?=$mark ? '' : 'disabled';?>>
-                  <span class="selected-value"><?=isset($_GET['ml']) && $_GET['ml'] != '' ? htmlspecialchars($_GET['ml'], ENT_QUOTES, 'UTF-8') : 'Модель';?></span>
-                  <input type="hidden" name="ml" value="<?=isset($_GET['ml']) && $_GET['ml'] != '' ? htmlspecialchars($_GET['ml'], ENT_QUOTES, 'UTF-8') : '';?>">
-                  <svg class="w-5 h-5 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                <div class="dropdown-menu absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-strong max-h-60 overflow-y-auto z-50 hidden text-primary-900" id="modellist">
-                  <?php
-                  if ($mark) {
-                    $stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_category WHERE idp = ? ORDER BY id ASC");
-                    $stmt->bind_param("i", $mark);
-                    $stmt->execute();
-                    $tmp = $stmt->get_result();
-                    if ($tmp->num_rows != 0) {
-                      while($get = $tmp->fetch_array()):
-                  ?>
-                  <div class="dropdown-item px-4 py-2 hover:bg-primary-100 cursor-pointer" data-value="<?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>" data-id="<?=$get['id'];?>">
-                    <?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>
-                  </div>
-                  <?php
-                      endwhile;
-                    }
-                    $stmt->close();
-                  }
-                  ?>
-                </div>
-              </div>
-
-              <!-- Год -->
-              <div class="dropdown relative">
-                <button type="button" class="dropdown-trigger w-full form-input bg-white/20 border-white/30 text-white placeholder-white/70 focus:border-white relative pr-10" <?=$mode ? '' : 'disabled';?>>
-                  <span class="selected-value"><?=isset($_GET['yr']) && $_GET['yr'] != '' ? htmlspecialchars($_GET['yr'], ENT_QUOTES, 'UTF-8') : 'Год';?></span>
-                  <input type="hidden" name="yr" value="<?=isset($_GET['yr']) && $_GET['yr'] != '' ? htmlspecialchars($_GET['yr'], ENT_QUOTES, 'UTF-8') : '';?>">
-                  <svg class="w-5 h-5 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                <div class="dropdown-menu absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-strong max-h-60 overflow-y-auto z-50 hidden text-primary-900" id="yearlist">
-                  <?php
-                  if ($mode) {
-                    $mode_pattern = '[' . $mode . ']';
-                    $stmt = $_DB_CONECT->prepare("SELECT internet_magazin_atributs_options.*
-                    FROM internet_magazin_atributs_options 
-                    INNER JOIN internet_magazin_tovari ON LOCATE(CONCAT('[', internet_magazin_atributs_options.id, ']'), internet_magazin_tovari.atributs_opt) > 0 
-                    AND LOCATE(?, internet_magazin_tovari.podegory) > 0
-                    WHERE internet_magazin_atributs_options.idp = 1");
-                    $stmt->bind_param("s", $mode_pattern);
-                    $stmt->execute();
-                    $sql = $stmt->get_result();
-                    if ($sql->num_rows != 0) {
-                      while($get = $sql->fetch_array()):
-                  ?>
-                  <div class="dropdown-item px-4 py-2 hover:bg-primary-100 cursor-pointer" data-value="<?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>" data-id="<?=$get['id'];?>">
-                    <?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>
-                  </div>
-                  <?php
-                      endwhile;
-                    }
-                    $stmt->close();
-                  }
-                  ?>
-                </div>
-              </div>
-            </div>
-
-            <button type="submit" class="btn btn-primary w-full">
-              Найти двигатель
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Consultation Section -->
-  <section class="section bg-gradient-to-b from-primary-50 to-white">
-    <div class="container-custom">
-      <div class="max-w-2xl mx-auto text-center reveal">
-        <h2 class="section-title">Хотите получить бесплатную консультацию?</h2>
-        <p class="section-subtitle">Заполните форму и наш специалист свяжется с вами</p>
-        
-        <form method="post" class="consult-form bg-white rounded-2xl shadow-medium p-8 lg:p-12 space-y-6">
-          <input type="text" name="website" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;z-index:-1;" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <input type="hidden" name="form_time" value="<?=time();?>" aria-hidden="true">
-          
-          <div>
-            <label for="consult-name" class="form-label">Имя *</label>
-            <input type="text" name="name" id="consult-name" class="form-input" placeholder="Ваше имя" required maxlength="100">
-          </div>
-          
-          <div>
-            <label for="consult-phone" class="form-label">Телефон *</label>
-            <input type="tel" name="phon" id="consult-phone" class="form-input" placeholder="+7 (___) ___-__-__" required maxlength="20">
-          </div>
-          
-          <input type="hidden" name="send_one" value="send">
-          <button type="submit" class="btn btn-primary w-full text-lg py-4">
-            Отправить
-          </button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section class="section">
-    <div class="container-custom">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-        <div class="reveal">
-          <?php 
-          $about_img = get_optimized_image(get_simple_images('index_about_image')[0]);
-          ?>
-          <div class="relative rounded-2xl overflow-hidden shadow-strong aspect-[4/3]">
-            <img src="<?=$about_img['webp'] ?: $about_img['original'];?>" 
-                 alt="О компании Motor Land" 
-                 class="w-full h-full object-cover"
-                 loading="lazy">
-          </div>
-        </div>
-        
-        <div class="reveal">
-          <h2 class="section-title">О нас</h2>
-          <div class="prose prose-lg max-w-none text-primary-700 leading-relaxed">
-            <?=get_customtexts('index_about_text');?>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Catalog Section -->
-  <section class="section bg-primary-900 text-white">
-    <div class="container-custom">
-      <div class="text-center mb-12 reveal">
-        <h2 class="text-4xl lg:text-5xl font-bold mb-4">Каталог двигателей</h2>
-        <p class="text-xl text-primary-300">Большой выбор контрактных двигателей</p>
-      </div>
-
-      <!-- Tabs -->
-      <div class="flex justify-center mb-12 reveal">
-        <div class="inline-flex bg-primary-800 rounded-lg p-1">
-          <button class="catalog-tab active px-6 py-3 rounded-lg transition-all duration-200 bg-accent text-white" data-tab="catalog">
-            Каталог
-          </button>
-          <button class="catalog-tab px-6 py-3 rounded-lg transition-all duration-200" data-tab="sales">
-            Акции
-          </button>
-        </div>
-      </div>
-
-      <!-- Products Grid -->
-      <div id="catalog-content" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-        <?php
-        $limit = 4;
-        $stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_tovari ORDER BY prio ASC LIMIT ?");
-        $stmt->bind_param("i", $limit);
-        $stmt->execute();
-        $tmp = $stmt->get_result();
-        while($get = $tmp->fetch_array()):
-        ?>
-        <article class="card card-hover reveal bg-white" itemscope itemtype="https://schema.org/Product">
-          <a href="/detal.php?id=<?=$get['id'];?>" class="block">
-            <?php 
-            $product_img = get_optimized_image(get_farrimg($get['images'])[0]);
-            ?>
-            <div class="relative aspect-square overflow-hidden bg-primary-100">
-              <img src="<?=$product_img['webp'] ?: $product_img['original'];?>" 
-                   alt="<?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>"
-                   class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                   loading="lazy"
-                   itemprop="image">
-              <?php if ($get['sale'] != 'noting') { ?>
-              <div class="absolute top-4 right-4 bg-accent text-white px-3 py-1 rounded-full text-sm font-bold">
-                <?=$get['sale'];?>
-              </div>
-              <?php } ?>
-            </div>
-          </a>
-          
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-primary-900 mb-2" itemprop="name">
-              <?=$get['name'];?>
-            </h3>
-            <p class="text-primary-600 text-sm mb-4 line-clamp-2" itemprop="description">
-              <?=$get['stext'];?>
-            </p>
-            <div class="flex items-center justify-between mb-4">
-              <div class="text-2xl font-bold text-primary-900" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-                <?php if ($get['cash'] != 0 && $get['cash'] != '0') { ?>
-                <span itemprop="price"><?=$get['cash'];?></span>
-                <span itemprop="priceCurrency" content="KZT"> KZT</span>
-                <?php } else { ?>
-                <span>Цена по запросу</span>
-                <?php } ?>
-              </div>
-            </div>
-            <a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" 
-               class="btn btn-primary w-full"
-               onclick="if(typeof gtag==='function'){gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});}">
-              Купить
-            </a>
-          </div>
-        </article>
-        <?php
-        endwhile;
-        if (isset($stmt)) {
-          $stmt->close();
-        }
-        ?>
-      </div>
-
-      <!-- Sales Products (hidden by default) -->
-      <div id="sales-content" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 hidden">
-        <?php
-        $sale_value = 'noting';
-        $limit = 4;
-        $stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_tovari WHERE sale != ? ORDER BY prio ASC LIMIT ?");
-        $stmt->bind_param("si", $sale_value, $limit);
-        $stmt->execute();
-        $tmp = $stmt->get_result();
-        while($get = $tmp->fetch_array()):
-        ?>
-        <article class="card card-hover reveal bg-white" itemscope itemtype="https://schema.org/Product">
-          <a href="/detal.php?id=<?=$get['id'];?>" class="block">
-            <?php 
-            $product_img = get_optimized_image(get_farrimg($get['images'])[0]);
-            ?>
-            <div class="relative aspect-square overflow-hidden bg-primary-100">
-              <img src="<?=$product_img['webp'] ?: $product_img['original'];?>" 
-                   alt="<?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>"
-                   class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                   loading="lazy"
-                   itemprop="image">
-              <?php if ($get['sale'] != 'noting') { ?>
-              <div class="absolute top-4 right-4 bg-accent text-white px-3 py-1 rounded-full text-sm font-bold">
-                <?=$get['sale'];?>
-              </div>
-              <?php } ?>
-            </div>
-          </a>
-          
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-primary-900 mb-2" itemprop="name">
-              <?=$get['name'];?>
-            </h3>
-            <p class="text-primary-600 text-sm mb-4 line-clamp-2" itemprop="description">
-              <?=$get['stext'];?>
-            </p>
-            <div class="flex items-center justify-between mb-4">
-              <div class="text-2xl font-bold text-primary-900" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-                <?php if ($get['cash'] != 0 && $get['cash'] != '0') { ?>
-                <span itemprop="price"><?=$get['cash'];?></span>
-                <span itemprop="priceCurrency" content="KZT"> KZT</span>
-                <?php } else { ?>
-                <span>Цена по запросу</span>
-                <?php } ?>
-              </div>
-            </div>
-            <a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" 
-               class="btn btn-primary w-full"
-               onclick="if(typeof gtag==='function'){gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});}">
-              Купить
-            </a>
-          </div>
-        </article>
-        <?php
-        endwhile;
-        if (isset($stmt)) {
-          $stmt->close();
-        }
-        ?>
-      </div>
-
-      <div class="text-center mt-12 reveal">
-        <a href="/catalog.php" class="btn btn-outline border-white text-white hover:bg-white hover:text-primary-900">
-          Смотреть все товары
-        </a>
-      </div>
-    </div>
-  </section>
-
+<!doctype html>
+<html lang="ru">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MCG7EP4276"></script>
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const tabs = document.querySelectorAll('.catalog-tab');
-  const catalogContent = document.getElementById('catalog-content');
-  const salesContent = document.getElementById('sales-content');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const targetTab = tab.dataset.tab;
-      
-      tabs.forEach(t => t.classList.remove('active', 'bg-accent', 'text-white'));
-      tab.classList.add('active', 'bg-accent', 'text-white');
-      
-      if (targetTab === 'catalog') {
-        catalogContent.classList.remove('hidden');
-        salesContent.classList.add('hidden');
-      } else {
-        catalogContent.classList.add('hidden');
-        salesContent.classList.remove('hidden');
-      }
-    });
-  });
-});
+  gtag('config', 'G-MCG7EP4276');
 </script>
-<style>
-.catalog-tab {
-  color: rgba(255, 255, 255, 0.7);
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<a href="#main-content" class="skip-link">Перейти к основному содержимому</a>
+<?php include("hyst/head.php"); ?>
+<link rel="canonical" href="https://motor-land.kz/"/>
+<meta name="keywords" content="<?=$SITE_KEYWORDS;?>">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://motor-land.kz/">
+<meta property="og:title" content="<?=$SITE_TITLE;?>">
+<meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
+<meta property="og:image" content="https://motor-land.kz/img/logo.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:locale:alternate" content="ru_KZ">
+<meta property="og:locale:alternate" content="ru_BY">
+<meta property="og:locale:alternate" content="ru_UA">
+<meta property="og:locale:alternate" content="ru_AM">
+<meta property="og:locale:alternate" content="ru_AZ">
+<meta property="og:locale:alternate" content="ru_GE">
+<meta property="og:locale:alternate" content="ru_KG">
+<meta property="og:locale:alternate" content="ru_MD">
+<meta property="og:locale:alternate" content="ru_TJ">
+<meta property="og:locale:alternate" content="ru_TM">
+<meta property="og:locale:alternate" content="ru_UZ">
+<meta property="og:site_name" content="Motor Land">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://motor-land.kz/">
+<meta name="twitter:title" content="<?=$SITE_TITLE;?>">
+<meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
+<meta name="twitter:image" content="https://motor-land.kz/img/logo.webp">
+<meta name="twitter:site" content="@motorland">
+<meta name="twitter:creator" content="@motorland">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Motor Land",
+  "alternateName": "Моторленд",
+  "url": "https://motor-land.kz",
+  "logo": "https://motor-land.kz/img/logo.webp",
+  "description": "Купить контрактный мотор в Алматы. Контрактные двигатели Казахстан, Россия, Беларусь, Украина, СНГ - привозные моторы из Малайзии. Двигатель бу Малайзия Алматы с гарантией. Доставка по странам СНГ.",
+  "address": [{
+    "@type": "PostalAddress",
+    "streetAddress": "РВ-90, 7-линия, 29",
+    "addressLocality": "Алматы",
+    "addressCountry": "KZ",
+    "addressRegion": "Алматы"
+  }, {
+    "@type": "PostalAddress",
+    "streetAddress": "улица Свердлова, 38",
+    "addressLocality": "Алматы",
+    "addressCountry": "KZ",
+    "addressRegion": "Алматы"
+  }],
+  "contactPoint": [{
+    "@type": "ContactPoint",
+    "telephone": "+7-777-144-5445",
+    "contactType": "Sales",
+    "areaServed": ["KZ", "RU", "BY", "UA", "AM", "AZ", "GE", "KG", "MD", "TJ", "TM", "UZ"],
+    "availableLanguage": ["Russian", "Kazakh"],
+    "hoursAvailable": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "09:00",
+      "closes": "20:00"
+    }
+  }, {
+    "@type": "ContactPoint",
+    "telephone": "+7-701-144-5445",
+    "contactType": "Sales",
+    "areaServed": ["KZ", "RU", "BY", "UA", "AM", "AZ", "GE", "KG", "MD", "TJ", "TM", "UZ"],
+    "availableLanguage": ["Russian", "Kazakh"],
+    "hoursAvailable": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "09:00",
+      "closes": "20:00"
+    }
+  }],
+  "sameAs": [
+    "https://2gis.kz/almaty/geo/70000001083496996",
+    "https://2gis.kz/almaty/geo/70000001024156353"
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "150",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "priceRange": "$$",
+  "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+  "currenciesAccepted": "KZT, RUB, USD, EUR"
 }
-.catalog-tab.active {
-  background: #dc2626;
-  color: white;
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "Доставляете ли вы контрактные двигатели в Россию, Беларусь и другие страны СНГ?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Да, мы доставляем контрактные двигатели во все страны СНГ: Россия, Беларусь, Украина, Армения, Азербайджан, Грузия, Кыргызстан, Молдова, Таджикистан, Туркменистан, Узбекистан. Доставка осуществляется надежными транспортными компаниями с полной страховкой груза."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Какая гарантия на контрактные двигатели?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "На все контрактные двигатели предоставляется официальная гарантия. Срок гарантии зависит от модели двигателя и условий покупки. Подробности гарантии уточняйте у наших менеджеров."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Откуда привозные моторы?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Мы привозим контрактные двигатели из Малайзии. Все моторы проходят тщательную проверку перед отправкой. Мы работаем только с проверенными поставщиками и гарантируем качество."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Сколько стоит доставка контрактного двигателя в Россию или Беларусь?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Стоимость доставки зависит от веса и габаритов двигателя, а также от региона доставки. Мы рассчитаем точную стоимость доставки после выбора конкретного двигателя. Доставка по Казахстану и странам СНГ осуществляется надежными транспортными компаниями."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Как быстро можно получить контрактный двигатель?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Сроки доставки зависят от наличия двигателя на складе и региона доставки. Обычно доставка по Казахстану занимает 2-5 дней, в страны СНГ - 5-14 дней. При наличии на складе можем отправить в день заказа."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Какие марки контрактных двигателей у вас есть?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "У нас большой выбор контрактных двигателей для автомобилей Toyota, Honda, Nissan, Mazda, Mitsubishi, Hyundai, Kia и других популярных марок. В каталоге представлены двигатели различных моделей и годов выпуска."
+    }
+  }]
 }
-</style>
-<?php
-$content = ob_get_clean();
+</script>
+</head>
+<body>
+<?php include("hyst/sbody.php"); ?>
+<?php include("des/head.php"); ?>
 
-$canonical_url = 'https://motor-land.kz/';
-$og_url = 'https://motor-land.kz/';
-$og_image = 'https://motor-land.kz/img/logo.webp';
+<main id="main-content" role="main">
+<section class="slider" aria-label="Главный слайдер">
+	<div id="slidess">
+		<?php
+		$slider = get_slider ('index_slider');
+		$slide_index = 0;
+		while($slide=$slider->fetch_array()):
+		?>
+		<?php if ($slide_index == 0): 
+			$slide_img = get_optimized_image($slide['image']);
+		?>
+		<link rel="preload" as="image" href="<?=$slide_img['webp'] ?: $slide_img['original'];?>" fetchpriority="high">
+		<picture>
+			<source srcset="<?=$slide_img['webp'] ?: $slide_img['original'];?>" type="image/webp">
+			<img src="<?=$slide_img['webp'] ?: $slide_img['original'];?>" alt="Купить контрактный мотор Алматы - привозные моторы из Малайзии, контрактные двигатели Казахстан, Россия, СНГ" class="sliderslid" loading="eager" fetchpriority="high" width="1920" height="600" decoding="async" style="object-fit:cover;width:100%;height:100%;position:absolute;top:0;left:0;display:block;">
+		</picture>
+		<?php else: 
+			$slide_img = get_optimized_image($slide['image']);
+		?>
+		<div class="sliderslid" style="background-image: url(<?=$slide_img['webp'] ?: $slide_img['original'];?>);" aria-label="Купить контрактный мотор Алматы - привозные моторы из Малайзии, контрактные двигатели Казахстан, Россия, СНГ"></div>
+		<?php endif; ?>
+		<?php
+		$slide_index++;
+		endwhile;
+		?>
+	</div>
+	<script>
+		// Автоматическая смена слайдов каждые 3 секунды
+		(function() {
+			function waitForJQuery(callback) {
+				if (typeof window.jQuery !== 'undefined' && typeof window.$ !== 'undefined') {
+					callback();
+				} else {
+					setTimeout(function() { waitForJQuery(callback); }, 50);
+				}
+			}
+			
+			function initSlider() {
+				var $ = window.jQuery || window.$;
+				if (!$) {
+					waitForJQuery(initSlider);
+					return;
+				}
+				
+				function slider() {
+					var cil = $("#slidess").children('div, img').length - 1;
+			var cur = 0;
+					$("#slidess").children('div, img').each(function(index, element){	
+						if ($(element).css('display') == 'block' || $(element).is(':visible')) {
+				cur = index;
+				}	
+			});
+			
+			if (cur >= cil) { cur = 0; } else { cur++; }
+			
+					$("#slidess").children('div, img').each(function(index, element){	
+						if ($(element).css('display') == 'block' || $(element).is(':visible')) { 
+							$(element).fadeOut(500); 
+						}
+				if (cur == index) {
+				$(element).fadeIn(500);
+				}	
+			});
+			
+					setTimeout(function() { slider(); }, 3000);
+		}
+		
+				setTimeout(function() { slider(); }, 3000);
+			}
+			
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', function() {
+					waitForJQuery(initSlider);
+				});
+			} else {
+				waitForJQuery(initSlider);
+			}
+		})();
+		</script>
+	<div class="slidercoun shirina">
+		<h1 class="titlephon"><?=get_simple_texts ('index_slider_title');?></h1>
+		<div class="sliderbtns" role="group" aria-label="Действия на главной странице">
+			<a href="tel:<?=get_simple_texts ('index_slider_phone');?>" class="phone" aria-label="Позвонить по телефону <?=get_simple_texts ('index_slider_phone');?>" role="button" tabindex="0" onclick="if(typeof gtag==='function'){gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});}"><?=get_simple_texts ('index_slider_phone');?></a><br>
+			<a href="catalog.php" aria-label="Перейти в каталог товаров"><div class="atalogb" role="button" tabindex="0">Каталог</div></a>
+		</div>
+		<div class="sliderform" role="search" aria-label="Поиск товаров по параметрам">
+			<label for="search-form" class="sr-only">Поиск товаров</label>
+			<span id="search-form-label">что ищем?</span>
+		
+		<form method="get" action="catalog.php" aria-labelledby="search-form-label">
+			<div class="maipttee">
+				<div class="meinputer" style="border: solid 1px white;"><div class="madiv" data-val="Марка"><?php if (isset($_GET['mk']) && $_GET['mk'] != '') { echo htmlspecialchars($_GET['mk'], ENT_QUOTES, 'UTF-8'); } else { echo "Марка"; } ?></div>
+					<input type="hidden" name="mk" value="<?php if (isset($_GET['mk']) && $_GET['mk'] != '') { echo htmlspecialchars($_GET['mk'], ENT_QUOTES, 'UTF-8'); } else { echo ""; } ?>">
+					<div class="btmmearrow" style="font-size: 17px;">&#9660;</div>
+					<div class="ddwnblock" style="border-top: solid 1px white; border-bottom: solid 1px white; border-right: solid 1px white; border-left: solid 1px white;">
+						<?php
+						$parent_id = 'noting';
+						$stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_category WHERE idp = ? ORDER BY id ASC");
+						$stmt->bind_param("s", $parent_id);
+						$stmt->execute();
+						$tmp = $stmt->get_result();
+						if ($tmp->num_rows != 0) {
+							while($get = $tmp->fetch_array()):
+							?>
+							<div style="color: black" data-id="<?=$get['id'];?>"><?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?></div>
+							<?php
+							endwhile;
+						}
+						$stmt->close();
+						?>
+					</div>
+				</div>
+				
+				<div class="meinputer" style="border: solid 1px white;"><div class="madiv" data-val="Модель"><?php if (isset($_GET['ml']) && $_GET['ml'] != '') { echo htmlspecialchars($_GET['ml'], ENT_QUOTES, 'UTF-8'); } else { echo "Модель"; } ?></div>
+					<input type="hidden" name="ml" value="<?php if (isset($_GET['ml']) && $_GET['ml'] != '') { echo htmlspecialchars($_GET['ml'], ENT_QUOTES, 'UTF-8'); } else { echo ""; } ?>">
+					<div class="btmmearrow" style="font-size: 17px;">&#9660;</div>
+					<div class="ddwnblock" id="modellist" style="border-top: solid 1px white; border-bottom: solid 1px white; border-right: solid 1px white; border-left: solid 1px white;">
+						<?php
+						if ($mark) {
+							$stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_category WHERE idp = ? ORDER BY id ASC");
+							$stmt->bind_param("i", $mark);
+							$stmt->execute();
+							$tmp = $stmt->get_result();
+							if ($tmp->num_rows != 0) {
+								while($get = $tmp->fetch_array()):
+								?>
+								<div style="color: black" data-id="<?=$get['id'];?>"><?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?></div>
+								<?php
+								endwhile;
+							}
+							$stmt->close();
+						}
+						?>
+					</div>
+				</div>
+				
+				<div class="meinputer" style="border-top: solid 1px white; border: solid 1px white;"><div class="madiv"><?php if (isset($_GET['yr']) && $_GET['yr'] != '') { echo htmlspecialchars($_GET['yr'], ENT_QUOTES, 'UTF-8'); } else { echo "Год"; } ?></div>
+					<input type="hidden" name="yr" value="<?php if (isset($_GET['yr']) && $_GET['yr'] != '') { echo htmlspecialchars($_GET['yr'], ENT_QUOTES, 'UTF-8'); } else { echo ""; } ?>">
+					<div class="btmmearrow" style="font-size: 17px;">&#9660;</div>
+					<div class="ddwnblock" id="yearlist" style="overflow-y: scroll; border-top: solid 1px white; border-bottom: solid 1px white; border-right: solid 1px white; border-left: solid 1px white;">
+						<?php
+						if ($mode) {
+							$mode_pattern = '[' . $mode . ']';
+							$stmt = $_DB_CONECT->prepare("SELECT internet_magazin_atributs_options.*
+							FROM internet_magazin_atributs_options 
+							INNER JOIN internet_magazin_tovari ON LOCATE(CONCAT('[', internet_magazin_atributs_options.id, ']'), internet_magazin_tovari.atributs_opt) > 0 
+							AND LOCATE(?, internet_magazin_tovari.podegory) > 0
+							WHERE internet_magazin_atributs_options.idp = 1");
+							$stmt->bind_param("s", $mode_pattern);
+							$stmt->execute();
+							$sql = $stmt->get_result();
+							if ($sql->num_rows != 0) {
+								while($get = $sql->fetch_array()):
+								?>
+								<div style="color: black" data-id="<?=$get['id'];?>"><?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?></div>
+								<?php
+								endwhile;
+							}
+							$stmt->close();
+						}
+						?>	
+					</div>
+				</div>
+			</div>
+			<button type="submit" name="sear" class="sliderform-submit-btn" aria-label="Найти товары по параметрам" title="Найти товары">
+				<span class="sr-only">Найти товары</span>
+			</button>
+		</form>
+		</div>
+	</div>
+</section>
 
-include('components/layout.php');
-?>
+<section class="generalw forsbgf consult-section" aria-labelledby="consult-title" role="region">
+	<div class="shirina forsliderform JF_parent_form consult-container">
+		<h2 id="consult-title" class="consult-title">Хотите получить бесплатную консультацию?</h2>
+		<div class="consult-subtitle" id="consult-subtitle">заполните форму</div>
+		<form method="post" class="consult-form" aria-labelledby="consult-title" aria-describedby="consult-subtitle" novalidate>
+			<input type="text" name="website" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;z-index:-1;" tabindex="-1" autocomplete="off" aria-hidden="true">
+			<input type="hidden" name="form_time" value="<?=time();?>" aria-hidden="true">
+			<div class="form-control consult-form-control">
+				<label for="consult-name">Имя <span aria-label="обязательное поле">*</span></label>
+				<input type="text" name="name" id="consult-name" class="consult-input consult-name" placeholder="Имя" required aria-required="true" autocomplete="name" maxlength="100">
+			</div>
+			<div class="form-control consult-form-control">
+				<label for="consult-phone">Телефон <span aria-label="обязательное поле">*</span></label>
+				<input type="tel" name="phon" id="consult-phone" class="consult-input consult-phone" placeholder="Телефон" required aria-required="true" autocomplete="tel" maxlength="20">
+			</div>
+			<div class="consult-btn-wrapper">
+				<input type="hidden" name="send_one" value="send" aria-hidden="true">
+				<button type="button" name="JF_send_casual" class="consult-btn" aria-label="Отправить форму обратной связи"><span>Отправить</span></button>
+			</div>
+		</form>
+	</div>
+</section>
+
+<section class="generalw" aria-labelledby="about-title">
+	<div class="shirina zgolovorleft">
+		<h2 id="about-title" class="sttitle"><span>О нас</span></h2>
+	</div>
+</section>
+
+<section class="generalw">
+	<div class="shirina">
+		<div class="aboutblock">
+			<?php 
+			$about_img = get_optimized_image(get_simple_images('index_about_image')[0]);
+			?>
+			<div class="sssskartins revealator-slideright" data-bg-src="<?=$about_img['webp'] ?: $about_img['original'];?>" aria-label="Контрактные двигатели и привозные моторы из Малайзии в Алматы - Моторленд"></div>
+			<div class="abouttext revealator-slideleft">
+			<?=get_customtexts('index_about_text');?>
+			</div>
+		</div>
+	</div>
+</section>
+
+<div class="generalw">
+	<div class="shirina zgolovorright">
+	</div>
+</div>
+
+<section class="generalw frayalpfhon" aria-labelledby="catalog-title">
+	<div class="shirina">
+		<ul class="actionbtms" role="tablist" aria-label="Переключение между каталогом и акциями">
+			<li class="liacactive" data-typ="ac" role="tab" aria-selected="true" aria-controls="actionb" id="tab-catalog" tabindex="0">Каталог</li>
+			<li data-typ="ca" role="tab" aria-selected="false" aria-controls="goodsb" id="tab-sales" tabindex="-1">Акции</li>
+		</ul>
+	</div>
+</section>
+
+<section class="generalw" aria-label="Каталог товаров">
+	<div class="shirina">
+		<br>
+		<div id="actionb" role="tabpanel" aria-labelledby="tab-catalog">
+			<?php
+			$limit = 4;
+			$stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_tovari ORDER BY prio ASC LIMIT ?");
+			$stmt->bind_param("i", $limit);
+			$stmt->execute();
+			$tmp = $stmt->get_result();
+			while($get = $tmp->fetch_array()):
+			?>
+			<article class="toverblock" itemscope itemtype="https://schema.org/Product" role="article" aria-labelledby="home-product-title-<?=$get['id'];?>">
+			<a href="/detal?id=<?=$get['id'];?>" itemprop="url" aria-label="Подробнее о товаре <?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>">
+				<?php 
+				$product_img = get_optimized_image(get_farrimg($get['images'])[0]);
+				?>
+				<div class="toverimg" data-bg-src="<?=$product_img['webp'] ?: $product_img['original'];?>" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии, доставка по СНГ', ENT_QUOTES, 'UTF-8');?>" itemprop="image" role="img"></div>
+			<?php if ($get['sale'] != 'noting') { ?>
+			<div class="cationsale" aria-label="Скидка: <?=htmlspecialchars($get['sale'], ENT_QUOTES, 'UTF-8');?>"><?=$get['sale'];?></div>
+			<?php } ?>
+			</a>
+			<h3 id="home-product-title-<?=$get['id'];?>" class="tovertitle" itemprop="name"><?=$get['name'];?></h3>
+			<div class="tovaropis" itemprop="description" aria-label="Описание товара">
+				<?=$get['stext'];?>
+			</div>
+			<div class="tovercena" itemprop="offers" itemscope itemtype="https://schema.org/Offer" aria-label="Цена товара">
+				<?php if ($get['cash'] != 0 && $get['cash'] != '0') { ?>
+				<span itemprop="price" aria-label="Цена"><?=$get['cash'];?></span>
+				<span itemprop="priceCurrency" content="KZT" aria-label="валюта"> KZT</span>
+				<?php } else { ?>
+				<span aria-label="Цена по запросу">Цена по запросу</span>
+				<?php } ?>
+			</div>
+			<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="toverbuton" role="button" aria-label="Купить товар <?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>" tabindex="0" onclick="if(typeof gtag==='function'){gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});}">Купить</a>
+			</article>
+			<?php
+			endwhile;
+			if (isset($stmt)) {
+				$stmt->close();
+			}
+			?>
+		</div>
+		<div id="goodsb" style="display: none;">
+			<?php
+			$sale_value = 'noting';
+			$limit = 4;
+			$stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_tovari WHERE sale != ? ORDER BY prio ASC LIMIT ?");
+			$stmt->bind_param("si", $sale_value, $limit);
+			$stmt->execute();
+			$tmp = $stmt->get_result();
+			while($get = $tmp->fetch_array()):
+			?>
+			<article class="toverblock revealator-slideup" itemscope itemtype="https://schema.org/Product">
+			<a href="/detal?id=<?=$get['id'];?>" itemprop="url">
+				<?php 
+				$product_img = get_optimized_image(get_farrimg($get['images'])[0]);
+				?>
+				<div class="toverimg" data-bg-src="<?=$product_img['webp'] ?: $product_img['original'];?>" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии, доставка по СНГ', ENT_QUOTES, 'UTF-8');?>" itemprop="image">
+			<?php if ($get['sale'] != 'noting') { ?>
+			<div class="cationsale"><?=$get['sale'];?></div>
+			<?php } ?>
+			</div></a>
+			<h3 class="tovertitle" itemprop="name"><?=$get['name'];?></h3>
+			<div class="tovaropis" itemprop="description">
+				<?=$get['stext'];?>
+			</div>
+			<div class="tovercena" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+				<?php if ($get['cash'] != 0 && $get['cash'] != '0') { ?>
+				<span itemprop="price"><?=$get['cash'];?></span>
+				<span itemprop="priceCurrency" content="KZT"> KZT</span>
+				<?php } else { ?>
+				<span>Цена по запросу</span>
+				<?php } ?>
+			</div>
+			<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="toverbuton" role="button" aria-label="Купить товар <?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>" tabindex="0" onclick="if(typeof gtag==='function'){gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});}">Купить</a>
+			</article>
+			<?php
+			endwhile;
+			if (isset($stmt)) {
+				$stmt->close();
+			}
+			?>			
+		</div>
+		<br>
+		<br>
+		<a href="/catalog" class="okazatybolsh-link" style="text-decoration: none; color: inherit; display: inline-block;"><div class="okazatybolsh">Подробнее</div></a>
+		<br>
+		<br>
+	</div>
+</section>
+</main>
+
+<?php include("des/foter.php"); ?>
+<?php include("hyst/fbody.php"); ?>
+</body>
+</html>
