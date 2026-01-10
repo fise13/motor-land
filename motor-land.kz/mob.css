@@ -755,8 +755,18 @@ margin: 20px 10px !important;
 	}
 
 	.guarantees-hero-icon {
-		font-size: 40px !important;
+		width: 56px !important;
+		height: 56px !important;
 		margin-bottom: 12px !important;
+	}
+
+	.icon-shield::before {
+		width: 28px !important;
+		height: 36px !important;
+	}
+
+	.icon-shield::after {
+		font-size: 18px !important;
 	}
 
 	.guarantees-hero-title {
@@ -811,13 +821,118 @@ margin: 20px 10px !important;
 	}
 
 	.guarantee-card-icon {
-		font-size: 28px !important;
+		width: 36px !important;
+		height: 36px !important;
 		margin-bottom: 12px !important;
 	}
 
+	.icon-clock::before {
+		width: 22px !important;
+		height: 22px !important;
+		border-width: 2px !important;
+	}
+
+	.icon-clock::after {
+		width: 1.5px !important;
+		height: 7px !important;
+		top: 5px !important;
+	}
+
+	.icon-tools::before {
+		width: 24px !important;
+		height: 24px !important;
+		border-width: 2px !important;
+	}
+
+	.icon-check-circle::before {
+		font-size: 22px !important;
+	}
+
+	.icon-gear::before {
+		width: 26px !important;
+		height: 26px !important;
+		border-width: 2px !important;
+	}
+
+	.icon-car::before {
+		width: 24px !important;
+		height: 13px !important;
+		top: 9px !important;
+	}
+
+	.icon-car::after {
+		width: 18px !important;
+		height: 9px !important;
+		bottom: 5px !important;
+	}
+
+	.icon-nut::before {
+		width: 20px !important;
+		height: 20px !important;
+	}
+
+	.icon-money::before {
+		font-size: 22px !important;
+	}
+
+	.icon-clipboard::before {
+		width: 14px !important;
+		height: 18px !important;
+		top: 5px !important;
+	}
+
+	.icon-clipboard::after {
+		width: 4px !important;
+		height: 4px !important;
+		top: 4px !important;
+	}
+
+	.icon-calendar::before {
+		width: 20px !important;
+		height: 24px !important;
+	}
+
+	.icon-calendar::after {
+		width: 16px !important;
+		height: 2px !important;
+		top: 7px !important;
+	}
+
+	.icon-box::before {
+		width: 20px !important;
+		height: 20px !important;
+	}
+
+	.icon-box::after {
+		width: 14px !important;
+		height: 14px !important;
+	}
+
+	.icon-warning::before {
+		font-size: 22px !important;
+	}
+
 	.guarantee-card-icon-sidebar {
-		font-size: 24px !important;
+		width: 32px !important;
+		height: 32px !important;
 		margin-bottom: 10px !important;
+	}
+
+	.icon-ban::before {
+		width: 24px !important;
+		height: 2.5px !important;
+	}
+
+	.icon-document::before {
+		width: 16px !important;
+		height: 20px !important;
+	}
+
+	.icon-document::after {
+		width: 10px !important;
+		height: 1.5px !important;
+		top: 8px !important;
+		box-shadow: 0 2.5px 0 0 rgba(255, 255, 255, 0.95), 0 5px 0 0 rgba(255, 255, 255, 0.95) !important;
 	}
 	
 	.card-title,
@@ -849,8 +964,20 @@ margin: 20px 10px !important;
 	}
 
 	.guarantee-contact-icon {
-		font-size: 36px !important;
+		width: 48px !important;
+		height: 48px !important;
 		margin-bottom: 12px !important;
+	}
+
+	.icon-phone::before {
+		width: 24px !important;
+		height: 36px !important;
+	}
+
+	.icon-phone::after {
+		width: 5px !important;
+		height: 5px !important;
+		bottom: 5px !important;
 	}
 
 	.guarantee-contact-card .card-title {

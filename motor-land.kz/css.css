@@ -1578,15 +1578,49 @@ overflow: hidden;
 }
 
 .guarantees-hero-icon {
-	font-size: 64px;
-	margin-bottom: 20px;
-	display: inline-block;
+	width: 80px;
+	height: 80px;
+	margin: 0 auto 20px;
+	display: block;
 	animation: float 3s ease-in-out infinite;
+	position: relative;
 }
 
 @keyframes float {
 	0%, 100% { transform: translateY(0px); }
 	50% { transform: translateY(-10px); }
+}
+
+/* Shield Icon */
+.icon-shield {
+	background: rgba(255, 255, 255, 0.2);
+	border: 3px solid rgba(255, 255, 255, 0.9);
+	border-radius: 50%;
+	position: relative;
+}
+
+.icon-shield::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 40px;
+	height: 50px;
+	background: rgba(255, 255, 255, 0.95);
+	clip-path: polygon(50% 0%, 100% 20%, 100% 70%, 50% 100%, 0% 70%, 0% 20%);
+}
+
+.icon-shield::after {
+	content: '✓';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -45%);
+	font-size: 24px;
+	font-weight: 700;
+	color: #fe0000;
+	z-index: 1;
 }
 
 .guarantees-hero-title {
@@ -1730,17 +1764,353 @@ overflow: hidden;
 }
 
 .guarantee-card-icon {
-	font-size: 40px;
+	width: 48px;
+	height: 48px;
 	margin-bottom: 20px;
-	display: inline-block;
-	line-height: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	flex-shrink: 0;
 }
 
 .guarantee-card-icon-sidebar {
-	font-size: 32px;
+	width: 40px;
+	height: 40px;
 	margin-bottom: 16px;
-	display: inline-block;
-	line-height: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	flex-shrink: 0;
+}
+
+/* Clock Icon */
+.icon-clock {
+	background: linear-gradient(135deg, #fe0000 0%, #d00000 100%);
+	border-radius: 50%;
+}
+
+.icon-clock::before {
+	content: '';
+	position: absolute;
+	width: 30px;
+	height: 30px;
+	border: 3px solid rgba(255, 255, 255, 0.95);
+	border-radius: 50%;
+}
+
+.icon-clock::after {
+	content: '';
+	position: absolute;
+	width: 2px;
+	height: 10px;
+	background: rgba(255, 255, 255, 0.95);
+	top: 8px;
+	left: 50%;
+	transform: translateX(-50%);
+	box-shadow: 4px 4px 0 0 rgba(255, 255, 255, 0.95);
+}
+
+/* Tools Icon */
+.icon-tools {
+	background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+	border-radius: 8px;
+	position: relative;
+}
+
+.icon-tools::before {
+	content: '';
+	position: absolute;
+	width: 32px;
+	height: 32px;
+	border: 3px solid rgba(255, 255, 255, 0.95);
+	border-radius: 50%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+/* Check Circle Icon */
+.icon-check-circle {
+	background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+	border-radius: 50%;
+}
+
+.icon-check-circle::before {
+	content: '✓';
+	position: absolute;
+	font-size: 28px;
+	color: rgba(255, 255, 255, 0.95);
+	font-weight: 700;
+	font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Gear Icon */
+.icon-gear {
+	background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+	border-radius: 8px;
+	position: relative;
+}
+
+.icon-gear::before {
+	content: '';
+	position: absolute;
+	width: 34px;
+	height: 34px;
+	border: 3px solid rgba(255, 255, 255, 0.95);
+	border-radius: 50%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+/* Car Icon */
+.icon-car {
+	background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+	border-radius: 8px;
+}
+
+.icon-car::before {
+	content: '';
+	position: absolute;
+	width: 32px;
+	height: 18px;
+	border: 3px solid rgba(255, 255, 255, 0.95);
+	border-radius: 4px 4px 0 0;
+	top: 12px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.icon-car::after {
+	content: '';
+	position: absolute;
+	width: 24px;
+	height: 12px;
+	background: rgba(255, 255, 255, 0.95);
+	border-radius: 2px;
+	bottom: 8px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+/* Nut/Bolt Icon */
+.icon-nut {
+	background: linear-gradient(135deg, #fd7e14 0%, #e85d00 100%);
+	border-radius: 50%;
+}
+
+.icon-nut::before {
+	content: '';
+	position: absolute;
+	width: 28px;
+	height: 28px;
+	border: 3px solid rgba(255, 255, 255, 0.95);
+	border-radius: 50%;
+	clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+/* Money Icon */
+.icon-money {
+	background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+	border-radius: 8px;
+}
+
+.icon-money::before {
+	content: '$';
+	position: absolute;
+	font-size: 28px;
+	color: rgba(255, 255, 255, 0.95);
+	font-weight: 700;
+	font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Clipboard Icon */
+.icon-clipboard {
+	background: linear-gradient(135deg, #6f42c1 0%, #5a32a3 100%);
+	border-radius: 6px;
+}
+
+.icon-clipboard::before {
+	content: '';
+	position: absolute;
+	width: 20px;
+	height: 24px;
+	border: 2px solid rgba(255, 255, 255, 0.95);
+	border-radius: 2px;
+	top: 8px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.icon-clipboard::after {
+	content: '';
+	position: absolute;
+	width: 6px;
+	height: 6px;
+	border: 2px solid rgba(255, 255, 255, 0.95);
+	border-radius: 50%;
+	top: 6px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+/* Calendar Icon */
+.icon-calendar {
+	background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+	border-radius: 6px;
+}
+
+.icon-calendar::before {
+	content: '';
+	position: absolute;
+	width: 28px;
+	height: 32px;
+	border: 2px solid rgba(255, 255, 255, 0.95);
+	border-radius: 2px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.icon-calendar::after {
+	content: '';
+	position: absolute;
+	width: 24px;
+	height: 3px;
+	background: rgba(255, 255, 255, 0.95);
+	top: 10px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+/* Box Icon */
+.icon-box {
+	background: linear-gradient(135deg, #20c997 0%, #17a2b8 100%);
+	border-radius: 6px;
+}
+
+.icon-box::before {
+	content: '';
+	position: absolute;
+	width: 28px;
+	height: 28px;
+	border: 2px solid rgba(255, 255, 255, 0.95);
+	border-radius: 2px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.icon-box::after {
+	content: '';
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	border: 2px solid rgba(255, 255, 255, 0.95);
+	border-radius: 2px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/* Warning Icon */
+.icon-warning {
+	background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
+	border-radius: 50%;
+}
+
+.icon-warning::before {
+	content: '!';
+	position: absolute;
+	font-size: 28px;
+	color: #1a1a1a;
+	font-weight: 700;
+	font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Ban/Prohibition Icon */
+.icon-ban {
+	background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+	border-radius: 50%;
+}
+
+.icon-ban::before {
+	content: '';
+	position: absolute;
+	width: 32px;
+	height: 3px;
+	background: rgba(255, 255, 255, 0.95);
+	transform: rotate(45deg);
+	box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.95);
+}
+
+/* Document Icon */
+.icon-document {
+	background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+	border-radius: 4px;
+}
+
+.icon-document::before {
+	content: '';
+	position: absolute;
+	width: 22px;
+	height: 28px;
+	border: 2px solid rgba(255, 255, 255, 0.95);
+	border-radius: 2px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.icon-document::after {
+	content: '';
+	position: absolute;
+	width: 16px;
+	height: 2px;
+	background: rgba(255, 255, 255, 0.95);
+	top: 12px;
+	left: 50%;
+	transform: translateX(-50%);
+	box-shadow: 0 4px 0 0 rgba(255, 255, 255, 0.95), 0 8px 0 0 rgba(255, 255, 255, 0.95);
+}
+
+/* Phone Icon */
+.icon-phone {
+	background: rgba(255, 255, 255, 0.2);
+	border: 3px solid rgba(255, 255, 255, 0.9);
+	border-radius: 12px;
+	width: 56px;
+	height: 56px;
+	margin: 0 auto 20px;
+	position: relative;
+}
+
+.icon-phone::before {
+	content: '';
+	position: absolute;
+	width: 32px;
+	height: 48px;
+	border: 3px solid rgba(255, 255, 255, 0.95);
+	border-radius: 6px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.icon-phone::after {
+	content: '';
+	position: absolute;
+	width: 8px;
+	height: 8px;
+	background: rgba(255, 255, 255, 0.95);
+	border-radius: 50%;
+	bottom: 8px;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 .guarantee-card-content {
@@ -1802,24 +2172,151 @@ overflow: hidden;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: 12px;
+	font-size: 0;
 	font-weight: 700;
 	font-family: system-ui, -apple-system, sans-serif;
 }
 
+/* Check Icon for Lists */
+.icon-check {
+	background: #28a745;
+}
+
+.icon-check::before {
+	content: '';
+	position: absolute;
+	width: 6px;
+	height: 10px;
+	border: 2px solid #ffffff;
+	border-top: none;
+	border-left: none;
+	transform: rotate(45deg);
+	top: 4px;
+	left: 7px;
+}
+
+/* Cross Icon for Lists */
+.icon-cross {
+	background: #dc3545;
+}
+
+.icon-cross::before {
+	content: '';
+	position: absolute;
+	width: 12px;
+	height: 2px;
+	background: #ffffff;
+	transform: rotate(45deg);
+}
+
+.icon-cross::after {
+	content: '';
+	position: absolute;
+	width: 12px;
+	height: 2px;
+	background: #ffffff;
+	transform: rotate(-45deg);
+}
+
+/* Document Icon for Lists */
+.icon-doc {
+	background: #17a2b8;
+	border-radius: 3px;
+}
+
+.icon-doc::before {
+	content: '';
+	position: absolute;
+	width: 12px;
+	height: 16px;
+	border: 2px solid #ffffff;
+	border-radius: 2px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.icon-doc::after {
+	content: '';
+	position: absolute;
+	width: 8px;
+	height: 1.5px;
+	background: #ffffff;
+	top: 5px;
+	left: 50%;
+	transform: translateX(-50%);
+	box-shadow: 0 3px 0 0 #ffffff;
+}
+
+/* Building Icon for Lists */
+.icon-building {
+	background: #6c757d;
+	border-radius: 3px;
+}
+
+.icon-building::before {
+	content: '';
+	position: absolute;
+	width: 14px;
+	height: 12px;
+	border: 2px solid #ffffff;
+	border-radius: 2px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.icon-building::after {
+	content: '';
+	position: absolute;
+	width: 3px;
+	height: 4px;
+	background: #ffffff;
+	top: 6px;
+	left: 4px;
+	box-shadow: 4px 0 0 0 #ffffff, 8px 0 0 0 #ffffff, 0 4px 0 0 #ffffff, 4px 4px 0 0 #ffffff, 8px 4px 0 0 #ffffff;
+}
+
+/* Report Icon for Lists */
+.icon-report {
+	background: #6f42c1;
+	border-radius: 3px;
+}
+
+.icon-report::before {
+	content: '';
+	position: absolute;
+	width: 12px;
+	height: 16px;
+	border: 2px solid #ffffff;
+	border-radius: 2px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.icon-report::after {
+	content: '';
+	position: absolute;
+	width: 8px;
+	height: 8px;
+	border: 2px solid #ffffff;
+	border-radius: 50%;
+	top: 3px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
 .guarantee-list.modern-list li .list-icon {
 	background: #28a745;
-	color: #ffffff;
 }
 
 .guarantee-list.warning-list li .list-icon {
 	background: #dc3545;
-	color: #ffffff;
 }
 
 .guarantee-list.info-list li .list-icon {
 	background: #17a2b8;
-	color: #ffffff;
 }
 
 /* Contact Card */
@@ -1839,9 +2336,13 @@ overflow: hidden;
 }
 
 .guarantee-contact-icon {
-	font-size: 48px;
-	margin-bottom: 20px;
-	display: inline-block;
+	width: 64px;
+	height: 64px;
+	margin: 0 auto 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
 }
 
 .guarantee-contact-card .card-title {
@@ -1954,22 +2455,142 @@ overflow: hidden;
 	.guarantee-section-description {
 		font-size: 15px;
 	}
-
+	
 	.guarantee-card {
 		padding: 24px 20px;
 		border-radius: 12px;
 	}
 
-	.guarantee-card-icon {
-		font-size: 32px;
+	.guarantees-hero-icon {
+		width: 60px;
+		height: 60px;
 		margin-bottom: 16px;
 	}
 
+	.icon-shield::before {
+		width: 30px;
+		height: 38px;
+	}
+
+	.icon-shield::after {
+		font-size: 20px;
+	}
+
+	.guarantee-card-icon {
+		width: 40px;
+		height: 40px;
+		margin-bottom: 16px;
+	}
+
+	.icon-clock::before {
+		width: 24px;
+		height: 24px;
+		border-width: 2px;
+	}
+
+	.icon-clock::after {
+		width: 1.5px;
+		height: 8px;
+		top: 6px;
+	}
+
+	.icon-tools::before {
+		width: 26px;
+		height: 26px;
+		border-width: 2px;
+	}
+
+	.icon-check-circle::before {
+		font-size: 24px;
+	}
+
+	.icon-gear::before {
+		width: 28px;
+		height: 28px;
+		border-width: 2px;
+	}
+
+	.icon-car::before {
+		width: 26px;
+		height: 14px;
+		top: 10px;
+	}
+
+	.icon-car::after {
+		width: 20px;
+		height: 10px;
+		bottom: 6px;
+	}
+
+	.icon-nut::before {
+		width: 22px;
+		height: 22px;
+	}
+
+	.icon-money::before {
+		font-size: 24px;
+	}
+
+	.icon-clipboard::before {
+		width: 16px;
+		height: 20px;
+		top: 6px;
+	}
+
+	.icon-clipboard::after {
+		width: 5px;
+		height: 5px;
+		top: 5px;
+	}
+
+	.icon-calendar::before {
+		width: 22px;
+		height: 26px;
+	}
+
+	.icon-calendar::after {
+		width: 18px;
+		height: 2px;
+		top: 8px;
+	}
+
+	.icon-box::before {
+		width: 22px;
+		height: 22px;
+	}
+
+	.icon-box::after {
+		width: 16px;
+		height: 16px;
+	}
+
+	.icon-warning::before {
+		font-size: 24px;
+	}
+
 	.guarantee-card-icon-sidebar {
-		font-size: 28px;
+		width: 36px;
+		height: 36px;
 		margin-bottom: 12px;
 	}
 
+	.icon-ban::before {
+		width: 26px;
+		height: 2.5px;
+	}
+
+	.icon-document::before {
+		width: 18px;
+		height: 22px;
+	}
+
+	.icon-document::after {
+		width: 12px;
+		height: 1.5px;
+		top: 10px;
+		box-shadow: 0 3px 0 0 rgba(255, 255, 255, 0.95), 0 6px 0 0 rgba(255, 255, 255, 0.95);
+	}
+	
 	.card-title {
 		font-size: 18px;
 		margin-bottom: 12px;
@@ -1998,8 +2619,20 @@ overflow: hidden;
 	}
 
 	.guarantee-contact-icon {
-		font-size: 40px;
+		width: 52px;
+		height: 52px;
 		margin-bottom: 16px;
+	}
+
+	.icon-phone::before {
+		width: 26px;
+		height: 40px;
+	}
+
+	.icon-phone::after {
+		width: 6px;
+		height: 6px;
+		bottom: 6px;
 	}
 
 	.guarantee-contact-btn {
