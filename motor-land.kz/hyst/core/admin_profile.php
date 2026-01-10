@@ -21,14 +21,26 @@ if ($_HYST_ADMIN_SETUP) {
 		$report['error'] = 2;
 		$report['message'] = 'Пароль не должен содержать недопустимые символы и быть не короче 6ти символов!';
 		} else { 
-			$sql = $_DB_CONECT->query("INSERT INTO ".AUT_NAME." (".AUC_PREFIX."_tip,".AUC_PREFIX."_name,".AUC_PREFIX."_mail,".AUC_PREFIX."_pass,".AUC_PREFIX."_laau,".AUC_PREFIX."_laac,".AUC_PREFIX."_role)
-			VALUES ('".$_REQUEST['title']."','".$_REQUEST['name']."','".mb_strtolower($_REQUEST['email'])."','".hyst_hash_admin_password($_REQUEST['password'])."','".time()."','".time()."','general')");
-			if ($sql != false) {
-			$report['error'] = 1;
-			$report['message'] = '';
+			// Security: Используем prepared statements для защиты от SQL инъекций
+			$title = $_REQUEST['title'];
+			$name = $_REQUEST['name'];
+			$email = mb_strtolower($_REQUEST['email']);
+			$password_hash = hyst_hash_admin_password($_REQUEST['password']);
+			$current_time = time();
+			$role = 'general';
+			
+			$stmt = $_DB_CONECT->prepare("INSERT INTO ".AUT_NAME." (".AUC_PREFIX."_tip,".AUC_PREFIX."_name,".AUC_PREFIX."_mail,".AUC_PREFIX."_pass,".AUC_PREFIX."_laau,".AUC_PREFIX."_laac,".AUC_PREFIX."_role)
+			VALUES (?, ?, ?, ?, ?, ?, ?)");
+			$stmt->bind_param("sssiiis", $title, $name, $email, $password_hash, $current_time, $current_time, $role);
+			
+			if ($stmt->execute()) {
+				$stmt->close();
+				$report['error'] = 1;
+				$report['message'] = '';
 			} else {
-			$report['error'] = 2;
-			$report['message'] = 'Ошибка базы данных';
+				$stmt->close();
+				$report['error'] = 2;
+				$report['message'] = 'Ошибка базы данных';
 			}
 		}
 		echo json_encode($report,JSON_UNESCAPED_UNICODE);
@@ -43,22 +55,47 @@ if ($_HYST_ADMIN_SETUP) {
 			$report['error'] = 2;
 			$report['message'] = 'Не верный логин или пароль!';
 			} else {
-				$check = $_DB_CONECT->query("SELECT id,".AUC_PREFIX."_pass FROM ".AUT_NAME." WHERE ".AUC_PREFIX."_mail='".mb_strtolower($_REQUEST['email'])."'");
+				// Security: Используем prepared statements для защиты от SQL инъекций
+				$email = mb_strtolower($_REQUEST['email']);
+				$stmt = $_DB_CONECT->prepare("SELECT id,".AUC_PREFIX."_pass FROM ".AUT_NAME." WHERE ".AUC_PREFIX."_mail = ?");
+				$stmt->bind_param("s", $email);
+				$stmt->execute();
+				$check = $stmt->get_result();
+				
 				if ($check->num_rows != 0) {
 					$data = $check->fetch_array();
-					$sql = $_DB_CONECT->query("UPDATE ".AUT_NAME." SET ".AUC_PREFIX."_laau='".time()."' WHERE id='".$data['id']."'");
-					if ($data[AUC_PREFIX.'_pass'] == hyst_hash_admin_password($_REQUEST['password'])) {
-					$_SESSION[AUSK_LOGIN] = $_REQUEST['email'];
-					$_SESSION[AUSK_PASSW] = hyst_hash_admin_password($_REQUEST['password']);
-					$report['error'] = 1;
-					$report['message'] = '';
+					$stmt->close();
+					
+					// Security: Обновляем время последнего входа
+					$admin_id = $data['id'];
+					$update_time = time();
+					$stmt = $_DB_CONECT->prepare("UPDATE ".AUT_NAME." SET ".AUC_PREFIX."_laau = ? WHERE id = ?");
+					$stmt->bind_param("ii", $update_time, $admin_id);
+					$stmt->execute();
+					$stmt->close();
+					
+					// Security: Используем безопасную проверку пароля
+					if (hyst_verify_admin_password($_REQUEST['password'], $data[AUC_PREFIX.'_pass'])) {
+						// Если использовался старый хеш, обновляем на новый
+						$new_hash = hyst_hash_admin_password($_REQUEST['password']);
+						$stmt = $_DB_CONECT->prepare("UPDATE ".AUT_NAME." SET ".AUC_PREFIX."_pass = ? WHERE id = ?");
+						$stmt->bind_param("si", $new_hash, $admin_id);
+						$stmt->execute();
+						$stmt->close();
+						
+						$_SESSION[AUSK_LOGIN] = $_REQUEST['email'];
+						// Не сохраняем пароль в сессии, только проверяем хеш
+						$_SESSION[AUSK_PASSW] = $new_hash;
+						$report['error'] = 1;
+						$report['message'] = '';
 					} else { 
-					$report['error'] = 2;
-					$report['message'] = 'Не верный логин или пароль!';
+						$report['error'] = 2;
+						$report['message'] = 'Не верный логин или пароль!';
 					}
 				} else {
-				$report['error'] = 2;
-				$report['message'] = 'Пользователь с таким email не существует!';
+					$stmt->close();
+					$report['error'] = 2;
+					$report['message'] = 'Пользователь с таким email не существует!';
 				}
 			}
 			echo json_encode($report,JSON_UNESCAPED_UNICODE);
@@ -76,15 +113,25 @@ if ($_HYST_ADMIN_SETUP) {
 				$report['error'] = 2;
 				$report['message'] = 'Адрес электронной почты не корректен!';
 				} else { 
-					$sql = $_DB_CONECT->query("UPDATE ".AUT_NAME." SET ".AUC_PREFIX."_tip='".$_REQUEST['title']."',".AUC_PREFIX."_name='".$_REQUEST['name']."',".AUC_PREFIX."_mail='".mb_strtolower($_REQUEST['email'])."',".AUC_PREFIX."_laau='".time()."'
-					WHERE id='".$_HYST_ADMIN['id']."'");
-					if ($sql != false) {
-					$report['error'] = 3;
-					$report['message'] = 'Изменения сохранены';
-					$report['visual_changes'] = array ('.admin_header_name'=>$_REQUEST['name']);
+					// Security: Используем prepared statements для защиты от SQL инъекций
+					$admin_id = $_HYST_ADMIN['id'];
+					$title = $_REQUEST['title'];
+					$name = $_REQUEST['name'];
+					$email = mb_strtolower($_REQUEST['email']);
+					$update_time = time();
+					
+					$stmt = $_DB_CONECT->prepare("UPDATE ".AUT_NAME." SET ".AUC_PREFIX."_tip = ?, ".AUC_PREFIX."_name = ?, ".AUC_PREFIX."_mail = ?, ".AUC_PREFIX."_laau = ? WHERE id = ?");
+					$stmt->bind_param("sssii", $title, $name, $email, $update_time, $admin_id);
+					
+					if ($stmt->execute()) {
+						$stmt->close();
+						$report['error'] = 3;
+						$report['message'] = 'Изменения сохранены';
+						$report['visual_changes'] = array ('.admin_header_name'=>$_REQUEST['name']);
 					} else {
-					$report['error'] = 2;
-					$report['message'] = 'Ошибка базы данных';
+						$stmt->close();
+						$report['error'] = 2;
+						$report['message'] = 'Ошибка базы данных';
 					}
 				}
 			} else {
@@ -92,15 +139,23 @@ if ($_HYST_ADMIN_SETUP) {
 				$report['error'] = 2;
 				$report['message'] = 'Адрес электронной почты не корректен!';
 				} else { 
-					$sql = $_DB_CONECT->query("UPDATE ".AUT_NAME." SET ".AUC_PREFIX."_mail='".mb_strtolower($_REQUEST['email'])."',".AUC_PREFIX."_laau='".time()."'
-					WHERE id='".$_HYST_ADMIN['id']."'");
-					if ($sql != false) {
-					$_SESSION[AUSK_LOGIN] = mb_strtolower($_REQUEST['email']);
-					$report['error'] = 3;
-					$report['message'] = 'Изменения сохранены';
+					// Security: Используем prepared statements для защиты от SQL инъекций
+					$admin_id = $_HYST_ADMIN['id'];
+					$email = mb_strtolower($_REQUEST['email']);
+					$update_time = time();
+					
+					$stmt = $_DB_CONECT->prepare("UPDATE ".AUT_NAME." SET ".AUC_PREFIX."_mail = ?, ".AUC_PREFIX."_laau = ? WHERE id = ?");
+					$stmt->bind_param("sii", $email, $update_time, $admin_id);
+					
+					if ($stmt->execute()) {
+						$stmt->close();
+						$_SESSION[AUSK_LOGIN] = $email;
+						$report['error'] = 3;
+						$report['message'] = 'Изменения сохранены';
 					} else {
-					$report['error'] = 2;
-					$report['message'] = 'Ошибка базы данных';
+						$stmt->close();
+						$report['error'] = 2;
+						$report['message'] = 'Ошибка базы данных';
 					}
 				}
 			}
@@ -112,15 +167,23 @@ if ($_HYST_ADMIN_SETUP) {
 			$report['error'] = 2;
 			$report['message'] = 'Пароль не корректен!';
 			} else { 
-				$sql = $_DB_CONECT->query("UPDATE ".AUT_NAME." SET ".AUC_PREFIX."_pass='".hyst_hash_admin_password($_REQUEST['password'])."',".AUC_PREFIX."_laau='".time()."'
-				WHERE id='".$_HYST_ADMIN['id']."'");
-				if ($sql != false) {
-				$_SESSION[AUSK_PASSW] = hyst_hash_admin_password($_REQUEST['password']);
-				$report['error'] = 3;
-				$report['message'] = 'Изменения сохранены';
+				// Security: Используем prepared statements для защиты от SQL инъекций
+				$admin_id = $_HYST_ADMIN['id'];
+				$password_hash = hyst_hash_admin_password($_REQUEST['password']);
+				$update_time = time();
+				
+				$stmt = $_DB_CONECT->prepare("UPDATE ".AUT_NAME." SET ".AUC_PREFIX."_pass = ?, ".AUC_PREFIX."_laau = ? WHERE id = ?");
+				$stmt->bind_param("sii", $password_hash, $update_time, $admin_id);
+				
+				if ($stmt->execute()) {
+					$stmt->close();
+					$_SESSION[AUSK_PASSW] = $password_hash;
+					$report['error'] = 3;
+					$report['message'] = 'Изменения сохранены';
 				} else {
-				$report['error'] = 2;
-				$report['message'] = 'Ошибка базы данных';
+					$stmt->close();
+					$report['error'] = 2;
+					$report['message'] = 'Ошибка базы данных';
 				}
 			}
 			echo json_encode($report,JSON_UNESCAPED_UNICODE);
@@ -144,17 +207,48 @@ if ($_HYST_ADMIN_SETUP) {
 			$report['error'] = 2;
 			$report['message'] = 'Нужно выбрать хотя бы одну роль!';
 			} else { 
-				$sql = $_DB_CONECT->query("SELECT id FROM ".AUT_NAME." WHERE ".AUC_PREFIX."_mail='".mb_strtolower($_REQUEST['email'])."'");
-				if ($sql->num_rows != 0) {
-				$report['error'] = 2;
-				$report['message'] = 'Пользователь с такой почтой уже зарегистрирован!';
+				// Security: Используем prepared statements для защиты от SQL инъекций
+				$email = mb_strtolower($_REQUEST['email']);
+				$stmt = $_DB_CONECT->prepare("SELECT id FROM ".AUT_NAME." WHERE ".AUC_PREFIX."_mail = ?");
+				$stmt->bind_param("s", $email);
+				$stmt->execute();
+				$result = $stmt->get_result();
+				
+				if ($result->num_rows != 0) {
+					$stmt->close();
+					$report['error'] = 2;
+					$report['message'] = 'Пользователь с такой почтой уже зарегистрирован!';
 				} else {
-					$sql = $_DB_CONECT->query("INSERT INTO ".AUT_NAME." (".AUC_PREFIX."_tip,".AUC_PREFIX."_name,".AUC_PREFIX."_mail,".AUC_PREFIX."_pass,".AUC_PREFIX."_laau,".AUC_PREFIX."_laac,".AUC_PREFIX."_role)
-					VALUES ('".$_REQUEST['title']."','".$_REQUEST['name']."','".mb_strtolower($_REQUEST['email'])."','".hyst_hash_admin_password($_REQUEST['password'])."','Не входил','Не входил','".$_REQUEST['moderator_role']."')");
+					$stmt->close();
+					
+					$title = $_REQUEST['title'];
+					$name = $_REQUEST['name'];
+					$password_hash = hyst_hash_admin_password($_REQUEST['password']);
+					$role = $_REQUEST['moderator_role'];
+					$not_logged = 'Не входил';
+					
+					$stmt = $_DB_CONECT->prepare("INSERT INTO ".AUT_NAME." (".AUC_PREFIX."_tip,".AUC_PREFIX."_name,".AUC_PREFIX."_mail,".AUC_PREFIX."_pass,".AUC_PREFIX."_laau,".AUC_PREFIX."_laac,".AUC_PREFIX."_role)
+					VALUES (?, ?, ?, ?, ?, ?, ?)");
+					$stmt->bind_param("sssssss", $title, $name, $email, $password_hash, $not_logged, $not_logged, $role);
+					$sql = $stmt->execute();
 					if ($sql != false) {
-					$sql = $_DB_CONECT->query("UPDATE ".AUT_NAME." SET ".AUC_PREFIX."_laac='".time()."' WHERE id='".$_HYST_ADMIN['id']."'");
-						$sql = $_DB_CONECT->query("SELECT id FROM ".AUT_NAME." WHERE ".AUC_PREFIX."_mail='".mb_strtolower($_REQUEST['email'])."' LIMIT 1");
-						$data = $sql->fetch_array();
+						$stmt->close();
+						
+						// Обновляем время активности администратора
+						$admin_id = $_HYST_ADMIN['id'];
+						$update_time = time();
+						$stmt = $_DB_CONECT->prepare("UPDATE ".AUT_NAME." SET ".AUC_PREFIX."_laac = ? WHERE id = ?");
+						$stmt->bind_param("ii", $update_time, $admin_id);
+						$stmt->execute();
+						$stmt->close();
+						
+						// Получаем ID нового модератора
+						$stmt = $_DB_CONECT->prepare("SELECT id FROM ".AUT_NAME." WHERE ".AUC_PREFIX."_mail = ? LIMIT 1");
+						$stmt->bind_param("s", $email);
+						$stmt->execute();
+						$result = $stmt->get_result();
+						$data = $result->fetch_array();
+						$stmt->close();
 						
 						$html_roles = '';
 						$mods_foldres = scandir($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/');
@@ -265,25 +359,52 @@ if ($_HYST_ADMIN_SETUP) {
 			} else if (empty($_REQUEST['moderator_role']) || $_REQUEST['moderator_role'] == '') {
 			$report['error'] = 2;
 			$report['message'] = 'Нужно выбрать хотя бы одну роль!';
-			} else { 
-				$sql = $_DB_CONECT->query("SELECT id FROM ".AUT_NAME." WHERE ".AUC_PREFIX."_mail='".mb_strtolower($_REQUEST['email'])."' AND id!='".$_REQUEST['id']."'");
-				if ($sql->num_rows != 0) {
-				$report['error'] = 2;
-				$report['message'] = 'Пользователь с такой почтой уже присутствует в системе!';
-				} else {
-					$sql = $_DB_CONECT->query("UPDATE ".AUT_NAME." SET 
-					".AUC_PREFIX."_tip='".$_REQUEST['title']."',".AUC_PREFIX."_name='".$_REQUEST['name']."',".AUC_PREFIX."_mail='".$_REQUEST['email']."',".AUC_PREFIX."_role='".$_REQUEST['moderator_role']."'
-					WHERE id='".$_REQUEST['id']."' AND ".AUC_PREFIX."_role!='general'");
-					if ($sql != false) {
-					$sql = $_DB_CONECT->query("UPDATE ".AUT_NAME." SET ".AUC_PREFIX."_laac='".time()."' WHERE id='".$_HYST_ADMIN['id']."'");
-					$report['error'] = 3;
-					$report['message'] = 'Учетная запись успешно изменена';
-					$report['visual_changes'] = array ('#moderator_info_title'.$_REQUEST['id']=>$_REQUEST['title'],
-					'#moderator_info_name'.$_REQUEST['id']=>$_REQUEST['name'],
-					'#moderator_info_email'.$_REQUEST['id']=>$_REQUEST['email']);
+				} else { 
+					// Security: Используем prepared statements для защиты от SQL инъекций
+					$email = mb_strtolower($_REQUEST['email']);
+					$moderator_id = (int)$_REQUEST['id'];
+					
+					$stmt = $_DB_CONECT->prepare("SELECT id FROM ".AUT_NAME." WHERE ".AUC_PREFIX."_mail = ? AND id != ?");
+					$stmt->bind_param("si", $email, $moderator_id);
+					$stmt->execute();
+					$result = $stmt->get_result();
+					
+					if ($result->num_rows != 0) {
+						$stmt->close();
+						$report['error'] = 2;
+						$report['message'] = 'Пользователь с такой почтой уже присутствует в системе!';
 					} else {
-					$report['error'] = 2;
-					$report['message'] = 'Ошибка базы данных';
+						$stmt->close();
+						
+						$title = $_REQUEST['title'];
+						$name = $_REQUEST['name'];
+						$role = $_REQUEST['moderator_role'];
+						
+						$stmt = $_DB_CONECT->prepare("UPDATE ".AUT_NAME." SET 
+						".AUC_PREFIX."_tip = ?, ".AUC_PREFIX."_name = ?, ".AUC_PREFIX."_mail = ?, ".AUC_PREFIX."_role = ?
+						WHERE id = ? AND ".AUC_PREFIX."_role != 'general'");
+						$stmt->bind_param("ssssi", $title, $name, $email, $role, $moderator_id);
+						$sql = $stmt->execute();
+					if ($sql != false) {
+						$stmt->close();
+						
+						// Обновляем время активности администратора
+						$admin_id = $_HYST_ADMIN['id'];
+						$update_time = time();
+						$stmt = $_DB_CONECT->prepare("UPDATE ".AUT_NAME." SET ".AUC_PREFIX."_laac = ? WHERE id = ?");
+						$stmt->bind_param("ii", $update_time, $admin_id);
+						$stmt->execute();
+						$stmt->close();
+						
+						$report['error'] = 3;
+						$report['message'] = 'Учетная запись успешно изменена';
+						$report['visual_changes'] = array ('#moderator_info_title'.$_REQUEST['id']=>$_REQUEST['title'],
+						'#moderator_info_name'.$_REQUEST['id']=>$_REQUEST['name'],
+						'#moderator_info_email'.$_REQUEST['id']=>$_REQUEST['email']);
+					} else {
+						$stmt->close();
+						$report['error'] = 2;
+						$report['message'] = 'Ошибка базы данных';
 					}
 				}
 			}
@@ -298,18 +419,34 @@ if ($_HYST_ADMIN_SETUP) {
 			$report['error'] = 2;
 			$report['message'] = 'Не корректный идентификатор!';
 			} else { 
-				$sql = $_DB_CONECT->query("UPDATE ".AUT_NAME." SET ".AUC_PREFIX."_pass='".hyst_hash_admin_password($_REQUEST['password'])."'
-				WHERE id='".$_REQUEST['id']."' AND ".AUC_PREFIX."_role!='general'");
-				if ($sql != false) {
-				$sql = $_DB_CONECT->query("UPDATE ".AUT_NAME." SET ".AUC_PREFIX."_laac='".time()."' WHERE id='".$_HYST_ADMIN['id']."'");
-				$report['error'] = 3;
-				$report['message'] = 'Изменения сохранены';
+				// Security: Используем prepared statements для защиты от SQL инъекций
+				$moderator_id = (int)$_REQUEST['id'];
+				$password_hash = hyst_hash_admin_password($_REQUEST['password']);
+				
+				$stmt = $_DB_CONECT->prepare("UPDATE ".AUT_NAME." SET ".AUC_PREFIX."_pass = ?
+				WHERE id = ? AND ".AUC_PREFIX."_role != 'general'");
+				$stmt->bind_param("si", $password_hash, $moderator_id);
+				
+				if ($stmt->execute()) {
+					$stmt->close();
+					
+					// Обновляем время активности администратора
+					$admin_id = $_HYST_ADMIN['id'];
+					$update_time = time();
+					$stmt = $_DB_CONECT->prepare("UPDATE ".AUT_NAME." SET ".AUC_PREFIX."_laac = ? WHERE id = ?");
+					$stmt->bind_param("ii", $update_time, $admin_id);
+					$stmt->execute();
+					$stmt->close();
+					
+					$report['error'] = 3;
+					$report['message'] = 'Изменения сохранены';
 				} else {
-				$report['error'] = 2;
-				$report['message'] = 'Ошибка базы данных';
+					$stmt->close();
+					$report['error'] = 2;
+					$report['message'] = 'Ошибка базы данных';
 				}
 			}
-			echo json_encode($ответ,JSON_UNESCAPED_UNICODE);
+			echo json_encode($report,JSON_UNESCAPED_UNICODE);
 		}
 		
 		if (($_HYST_ADMIN[AUC_PREFIX.'_role']=='general' || $_HYST_ADMIN[AUC_PREFIX.'_role']=='all') && isset($_REQUEST['comand']) && $_REQUEST['comand'] == 'delet_moderator') { 
@@ -317,15 +454,30 @@ if ($_HYST_ADMIN_SETUP) {
 			$report['error'] = 2;
 			$report['message'] = 'Не корректный идентификатор!';
 			} else { 
-				$sql = $_DB_CONECT->query("DELETE FROM ".AUT_NAME." WHERE id='".$_REQUEST['id']."' AND ".AUC_PREFIX."_role!='general'");
-				if ($sql != false) {
-				$sql = $_DB_CONECT->query("UPDATE ".AUT_NAME." SET ".AUC_PREFIX."_laac='".time()."' WHERE id='".$_HYST_ADMIN['id']."'");
-				$report['error'] = 3;
-				$report['message'] = 'Данные удалены';
-				$report['delete_item'] = '.deleted_item'.$_REQUEST['id'];
+				// Security: Используем prepared statements для защиты от SQL инъекций
+				$moderator_id = (int)$_REQUEST['id'];
+				
+				$stmt = $_DB_CONECT->prepare("DELETE FROM ".AUT_NAME." WHERE id = ? AND ".AUC_PREFIX."_role != 'general'");
+				$stmt->bind_param("i", $moderator_id);
+				
+				if ($stmt->execute()) {
+					$stmt->close();
+					
+					// Обновляем время активности администратора
+					$admin_id = $_HYST_ADMIN['id'];
+					$update_time = time();
+					$stmt = $_DB_CONECT->prepare("UPDATE ".AUT_NAME." SET ".AUC_PREFIX."_laac = ? WHERE id = ?");
+					$stmt->bind_param("ii", $update_time, $admin_id);
+					$stmt->execute();
+					$stmt->close();
+					
+					$report['error'] = 3;
+					$report['message'] = 'Данные удалены';
+					$report['delete_item'] = '.deleted_item'.$_REQUEST['id'];
 				} else {
-				$report['error'] = 2;
-				$report['message'] = 'Ошибка базы данных';
+					$stmt->close();
+					$report['error'] = 2;
+					$report['message'] = 'Ошибка базы данных';
 				}
 			}
 			echo json_encode($report,JSON_UNESCAPED_UNICODE);

@@ -43,13 +43,34 @@ if (isset($_POST['send_leed'])) {
 	}
 	
 	if (!empty($_POST['name']) && !empty($_POST['phon'])) {
+	// Security: Валидация и очистка входных данных
 	$name = htmlspecialchars(trim($_POST['name']), ENT_QUOTES, 'UTF-8');
 	$phone = htmlspecialchars(trim($_POST['phon']), ENT_QUOTES, 'UTF-8');
 	
+	// Дополнительная валидация длины
+	if (mb_strlen($name) > 100) {
+		$res['error'] = true;
+		$res['message'] = 'Ошибка! Имя слишком длинное!';
+		echo json_encode($res);
+		exit;
+	}
+	
+	if (mb_strlen($phone) > 20) {
+		$res['error'] = true;
+		$res['message'] = 'Ошибка! Номер телефона слишком длинный!';
+		echo json_encode($res);
+		exit;
+	}
+	
+	// Performance: Форматирование сообщения с использованием более читаемого формата
+	$message_text = "На сайте была заполнена форма заявки\n\n" .
+					"От: {$name}\n" .
+					"Телефон: {$phone}\n\n" .
+					"Время отправки: " . date('Y-m-d H:i:s') . "\n";
+	
 	$letter = new send_message(get_simple_texts ('general_post_box'), 
 	'Заявка с сайта', 
-	'На сайте была заполненна форма заявки \n\n 
-	От: '.$name.' \n\n Телефон: '.$phone.'\n\n');
+	$message_text);
 	$sending = $letter->send();
 	
 		if ($sending != FALSE) {
@@ -77,14 +98,44 @@ if (isset($_POST['zakaz'])) {
 	}
 	
 	if (!empty($_POST['name']) && !empty($_POST['phon']) && !empty($_POST['id'])) {
+	// Security: Валидация и очистка входных данных
 	$name = htmlspecialchars(trim($_POST['name']), ENT_QUOTES, 'UTF-8');
 	$phone = htmlspecialchars(trim($_POST['phon']), ENT_QUOTES, 'UTF-8');
-	$id = htmlspecialchars(trim($_POST['id']), ENT_QUOTES, 'UTF-8'); 
+	$id = htmlspecialchars(trim($_POST['id']), ENT_QUOTES, 'UTF-8');
+	
+	// Валидация ID товара
+	if (!preg_match('/^\d+$/', $id)) {
+		$res['error'] = true;
+		$res['message'] = 'Ошибка! Неверный идентификатор товара!';
+		echo json_encode($res);
+		exit;
+	}
+	
+	// Дополнительная валидация длины
+	if (mb_strlen($name) > 100) {
+		$res['error'] = true;
+		$res['message'] = 'Ошибка! Имя слишком длинное!';
+		echo json_encode($res);
+		exit;
+	}
+	
+	if (mb_strlen($phone) > 20) {
+		$res['error'] = true;
+		$res['message'] = 'Ошибка! Номер телефона слишком длинный!';
+		echo json_encode($res);
+		exit;
+	}
+	
+	// Performance: Форматирование сообщения с использованием более читаемого формата
+	$message_text = "На сайте была заполнена форма заявки на товар\n\n" .
+					"ID товара: {$id}\n" .
+					"От: {$name}\n" .
+					"Телефон: {$phone}\n\n" .
+					"Время отправки: " . date('Y-m-d H:i:s') . "\n";
 	
 	$letter = new send_message(get_simple_texts ('general_post_box'), 
 	'Заявка с сайта', 
-	'На сайте была заполненна форма заявки на: '.$id.' \n\n 
-	От: '.$name.' \n\n Телефон: '.$phone.'\n\n');
+	$message_text);
 	$sending = $letter->send();
 
 		if ($sending != FALSE) {

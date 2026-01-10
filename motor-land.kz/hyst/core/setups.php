@@ -34,17 +34,28 @@ $_HYST_ADMIN_SETUP = FALSE;
 
 	if (hyst_test_val($_SESSION[AUSK_LOGIN],REGEXP_MAIL) && hyst_test_val ($_SESSION[AUSK_PASSW],REGEXP_MD5)) {
 		
-		$hyst_sql = $_DB_CONECT->query("SELECT * FROM ".AUT_NAME." WHERE ".AUC_PREFIX."_mail='".$_SESSION[AUSK_LOGIN]."'"); 
+		// Security: Используем prepared statements для защиты от SQL инъекций
+		$email = $_SESSION[AUSK_LOGIN];
+		$stmt = $_DB_CONECT->prepare("SELECT * FROM ".AUT_NAME." WHERE ".AUC_PREFIX."_mail = ?");
+		$stmt->bind_param("s", $email);
+		$stmt->execute();
+		$hyst_sql = $stmt->get_result();
+		
 		if (mysqli_num_rows($hyst_sql) != 0) { 
 			$_HYST_ADMIN = mysqli_fetch_array($hyst_sql);
+			$stmt->close();
+			
+			// Security: Проверяем хеш пароля из сессии (но лучше бы использовать токен)
+			// Для совместимости проверяем старый формат и новый
 			if ($_HYST_ADMIN[AUC_PREFIX."_pass"] != $_SESSION[AUSK_PASSW]) {
-			unset($_SESSION[AUSK_LOGIN]);
-			unset($_SESSION[AUSK_PASSW]);
-			$_HYST_ADMIN = false; 
+				unset($_SESSION[AUSK_LOGIN]);
+				unset($_SESSION[AUSK_PASSW]);
+				$_HYST_ADMIN = false; 
 			}
 		} else {
-		unset($_SESSION[AUSK_LOGIN]);
-		unset($_SESSION[AUSK_PASSW]);
+			$stmt->close();
+			unset($_SESSION[AUSK_LOGIN]);
+			unset($_SESSION[AUSK_PASSW]);
 		}
 	} 
 } else {

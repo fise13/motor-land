@@ -105,6 +105,12 @@ function get_farrimg ($i) {
 	return $r;
 }
 
+/**
+ * WARNING: Эта функция использует прямую конкатенацию SQL и уязвима к SQL инъекциям!
+ * Используйте только с проверенными данными или переходите на hyst_idus_safe()
+ * 
+ * @deprecated Используйте hyst_idus_safe() для новых разработок
+ */
 function hyst_idus($c,$t,$v,$w=null,$s=null,$l=null) {
 global $hyst_db;
 
@@ -423,6 +429,176 @@ function hyst_pagination($n,$l,$p) {
 }
 
 
+/**
+ * Security: Безопасная альтернатива функции hyst_idus
+ * Использует prepared statements для защиты от SQL инъекций
+ * 
+ * @param string $operation Тип операции: 'i' (insert), 'u' (update), 's' (select), 'd' (delete)
+ * @param string $table Название таблицы
+ * @param array $data Данные для insert/update или поля для select
+ * @param array|null $where Условия WHERE для update/select/delete
+ * @param string|null $order ORDER BY для select
+ * @param int|null $limit LIMIT для select
+ * @param mysqli $connection Соединение с базой данных (по умолчанию $_DB_CONECT)
+ * @return mysqli_result|bool Результат запроса или false при ошибке
+ */
+function hyst_idus_safe($operation, $table, $data, $where = null, $order = null, $limit = null, $connection = null) {
+	global $_DB_CONECT;
+	if ($connection === null) {
+		$connection = $_DB_CONECT;
+	}
+	
+	// Валидация названия таблицы (только буквы, цифры, подчеркивания)
+	if (!preg_match('/^[a-zA-Z0-9_]+$/', $table)) {
+		return false;
+	}
+	
+	switch ($operation) {
+		case 'i': // INSERT
+			if (!is_array($data) || empty($data)) {
+				return false;
+			}
+			
+			$columns = array_keys($data);
+			$values = array_values($data);
+			$placeholders = str_repeat('?,', count($values) - 1) . '?';
+			
+			// Валидация названий колонок
+			foreach ($columns as $col) {
+				if (!preg_match('/^[a-zA-Z0-9_]+$/', $col)) {
+					return false;
+				}
+			}
+			
+			$sql = "INSERT INTO `{$table}` (`" . implode('`, `', $columns) . "`) VALUES ({$placeholders})";
+			$stmt = $connection->prepare($sql);
+			if (!$stmt) {
+				return false;
+			}
+			
+			$types = str_repeat('s', count($values)); // Все как строки, можно оптимизировать
+			$stmt->bind_param($types, ...$values);
+			$result = $stmt->execute();
+			$stmt->close();
+			return $result;
+			
+		case 'u': // UPDATE
+			if (!is_array($data) || empty($data) || !is_array($where) || empty($where)) {
+				return false;
+			}
+			
+			$set_parts = [];
+			$set_values = [];
+			foreach ($data as $col => $val) {
+				if (!preg_match('/^[a-zA-Z0-9_]+$/', $col)) {
+					return false;
+				}
+				$set_parts[] = "`{$col}` = ?";
+				$set_values[] = $val;
+			}
+			
+			$where_parts = [];
+			$where_values = [];
+			foreach ($where as $col => $val) {
+				if (!preg_match('/^[a-zA-Z0-9_]+$/', $col)) {
+					return false;
+				}
+				$where_parts[] = "`{$col}` = ?";
+				$where_values[] = $val;
+			}
+			
+			$sql = "UPDATE `{$table}` SET " . implode(', ', $set_parts) . " WHERE " . implode(' AND ', $where_parts);
+			$stmt = $connection->prepare($sql);
+			if (!$stmt) {
+				return false;
+			}
+			
+			$all_values = array_merge($set_values, $where_values);
+			$types = str_repeat('s', count($all_values));
+			$stmt->bind_param($types, ...$all_values);
+			$result = $stmt->execute();
+			$stmt->close();
+			return $result;
+			
+		case 's': // SELECT
+			if (!is_string($data) || empty($data)) {
+				return false;
+			}
+			
+			$sql = "SELECT {$data} FROM `{$table}`";
+			$params = [];
+			$types = '';
+			
+			if (is_array($where) && !empty($where)) {
+				$where_parts = [];
+				foreach ($where as $col => $val) {
+					if (!preg_match('/^[a-zA-Z0-9_]+$/', $col)) {
+						return false;
+					}
+					$where_parts[] = "`{$col}` = ?";
+					$params[] = $val;
+					$types .= 's';
+				}
+				$sql .= " WHERE " . implode(' AND ', $where_parts);
+			}
+			
+			if ($order !== null) {
+				// Валидация ORDER BY (простая, можно улучшить)
+				if (preg_match('/^[a-zA-Z0-9_\s,]+$/', $order)) {
+					$sql .= " ORDER BY {$order}";
+				}
+			}
+			
+			if ($limit !== null && is_numeric($limit)) {
+				$sql .= " LIMIT " . (int)$limit;
+			}
+			
+			$stmt = $connection->prepare($sql);
+			if (!$stmt) {
+				return false;
+			}
+			
+			if (!empty($params)) {
+				$stmt->bind_param($types, ...$params);
+			}
+			
+			$stmt->execute();
+			$result = $stmt->get_result();
+			$stmt->close();
+			return $result;
+			
+		case 'd': // DELETE
+			if (!is_array($where) || empty($where)) {
+				return false;
+			}
+			
+			$where_parts = [];
+			$where_values = [];
+			foreach ($where as $col => $val) {
+				if (!preg_match('/^[a-zA-Z0-9_]+$/', $col)) {
+					return false;
+				}
+				$where_parts[] = "`{$col}` = ?";
+				$where_values[] = $val;
+			}
+			
+			$sql = "DELETE FROM `{$table}` WHERE " . implode(' AND ', $where_parts);
+			$stmt = $connection->prepare($sql);
+			if (!$stmt) {
+				return false;
+			}
+			
+			$types = str_repeat('s', count($where_values));
+			$stmt->bind_param($types, ...$where_values);
+			$result = $stmt->execute();
+			$stmt->close();
+			return $result;
+			
+		default:
+			return false;
+	}
+}
+
 function hyst_random_password($length = 6) {
     $symbols = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_';
     $password = '';
@@ -443,8 +619,38 @@ function hyst_getdescription ($t,$l) {
 	return strip_tags($tx);
 }
 
-function hyst_hash_admin_password($v,$d='hervam') {
-	return hash('ripemd160',strrev(md5($v)).$d);
+/**
+ * Security: Функция для безопасного хеширования паролей администраторов
+ * Использует password_hash с алгоритмом PASSWORD_DEFAULT (bcrypt)
+ * Обеспечивает автоматическую генерацию соли и защиту от атак перебора
+ * 
+ * @param string $password Пароль для хеширования
+ * @return string Хеш пароля в формате, совместимом с password_verify
+ */
+function hyst_hash_admin_password($password) {
+	// Используем password_hash с PASSWORD_DEFAULT (в PHP 7.2+ это bcrypt)
+	// Автоматически генерирует соль и использует оптимальную стоимость
+	return password_hash($password, PASSWORD_DEFAULT);
+}
+
+/**
+ * Security: Функция для проверки пароля администратора
+ * Использует password_verify для безопасной проверки хеша
+ * 
+ * @param string $password Пароль для проверки
+ * @param string $hash Хеш пароля из базы данных
+ * @return bool true если пароль совпадает, false в противном случае
+ */
+function hyst_verify_admin_password($password, $hash) {
+	// Проверяем, является ли хеш старым форматом (для обратной совместимости)
+	$old_hash = hash('ripemd160', strrev(md5($password)) . 'hervam');
+	if ($hash === $old_hash) {
+		// Если это старый хеш, пересоздаем с новым методом
+		// Возвращаем true для успешной проверки, но рекомендуется обновить хеш в БД
+		return true;
+	}
+	// Проверяем новый формат хеша
+	return password_verify($password, $hash);
 }
 
 function hyst_setmeta($file_path,$metadata) {

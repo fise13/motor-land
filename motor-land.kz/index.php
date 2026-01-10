@@ -1,48 +1,51 @@
 <?php
 include('hyst/php.php');
 
-$SITE_TITLE = '🔥 Контрактные Двигатели СНГ | Купить Мотор Алматы | Доставка по России, Казахстану, Беларуси | Motor Land';
-$SITE_DESCRIPTION = '✅ Контрактные двигатели с гарантией! Доставка по России, Казахстану, Беларуси, Украине и всему СНГ. Привозные моторы из Малайзии. Toyota, Honda, Nissan, Mazda, Mitsubishi. Большой выбор, быстрая доставка, официальная гарантия. Звоните сейчас!';
+$SITE_TITLE = ' Контрактные Двигатели СНГ | Купить Мотор Алматы | Доставка по России, Казахстану, Беларуси | Motor Land';
+$SITE_DESCRIPTION = ' Контрактные двигатели с гарантией! Доставка по России, Казахстану, Беларуси, Украине и всему СНГ. Привозные моторы из Малайзии. Toyota, Honda, Nissan, Mazda, Mitsubishi. Большой выбор, быстрая доставка, официальная гарантия. Звоните сейчас!';
 $SITE_KEYWORDS = 'купить контрактный мотор Алматы, контрактные двигатели Казахстан, контрактные двигатели Россия, контрактные двигатели Беларусь, контрактные двигатели Украина, контрактные двигатели СНГ, привозные моторы Алматы, двигатель бу Малайзия Алматы, контрактные двигатели алматы, купить мотор б/у, привозные двигатели, контрактный мотор малайзия, контрактный двигатель Toyota, контрактный двигатель Honda, контрактный двигатель Nissan, контрактный двигатель Mazda, контрактный двигатель Mitsubishi, двигатель бу, контрактные двигатели, двигатели бу, двигатель 1NZ, двигатель 2AZ, двигатель 3S, двигатель K24A, двигатель QR25DE, контрактный двигатель Camry, контрактный двигатель CRV, контрактный двигатель Corolla, контрактный двигатель Almera, контрактный двигатель Accord, доставка двигателей СНГ, контрактные моторы Беларусь, контрактные моторы Украина, контрактные двигатели Армения, контрактные двигатели Азербайджан, контрактные двигатели Грузия, контрактные двигатели Кыргызстан, контрактные двигатели Молдова, контрактные двигатели Таджикистан, контрактные двигатели Туркменистан, контрактные двигатели Узбекистан';
 
+// Performance: Оптимизированная обработка GET параметров с единой функцией
 $mark = false;
 $mode = false;
 $year = false;
 
-if (isset($_GET['mk']) && $_GET['mk'] != '') {
-	$name = trim($_GET['mk']);
-	$stmt = $_DB_CONECT->prepare("SELECT id FROM internet_magazin_category WHERE name = ?");
+/**
+ * Helper function: Получает ID категории или опции атрибута по имени
+ * @param string $name Название для поиска
+ * @param string $table Название таблицы (internet_magazin_category или internet_magazin_atributs_options)
+ * @return int|false ID записи или false если не найдено
+ */
+function get_category_id_by_name($name, $table = 'internet_magazin_category') {
+	global $_DB_CONECT;
+	if (empty($name)) {
+		return false;
+	}
+	$name = trim($name);
+	$stmt = $_DB_CONECT->prepare("SELECT id FROM " . $table . " WHERE name = ? LIMIT 1");
 	$stmt->bind_param("s", $name);
 	$stmt->execute();
 	$result = $stmt->get_result();
+	$id = false;
 	if ($result->num_rows != 0) {
-		$mark = $result->fetch_array()['id'];
+		$row = $result->fetch_array();
+		$id = (int)$row['id'];
 	}
 	$stmt->close();
+	return $id;
+}
+
+// Обработка GET параметров с использованием helper функции
+if (isset($_GET['mk']) && $_GET['mk'] != '') {
+	$mark = get_category_id_by_name($_GET['mk'], 'internet_magazin_category');
 }
 
 if (isset($_GET['ml']) && $_GET['ml'] != '') {
-	$name = trim($_GET['ml']);
-	$stmt = $_DB_CONECT->prepare("SELECT id FROM internet_magazin_category WHERE name = ?");
-	$stmt->bind_param("s", $name);
-	$stmt->execute();
-	$result = $stmt->get_result();
-	if ($result->num_rows != 0) {
-		$mode = $result->fetch_array()['id'];
-	}
-	$stmt->close();
+	$mode = get_category_id_by_name($_GET['ml'], 'internet_magazin_category');
 }
 
 if (isset($_GET['yr']) && $_GET['yr'] != '') {
-	$name = trim($_GET['yr']);
-	$stmt = $_DB_CONECT->prepare("SELECT id FROM internet_magazin_atributs_options WHERE name = ?");
-	$stmt->bind_param("s", $name);
-	$stmt->execute();
-	$result = $stmt->get_result();
-	if ($result->num_rows != 0) {
-		$year = $result->fetch_array()['id'];
-	}
-	$stmt->close();
+	$year = get_category_id_by_name($_GET['yr'], 'internet_magazin_atributs_options');
 }
 ?>
 <!doctype html>
