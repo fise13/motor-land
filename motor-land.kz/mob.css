@@ -746,7 +746,26 @@ margin: 20px 10px !important;
 	/* Оптимизация страниц гарантий и сервиса */
 	.guarantees-page,
 	.service-page {
-		padding: 30px 0 40px !important;
+		padding: 0 !important;
+	}
+
+	.guarantees-hero-section {
+		padding: 40px 15px !important;
+		margin-bottom: 30px !important;
+	}
+
+	.guarantees-hero-icon {
+		font-size: 40px !important;
+		margin-bottom: 12px !important;
+	}
+
+	.guarantees-hero-title {
+		font-size: 24px !important;
+		margin-bottom: 12px !important;
+	}
+
+	.guarantees-hero-subtitle {
+		font-size: 14px !important;
 	}
 	
 	.guarantees-container,
@@ -754,32 +773,98 @@ margin: 20px 10px !important;
 		padding: 0 15px !important;
 	}
 	
-	.guarantees-title,
-	.service-title {
-		font-size: 28px !important;
-		margin-bottom: 10px !important;
-	}
-	
-	.guarantees-subtitle,
-	.service-subtitle {
-		font-size: 16px !important;
-	}
-	
 	.guarantees-content,
 	.service-hero-content {
 		grid-template-columns: 1fr !important;
 		gap: 20px !important;
-		padding: 25px 15px !important;
+		padding: 0 !important;
+		padding-bottom: 30px !important;
+	}
+
+	.guarantees-sidebar {
+		position: static !important;
+		max-height: none !important;
+	}
+	
+	.guarantee-section-header {
+		margin-bottom: 20px !important;
+		padding-bottom: 12px !important;
+	}
+
+	.guarantee-section-title {
+		font-size: 22px !important;
+		margin-bottom: 8px !important;
+	}
+
+	.guarantee-section-description {
+		font-size: 14px !important;
+	}
+
+	.guarantee-cards-grid {
+		gap: 18px !important;
 	}
 	
 	.guarantee-card,
 	.service-card {
-		padding: 20px 15px !important;
+		padding: 20px 16px !important;
+		border-radius: 12px !important;
+	}
+
+	.guarantee-card-icon {
+		font-size: 28px !important;
+		margin-bottom: 12px !important;
+	}
+
+	.guarantee-card-icon-sidebar {
+		font-size: 24px !important;
+		margin-bottom: 10px !important;
 	}
 	
 	.card-title,
 	.service-card-title {
-		font-size: 18px !important;
+		font-size: 17px !important;
+		margin-bottom: 10px !important;
+	}
+
+	.guarantee-card p {
+		font-size: 13px !important;
+		line-height: 1.65 !important;
+	}
+
+	.guarantee-list.modern-list li {
+		font-size: 13px !important;
+		padding: 6px 0 !important;
+		padding-left: 24px !important;
+	}
+
+	.guarantee-list.modern-list li .list-icon {
+		width: 18px !important;
+		height: 18px !important;
+		font-size: 10px !important;
+		top: 6px !important;
+	}
+
+	.guarantee-contact-card {
+		padding: 20px 16px !important;
+	}
+
+	.guarantee-contact-icon {
+		font-size: 36px !important;
+		margin-bottom: 12px !important;
+	}
+
+	.guarantee-contact-card .card-title {
+		font-size: 17px !important;
+	}
+
+	.guarantee-contact-card p {
+		font-size: 13px !important;
+		margin-bottom: 20px !important;
+	}
+
+	.guarantee-contact-btn {
+		padding: 11px 20px !important;
+		font-size: 14px !important;
 	}
 	
 	.service-hero-image {
