@@ -2,9 +2,10 @@
 include('hyst/php.php');
 include_once('hyst/mods/customtexts/proces.php');
 
-$SITE_TITLE = 'Автосервис - Замена Двигателей и КПП в Алматы | Моторленд | Доставка по СНГ';
-$SITE_DESCRIPTION = 'Профессиональная замена и обслуживание контрактных двигателей и КПП в Алматы. Доставка контрактных двигателей по Казахстану и странам СНГ.';
-$SITE_KEYWORDS = 'замена двигателя алматы, автосервис замена КПП, установка контрактного двигателя, доставка двигателей СНГ, контрактные двигатели Россия, контрактные двигатели Беларусь';
+// SEO: Оптимизированные мета-теги страницы сервиса
+$SITE_TITLE = 'Автосервис - Замена Двигателей и КПП в Алматы | Motor Land';
+$SITE_DESCRIPTION = 'Профессиональная замена и обслуживание контрактных двигателей и КПП в Алматы. Диагностика, установка, техническое обслуживание. Доставка по Казахстану и странам СНГ.';
+$SITE_KEYWORDS = 'замена двигателя алматы, автосервис замена КПП, установка контрактного двигателя, диагностика двигателя, техническое обслуживание';
 ?>
 <!doctype html>
 <html lang="ru">
@@ -38,15 +39,25 @@ $SITE_KEYWORDS = 'замена двигателя алматы, автосерв
 {
   "@context": "https://schema.org",
   "@type": "Service",
+  "@id": "https://motor-land.kz/service#service",
   "serviceType": "Автосервис - замена двигателей и КПП",
+  "name": "Замена контрактных двигателей и КПП",
+  "description": "<?=htmlspecialchars($SITE_DESCRIPTION, ENT_QUOTES, 'UTF-8');?>",
   "provider": {
     "@type": "LocalBusiness",
+    "@id": "https://motor-land.kz/#organization",
     "name": "Motor Land",
+    "url": "https://motor-land.kz",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Алматы",
-      "addressCountry": "KZ"
-    }
+      "addressRegion": "Алматы",
+      "addressCountry": {
+        "@type": "Country",
+        "name": "KZ"
+      }
+    },
+    "telephone": "+7-777-144-5445"
   },
   "areaServed": [
     {"@type": "City", "name": "Алматы"},
@@ -63,7 +74,39 @@ $SITE_KEYWORDS = 'замена двигателя алматы, автосерв
     {"@type": "Country", "name": "Turkmenistan"},
     {"@type": "Country", "name": "Uzbekistan"}
   ],
-  "description": "<?=$SITE_DESCRIPTION;?>"
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Услуги автосервиса",
+    "itemListElement": [{
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Замена двигателя",
+        "description": "Профессиональная замена контрактного двигателя с полной диагностикой и гарантией на работы"
+      }
+    }, {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Замена КПП",
+        "description": "Установка контрактных коробок передач (АКПП и МКПП) с заменой масла и фильтров"
+      }
+    }, {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Диагностика",
+        "description": "Компьютерная диагностика двигателя и всех систем автомобиля"
+      }
+    }, {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Техническое обслуживание",
+        "description": "Регулярное ТО для обеспечения долгой и надежной работы агрегата"
+      }
+    }]
+  }
 }
 </script>
 <script type="application/ld+json">

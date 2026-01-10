@@ -81,9 +81,22 @@ try {
 	exit;
 }
 
-$SITE_TITLE = !empty($query['meta_title']) ? htmlspecialchars($query['meta_title'], ENT_QUOTES, 'UTF-8') : (!empty($query['query_text']) ? '✅ ' . htmlspecialchars($query['query_text'], ENT_QUOTES, 'UTF-8') . ' | Motor Land | Доставка по России, Казахстану, Беларуси, СНГ' : 'Запрос | Motor Land | Доставка по СНГ');
-$SITE_DESCRIPTION = !empty($query['meta_description']) ? htmlspecialchars($query['meta_description'], ENT_QUOTES, 'UTF-8') : 'Контрактные двигатели в Алматы. Доставка по России, Казахстану, Беларуси, Украине и всем странам СНГ. Привозные моторы из Малайзии с гарантией.';
-$SITE_KEYWORDS = !empty($query['meta_keywords']) ? htmlspecialchars($query['meta_keywords'], ENT_QUOTES, 'UTF-8') . ', контрактные двигатели Россия, контрактные двигатели Беларусь, контрактные двигатели Украина, контрактные двигатели СНГ, доставка двигателей СНГ' : 'контрактные двигатели, двигатель бу, контрактные двигатели СНГ, контрактные двигатели Россия, контрактные двигатели Беларусь, контрактные двигатели Украина, доставка двигателей СНГ';
+// SEO: Оптимизированные мета-теги для SEO-запросов (без эмодзи в title)
+$query_title = !empty($query['meta_title']) ? trim($query['meta_title']) : (!empty($query['query_text']) ? trim($query['query_text']) : 'Запрос');
+// Убираем эмодзи из title для лучшей SEO-оптимизации
+$query_title = preg_replace('/[\x{1F300}-\x{1F9FF}]/u', '', $query_title);
+$query_title = trim($query_title);
+// Оптимизируем длину title (55-60 символов)
+if (mb_strlen($query_title) > 50) {
+	$query_title = mb_substr($query_title, 0, 47) . '...';
+}
+$SITE_TITLE = $query_title . ' | Motor Land';
+$SITE_DESCRIPTION = !empty($query['meta_description']) ? htmlspecialchars(trim($query['meta_description']), ENT_QUOTES, 'UTF-8') : (!empty($query['query_text']) ? 'Контрактные двигатели ' . htmlspecialchars(trim($query['query_text']), ENT_QUOTES, 'UTF-8') . ' в Алматы. Доставка по России, Казахстану, Беларуси, Украине и всем странам СНГ. Привозные моторы из Малайзии с гарантией.' : 'Контрактные двигатели в Алматы. Доставка по России, Казахстану, Беларуси, Украине и всем странам СНГ. Привозные моторы из Малайзии с гарантией.');
+// Оптимизируем длину description (150-160 символов)
+if (mb_strlen($SITE_DESCRIPTION) > 160) {
+	$SITE_DESCRIPTION = mb_substr($SITE_DESCRIPTION, 0, 157) . '...';
+}
+$SITE_KEYWORDS = !empty($query['meta_keywords']) ? htmlspecialchars(trim($query['meta_keywords']), ENT_QUOTES, 'UTF-8') . ', контрактные двигатели, доставка двигателей СНГ' : (!empty($query['query_text']) ? htmlspecialchars(mb_strtolower(trim($query['query_text'])), ENT_QUOTES, 'UTF-8') . ', контрактные двигатели, доставка двигателей СНГ' : 'контрактные двигатели, двигатель бу, доставка двигателей СНГ');
 ?>
 <!doctype html>
 <html lang="ru">

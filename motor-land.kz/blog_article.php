@@ -259,7 +259,7 @@ try {
 			<!-- Изображение статьи -->
 			<?php if (!empty($article['image'])): ?>
 			<div class="blog-article-image">
-				<img src="<?=htmlspecialchars($article['image'], ENT_QUOTES, 'UTF-8');?>" alt="<?=!empty($article['title']) ? htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') : 'Статья';?>" itemprop="image" loading="eager">
+				<img src="<?=htmlspecialchars($article['image'], ENT_QUOTES, 'UTF-8');?>" alt="<?=!empty($article['title']) ? htmlspecialchars('Статья: ' . $article['title'] . ($article['category'] ? ' - ' . $article['category'] : ''), ENT_QUOTES, 'UTF-8') : 'Статья в блоге Motor Land';?>" itemprop="image" loading="eager" width="1200" height="630">
 			</div>
 			<?php endif; ?>
 			
@@ -343,7 +343,7 @@ try {
 					<article class="blog-card">
 						<a href="/blog/<?=$related['slug'];?>" class="blog-card-link">
 							<div class="blog-card-image">
-								<img src="<?=!empty($related['image']) ? $related['image'] : '/img/logo.webp';?>" alt="<?=htmlspecialchars($related['title'], ENT_QUOTES, 'UTF-8');?>" loading="lazy">
+								<img src="<?=!empty($related['image']) ? $related['image'] : '/img/logo.webp';?>" alt="<?=htmlspecialchars('Похожая статья: ' . $related['title'] . ' - ' . ($related['category'] ?? 'Блог о контрактных двигателях'), ENT_QUOTES, 'UTF-8');?>" loading="lazy" width="400" height="250">
 								<div class="blog-card-category"><?=htmlspecialchars($related['category'], ENT_QUOTES, 'UTF-8');?></div>
 							</div>
 							<div class="blog-card-content">

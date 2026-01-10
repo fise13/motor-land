@@ -1,9 +1,10 @@
 <?php
 include('hyst/php.php');
 
-$SITE_TITLE = 'Контакты | Моторленд - Контрактные Двигатели и КПП в Алматы | Доставка по СНГ';
-$SITE_DESCRIPTION = 'Контакты компании Motor Land в Алматы. Адреса офисов, телефоны, режим работы. Доставка контрактных двигателей по Казахстану и странам СНГ.';
-$SITE_KEYWORDS = 'контакты моторленд, адрес автосервиса алматы, телефон контрактных двигателей, доставка двигателей СНГ, контрактные двигатели Россия, контрактные двигатели Беларусь';
+// SEO: Оптимизированные мета-теги страницы контактов
+$SITE_TITLE = 'Контакты | Моторленд - Контрактные Двигатели Алматы';
+$SITE_DESCRIPTION = 'Контакты компании Motor Land в Алматы. Адреса офисов, телефоны, режим работы. Доставка контрактных двигателей по Казахстану и странам СНГ. Два офиса в Алматы.';
+$SITE_KEYWORDS = 'контакты моторленд, адрес автосервиса алматы, телефон контрактных двигателей, доставка двигателей СНГ';
 ?>
 <!doctype html>
 <html lang="ru">
@@ -37,22 +38,38 @@ $SITE_KEYWORDS = 'контакты моторленд, адрес автосер
 {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
+  "@id": "https://motor-land.kz/contacts#organization",
   "name": "Motor Land",
   "alternateName": "Моторленд",
+  "url": "https://motor-land.kz",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://motor-land.kz/img/logo.webp",
+    "width": 500,
+    "height": 500
+  },
   "image": "https://motor-land.kz/img/logo.webp",
-  "description": "<?=$SITE_DESCRIPTION;?>",
+  "description": "<?=htmlspecialchars($SITE_DESCRIPTION, ENT_QUOTES, 'UTF-8');?>",
   "address": [{
     "@type": "PostalAddress",
     "streetAddress": "РВ-90, 7-линия, 29",
     "addressLocality": "Алматы",
     "addressRegion": "Алматы",
-    "addressCountry": "KZ"
+    "postalCode": "050000",
+    "addressCountry": {
+      "@type": "Country",
+      "name": "KZ"
+    }
   }, {
     "@type": "PostalAddress",
     "streetAddress": "улица Свердлова, 38",
     "addressLocality": "Алматы",
     "addressRegion": "Алматы",
-    "addressCountry": "KZ"
+    "postalCode": "050000",
+    "addressCountry": {
+      "@type": "Country",
+      "name": "KZ"
+    }
   }],
   "geo": {
     "@type": "GeoCoordinates",
@@ -72,6 +89,8 @@ $SITE_KEYWORDS = 'контакты моторленд, адрес автосер
     "closes": "15:00"
   }],
   "priceRange": "$$",
+  "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+  "currenciesAccepted": "KZT, RUB, USD, EUR",
   "areaServed": [
     {"@type": "Country", "name": "Kazakhstan"},
     {"@type": "Country", "name": "Russia"},
@@ -85,6 +104,10 @@ $SITE_KEYWORDS = 'контакты моторленд, адрес автосер
     {"@type": "Country", "name": "Tajikistan"},
     {"@type": "Country", "name": "Turkmenistan"},
     {"@type": "Country", "name": "Uzbekistan"}
+  ],
+  "sameAs": [
+    "https://2gis.kz/almaty/geo/70000001083496996",
+    "https://2gis.kz/almaty/geo/70000001024156353"
   ]
 }
 </script>

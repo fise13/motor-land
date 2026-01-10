@@ -19,17 +19,23 @@ if (hyst_test_id($_GET['id'])) {
 	exit;
 }
 
+// SEO: Оптимизированные мета-теги страницы товара
 $product_name = htmlspecialchars($print['name'], ENT_QUOTES, 'UTF-8');
 $product_meta = htmlspecialchars($print['tmeta'], ENT_QUOTES, 'UTF-8');
-$SITE_TITLE = '✅ Купить Контрактный Мотор '.$product_name.' Алматы | Привозные Моторы Малайзия | Моторленд | Доставка по России, Казахстану, Беларуси, СНГ';
-$SITE_DESCRIPTION = '🔥 Купить контрактный мотор '.$product_name.' в Алматы. Привозные моторы из Малайзии с гарантией. '.$product_meta.'. Двигатель бу Малайзия Алматы. Контрактные двигатели Россия, Казахстан, Беларусь, Украина и все страны СНГ. Быстрая доставка по СНГ. Цена: '.($print['cash']!=0?$print['cash'].' KZT':'уточняйте').'. Звоните сейчас!';
-$SITE_KEYWORDS = 'купить контрактный мотор '.mb_strtolower($product_name).' алматы, привозные моторы '.mb_strtolower($product_name).', двигатель бу малайзия алматы, контрактные двигатели казахстан, контрактные двигатели россия, контрактные двигатели беларусь, контрактные двигатели украина, контрактные двигатели СНГ, '.mb_strtolower($product_meta).', контрактный двигатель Toyota, контрактный двигатель Honda, контрактный двигатель Nissan, двигатель бу, контрактные двигатели, двигатели бу, доставка двигателей СНГ, контрактные моторы Беларусь, контрактные моторы Украина, контрактные двигатели Армения, контрактные двигатели Азербайджан, контрактные двигатели Грузия, контрактные двигатели Кыргызстан, контрактные двигатели Молдова, контрактные двигатели Таджикистан, контрактные двигатели Туркменистан, контрактные двигатели Узбекистан';
+$product_price_text = ($print['cash'] != 0 && $print['cash'] != '0') ? number_format($print['cash'], 0, '.', ' ') . ' KZT' : 'уточняйте';
+// Оптимизированный title (55-60 символов)
+$SITE_TITLE = 'Купить ' . $product_name . ' в Алматы | Контрактный Мотор | Motor Land';
+// Оптимизированное описание (150-160 символов)
+$short_desc = mb_substr(strip_tags($print['stext'] ? $print['stext'] : ''), 0, 80);
+$SITE_DESCRIPTION = 'Купить контрактный мотор ' . $product_name . ' в Алматы. Привозные моторы из Малайзии с гарантией. ' . ($product_meta ? $product_meta . '. ' : '') . 'Доставка по России, Казахстану, Беларуси, СНГ. Цена: ' . $product_price_text;
+$SITE_KEYWORDS = 'купить контрактный мотор ' . mb_strtolower($product_name) . ' алматы, контрактные двигатели казахстан, контрактные двигатели россия, привозные моторы, двигатель бу, доставка двигателей СНГ';
 
 $product_image = get_farrimg($print['images'])[0];
 $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : 'https://motor-land.kz'.$product_image;
 
 $canonical_url = seo_get_product_url($print['id'], $print['name']);
 $full_canonical_url = 'https://motor-land.kz' . $canonical_url;
+$product_url_safe = htmlspecialchars($full_canonical_url, ENT_QUOTES, 'UTF-8');
 
 // SEO: Редирект на ЧПУ URL, если доступ через старый URL с параметром id
 // Проверяем, что это не прямой доступ к ЧПУ URL (чтобы избежать циклов)
@@ -57,22 +63,26 @@ if (preg_match('#^/detal(\.php)?$#', $request_path) && isset($_GET['id']) && !pr
 <link rel="canonical" href="<?=$full_canonical_url;?>"/>
 <meta name="keywords" content="<?=$SITE_KEYWORDS;?>">
 <meta property="og:type" content="product">
-<meta property="og:url" content="https://motor-land.kz/detal?id=<?=$print['id'];?>">
-<meta property="og:title" content="<?=$SITE_TITLE;?>">
-<meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
+<meta property="og:url" content="<?=$product_url_safe;?>">
+<meta property="og:title" content="<?=htmlspecialchars(trim($SITE_TITLE), ENT_QUOTES, 'UTF-8');?>">
+<meta property="og:description" content="<?=htmlspecialchars(trim($SITE_DESCRIPTION), ENT_QUOTES, 'UTF-8');?>">
+<meta property="og:type" content="product">
 <meta property="og:image" content="<?=$product_image_url;?>">
+<meta property="og:image:secure_url" content="<?=$product_image_url;?>">
+<meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="<?=htmlspecialchars('Купить контрактный мотор ' . $product_name . ' Алматы', ENT_QUOTES, 'UTF-8');?>">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:locale:alternate" content="ru_KZ">
 <meta property="og:locale:alternate" content="ru_BY">
 <meta property="og:locale:alternate" content="ru_UA">
 <meta property="og:site_name" content="Motor Land">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
 <?php if ($print['cash'] != 0 && $print['cash'] != '0') { ?>
 <meta property="product:price:amount" content="<?=$print['cash'];?>">
 <meta property="product:price:currency" content="KZT">
+<meta property="product:availability" content="in stock">
+<meta property="product:condition" content="used">
 <?php } ?>
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="<?=$SITE_TITLE;?>">
@@ -92,16 +102,20 @@ if (preg_match('#^/detal(\.php)?$#', $request_path) && isset($_GET['id']) && !pr
   "category": "Контрактные двигатели и привозные моторы из Малайзии",
   "offers": {
     "@type": "Offer",
-    "url": "https://motor-land.kz/detal?id=<?=$print['id'];?>",
+    "@id": "<?=$product_url_safe;?>#offer",
+    "url": "<?=$product_url_safe;?>",
     "priceCurrency": "KZT",
     "price": "<?=($print['cash'] != 0 && $print['cash'] != '0') ? $print['cash'] : '0';?>",
     "priceValidUntil": "<?=date('Y-m-d', strtotime('+1 year'));?>",
     "availability": "https://schema.org/InStock",
     "itemCondition": "https://schema.org/UsedCondition",
+    "availabilityStarts": "<?=date('Y-m-d');?>",
     "seller": {
       "@type": "Organization",
+      "@id": "https://motor-land.kz/#organization",
       "name": "Motor Land",
-      "url": "https://motor-land.kz"
+      "url": "https://motor-land.kz",
+      "logo": "https://motor-land.kz/img/logo.webp"
     },
     "shippingDetails": {
       "@type": "OfferShippingDetails",
@@ -224,8 +238,8 @@ if (preg_match('#^/detal(\.php)?$#', $request_path) && isset($_GET['id']) && !pr
   }, {
     "@type": "ListItem",
     "position": 3,
-    "name": "<?=$product_name;?>",
-    "item": "https://motor-land.kz/detal?id=<?=$print['id'];?>"
+    "name": "<?=htmlspecialchars($product_name, ENT_QUOTES, 'UTF-8');?>",
+    "item": "<?=$product_url_safe;?>"
   }]
 }
 </script>
@@ -247,7 +261,7 @@ if (preg_match('#^/detal(\.php)?$#', $request_path) && isset($_GET['id']) && !pr
 			<meta itemprop="position" content="2" />
 		</span> / 
 		<span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-			<span itemprop="name"><?=$product_name;?></span>
+			<a href="<?=$canonical_url;?>" itemprop="item"><span itemprop="name"><?=$product_name;?></span></a>
 			<meta itemprop="position" content="3" />
 		</span>
 		</div>

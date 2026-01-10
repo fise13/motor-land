@@ -2,9 +2,9 @@
 include('hyst/php.php');
 
 // SEO: Оптимизированные мета-теги для страницы блога
-$SITE_TITLE = 'Блог о Контрактных Двигателях | Полезные Статьи | Моторленд';
-$SITE_DESCRIPTION = 'Полезные статьи о контрактных двигателях, советы по выбору, установке и обслуживанию. Экспертные материалы от специалистов Motor Land.';
-$SITE_KEYWORDS = 'блог контрактные двигатели, статьи о двигателях, как выбрать контрактный двигатель, установка контрактного двигателя, что такое контрактный двигатель';
+$SITE_TITLE = 'Блог о Контрактных Двигателях | Motor Land';
+$SITE_DESCRIPTION = 'Полезные статьи о контрактных двигателях, советы по выбору, установке и обслуживанию. Экспертные материалы от специалистов Motor Land. Читайте полезные советы.';
+$SITE_KEYWORDS = 'блог контрактные двигатели, статьи о двигателях, как выбрать контрактный двигатель, установка контрактного двигателя';
 
 // Загружаем функции блога
 include_once('hyst/mods/blog/proces.php');
@@ -139,7 +139,7 @@ unset($article);
 					<article class="blog-card" itemscope itemtype="https://schema.org/BlogPosting" data-category="<?=$article['category'];?>">
 						<a href="/blog/<?=$article['slug'];?>" itemprop="url" class="blog-card-link">
 							<div class="blog-card-image">
-								<img src="<?=$article['image'];?>" alt="<?=htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8');?>" itemprop="image" loading="lazy">
+								<img src="<?=$article['image'];?>" alt="<?=htmlspecialchars('Статья: ' . $article['title'] . ' - ' . ($article['category'] ?? 'Блог о контрактных двигателях'), ENT_QUOTES, 'UTF-8');?>" itemprop="image" loading="lazy" width="400" height="250">
 								<div class="blog-card-category"><?=$article['category'];?></div>
 							</div>
 							<div class="blog-card-content">

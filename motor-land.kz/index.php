@@ -1,9 +1,10 @@
 <?php
 include('hyst/php.php');
 
-$SITE_TITLE = ' Контрактные Двигатели СНГ | Купить Мотор Алматы | Доставка по России, Казахстану, Беларуси | Motor Land';
-$SITE_DESCRIPTION = ' Контрактные двигатели с гарантией! Доставка по России, Казахстану, Беларуси, Украине и всему СНГ. Привозные моторы из Малайзии. Toyota, Honda, Nissan, Mazda, Mitsubishi. Большой выбор, быстрая доставка, официальная гарантия. Звоните сейчас!';
-$SITE_KEYWORDS = 'купить контрактный мотор Алматы, контрактные двигатели Казахстан, контрактные двигатели Россия, контрактные двигатели Беларусь, контрактные двигатели Украина, контрактные двигатели СНГ, привозные моторы Алматы, двигатель бу Малайзия Алматы, контрактные двигатели алматы, купить мотор б/у, привозные двигатели, контрактный мотор малайзия, контрактный двигатель Toyota, контрактный двигатель Honda, контрактный двигатель Nissan, контрактный двигатель Mazda, контрактный двигатель Mitsubishi, двигатель бу, контрактные двигатели, двигатели бу, двигатель 1NZ, двигатель 2AZ, двигатель 3S, двигатель K24A, двигатель QR25DE, контрактный двигатель Camry, контрактный двигатель CRV, контрактный двигатель Corolla, контрактный двигатель Almera, контрактный двигатель Accord, доставка двигателей СНГ, контрактные моторы Беларусь, контрактные моторы Украина, контрактные двигатели Армения, контрактные двигатели Азербайджан, контрактные двигатели Грузия, контрактные двигатели Кыргызстан, контрактные двигатели Молдова, контрактные двигатели Таджикистан, контрактные двигатели Туркменистан, контрактные двигатели Узбекистан';
+// SEO: Оптимизированные мета-теги главной страницы (длина title: 55-60 символов, description: 150-160 символов)
+$SITE_TITLE = 'Контрактные Двигатели СНГ | Купить Мотор Алматы | Motor Land';
+$SITE_DESCRIPTION = 'Контрактные двигатели с гарантией! Доставка по России, Казахстану, Беларуси, Украине и всему СНГ. Привозные моторы из Малайзии. Toyota, Honda, Nissan, Mazda, Mitsubishi. Большой выбор, быстрая доставка, официальная гарантия.';
+$SITE_KEYWORDS = 'контрактные двигатели, купить контрактный мотор Алматы, контрактные двигатели Казахстан, контрактные двигатели Россия, контрактные двигатели Беларусь, привозные моторы, двигатель бу, контрактный двигатель Toyota, контрактный двигатель Honda, доставка двигателей СНГ';
 
 // Performance: Оптимизированная обработка GET параметров с единой функцией
 $mark = false;
@@ -67,11 +68,14 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 <meta name="keywords" content="<?=$SITE_KEYWORDS;?>">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://motor-land.kz/">
-<meta property="og:title" content="<?=$SITE_TITLE;?>">
-<meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
+<meta property="og:title" content="<?=htmlspecialchars(trim($SITE_TITLE), ENT_QUOTES, 'UTF-8');?>">
+<meta property="og:description" content="<?=htmlspecialchars(trim($SITE_DESCRIPTION), ENT_QUOTES, 'UTF-8');?>">
 <meta property="og:image" content="https://motor-land.kz/img/logo.webp">
+<meta property="og:image:secure_url" content="https://motor-land.kz/img/logo.webp">
+<meta property="og:image:type" content="image/webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Motor Land - Контрактные двигатели и привозные моторы из Малайзии">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:locale:alternate" content="ru_KZ">
 <meta property="og:locale:alternate" content="ru_BY">
@@ -86,6 +90,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 <meta property="og:locale:alternate" content="ru_UZ">
 <meta property="og:site_name" content="Motor Land">
 <meta property="og:type" content="website">
+<meta property="article:publisher" content="https://motor-land.kz">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="https://motor-land.kz/">
 <meta name="twitter:title" content="<?=$SITE_TITLE;?>">
@@ -96,49 +101,80 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": "LocalBusiness",
+  "@id": "https://motor-land.kz/#organization",
   "name": "Motor Land",
   "alternateName": "Моторленд",
   "url": "https://motor-land.kz",
-  "logo": "https://motor-land.kz/img/logo.webp",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://motor-land.kz/img/logo.webp",
+    "width": 500,
+    "height": 500
+  },
+  "image": "https://motor-land.kz/img/logo.webp",
   "description": "Купить контрактный мотор в Алматы. Контрактные двигатели Казахстан, Россия, Беларусь, Украина, СНГ - привозные моторы из Малайзии. Двигатель бу Малайзия Алматы с гарантией. Доставка по странам СНГ.",
   "address": [{
     "@type": "PostalAddress",
     "streetAddress": "РВ-90, 7-линия, 29",
     "addressLocality": "Алматы",
-    "addressCountry": "KZ",
-    "addressRegion": "Алматы"
+    "addressRegion": "Алматы",
+    "postalCode": "050000",
+    "addressCountry": {
+      "@type": "Country",
+      "name": "KZ"
+    }
   }, {
     "@type": "PostalAddress",
     "streetAddress": "улица Свердлова, 38",
     "addressLocality": "Алматы",
-    "addressCountry": "KZ",
-    "addressRegion": "Алматы"
+    "addressRegion": "Алматы",
+    "postalCode": "050000",
+    "addressCountry": {
+      "@type": "Country",
+      "name": "KZ"
+    }
   }],
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "43.238949",
+    "longitude": "76.889709"
+  },
   "contactPoint": [{
     "@type": "ContactPoint",
     "telephone": "+7-777-144-5445",
     "contactType": "Sales",
-    "areaServed": ["KZ", "RU", "BY", "UA", "AM", "AZ", "GE", "KG", "MD", "TJ", "TM", "UZ"],
     "availableLanguage": ["Russian", "Kazakh"],
+    "areaServed": ["KZ", "RU", "BY", "UA", "AM", "AZ", "GE", "KG", "MD", "TJ", "TM", "UZ"],
     "hoursAvailable": {
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
       "opens": "09:00",
-      "closes": "20:00"
+      "closes": "18:00"
     }
   }, {
     "@type": "ContactPoint",
     "telephone": "+7-701-144-5445",
     "contactType": "Sales",
-    "areaServed": ["KZ", "RU", "BY", "UA", "AM", "AZ", "GE", "KG", "MD", "TJ", "TM", "UZ"],
     "availableLanguage": ["Russian", "Kazakh"],
+    "areaServed": ["KZ", "RU", "BY", "UA", "AM", "AZ", "GE", "KG", "MD", "TJ", "TM", "UZ"],
     "hoursAvailable": {
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
       "opens": "09:00",
-      "closes": "20:00"
+      "closes": "18:00"
     }
+  }],
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "opens": "09:00",
+    "closes": "18:00"
+  }, {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": "Saturday",
+    "opens": "10:00",
+    "closes": "15:00"
   }],
   "sameAs": [
     "https://2gis.kz/almaty/geo/70000001083496996",
@@ -153,7 +189,15 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
   },
   "priceRange": "$$",
   "paymentAccepted": "Cash, Credit Card, Bank Transfer",
-  "currenciesAccepted": "KZT, RUB, USD, EUR"
+  "currenciesAccepted": "KZT, RUB, USD, EUR",
+  "makesOffer": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Product",
+      "name": "Контрактные двигатели и КПП",
+      "category": "Автомобильные запчасти"
+    }
+  }
 }
 </script>
 <script type="application/ld+json">
