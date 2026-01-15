@@ -147,19 +147,31 @@
 		const modal = document.getElementById(modalId);
 		if (modal) {
 			// Сохраняем текущую позицию прокрутки
-			const scrollY = window.scrollY;
+			const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
 			
 			// Блокируем прокрутку страницы
 			document.body.style.position = 'fixed';
 			document.body.style.top = `-${scrollY}px`;
+			document.body.style.left = '0';
+			document.body.style.right = '0';
 			document.body.style.width = '100%';
 			document.body.style.overflow = 'hidden';
+			
+			// Также блокируем прокрутку на html элементе
+			document.documentElement.style.overflow = 'hidden';
 			
 			// Открываем модальное окно
 			modal.classList.add('active');
 			
 			// Сохраняем позицию прокрутки в data-атрибут для восстановления
 			modal.setAttribute('data-scroll-y', scrollY);
+			
+			// Убеждаемся, что модальное окно по центру viewport
+			// Прокручиваем модальное окно в начало, если оно длинное
+			const modalContent = modal.querySelector('.modal-content');
+			if (modalContent) {
+				modalContent.scrollTop = 0;
+			}
 			
 			// Фокус на первое поле формы
 			const firstInput = modal.querySelector('input, textarea');
@@ -181,13 +193,21 @@
 			
 			// Восстанавливаем прокрутку страницы
 			const scrollY = modal.getAttribute('data-scroll-y') || '0';
+			
+			// Убираем блокировку прокрутки
 			document.body.style.position = '';
 			document.body.style.top = '';
+			document.body.style.left = '';
+			document.body.style.right = '';
 			document.body.style.width = '';
 			document.body.style.overflow = '';
+			document.documentElement.style.overflow = '';
 			
 			// Восстанавливаем позицию прокрутки
-			window.scrollTo(0, parseInt(scrollY));
+			window.scrollTo({
+				top: parseInt(scrollY),
+				behavior: 'auto'
+			});
 			
 			// Очистка формы
 			const form = modal.querySelector('form');
