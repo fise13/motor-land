@@ -891,11 +891,15 @@ max-height: 280px;
 		width: 100% !important;
 	}
 	
-	.filtersblock button[type="submit"],
-	.filtersblock .sliderform-submit-btn {
+	.filtersblock form > button[type="submit"],
+	.filtersblock form > .sliderform-submit-btn {
 		width: 100% !important;
+		max-width: 100% !important;
 		height: 44px !important;
-		margin-top: 0 !important;
+		margin: 0 !important;
+		align-self: stretch !important;
+		flex-shrink: 0 !important;
+		box-sizing: border-box !important;
 	}
 	
 	/* Адаптивность для формы в слайдере */
@@ -946,13 +950,15 @@ max-height: 280px;
 		gap: 12px !important;
 	}
 	
-	.sliderform button[type="submit"],
-	.sliderform .sliderform-submit-btn {
+	.sliderform form > button[type="submit"],
+	.sliderform form > .sliderform-submit-btn {
 		width: 100% !important;
 		max-width: 100% !important;
 		height: 44px !important;
 		margin: 0 !important;
 		align-self: stretch !important;
+		flex-shrink: 0 !important;
+		box-sizing: border-box !important;
 	}
 	
 	.filtersblock form {

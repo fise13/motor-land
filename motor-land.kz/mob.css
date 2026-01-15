@@ -551,9 +551,11 @@ margin: 20px 10px !important;
 	.sliderform form > .sliderform-submit-btn {
 		width: 100% !important;
 		max-width: 100% !important;
-		margin-left: 0 !important;
-		margin-right: 0 !important;
+		height: 44px !important;
+		margin: 0 !important;
 		align-self: stretch !important;
+		flex-shrink: 0 !important;
+		box-sizing: border-box !important;
 	}
 	
 	/* Гарантируем кликабельность всех элементов внутри формы */
@@ -663,6 +665,7 @@ margin: 20px 10px !important;
 		box-sizing: border-box !important;
 		transition: all 0.3s ease !important;
 		align-self: stretch !important;
+		flex-shrink: 0 !important;
 	}
 	
 	.sliderform button[type="submit"]:hover,
@@ -1133,10 +1136,10 @@ margin: 20px 10px !important;
 		width: 100% !important;
 		max-width: 100% !important;
 		height: 44px !important;
-		margin-top: 0 !important;
-		margin-left: 0 !important;
-		margin-right: 0 !important;
+		margin: 0 !important;
 		align-self: stretch !important;
+		flex-shrink: 0 !important;
+		box-sizing: border-box !important;
 	}
 	
 	.filtersblock input[type="text"] {
