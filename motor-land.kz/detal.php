@@ -30,7 +30,9 @@ $short_desc = mb_substr(strip_tags($print['stext'] ? $print['stext'] : ''), 0, 8
 $SITE_DESCRIPTION = 'Купить контрактный мотор ' . $product_name . ' в Алматы. Привозные моторы из Малайзии с гарантией. ' . ($product_meta ? $product_meta . '. ' : '') . 'Доставка по России, Казахстану, Беларуси, СНГ. Цена: ' . $product_price_text;
 $SITE_KEYWORDS = 'купить контрактный мотор ' . mb_strtolower($product_name) . ' алматы, контрактные двигатели казахстан, контрактные двигатели россия, привозные моторы, двигатель бу, доставка двигателей СНГ';
 
-$product_image = get_farrimg($print['images'])[0];
+// Получаем все изображения для мета-тегов
+$all_product_images = get_farrimg($print['images']);
+$product_image = !empty($all_product_images[0]) ? $all_product_images[0] : '';
 $product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : 'https://motor-land.kz'.$product_image;
 
 $canonical_url = seo_get_product_url($print['id'], $print['name']);
@@ -94,7 +96,21 @@ if (preg_match('#^/detal(\.php)?$#', $request_path) && isset($_GET['id']) && !pr
   "@type": "Product",
   "name": "<?=$product_name;?>",
   "description": "Купить контрактный мотор <?=$product_name;?> в Алматы. Привозные моторы из Малайзии с гарантией. Доставка по России, Казахстану, Беларуси, Украине и всем странам СНГ. <?=htmlspecialchars(strip_tags($print['text'] ? $print['text'] : $print['stext']), ENT_QUOTES, 'UTF-8');?>",
-  "image": "<?=$product_image_url;?>",
+  <?php 
+  // Добавляем все изображения в схему
+  $schema_images = array();
+  foreach ($all_product_images as $img) {
+    if (!empty($img)) {
+      $img_url = (strpos($img, 'http') === 0) ? $img : 'https://motor-land.kz'.$img;
+      $schema_images[] = '"' . htmlspecialchars($img_url, ENT_QUOTES, 'UTF-8') . '"';
+    }
+  }
+  if (count($schema_images) > 1) {
+    echo '"image": [' . implode(', ', $schema_images) . '],';
+  } else {
+    echo '"image": "' . htmlspecialchars($product_image_url, ENT_QUOTES, 'UTF-8') . '",';
+  }
+  ?>
   "brand": {
     "@type": "Brand",
     "name": "Motor Land"
@@ -274,19 +290,47 @@ if (preg_match('#^/detal(\.php)?$#', $request_path) && isset($_GET['id']) && !pr
 			<div class="product-detail-container">
 				<div class="product-image-wrapper">
 					<?php 
-					$product_img = get_optimized_image(get_farrimg($print['images'])[0]);
+					// Получаем ВСЕ фотографии из базы данных
+					$all_images = get_farrimg($print['images']);
+					$product_img = !empty($all_images[0]) ? get_optimized_image($all_images[0]) : ['webp' => '', 'original' => ''];
 					?>
 					<link rel="preload" as="image" href="<?=$product_img['webp'] ?: $product_img['original'];?>">
-			<div class="tovarimage">
+					
+					<!-- Главное изображение -->
+					<div class="tovarimage">
 						<picture>
 							<source srcset="<?=$product_img['webp'] ?: $product_img['original'];?>" type="image/webp">
-							<img src="<?=$product_img['webp'] ?: $product_img['original'];?>" alt="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы из Малайзии, доставка по СНГ';?>" title="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы, доставка по СНГ';?>" itemprop="image" loading="eager" fetchpriority="high" width="600" height="450" decoding="async">
+							<img id="main-product-image" src="<?=$product_img['webp'] ?: $product_img['original'];?>" alt="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы из Малайзии, доставка по СНГ';?>" title="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы, доставка по СНГ';?>" itemprop="image" loading="eager" fetchpriority="high" width="600" height="450" decoding="async">
 						</picture>
-				<?php if ($print['sale'] != 'noting') { ?>
-				<div class="cationsale"><?=$print['sale'];?></div>
-				<?php } ?>
-			</div>
-		</div>
+						<?php if ($print['sale'] != 'noting') { ?>
+						<div class="cationsale"><?=$print['sale'];?></div>
+						<?php } ?>
+					</div>
+					
+					<!-- Галерея миниатюр (если есть больше 1 фотографии) -->
+					<?php if (count($all_images) > 1): ?>
+					<div class="product-gallery-thumbnails" style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+						<?php foreach ($all_images as $index => $img_path): 
+							if (empty($img_path)) continue;
+							$thumb_img = get_optimized_image($img_path);
+							$is_active = $index === 0 ? 'active' : '';
+						?>
+						<div class="gallery-thumb <?=$is_active;?>" 
+							 style="cursor: pointer; border: 2px solid <?=$index === 0 ? '#007bff' : 'transparent';?>; border-radius: 4px; overflow: hidden; width: 80px; height: 80px; flex-shrink: 0;"
+							 data-image-index="<?=$index;?>"
+							 onclick="changeMainImage('<?=$thumb_img['webp'] ?: $thumb_img['original'];?>', <?=$index;?>)">
+							<picture>
+								<source srcset="<?=$thumb_img['webp'] ?: $thumb_img['original'];?>" type="image/webp">
+								<img src="<?=$thumb_img['webp'] ?: $thumb_img['original'];?>" 
+									 alt="Фото <?=$index + 1;?>" 
+									 style="width: 100%; height: 100%; object-fit: cover;"
+									 loading="lazy">
+							</picture>
+						</div>
+						<?php endforeach; ?>
+					</div>
+					<?php endif; ?>
+				</div>
 				
 				<div class="product-info-wrapper">
 					<h1 class="product-title" itemprop="name"><?=$print['name'];?></h1>
@@ -332,6 +376,34 @@ if (preg_match('#^/detal(\.php)?$#', $request_path) && isset($_GET['id']) && !pr
 <?php include("hyst/fbody.php"); ?>
 
 <script defer>
+// Функция для переключения главного изображения в галерее
+function changeMainImage(imageSrc, index) {
+	var mainImg = document.getElementById('main-product-image');
+	if (mainImg) {
+		// Обновляем source и img
+		var picture = mainImg.closest('picture');
+		if (picture) {
+			var source = picture.querySelector('source');
+			if (source) {
+				source.srcset = imageSrc;
+			}
+			mainImg.src = imageSrc;
+		}
+		
+		// Обновляем активную миниатюру
+		var thumbs = document.querySelectorAll('.gallery-thumb');
+		thumbs.forEach(function(thumb, i) {
+			if (i === index) {
+				thumb.style.borderColor = '#007bff';
+				thumb.classList.add('active');
+			} else {
+				thumb.style.borderColor = 'transparent';
+				thumb.classList.remove('active');
+			}
+		});
+	}
+}
+
 (function() {
 	function waitForJQuery(callback) {
 		if (typeof window.jQuery !== 'undefined' && typeof window.$ !== 'undefined') {
