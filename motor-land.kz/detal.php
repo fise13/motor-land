@@ -197,7 +197,7 @@ $parsed_attributes = parse_product_attributes($product_data['attributes_opt'], $
 	</script>
 	
 	<!-- Подключение стилей карточки товара -->
-	<link rel="stylesheet" href="/assets/css/product-card.css?v=<?=time();?>&fix=6">
+	<link rel="stylesheet" href="/assets/css/product-card.css?v=<?=time();?>&fix=7">
 </head>
 <body>
 <?php include("hyst/sbody.php"); ?>

@@ -532,11 +532,16 @@
 /* Overlay - фиксированный контейнер на весь viewport */
 .modal {
 	position: fixed;
-	inset: 0;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 	width: 100vw;
 	height: 100vh;
 	/* iOS Safari fix: используем -webkit-fill-available для корректной высоты */
 	height: -webkit-fill-available;
+	min-width: 100vw;
+	min-height: 100vh;
 	z-index: 99999;
 	display: flex;
 	align-items: center;
@@ -550,8 +555,7 @@
 	/* Убеждаемся, что нет влияния родительских элементов */
 	transform: none;
 	will-change: opacity, visibility;
-	/* Изолируем от родительских стилей */
-	contain: layout style paint;
+	/* НЕ используем contain - он может ограничивать размер overlay */
 }
 
 .modal.active {
@@ -560,15 +564,27 @@
 	pointer-events: auto;
 }
 
-/* Фон модального окна */
+/* Фон модального окна - должен полностью покрывать viewport */
 .modal-overlay {
 	position: absolute;
-	inset: 0;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 	width: 100%;
 	height: 100%;
+	/* Гарантируем полное покрытие родителя (.modal) */
+	min-width: 100%;
+	min-height: 100%;
 	background: rgba(0, 0, 0, 0.6);
 	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
 	z-index: 1;
+	/* Убеждаемся, что overlay покрывает весь экран */
+	margin: 0;
+	padding: 0;
+	/* Убираем любые ограничения размера */
+	box-sizing: border-box;
 }
 
 /* Контент модального окна - центрируется через flex родителя */
@@ -895,6 +911,19 @@
 		height: 100vh !important;
 		/* iOS Safari fix */
 		height: -webkit-fill-available !important;
+		min-width: 100vw !important;
+		min-height: 100vh !important;
+		top: 0 !important;
+		left: 0 !important;
+		right: 0 !important;
+		bottom: 0 !important;
+	}
+	
+	.modal-overlay {
+		min-width: 100% !important;
+		min-height: 100% !important;
+		width: 100% !important;
+		height: 100% !important;
 		top: 0 !important;
 		left: 0 !important;
 		right: 0 !important;
