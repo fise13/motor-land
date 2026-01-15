@@ -32,7 +32,20 @@ $hyst_admin_data_sql = $_DB_CONECT->query("SELECT id FROM ".AUT_NAME." WHERE ".A
 if (mysqli_num_rows ($hyst_admin_data_sql) != 0) {
 $_HYST_ADMIN_SETUP = FALSE;
 
-	if (hyst_test_val($_SESSION[AUSK_LOGIN],REGEXP_MAIL) && hyst_test_val ($_SESSION[AUSK_PASSW],REGEXP_MD5)) {
+	// Проверяем наличие сессии - поддерживаем как старый формат (MD5), так и новый (bcrypt)
+	$session_pass_valid = false;
+	if (isset($_SESSION[AUSK_PASSW])) {
+		// Проверяем формат: если это bcrypt (начинается с $2y$), используем более гибкую проверку
+		if (strpos($_SESSION[AUSK_PASSW], '$2y$') === 0 || strpos($_SESSION[AUSK_PASSW], '$2a$') === 0 || strpos($_SESSION[AUSK_PASSW], '$2b$') === 0) {
+			// Новый формат bcrypt - проверяем только что это не пустая строка и содержит допустимые символы
+			$session_pass_valid = (strlen($_SESSION[AUSK_PASSW]) >= 60 && preg_match('/^[0-9a-zA-Z\.\/\$]+$/', $_SESSION[AUSK_PASSW]));
+		} else {
+			// Старый формат MD5
+			$session_pass_valid = hyst_test_val($_SESSION[AUSK_PASSW], REGEXP_MD5);
+		}
+	}
+
+	if (hyst_test_val($_SESSION[AUSK_LOGIN],REGEXP_MAIL) && $session_pass_valid) {
 		
 		// Security: Используем prepared statements для защиты от SQL инъекций
 		$email = $_SESSION[AUSK_LOGIN];
