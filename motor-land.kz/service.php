@@ -167,7 +167,63 @@ $SITE_KEYWORDS = 'замена двигателя алматы, автосерв
 							}
 							?>
 						</div>
-						<div class="service-hero-image" style="background-image: url(/cms_img/2025-02/1740464745_67bd626973430.webp);"></div>
+						<!-- Слайдер фотографий автосервиса -->
+						<div class="service-gallery-slider">
+							<?php
+							// Массив фотографий автосервиса
+							$service_images = [
+								'/cms_img/2025-02/1740464745_67bd626973430.webp', // Основное фото
+								// Добавьте здесь пути к другим фотографиям автосервиса
+								// Например: '/cms_img/2025-02/photo2.webp',
+								// '/cms_img/2025-02/photo3.webp',
+							];
+							
+							// Если есть только одно изображение, показываем его без слайдера
+							if (count($service_images) > 1):
+							?>
+							<div class="service-slider-container">
+								<div class="service-slider-wrapper">
+									<?php foreach ($service_images as $index => $img_path): ?>
+									<div class="service-slide <?php echo $index === 0 ? 'active' : ''; ?>" data-slide="<?=$index;?>">
+										<picture>
+											<source srcset="<?=$img_path;?>" type="image/webp">
+											<img src="<?=$img_path;?>" 
+												 alt="Автосервис Motor Land - фото <?=$index + 1;?>" 
+												 loading="<?=$index === 0 ? 'eager' : 'lazy';?>"
+												 style="width: 100%; height: 100%; object-fit: cover;">
+										</picture>
+									</div>
+									<?php endforeach; ?>
+								</div>
+								
+								<!-- Навигация слайдера -->
+								<div class="service-slider-nav">
+									<button class="service-slider-btn service-slider-prev" aria-label="Предыдущее фото">
+										<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+											<path d="M15 18l-6-6 6-6"/>
+										</svg>
+									</button>
+									<button class="service-slider-btn service-slider-next" aria-label="Следующее фото">
+										<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+											<path d="M9 18l6-6-6-6"/>
+										</svg>
+									</button>
+								</div>
+								
+								<!-- Индикаторы (точки) -->
+								<div class="service-slider-dots">
+									<?php foreach ($service_images as $index => $img_path): ?>
+									<button class="service-slider-dot <?php echo $index === 0 ? 'active' : ''; ?>" 
+											data-slide="<?=$index;?>" 
+											aria-label="Перейти к фото <?=$index + 1;?>"></button>
+									<?php endforeach; ?>
+								</div>
+							</div>
+							<?php else: ?>
+							<!-- Если только одно изображение, показываем его без слайдера -->
+							<div class="service-hero-image" style="background-image: url(<?=$service_images[0];?>);"></div>
+							<?php endif; ?>
+						</div>
 					</div>
 				</div>
 
@@ -211,6 +267,146 @@ $SITE_KEYWORDS = 'замена двигателя алматы, автосерв
 
 <?php include("des/foter.php"); ?>
 <?php include("hyst/fbody.php"); ?>
+
+<script>
+(function() {
+	// Инициализация слайдера фотографий автосервиса
+	function initServiceSlider() {
+		var sliderContainer = document.querySelector('.service-slider-container');
+		if (!sliderContainer) return;
+		
+		var slides = sliderContainer.querySelectorAll('.service-slide');
+		if (slides.length <= 1) return; // Если слайд один, слайдер не нужен
+		
+		var currentSlide = 0;
+		var dots = sliderContainer.querySelectorAll('.service-slider-dot');
+		var prevBtn = sliderContainer.querySelector('.service-slider-prev');
+		var nextBtn = sliderContainer.querySelector('.service-slider-next');
+		var autoSlideInterval = null;
+		
+		// Функция показа слайда
+		function showSlide(index) {
+			// Убираем активный класс со всех слайдов
+			slides.forEach(function(slide, i) {
+				slide.classList.remove('active');
+				if (dots[i]) {
+					dots[i].classList.remove('active');
+				}
+			});
+			
+			// Добавляем активный класс к текущему слайду
+			if (slides[index]) {
+				slides[index].classList.add('active');
+			}
+			if (dots[index]) {
+				dots[index].classList.add('active');
+			}
+			
+			currentSlide = index;
+		}
+		
+		// Переход к следующему слайду
+		function nextSlide() {
+			var next = (currentSlide + 1) % slides.length;
+			showSlide(next);
+		}
+		
+		// Переход к предыдущему слайду
+		function prevSlide() {
+			var prev = (currentSlide - 1 + slides.length) % slides.length;
+			showSlide(prev);
+		}
+		
+		// Обработчики для кнопок
+		if (nextBtn) {
+			nextBtn.addEventListener('click', function(e) {
+				e.preventDefault();
+				nextSlide();
+				resetAutoSlide();
+			});
+		}
+		
+		if (prevBtn) {
+			prevBtn.addEventListener('click', function(e) {
+				e.preventDefault();
+				prevSlide();
+				resetAutoSlide();
+			});
+		}
+		
+		// Обработчики для точек
+		dots.forEach(function(dot, index) {
+			dot.addEventListener('click', function(e) {
+				e.preventDefault();
+				showSlide(index);
+				resetAutoSlide();
+			});
+		});
+		
+		// Автоматическая смена слайдов
+		function startAutoSlide() {
+			autoSlideInterval = setInterval(nextSlide, 5000); // Меняем каждые 5 секунд
+		}
+		
+		function resetAutoSlide() {
+			if (autoSlideInterval) {
+				clearInterval(autoSlideInterval);
+			}
+			startAutoSlide();
+		}
+		
+		// Остановка автопрокрутки при наведении
+		sliderContainer.addEventListener('mouseenter', function() {
+			if (autoSlideInterval) {
+				clearInterval(autoSlideInterval);
+			}
+		});
+		
+		sliderContainer.addEventListener('mouseleave', function() {
+			startAutoSlide();
+		});
+		
+		// Запускаем автопрокрутку
+		startAutoSlide();
+		
+		// Поддержка свайпов на мобильных устройствах
+		var touchStartX = 0;
+		var touchEndX = 0;
+		
+		sliderContainer.addEventListener('touchstart', function(e) {
+			touchStartX = e.changedTouches[0].screenX;
+		}, { passive: true });
+		
+		sliderContainer.addEventListener('touchend', function(e) {
+			touchEndX = e.changedTouches[0].screenX;
+			handleSwipe();
+		}, { passive: true });
+		
+		function handleSwipe() {
+			var swipeThreshold = 50;
+			var diff = touchStartX - touchEndX;
+			
+			if (Math.abs(diff) > swipeThreshold) {
+				if (diff > 0) {
+					// Свайп влево - следующий слайд
+					nextSlide();
+				} else {
+					// Свайп вправо - предыдущий слайд
+					prevSlide();
+				}
+				resetAutoSlide();
+			}
+		}
+	}
+	
+	// Инициализация при загрузке страницы
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initServiceSlider);
+	} else {
+		initServiceSlider();
+	}
+})();
+</script>
 
 </body>
 </html>

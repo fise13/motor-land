@@ -4155,6 +4155,137 @@ to {
 	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
+/* Слайдер фотографий автосервиса */
+.service-gallery-slider {
+	width: 100%;
+	position: relative;
+}
+
+.service-slider-container {
+	position: relative;
+	width: 100%;
+	height: 400px;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+	background: #f5f5f5;
+}
+
+.service-slider-wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.service-slide {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	transition: opacity 0.5s ease-in-out;
+	z-index: 1;
+}
+
+.service-slide.active {
+	opacity: 1;
+	z-index: 2;
+}
+
+.service-slide img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+/* Кнопки навигации слайдера */
+.service-slider-nav {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	padding: 0 15px;
+	z-index: 10;
+	pointer-events: none;
+}
+
+.service-slider-btn {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.9);
+	border: none;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+	transition: all 0.3s ease;
+	pointer-events: all;
+	color: #1a1a1a;
+}
+
+.service-slider-btn:hover {
+	background: rgba(255, 255, 255, 1);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+	transform: scale(1.1);
+}
+
+.service-slider-btn:active {
+	transform: scale(0.95);
+}
+
+.service-slider-btn svg {
+	width: 24px;
+	height: 24px;
+}
+
+.service-slider-prev {
+	left: 15px;
+}
+
+.service-slider-next {
+	right: 15px;
+}
+
+/* Индикаторы (точки) */
+.service-slider-dots {
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	gap: 10px;
+	z-index: 10;
+}
+
+.service-slider-dot {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	border: 2px solid rgba(255, 255, 255, 0.8);
+	background: rgba(255, 255, 255, 0.5);
+	cursor: pointer;
+	transition: all 0.3s ease;
+	padding: 0;
+}
+
+.service-slider-dot:hover {
+	background: rgba(255, 255, 255, 0.8);
+	transform: scale(1.2);
+}
+
+.service-slider-dot.active {
+	background: rgba(255, 255, 255, 1);
+	border-color: rgba(255, 255, 255, 1);
+	width: 32px;
+	border-radius: 6px;
+}
+
 /* Секция услуг */
 .service-services {
 	margin-bottom: 80px;
@@ -4341,6 +4472,21 @@ to {
 		order: -1;
 		height: 300px;
 	}
+	
+	.service-slider-container {
+		height: 300px;
+		order: -1;
+	}
+	
+	.service-slider-btn {
+		width: 40px;
+		height: 40px;
+	}
+	
+	.service-slider-btn svg {
+		width: 20px;
+		height: 20px;
+	}
 
 	.service-cards {
 		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -4372,6 +4518,35 @@ to {
 
 	.service-hero-image {
 		height: 250px;
+	}
+	
+	.service-slider-container {
+		height: 250px;
+	}
+	
+	.service-slider-btn {
+		width: 36px;
+		height: 36px;
+		padding: 0 10px;
+	}
+	
+	.service-slider-btn svg {
+		width: 18px;
+		height: 18px;
+	}
+	
+	.service-slider-dots {
+		bottom: 10px;
+		gap: 8px;
+	}
+	
+	.service-slider-dot {
+		width: 10px;
+		height: 10px;
+	}
+	
+	.service-slider-dot.active {
+		width: 24px;
 	}
 
 	.service-section-title {
