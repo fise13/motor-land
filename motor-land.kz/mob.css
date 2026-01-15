@@ -43,11 +43,13 @@
 
 	
 	.sliderbtns {
+		position: static !important;
 		bottom: auto !important;
-		top: 120px !important;
-		left: 50px !important;
-		width: calc(100% - 100px) !important;
+		top: auto !important;
+		left: auto !important;
+		width: calc(100% - 30px) !important;
 		max-width: 400px !important;
+		margin: 0 auto 20px auto !important;
 		background: transparent !important;
 		backdrop-filter: none !important;
 		-webkit-backdrop-filter: none !important;
@@ -500,8 +502,16 @@ margin: 20px 10px !important;
 	}
 
 	.titlephon {
-	width: 340px;
-	height: 300px;
+		position: static !important;
+		left: auto !important;
+		top: auto !important;
+		width: calc(100% - 30px) !important;
+		max-width: 100% !important;
+		font-size: 24px !important;
+		text-align: center !important;
+		margin: 20px 15px 15px 15px !important;
+		padding: 0 !important;
+		line-height: 1.3 !important;
 	}
 
 	.sliderform {
@@ -522,16 +532,28 @@ margin: 20px 10px !important;
 	}
 	
 	.sliderform form {
+		display: flex !important;
 		flex-direction: column !important;
 		gap: 12px !important;
 		align-items: stretch !important;
+		width: 100% !important;
 	}
 	
 	.sliderform .maipttee {
+		display: grid !important;
 		grid-template-columns: 1fr !important;
 		width: 100% !important;
 		max-width: 100% !important;
 		gap: 12px !important;
+	}
+	
+	.sliderform form > button[type="submit"],
+	.sliderform form > .sliderform-submit-btn {
+		width: 100% !important;
+		max-width: 100% !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		align-self: stretch !important;
 	}
 	
 	/* Гарантируем кликабельность всех элементов внутри формы */
@@ -628,8 +650,9 @@ margin: 20px 10px !important;
 	.sliderform button[type="submit"],
 	.sliderform .sliderform-submit-btn {
 		width: 100% !important;
+		max-width: 100% !important;
 		height: 44px !important;
-		margin-top: 0 !important;
+		margin: 0 !important;
 		background: rgba(255, 255, 255, 0.25) !important;
 		border: 1px solid rgba(255, 255, 255, 0.3) !important;
 		border-radius: 8px !important;
@@ -639,6 +662,7 @@ margin: 20px 10px !important;
 		padding: 0 !important;
 		box-sizing: border-box !important;
 		transition: all 0.3s ease !important;
+		align-self: stretch !important;
 	}
 	
 	.sliderform button[type="submit"]:hover,
@@ -1079,12 +1103,15 @@ margin: 20px 10px !important;
 	}
 	
 	.filtersblock form {
+		display: flex !important;
 		flex-direction: column !important;
 		gap: 12px !important;
 		align-items: stretch !important;
+		width: 100% !important;
 	}
 	
 	.filtersblock .maipttee {
+		display: grid !important;
 		grid-template-columns: 1fr !important;
 		width: 100% !important;
 		max-width: 100% !important;
@@ -1101,11 +1128,15 @@ margin: 20px 10px !important;
 		width: 100% !important;
 	}
 	
-	.filtersblock button[type="submit"],
-	.filtersblock .sliderform-submit-btn {
+	.filtersblock form > button[type="submit"],
+	.filtersblock form > .sliderform-submit-btn {
 		width: 100% !important;
+		max-width: 100% !important;
 		height: 44px !important;
 		margin-top: 0 !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		align-self: stretch !important;
 	}
 	
 	.filtersblock input[type="text"] {

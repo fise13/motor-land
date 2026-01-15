@@ -930,11 +930,54 @@ max-height: 280px;
 		width: 100% !important;
 	}
 	
+	.sliderform form {
+		display: flex !important;
+		flex-direction: column !important;
+		gap: 12px !important;
+		align-items: stretch !important;
+		width: 100% !important;
+	}
+	
+	.sliderform .maipttee {
+		display: grid !important;
+		grid-template-columns: 1fr !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		gap: 12px !important;
+	}
+	
 	.sliderform button[type="submit"],
 	.sliderform .sliderform-submit-btn {
 		width: 100% !important;
+		max-width: 100% !important;
 		height: 44px !important;
-		margin-top: 0 !important;
+		margin: 0 !important;
+		align-self: stretch !important;
+	}
+	
+	.filtersblock form {
+		display: flex !important;
+		flex-direction: column !important;
+		gap: 12px !important;
+		align-items: stretch !important;
+		width: 100% !important;
+	}
+	
+	.filtersblock .maipttee {
+		display: grid !important;
+		grid-template-columns: 1fr !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		gap: 12px !important;
+	}
+	
+	.filtersblock button[type="submit"],
+	.filtersblock .sliderform-submit-btn {
+		width: 100% !important;
+		max-width: 100% !important;
+		height: 44px !important;
+		margin: 0 !important;
+		align-self: stretch !important;
 	}
 }
 
