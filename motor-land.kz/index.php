@@ -2,7 +2,7 @@
 include('hyst/php.php');
 
 // SEO: Оптимизированные мета-теги главной страницы (длина title: 55-60 символов, description: 150-160 символов)
-$SITE_TITLE = 'Контрактные Двигатели СНГ | Купить Мотор Алматы | Motor Land';
+$SITE_TITLE = 'Контрактные Двигатели  | Купить Мотор Алматы | Motor Land';
 $SITE_DESCRIPTION = 'Контрактные двигатели с гарантией! Доставка по России, Казахстану, Беларуси, Украине и всему СНГ. Привозные моторы из Малайзии. Toyota, Honda, Nissan, Mazda, Mitsubishi. Большой выбор, быстрая доставка, официальная гарантия.';
 $SITE_KEYWORDS = 'контрактные двигатели, купить контрактный мотор Алматы, контрактные двигатели Казахстан, контрактные двигатели Россия, контрактные двигатели Беларусь, привозные моторы, двигатель бу, контрактный двигатель Toyota, контрактный двигатель Honda, доставка двигателей СНГ';
 
@@ -345,10 +345,10 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		
 		<form method="get" action="catalog.php" aria-labelledby="search-form-label">
 			<div class="maipttee">
-				<div class="meinputer" style="border: solid 1px white;"><div class="madiv" data-val="Марка"><?php if (isset($_GET['mk']) && $_GET['mk'] != '') { echo htmlspecialchars($_GET['mk'], ENT_QUOTES, 'UTF-8'); } else { echo "Марка"; } ?></div>
+				<div class="meinputer"><div class="madiv" data-val="Марка"><?php if (isset($_GET['mk']) && $_GET['mk'] != '') { echo htmlspecialchars($_GET['mk'], ENT_QUOTES, 'UTF-8'); } ?></div>
 					<input type="hidden" name="mk" value="<?php if (isset($_GET['mk']) && $_GET['mk'] != '') { echo htmlspecialchars($_GET['mk'], ENT_QUOTES, 'UTF-8'); } else { echo ""; } ?>">
-					<div class="btmmearrow" style="font-size: 17px;">&#9660;</div>
-					<div class="ddwnblock" style="border-top: solid 1px white; border-bottom: solid 1px white; border-right: solid 1px white; border-left: solid 1px white;">
+					<div class="btmmearrow">&#9660;</div>
+					<div class="ddwnblock">
 						<?php
 						$parent_id = 'noting';
 						$stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_category WHERE idp = ? ORDER BY id ASC");
@@ -358,7 +358,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 						if ($tmp->num_rows != 0) {
 							while($get = $tmp->fetch_array()):
 							?>
-							<div style="color: black" data-id="<?=$get['id'];?>"><?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?></div>
+							<div data-id="<?=$get['id'];?>"><?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?></div>
 							<?php
 							endwhile;
 						}
@@ -367,10 +367,10 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 					</div>
 				</div>
 				
-				<div class="meinputer" style="border: solid 1px white;"><div class="madiv" data-val="Модель"><?php if (isset($_GET['ml']) && $_GET['ml'] != '') { echo htmlspecialchars($_GET['ml'], ENT_QUOTES, 'UTF-8'); } else { echo "Модель"; } ?></div>
+				<div class="meinputer"><div class="madiv" data-val="Модель"><?php if (isset($_GET['ml']) && $_GET['ml'] != '') { echo htmlspecialchars($_GET['ml'], ENT_QUOTES, 'UTF-8'); } ?></div>
 					<input type="hidden" name="ml" value="<?php if (isset($_GET['ml']) && $_GET['ml'] != '') { echo htmlspecialchars($_GET['ml'], ENT_QUOTES, 'UTF-8'); } else { echo ""; } ?>">
-					<div class="btmmearrow" style="font-size: 17px;">&#9660;</div>
-					<div class="ddwnblock" id="modellist" style="border-top: solid 1px white; border-bottom: solid 1px white; border-right: solid 1px white; border-left: solid 1px white;">
+					<div class="btmmearrow">&#9660;</div>
+					<div class="ddwnblock" id="modellist">
 						<?php
 						if ($mark) {
 							$stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_category WHERE idp = ? ORDER BY id ASC");
@@ -380,7 +380,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 							if ($tmp->num_rows != 0) {
 								while($get = $tmp->fetch_array()):
 								?>
-								<div style="color: black" data-id="<?=$get['id'];?>"><?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?></div>
+								<div data-id="<?=$get['id'];?>"><?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?></div>
 								<?php
 								endwhile;
 							}
@@ -390,10 +390,10 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 					</div>
 				</div>
 				
-				<div class="meinputer" style="border-top: solid 1px white; border: solid 1px white;"><div class="madiv"><?php if (isset($_GET['yr']) && $_GET['yr'] != '') { echo htmlspecialchars($_GET['yr'], ENT_QUOTES, 'UTF-8'); } else { echo "Год"; } ?></div>
+				<div class="meinputer"><div class="madiv" data-val="Год"><?php if (isset($_GET['yr']) && $_GET['yr'] != '') { echo htmlspecialchars($_GET['yr'], ENT_QUOTES, 'UTF-8'); } ?></div>
 					<input type="hidden" name="yr" value="<?php if (isset($_GET['yr']) && $_GET['yr'] != '') { echo htmlspecialchars($_GET['yr'], ENT_QUOTES, 'UTF-8'); } else { echo ""; } ?>">
-					<div class="btmmearrow" style="font-size: 17px;">&#9660;</div>
-					<div class="ddwnblock" id="yearlist" style="overflow-y: scroll; border-top: solid 1px white; border-bottom: solid 1px white; border-right: solid 1px white; border-left: solid 1px white;">
+					<div class="btmmearrow">&#9660;</div>
+					<div class="ddwnblock" id="yearlist" style="overflow-y: scroll;">
 						<?php
 						if ($mode) {
 							$mode_pattern = '[' . $mode . ']';
@@ -408,7 +408,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 							if ($sql->num_rows != 0) {
 								while($get = $sql->fetch_array()):
 								?>
-								<div style="color: black" data-id="<?=$get['id'];?>"><?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?></div>
+								<div data-id="<?=$get['id'];?>"><?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?></div>
 								<?php
 								endwhile;
 							}
@@ -419,6 +419,10 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 				</div>
 			</div>
 			<button type="submit" name="sear" class="sliderform-submit-btn" aria-label="Найти товары по параметрам" title="Найти товары">
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<circle cx="11" cy="11" r="8"></circle>
+					<path d="m21 21-4.35-4.35"></path>
+				</svg>
 				<span class="sr-only">Найти товары</span>
 			</button>
 		</form>
