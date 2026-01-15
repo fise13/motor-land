@@ -60,7 +60,6 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 </script>
 <?php include("hyst/head.php"); ?>
 <link rel="canonical" href="https://motor-land.kz/catalog"/>
-<link rel="stylesheet" href="/assets/css/catalog-cards.css?v=<?=time();?>">
 <meta name="keywords" content="<?=$SITE_KEYWORDS;?>">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://motor-land.kz/catalog">
@@ -266,140 +265,29 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		if ($tmps->num_rows != 0) { 
 			while($get = $tmps->fetch_array()):
 		?>
-		<article class="catalog-product-card" itemscope itemtype="https://schema.org/Product" role="article" aria-labelledby="product-title-<?=$get['id'];?>">
-			<!-- Изображение товара -->
-			<div class="catalog-product-image">
-				<a href="/detal?id=<?=$get['id'];?>" itemprop="url" aria-label="Подробнее о товаре <?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>">
-					<?php 
-					$product_img = get_optimized_image(get_farrimg($get['images'])[0]);
-					?>
-					<picture>
-						<source srcset="<?=$product_img['webp'] ?: $product_img['original'];?>" type="image/webp">
-						<img 
-							src="<?=$product_img['webp'] ?: $product_img['original'];?>" 
-							alt="<?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>" 
-							itemprop="image"
-							loading="lazy"
-							class="catalog-product-img">
-					</picture>
-				</a>
-				<?php if ($get['sale'] != 'noting') { ?>
-				<div class="catalog-product-badge catalog-product-badge-sale" aria-label="Скидка: <?=htmlspecialchars($get['sale'], ENT_QUOTES, 'UTF-8');?>">
-					<?=$get['sale'];?>
-				</div>
-				<?php } ?>
-				<?php if ($get['instock'] > 0) { ?>
-				<div class="catalog-product-badge catalog-product-badge-stock">
-					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-						<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-						<polyline points="22 4 12 14.01 9 11.01"></polyline>
-					</svg>
-					В наличии
-				</div>
+		<article class="toverblock" itemscope itemtype="https://schema.org/Product" role="article" aria-labelledby="product-title-<?=$get['id'];?>">
+			<a href="/detal?id=<?=$get['id'];?>" itemprop="url" aria-label="Подробнее о товаре <?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>">
+				<?php 
+				$product_img = get_optimized_image(get_farrimg($get['images'])[0]);
+				?>
+				<div class="toverimg" data-bg-src="<?=$product_img['webp'] ?: $product_img['original'];?>" aria-label="<?=htmlspecialchars('Купить контрактный мотор '.$get['name'].' Алматы - привозные моторы из Малайзии, доставка по СНГ', ENT_QUOTES, 'UTF-8');?>" itemprop="image" role="img">
+			<?php if ($get['sale'] != 'noting') { ?>
+			<div class="cationsale" aria-label="Скидка: <?=htmlspecialchars($get['sale'], ENT_QUOTES, 'UTF-8');?>"><?=$get['sale'];?></div>
+			<?php } ?>
+			</div></a>
+			<h2 id="product-title-<?=$get['id'];?>" class="tovertitle" itemprop="name"><?=$get['name'];?></h2>
+			<div class="tovaropis" itemprop="description" aria-label="Описание товара">
+				<?=$get['stext'];?>
+			</div>
+			<div class="tovercena" itemprop="offers" itemscope itemtype="https://schema.org/Offer" aria-label="Цена товара">
+				<?php if ($get['cash'] != 0 && $get['cash'] != '0') { ?>
+				<span itemprop="price" aria-label="Цена"><?=$get['cash'];?></span>
+				<span itemprop="priceCurrency" content="KZT" aria-label="валюта"> KZT</span>
+				<?php } else { ?>
+				<span aria-label="Цена по запросу">Цена по запросу</span>
 				<?php } ?>
 			</div>
-			
-			<!-- Информация о товаре -->
-			<div class="catalog-product-info">
-				<!-- 1. Название двигателя (H1, жирно) -->
-				<h2 id="product-title-<?=$get['id'];?>" class="catalog-product-title" itemprop="name">
-					<a href="/detal?id=<?=$get['id'];?>" itemprop="url"><?=$get['name'];?></a>
-				</h2>
-				
-				<!-- 2. Статус наличия (зелёный бейдж) -->
-				<?php if ($get['instock'] > 0) { ?>
-				<div class="catalog-product-status">
-					<span class="status-badge status-badge-in-stock">
-						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-							<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-							<polyline points="22 4 12 14.01 9 11.01"></polyline>
-						</svg>
-						В наличии
-					</span>
-				</div>
-				<?php } ?>
-				
-				<!-- 3. Цена или статус (как бейдж) -->
-				<div class="catalog-product-price-block" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-					<?php if ($get['cash'] != 0 && $get['cash'] != '0') { ?>
-					<div class="catalog-product-price">
-						<span class="catalog-price-value" itemprop="price"><?=number_format((int)$get['cash'], 0, '.', ' ');?></span>
-						<span class="catalog-price-currency" itemprop="priceCurrency" content="KZT"> KZT</span>
-					</div>
-					<?php } else { ?>
-					<div class="catalog-price-badge">
-						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-						</svg>
-						<span>Цена по запросу</span>
-					</div>
-					<?php } ?>
-					<meta itemprop="availability" href="https://schema.org/InStock" />
-				</div>
-				
-				<!-- 4. Краткие характеристики (список с иконками) -->
-				<div class="catalog-product-specs">
-					<div class="catalog-spec-item">
-						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<circle cx="12" cy="12" r="10"></circle>
-							<polyline points="12 6 12 12 16 14"></polyline>
-						</svg>
-						<span>Контрактный</span>
-					</div>
-					<div class="catalog-spec-item">
-						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<circle cx="12" cy="12" r="10"></circle>
-							<line x1="2" y1="12" x2="22" y2="12"></line>
-							<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-						</svg>
-						<span>Малайзия</span>
-					</div>
-					<div class="catalog-spec-item">
-						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<rect x="3" y="8" width="18" height="4" rx="1"></rect>
-							<path d="M12 8v13"></path>
-							<path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path>
-						</svg>
-						<span>Гарантия 14 дней</span>
-					</div>
-				</div>
-				
-				<!-- 5. Блок доверия (мини) -->
-				<div class="catalog-product-trust">
-					<div class="catalog-trust-item">
-						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-							<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-							<polyline points="22 4 12 14.01 9 11.01"></polyline>
-						</svg>
-						<span>Проверен</span>
-					</div>
-					<div class="catalog-trust-item">
-						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-							<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-							<circle cx="8.5" cy="8.5" r="1.5"></circle>
-							<polyline points="21 15 16 10 5 21"></polyline>
-						</svg>
-						<span>Фото/Видео</span>
-					</div>
-				</div>
-				
-				<!-- 6. Основной CTA -->
-				<div class="catalog-product-actions">
-					<a href="/detal?id=<?=$get['id'];?>" class="catalog-btn-primary" role="button" aria-label="Запросить цену на <?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>" onclick="if(typeof gtag==='function'){gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});}">
-						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-							<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-						</svg>
-						<span>Запросить цену</span>
-					</a>
-					<div class="catalog-product-actions-secondary">
-						<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="catalog-btn-secondary" aria-label="Позвонить" title="Позвонить">
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-								<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-							</svg>
-						</a>
-					</div>
-				</div>
-			</div>
+			<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="toverbuton" role="button" aria-label="Купить товар <?=htmlspecialchars($get['name'], ENT_QUOTES, 'UTF-8');?>" tabindex="0" onclick="if(typeof gtag==='function'){gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});}">Купить</a>
 		</article>
 		<?php
 			endwhile;
@@ -415,9 +303,6 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 <br><br>
 <?php include("des/foter.php"); ?>
 <?php include("hyst/fbody.php"); ?>
-
-<!-- JavaScript для карточек каталога -->
-<script src="/assets/js/catalog-cards.js?v=<?=time();?>"></script>
 
 </body>
 </html>
