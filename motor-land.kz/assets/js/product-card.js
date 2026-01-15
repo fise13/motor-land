@@ -146,8 +146,20 @@
 	function openModal(modalId) {
 		const modal = document.getElementById(modalId);
 		if (modal) {
-			modal.classList.add('active');
+			// Сохраняем текущую позицию прокрутки
+			const scrollY = window.scrollY;
+			
+			// Блокируем прокрутку страницы
+			document.body.style.position = 'fixed';
+			document.body.style.top = `-${scrollY}px`;
+			document.body.style.width = '100%';
 			document.body.style.overflow = 'hidden';
+			
+			// Открываем модальное окно
+			modal.classList.add('active');
+			
+			// Сохраняем позицию прокрутки в data-атрибут для восстановления
+			modal.setAttribute('data-scroll-y', scrollY);
 			
 			// Фокус на первое поле формы
 			const firstInput = modal.querySelector('input, textarea');
@@ -166,7 +178,16 @@
 		}
 		if (modal) {
 			modal.classList.remove('active');
+			
+			// Восстанавливаем прокрутку страницы
+			const scrollY = modal.getAttribute('data-scroll-y') || '0';
+			document.body.style.position = '';
+			document.body.style.top = '';
+			document.body.style.width = '';
 			document.body.style.overflow = '';
+			
+			// Восстанавливаем позицию прокрутки
+			window.scrollTo(0, parseInt(scrollY));
 			
 			// Очистка формы
 			const form = modal.querySelector('form');
