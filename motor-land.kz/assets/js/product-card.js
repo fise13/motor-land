@@ -12,50 +12,85 @@
 	
 	// Инициализация при загрузке DOM
 	document.addEventListener('DOMContentLoaded', function() {
-		// Перемещаем модальные окна в конец body для корректной работы position: fixed
-		moveModalsToBody();
+		// ОБЯЗАТЕЛЬНО: Перемещаем модальные окна в body перед инициализацией
+		ensureModalInBody();
 		initProductCard();
 	});
 	
 	/**
-	 * Переместить модальные окна в конец body
-	 * Это необходимо для корректной работы position: fixed
-	 * position: fixed работает относительно viewport только если элемент - прямой потомок body
-	 * Если родитель имеет transform, filter, perspective, will-change - создается новый контекст позиционирования
+	 * ОБЯЗАТЕЛЬНАЯ ПРОВЕРКА: Убедиться, что модальное окно в body
+	 * 
+	 * Проверяет:
+	 * 1. Является ли .modal прямым потомком <body>
+	 * 2. Нет ли у родителей transform, filter, perspective, will-change, contain
+	 * 3. Нет ли у родителей position: relative/absolute, создающих новый контекст
+	 * 
+	 * Если обнаружена проблема - автоматически перемещает в body
 	 */
-	function moveModalsToBody() {
+	function ensureModalInBody() {
 		const modals = document.querySelectorAll('.modal');
 		modals.forEach(function(modal) {
-			// Проверяем, не находится ли модальное окно уже в body (прямой дочерний элемент)
 			const parent = modal.parentElement;
-			if (parent && parent !== document.body) {
-				// Проверяем computed styles родителя
+			
+			// Если уже в body - проверяем, нет ли проблемных стилей у body
+			if (parent === document.body) {
+				// Body не должен иметь transform/filter - это редко, но проверим
+				const bodyStyle = window.getComputedStyle(document.body);
+				if (bodyStyle.transform !== 'none' && bodyStyle.transform !== 'matrix(1, 0, 0, 1, 0, 0)') {
+					console.warn('[MODAL DEBUG] Body has transform - this may affect position:fixed');
+				}
+				return; // Уже в body, всё ок
+			}
+			
+			// Если не в body - проверяем родителя
+			if (parent) {
 				const parentStyle = window.getComputedStyle(parent);
-				const hasTransform = parentStyle.transform !== 'none' && parentStyle.transform !== 'matrix(1, 0, 0, 1, 0, 0)';
+				
+				// Проверяем все свойства, создающие новый контекст позиционирования
+				const hasTransform = parentStyle.transform !== 'none' && 
+					parentStyle.transform !== 'matrix(1, 0, 0, 1, 0, 0)' &&
+					parentStyle.transform !== 'matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)';
 				const hasFilter = parentStyle.filter !== 'none';
 				const hasPerspective = parentStyle.perspective !== 'none';
 				const hasWillChange = parentStyle.willChange !== 'auto' && parentStyle.willChange !== '';
+				const hasContain = parentStyle.contain !== 'none';
+				const hasPosition = parentStyle.position === 'relative' || parentStyle.position === 'absolute' || parentStyle.position === 'fixed';
 				
-				// Если родитель имеет свойства, создающие новый контекст позиционирования
-				if (hasTransform || hasFilter || hasPerspective || hasWillChange) {
-					// Перемещаем в конец body
+				// ДЕБАГ: Выводим информацию о родителе
+				console.log('[MODAL DEBUG] Modal:', modal.id);
+				console.log('[MODAL DEBUG] Parent:', parent.tagName, parent.className || parent.id || 'no-class');
+				console.log('[MODAL DEBUG] Parent styles:', {
+					transform: parentStyle.transform,
+					filter: parentStyle.filter,
+					perspective: parentStyle.perspective,
+					willChange: parentStyle.willChange,
+					contain: parentStyle.contain,
+					position: parentStyle.position
+				});
+				
+				// Если родитель создает новый контекст - перемещаем в body
+				if (hasTransform || hasFilter || hasPerspective || hasWillChange || hasContain) {
+					console.warn('[MODAL DEBUG] Moving modal to body - parent creates positioning context');
 					document.body.appendChild(modal);
-					console.log('Modal moved to body (parent has transform/filter):', modal.id);
-				} else if (parent.tagName !== 'BODY') {
-					// На всякий случай перемещаем, если родитель не body
-					document.body.appendChild(modal);
-					console.log('Modal moved to body (not direct child of body):', modal.id);
+					return;
 				}
+				
+				// Если родитель не body - тоже перемещаем (на всякий случай)
+				if (parent.tagName !== 'BODY') {
+					console.warn('[MODAL DEBUG] Moving modal to body - not direct child of body');
+					document.body.appendChild(modal);
+				}
+			} else {
+				// Нет родителя - перемещаем в body
+				console.warn('[MODAL DEBUG] Modal has no parent - moving to body');
+				document.body.appendChild(modal);
 			}
 		});
 		
 		// Также перемещаем toast контейнер
 		const toastContainer = document.getElementById('toast-container');
-		if (toastContainer) {
-			const toastParent = toastContainer.parentElement;
-			if (toastParent && toastParent !== document.body) {
-				document.body.appendChild(toastContainer);
-			}
+		if (toastContainer && toastContainer.parentElement !== document.body) {
+			document.body.appendChild(toastContainer);
 		}
 	}
 	
@@ -186,93 +221,141 @@
 	
 	/**
 	 * Открыть модальное окно
-	 * Простая логика: только добавляем класс и блокируем прокрутку body
+	 * 
+	 * ОБЯЗАТЕЛЬНО:
+	 * 1. Проверяем, что модальное окно в body
+	 * 2. Блокируем скролл с компенсацией scrollbar
+	 * 3. Открываем модальное окно (CSS сделает центрирование)
+	 * 
+	 * ЗАПРЕЩЕНО:
+	 * - Вычислять позицию через scrollTop
+	 * - Использовать top/left для позиционирования
+	 * - Любые JS-координаты
 	 */
 	function openModal(modalId) {
 		const modal = document.getElementById(modalId);
-		if (modal) {
-			// Убеждаемся, что модальное окно в body (на случай если оно было перемещено)
-			if (modal.parentElement !== document.body) {
-				document.body.appendChild(modal);
-			}
-			
-			// Сохраняем текущую позицию прокрутки для восстановления
-			const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-			modal.setAttribute('data-scroll-y', scrollY);
-			
-			// Блокируем прокрутку страницы через overflow: hidden
-			// Сохраняем текущую позицию через position: fixed на body
-			document.body.style.position = 'fixed';
-			document.body.style.top = `-${scrollY}px`;
-			document.body.style.left = '0';
-			document.body.style.right = '0';
-			document.body.style.width = '100%';
-			document.body.style.overflow = 'hidden';
-			
-			// Также блокируем на html
-			document.documentElement.style.overflow = 'hidden';
-			
-			// Открываем модальное окно - CSS сделает остальное
-			modal.classList.add('active');
-			
-			// Прокручиваем контент модального окна в начало
-			const modalContent = modal.querySelector('.modal-content');
-			if (modalContent) {
-				modalContent.scrollTop = 0;
-			}
-			
-			// Фокус на первое поле формы
-			setTimeout(function() {
-				const firstInput = modal.querySelector('input, textarea');
-				if (firstInput) {
-					firstInput.focus();
-				}
-			}, 100);
+		if (!modal) {
+			console.error('[MODAL DEBUG] Modal not found:', modalId);
+			return;
 		}
+		
+		// КРИТИЧНО: Убеждаемся, что модальное окно в body
+		ensureModalInBody();
+		
+		// Проверяем еще раз после ensureModalInBody
+		if (modal.parentElement !== document.body) {
+			console.error('[MODAL DEBUG] Modal still not in body after ensureModalInBody!');
+			document.body.appendChild(modal);
+		}
+		
+		// ДЕБАГ: Проверяем computed styles модального окна
+		const modalStyle = window.getComputedStyle(modal);
+		console.log('[MODAL DEBUG] Opening modal:', modalId);
+		console.log('[MODAL DEBUG] Modal position:', modalStyle.position);
+		console.log('[MODAL DEBUG] Modal parent:', modal.parentElement.tagName);
+		console.log('[MODAL DEBUG] Modal top/left:', modalStyle.top, modalStyle.left);
+		
+		// Сохраняем текущую позицию прокрутки для восстановления
+		const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+		modal.setAttribute('data-scroll-y', scrollY);
+		
+		// Блокируем прокрутку страницы
+		// Компенсируем scrollbar, чтобы не было layout-shift
+		const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+		
+		// Сохраняем текущие стили для восстановления
+		const bodyStyle = window.getComputedStyle(document.body);
+		modal.setAttribute('data-body-padding-right', bodyStyle.paddingRight || '0');
+		
+		// Блокируем скролл через position: fixed на body
+		document.body.style.position = 'fixed';
+		document.body.style.top = `-${scrollY}px`;
+		document.body.style.left = '0';
+		document.body.style.right = '0';
+		document.body.style.width = '100%';
+		document.body.style.overflow = 'hidden';
+		
+		// Компенсируем scrollbar
+		if (scrollbarWidth > 0) {
+			document.body.style.paddingRight = `${scrollbarWidth}px`;
+		}
+		
+		// Также блокируем на html
+		document.documentElement.style.overflow = 'hidden';
+		
+		// Открываем модальное окно - CSS сделает центрирование через flex
+		modal.classList.add('active');
+		
+		// Прокручиваем контент модального окна в начало
+		const modalContent = modal.querySelector('.modal-content, .modal-content-image');
+		if (modalContent) {
+			modalContent.scrollTop = 0;
+		}
+		
+		// Фокус на первое поле формы
+		setTimeout(function() {
+			const firstInput = modal.querySelector('input, textarea');
+			if (firstInput) {
+				firstInput.focus();
+			}
+		}, 100);
 	}
 	
 	/**
 	 * Закрыть модальное окно
-	 * Простая логика: убираем класс и восстанавливаем прокрутку
+	 * 
+	 * Восстанавливает:
+	 * 1. Прокрутку страницы
+	 * 2. Padding для scrollbar
+	 * 3. Все стили body/html
 	 */
 	function closeModal(modal) {
 		if (typeof modal === 'string') {
 			modal = document.getElementById(modal);
 		}
-		if (modal) {
-			// Закрываем модальное окно
-			modal.classList.remove('active');
-			
-			// Восстанавливаем прокрутку страницы
-			const scrollY = modal.getAttribute('data-scroll-y') || '0';
-			
-			// Убираем блокировку прокрутки
-			document.body.style.position = '';
-			document.body.style.top = '';
-			document.body.style.left = '';
-			document.body.style.right = '';
-			document.body.style.width = '';
-			document.body.style.overflow = '';
-			document.documentElement.style.overflow = '';
-			
-			// Восстанавливаем позицию прокрутки
+		if (!modal) {
+			return;
+		}
+		
+		console.log('[MODAL DEBUG] Closing modal:', modal.id);
+		
+		// Закрываем модальное окно
+		modal.classList.remove('active');
+		
+		// Восстанавливаем прокрутку страницы
+		const scrollY = modal.getAttribute('data-scroll-y') || '0';
+		const bodyPaddingRight = modal.getAttribute('data-body-padding-right') || '0';
+		
+		// Убираем блокировку прокрутки
+		document.body.style.position = '';
+		document.body.style.top = '';
+		document.body.style.left = '';
+		document.body.style.right = '';
+		document.body.style.width = '';
+		document.body.style.overflow = '';
+		document.body.style.paddingRight = bodyPaddingRight;
+		document.documentElement.style.overflow = '';
+		
+		// Восстанавливаем позицию прокрутки
+		// Используем requestAnimationFrame для гарантии применения стилей
+		requestAnimationFrame(function() {
 			window.scrollTo({
 				top: parseInt(scrollY),
 				behavior: 'auto'
 			});
-			
-			// Очистка формы
-			const form = modal.querySelector('form');
-			if (form) {
-				form.reset();
-				// Очистка ошибок
-				form.querySelectorAll('.error').forEach(el => {
-					el.classList.remove('error');
-				});
-				form.querySelectorAll('.form-error').forEach(el => {
-					el.style.display = 'none';
-				});
-			}
+		});
+		
+		// Очистка формы
+		const form = modal.querySelector('form');
+		if (form) {
+			form.reset();
+			// Очистка ошибок
+			form.querySelectorAll('.error').forEach(el => {
+				el.classList.remove('error');
+			});
+			form.querySelectorAll('.form-error').forEach(el => {
+				el.style.display = 'none';
+			});
 		}
 	}
 	

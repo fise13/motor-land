@@ -197,7 +197,7 @@ $parsed_attributes = parse_product_attributes($product_data['attributes_opt'], $
 	</script>
 	
 	<!-- Подключение стилей карточки товара -->
-	<link rel="stylesheet" href="/assets/css/product-card.css?v=<?=time();?>&fix=4">
+	<link rel="stylesheet" href="/assets/css/product-card.css?v=<?=time();?>&fix=5">
 </head>
 <body>
 <?php include("hyst/sbody.php"); ?>
@@ -633,7 +633,7 @@ $parsed_attributes = parse_product_attributes($product_data['attributes_opt'], $
 <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
 
 <!-- JavaScript для карточки товара -->
-<script src="/assets/js/product-card.js?v=<?=time();?>&fix=4"></script>
+<script src="/assets/js/product-card.js?v=<?=time();?>&fix=5"></script>
 <script>
 // Передаем данные товара в JavaScript
 window.productData = {
