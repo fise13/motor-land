@@ -149,16 +149,27 @@
 			// Сохраняем текущую позицию прокрутки
 			const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
 			
-			// Блокируем прокрутку страницы
+			// Блокируем прокрутку страницы - фиксируем body
 			document.body.style.position = 'fixed';
 			document.body.style.top = `-${scrollY}px`;
 			document.body.style.left = '0';
 			document.body.style.right = '0';
 			document.body.style.width = '100%';
 			document.body.style.overflow = 'hidden';
+			document.body.style.height = '100%';
 			
 			// Также блокируем прокрутку на html элементе
 			document.documentElement.style.overflow = 'hidden';
+			document.documentElement.style.height = '100%';
+			
+			// Убеждаемся, что модальное окно фиксировано относительно viewport
+			modal.style.position = 'fixed';
+			modal.style.top = '0';
+			modal.style.left = '0';
+			modal.style.right = '0';
+			modal.style.bottom = '0';
+			modal.style.width = '100vw';
+			modal.style.height = '100vh';
 			
 			// Открываем модальное окно
 			modal.classList.add('active');
@@ -172,6 +183,9 @@
 			if (modalContent) {
 				modalContent.scrollTop = 0;
 			}
+			
+			// Прокручиваем сам модальный контейнер в начало (на случай если он длинный)
+			modal.scrollTop = 0;
 			
 			// Фокус на первое поле формы
 			const firstInput = modal.querySelector('input, textarea');
@@ -201,7 +215,18 @@
 			document.body.style.right = '';
 			document.body.style.width = '';
 			document.body.style.overflow = '';
+			document.body.style.height = '';
 			document.documentElement.style.overflow = '';
+			document.documentElement.style.height = '';
+			
+			// Убираем inline стили с модального окна
+			modal.style.position = '';
+			modal.style.top = '';
+			modal.style.left = '';
+			modal.style.right = '';
+			modal.style.bottom = '';
+			modal.style.width = '';
+			modal.style.height = '';
 			
 			// Восстанавливаем позицию прокрутки
 			window.scrollTo({
