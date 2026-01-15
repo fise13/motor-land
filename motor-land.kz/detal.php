@@ -197,7 +197,7 @@ $parsed_attributes = parse_product_attributes($product_data['attributes_opt'], $
 	</script>
 	
 	<!-- Подключение стилей карточки товара -->
-	<link rel="stylesheet" href="/assets/css/product-card.css?v=<?=time();?>&fix=3">
+	<link rel="stylesheet" href="/assets/css/product-card.css?v=<?=time();?>&fix=4">
 </head>
 <body>
 <?php include("hyst/sbody.php"); ?>
@@ -473,6 +473,10 @@ $parsed_attributes = parse_product_attributes($product_data['attributes_opt'], $
 	</section>
 </main>
 
+<?php include("des/foter.php"); ?>
+<?php include("hyst/fbody.php"); ?>
+
+<!-- Модальные окна перемещены в конец body для корректной работы position: fixed -->
 <!-- Модальное окно запроса цены -->
 <div class="modal" id="price-modal" role="dialog" aria-labelledby="price-modal-title" aria-hidden="true">
 	<div class="modal-overlay" onclick="closePriceModal()"></div>
@@ -628,11 +632,8 @@ $parsed_attributes = parse_product_attributes($product_data['attributes_opt'], $
 <!-- Toast уведомления -->
 <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
 
-<?php include("des/foter.php"); ?>
-<?php include("hyst/fbody.php"); ?>
-
 <!-- JavaScript для карточки товара -->
-<script src="/assets/js/product-card.js?v=<?=time();?>&fix=3"></script>
+<script src="/assets/js/product-card.js?v=<?=time();?>&fix=4"></script>
 <script>
 // Передаем данные товара в JavaScript
 window.productData = {

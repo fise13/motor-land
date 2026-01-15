@@ -12,8 +12,52 @@
 	
 	// Инициализация при загрузке DOM
 	document.addEventListener('DOMContentLoaded', function() {
+		// Перемещаем модальные окна в конец body для корректной работы position: fixed
+		moveModalsToBody();
 		initProductCard();
 	});
+	
+	/**
+	 * Переместить модальные окна в конец body
+	 * Это необходимо для корректной работы position: fixed
+	 * position: fixed работает относительно viewport только если элемент - прямой потомок body
+	 * Если родитель имеет transform, filter, perspective, will-change - создается новый контекст позиционирования
+	 */
+	function moveModalsToBody() {
+		const modals = document.querySelectorAll('.modal');
+		modals.forEach(function(modal) {
+			// Проверяем, не находится ли модальное окно уже в body (прямой дочерний элемент)
+			const parent = modal.parentElement;
+			if (parent && parent !== document.body) {
+				// Проверяем computed styles родителя
+				const parentStyle = window.getComputedStyle(parent);
+				const hasTransform = parentStyle.transform !== 'none' && parentStyle.transform !== 'matrix(1, 0, 0, 1, 0, 0)';
+				const hasFilter = parentStyle.filter !== 'none';
+				const hasPerspective = parentStyle.perspective !== 'none';
+				const hasWillChange = parentStyle.willChange !== 'auto' && parentStyle.willChange !== '';
+				
+				// Если родитель имеет свойства, создающие новый контекст позиционирования
+				if (hasTransform || hasFilter || hasPerspective || hasWillChange) {
+					// Перемещаем в конец body
+					document.body.appendChild(modal);
+					console.log('Modal moved to body (parent has transform/filter):', modal.id);
+				} else if (parent.tagName !== 'BODY') {
+					// На всякий случай перемещаем, если родитель не body
+					document.body.appendChild(modal);
+					console.log('Modal moved to body (not direct child of body):', modal.id);
+				}
+			}
+		});
+		
+		// Также перемещаем toast контейнер
+		const toastContainer = document.getElementById('toast-container');
+		if (toastContainer) {
+			const toastParent = toastContainer.parentElement;
+			if (toastParent && toastParent !== document.body) {
+				document.body.appendChild(toastContainer);
+			}
+		}
+	}
 	
 	/**
 	 * Инициализация карточки товара
@@ -147,6 +191,11 @@
 	function openModal(modalId) {
 		const modal = document.getElementById(modalId);
 		if (modal) {
+			// Убеждаемся, что модальное окно в body (на случай если оно было перемещено)
+			if (modal.parentElement !== document.body) {
+				document.body.appendChild(modal);
+			}
+			
 			// Сохраняем текущую позицию прокрутки для восстановления
 			const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
 			modal.setAttribute('data-scroll-y', scrollY);

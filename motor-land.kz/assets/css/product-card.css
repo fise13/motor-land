@@ -514,32 +514,48 @@
    МОДАЛЬНЫЕ ОКНА
    ============================================ */
 
+/* ============================================
+   МОДАЛЬНЫЕ ОКНА
+   ============================================ */
+
 /* Overlay - фиксированный контейнер на весь viewport */
+/* ВАЖНО: Модальное окно ДОЛЖНО быть прямым дочерним элементом <body> */
+/* Это критично для корректной работы position: fixed */
+/* Если родитель имеет transform, filter, perspective - position: fixed работает относительно него, а не viewport */
 .modal {
-	position: fixed;
-	inset: 0;
-	width: 100vw;
-	height: 100vh;
-	z-index: 10000;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	position: fixed !important;
+	top: 0 !important;
+	left: 0 !important;
+	right: 0 !important;
+	bottom: 0 !important;
+	width: 100vw !important;
+	height: 100vh !important;
+	z-index: 10000 !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
 	opacity: 0;
 	visibility: hidden;
 	pointer-events: none;
 	transition: opacity 0.3s, visibility 0.3s;
-	margin: 0;
-	padding: 0;
+	margin: 0 !important;
+	padding: 0 !important;
 	/* Фиксируем позицию относительно viewport - не зависит от прокрутки документа */
+	/* Убеждаемся, что нет влияния родительских элементов */
+	transform: none !important;
+	will-change: opacity, visibility;
+	/* Изолируем от родительских стилей */
+	contain: layout style paint;
 }
 
 .modal.active {
-	opacity: 1;
-	visibility: visible;
-	pointer-events: auto;
+	opacity: 1 !important;
+	visibility: visible !important;
+	pointer-events: auto !important;
 	/* При активном состоянии overlay всегда фиксирован по viewport */
-	position: fixed;
-	inset: 0;
+	position: fixed !important;
+	inset: 0 !important;
+	transform: none !important;
 }
 
 /* Фон модального окна */
