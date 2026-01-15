@@ -334,16 +334,12 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		})();
 		</script>
 	<div class="slidercoun shirina">
-		<div class="hero-content">
-			<div class="hero-left">
-				<h1 class="titlephon"><?=get_simple_texts ('index_slider_title');?></h1>
-				<div class="sliderbtns" role="group" aria-label="Действия на главной странице">
-					<a href="tel:<?=get_simple_texts ('index_slider_phone');?>" class="phone" aria-label="Позвонить по телефону <?=get_simple_texts ('index_slider_phone');?>" role="button" tabindex="0" onclick="if(typeof gtag==='function'){gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});}"><?=get_simple_texts ('index_slider_phone');?></a>
-					<a href="catalog.php" aria-label="Перейти в каталог товаров"><div class="atalogb" role="button" tabindex="0">Каталог</div></a>
-				</div>
-			</div>
-			<div class="hero-right">
-				<div class="sliderform" role="search" aria-label="Поиск товаров по параметрам">
+		<h1 class="titlephon"><?=get_simple_texts ('index_slider_title');?></h1>
+		<div class="sliderbtns" role="group" aria-label="Действия на главной странице">
+			<a href="tel:<?=get_simple_texts ('index_slider_phone');?>" class="phone" aria-label="Позвонить по телефону <?=get_simple_texts ('index_slider_phone');?>" role="button" tabindex="0" onclick="if(typeof gtag==='function'){gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});}"><?=get_simple_texts ('index_slider_phone');?></a><br>
+			<a href="catalog.php" aria-label="Перейти в каталог товаров"><div class="atalogb" role="button" tabindex="0">Каталог</div></a>
+		</div>
+		<div class="sliderform" role="search" aria-label="Поиск товаров по параметрам">
 			<label for="search-form" class="sr-only">Поиск товаров</label>
 			<span id="search-form-label">что ищем?</span>
 		
@@ -429,9 +425,7 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 				</svg>
 				<span class="sr-only">Найти товары</span>
 			</button>
-				</form>
-				</div>
-			</div>
+		</form>
 		</div>
 	</div>
 </section>
