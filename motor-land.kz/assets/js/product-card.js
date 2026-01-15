@@ -142,122 +142,35 @@
 	
 	/**
 	 * Открыть модальное окно
+	 * Простая логика: только добавляем класс и блокируем прокрутку body
 	 */
 	function openModal(modalId) {
 		const modal = document.getElementById(modalId);
 		if (modal) {
-			// Сохраняем текущую позицию прокрутки
+			// Сохраняем текущую позицию прокрутки для восстановления
 			const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+			modal.setAttribute('data-scroll-y', scrollY);
 			
-			// Блокируем прокрутку страницы - фиксируем body
+			// Блокируем прокрутку страницы через overflow: hidden
+			// Сохраняем текущую позицию через position: fixed на body
 			document.body.style.position = 'fixed';
 			document.body.style.top = `-${scrollY}px`;
 			document.body.style.left = '0';
 			document.body.style.right = '0';
 			document.body.style.width = '100%';
 			document.body.style.overflow = 'hidden';
-			document.body.style.height = '100%';
 			
-			// Также блокируем прокрутку на html элементе
+			// Также блокируем на html
 			document.documentElement.style.overflow = 'hidden';
-			document.documentElement.style.height = '100%';
-			document.documentElement.style.position = 'fixed';
-			document.documentElement.style.top = `-${scrollY}px`;
 			
-			// Убеждаемся, что модальное окно фиксировано относительно viewport
-			// Применяем стили сразу и через requestAnimationFrame для гарантии
-			modal.style.cssText = `
-				position: fixed !important;
-				top: 0 !important;
-				left: 0 !important;
-				right: 0 !important;
-				bottom: 0 !important;
-				width: 100vw !important;
-				height: 100vh !important;
-				max-width: 100vw !important;
-				max-height: 100vh !important;
-				z-index: 10000 !important;
-				display: flex !important;
-				align-items: center !important;
-				justify-content: center !important;
-				margin: 0 !important;
-				padding: 0 !important;
-				transform: none !important;
-				overflow-y: auto !important;
-			`;
-			
-			// Открываем модальное окно
+			// Открываем модальное окно - CSS сделает остальное
 			modal.classList.add('active');
 			
-			// Используем requestAnimationFrame для гарантированного применения
-			requestAnimationFrame(function() {
-				// Принудительно прокручиваем viewport к началу
-				window.scrollTo(0, 0);
-				
-				// Прокручиваем модальное окно в начало
-				modal.scrollTop = 0;
-				
-				const modalContent = modal.querySelector('.modal-content');
-				if (modalContent) {
-					modalContent.scrollTop = 0;
-				}
-				
-				// Дополнительная проверка - убеждаемся что модальное окно на месте
-				const rect = modal.getBoundingClientRect();
-				if (rect.top !== 0 || rect.left !== 0) {
-					// Принудительно устанавливаем позицию
-					modal.style.top = '0px';
-					modal.style.left = '0px';
-				}
-			});
-			
-			// Сохраняем позицию прокрутки в data-атрибут для восстановления
-			modal.setAttribute('data-scroll-y', scrollY);
-			
-			// Блокируем прокрутку через обработчик событий
-			const preventScroll = function(e) {
-				if (modal.classList.contains('active')) {
-					e.preventDefault();
-					e.stopPropagation();
-					
-					// Принудительно фиксируем позицию модального окна
-					window.scrollTo(0, 0);
-					modal.scrollTop = 0;
-					
-					// Проверяем и исправляем позицию модального окна
-					const rect = modal.getBoundingClientRect();
-					if (rect.top !== 0 || rect.left !== 0) {
-						modal.style.top = '0px';
-						modal.style.left = '0px';
-					}
-					
-					return false;
-				}
-			};
-			
-			// Функция для постоянной проверки позиции модального окна
-			const checkModalPosition = function() {
-				if (modal.classList.contains('active')) {
-					const rect = modal.getBoundingClientRect();
-					if (rect.top !== 0 || rect.left !== 0) {
-						modal.style.top = '0px';
-						modal.style.left = '0px';
-						window.scrollTo(0, 0);
-					}
-					requestAnimationFrame(checkModalPosition);
-				}
-			};
-			
-			// Сохраняем функции для удаления
-			modal._preventScrollHandler = preventScroll;
-			modal._checkPositionHandler = checkModalPosition;
-			
-			// Добавляем обработчики для блокировки прокрутки
-			window.addEventListener('scroll', preventScroll, { passive: false, capture: true });
-			document.addEventListener('scroll', preventScroll, { passive: false, capture: true });
-			
-			// Запускаем постоянную проверку позиции
-			requestAnimationFrame(checkModalPosition);
+			// Прокручиваем контент модального окна в начало
+			const modalContent = modal.querySelector('.modal-content');
+			if (modalContent) {
+				modalContent.scrollTop = 0;
+			}
 			
 			// Фокус на первое поле формы
 			setTimeout(function() {
@@ -265,18 +178,20 @@
 				if (firstInput) {
 					firstInput.focus();
 				}
-			}, 200);
+			}, 100);
 		}
 	}
 	
 	/**
 	 * Закрыть модальное окно
+	 * Простая логика: убираем класс и восстанавливаем прокрутку
 	 */
 	function closeModal(modal) {
 		if (typeof modal === 'string') {
 			modal = document.getElementById(modal);
 		}
 		if (modal) {
+			// Закрываем модальное окно
 			modal.classList.remove('active');
 			
 			// Восстанавливаем прокрутку страницы
@@ -289,33 +204,12 @@
 			document.body.style.right = '';
 			document.body.style.width = '';
 			document.body.style.overflow = '';
-			document.body.style.height = '';
 			document.documentElement.style.overflow = '';
-			document.documentElement.style.height = '';
-			document.documentElement.style.position = '';
-			document.documentElement.style.top = '';
-			
-			// Убираем inline стили с модального окна
-			modal.style.cssText = '';
-			
-			// Удаляем обработчики блокировки прокрутки
-			if (modal._preventScrollHandler) {
-				window.removeEventListener('scroll', modal._preventScrollHandler, { capture: true });
-				document.removeEventListener('scroll', modal._preventScrollHandler, { capture: true });
-				delete modal._preventScrollHandler;
-			}
-			
-			// Останавливаем проверку позиции
-			if (modal._checkPositionHandler) {
-				delete modal._checkPositionHandler;
-			}
 			
 			// Восстанавливаем позицию прокрутки
-			requestAnimationFrame(function() {
-				window.scrollTo({
-					top: parseInt(scrollY),
-					behavior: 'auto'
-				});
+			window.scrollTo({
+				top: parseInt(scrollY),
+				behavior: 'auto'
 			});
 			
 			// Очистка формы

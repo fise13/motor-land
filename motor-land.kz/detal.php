@@ -197,7 +197,7 @@ $parsed_attributes = parse_product_attributes($product_data['attributes_opt'], $
 	</script>
 	
 	<!-- Подключение стилей карточки товара -->
-	<link rel="stylesheet" href="/assets/css/product-card.css?v=<?=time();?>&fix=2">
+	<link rel="stylesheet" href="/assets/css/product-card.css?v=<?=time();?>&fix=3">
 </head>
 <body>
 <?php include("hyst/sbody.php"); ?>
@@ -632,7 +632,7 @@ $parsed_attributes = parse_product_attributes($product_data['attributes_opt'], $
 <?php include("hyst/fbody.php"); ?>
 
 <!-- JavaScript для карточки товара -->
-<script src="/assets/js/product-card.js?v=<?=time();?>&fix=2"></script>
+<script src="/assets/js/product-card.js?v=<?=time();?>&fix=3"></script>
 <script>
 // Передаем данные товара в JavaScript
 window.productData = {
