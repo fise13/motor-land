@@ -529,6 +529,18 @@
 	transition: opacity 0.3s, visibility 0.3s;
 }
 
+/* Смещаем модальное окно вправо, чтобы не перекрывать изображение товара */
+.modal:not(.modal-image) {
+	justify-content: flex-end;
+	padding-right: 5%;
+}
+
+@media (min-width: 1200px) {
+	.modal:not(.modal-image) {
+		padding-right: 8%;
+	}
+}
+
 .modal.active {
 	opacity: 1;
 	visibility: visible;
@@ -549,18 +561,20 @@
 	background: #ffffff;
 	border-radius: 16px;
 	padding: 32px;
-	max-width: 500px;
-	width: 90%;
+	max-width: 480px;
+	width: 100%;
 	max-height: 90vh;
 	overflow-y: auto;
 	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-	transform: scale(0.9);
-	transition: transform 0.3s;
+	transform: translateX(50px) scale(0.95);
+	transition: transform 0.3s ease-out, opacity 0.3s;
+	opacity: 0;
 	z-index: 1001;
 }
 
 .modal.active .modal-content {
-	transform: scale(1);
+	transform: translateX(0) scale(1);
+	opacity: 1;
 }
 
 .modal-close {
@@ -857,9 +871,21 @@
 		padding: 16px 24px;
 	}
 	
+	.modal:not(.modal-image) {
+		justify-content: center;
+		padding-right: 0;
+	}
+	
 	.modal-content {
 		padding: 24px;
 		width: 95%;
+		transform: scale(0.9);
+		opacity: 0;
+	}
+	
+	.modal.active .modal-content {
+		transform: scale(1);
+		opacity: 1;
 	}
 	
 	.toast {
