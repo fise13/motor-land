@@ -520,10 +520,13 @@
 
 /* 
  * КРИТИЧЕСКИ ВАЖНО:
- * 1. .modal ДОЛЖЕН быть прямым потомком <body>
+ * 1. .modal ДОЛЖЕН быть прямым потомком <html> (не body, т.к. body имеет transform!)
  * 2. Никаких родителей с transform, filter, perspective, contain
  * 3. Используем ТОЛЬКО position: fixed + inset: 0 + flex для центрирования
  * 4. НИКАКИХ вычислений позиции через JS
+ * 
+ * ПРОБЛЕМА: body имеет transform: translateY(30px) в css.css
+ * РЕШЕНИЕ: Модальные окна перемещаются в document.documentElement (html)
  */
 
 /* Overlay - фиксированный контейнер на весь viewport */

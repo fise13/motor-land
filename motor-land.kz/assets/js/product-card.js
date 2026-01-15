@@ -18,31 +18,40 @@
 	});
 	
 	/**
-	 * ОБЯЗАТЕЛЬНАЯ ПРОВЕРКА: Убедиться, что модальное окно в body
+	 * КРИТИЧНО: Переместить модальные окна в HTML (не body!)
 	 * 
-	 * Проверяет:
-	 * 1. Является ли .modal прямым потомком <body>
-	 * 2. Нет ли у родителей transform, filter, perspective, will-change, contain
-	 * 3. Нет ли у родителей position: relative/absolute, создающих новый контекст
+	 * ПРОБЛЕМА: body имеет transform: translateY(30px) в css.css
+	 * Это создает новый контекст позиционирования, ломая position: fixed
 	 * 
-	 * Если обнаружена проблема - автоматически перемещает в body
+	 * РЕШЕНИЕ: Перемещаем модальные окна в document.documentElement (html)
+	 * HTML не имеет transform, поэтому position: fixed будет работать корректно
 	 */
 	function ensureModalInBody() {
 		const modals = document.querySelectorAll('.modal');
 		modals.forEach(function(modal) {
 			const parent = modal.parentElement;
 			
-			// Если уже в body - проверяем, нет ли проблемных стилей у body
-			if (parent === document.body) {
-				// Body не должен иметь transform/filter - это редко, но проверим
-				const bodyStyle = window.getComputedStyle(document.body);
-				if (bodyStyle.transform !== 'none' && bodyStyle.transform !== 'matrix(1, 0, 0, 1, 0, 0)') {
-					console.warn('[MODAL DEBUG] Body has transform - this may affect position:fixed');
+			// КРИТИЧНО: Проверяем, есть ли у body transform
+			const bodyStyle = window.getComputedStyle(document.body);
+			const bodyHasTransform = bodyStyle.transform !== 'none' && 
+				bodyStyle.transform !== 'matrix(1, 0, 0, 1, 0, 0)' &&
+				bodyStyle.transform !== 'matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)';
+			
+			// Если body имеет transform - перемещаем в html
+			if (bodyHasTransform) {
+				if (parent !== document.documentElement) {
+					console.warn('[MODAL DEBUG] Body has transform - moving modal to HTML element');
+					document.documentElement.appendChild(modal);
 				}
-				return; // Уже в body, всё ок
+				return;
 			}
 			
-			// Если не в body - проверяем родителя
+			// Если body не имеет transform - можно оставить в body
+			if (parent === document.body) {
+				return; // Уже в body и body без transform - всё ок
+			}
+			
+			// Если не в body и не в html - проверяем родителя
 			if (parent) {
 				const parentStyle = window.getComputedStyle(parent);
 				
@@ -54,7 +63,6 @@
 				const hasPerspective = parentStyle.perspective !== 'none';
 				const hasWillChange = parentStyle.willChange !== 'auto' && parentStyle.willChange !== '';
 				const hasContain = parentStyle.contain !== 'none';
-				const hasPosition = parentStyle.position === 'relative' || parentStyle.position === 'absolute' || parentStyle.position === 'fixed';
 				
 				// ДЕБАГ: Выводим информацию о родителе
 				console.log('[MODAL DEBUG] Modal:', modal.id);
@@ -68,29 +76,32 @@
 					position: parentStyle.position
 				});
 				
-				// Если родитель создает новый контекст - перемещаем в body
+				// Если родитель создает новый контекст - перемещаем в html
 				if (hasTransform || hasFilter || hasPerspective || hasWillChange || hasContain) {
-					console.warn('[MODAL DEBUG] Moving modal to body - parent creates positioning context');
-					document.body.appendChild(modal);
+					console.warn('[MODAL DEBUG] Moving modal to HTML - parent creates positioning context');
+					document.documentElement.appendChild(modal);
 					return;
 				}
 				
-				// Если родитель не body - тоже перемещаем (на всякий случай)
-				if (parent.tagName !== 'BODY') {
-					console.warn('[MODAL DEBUG] Moving modal to body - not direct child of body');
-					document.body.appendChild(modal);
+				// Если родитель не body/html - перемещаем в html
+				if (parent.tagName !== 'BODY' && parent.tagName !== 'HTML') {
+					console.warn('[MODAL DEBUG] Moving modal to HTML - not direct child of body/html');
+					document.documentElement.appendChild(modal);
 				}
 			} else {
-				// Нет родителя - перемещаем в body
-				console.warn('[MODAL DEBUG] Modal has no parent - moving to body');
-				document.body.appendChild(modal);
+				// Нет родителя - перемещаем в html
+				console.warn('[MODAL DEBUG] Modal has no parent - moving to HTML');
+				document.documentElement.appendChild(modal);
 			}
 		});
 		
-		// Также перемещаем toast контейнер
+		// Также перемещаем toast контейнер в html
 		const toastContainer = document.getElementById('toast-container');
-		if (toastContainer && toastContainer.parentElement !== document.body) {
-			document.body.appendChild(toastContainer);
+		if (toastContainer) {
+			const toastParent = toastContainer.parentElement;
+			if (toastParent !== document.documentElement && toastParent !== document.body) {
+				document.documentElement.appendChild(toastContainer);
+			}
 		}
 	}
 	
@@ -239,13 +250,15 @@
 			return;
 		}
 		
-		// КРИТИЧНО: Убеждаемся, что модальное окно в body
+		// КРИТИЧНО: Убеждаемся, что модальное окно в html (не body, т.к. body имеет transform!)
 		ensureModalInBody();
 		
 		// Проверяем еще раз после ensureModalInBody
-		if (modal.parentElement !== document.body) {
-			console.error('[MODAL DEBUG] Modal still not in body after ensureModalInBody!');
-			document.body.appendChild(modal);
+		// Модальное окно должно быть в html или body (если body без transform)
+		const parent = modal.parentElement;
+		if (parent !== document.documentElement && parent !== document.body) {
+			console.error('[MODAL DEBUG] Modal still not in html/body after ensureModalInBody!');
+			document.documentElement.appendChild(modal);
 		}
 		
 		// ДЕБАГ: Проверяем computed styles модального окна
