@@ -48,6 +48,11 @@
 		left: 50px !important;
 		width: calc(100% - 100px) !important;
 		max-width: 400px !important;
+		background: transparent !important;
+		backdrop-filter: none !important;
+		-webkit-backdrop-filter: none !important;
+		border: none !important;
+		box-shadow: none !important;
 	}
 	
 	.sliderform {
@@ -544,6 +549,76 @@ margin: 20px 10px !important;
 		width: 100% !important;
 		height: 44px !important;
 		margin: 0 !important;
+		display: flex !important;
+		align-items: center !important;
+		justify-content: space-between !important;
+		border-radius: 8px !important;
+		border: 1px solid rgba(255, 255, 255, 0.3) !important;
+		background: rgba(255, 255, 255, 0.1) !important;
+		padding: 0 !important;
+		box-sizing: border-box !important;
+		transition: all 0.2s ease !important;
+	}
+	
+	.sliderform .meinputer:hover {
+		border-color: rgba(255, 255, 255, 0.5) !important;
+		background: rgba(255, 255, 255, 0.15) !important;
+		box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1) !important;
+	}
+	
+	.sliderform .meinputer:focus-within {
+		border-color: rgba(255, 255, 255, 0.7) !important;
+		background: rgba(255, 255, 255, 0.18) !important;
+		box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15) !important;
+		outline: none !important;
+	}
+	
+	.sliderform .madiv {
+		flex: 1 !important;
+		padding: 12px 12px 12px 14px !important;
+		font-size: 15px !important;
+		line-height: 1.4 !important;
+		overflow: hidden !important;
+		text-overflow: ellipsis !important;
+		white-space: nowrap !important;
+		color: white !important;
+		font-weight: 500 !important;
+	}
+	
+	.sliderform .madiv:empty:before {
+		content: attr(data-val) !important;
+		color: rgba(255, 255, 255, 0.7) !important;
+	}
+	
+	.sliderform .madiv:not(:empty) {
+		color: white !important;
+	}
+	
+	.sliderform .btmmearrow {
+		color: rgba(255, 255, 255, 0.8) !important;
+		position: static !important;
+		background: transparent !important;
+		backdrop-filter: none !important;
+		-webkit-backdrop-filter: none !important;
+		padding: 0 !important;
+		font-size: 12px !important;
+		border-radius: 0 !important;
+		cursor: pointer !important;
+		border-left: none !important;
+		transition: transform 0.2s ease !important;
+		box-shadow: none !important;
+		display: flex !important;
+		align-items: center !important;
+		justify-content: center !important;
+		width: 32px !important;
+		height: 100% !important;
+		flex-shrink: 0 !important;
+	}
+	
+	.sliderform .meinputer.active .btmmearrow,
+	.sliderform .meinputer:has(.ddwnblock.open) .btmmearrow {
+		transform: rotate(180deg) !important;
+		color: white !important;
 	}
 	
 	.sliderform .ddwnblock {
@@ -555,11 +630,50 @@ margin: 20px 10px !important;
 		width: 100% !important;
 		height: 44px !important;
 		margin-top: 0 !important;
+		background: rgba(255, 255, 255, 0.25) !important;
+		border: 1px solid rgba(255, 255, 255, 0.3) !important;
+		border-radius: 8px !important;
+		display: flex !important;
+		align-items: center !important;
+		justify-content: center !important;
+		padding: 0 !important;
+		box-sizing: border-box !important;
+		transition: all 0.3s ease !important;
+	}
+	
+	.sliderform button[type="submit"]:hover,
+	.sliderform .sliderform-submit-btn:hover {
+		background-color: rgba(255, 255, 255, 0.35) !important;
+		border-color: rgba(255, 255, 255, 0.5) !important;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+		transform: translateY(-1px) !important;
+	}
+	
+	.sliderform button[type="submit"] svg,
+	.sliderform .sliderform-submit-btn svg {
+		width: 20px !important;
+		height: 20px !important;
+		stroke: white !important;
+		fill: none !important;
+		stroke-width: 2 !important;
+		stroke-linecap: round !important;
+		stroke-linejoin: round !important;
 	}
 	
 	/* Dropdown внутри .sliderform - используем absolute позиционирование */
 	.sliderform .ddwnblock {
 		position: absolute !important;
+		width: 100% !important;
+		top: calc(100% + 4px) !important;
+		left: 0 !important;
+		border-radius: 8px !important;
+		border: 1px solid rgba(255, 255, 255, 0.2) !important;
+		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+		padding: 8px !important;
+		max-height: 280px !important;
+		background: rgba(255, 255, 255, 0.95) !important;
+		backdrop-filter: blur(10px) !important;
+		-webkit-backdrop-filter: blur(10px) !important;
 		/* z-index выше всего, чтобы выпадающие списки были поверх всех элементов, включая секцию консультации */
 		z-index: 10004 !important;
 		/* Создаем новый stacking context для выпадающих списков, чтобы они вышли за пределы секции консультации */
@@ -570,6 +684,20 @@ margin: 20px 10px !important;
 		clip-path: none !important;
 		/* Гарантируем что элемент видим */
 		visibility: visible !important;
+	}
+	
+	.sliderform .ddwnblock div {
+		padding: 10px 12px !important;
+		color: #333 !important;
+		font-size: 14px !important;
+		border-radius: 4px !important;
+		margin: 2px 0 !important;
+	}
+	
+	.sliderform .ddwnblock div:hover {
+		background-color: #f0f0f0 !important;
+		transform: translateX(2px) !important;
+		color: #fe0000 !important;
 	}
 	
 	.sliderform .ddwnblock.open {
