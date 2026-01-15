@@ -909,6 +909,37 @@ margin: 20px 10px !important;
 	.filtersblock {
 		width: 100% !important;
 		padding: 15px 10px !important;
+		margin: 10px 0 !important;
+	}
+	
+	.filtersblock form {
+		flex-direction: column !important;
+		gap: 12px !important;
+		align-items: stretch !important;
+	}
+	
+	.filtersblock .maipttee {
+		grid-template-columns: 1fr !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		gap: 12px !important;
+	}
+	
+	.filtersblock .meinputer {
+		width: 100% !important;
+		height: 44px !important;
+		margin: 0 !important;
+	}
+	
+	.filtersblock .ddwnblock {
+		width: 100% !important;
+	}
+	
+	.filtersblock button[type="submit"],
+	.filtersblock .sliderform-submit-btn {
+		width: 100% !important;
+		height: 44px !important;
+		margin-top: 0 !important;
 	}
 	
 	.filtersblock input[type="text"] {

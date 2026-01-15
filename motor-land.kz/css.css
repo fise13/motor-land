@@ -597,6 +597,34 @@ color: white !important;
 box-shadow: inset -2px 0 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Стили для фильтров в каталоге */
+.filtersblock .btmmearrow {
+position: static;
+background: transparent;
+backdrop-filter: none;
+-webkit-backdrop-filter: none;
+padding: 0;
+font-size: 12px;
+border-radius: 0;
+cursor: pointer;
+border-left: none;
+transition: transform 0.2s ease;
+color: #666 !important;
+box-shadow: none;
+display: flex;
+align-items: center;
+justify-content: center;
+width: 32px;
+height: 100%;
+flex-shrink: 0;
+}
+
+.filtersblock .meinputer.active .btmmearrow,
+.filtersblock .meinputer:has(.ddwnblock.open) .btmmearrow {
+transform: rotate(180deg);
+color: #fe0000 !important;
+}
+
 .btmmearrow:hover {
 background: linear-gradient(135deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.25));
 box-shadow: inset -2px 0 6px rgba(0, 0, 0, 0.15);
@@ -618,44 +646,53 @@ color: white !important;
 }
 
 .meinputer {
-display: inline-block;
-border-radius: 15px;
-border: solid 2px rgba(255, 255, 255, 0.9);
-padding: 8px 30px 8px 10px;
-font-size: 18px;
-color: rgb(91, 91, 91);
+display: flex;
+align-items: center;
+justify-content: space-between;
+border-radius: 8px;
+border: 1px solid #d0d0d0;
+background: #ffffff;
+padding: 0;
+font-size: 15px;
+color: #333;
 font-weight: normal;
-width: 170px;
-margin: 5px;
+width: 100%;
+height: 44px;
+min-width: 0;
 position: relative;
-height: 20px;
-vertical-align: top;
-  /* Performance: Увеличен z-index чтобы поля формы были поверх всего контента, включая меню */
-  z-index: 10002;
-/* Performance: Разрешаем overflow для выпадающих списков */
-overflow: visible;
-/* Гарантируем что элементы внутри кликабельны */
-pointer-events: auto !important;
-/* Улучшенный дизайн */
-background: rgba(255, 255, 255, 0.15);
-backdrop-filter: blur(4px);
--webkit-backdrop-filter: blur(4px);
-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-transition: all 0.3s ease;
 cursor: pointer;
+transition: all 0.2s ease;
+box-sizing: border-box;
+z-index: 10002;
+overflow: visible;
+pointer-events: auto !important;
 }
 
-.meinputer:hover {
-border-color: rgba(255, 255, 255, 1);
-background: rgba(255, 255, 255, 0.22);
-box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-transform: translateY(-1px);
+/* Специальные стили для фильтров в каталоге */
+.filtersblock .meinputer {
+border: 1px solid #d0d0d0;
+background: #ffffff;
 }
 
-.meinputer:active {
-transform: translateY(0);
-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+.filtersblock .meinputer:hover {
+border-color: #fe0000;
+box-shadow: 0 0 0 3px rgba(254, 0, 0, 0.1);
 }
+
+.filtersblock .meinputer:focus-within {
+border-color: #fe0000;
+box-shadow: 0 0 0 3px rgba(254, 0, 0, 0.15);
+outline: none;
+}
+
+.filtersblock .meinputer.disabled {
+opacity: 0.5;
+cursor: not-allowed;
+background: #f5f5f5;
+border-color: #e0e0e0;
+}
+
+/* Hover и active состояния теперь выше */
 
 /* Performance: Стили для поля ввода .madiv - кликабельное поле */
 .madiv {
@@ -664,6 +701,23 @@ user-select: none;
 -webkit-user-select: none;
 -moz-user-select: none;
 -ms-user-select: none;
+flex: 1;
+padding: 12px 12px 12px 14px;
+color: #333;
+font-size: 15px;
+line-height: 1.4;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+
+.filtersblock .madiv:empty:before {
+content: attr(data-val);
+color: #999;
+}
+
+.filtersblock .madiv:not(:empty) {
+color: #333;
 }
 
 .ddwnblock {
@@ -690,6 +744,56 @@ opacity: 0;
 pointer-events: none;
 /* Не создаем новый stacking context, чтобы элемент был в том же контексте что и форма */
 isolation: auto;
+}
+
+/* Стили для выпадающих списков в фильтрах каталога */
+.filtersblock .ddwnblock {
+width: 100%;
+top: calc(100% + 4px);
+left: 0;
+border-radius: 8px;
+border: 1px solid #e0e0e0;
+box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+padding: 8px;
+max-height: 280px;
+}
+
+/* Медиа-запросы для адаптивности фильтров */
+@media screen and (max-width: 660px) {
+	.filtersblock {
+		padding: 15px 10px !important;
+		margin: 10px 0 !important;
+	}
+	
+	.filtersblock form {
+		flex-direction: column !important;
+		gap: 12px !important;
+		align-items: stretch !important;
+	}
+	
+	.filtersblock .maipttee {
+		grid-template-columns: 1fr !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		gap: 12px !important;
+	}
+	
+	.filtersblock .meinputer {
+		width: 100% !important;
+		height: 44px !important;
+		margin: 0 !important;
+	}
+	
+	.filtersblock .ddwnblock {
+		width: 100% !important;
+	}
+	
+	.filtersblock button[type="submit"],
+	.filtersblock .sliderform-submit-btn {
+		width: 100% !important;
+		height: 44px !important;
+		margin-top: 0 !important;
+	}
 }
 
 /* Dropdown внутри .sliderform - используем absolute позиционирование */
@@ -732,6 +836,21 @@ background-color: #f5f5f5;
 transform: translateX(3px);
 }
 
+/* Стили для элементов выпадающего списка в фильтрах */
+.filtersblock .ddwnblock div {
+padding: 10px 12px;
+color: #333;
+font-size: 14px;
+border-radius: 4px;
+margin: 2px 0;
+}
+
+.filtersblock .ddwnblock div:hover {
+background-color: #f0f0f0;
+transform: translateX(2px);
+color: #fe0000;
+}
+
 .ddwnblock.open {
     max-height: 300px;
     opacity: 1;
@@ -764,14 +883,15 @@ transform: translateX(3px);
     cursor: not-allowed;
 }
 .maipttee {
-display: inline-block;
-width: 700px;
-height: 40px;
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 12px;
+width: 100%;
+max-width: 750px;
 position: relative;
-/* Performance: Увеличен z-index чтобы форма поиска была поверх всего контента */
 z-index: 1001;
-/* Performance: Разрешаем overflow для выпадающих списков */
 overflow: visible;
+align-items: start;
 }
 
 /* Когда открыт выпадающий список, другие поля должны быть под ним */
@@ -2854,9 +2974,21 @@ transform: scale(1.05);
 
 .filtersblock {
 text-align: center;
-padding: 15px;
-border-bottom: solid 1px #404554;
+padding: 20px;
+border-bottom: 1px solid #e0e0e0;
 margin: 10px;
+background: #fafafa;
+border-radius: 12px;
+}
+
+.filtersblock form {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 12px;
+flex-wrap: wrap;
+max-width: 900px;
+margin: 0 auto;
 }
 
 .filtersblock input[type="text"]{
@@ -2871,6 +3003,57 @@ width: 600px;
 margin: 10px 20px 0 0;
 }
 
+.filtersblock button[type="submit"],
+.filtersblock .sliderform-submit-btn {
+background: linear-gradient(135deg, #fe0000 0%, #cc0000 100%);
+border: none;
+border-radius: 8px;
+width: 44px;
+height: 44px;
+min-width: 44px;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: all 0.2s ease;
+flex-shrink: 0;
+padding: 0;
+box-shadow: 0 2px 8px rgba(254, 0, 0, 0.2);
+position: relative;
+overflow: hidden;
+}
+
+.filtersblock button[type="submit"]:hover,
+.filtersblock .sliderform-submit-btn:hover {
+background: linear-gradient(135deg, #ff1a1a 0%, #e60000 100%);
+box-shadow: 0 4px 12px rgba(254, 0, 0, 0.3);
+transform: translateY(-1px);
+}
+
+.filtersblock button[type="submit"]:active,
+.filtersblock .sliderform-submit-btn:active {
+transform: translateY(0);
+box-shadow: 0 2px 6px rgba(254, 0, 0, 0.25);
+}
+
+.filtersblock button[type="submit"]:disabled,
+.filtersblock .sliderform-submit-btn:disabled {
+opacity: 0.5;
+cursor: not-allowed;
+transform: none;
+}
+
+.filtersblock button[type="submit"] svg,
+.filtersblock .sliderform-submit-btn svg {
+width: 20px;
+height: 20px;
+stroke: white;
+fill: none;
+stroke-width: 2;
+stroke-linecap: round;
+stroke-linejoin: round;
+}
+
 .filtersblock input[type="submit"]{
 background: transparent url(./img/sertch.webp) no-repeat;
 background-size: contain;
@@ -2879,6 +3062,7 @@ width: 60px;
 height: 60px;
 border: none;
 cursor: pointer;
+display: none;
 }
 
 .filtersblock input[type="submit"]:active{
