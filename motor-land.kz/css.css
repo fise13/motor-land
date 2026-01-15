@@ -162,11 +162,9 @@ font-style: normal;
 
 
 .sliderbtns {
-position: absolute;
+position: static;
 /* z-index для кнопок слайдера - ниже формы поиска */
 z-index: 50;
-left: 860px;
-bottom: 80px;
 padding: 20px;
 background: rgba(255, 255, 255, 0.15);
 backdrop-filter: blur(10px);
@@ -178,6 +176,7 @@ display: flex;
 flex-direction: column;
 gap: 12px;
 min-width: 220px;
+max-width: 280px;
 align-items: stretch;
 }
 
@@ -455,12 +454,14 @@ z-index: 0;
 .slidercoun {
 position: relative;
 height: 100%;
-display: block;
+display: flex;
+align-items: flex-end;
+justify-content: space-between;
 width: 100%;
 max-width: 1200px;
 margin: 0 auto;
-padding-left: 0;
-padding-right: 0;
+padding: 40px 20px;
+padding-bottom: 100px;
 box-sizing: border-box;
 /* Наследуем stacking context от .slider (z-index: 200) */
 z-index: auto;
@@ -468,6 +469,48 @@ z-index: auto;
 overflow: visible;
 /* Решение 8: Убеждаемся что не создаем новый stacking context который может мешать */
 isolation: auto;
+gap: 40px;
+}
+
+/* Контейнер для содержимого hero */
+.hero-content {
+display: grid;
+grid-template-columns: 1fr auto;
+align-items: flex-end;
+justify-content: space-between;
+width: 100%;
+gap: 60px;
+}
+
+@media (max-width: 1024px) {
+	.hero-content {
+		grid-template-columns: 1fr;
+		gap: 40px;
+		align-items: center;
+	}
+	
+	.hero-right {
+		align-items: center !important;
+	}
+}
+
+/* Левая часть hero - заголовок и CTA */
+.hero-left {
+display: flex;
+flex-direction: column;
+gap: 30px;
+flex: 0 1 auto;
+min-width: 0;
+max-width: 600px;
+}
+
+/* Правая часть hero - форма поиска */
+.hero-right {
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+flex: 0 0 auto;
+align-items: flex-end;
 }
 
 .titlephon {
@@ -475,13 +518,13 @@ color: white;
 font-family: robotob, sans-serif; /* Fallback для предотвращения FOIT */
 text-transform: uppercase;
 font-size: 40px;
-position: absolute;
-left: 0px;
-top: 100px;
-width: 500px;
+position: static;
+width: auto;
+max-width: 600px;
 text-align: left;
 /* Performance: Предотвращение layout shift */
 min-height: 60px;
+margin: 0;
 }
 
 /* On-load animations for hero elements */
@@ -561,9 +604,7 @@ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 16px;
   display: inline-block;
-  position: absolute;
-  bottom: 80px;
-  left: 0px;
+  position: static;
   font-size: 40px;
   color: white;
   font-family: robotob;
@@ -585,6 +626,10 @@ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   clip-path: none !important;
   /* Гарантируем что форма и все её элементы кликабельны */
   pointer-events: auto !important;
+  width: 100%;
+  max-width: 520px;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 /* Гарантируем кликабельность всех элементов внутри формы */
@@ -605,7 +650,7 @@ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   width: 100%;
-  max-width: 750px;
+  max-width: 100%;
   align-items: start;
 }
 
@@ -912,9 +957,49 @@ max-height: 280px;
 		margin-top: 0 !important;
 	}
 	
+	/* Адаптивность для hero-блока */
+	.slidercoun {
+		flex-direction: column !important;
+		align-items: center !important;
+		padding: 20px 15px 80px 15px !important;
+		gap: 30px !important;
+	}
+	
+	.hero-content {
+		flex-direction: column !important;
+		align-items: center !important;
+		width: 100% !important;
+		gap: 30px !important;
+	}
+	
+	.hero-left {
+		width: 100% !important;
+		max-width: 100% !important;
+		align-items: center !important;
+		text-align: center !important;
+	}
+	
+	.hero-right {
+		width: 100% !important;
+		max-width: 100% !important;
+	}
+	
+	.titlephon {
+		max-width: 100% !important;
+		font-size: 28px !important;
+		text-align: center !important;
+	}
+	
+	.sliderbtns {
+		max-width: 100% !important;
+		width: 100% !important;
+	}
+	
 	/* Адаптивность для формы в слайдере */
 	.sliderform {
 		padding: 15px !important;
+		max-width: 100% !important;
+		width: 100% !important;
 	}
 	
 	.sliderform form {
