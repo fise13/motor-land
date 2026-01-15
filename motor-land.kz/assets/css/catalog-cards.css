@@ -1,0 +1,405 @@
+/* ============================================
+   КАТАЛОГ - КАРТОЧКИ ТОВАРОВ С ФОКУСОМ НА КОНВЕРСИЮ
+   ============================================ */
+
+/* Скрываем старые карточки .toverblock */
+.toverblock {
+	display: none !important;
+}
+
+/* Контейнер для карточек каталога */
+section[aria-label="Фильтры и товары каталога"] .shirina {
+	display: grid !important;
+	grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important;
+	gap: 24px !important;
+	padding: 20px 0 !important;
+	width: 100% !important;
+	max-width: 100% !important;
+}
+
+/* Карточка товара */
+.catalog-product-card {
+	display: flex;
+	flex-direction: column;
+	background: #ffffff;
+	border-radius: 16px;
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+	overflow: hidden;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	border: 1px solid #f0f0f0;
+	position: relative;
+	min-height: 520px;
+}
+
+.catalog-product-card:hover {
+	transform: translateY(-8px);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+	border-color: #fe0000;
+}
+
+/* Изображение товара */
+.catalog-product-image {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 1 / 1;
+	background: #f8f9fa;
+	overflow: hidden;
+}
+
+.catalog-product-img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.catalog-product-card:hover .catalog-product-img {
+	transform: scale(1.05);
+}
+
+/* Бейджи на изображении */
+.catalog-product-badge {
+	position: absolute;
+	z-index: 2;
+	font-size: 13px;
+	font-weight: 700;
+	padding: 6px 12px;
+	border-radius: 20px;
+	line-height: 1;
+	white-space: nowrap;
+}
+
+.catalog-product-badge-sale {
+	top: 12px;
+	right: 12px;
+	background: linear-gradient(135deg, #fe0000 0%, #cc0000 100%);
+	color: #ffffff;
+	box-shadow: 0 2px 8px rgba(254, 0, 0, 0.3);
+}
+
+.catalog-product-badge-stock {
+	top: 12px;
+	left: 12px;
+	background: #d4edda;
+	color: #155724;
+	border: 1px solid #c3e6cb;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.catalog-product-badge-stock svg {
+	color: #28a745;
+	flex-shrink: 0;
+}
+
+/* Информация о товаре */
+.catalog-product-info {
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	gap: 16px;
+	flex: 1;
+}
+
+/* 1. Название двигателя (H1, жирно) */
+.catalog-product-title {
+	margin: 0;
+	font-size: 20px;
+	font-weight: 800;
+	line-height: 1.3;
+	color: #1a1a1a;
+	letter-spacing: -0.5px;
+}
+
+.catalog-product-title a {
+	color: inherit;
+	text-decoration: none;
+	transition: color 0.2s;
+}
+
+.catalog-product-title a:hover {
+	color: #fe0000;
+}
+
+/* 2. Статус наличия (зелёный бейдж) */
+.catalog-product-status {
+	margin-top: -8px;
+}
+
+.status-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 12px;
+	border-radius: 20px;
+	font-size: 13px;
+	font-weight: 600;
+	line-height: 1;
+	white-space: nowrap;
+}
+
+.status-badge-in-stock {
+	background: #d4edda;
+	color: #155724;
+	border: 1px solid #c3e6cb;
+}
+
+.status-badge-in-stock svg {
+	color: #28a745;
+	flex-shrink: 0;
+}
+
+/* 3. Цена или статус (как бейдж) */
+.catalog-product-price-block {
+	margin-top: -4px;
+}
+
+.catalog-product-price {
+	display: flex;
+	align-items: baseline;
+	gap: 6px;
+}
+
+.catalog-price-value {
+	font-size: 28px;
+	font-weight: 800;
+	color: #fe0000;
+	line-height: 1;
+	letter-spacing: -0.5px;
+}
+
+.catalog-price-currency {
+	font-size: 18px;
+	font-weight: 600;
+	color: #6c757d;
+}
+
+.catalog-price-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 16px;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: #ffffff;
+	border-radius: 12px;
+	font-size: 15px;
+	font-weight: 600;
+	box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.catalog-price-badge svg {
+	flex-shrink: 0;
+	opacity: 0.9;
+}
+
+/* 4. Краткие характеристики (список с иконками) */
+.catalog-product-specs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 4px;
+}
+
+.catalog-spec-item {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 10px;
+	background: #f8f9fa;
+	border-radius: 8px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #495057;
+	border: 1px solid #e9ecef;
+}
+
+.catalog-spec-item svg {
+	flex-shrink: 0;
+	color: #6c757d;
+	width: 16px;
+	height: 16px;
+}
+
+/* 5. Блок доверия (мини) */
+.catalog-product-trust {
+	display: flex;
+	gap: 12px;
+	margin-top: 4px;
+	padding-top: 12px;
+	border-top: 1px solid #f0f0f0;
+}
+
+.catalog-trust-item {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	font-size: 11px;
+	font-weight: 600;
+	color: #28a745;
+}
+
+.catalog-trust-item svg {
+	flex-shrink: 0;
+	color: #28a745;
+	width: 14px;
+	height: 14px;
+}
+
+/* 6. Основной CTA */
+.catalog-product-actions {
+	display: flex;
+	gap: 8px;
+	margin-top: auto;
+	padding-top: 12px;
+}
+
+.catalog-btn-primary {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	flex: 1;
+	padding: 14px 20px;
+	background: linear-gradient(135deg, #fe0000 0%, #cc0000 100%);
+	color: #ffffff;
+	border-radius: 12px;
+	font-size: 15px;
+	font-weight: 700;
+	text-decoration: none;
+	text-transform: uppercase;
+	letter-spacing: 0.3px;
+	box-shadow: 0 4px 12px rgba(254, 0, 0, 0.3);
+	transition: all 0.2s ease;
+	border: none;
+	cursor: pointer;
+	min-height: 48px;
+}
+
+.catalog-btn-primary:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 16px rgba(254, 0, 0, 0.4);
+	background: linear-gradient(135deg, #ff1a1a 0%, #e00000 100%);
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.catalog-btn-primary:active {
+	transform: translateY(0);
+}
+
+.catalog-btn-primary svg {
+	flex-shrink: 0;
+	width: 18px;
+	height: 18px;
+}
+
+.catalog-product-actions-secondary {
+	display: flex;
+	gap: 8px;
+}
+
+.catalog-btn-secondary {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 48px;
+	height: 48px;
+	background: #f8f9fa;
+	color: #1a1a1a;
+	border: 2px solid #e9ecef;
+	border-radius: 12px;
+	text-decoration: none;
+	transition: all 0.2s ease;
+}
+
+.catalog-btn-secondary:hover {
+	background: #ffffff;
+	border-color: #fe0000;
+	color: #fe0000;
+	text-decoration: none;
+}
+
+.catalog-btn-secondary svg {
+	width: 18px;
+	height: 18px;
+}
+
+/* ============================================
+   МОБИЛЬНАЯ ВЕРСИЯ
+   ============================================ */
+
+@media (max-width: 768px) {
+	section[aria-label="Фильтры и товары каталога"] .shirina {
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+		gap: 16px;
+		padding: 16px;
+	}
+	
+	.catalog-product-card {
+		min-height: auto;
+		border-radius: 12px;
+	}
+	
+	.catalog-product-info {
+		padding: 16px;
+		gap: 12px;
+	}
+	
+	.catalog-product-title {
+		font-size: 18px;
+	}
+	
+	.catalog-price-value {
+		font-size: 24px;
+	}
+	
+	.catalog-product-specs {
+		gap: 6px;
+	}
+	
+	.catalog-spec-item {
+		font-size: 11px;
+		padding: 5px 8px;
+	}
+	
+	.catalog-product-actions {
+		flex-direction: column;
+		gap: 8px;
+	}
+	
+	.catalog-btn-primary {
+		width: 100%;
+		padding: 16px 20px;
+		font-size: 14px;
+	}
+	
+	.catalog-product-actions-secondary {
+		width: 100%;
+		justify-content: center;
+	}
+}
+
+@media (max-width: 480px) {
+	section[aria-label="Фильтры и товары каталога"] .shirina {
+		grid-template-columns: 1fr;
+		gap: 16px;
+		padding: 12px;
+	}
+	
+	.catalog-product-card {
+		border-radius: 12px;
+	}
+	
+	.catalog-product-info {
+		padding: 14px;
+	}
+	
+	.catalog-product-title {
+		font-size: 17px;
+	}
+	
+	.catalog-price-value {
+		font-size: 22px;
+	}
+}
