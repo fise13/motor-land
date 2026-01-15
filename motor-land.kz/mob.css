@@ -43,8 +43,27 @@
 
 	
 	.sliderbtns {
-	bottom: 400px !important;
-	left: 50px !important;
+		bottom: auto !important;
+		top: 120px !important;
+		left: 50% !important;
+		transform: translateX(-50%) !important;
+		right: auto !important;
+		width: calc(100% - 40px) !important;
+		max-width: 400px !important;
+		min-width: auto !important;
+		padding: 15px !important;
+	}
+	
+	.phone {
+		font-size: 15px !important;
+		padding: 12px 16px !important;
+		min-height: 44px !important;
+	}
+	
+	.atalogb {
+		font-size: 15px !important;
+		padding: 12px 16px !important;
+		min-height: 44px !important;
 	}
 
 .maipttee {
