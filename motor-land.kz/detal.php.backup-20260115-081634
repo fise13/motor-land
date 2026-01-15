@@ -1,0 +1,475 @@
+<?php
+include('hyst/php.php');
+
+if (hyst_test_id($_GET['id'])) {
+	$id = (int)$_GET['id'];
+	$stmt = $_DB_CONECT->prepare("SELECT * FROM internet_magazin_tovari WHERE id = ?");
+	$stmt->bind_param("i", $id);
+	$stmt->execute();
+	$sql = $stmt->get_result();
+	if ($sql->num_rows != 0) {
+		$print = $sql->fetch_array();
+		$stmt->close();
+	} else {
+		echo "<script>location.href='catalog.php';</script>"; 
+		exit;
+	}
+} else {
+	echo "<script>location.href='catalog.php';</script>"; 
+	exit;
+}
+
+// SEO: Оптимизированные мета-теги страницы товара
+$product_name = htmlspecialchars($print['name'], ENT_QUOTES, 'UTF-8');
+$product_meta = htmlspecialchars($print['tmeta'], ENT_QUOTES, 'UTF-8');
+$product_price_text = ($print['cash'] != 0 && $print['cash'] != '0') ? number_format($print['cash'], 0, '.', ' ') . ' KZT' : 'уточняйте';
+// Оптимизированный title (55-60 символов)
+$SITE_TITLE = 'Купить ' . $product_name . ' в Алматы | Контрактный Мотор | Motor Land';
+// Оптимизированное описание (150-160 символов)
+$short_desc = mb_substr(strip_tags($print['stext'] ? $print['stext'] : ''), 0, 80);
+$SITE_DESCRIPTION = 'Купить контрактный мотор ' . $product_name . ' в Алматы. Привозные моторы из Малайзии с гарантией. ' . ($product_meta ? $product_meta . '. ' : '') . 'Доставка по России, Казахстану, Беларуси, СНГ. Цена: ' . $product_price_text;
+$SITE_KEYWORDS = 'купить контрактный мотор ' . mb_strtolower($product_name) . ' алматы, контрактные двигатели казахстан, контрактные двигатели россия, привозные моторы, двигатель бу, доставка двигателей СНГ';
+
+// Получаем все изображения для мета-тегов
+$all_product_images = get_farrimg($print['images']);
+$product_image = !empty($all_product_images[0]) ? $all_product_images[0] : '';
+$product_image_url = (strpos($product_image, 'http') === 0) ? $product_image : 'https://motor-land.kz'.$product_image;
+
+$canonical_url = seo_get_product_url($print['id'], $print['name']);
+$full_canonical_url = 'https://motor-land.kz' . $canonical_url;
+$product_url_safe = htmlspecialchars($full_canonical_url, ENT_QUOTES, 'UTF-8');
+
+// SEO: Редирект на ЧПУ URL, если доступ через старый URL с параметром id
+// Проверяем, что это не прямой доступ к ЧПУ URL (чтобы избежать циклов)
+$request_uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+$request_path = parse_url($request_uri, PHP_URL_PATH);
+// Если это доступ через /detal или /detal.php с параметром id, и это НЕ ЧПУ URL, перенаправляем на ЧПУ URL
+if (preg_match('#^/detal(\.php)?$#', $request_path) && isset($_GET['id']) && !preg_match('#^/katalog/#', $request_path)) {
+	header('Location: ' . $canonical_url, true, 301);
+	exit;
+}
+?>
+<!doctype html>
+<html lang="ru">
+<head>
+	<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MCG7EP4276"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MCG7EP4276');
+</script>
+<?php include("hyst/head.php"); ?>
+<link rel="canonical" href="<?=$full_canonical_url;?>"/>
+<meta name="keywords" content="<?=$SITE_KEYWORDS;?>">
+<meta property="og:type" content="product">
+<meta property="og:url" content="<?=$product_url_safe;?>">
+<meta property="og:title" content="<?=htmlspecialchars(trim($SITE_TITLE), ENT_QUOTES, 'UTF-8');?>">
+<meta property="og:description" content="<?=htmlspecialchars(trim($SITE_DESCRIPTION), ENT_QUOTES, 'UTF-8');?>">
+<meta property="og:type" content="product">
+<meta property="og:image" content="<?=$product_image_url;?>">
+<meta property="og:image:secure_url" content="<?=$product_image_url;?>">
+<meta property="og:image:type" content="image/webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="<?=htmlspecialchars('Купить контрактный мотор ' . $product_name . ' Алматы', ENT_QUOTES, 'UTF-8');?>">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:locale:alternate" content="ru_KZ">
+<meta property="og:locale:alternate" content="ru_BY">
+<meta property="og:locale:alternate" content="ru_UA">
+<meta property="og:site_name" content="Motor Land">
+<?php if ($print['cash'] != 0 && $print['cash'] != '0') { ?>
+<meta property="product:price:amount" content="<?=$print['cash'];?>">
+<meta property="product:price:currency" content="KZT">
+<meta property="product:availability" content="in stock">
+<meta property="product:condition" content="used">
+<?php } ?>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<?=$SITE_TITLE;?>">
+<meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
+<meta name="twitter:image" content="<?=$product_image_url;?>">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "<?=$product_name;?>",
+  "description": "Купить контрактный мотор <?=$product_name;?> в Алматы. Привозные моторы из Малайзии с гарантией. Доставка по России, Казахстану, Беларуси, Украине и всем странам СНГ. <?=htmlspecialchars(strip_tags($print['text'] ? $print['text'] : $print['stext']), ENT_QUOTES, 'UTF-8');?>",
+  <?php 
+  // Добавляем все изображения в схему
+  $schema_images = array();
+  foreach ($all_product_images as $img) {
+    if (!empty($img)) {
+      $img_url = (strpos($img, 'http') === 0) ? $img : 'https://motor-land.kz'.$img;
+      $schema_images[] = '"' . htmlspecialchars($img_url, ENT_QUOTES, 'UTF-8') . '"';
+    }
+  }
+  if (count($schema_images) > 1) {
+    echo '"image": [' . implode(', ', $schema_images) . '],';
+  } else {
+    echo '"image": "' . htmlspecialchars($product_image_url, ENT_QUOTES, 'UTF-8') . '",';
+  }
+  ?>
+  "brand": {
+    "@type": "Brand",
+    "name": "Motor Land"
+  },
+  "category": "Контрактные двигатели и привозные моторы из Малайзии",
+  "offers": {
+    "@type": "Offer",
+    "@id": "<?=$product_url_safe;?>#offer",
+    "url": "<?=$product_url_safe;?>",
+    "priceCurrency": "KZT",
+    "price": "<?=($print['cash'] != 0 && $print['cash'] != '0') ? $print['cash'] : '0';?>",
+    "priceValidUntil": "<?=date('Y-m-d', strtotime('+1 year'));?>",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/UsedCondition",
+    "availabilityStarts": "<?=date('Y-m-d');?>",
+    "seller": {
+      "@type": "Organization",
+      "@id": "https://motor-land.kz/#organization",
+      "name": "Motor Land",
+      "url": "https://motor-land.kz",
+      "logo": "https://motor-land.kz/img/logo.webp"
+    },
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+        "@type": "MonetaryAmount",
+        "value": "0",
+        "currency": "KZT"
+      },
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "businessDays": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+        },
+        "cutoffTime": "18:00",
+        "handlingTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 1,
+          "maxValue": 3,
+          "unitCode": "DAY"
+        },
+        "transitTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 2,
+          "maxValue": 14,
+          "unitCode": "DAY"
+        }
+      },
+      "shippingDestination": {
+        "@type": "DefinedRegion",
+        "addressCountry": ["KZ", "RU", "BY", "UA", "AM", "AZ", "GE", "KG", "MD", "TJ", "TM", "UZ"]
+      },
+      "areaServed": [{
+        "@type": "Country",
+        "name": "Казахстан"
+      }, {
+        "@type": "Country",
+        "name": "Россия"
+      }, {
+        "@type": "Country",
+        "name": "Беларусь"
+      }, {
+        "@type": "Country",
+        "name": "Украина"
+      }, {
+        "@type": "Country",
+        "name": "Армения"
+      }, {
+        "@type": "Country",
+        "name": "Азербайджан"
+      }, {
+        "@type": "Country",
+        "name": "Грузия"
+      }, {
+        "@type": "Country",
+        "name": "Кыргызстан"
+      }, {
+        "@type": "Country",
+        "name": "Молдова"
+      }, {
+        "@type": "Country",
+        "name": "Таджикистан"
+      }, {
+        "@type": "Country",
+        "name": "Туркменистан"
+      }, {
+        "@type": "Country",
+        "name": "Узбекистан"
+      }]
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "15",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [{
+    "@type": "Review",
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "5",
+      "bestRating": "5"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Клиент Motor Land"
+    },
+    "reviewBody": "Отличный контрактный двигатель, доставили быстро по СНГ. Всё работает как новое!"
+  }],
+  "sku": "<?=$print['id'];?>",
+  "mpn": "<?=$product_name;?>",
+  "gtin": "",
+  "additionalProperty": [{
+    "@type": "PropertyValue",
+    "name": "Состояние",
+    "value": "Бывший в употреблении"
+  }, {
+    "@type": "PropertyValue",
+    "name": "Страна происхождения",
+    "value": "Малайзия"
+  }]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Главная",
+    "item": "https://motor-land.kz/"
+  }, {
+    "@type": "ListItem",
+    "position": 2,
+    "name": "Каталог",
+    "item": "https://motor-land.kz/catalog"
+  }, {
+    "@type": "ListItem",
+    "position": 3,
+    "name": "<?=htmlspecialchars($product_name, ENT_QUOTES, 'UTF-8');?>",
+    "item": "<?=$product_url_safe;?>"
+  }]
+}
+</script>
+</head>
+<body>
+<?php include("hyst/sbody.php"); ?>
+<?php include("des/head.php"); ?>
+<main>
+<br><br>
+<nav class="generalw" aria-label="Навигационная цепочка">
+	<div class="shirina">
+		<div class="crumbsblock" itemscope itemtype="https://schema.org/BreadcrumbList">
+		<span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+			<a href="/" itemprop="item"><span itemprop="name">Главная</span></a>
+			<meta itemprop="position" content="1" />
+		</span> / 
+		<span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+			<a href="/catalog" itemprop="item"><span itemprop="name">Каталог</span></a>
+			<meta itemprop="position" content="2" />
+		</span> / 
+		<span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+			<a href="<?=$canonical_url;?>" itemprop="item"><span itemprop="name"><?=$product_name;?></span></a>
+			<meta itemprop="position" content="3" />
+		</span>
+		</div>
+		</div>
+</nav>
+
+<section class="generalw">
+	<div class="shirina">
+		<article class="product-detail-wrapper" itemscope itemtype="https://schema.org/Product">
+			<div class="product-detail-container">
+				<div class="product-image-wrapper">
+					<?php 
+					// Получаем ВСЕ фотографии из базы данных
+					$all_images = get_farrimg($print['images']);
+					$product_img = !empty($all_images[0]) ? get_optimized_image($all_images[0]) : ['webp' => '', 'original' => ''];
+					?>
+					<link rel="preload" as="image" href="<?=$product_img['webp'] ?: $product_img['original'];?>">
+					
+					<!-- Главное изображение -->
+					<div class="tovarimage">
+						<picture>
+							<source srcset="<?=$product_img['webp'] ?: $product_img['original'];?>" type="image/webp">
+							<img id="main-product-image" src="<?=$product_img['webp'] ?: $product_img['original'];?>" alt="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы из Малайзии, доставка по СНГ';?>" title="<?='Купить контрактный мотор '.$product_name.' Алматы - привозные моторы, доставка по СНГ';?>" itemprop="image" loading="eager" fetchpriority="high" width="600" height="450" decoding="async">
+						</picture>
+						<?php if ($print['sale'] != 'noting') { ?>
+						<div class="cationsale"><?=$print['sale'];?></div>
+						<?php } ?>
+					</div>
+					
+					<!-- Галерея миниатюр (если есть больше 1 фотографии) -->
+					<?php if (count($all_images) > 1): ?>
+					<div class="product-gallery-thumbnails" style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+						<?php foreach ($all_images as $index => $img_path): 
+							if (empty($img_path)) continue;
+							$thumb_img = get_optimized_image($img_path);
+							$is_active = $index === 0 ? 'active' : '';
+						?>
+						<div class="gallery-thumb <?=$is_active;?>" 
+							 style="cursor: pointer; border: 2px solid <?=$index === 0 ? '#007bff' : 'transparent';?>; border-radius: 4px; overflow: hidden; width: 80px; height: 80px; flex-shrink: 0;"
+							 data-image-index="<?=$index;?>"
+							 onclick="changeMainImage('<?=$thumb_img['webp'] ?: $thumb_img['original'];?>', <?=$index;?>)">
+							<picture>
+								<source srcset="<?=$thumb_img['webp'] ?: $thumb_img['original'];?>" type="image/webp">
+								<img src="<?=$thumb_img['webp'] ?: $thumb_img['original'];?>" 
+									 alt="Фото <?=$index + 1;?>" 
+									 style="width: 100%; height: 100%; object-fit: cover;"
+									 loading="lazy">
+							</picture>
+						</div>
+						<?php endforeach; ?>
+					</div>
+					<?php endif; ?>
+				</div>
+				
+				<div class="product-info-wrapper">
+					<h1 class="product-title" itemprop="name"><?=$print['name'];?></h1>
+			
+					<div class="product-price-section" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+						<?php if ($print['cash'] != 0 && $print['cash'] != '0') { ?>
+						<div class="product-price">
+							<span class="price-value" itemprop="price"><?=number_format($print['cash'], 0, '.', ' ');?></span>
+							<span class="price-currency" itemprop="priceCurrency" content="KZT"> KZT</span>
+						</div>
+						<?php } else { ?>
+						<div class="product-price-request">
+							<span>Цена по запросу</span>
+						</div>
+						<?php } ?>
+						<link itemprop="availability" href="https://schema.org/InStock" />
+					</div>
+					
+					<a href="tel:<?=preg_replace('/[^\\d+]/','', get_simple_texts('index_slider_phone'));?>" class="product-buy-button" role="button" aria-label="Купить товар <?=htmlspecialchars($product_name, ENT_QUOTES, 'UTF-8');?>" tabindex="0" onclick="if(typeof gtag==='function'){gtag('event', 'conversion', {'send_to': 'AW-17661940869/8IrgCNzqw7QbEIWp7-VB'});}">Купить</a>
+					
+					<div class="product-description" itemprop="description">
+						<?php
+						$text = $print['text'];
+						$text = preg_replace('/В наличии\s*[-–—]\s*на выбор более\s*\d+шт\.?/iu', '', $text);
+						$text = preg_replace('/В наличии\s*на выбор более\s*\d+шт\.?/iu', '', $text);
+						$text = preg_replace('/на выбор более\s*\d+шт\.?/iu', '', $text);
+						echo $text;
+						?>
+					</div>
+				</div>
+		</div>
+		<!--<div class="charactr">
+		<?=$print['text1'];?>
+		</div>-->
+		</article>
+	</div>
+</section>
+</main>
+<br><br>
+
+	
+<?php include("des/foter.php"); ?>
+<?php include("hyst/fbody.php"); ?>
+
+<script defer>
+// Функция для переключения главного изображения в галерее
+function changeMainImage(imageSrc, index) {
+	var mainImg = document.getElementById('main-product-image');
+	if (mainImg) {
+		// Обновляем source и img
+		var picture = mainImg.closest('picture');
+		if (picture) {
+			var source = picture.querySelector('source');
+			if (source) {
+				source.srcset = imageSrc;
+			}
+			mainImg.src = imageSrc;
+		}
+		
+		// Обновляем активную миниатюру
+		var thumbs = document.querySelectorAll('.gallery-thumb');
+		thumbs.forEach(function(thumb, i) {
+			if (i === index) {
+				thumb.style.borderColor = '#007bff';
+				thumb.classList.add('active');
+			} else {
+				thumb.style.borderColor = 'transparent';
+				thumb.classList.remove('active');
+			}
+		});
+	}
+}
+
+(function() {
+	function waitForJQuery(callback) {
+		if (typeof window.jQuery !== 'undefined' && typeof window.$ !== 'undefined') {
+			callback();
+		} else {
+			setTimeout(function() { waitForJQuery(callback); }, 50);
+		}
+	}
+	
+	function initBuyButtons() {
+		var $ = window.jQuery || window.$;
+		if (!$) {
+			waitForJQuery(initBuyButtons);
+			return;
+		}
+		
+		$(document).on('click', '.product-buy-button', function(e) {
+			if ($(this).attr('href') && $(this).attr('href').indexOf('tel:') === 0) {
+				return;
+			}
+			e.preventDefault();
+			var productName = $(this).closest('.product-info-wrapper').find('.product-title').text() || 
+			                  $(this).attr('data-nam') || 
+			                  $('#playpayidv').text();
+			if (productName) {
+				$('#playpayid').val(productName);
+				$('#playpayidv').text(productName);
+				if (typeof openModal === 'function') {
+					openModal();
+				} else {
+					$('.plashesbgmodl').addClass('show').show().attr('aria-hidden', 'false');
+					$('#zakazaty').addClass('show').show().attr('aria-hidden', 'false');
+				}
+			}
+		});
+		
+		$(document).on('click', '.toverbuton', function(e) {
+			if ($(this).attr('href') && $(this).attr('href').indexOf('tel:') === 0) {
+				return;
+			}
+			e.preventDefault();
+			var productName = $(this).closest('article').find('.tovertitle').text() || 
+			                  $(this).attr('data-nam') || 
+			                  $('#playpayidv').text();
+			if (productName) {
+				$('#playpayid').val(productName);
+				$('#playpayidv').text(productName);
+				if (typeof openModal === 'function') {
+					openModal();
+				} else {
+					$('.plashesbgmodl').addClass('show').show().attr('aria-hidden', 'false');
+					$('#zakazaty').addClass('show').show().attr('aria-hidden', 'false');
+				}
+			}
+		});
+	}
+	
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', function() {
+			waitForJQuery(initBuyButtons);
+		});
+	} else {
+		waitForJQuery(initBuyButtons);
+	}
+})();
+</script>
+
+</body>
+</html>
