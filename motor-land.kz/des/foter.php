@@ -75,6 +75,12 @@
 <div class="generalw frayalpfhon">
 	<div class="shirina copyr">
 		<div class="footer-links">
+			<a href="/catalog" class="footer-link">Каталог</a>
+			<span class="footer-separator">|</span>
+			<a href="/service" class="footer-link">Автосервис</a>
+			<span class="footer-separator">|</span>
+			<a href="/actions" class="footer-link">Акции</a>
+			<span class="footer-separator">|</span>
 			<a href="/faq" class="footer-link-faq">FAQ</a>
 			<span class="footer-separator">|</span>
 			<a href="/blog" class="footer-link">Блог</a>

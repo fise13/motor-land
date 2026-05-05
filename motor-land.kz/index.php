@@ -70,32 +70,13 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 <meta property="og:url" content="https://motor-land.kz/">
 <meta property="og:title" content="<?=htmlspecialchars(trim($SITE_TITLE), ENT_QUOTES, 'UTF-8');?>">
 <meta property="og:description" content="<?=htmlspecialchars(trim($SITE_DESCRIPTION), ENT_QUOTES, 'UTF-8');?>">
-<meta property="og:image" content="https://motor-land.kz/img/logo.webp">
-<meta property="og:image:secure_url" content="https://motor-land.kz/img/logo.webp">
-<meta property="og:image:type" content="image/webp">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Motor Land - Контрактные двигатели и привозные моторы из Малайзии">
 <meta property="og:locale" content="ru_RU">
-<meta property="og:locale:alternate" content="ru_KZ">
-<meta property="og:locale:alternate" content="ru_BY">
-<meta property="og:locale:alternate" content="ru_UA">
-<meta property="og:locale:alternate" content="ru_AM">
-<meta property="og:locale:alternate" content="ru_AZ">
-<meta property="og:locale:alternate" content="ru_GE">
-<meta property="og:locale:alternate" content="ru_KG">
-<meta property="og:locale:alternate" content="ru_MD">
-<meta property="og:locale:alternate" content="ru_TJ">
-<meta property="og:locale:alternate" content="ru_TM">
-<meta property="og:locale:alternate" content="ru_UZ">
 <meta property="og:site_name" content="Motor Land">
 <meta property="og:type" content="website">
 <meta property="article:publisher" content="https://motor-land.kz">
-<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="https://motor-land.kz/">
 <meta name="twitter:title" content="<?=$SITE_TITLE;?>">
 <meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
-<meta name="twitter:image" content="https://motor-land.kz/img/logo.webp">
 <meta name="twitter:site" content="@motorland">
 <meta name="twitter:creator" content="@motorland">
 <script type="application/ld+json">
@@ -264,16 +245,18 @@ if (isset($_GET['yr']) && $_GET['yr'] != '') {
 		?>
 		<?php if ($slide_index == 0): 
 			$slide_img = get_optimized_image($slide['image']);
+			$slide_alt = !empty($slide['title']) ? trim(strip_tags($slide['title'])) : ('Контрактные двигатели — слайд ' . ($slide_index + 1));
 		?>
 		<link rel="preload" as="image" href="<?=$slide_img['webp'] ?: $slide_img['original'];?>" fetchpriority="high">
 		<picture>
 			<source srcset="<?=$slide_img['webp'] ?: $slide_img['original'];?>" type="image/webp">
-			<img src="<?=$slide_img['webp'] ?: $slide_img['original'];?>" alt="Купить контрактный мотор Алматы - привозные моторы из Малайзии, контрактные двигатели Казахстан, Россия, СНГ" class="sliderslid" loading="eager" fetchpriority="high" width="1920" height="600" decoding="async" style="object-fit:cover;width:100%;height:100%;position:absolute;top:0;left:0;display:block;">
+			<img src="<?=$slide_img['webp'] ?: $slide_img['original'];?>" alt="<?=htmlspecialchars($slide_alt, ENT_QUOTES, 'UTF-8');?>" class="sliderslid" loading="eager" fetchpriority="high" width="1920" height="600" decoding="async" style="object-fit:cover;width:100%;height:100%;position:absolute;top:0;left:0;display:block;">
 		</picture>
 		<?php else: 
 			$slide_img = get_optimized_image($slide['image']);
+			$slide_alt = !empty($slide['title']) ? trim(strip_tags($slide['title'])) : ('Контрактные двигатели — слайд ' . ($slide_index + 1));
 		?>
-		<div class="sliderslid" style="background-image: url(<?=$slide_img['webp'] ?: $slide_img['original'];?>);" aria-label="Купить контрактный мотор Алматы - привозные моторы из Малайзии, контрактные двигатели Казахстан, Россия, СНГ"></div>
+		<div class="sliderslid" style="background-image: url(<?=$slide_img['webp'] ?: $slide_img['original'];?>);" aria-label="<?=htmlspecialchars($slide_alt, ENT_QUOTES, 'UTF-8');?>"></div>
 		<?php endif; ?>
 		<?php
 		$slide_index++;

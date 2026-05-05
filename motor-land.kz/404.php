@@ -1,5 +1,8 @@
 <?php
 include('hyst/php.php');
+if (http_response_code() < 400) {
+	http_response_code(404);
+}
 
 // SEO: Оптимизированные мета-теги для страницы 404
 $SITE_TITLE = '404 - Страница не найдена | Моторленд';

@@ -25,7 +25,7 @@ $SITE_KEYWORDS = 'гарантия на контрактные двигател�
 <meta property="og:url" content="https://motor-land.kz/guarantees">
 <meta property="og:title" content="<?=$SITE_TITLE;?>">
 <meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
-<meta property="og:image" content="https://motor-land.kz/img/logo.webp">
+<meta property="og:image" content="https://motor-land.kz/img/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:site_name" content="Motor Land">
@@ -33,7 +33,7 @@ $SITE_KEYWORDS = 'гарантия на контрактные двигател�
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="<?=$SITE_TITLE;?>">
 <meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
-<meta name="twitter:image" content="https://motor-land.kz/img/logo.webp">
+<meta name="twitter:image" content="https://motor-land.kz/img/og-image.jpg">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -49,6 +49,17 @@ $SITE_KEYWORDS = 'гарантия на контрактные двигател�
     "name": "Гарантии",
     "item": "https://motor-land.kz/guarantees"
   }]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+	{"@type":"Question","name":"Какой срок гарантии на контрактные двигатели?","acceptedAnswer":{"@type":"Answer","text":"Срок проверки обычно от 3 до 25 дней, для спортивных авто — 5 дней."}},
+	{"@type":"Question","name":"Что делать, если двигатель не подошёл?","acceptedAnswer":{"@type":"Answer","text":"Мы выполняем замену на аналог, привозим под заказ или возвращаем деньги при отсутствии замены."}},
+	{"@type":"Question","name":"Когда гарантия не действует?","acceptedAnswer":{"@type":"Answer","text":"При нарушении условий эксплуатации, неправильной установке, перегреве и иных исключениях, указанных в гарантийных правилах."}}
+  ]
 }
 </script>
 </head>

@@ -36,8 +36,8 @@ if (!isset($SITE_TITLE) || empty($SITE_TITLE) || trim($SITE_TITLE) === '') {
 	}
 }
 
-// SEO: Гарантируем что метаописание не пустое и имеет минимальную длину (минимум 50 символов для SEO)
-if (mb_strlen($SITE_DESCRIPTION) < 50) {
+// SEO: Гарантируем что метаописание не пустое и имеет разумную минимальную длину
+if (mb_strlen($SITE_DESCRIPTION) < 30) {
 	$SITE_DESCRIPTION = $default_description;
 }
 ?>
@@ -79,26 +79,9 @@ if ($current_url == 'https://motor-land.kz') {
 	$current_url = 'https://motor-land.kz/';
 }
 
-// Hreflang для всех стран СНГ
-$hreflang_countries = [
-	'ru' => 'ru_RU', // Россия
-	'kz' => 'ru_KZ', // Казахстан
-	'by' => 'ru_BY', // Беларусь
-	'ua' => 'ru_UA', // Украина
-	'am' => 'ru_AM', // Армения
-	'az' => 'ru_AZ', // Азербайджан
-	'ge' => 'ru_GE', // Грузия
-	'kg' => 'ru_KG', // Кыргызстан
-	'md' => 'ru_MD', // Молдова
-	'tj' => 'ru_TJ', // Таджикистан
-	'tm' => 'ru_TM', // Туркменистан
-	'uz' => 'ru_UZ', // Узбекистан
-	'x-default' => 'ru_RU' // По умолчанию
-];
-
-foreach ($hreflang_countries as $code => $locale) {
-	echo '<link rel="alternate" hreflang="' . htmlspecialchars($code, ENT_QUOTES, 'UTF-8') . '" href="' . htmlspecialchars($current_url, ENT_QUOTES, 'UTF-8') . '">' . "\n";
-}
+// Hreflang: валидные значения для текущего одноязычного сайта
+echo '<link rel="alternate" hreflang="ru" href="' . htmlspecialchars($current_url, ENT_QUOTES, 'UTF-8') . '">' . "\n";
+echo '<link rel="alternate" hreflang="x-default" href="' . htmlspecialchars($current_url, ENT_QUOTES, 'UTF-8') . '">' . "\n";
 ?>
 <title><?=htmlspecialchars($SITE_TITLE ?? 'Купить Контрактный Мотор Алматы | Моторленд', ENT_QUOTES, 'UTF-8');?></title>
 <!-- Accessibility: Убираем maximum-scale для разрешения масштабирования (требование PageSpeed) -->
@@ -107,9 +90,16 @@ foreach ($hreflang_countries as $code => $locale) {
 <link rel="shortcut icon" href="favicon.ico?<?=$INTERFACE_VERSION;?>" />
 <link rel="apple-touch-icon" href="favicon_apple.png?<?=$INTERFACE_VERSION;?>">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-<meta property="og:image" content="https://motor-land.kz/img/logo.webp">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Motor Land">
+<meta property="og:image" content="https://motor-land.kz/img/og-image.jpg">
+<meta property="og:image:secure_url" content="https://motor-land.kz/img/og-image.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Motor Land — контрактные двигатели и доставка по СНГ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://motor-land.kz/img/og-image.jpg">
 
 <!-- Performance: Preload критических шрифтов для устранения блокировки рендеринга -->
 <!-- Используем абсолютные пути для работы на всех страницах -->
@@ -160,6 +150,10 @@ body{margin:0;padding:0;width:100%;height:100%;font-family:roboto,sans-serif;fon
 <script src="/des/scroll-animations.js?<?=$INTERFACE_VERSION;?>" defer></script>
 
 <?php
+if (file_exists($_SERVER['DOCUMENT_ROOT'].'/hyst/seo_global.php')) {
+	include_once($_SERVER['DOCUMENT_ROOT'].'/hyst/seo_global.php');
+}
+
 if ($_HYST_ADMIN) {
 	$mods_folders = scandir($_SERVER['DOCUMENT_ROOT'].'/hyst/mods/');
 	array_splice($mods_folders, 0, 2);

@@ -47,6 +47,9 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^query-cluster/(.+)$ /seo_cluster.php?cluster=$1 [L,QSA]
 
+# SEO: Человекочитаемый sitemap URL
+RewriteRule ^sitemap\.xml$ /sitemap.php [L]
+
 # SEO: Поддержка старых URL с ?id= для обратной совместимости
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
@@ -157,6 +160,7 @@ RewriteRule ^ %1 [R=301,L]
     Header set X-Frame-Options "SAMEORIGIN"
     Header set X-XSS-Protection "1; mode=block"
     Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Content-Language "ru"
 </IfModule>
 
 # Performance: Включение Brotli сжатия (если модуль доступен)

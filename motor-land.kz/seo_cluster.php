@@ -55,18 +55,15 @@ $SITE_KEYWORDS = mb_strtolower($cluster_name_clean) . ', купить контр
 <meta property="og:url" content="https://motor-land.kz/query-cluster/<?=urlencode($cluster_name);?>">
 <meta property="og:title" content="<?=$SITE_TITLE;?>">
 <meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
-<meta property="og:image" content="https://motor-land.kz/img/logo.webp">
+<meta property="og:image" content="https://motor-land.kz/img/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:site_name" content="Motor Land">
 <meta property="og:locale" content="ru_RU">
-<meta property="og:locale:alternate" content="ru_KZ">
-<meta property="og:locale:alternate" content="ru_BY">
-<meta property="og:locale:alternate" content="ru_UA">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="<?=$SITE_TITLE;?>">
 <meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
-<meta name="twitter:image" content="https://motor-land.kz/img/logo.webp">
+<meta name="twitter:image" content="https://motor-land.kz/img/og-image.jpg">
 <script type="application/ld+json">
 <?php
 $breadcrumb_data = [

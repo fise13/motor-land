@@ -25,13 +25,11 @@ Disallow: /adm
 Disallow: /adm.php
 Disallow: /cms_img/
 Disallow: /logs/
-Disallow: /actions.php
 Disallow: /getdtls.php
 Disallow: /getdtlsaa.php
 Disallow: /getf.php
 Disallow: /send_form.php
-Disallow: /detal?id=*
-Disallow: /*?*id=*
+Disallow: /detal.php
 Disallow: /*?*page=*
 Disallow: /*?*sort=*
 Disallow: /*?*filter=*
@@ -85,7 +83,7 @@ User-agent: MJ12bot
 Disallow: /
 
 # SEO: Указываем расположение sitemap
-Sitemap: https://motor-land.kz/sitemap.php
+Sitemap: https://motor-land.kz/sitemap.xml
 
 # SEO: Указываем задержку для вежливых роботов (1 секунда)
 Crawl-delay: 1

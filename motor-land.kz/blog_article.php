@@ -170,8 +170,8 @@ $article_data = [
   "headline" => !empty($article['title']) ? $article['title'] : 'Статья',
   "description" => !empty($article['description']) ? $article['description'] : 'Статья в блоге Motor Land',
   "image" => "https://motor-land.kz" . (!empty($article['image']) ? $article['image'] : '/img/logo.webp'),
-  "datePublished" => !empty($article['date']) ? $article['date'] : date('Y-m-d H:i:s'),
-  "dateModified" => !empty($article['date_modified']) ? $article['date_modified'] : date('Y-m-d H:i:s'),
+  "datePublished" => !empty($article['date']) ? date('c', strtotime($article['date'])) : date('c'),
+  "dateModified" => !empty($article['date_modified']) ? date('c', strtotime($article['date_modified'])) : date('c'),
   "author" => [
     "@type" => "Organization",
     "name" => !empty($article['author']) ? $article['author'] : 'Motor Land',
@@ -188,7 +188,8 @@ $article_data = [
   "mainEntityOfPage" => [
     "@type" => "WebPage",
     "@id" => "https://motor-land.kz/blog/" . (!empty($article['slug']) ? $article['slug'] : '')
-  ]
+  ],
+  "wordCount" => str_word_count(strip_tags(!empty($article['content']) ? $article['content'] : ''), 0, 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя0123456789')
 ];
 echo json_encode($article_data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_QUOT | JSON_HEX_APOS);
 ?>

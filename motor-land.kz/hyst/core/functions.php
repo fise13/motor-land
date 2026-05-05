@@ -86,11 +86,15 @@ function get_optimized_image($image_path) {
 	// Это для обратной совместимости с путями в базе данных
 	$webp_path = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $image_path);
 	
-	// Возвращаем webp путь (все изображения теперь в webp формате)
+	$doc_root = isset($_SERVER['DOCUMENT_ROOT']) ? rtrim($_SERVER['DOCUMENT_ROOT'], '/') : '';
+	$webp_fs = ($doc_root !== '' && $webp_path !== '') ? $doc_root . $webp_path : '';
+	$webp_exists = ($webp_fs !== '' && is_file($webp_fs));
+	
+	// Возвращаем webp только если файл реально существует (иначе <picture> / фолбэк на original)
 	return [
-		'original' => $image_path, // Оставляем оригинальный путь для совместимости
-		'webp' => $webp_path,      // Основной путь к webp изображению
-		'has_webp' => true         // Всегда true, так как все изображения теперь webp
+		'original' => $image_path,
+		'webp' => $webp_exists ? $webp_path : '',
+		'has_webp' => $webp_exists,
 	];
 }
 

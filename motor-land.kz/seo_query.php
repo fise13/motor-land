@@ -86,9 +86,10 @@ $query_title = !empty($query['meta_title']) ? trim($query['meta_title']) : (!emp
 // Убираем эмодзи из title для лучшей SEO-оптимизации
 $query_title = preg_replace('/[\x{1F300}-\x{1F9FF}]/u', '', $query_title);
 $query_title = trim($query_title);
-// Оптимизируем длину title (55-60 символов)
-if (mb_strlen($query_title) > 50) {
-	$query_title = mb_substr($query_title, 0, 47) . '...';
+// Оптимизируем длину title (до ~60 символов, по словам)
+if (mb_strlen($query_title) > 60) {
+	$short = mb_substr($query_title, 0, 60);
+	$query_title = trim(preg_replace('/\s+\S*$/u', '', $short));
 }
 $SITE_TITLE = $query_title . ' | Motor Land';
 $SITE_DESCRIPTION = !empty($query['meta_description']) ? htmlspecialchars(trim($query['meta_description']), ENT_QUOTES, 'UTF-8') : (!empty($query['query_text']) ? 'Контрактные двигатели ' . htmlspecialchars(trim($query['query_text']), ENT_QUOTES, 'UTF-8') . ' в Алматы. Доставка по России, Казахстану, Беларуси, Украине и всем странам СНГ. Привозные моторы из Малайзии с гарантией.' : 'Контрактные двигатели в Алматы. Доставка по России, Казахстану, Беларуси, Украине и всем странам СНГ. Привозные моторы из Малайзии с гарантией.');
@@ -116,7 +117,7 @@ include("hyst/head.php");
 <meta property="og:url" content="https://motor-land.kz/query/<?=!empty($query['slug']) ? htmlspecialchars($query['slug'], ENT_QUOTES, 'UTF-8') : '';?>">
 <meta property="og:title" content="<?=$SITE_TITLE;?>">
 <meta property="og:description" content="<?=$SITE_DESCRIPTION;?>">
-<meta property="og:image" content="https://motor-land.kz/img/logo.webp">
+<meta property="og:image" content="https://motor-land.kz/img/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:site_name" content="Motor Land">
@@ -127,11 +128,7 @@ include("hyst/head.php");
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="<?=$SITE_TITLE;?>">
 <meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
-<meta name="twitter:image" content="https://motor-land.kz/img/logo.webp">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="<?=$SITE_TITLE;?>">
-<meta name="twitter:description" content="<?=$SITE_DESCRIPTION;?>">
-<meta name="twitter:image" content="https://motor-land.kz/img/logo.webp">
+<meta name="twitter:image" content="https://motor-land.kz/img/og-image.jpg">
 <script type="application/ld+json">
 <?php
 $breadcrumb_data = [

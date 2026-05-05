@@ -22,20 +22,22 @@ echo '  </url>' . "\n";
 
 // SEO: Оптимизированные приоритеты и частоты обновления для страниц
 $pages = [
-    ['/catalog', 'daily', '0.9'],
-    ['/service', 'monthly', '0.8'],
-    ['/pay', 'monthly', '0.8'],
-    ['/guarantees', 'monthly', '0.8'],
-    ['/faq', 'monthly', '0.7'],
-    ['/blog', 'weekly', '0.8'],
-    ['/contacts', 'monthly', '0.8'],
-    ['/actions', 'weekly', '0.7']
+    ['/catalog', 'daily', '0.9', '/catalog.php'],
+    ['/service', 'monthly', '0.8', '/service.php'],
+    ['/pay', 'monthly', '0.8', '/pay.php'],
+    ['/guarantees', 'monthly', '0.8', '/guarantees.php'],
+    ['/faq', 'monthly', '0.7', '/faq.php'],
+    ['/blog', 'weekly', '0.8', '/blog.php'],
+    ['/contacts', 'monthly', '0.8', '/contacts.php'],
+    ['/actions', 'weekly', '0.7', '/actions.php']
 ];
 
 foreach ($pages as $page) {
     echo '  <url>' . "\n";
     echo '    <loc>' . $base_url . $page[0] . '</loc>' . "\n";
-    echo '    <lastmod>' . date('Y-m-d') . '</lastmod>' . "\n";
+    $page_file = $_SERVER['DOCUMENT_ROOT'] . $page[3];
+    $page_lastmod = file_exists($page_file) ? date('Y-m-d', filemtime($page_file)) : date('Y-m-d');
+    echo '    <lastmod>' . $page_lastmod . '</lastmod>' . "\n";
     echo '    <changefreq>' . $page[1] . '</changefreq>' . "\n";
     echo '    <priority>' . $page[2] . '</priority>' . "\n";
     echo '  </url>' . "\n";
@@ -46,7 +48,14 @@ if (!function_exists('get_farrimg')) {
     require_once('hyst/core/functions.php');
 }
 
-$stmt = $_DB_CONECT->prepare("SELECT id, name, images FROM internet_magazin_tovari ORDER BY id DESC");
+$has_date_modified = false;
+$col_check = $_DB_CONECT->query("SHOW COLUMNS FROM internet_magazin_tovari LIKE 'date_modified'");
+if ($col_check && $col_check->num_rows > 0) {
+    $has_date_modified = true;
+}
+$stmt = $has_date_modified
+    ? $_DB_CONECT->prepare("SELECT id, name, images, date_modified FROM internet_magazin_tovari ORDER BY id DESC")
+    : $_DB_CONECT->prepare("SELECT id, name, images FROM internet_magazin_tovari ORDER BY id DESC");
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -56,7 +65,10 @@ while ($row = $result->fetch_assoc()) {
     $product_name = htmlspecialchars($row['name'], ENT_XML1, 'UTF-8');
     echo '  <url>' . "\n";
     echo '    <loc>' . $base_url . htmlspecialchars($product_url, ENT_XML1, 'UTF-8') . '</loc>' . "\n";
-    echo '    <lastmod>' . date('Y-m-d') . '</lastmod>' . "\n";
+    $product_lastmod = ($has_date_modified && !empty($row['date_modified']))
+        ? date('Y-m-d', strtotime($row['date_modified']))
+        : date('Y-m-d');
+    echo '    <lastmod>' . $product_lastmod . '</lastmod>' . "\n";
     echo '    <changefreq>weekly</changefreq>' . "\n";
     echo '    <priority>0.8</priority>' . "\n";
     // Добавляем изображение товара в sitemap для лучшей индексации
