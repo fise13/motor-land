@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 	exit;
 }
 
-include('../hyst/php.php');
+require_once dirname(__DIR__) . '/hyst/form_bootstrap.php';
 
 // Получение данных из POST
 $product_id = isset($_POST['product_id']) ? (int)$_POST['product_id'] : 0;
@@ -62,9 +62,6 @@ if (!empty($errors)) {
 	]);
 	exit;
 }
-
-// Получение телефона для отправки
-$contact_phone = preg_replace('/[^\\d+]/', '', get_simple_texts('index_slider_phone'));
 
 // Подготовка данных для сохранения/отправки
 $request_data = [
@@ -122,12 +119,7 @@ if (!empty($request_data['message'])) {
 }
 $notification_text .= "\nДата: " . $request_data['date'];
 
-$letter = new send_message(
-	FORM_RECIPIENT_EMAIL,
-	'Новый запрос цены с сайта',
-	nl2br(htmlspecialchars($notification_text, ENT_QUOTES, 'UTF-8'))
-);
-if (!$letter->send()) {
+if (!send_form_lead('Новый запрос цены с сайта', $notification_text)) {
 	http_response_code(500);
 	echo json_encode([
 		'success' => false,

@@ -539,19 +539,28 @@
 			data: data,
 			type: 'post',
 			success: function(res) {
-				var res = JSON.parse(res);
-				if (!res.error) { 
-					window.dataLayer = window.dataLayer || [];
-					window.dataLayer.push({ event:'sendLeadForm', name:name, phone:phon });
-					if (res.conversion) {
-						gtag('event', 'conversion', {
-							'send_to': 'AW-17661940869/u-y4CIO6zLQbEIWp7-VB',
-							'value': 0.4,
-							'currency': 'USD'
-						});
+				try {
+					var parsed = typeof res === 'string' ? JSON.parse(res) : res;
+					if (!parsed.error) {
+						window.dataLayer = window.dataLayer || [];
+						window.dataLayer.push({ event:'sendLeadForm', name:name, phone:phon });
+						if (parsed.conversion && typeof gtag === 'function') {
+							gtag('event', 'conversion', {
+								'send_to': 'AW-17661940869/u-y4CIO6zLQbEIWp7-VB',
+								'value': 0.4,
+								'currency': 'USD'
+							});
+						}
+						parent_form.html('<h3>'+parsed.message+'</h3>');
+					} else {
+						alert(parsed.message || 'Ошибка отправки');
 					}
-					parent_form.html('<h3>'+res.message+'</h3>');
-				} else { alert(res.message); }
+				} catch (e) {
+					alert('Ошибка сервера. Попробуйте позже или позвоните нам.');
+				}
+			},
+			error: function() {
+				alert('Не удалось отправить заявку. Проверьте интернет или позвоните нам.');
 			}
 		});
 	});
@@ -594,13 +603,22 @@
 			data: data,
 			type: 'post',
 			success: function(res) {
-				var res = JSON.parse(res);
-				if (!res.error) { 
-					window.dataLayer = window.dataLayer || [];
-					window.dataLayer.push({ event:'sendOrder', name:name, phone:phon, product:product });
-					parent_form.find('.formza').html(res.message);
-					parent_form.find('form').detach();
-				} else { alert(res.message); }
+				try {
+					var parsed = typeof res === 'string' ? JSON.parse(res) : res;
+					if (!parsed.error) {
+						window.dataLayer = window.dataLayer || [];
+						window.dataLayer.push({ event:'sendOrder', name:name, phone:phon, product:product });
+						parent_form.find('.formza').html(parsed.message);
+						parent_form.find('form').detach();
+					} else {
+						alert(parsed.message || 'Ошибка отправки');
+					}
+				} catch (e) {
+					alert('Ошибка сервера. Попробуйте позже или позвоните нам.');
+				}
+			},
+			error: function() {
+				alert('Не удалось отправить заказ. Попробуйте позже или позвоните нам.');
 			}
 		});
 	});

@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 	exit;
 }
 
-include('../hyst/php.php');
+require_once dirname(__DIR__) . '/hyst/form_bootstrap.php';
 
 // Получение данных из POST
 $product_id = isset($_POST['product_id']) ? (int)$_POST['product_id'] : 0;
@@ -102,12 +102,7 @@ $notification_text .= "Телефон: " . $request_data['phone'] . "\n";
 $notification_text .= "Вопрос: " . $request_data['question'] . "\n";
 $notification_text .= "\nДата: " . $request_data['date'];
 
-$letter = new send_message(
-	FORM_RECIPIENT_EMAIL,
-	'Новый вопрос о товаре с сайта',
-	nl2br(htmlspecialchars($notification_text, ENT_QUOTES, 'UTF-8'))
-);
-if (!$letter->send()) {
+if (!send_form_lead('Новый вопрос о товаре с сайта', $notification_text)) {
 	http_response_code(500);
 	echo json_encode([
 		'success' => false,

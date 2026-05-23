@@ -29,11 +29,10 @@ if (isset($_POST['send_one'])) {
 	if (!empty($_POST['name']) && !empty($_POST['phon'])) {
 	$name = $_POST['name']; $phone = $_POST['phon'];
 	
-	$letter = new send_message(FORM_RECIPIENT_EMAIL,
-	'Заявка с сайта', 
-	'На сайте была заполненна форма заявки \n\n 
-	От: '.$name.' \n\n Телефон: '.$phone.'\n\n');
-	$sending = $letter->send();
+	$sending = send_form_lead('Заявка с сайта',
+	'На сайте была заполненна форма заявки' . "\n\n"
+	. 'От: ' . $name . "\n\n"
+	. 'Телефон: ' . $phone . "\n\n");
 	
 	
 		if ($sending != FALSE) {
@@ -51,11 +50,10 @@ if (isset($_POST['zakazat_one'])) {
 	$name = $_POST['name']; $phone = $_POST['phon'];
 	$id = $_POST['id']; 
 	
-	$letter = new send_message(FORM_RECIPIENT_EMAIL,
-	'Заявка с сайта', 
-	'На сайте была заполненна форма заявки на: '.$id.' \n\n 
-	От: '.$name.' \n\n Телефон: '.$phone.'\n\n');
-	$sending = $letter->send();
+	$sending = send_form_lead('Заявка на товар с сайта',
+	'На сайте была заполненна форма заявки на: ' . $id . "\n\n"
+	. 'От: ' . $name . "\n\n"
+	. 'Телефон: ' . $phone . "\n\n");
 	
 
 		if ($sending != FALSE) {

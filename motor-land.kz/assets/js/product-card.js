@@ -634,7 +634,12 @@
 				body: formData
 			});
 			
-			const result = await response.json();
+			let result;
+			try {
+				result = await response.json();
+			} catch (parseError) {
+				throw new Error('invalid_json');
+			}
 			
 			if (result.success) {
 				showToast('Запрос отправлен! Мы свяжемся с вами в ближайшее время.', 'success', 'Спасибо!');
@@ -701,7 +706,12 @@
 				body: formData
 			});
 			
-			const result = await response.json();
+			let result;
+			try {
+				result = await response.json();
+			} catch (parseError) {
+				throw new Error('invalid_json');
+			}
 			
 			if (result.success) {
 				showToast('Вопрос отправлен! Мы ответим вам в ближайшее время.', 'success', 'Спасибо!');

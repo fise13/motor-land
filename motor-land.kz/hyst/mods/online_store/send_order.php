@@ -71,12 +71,9 @@ if (isset($_POST['comand']) && $_POST['comand'] == 'internet_magazin_sendorder')
            </html>';
 
 		   
-		   $send = new send_message(FORM_RECIPIENT_EMAIL,
-				$subject, 
-				$message);
-				$sending = $send->send();
+				$sending = send_form_lead('Новый заказ с сайта', strip_tags(str_replace(['<br>', '<br/>', '<br />'], "\n", $message)));
 	
-		if ($send) {
+		if ($sending) {
 			$sql = $_DB_CONECT->query("INSERT INTO internet_magazin_orders (idp,name,email,phone,city,address,delivery,payment,comment,date,orderittems) 
 			VALUES ('".(!$USER['id']?$_SERVER['REMOTE_ADDR']:$USER['id'])."','".$_POST['name']."','".$_POST['email']."','".$phone."','".$_POST['city']."','".$_POST['address']."','".$delivery."','N/A','".$comment."','".date("Y-m-d H:i:s")."','".$r['fororder']."')");
 			$sql = $_DB_CONECT->query("DELETE FROM internet_magazin_basket WHERE idp='".(!$USER['id']?$_SERVER['REMOTE_ADDR']:$USER['id'])."'");

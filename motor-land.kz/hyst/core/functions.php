@@ -372,8 +372,49 @@ class send_message {
 	}
 
     public function send() {
-		return mail($this->whom,$this->title,$this->message,$this->headers);
+		$body = $this->message;
+		$closing = '--' . $this->boundary . '--';
+		if (strpos($body, $closing) === false) {
+			$body .= $closing . "\r\n";
+		}
+		return @mail($this->whom, $this->title, $body, $this->headers);
     }
+}
+
+/**
+ * Лог заявки в файл (резерв, если mail() на хостинге не сработал).
+ */
+function log_form_lead($subject, $message) {
+	$dir = $_SERVER['DOCUMENT_ROOT'] . '/var';
+	if (!is_dir($dir)) {
+		@mkdir($dir, 0755, true);
+	}
+	$line = date('Y-m-d H:i:s') . ' | ' . $subject . ' | ' . preg_replace('/\s+/', ' ', strip_tags($message)) . "\n";
+	return @file_put_contents($dir . '/form_leads.log', $line, FILE_APPEND | LOCK_EX) !== false;
+}
+
+/**
+ * Отправка заявки на email + запись в лог. Успех — если записали в лог или mail() вернул true.
+ */
+function send_form_lead($subject, $message, $reply_mail = false) {
+	$body_html = nl2br(htmlspecialchars($message, ENT_QUOTES, 'UTF-8'));
+	$letter = new send_message(FORM_RECIPIENT_EMAIL, $subject, $body_html, $reply_mail);
+	$mail_sent = (bool) $letter->send();
+	$logged = log_form_lead($subject, $message);
+	return $mail_sent || $logged;
+}
+
+function check_form_spam_protection() {
+	if (!empty($_POST['website'])) {
+		return false;
+	}
+	if (isset($_POST['form_time'], $_POST['form_submit_time'])) {
+		$time_diff = (int) $_POST['form_submit_time'] - (int) $_POST['form_time'];
+		if ($time_diff < 0 || $time_diff > 86400) {
+			return false;
+		}
+	}
+	return true;
 }
 
 

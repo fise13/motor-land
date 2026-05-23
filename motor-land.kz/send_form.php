@@ -1,154 +1,83 @@
 <?php
-include('hyst/php.php');
+header('Content-Type: application/json; charset=utf-8');
 
-// Защита от спама: honeypot, проверка времени отправки, паттерны спама
-function check_spam_protection() {
-	if (isset($_POST['website']) && !empty($_POST['website'])) {
-		return false;
-	}
-	
-	if (isset($_POST['form_time']) && isset($_POST['form_submit_time'])) {
-		$time_diff = $_POST['form_submit_time'] - $_POST['form_time'];
-		if ($time_diff < 3) {
-			return false;
-		}
-	}
-	
-	if (isset($_POST['name']) && isset($_POST['phon'])) {
-		$name = $_POST['name'];
-		$phone = $_POST['phon'];
-		
-		if (preg_match('/(.)\1{4,}/', $name) || preg_match('/(.)\1{4,}/', $phone)) {
-			return false;
-		}
-		
-		$spam_words = ['viagra', 'casino', 'loan', 'credit', 'buy now', 'click here'];
-		$name_lower = mb_strtolower($name);
-		foreach ($spam_words as $word) {
-			if (strpos($name_lower, $word) !== false) {
-				return false;
-			}
-		}
-	}
-	
-	return true;
-}
+require_once __DIR__ . '/hyst/form_bootstrap.php';
 
-if (isset($_POST['send_leed'])) { 
-	if (!check_spam_protection()) {
-		$res['error'] = true;
-		$res['message'] = 'Ошибка безопасности!';
-		echo json_encode($res);
+if (isset($_POST['send_leed'])) {
+	if (!check_form_spam_protection()) {
+		echo json_encode(['error' => true, 'message' => 'Ошибка безопасности!']);
 		exit;
 	}
-	
+
 	if (!empty($_POST['name']) && !empty($_POST['phon'])) {
-	// Security: Валидация и очистка входных данных
-	$name = htmlspecialchars(trim($_POST['name']), ENT_QUOTES, 'UTF-8');
-	$phone = htmlspecialchars(trim($_POST['phon']), ENT_QUOTES, 'UTF-8');
-	
-	// Дополнительная валидация длины
-	if (mb_strlen($name) > 100) {
-		$res['error'] = true;
-		$res['message'] = 'Ошибка! Имя слишком длинное!';
-		echo json_encode($res);
-		exit;
-	}
-	
-	if (mb_strlen($phone) > 20) {
-		$res['error'] = true;
-		$res['message'] = 'Ошибка! Номер телефона слишком длинный!';
-		echo json_encode($res);
-		exit;
-	}
-	
-	// Performance: Форматирование сообщения с использованием более читаемого формата
-	$message_text = "На сайте была заполнена форма заявки\n\n" .
-					"От: {$name}\n" .
-					"Телефон: {$phone}\n\n" .
-					"Время отправки: " . date('Y-m-d H:i:s') . "\n";
-	
-	$letter = new send_message(FORM_RECIPIENT_EMAIL,
-	'Заявка с сайта', 
-	$message_text);
-	$sending = $letter->send();
-	
-		if ($sending != FALSE) {
-		$res['error'] = false;
-		$res['message'] = 'Запрос отправлен, ждите ответа!';
-		$res['conversion'] = true;
+		$name = htmlspecialchars(trim($_POST['name']), ENT_QUOTES, 'UTF-8');
+		$phone = htmlspecialchars(trim($_POST['phon']), ENT_QUOTES, 'UTF-8');
+
+		if (mb_strlen($name) > 100) {
+			echo json_encode(['error' => true, 'message' => 'Ошибка! Имя слишком длинное!']);
+			exit;
+		}
+		if (mb_strlen($phone) > 20) {
+			echo json_encode(['error' => true, 'message' => 'Ошибка! Номер телефона слишком длинный!']);
+			exit;
+		}
+
+		$message_text = "На сайте была заполнена форма заявки\n\n"
+			. "От: {$name}\n"
+			. "Телефон: {$phone}\n\n"
+			. "Время отправки: " . date('Y-m-d H:i:s') . "\n";
+
+		if (send_form_lead('Заявка с сайта', $message_text)) {
+			echo json_encode([
+				'error' => false,
+				'message' => 'Запрос отправлен, ждите ответа!',
+				'conversion' => true,
+			]);
 		} else {
-		$res['error'] = true;
-		$res['message'] = 'Ошибка! Нет соединения!';
+			echo json_encode(['error' => true, 'message' => 'Ошибка! Не удалось сохранить заявку.']);
 		}
 	} else {
-	$res['error'] = true;
-	$res['message'] = 'Ошибка! Не заполнены обязательные поля Имя и Телефон!';
+		echo json_encode(['error' => true, 'message' => 'Ошибка! Не заполнены обязательные поля Имя и Телефон!']);
 	}
-	
-	echo json_encode($res);
+	exit;
 }
 
 if (isset($_POST['zakaz'])) {
-	if (!check_spam_protection()) {
-		$res['error'] = true;
-		$res['message'] = 'Ошибка безопасности!';
-		echo json_encode($res);
+	if (!check_form_spam_protection()) {
+		echo json_encode(['error' => true, 'message' => 'Ошибка безопасности!']);
 		exit;
 	}
-	
-	if (!empty($_POST['name']) && !empty($_POST['phon']) && !empty($_POST['id'])) {
-	// Security: Валидация и очистка входных данных
-	$name = htmlspecialchars(trim($_POST['name']), ENT_QUOTES, 'UTF-8');
-	$phone = htmlspecialchars(trim($_POST['phon']), ENT_QUOTES, 'UTF-8');
-	$id = htmlspecialchars(trim($_POST['id']), ENT_QUOTES, 'UTF-8');
-	
-	// Валидация ID товара
-	if (!preg_match('/^\d+$/', $id)) {
-		$res['error'] = true;
-		$res['message'] = 'Ошибка! Неверный идентификатор товара!';
-		echo json_encode($res);
-		exit;
-	}
-	
-	// Дополнительная валидация длины
-	if (mb_strlen($name) > 100) {
-		$res['error'] = true;
-		$res['message'] = 'Ошибка! Имя слишком длинное!';
-		echo json_encode($res);
-		exit;
-	}
-	
-	if (mb_strlen($phone) > 20) {
-		$res['error'] = true;
-		$res['message'] = 'Ошибка! Номер телефона слишком длинный!';
-		echo json_encode($res);
-		exit;
-	}
-	
-	// Performance: Форматирование сообщения с использованием более читаемого формата
-	$message_text = "На сайте была заполнена форма заявки на товар\n\n" .
-					"ID товара: {$id}\n" .
-					"От: {$name}\n" .
-					"Телефон: {$phone}\n\n" .
-					"Время отправки: " . date('Y-m-d H:i:s') . "\n";
-	
-	$letter = new send_message(FORM_RECIPIENT_EMAIL,
-	'Заявка с сайта', 
-	$message_text);
-	$sending = $letter->send();
 
-		if ($sending != FALSE) {
-		$res['error'] = false;
-		$res['message'] = 'Запрос отправлен, ждите ответа!';
-		$res['conversion'] = true;
+	if (!empty($_POST['name']) && !empty($_POST['phon']) && !empty($_POST['id'])) {
+		$name = htmlspecialchars(trim($_POST['name']), ENT_QUOTES, 'UTF-8');
+		$phone = htmlspecialchars(trim($_POST['phon']), ENT_QUOTES, 'UTF-8');
+		$product = htmlspecialchars(trim($_POST['id']), ENT_QUOTES, 'UTF-8');
+
+		if (mb_strlen($name) > 100 || mb_strlen($phone) > 20 || mb_strlen($product) > 255) {
+			echo json_encode(['error' => true, 'message' => 'Ошибка! Слишком длинные данные в форме.']);
+			exit;
+		}
+
+		$message_text = "На сайте была заполнена форма заявки на товар\n\n"
+			. "Товар: {$product}\n"
+			. "От: {$name}\n"
+			. "Телефон: {$phone}\n\n"
+			. "Время отправки: " . date('Y-m-d H:i:s') . "\n";
+
+		if (send_form_lead('Заявка на товар с сайта', $message_text)) {
+			echo json_encode([
+				'error' => false,
+				'message' => 'Запрос отправлен, ждите ответа!',
+				'conversion' => true,
+			]);
 		} else {
-		$res['error'] = true;
-		$res['message'] = 'Ошибка! Нет соединения!';
+			echo json_encode(['error' => true, 'message' => 'Ошибка! Не удалось сохранить заявку.']);
 		}
 	} else {
-	$res['error'] = true;
-	$res['message'] = 'Поля формы пусты или заполненны не корректно!';
+		echo json_encode(['error' => true, 'message' => 'Поля формы пусты или заполненны не корректно!']);
 	}
-	echo json_encode($res);
+	exit;
 }
+
+http_response_code(400);
+echo json_encode(['error' => true, 'message' => 'Неверный запрос']);
