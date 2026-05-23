@@ -1,6 +1,4 @@
 <?php
-require_once __DIR__ . '/mail_config.php';
-
 define("DB_HOST", "localhost");
 define("DB_USER", "un446428_bd");
 define("DB_PASSWORD", "H5#29wkg7");
@@ -12,5 +10,8 @@ define("AUT_NAME", "hyst_escalibe");
 define("AUC_PREFIX", "aucd");
 define("AUSK_LOGIN", "aucd_login");
 define("AUSK_PASSW", "aucd_passw");
+
+define("SITE_MAIL", "robot@xn--d1abrdhdaqq.kz");
+define("FORM_RECIPIENT_EMAIL", "motorlendavtorazbor@gmail.com");
 
 define("SITE_URL", "http://motor-land.kz");

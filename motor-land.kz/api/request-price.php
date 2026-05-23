@@ -17,7 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 require_once dirname(__DIR__) . '/hyst/form_bootstrap.php';
-require_once dirname(__DIR__) . '/hyst/config.php';
+
+if (file_exists(dirname(__DIR__) . '/hyst/config.php')) {
+	require_once dirname(__DIR__) . '/hyst/config.php';
+}
 
 // Получение данных из POST
 $product_id = isset($_POST['product_id']) ? (int)$_POST['product_id'] : 0;
@@ -80,6 +83,9 @@ $request_data = [
 // Сохранение в базу данных (если есть таблица для заявок)
 // Можно создать таблицу: CREATE TABLE product_price_requests (id INT AUTO_INCREMENT PRIMARY KEY, product_id INT, name VARCHAR(255), phone VARCHAR(50), email VARCHAR(255), message TEXT, date DATETIME, ip VARCHAR(45), user_agent TEXT, status VARCHAR(20) DEFAULT 'new')
 try {
+	if (!isset($_DB_CONECT) || !($_DB_CONECT instanceof mysqli)) {
+		throw new Exception('DB not available');
+	}
 	// Проверяем существование таблицы
 	$check_table = $_DB_CONECT->query("SHOW TABLES LIKE 'product_price_requests'");
 	

@@ -17,7 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 require_once dirname(__DIR__) . '/hyst/form_bootstrap.php';
-require_once dirname(__DIR__) . '/hyst/config.php';
+
+if (file_exists(dirname(__DIR__) . '/hyst/config.php')) {
+	require_once dirname(__DIR__) . '/hyst/config.php';
+}
 
 // Получение данных из POST
 $product_id = isset($_POST['product_id']) ? (int)$_POST['product_id'] : 0;
@@ -75,6 +78,9 @@ $request_data = [
 
 // Сохранение в базу данных
 try {
+	if (!isset($_DB_CONECT) || !($_DB_CONECT instanceof mysqli)) {
+		throw new Exception('DB not available');
+	}
 	$check_table = $_DB_CONECT->query("SHOW TABLES LIKE 'product_questions'");
 	
 	if ($check_table && $check_table->num_rows > 0) {

@@ -394,10 +394,18 @@ function log_form_lead($subject, $message, $mail_sent = null) {
 	return @file_put_contents($dir . '/form_leads.log', $line, FILE_APPEND | LOCK_EX) !== false;
 }
 
+function ensure_form_mail_loaded() {
+	if (!function_exists('smtp_send_mail')) {
+		require_once dirname(__DIR__) . '/mail_config.php';
+	}
+}
+
 /**
  * Отправка заявки на email + запись в лог. Успех — если записали в лог или письмо ушло.
  */
 function send_form_lead($subject, $message, $reply_mail = false) {
+	ensure_form_mail_loaded();
+
 	$body_html = nl2br(htmlspecialchars($message, ENT_QUOTES, 'UTF-8'));
 	$mail_sent = false;
 
