@@ -1,18 +1,15 @@
 <?php
 /**
- * Скопируйте этот файл как mail.local.php и укажите пароль приложения Gmail.
+ * ВАЖНО: скопируйте этот файл как mail.local.php (без .example)
+ * PHP читает ТОЛЬКО mail.local.php — иначе SMTP не включится.
  *
- * Как получить пароль приложения:
- * 1. Войдите в motorlendavtorazbor@gmail.com
- * 2. Google-аккаунт → Безопасность → Двухэтапная аутентификация (включить)
- * 3. Пароли приложений → Создать → «Почта» / «Другое» → скопировать 16 символов
- * 4. Вставить в SMTP_PASS ниже (без пробелов)
+ * Пароль приложения Google — 16 символов БЕЗ пробелов.
  */
 
 define('MAIL_USE_SMTP', true);
 define('SMTP_HOST', 'smtp.gmail.com');
 define('SMTP_PORT', 587);
 define('SMTP_USER', 'motorlendavtorazbor@gmail.com');
-define('SMTP_PASS', 'ВСТАВЬТЕ_ПАРОЛЬ_ПРИЛОЖЕНИЯ_СЮДА');
+define('SMTP_PASS', 'xxxxxxxxxxxxxxxx');
 define('SMTP_FROM_EMAIL', 'motorlendavtorazbor@gmail.com');
 define('SMTP_FROM_NAME', 'Motor-Land заявки');

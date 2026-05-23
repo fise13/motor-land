@@ -401,7 +401,8 @@ function send_form_lead($subject, $message, $reply_mail = false) {
 	$body_html = nl2br(htmlspecialchars($message, ENT_QUOTES, 'UTF-8'));
 	$mail_sent = false;
 
-	if (defined('MAIL_USE_SMTP') && MAIL_USE_SMTP && SMTP_PASS !== '') {
+	$smtp_ready = defined('MAIL_USE_SMTP') && MAIL_USE_SMTP && defined('SMTP_PASS') && SMTP_PASS !== '';
+	if ($smtp_ready) {
 		$mail_sent = smtp_send_mail(FORM_RECIPIENT_EMAIL, $subject, $body_html, $reply_mail ?: null);
 	}
 

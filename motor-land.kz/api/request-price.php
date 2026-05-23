@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 require_once dirname(__DIR__) . '/hyst/form_bootstrap.php';
+require_once dirname(__DIR__) . '/hyst/config.php';
 
 // Получение данных из POST
 $product_id = isset($_POST['product_id']) ? (int)$_POST['product_id'] : 0;

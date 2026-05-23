@@ -1,8 +1,7 @@
 <?php
 /**
- * Минимальное подключение для обработчиков форм (без админ-модулей и session).
+ * Минимальное подключение для обработчиков форм (без БД и админ-модулей).
  */
-require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/mail_config.php';
 require_once __DIR__ . '/core/constants.php';
-require_once __DIR__ . '/core/smtp_mail.php';
 require_once __DIR__ . '/core/functions.php';
