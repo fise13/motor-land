@@ -102,6 +102,20 @@ $notification_text .= "Телефон: " . $request_data['phone'] . "\n";
 $notification_text .= "Вопрос: " . $request_data['question'] . "\n";
 $notification_text .= "\nДата: " . $request_data['date'];
 
+$letter = new send_message(
+	FORM_RECIPIENT_EMAIL,
+	'Новый вопрос о товаре с сайта',
+	nl2br(htmlspecialchars($notification_text, ENT_QUOTES, 'UTF-8'))
+);
+if (!$letter->send()) {
+	http_response_code(500);
+	echo json_encode([
+		'success' => false,
+		'message' => 'Не удалось отправить вопрос. Попробуйте позже или позвоните нам.'
+	]);
+	exit;
+}
+
 // Успешный ответ
 echo json_encode([
 	'success' => true,

@@ -122,8 +122,19 @@ if (!empty($request_data['message'])) {
 }
 $notification_text .= "\nДата: " . $request_data['date'];
 
-// Здесь можно добавить отправку email или в Telegram
-// Например: mail($admin_email, 'Новый запрос цены', $notification_text);
+$letter = new send_message(
+	FORM_RECIPIENT_EMAIL,
+	'Новый запрос цены с сайта',
+	nl2br(htmlspecialchars($notification_text, ENT_QUOTES, 'UTF-8'))
+);
+if (!$letter->send()) {
+	http_response_code(500);
+	echo json_encode([
+		'success' => false,
+		'message' => 'Не удалось отправить заявку. Попробуйте позже или позвоните нам.'
+	]);
+	exit;
+}
 
 // Успешный ответ
 echo json_encode([

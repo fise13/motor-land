@@ -71,7 +71,7 @@ if (isset($_POST['comand']) && $_POST['comand'] == 'internet_magazin_sendorder')
            </html>';
 
 		   
-		   $send = new send_message(get_simple_texts('orders_email'), 
+		   $send = new send_message(FORM_RECIPIENT_EMAIL,
 				$subject, 
 				$message);
 				$sending = $send->send();

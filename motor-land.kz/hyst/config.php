@@ -14,4 +14,7 @@ define("AUSK_PASSW", "aucd_passw");
 //define("SITE_MAIL", "robot@моторленд.kz");
 define("SITE_MAIL", "robot@xn--d1abrdhdaqq.kz");
 
+/** Email для всех заявок с форм сайта */
+define("FORM_RECIPIENT_EMAIL", "motorlendavtorazbor@gmail.com");
+
 define("SITE_URL", "http://motor-land.kz");

@@ -68,7 +68,7 @@ if (isset($_POST['send_leed'])) {
 					"Телефон: {$phone}\n\n" .
 					"Время отправки: " . date('Y-m-d H:i:s') . "\n";
 	
-	$letter = new send_message(get_simple_texts ('general_post_box'), 
+	$letter = new send_message(FORM_RECIPIENT_EMAIL,
 	'Заявка с сайта', 
 	$message_text);
 	$sending = $letter->send();
@@ -133,7 +133,7 @@ if (isset($_POST['zakaz'])) {
 					"Телефон: {$phone}\n\n" .
 					"Время отправки: " . date('Y-m-d H:i:s') . "\n";
 	
-	$letter = new send_message(get_simple_texts ('general_post_box'), 
+	$letter = new send_message(FORM_RECIPIENT_EMAIL,
 	'Заявка с сайта', 
 	$message_text);
 	$sending = $letter->send();
