@@ -384,23 +384,33 @@ class send_message {
 /**
  * Лог заявки в файл (резерв, если mail() на хостинге не сработал).
  */
-function log_form_lead($subject, $message) {
+function log_form_lead($subject, $message, $mail_sent = null) {
 	$dir = $_SERVER['DOCUMENT_ROOT'] . '/var';
 	if (!is_dir($dir)) {
 		@mkdir($dir, 0755, true);
 	}
-	$line = date('Y-m-d H:i:s') . ' | ' . $subject . ' | ' . preg_replace('/\s+/', ' ', strip_tags($message)) . "\n";
+	$status = $mail_sent === null ? 'unknown' : ($mail_sent ? 'email_ok' : 'email_fail');
+	$line = date('Y-m-d H:i:s') . ' | ' . $status . ' | ' . $subject . ' | ' . preg_replace('/\s+/', ' ', strip_tags($message)) . "\n";
 	return @file_put_contents($dir . '/form_leads.log', $line, FILE_APPEND | LOCK_EX) !== false;
 }
 
 /**
- * Отправка заявки на email + запись в лог. Успех — если записали в лог или mail() вернул true.
+ * Отправка заявки на email + запись в лог. Успех — если записали в лог или письмо ушло.
  */
 function send_form_lead($subject, $message, $reply_mail = false) {
 	$body_html = nl2br(htmlspecialchars($message, ENT_QUOTES, 'UTF-8'));
-	$letter = new send_message(FORM_RECIPIENT_EMAIL, $subject, $body_html, $reply_mail);
-	$mail_sent = (bool) $letter->send();
-	$logged = log_form_lead($subject, $message);
+	$mail_sent = false;
+
+	if (defined('MAIL_USE_SMTP') && MAIL_USE_SMTP && SMTP_PASS !== '') {
+		$mail_sent = smtp_send_mail(FORM_RECIPIENT_EMAIL, $subject, $body_html, $reply_mail ?: null);
+	}
+
+	if (!$mail_sent) {
+		$letter = new send_message(FORM_RECIPIENT_EMAIL, $subject, $body_html, $reply_mail);
+		$mail_sent = (bool) $letter->send();
+	}
+
+	$logged = log_form_lead($subject, $message, $mail_sent);
 	return $mail_sent || $logged;
 }
 
